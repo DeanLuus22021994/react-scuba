@@ -137,7 +137,7 @@ export const trackFormAbandon = (formName, source, completionPercentage) => {
 };
 
 // Send Web Vitals to GA4
-export const sendWebVitalsToGA4 = ({ name, delta, value, id }) => {
+export const sendWebVitalsToGA4 = ({ name, delta, id }) => {
   ReactGA.event({
     category: 'Web Vitals',
     action: name,
