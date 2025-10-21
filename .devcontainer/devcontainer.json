@@ -44,9 +44,7 @@
                 "GitHub.vscode-pull-request-github",
                 "christian-kohler.npm-intellisense",
                 "Orta.vscode-jest",
-                "VisualStudioExptTeam.intellicode-api-usage-examples",
-                "yzhang.markdown-all-in-one",
-                "DavidAnson.vscode-markdownlint"
+                "VisualStudioExptTeam.intellicode-api-usage-examples"
             ]
         }
     },
