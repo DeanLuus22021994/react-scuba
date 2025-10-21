@@ -57,7 +57,19 @@ features:
     details: WCAG 2.1 AA compliant with keyboard navigation, ARIA labels, and screen reader support.
 ---
 
-## Quick Start
+<style>
+.home-quick-start {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(3, 105, 161, 0.05) 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 2px solid var(--vp-c-brand);
+}
+</style>
+
+<div class="home-quick-start">
+
+## ⚡ Quick Start
 
 ```bash
 # Clone and install
@@ -75,7 +87,28 @@ npm test
 npm run build
 ```
 
-## Modern Tech Stack
+</div>
+
+## 🎯 Modern Tech Stack
+
+<div class="metrics">
+  <div class="metric">
+    <span class="metric-value">19.0</span>
+    <span class="metric-label">React</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">6.3</span>
+    <span class="metric-label">Vite</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">38+</span>
+    <span class="metric-label">Components</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">347KB</span>
+    <span class="metric-label">Gzipped</span>
+  </div>
+</div>
 
 | Category       | Technology               | Version  |
 | -------------- | ------------------------ | -------- |
@@ -91,26 +124,53 @@ npm run build
 | **Testing**    | Vitest + Testing Library | 3.0.7    |
 | **Docs**       | VitePress                | 1.6.4    |
 
-## What's Included
+## 📦 What's Included
 
 ::: tip Complete Feature Set
 **5 Main Pages** • **38+ Components** • **6 Utilities** • **Comprehensive Testing** • **Full Analytics Integration**
 :::
 
-- ✅ **Homepage** - Hero, services, features, testimonials, CTAs
-- ✅ **About Page** - Team profiles, certifications, company story
-- ✅ **Dive Sites** - Interactive maps, detailed site info
-- ✅ **Courses** - PADI offerings, pricing, comparison tables
-- ✅ **Gallery** - Lightbox, categories, lazy loading, filters
-- ✅ **Contact & Booking** - Forms with validation and reCAPTCHA
-- ✅ **Multi-Currency** - Live exchange rates (MUR, USD, EUR, GBP)
-- ✅ **SEO Ready** - Meta tags, JSON-LD, sitemap generation
-- ✅ **Analytics** - GA4, GTM, conversion tracking
-- ✅ **Accessibility** - WCAG 2.1 AA compliant
-- ✅ **Error Handling** - Error boundaries, validation, logging
-- ✅ **Performance** - Code splitting, lazy loading, optimized images
+<div class="quick-links">
+  <div class="feature-card">
+    <h3>✅ Homepage</h3>
+    <p>Hero, services, features, testimonials, CTAs</p>
+  </div>
+  <div class="feature-card">
+    <h3>✅ About Page</h3>
+    <p>Team profiles, certifications, company story</p>
+  </div>
+  <div class="feature-card">
+    <h3>✅ Dive Sites</h3>
+    <p>Interactive maps, detailed site info</p>
+  </div>
+  <div class="feature-card">
+    <h3>✅ Courses</h3>
+    <p>PADI offerings, pricing, comparison tables</p>
+  </div>
+  <div class="feature-card">
+    <h3>✅ Gallery</h3>
+    <p>Lightbox, categories, lazy loading, filters</p>
+  </div>
+  <div class="feature-card">
+    <h3>✅ Booking</h3>
+    <p>Forms with validation and reCAPTCHA</p>
+  </div>
+</div>
 
-## Project Architecture
+**Core Features:**
+
+- 💰 **Multi-Currency** - Live exchange rates (MUR, USD, EUR, GBP)
+- 🔍 **SEO Ready** - Meta tags, JSON-LD, sitemap generation
+- 📊 **Analytics** - GA4, GTM, conversion tracking
+- ♿ **Accessibility** - WCAG 2.1 AA compliant
+- 🛡️ **Error Handling** - Error boundaries, validation, logging
+- ⚡ **Performance** - Code splitting, lazy loading, optimized images
+
+## 🏗️ Project Architecture
+
+::: info Well-Organized Structure
+Clean separation of concerns with feature-based component organization
+:::
 
 ```
 react-scuba/
@@ -136,22 +196,24 @@ react-scuba/
 
 ## Next Steps
 
-<div class="vp-card-container">
-  <a href="/guide/quick-start" class="vp-card">
-    <h3>🚀 Quick Start</h3>
+## 🚀 Next Steps
+
+<div class="quick-links">
+  <a href="/guide/quick-start" class="quick-link">
+    <h4>🚀 Quick Start</h4>
     <p>Get up and running in 5 minutes</p>
   </a>
-  <a href="/guide/installation" class="vp-card">
-    <h3>📦 Installation</h3>
-    <p>Complete setup guide with troubleshooting</p>
+  <a href="/guide/installation" class="quick-link">
+    <h4>📦 Installation</h4>
+    <p>Detailed setup instructions</p>
   </a>
-  <a href="/components/" class="vp-card">
-    <h3>🧩 Components</h3>
-    <p>Explore 38+ documented components</p>
+  <a href="/components/" class="quick-link">
+    <h4>🧩 Components</h4>
+    <p>Explore 38+ React components</p>
   </a>
-  <a href="/api/" class="vp-card">
-    <h3>⚙️ API Reference</h3>
-    <p>Utilities, hooks, and services</p>
+  <a href="/deployment/" class="quick-link">
+    <h4>🌐 Deploy</h4>
+    <p>Production deployment guides</p>
   </a>
 </div>
 

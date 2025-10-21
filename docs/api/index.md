@@ -1,10 +1,29 @@
 # API Reference
 
+<div class="feature-card">
+
 Complete reference for all utilities, hooks, services, and data structures in React Scuba.
 
-## Overview
+</div>
+
+## 🛠️ Overview
 
 React Scuba includes a comprehensive set of utilities and helpers designed to handle common tasks in dive center applications.
+
+<div class="metrics">
+  <div class="metric">
+    <span class="metric-value">10+</span>
+    <span class="metric-label">Modules</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">85%</span>
+    <span class="metric-label">Coverage</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">100%</span>
+    <span class="metric-label">Documented</span>
+  </div>
+</div>
 
 ## Quick Links
 

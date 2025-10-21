@@ -1,8 +1,16 @@
 # Contributing to React Scuba
 
-Thank you for your interest in contributing! This guide will help you get started.
+<div class="feature-card">
 
-## Quick Start for Contributors
+Thank you for your interest in contributing! This guide will help you get started with the development workflow.
+
+</div>
+
+## 🚀 Quick Start for Contributors
+
+::: tip Fork & Clone
+Start by forking the repository on GitHub, then follow these steps:
+:::
 
 ```bash
 # 1. Fork the repository on GitHub
@@ -58,13 +66,32 @@ footer (optional)
 
 **Types:**
 
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting)
-- `refactor`: Code refactoring
-- `test`: Adding or updating tests
-- `chore`: Maintenance tasks
+<div class="quick-links">
+  <div class="feature-card">
+    <h4><span class="badge badge-success">feat</span></h4>
+    <p>New feature</p>
+  </div>
+  <div class="feature-card">
+    <h4><span class="badge badge-purple">fix</span></h4>
+    <p>Bug fix</p>
+  </div>
+  <div class="feature-card">
+    <h4><span class="badge badge-info">docs</span></h4>
+    <p>Documentation changes</p>
+  </div>
+  <div class="feature-card">
+    <h4><span class="badge badge-warning">style</span></h4>
+    <p>Code style changes</p>
+  </div>
+  <div class="feature-card">
+    <h4><span class="badge badge-info">refactor</span></h4>
+    <p>Code refactoring</p>
+  </div>
+  <div class="feature-card">
+    <h4><span class="badge badge-success">test</span></h4>
+    <p>Adding/updating tests</p>
+  </div>
+</div>
 
 **Examples:**
 
@@ -107,15 +134,19 @@ npm test              # Run tests
 npm run test:coverage # Check coverage
 ```
 
-### Pull Request Checklist
+### ✅ Pull Request Checklist
 
-- [ ] Code follows style guidelines
-- [ ] Tests added/updated and passing
-- [ ] Documentation updated
-- [ ] No console statements (use logger)
-- [ ] PropTypes defined for all components
-- [ ] Build succeeds (`npm run build`)
-- [ ] Linting passes (`npm run lint`)
+::: warning Before Submitting
+Ensure all items are checked before opening a pull request
+:::
+
+- [ ] ✨ Code follows style guidelines
+- [ ] 🧪 Tests added/updated and passing
+- [ ] 📚 Documentation updated
+- [ ] 🚫 No console statements (use logger)
+- [ ] 📝 PropTypes defined for all components
+- [ ] 🏗️ Build succeeds (`npm run build`)
+- [ ] 🎨 Linting passes (`npm run lint`)
 
 ## Project Structure
 

@@ -1,15 +1,33 @@
 # Getting Started
 
-Welcome to the SCUBA Bali documentation! This guide will help you set up and understand the project.
+<div class="feature-card">
+
+Welcome to the **React Scuba** documentation! This guide will help you set up and understand the project.
+
+</div>
 
 ## Overview
 
-SCUBA Bali is a modern, production-ready website for a dive center built with:
+React Scuba is a modern, production-ready website for a dive center built with:
 
-- **React 19** - Latest React features with improved performance
-- **Vite** - Lightning-fast build tool
-- **Tailwind CSS** - Utility-first CSS framework
-- **VitePress** - Documentation powered by Vue and Vite
+<div class="quick-links">
+  <div class="feature-card">
+    <h3>⚛️ React 19</h3>
+    <p>Latest React features with improved performance</p>
+  </div>
+  <div class="feature-card">
+    <h3>⚡ Vite</h3>
+    <p>Lightning-fast build tool</p>
+  </div>
+  <div class="feature-card">
+    <h3>🎨 Tailwind CSS</h3>
+    <p>Utility-first CSS framework</p>
+  </div>
+  <div class="feature-card">
+    <h3>📚 VitePress</h3>
+    <p>Documentation powered by Vue and Vite</p>
+  </div>
+</div>
 
 ## What You'll Build
 

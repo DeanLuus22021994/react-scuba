@@ -46,20 +46,20 @@ Specific feature implementations.
 
 ```javascript
 // Layout components
-import Header from "@/layouts/Header";
-import Footer from "@/layouts/Footer";
+import Header from '@/layouts/Header';
+import Footer from '@/layouts/Footer';
 
 // Page components
-import HomePage from "@/pages/HomePage";
-import AboutPage from "@/pages/AboutPage";
+import HomePage from '@/pages/HomePage';
+import AboutPage from '@/pages/AboutPage';
 
 // Shared components
-import BackToTop from "@/components/shared/BackToTop";
-import ScrollProgress from "@/components/shared/ScrollProgress";
+import BackToTop from '@/components/shared/BackToTop';
+import ScrollProgress from '@/components/shared/ScrollProgress';
 
 // Feature components (barrel exports)
-import { HeroSection, ServicesSection } from "@/components/home";
-import { CourseCard, CourseComparison } from "@/components/courses";
+import { HeroSection, ServicesSection } from '@/components/home';
+import { CourseCard, CourseComparison } from '@/components/courses';
 ```
 
 ### PropTypes Validation
@@ -67,7 +67,7 @@ import { CourseCard, CourseComparison } from "@/components/courses";
 All components include PropTypes for type checking:
 
 ```javascript
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 MyComponent.propTypes = {
   title: PropTypes.string.isRequired,
@@ -118,7 +118,26 @@ App
 └── ContactModal (conditional)
 ```
 
-## Component Statistics
+## 📊 Component Statistics
+
+<div class="metrics">
+  <div class="metric">
+    <span class="metric-value">38+</span>
+    <span class="metric-label">Components</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">3,500</span>
+    <span class="metric-label">Lines of Code</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">100%</span>
+    <span class="metric-label">PropTypes</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">< 250</span>
+    <span class="metric-label">Lines/File</span>
+  </div>
+</div>
 
 | Category   | Count   | Total Lines |
 | ---------- | ------- | ----------- |

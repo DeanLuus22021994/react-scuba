@@ -1,0 +1,397 @@
+/**
+ * Custom VitePress Theme Styles
+ * Enhances visual appearance of React Scuba documentation
+ */
+
+/* ===== Color Variables ===== */
+:root {
+    --vp-c-brand: #0ea5e9;
+    --vp-c-brand-light: #38bdf8;
+    --vp-c-brand-lighter: #7dd3fc;
+    --vp-c-brand-dark: #0284c7;
+    --vp-c-brand-darker: #0369a1;
+
+    --vp-c-green: #10b981;
+    --vp-c-green-light: #34d399;
+    --vp-c-yellow: #f59e0b;
+    --vp-c-red: #ef4444;
+    --vp-c-purple: #8b5cf6;
+
+    --gradient-brand: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+}
+
+/* ===== Enhanced Feature Cards ===== */
+.vp-feature {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--vp-c-divider);
+    background: var(--vp-c-bg-soft);
+}
+
+.vp-feature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -8px rgba(14, 165, 233, 0.3);
+    border-color: var(--vp-c-brand);
+}
+
+.vp-feature .icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+/* ===== Custom Cards ===== */
+.feature-card {
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+    border-color: var(--vp-c-brand-light);
+}
+
+.feature-card h3 {
+    color: var(--vp-c-brand);
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ===== Badge Styles ===== */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.25rem;
+}
+
+.badge-success {
+    background: var(--gradient-success);
+    color: white;
+}
+
+.badge-warning {
+    background: var(--gradient-warning);
+    color: white;
+}
+
+.badge-info {
+    background: var(--gradient-brand);
+    color: white;
+}
+
+.badge-purple {
+    background: var(--gradient-purple);
+    color: white;
+}
+
+.badge-version {
+    background: var(--vp-c-bg-mute);
+    color: var(--vp-c-text-1);
+    border: 1px solid var(--vp-c-divider);
+}
+
+/* ===== Enhanced Tables ===== */
+.vp-doc table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.vp-doc thead {
+    background: var(--gradient-brand);
+}
+
+.vp-doc thead th {
+    color: white !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.vp-doc tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.vp-doc tbody tr:hover {
+    background-color: var(--vp-c-bg-soft);
+}
+
+.vp-doc tbody tr:nth-child(even) {
+    background-color: var(--vp-c-bg-alt);
+}
+
+/* ===== Code Block Enhancements ===== */
+.vp-doc div[class*='language-'] {
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.vp-doc div[class*='language-']:before {
+    font-weight: 600;
+    color: var(--vp-c-brand-light);
+}
+
+/* ===== Custom Containers ===== */
+.custom-block {
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid;
+}
+
+.custom-block.tip {
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+    border-left-color: var(--vp-c-green);
+}
+
+.custom-block.warning {
+    background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent);
+    border-left-color: var(--vp-c-yellow);
+}
+
+.custom-block.danger {
+    background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent);
+    border-left-color: var(--vp-c-red);
+}
+
+.custom-block.info {
+    background: linear-gradient(to right, rgba(14, 165, 233, 0.1), transparent);
+    border-left-color: var(--vp-c-brand);
+}
+
+.custom-block-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ===== Enhanced Lists ===== */
+.vp-doc ul li,
+.vp-doc ol li {
+    margin: 0.5rem 0;
+}
+
+.vp-doc ul li::marker {
+    color: var(--vp-c-brand);
+}
+
+/* ===== Gradient Text ===== */
+.gradient-text {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+/* ===== Platform Cards ===== */
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.platform-card {
+    background: var(--vp-c-bg-soft);
+    border: 2px solid var(--vp-c-divider);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-brand);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.platform-card:hover::before {
+    transform: scaleX(1);
+}
+
+.platform-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -8px rgba(14, 165, 233, 0.3);
+    border-color: var(--vp-c-brand);
+}
+
+/* ===== Star Rating ===== */
+.stars {
+    color: var(--vp-c-yellow);
+    font-size: 1.2rem;
+    letter-spacing: 0.125rem;
+}
+
+/* ===== Changelog Badges ===== */
+.change-badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+}
+
+.change-badge.added {
+    background: var(--vp-c-green);
+    color: white;
+}
+
+.change-badge.changed {
+    background: var(--vp-c-brand);
+    color: white;
+}
+
+.change-badge.removed {
+    background: var(--vp-c-red);
+    color: white;
+}
+
+.change-badge.fixed {
+    background: var(--vp-c-purple);
+    color: white;
+}
+
+/* ===== Component Tree ===== */
+.component-tree {
+    font-family: 'Courier New', monospace;
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.component-tree code {
+    background: transparent;
+    padding: 0;
+    color: var(--vp-c-text-1);
+}
+
+/* ===== Quick Links Grid ===== */
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.quick-link {
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.quick-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(14, 165, 233, 0.2);
+    border-color: var(--vp-c-brand);
+}
+
+.quick-link h4 {
+    color: var(--vp-c-brand);
+    margin: 0 0 0.5rem 0;
+}
+
+.quick-link p {
+    margin: 0;
+    color: var(--vp-c-text-2);
+    font-size: 0.9rem;
+}
+
+/* ===== Metrics Display ===== */
+.metrics {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.metric {
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--vp-c-brand);
+    display: block;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: var(--vp-c-text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 768px) {
+
+    .platform-grid,
+    .quick-links {
+        grid-template-columns: 1fr;
+    }
+
+    .metrics {
+        flex-direction: column;
+    }
+
+    .metric {
+        min-width: 100%;
+    }
+}
+
+/* ===== Smooth Scroll ===== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== Enhanced Links ===== */
+.vp-doc a {
+    transition: color 0.2s ease;
+}
+
+.vp-doc a:hover {
+    color: var(--vp-c-brand-light);
+}

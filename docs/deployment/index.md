@@ -6,16 +6,40 @@ Guide for deploying React Scuba to production on various platforms.
 
 React Scuba is optimized for deployment on modern hosting platforms. Choose the one that best fits your needs.
 
-## Quick Deploy Options
+## 🚀 Quick Deploy Options
 
 ### Recommended Platforms
 
-| Platform                                     | Build Time | Deploy Time | Ease       | Cost                  |
-| -------------------------------------------- | ---------- | ----------- | ---------- | --------------------- |
-| **[Vercel](/deployment/vercel)**             | ~30s       | ~5s         | ⭐⭐⭐⭐⭐ | Free tier available   |
-| **[Netlify](/deployment/netlify)**           | ~40s       | ~10s        | ⭐⭐⭐⭐⭐ | Free tier available   |
-| **[GitHub Pages](/deployment/github-pages)** | ~1m        | ~15s        | ⭐⭐⭐⭐   | Free for public repos |
-| **[Docker](/deployment/docker)**             | ~2m        | Varies      | ⭐⭐⭐     | Self-hosted           |
+<div class="platform-grid">
+  <div class="platform-card">
+    <h3>🔵 Vercel</h3>
+    <p class="stars">⭐⭐⭐⭐⭐</p>
+    <p><strong>Build:</strong> ~30s | <strong>Deploy:</strong> ~5s</p>
+    <p><span class="badge badge-success">Free tier</span></p>
+    <p>One-click deploy with GitHub integration</p>
+  </div>
+  <div class="platform-card">
+    <h3>💚 Netlify</h3>
+    <p class="stars">⭐⭐⭐⭐⭐</p>
+    <p><strong>Build:</strong> ~40s | <strong>Deploy:</strong> ~10s</p>
+    <p><span class="badge badge-success">Free tier</span></p>
+    <p>Drag & drop or Git-based deployment</p>
+  </div>
+  <div class="platform-card">
+    <h3>🐙 GitHub Pages</h3>
+    <p class="stars">⭐⭐⭐⭐</p>
+    <p><strong>Build:</strong> ~1m | <strong>Deploy:</strong> ~15s</p>
+    <p><span class="badge badge-success">Free</span></p>
+    <p>Free for public repositories</p>
+  </div>
+  <div class="platform-card">
+    <h3>🐳 Docker</h3>
+    <p class="stars">⭐⭐⭐</p>
+    <p><strong>Build:</strong> ~2m | <strong>Deploy:</strong> Varies</p>
+    <p><span class="badge badge-info">Self-hosted</span></p>
+    <p>Containerized deployment for any platform</p>
+  </div>
+</div>
 
 ## Pre-Deployment Checklist
 

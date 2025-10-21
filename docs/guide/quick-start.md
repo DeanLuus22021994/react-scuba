@@ -1,10 +1,29 @@
 # Quick Start
 
-Get React Scuba up and running in under 5 minutes.
+<div class="feature-card">
+
+🚀 Get React Scuba up and running in under **5 minutes**.
+
+</div>
 
 ## Prerequisites
 
 Ensure you have installed:
+
+<div class="metrics">
+  <div class="metric">
+    <span class="metric-value">18+</span>
+    <span class="metric-label">Node.js</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">9+</span>
+    <span class="metric-label">npm</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">✓</span>
+    <span class="metric-label">Git</span>
+  </div>
+</div>
 
 - **Node.js** 18.x or later ([Download](https://nodejs.org/))
 - **npm** 9.x or later (comes with Node.js)

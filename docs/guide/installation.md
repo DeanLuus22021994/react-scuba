@@ -1,8 +1,27 @@
 # Installation
 
+<div class="feature-card">
+
 This guide covers the complete installation process for the SCUBA Bali project.
 
+</div>
+
 ## System Requirements
+
+<div class="metrics">
+  <div class="metric">
+    <span class="metric-value">18.0+</span>
+    <span class="metric-label">Node.js</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">4GB+</span>
+    <span class="metric-label">RAM</span>
+  </div>
+  <div class="metric">
+    <span class="metric-value">500MB</span>
+    <span class="metric-label">Disk Space</span>
+  </div>
+</div>
 
 ### Minimum Requirements
 
@@ -174,9 +193,7 @@ Create `.vscode/settings.json`:
   "css.lint.unknownAtRules": "ignore",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ]
+  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]]
 }
 ```
 
