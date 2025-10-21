@@ -1,133 +1,52 @@
 {
-  "runTime": "2025-10-21T14:39:24.208Z",
+  "runTime": "2025-10-21T15:01:46.292Z",
   "summary": {
-    "totalFiles": 2,
+    "totalFiles": 1,
     "passedFiles": 1,
-    "failedFiles": 1,
-    "totalTests": 10,
-    "passedTests": 8,
-    "failedTests": 2,
-    "passRate": 80
+    "failedFiles": 0,
+    "totalTests": 4,
+    "passedTests": 4,
+    "failedTests": 0,
+    "passRate": 100
   },
   "performance": {
-    "totalDuration": 30.228405999999836,
-    "avgDuration": 3.0228405999999834,
-    "testCount": 10,
+    "totalDuration": 6.5602230000000645,
+    "avgDuration": 1.6400557500000161,
+    "testCount": 4,
     "slowestTests": [
       {
-        "name": "should validate all internal links",
-        "duration": 12.415956999999935,
-        "state": "fail",
-        "errors": [
-          {
-            "message": "Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)",
-            "actual": "undefined",
-            "expected": "undefined",
-            "name": "AssertionError",
-            "ok": false,
-            "stack": "AssertionError: Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)\n    at /workspaces/react-scuba/tests/docs-validation.test.js:215:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
-            "stacks": [
-              {
-                "method": "",
-                "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
-                "line": 215,
-                "column": 14
-              }
-            ]
-          }
-        ],
-        "fileName": "tests/docs-validation.test.js"
-      },
-      {
         "name": "should validate all links in documentation",
-        "duration": 9.939806999999973,
+        "duration": 3.8344079999999394,
         "state": "pass",
         "errors": [],
         "fileName": "tests/link-checker.test.js"
       },
       {
         "name": "should find all markdown files",
-        "duration": 2.0719429999999193,
-        "state": "pass",
-        "errors": [],
-        "fileName": "tests/link-checker.test.js"
-      },
-      {
-        "name": "should validate code blocks have language specified",
-        "duration": 1.764782999999852,
-        "state": "fail",
-        "errors": [
-          {
-            "message": "Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier",
-            "actual": "undefined",
-            "expected": "undefined",
-            "name": "AssertionError",
-            "ok": false,
-            "stack": "AssertionError: Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier\n    at /workspaces/react-scuba/tests/docs-validation.test.js:313:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
-            "stacks": [
-              {
-                "method": "",
-                "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
-                "line": 313,
-                "column": 14
-              }
-            ]
-          }
-        ],
-        "fileName": "tests/docs-validation.test.js"
-      },
-      {
-        "name": "should validate all image references",
-        "duration": 1.0126370000000406,
-        "state": "pass",
-        "errors": [],
-        "fileName": "tests/docs-validation.test.js"
-      },
-      {
-        "name": "should find markdown files in docs directory",
-        "duration": 0.9211999999999989,
-        "state": "pass",
-        "errors": [],
-        "fileName": "tests/docs-validation.test.js"
-      },
-      {
-        "name": "should validate frontmatter in all markdown files",
-        "duration": 0.7778820000000906,
-        "state": "pass",
-        "errors": [],
-        "fileName": "tests/docs-validation.test.js"
-      },
-      {
-        "name": "should validate all links in README.md",
-        "duration": 0.6833259999999655,
+        "duration": 1.8380960000000641,
         "state": "pass",
         "errors": [],
         "fileName": "tests/link-checker.test.js"
       },
       {
         "name": "should detect common link issues",
-        "duration": 0.4565059999999903,
+        "duration": 0.5327919999999722,
         "state": "pass",
         "errors": [],
         "fileName": "tests/link-checker.test.js"
       },
       {
-        "name": "should validate public assets exist",
-        "duration": 0.18436500000007072,
+        "name": "should validate all links in README.md",
+        "duration": 0.3549270000000888,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/docs-validation.test.js"
+        "fileName": "tests/link-checker.test.js"
       }
     ],
     "slowestFiles": [
       {
-        "fileName": "tests/docs-validation.test.js",
-        "duration": 18.0633499999999,
-        "testCount": 6
-      },
-      {
         "fileName": "tests/link-checker.test.js",
-        "duration": 14.109725000000026,
+        "duration": 7.579544999999939,
         "testCount": 4
       }
     ],
@@ -136,13 +55,13 @@
         "label": "< 10ms",
         "min": 0,
         "max": 10,
-        "count": 9
+        "count": 4
       },
       {
         "label": "10-50ms",
         "min": 10,
         "max": 50,
-        "count": 1
+        "count": 0
       },
       {
         "label": "50-100ms",
@@ -167,123 +86,45 @@
   "categories": [
     {
       "category": "tests",
-      "fileCount": 2,
-      "totalTests": 10,
-      "passedTests": 8,
-      "failedTests": 2,
-      "totalDuration": 32.173074999999926,
-      "passRate": 80
+      "fileCount": 1,
+      "totalTests": 4,
+      "passedTests": 4,
+      "failedTests": 0,
+      "totalDuration": 7.579544999999939,
+      "passRate": 100
     }
   ],
   "files": {
-    "tests/docs-validation.test.js": {
-      "passed": [
-        {
-          "name": "should find markdown files in docs directory",
-          "duration": 0.9211999999999989,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should validate all image references",
-          "duration": 1.0126370000000406,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should validate frontmatter in all markdown files",
-          "duration": 0.7778820000000906,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should validate public assets exist",
-          "duration": 0.18436500000007072,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [
-        {
-          "name": "should validate all internal links",
-          "duration": 12.415956999999935,
-          "state": "fail",
-          "errors": [
-            {
-              "message": "Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)",
-              "actual": "undefined",
-              "expected": "undefined",
-              "name": "AssertionError",
-              "ok": false,
-              "stack": "AssertionError: Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)\n    at /workspaces/react-scuba/tests/docs-validation.test.js:215:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
-              "stacks": [
-                {
-                  "method": "",
-                  "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
-                  "line": 215,
-                  "column": 14
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "should validate code blocks have language specified",
-          "duration": 1.764782999999852,
-          "state": "fail",
-          "errors": [
-            {
-              "message": "Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier",
-              "actual": "undefined",
-              "expected": "undefined",
-              "name": "AssertionError",
-              "ok": false,
-              "stack": "AssertionError: Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier\n    at /workspaces/react-scuba/tests/docs-validation.test.js:313:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
-              "stacks": [
-                {
-                  "method": "",
-                  "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
-                  "line": 313,
-                  "column": 14
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "skipped": [],
-      "totalDuration": 18.0633499999999
-    },
     "tests/link-checker.test.js": {
       "passed": [
         {
           "name": "should find all markdown files",
-          "duration": 2.0719429999999193,
+          "duration": 1.8380960000000641,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should validate all links in documentation",
-          "duration": 9.939806999999973,
+          "duration": 3.8344079999999394,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should validate all links in README.md",
-          "duration": 0.6833259999999655,
+          "duration": 0.3549270000000888,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should detect common link issues",
-          "duration": 0.4565059999999903,
+          "duration": 0.5327919999999722,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 14.109725000000026
+      "totalDuration": 7.579544999999939
     }
   }
 }

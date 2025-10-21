@@ -58,18 +58,6 @@ features:
     details: WCAG 2.1 AA compliant with keyboard navigation, ARIA labels, and screen reader support.
 ---
 
-<style>
-.home-quick-start {
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(3, 105, 161, 0.05) 100%);
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 2rem 0;
-  border: 2px solid var(--vp-c-brand);
-}
-</style>
-
-<div class="home-quick-start">
-
 ## ⚡ Quick Start
 
 ```bash
@@ -88,28 +76,14 @@ npm test
 npm run build
 ```
 
-</div>
-
 ## 🎯 Modern Tech Stack
 
-<div class="metrics">
-  <div class="metric">
-    <span class="metric-value">19.0</span>
-    <span class="metric-label">React</span>
-  </div>
-  <div class="metric">
-    <span class="metric-value">6.3</span>
-    <span class="metric-label">Vite</span>
-  </div>
-  <div class="metric">
-    <span class="metric-value">38+</span>
-    <span class="metric-label">Components</span>
-  </div>
-  <div class="metric">
-    <span class="metric-value">347KB</span>
-    <span class="metric-label">Gzipped</span>
-  </div>
-</div>
+| Metric     | Value |
+| ---------- | ----- |
+| React      | 19.0  |
+| Vite       | 6.3   |
+| Components | 38+   |
+| Gzipped    | 347KB |
 
 | Category       | Technology               | Version  |
 | -------------- | ------------------------ | -------- |
@@ -131,32 +105,14 @@ npm run build
 **5 Main Pages** • **38+ Components** • **6 Utilities** • **Comprehensive Testing** • **Full Analytics Integration**
 :::
 
-<div class="quick-links">
-  <div class="feature-card">
-    <h3>✅ Homepage</h3>
-    <p>Hero, services, features, testimonials, CTAs</p>
-  </div>
-  <div class="feature-card">
-    <h3>✅ About Page</h3>
-    <p>Team profiles, certifications, company story</p>
-  </div>
-  <div class="feature-card">
-    <h3>✅ Dive Sites</h3>
-    <p>Interactive maps, detailed site info</p>
-  </div>
-  <div class="feature-card">
-    <h3>✅ Courses</h3>
-    <p>PADI offerings, pricing, comparison tables</p>
-  </div>
-  <div class="feature-card">
-    <h3>✅ Gallery</h3>
-    <p>Lightbox, categories, lazy loading, filters</p>
-  </div>
-  <div class="feature-card">
-    <h3>✅ Booking</h3>
-    <p>Forms with validation and reCAPTCHA</p>
-  </div>
-</div>
+### Main Pages
+
+- **Homepage**: Hero, services, features, testimonials, CTAs
+- **About Page**: Team profiles, certifications, company story
+- **Dive Sites**: Interactive maps, detailed site info
+- **Courses**: PADI offerings, pricing, comparison tables
+- **Gallery**: Lightbox, categories, lazy loading, filters
+- **Booking**: Forms with validation and reCAPTCHA
 
 **Core Features:**
 
@@ -173,7 +129,7 @@ npm run build
 Clean separation of concerns with feature-based component organization
 :::
 
-```
+```text
 react-scuba/
 ├── docs/                    # 📚 VitePress documentation
 ├── src/
@@ -195,28 +151,12 @@ react-scuba/
 └── package.json
 ```
 
-## Next Steps
-
 ## 🚀 Next Steps
 
-<div class="quick-links">
-  <a href="/guide/quick-start" class="quick-link">
-    <h4>🚀 Quick Start</h4>
-    <p>Get up and running in 5 minutes</p>
-  </a>
-  <a href="/guide/installation" class="quick-link">
-    <h4>📦 Installation</h4>
-    <p>Detailed setup instructions</p>
-  </a>
-  <a href="/components/" class="quick-link">
-    <h4>🧩 Components</h4>
-    <p>Explore 38+ React components</p>
-  </a>
-  <a href="/deployment/" class="quick-link">
-    <h4>🌐 Deploy</h4>
-    <p>Production deployment guides</p>
-  </a>
-</div>
+- [🚀 Quick Start](/guide/quick-start): Get up and running in 5 minutes
+- [📦 Installation](/guide/installation): Detailed setup instructions
+- [🧩 Components](/components/): Explore 38+ React components
+- [🌐 Deploy](/deployment/): Production deployment guides
 
 ## Community & Support
 
