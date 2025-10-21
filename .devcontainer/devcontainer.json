@@ -14,6 +14,12 @@
       "openFiles": [
         "src/App.jsx"
       ]
+    },
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "redhat.vscode-yaml"
+      ]
     }
   },
   "portsAttributes": {
