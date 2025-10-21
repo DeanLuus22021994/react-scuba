@@ -1,4 +1,5 @@
-import { Outlet, useEffect, useLocation } from 'react';
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { WhatsAppButton } from '../components/common';
 import { trackPageView } from '../utils/analytics';
 import Footer from './Footer';

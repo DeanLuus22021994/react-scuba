@@ -3,7 +3,7 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
-import { appendFileSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'fs';
+import { appendFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { afterAll, afterEach, beforeAll } from 'vitest';
@@ -17,14 +17,18 @@ const logFile = join(logsDir, 'test-results.log');
 const testResults = [];
 
 beforeAll(() => {
-  // Clear logs directory at the start of test run
-  if (existsSync(logsDir)) {
-    rmSync(logsDir, { recursive: true, force: true });
-  }
-  mkdirSync(logsDir, { recursive: true });
+  // Create logs directory if it doesn't exist
+  try {
+    if (!existsSync(logsDir)) {
+      mkdirSync(logsDir, { recursive: true });
+    }
 
-  const header = `Test Run Started: ${new Date().toISOString()}\n${'='.repeat(80)}\n\n`;
-  writeFileSync(logFile, header);
+    const header = `Test Run Started: ${new Date().toISOString()}\n${'='.repeat(80)}\n\n`;
+    writeFileSync(logFile, header, { flag: 'a' });
+  } catch (error) {
+    // Ignore errors in test setup - tests can still run
+    console.warn('Could not setup test logging:', error.message);
+  }
 });
 
 afterEach((context) => {

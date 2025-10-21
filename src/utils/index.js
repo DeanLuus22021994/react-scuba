@@ -5,7 +5,15 @@
 
 export * from './analytics';
 export * from './currency';
-export { validateEnv } from './env';
+export {
+  getApiUrl,
+  getCalendarApiKey,
+  getCalendarEmail,
+  getEnvVar,
+  isDevelopment,
+  isProduction,
+  validateEnvVars as validateEnv,
+} from './env';
 export { default as logger } from './logger';
-export { default as scrollToAnchor } from './scrollToAnchor';
+export * from './scrollToAnchor';
 export * from './seo';

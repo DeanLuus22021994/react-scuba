@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as servicesExports from '../../src/services/index';
+import * as servicesExports from '@/services/index';
 
 describe('services/index', () => {
   it('should export api functions', () => {

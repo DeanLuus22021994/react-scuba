@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import CurrencySelector from '../../src/components/common/CurrencySelector';
-import { CurrencyProvider } from '../../src/hooks/useCurrency';
+import CurrencySelector from '@/components/common/CurrencySelector';
+import { CurrencyProvider } from '@/hooks/useCurrency';
 
 describe('CurrencySelector', () => {
     const renderWithProvider = (component) => {

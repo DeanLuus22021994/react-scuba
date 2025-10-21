@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider } from '../../src/hooks/useCurrency';
-import Header from '../../src/layouts/Header';
+import { CurrencyProvider } from '@/hooks/useCurrency';
+import Header from '@/layouts/Header';
 
 describe('Header', () => {
     const renderWithProviders = (component) => {

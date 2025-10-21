@@ -90,3 +90,27 @@ export const isProduction = () => {
 export const isDevelopment = () => {
   return import.meta.env.MODE === 'development';
 };
+
+/**
+ * Gets the API URL from environment variables
+ * @returns {string}
+ */
+export const getApiUrl = () => {
+  return getEnvVar('VITE_API_ENDPOINT', 'http://localhost:5000/api');
+};
+
+/**
+ * Gets the calendar email from environment variables
+ * @returns {string}
+ */
+export const getCalendarEmail = () => {
+  return getEnvVar('VITE_GOOGLE_CALENDAR_ID', '');
+};
+
+/**
+ * Gets the calendar API key from environment variables
+ * @returns {string}
+ */
+export const getCalendarApiKey = () => {
+  return getEnvVar('VITE_GOOGLE_CALENDAR_API_KEY', '');
+};

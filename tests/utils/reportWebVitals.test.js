@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import reportWebVitals from '../../src/utils/reportWebVitals';
+import reportWebVitals from '@/utils/reportWebVitals';
 
 describe('reportWebVitals', () => {
   it('should export reportWebVitals function', () => {

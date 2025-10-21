@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { COURSES, getCourseById } from '../../src/data/courses';
+import { COURSES, getCourseById } from '@/data/courses';
 
 describe('courses', () => {
   it('should export COURSES array', () => {

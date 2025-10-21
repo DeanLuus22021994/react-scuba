@@ -4,7 +4,7 @@ import {
   FEATURED_IMAGES,
   GALLERY_IMAGES,
   getImagesByCategory,
-} from '../../src/data/gallery';
+} from '@/data/gallery';
 
 describe('gallery', () => {
   it('should export GALLERY_IMAGES array', () => {

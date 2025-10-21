@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getTeamMemberByName, TEAM_MEMBERS } from '../../src/data/team';
+import { getTeamMemberByName, TEAM_MEMBERS } from '@/data/team';
 
 describe('team', () => {
   it('should export TEAM_MEMBERS array', () => {

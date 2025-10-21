@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import ErrorBoundary from '../../src/components/common/ErrorBoundary';
+import ErrorBoundary from '@/components/common/ErrorBoundary';
 
 const ThrowError = ({ shouldThrow }) => {
     if (shouldThrow) {

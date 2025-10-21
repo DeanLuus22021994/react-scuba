@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { convertCurrency, CURRENCIES, formatCurrency } from '../../src/utils/currency';
+import { convertCurrency, CURRENCIES, formatCurrency } from '@/utils/currency';
 
 describe('currency', () => {
   it('should export CURRENCIES', () => {
@@ -30,13 +30,13 @@ describe('currency', () => {
   });
 
   it('should convert currency with rates', () => {
-    const rates = { EUR: 0.85 };
+    const rates = { USD: 1, EUR: 0.85 };
     const converted = convertCurrency(100, 'USD', 'EUR', rates);
     expect(converted).toBe(85);
   });
 
   it('should return same amount for same currency', () => {
-    const rates = {};
+    const rates = { USD: 1 };
     const converted = convertCurrency(100, 'USD', 'USD', rates);
     expect(converted).toBe(100);
   });

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import ContactModal from '../../src/components/modals/ContactModal';
+import ContactModal from '@/components/modals/ContactModal';
 
 // Mock dependencies
 vi.mock('../../../src/services/api', () => ({

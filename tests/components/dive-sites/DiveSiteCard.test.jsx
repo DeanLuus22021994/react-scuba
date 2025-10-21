@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import DiveSiteCard from '../../src/components/dive-sites/DiveSiteCard';
+import DiveSiteCard from '@/components/dive-sites/DiveSiteCard';
 
 describe('DiveSiteCard', () => {
     const mockSite = {

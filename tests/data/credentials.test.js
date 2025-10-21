@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CREDENTIALS } from '../../src/data/credentials';
+import { CREDENTIALS } from '@/data/credentials';
 
 describe('credentials', () => {
   it('should export CREDENTIALS array', () => {

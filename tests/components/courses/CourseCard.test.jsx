@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import CourseCard from '../../src/components/courses/CourseCard';
-import { CurrencyProvider } from '../../src/hooks/useCurrency';
+import CourseCard from '@/components/courses/CourseCard';
+import { CurrencyProvider } from '@/hooks/useCurrency';
 
 describe('CourseCard', () => {
     const mockCourse = {

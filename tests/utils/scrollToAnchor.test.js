@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { scrollToElement, scrollToTop } from '../../src/utils/scrollToAnchor';
+import { scrollToElement, scrollToTop } from '@/utils/scrollToAnchor';
 
 describe('scrollToAnchor', () => {
   beforeEach(() => {

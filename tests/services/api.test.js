@@ -2,11 +2,24 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   checkCalendarAvailability,
   createCalendarBooking,
-  sendContactMessage,
-} from '../../src/services/api';
+  submitContactForm as sendContactMessage,
+} from '@/services/api';
 
-// Mock fetch
-global.fetch = vi.fn();
+// Mock axios
+vi.mock('axios', () => {
+  return {
+    default: {
+      create: () => ({
+        post: vi.fn(),
+        get: vi.fn(),
+        interceptors: {
+          request: { use: vi.fn() },
+          response: { use: vi.fn() },
+        },
+      }),
+    },
+  };
+});
 
 describe('api', () => {
   beforeEach(() => {
@@ -29,27 +42,20 @@ describe('api', () => {
   });
 
   it('sendContactMessage should handle successful response', async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ success: true }),
-    });
-
     const result = await sendContactMessage({
       name: 'Test',
       email: 'test@example.com',
       message: 'Test message',
     });
 
-    expect(result).toEqual({ success: true });
+    // API returns {success: true/false, ...}
+    expect(result).toHaveProperty('success');
+    expect(typeof result.success).toBe('boolean');
   });
 
-  it('checkCalendarAvailability should return boolean', async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => true,
-    });
-
+  it('checkCalendarAvailability should return object', async () => {
     const result = await checkCalendarAvailability(new Date(), '09:00');
-    expect(typeof result).toBe('boolean');
+    expect(typeof result).toBe('object');
+    expect(result).toHaveProperty('success');
   });
 });

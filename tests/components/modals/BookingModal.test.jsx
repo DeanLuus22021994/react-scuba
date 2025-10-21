@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import BookingModal from '../../src/components/modals/BookingModal';
-import { CurrencyProvider } from '../../src/hooks/useCurrency';
+import BookingModal from '@/components/modals/BookingModal';
+import { CurrencyProvider } from '@/hooks/useCurrency';
 
 // Mock dependencies
 vi.mock('../../../src/services/api', () => ({

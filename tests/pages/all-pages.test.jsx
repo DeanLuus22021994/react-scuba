@@ -1,15 +1,15 @@
+import { CurrencyProvider } from '@/hooks/useCurrency';
 import { render, screen } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider } from '../../src/hooks/useCurrency';
 
 // Import pages directly
-import AboutPageComponent from '../../src/pages/AboutPage';
-import CoursesPageComponent from '../../src/pages/CoursesPage';
-import DiveSitesPageComponent from '../../src/pages/DiveSitesPage';
-import GalleryPageComponent from '../../src/pages/GalleryPage';
-import HomePageComponent from '../../src/pages/HomePage';
+import AboutPageComponent from '@/pages/AboutPage';
+import CoursesPageComponent from '@/pages/CoursesPage';
+import DiveSitesPageComponent from '@/pages/DiveSitesPage';
+import GalleryPageComponent from '@/pages/GalleryPage';
+import HomePageComponent from '@/pages/HomePage';
 
 const renderWithProviders = (component) => {
     return render(
@@ -24,14 +24,14 @@ const renderWithProviders = (component) => {
 describe('pages/AboutPage', () => {
     it('should render without crashing', () => {
         renderWithProviders(<AboutPageComponent />);
-        expect(screen.getByText(/About/i)).toBeInTheDocument();
+        expect(screen.getByText(/About Our Dive Center/i)).toBeInTheDocument();
     });
 });
 
 describe('pages/CoursesPage', () => {
     it('should render without crashing', () => {
         renderWithProviders(<CoursesPageComponent />);
-        expect(screen.getByText(/Courses/i)).toBeInTheDocument();
+        expect(screen.getByText(/Diving Courses/i)).toBeInTheDocument();
     });
 });
 
@@ -47,14 +47,14 @@ describe('pages/DiveSitesPage', () => {
             );
         };
         renderWithMemory(<DiveSitesPageComponent />);
-        expect(screen.getByText(/Dive Sites/i)).toBeInTheDocument();
+        expect(screen.getByText(/Dive Sites of Mauritius/i)).toBeInTheDocument();
     });
 });
 
 describe('pages/GalleryPage', () => {
     it('should render without crashing', () => {
         renderWithProviders(<GalleryPageComponent />);
-        expect(screen.getByText(/Gallery/i)).toBeInTheDocument();
+        expect(screen.getByText(/Dive Gallery/i)).toBeInTheDocument();
     });
 });
 

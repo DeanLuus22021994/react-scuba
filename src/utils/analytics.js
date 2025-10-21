@@ -136,6 +136,13 @@ export const trackFormAbandon = (formName, source, completionPercentage) => {
   });
 };
 
+export const trackFormComplete = (formName, source) => {
+  trackConversion('form_complete', {
+    form_name: formName,
+    source: source,
+  });
+};
+
 // Send Web Vitals to GA4
 export const sendWebVitalsToGA4 = ({ name, delta, id }) => {
   ReactGA.event({

@@ -5,15 +5,15 @@ import {
   getCalendarEmail,
   isDevelopment,
   isProduction,
-} from '../../src/utils/env';
+} from '@/utils/env';
 
 describe('env', () => {
   it('should export isDevelopment', () => {
-    expect(typeof isDevelopment).toBe('boolean');
+    expect(typeof isDevelopment).toBe('function');
   });
 
   it('should export isProduction', () => {
-    expect(typeof isProduction).toBe('boolean');
+    expect(typeof isProduction).toBe('function');
   });
 
   it('should export getApiUrl', () => {

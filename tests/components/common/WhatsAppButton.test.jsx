@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import WhatsAppButton from '../../src/components/common/WhatsAppButton';
+import WhatsAppButton from '@/components/common/WhatsAppButton';
 
 vi.mock('../../../src/utils/analytics', () => ({
     trackWhatsAppClick: vi.fn(),

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as hooksExports from '../../src/hooks/index';
+import * as hooksExports from '@/hooks/index';
 
 describe('hooks/index', () => {
   it('should export useCurrency', () => {

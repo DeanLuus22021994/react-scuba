@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BOOKING_TYPES } from '../../src/data/bookingTypes';
+import { BOOKING_TYPES } from '@/data/bookingTypes';
 
 describe('bookingTypes', () => {
   it('should export BOOKING_TYPES', () => {
@@ -17,7 +17,7 @@ describe('bookingTypes', () => {
   });
 
   it('should have valid course structure', () => {
-    BOOKING_TYPES.courses.forEach((course) => {
+    BOOKING_TYPES.course.forEach((course) => {
       expect(course).toHaveProperty('id');
       expect(course).toHaveProperty('name');
       expect(course).toHaveProperty('duration');
@@ -26,7 +26,7 @@ describe('bookingTypes', () => {
   });
 
   it('should have valid dive structure', () => {
-    BOOKING_TYPES.dives.forEach((dive) => {
+    BOOKING_TYPES.dive.forEach((dive) => {
       expect(dive).toHaveProperty('id');
       expect(dive).toHaveProperty('name');
       expect(dive).toHaveProperty('duration');

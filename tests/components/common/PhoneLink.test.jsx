@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import PhoneLink from '../../src/components/common/PhoneLink';
+import PhoneLink from '@/components/common/PhoneLink';
 
 vi.mock('../../../src/utils/analytics', () => ({
     trackPhoneClick: vi.fn(),
