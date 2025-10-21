@@ -1,7 +1,10 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "hostRequirements": {
-    "cpus": 4
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb",
+    "gpu": "optional"
   },
   "waitFor": "onCreateCommand",
   "updateContentCommand": "npm install",
@@ -11,14 +14,19 @@
   },
   "customizations": {
     "codespaces": {
-      "openFiles": [
-        "src/App.jsx"
-      ]
+      "openFiles": ["src/App.jsx"]
     },
     "vscode": {
       "extensions": [
+        "GitHub.copilot-chat",
+        "GitHub.copilot",
         "esbenp.prettier-vscode",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "ms-vscode.copilot-mermaid-diagram",
+        "ms-vscode.vscode-copilot-vision",
+        "ms-vscode.vscode-websearchforcopilot",
+        "vscjava.migrate-java-to-azure",
+        "vscjava.vscode-java-upgrade"
       ]
     }
   },
