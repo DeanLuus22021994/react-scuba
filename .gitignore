@@ -144,3 +144,6 @@ Thumbs.db
 docs/.vitepress/dist
 docs/.vitepress/cache
 *.backup
+
+# Test logs
+tests/logs/
