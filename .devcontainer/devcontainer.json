@@ -15,7 +15,7 @@
     "waitFor": "onCreateCommand",
     "updateContentCommand": "npm install --legacy-peer-deps",
     "postCreateCommand": "",
-    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postStartCommand": "git config --global --unset-all safe.directory || true && git config --global --add safe.directory ${containerWorkspaceFolder}",
     "postAttachCommand": "",
     "customizations": {
         "codespaces": {
@@ -42,12 +42,12 @@
         }
     },
     "portsAttributes": {
-        "3000": {
+        "3001": {
             "label": "Application",
             "onAutoForward": "openPreview"
         }
     },
     "forwardPorts": [
-        3000
+        3001
     ]
 }
