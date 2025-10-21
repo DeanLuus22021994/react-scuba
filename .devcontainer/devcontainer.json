@@ -1,6 +1,8 @@
 {
     "image": "node:22-alpine",
-    "features": {},
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {}
+    },
     "mounts": [
         "source=react-scuba-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
     ],
