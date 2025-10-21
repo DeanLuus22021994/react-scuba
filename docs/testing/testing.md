@@ -1,6 +1,6 @@
 # Test Results
 
-**Generated:** 10/21/2025, 1:24:44 PM
+**Generated:** 10/21/2025, 1:30:34 PM
 
 ---
 
@@ -21,68 +21,68 @@
 
 ### ✅ Passed Files (62)
 
-- **tests/AboutPage.test.jsx** - 4 tests (2458ms)
-- **tests/App.test.jsx** - 5 tests (940ms)
-- **tests/components/about/CredentialCard.test.jsx** - 6 tests (183ms)
+- **tests/AboutPage.test.jsx** - 4 tests (2197ms)
+- **tests/App.test.jsx** - 5 tests (981ms)
+- **tests/components/about/CredentialCard.test.jsx** - 6 tests (235ms)
 - **tests/components/about/index.test.js** - 4 tests (4ms)
-- **tests/components/about/TeamMember.test.jsx** - 7 tests (200ms)
-- **tests/components/common/CurrencySelector.test.jsx** - 6 tests (1294ms)
-- **tests/components/common/ErrorBoundary.test.jsx** - 5 tests (908ms)
-- **tests/components/common/index.test.js** - 6 tests (4ms)
-- **tests/components/common/Loading.test.jsx** - 9 tests (161ms)
-- **tests/components/common/PhoneLink.test.jsx** - 8 tests (1119ms)
-- **tests/components/common/SEO.test.jsx** - 8 tests (268ms)
-- **tests/components/common/WhatsAppButton.test.jsx** - 10 tests (967ms)
-- **tests/components/courses/CourseCard.test.jsx** - 9 tests (1374ms)
-- **tests/components/courses/CourseComparison.test.jsx** - 5 tests (1040ms)
-- **tests/components/courses/index.test.js** - 3 tests (3ms)
-- **tests/components/dive-sites/DiveMap.test.jsx** - 3 tests (106ms)
-- **tests/components/dive-sites/DiveSiteCard.test.jsx** - 9 tests (301ms)
+- **tests/components/about/TeamMember.test.jsx** - 7 tests (213ms)
+- **tests/components/common/CurrencySelector.test.jsx** - 6 tests (1181ms)
+- **tests/components/common/ErrorBoundary.test.jsx** - 5 tests (821ms)
+- **tests/components/common/index.test.js** - 6 tests (7ms)
+- **tests/components/common/Loading.test.jsx** - 9 tests (184ms)
+- **tests/components/common/PhoneLink.test.jsx** - 8 tests (817ms)
+- **tests/components/common/SEO.test.jsx** - 8 tests (402ms)
+- **tests/components/common/WhatsAppButton.test.jsx** - 10 tests (775ms)
+- **tests/components/courses/CourseCard.test.jsx** - 9 tests (1394ms)
+- **tests/components/courses/CourseComparison.test.jsx** - 5 tests (836ms)
+- **tests/components/courses/index.test.js** - 3 tests (4ms)
+- **tests/components/dive-sites/DiveMap.test.jsx** - 3 tests (100ms)
+- **tests/components/dive-sites/DiveSiteCard.test.jsx** - 9 tests (294ms)
 - **tests/components/dive-sites/index.test.js** - 3 tests (3ms)
-- **tests/components/gallery/FeaturedCarousel.test.jsx** - 3 tests (163ms)
-- **tests/components/gallery/GalleryGrid.test.jsx** - 5 tests (213ms)
+- **tests/components/gallery/FeaturedCarousel.test.jsx** - 3 tests (132ms)
+- **tests/components/gallery/GalleryGrid.test.jsx** - 5 tests (229ms)
 - **tests/components/gallery/index.test.js** - 4 tests (3ms)
-- **tests/components/gallery/Lightbox.test.jsx** - 7 tests (1019ms)
-- **tests/components/home/CTASection.test.jsx** - 5 tests (761ms)
-- **tests/components/home/FeaturesSection.test.jsx** - 5 tests (281ms)
-- **tests/components/home/HeroSection.test.jsx** - 6 tests (931ms)
-- **tests/components/home/index.test.js** - 6 tests (3ms)
-- **tests/components/home/ServicesSection.test.jsx** - 5 tests (952ms)
-- **tests/components/home/TestimonialsSection.test.jsx** - 6 tests (464ms)
-- **tests/components/modals/BookingModal.test.jsx** - 4 tests (1060ms)
-- **tests/components/modals/ContactModal.test.jsx** - 4 tests (1414ms)
-- **tests/components/shared/BackToTop.test.jsx** - 5 tests (97ms)
-- **tests/components/shared/ScrollProgress.test.jsx** - 4 tests (142ms)
-- **tests/CoursesPage.test.jsx** - 4 tests (2631ms)
+- **tests/components/gallery/Lightbox.test.jsx** - 7 tests (773ms)
+- **tests/components/home/CTASection.test.jsx** - 5 tests (690ms)
+- **tests/components/home/FeaturesSection.test.jsx** - 5 tests (251ms)
+- **tests/components/home/HeroSection.test.jsx** - 6 tests (790ms)
+- **tests/components/home/index.test.js** - 6 tests (4ms)
+- **tests/components/home/ServicesSection.test.jsx** - 5 tests (1009ms)
+- **tests/components/home/TestimonialsSection.test.jsx** - 6 tests (393ms)
+- **tests/components/modals/BookingModal.test.jsx** - 4 tests (994ms)
+- **tests/components/modals/ContactModal.test.jsx** - 4 tests (1359ms)
+- **tests/components/shared/BackToTop.test.jsx** - 5 tests (78ms)
+- **tests/components/shared/ScrollProgress.test.jsx** - 4 tests (143ms)
+- **tests/CoursesPage.test.jsx** - 4 tests (2382ms)
 - **tests/data/bookingTypes.test.js** - 5 tests (10ms)
-- **tests/data/courses.test.js** - 5 tests (14ms)
-- **tests/data/credentials.test.js** - 3 tests (9ms)
-- **tests/data/diveSites.test.js** - 5 tests (16ms)
-- **tests/data/gallery.test.js** - 5 tests (11ms)
-- **tests/data/team.test.js** - 4 tests (22ms)
-- **tests/DiveSitesPage.test.jsx** - 4 tests (3704ms)
-- **tests/GalleryPage.test.jsx** - 4 tests (4393ms)
-- **tests/HomePage.test.jsx** - 4 tests (2148ms)
-- **tests/hooks/index.test.js** - 2 tests (5ms)
-- **tests/hooks/useCurrency.test.jsx** - 6 tests (208ms)
-- **tests/layouts/Footer.test.jsx** - 4 tests (1453ms)
-- **tests/layouts/Header.test.jsx** - 3 tests (537ms)
-- **tests/layouts/MainLayout.test.jsx** - 4 tests (469ms)
-- **tests/layouts/Navigation.test.jsx** - 3 tests (931ms)
-- **tests/link-checker.test.js** - 4 tests (27ms)
-- **tests/pages/all-pages.test.jsx** - 5 tests (2351ms)
-- **tests/services/api.test.js** - 5 tests (9ms)
+- **tests/data/courses.test.js** - 5 tests (8ms)
+- **tests/data/credentials.test.js** - 3 tests (6ms)
+- **tests/data/diveSites.test.js** - 5 tests (12ms)
+- **tests/data/gallery.test.js** - 5 tests (12ms)
+- **tests/data/team.test.js** - 4 tests (12ms)
+- **tests/DiveSitesPage.test.jsx** - 4 tests (3305ms)
+- **tests/GalleryPage.test.jsx** - 4 tests (3976ms)
+- **tests/HomePage.test.jsx** - 4 tests (1721ms)
+- **tests/hooks/index.test.js** - 2 tests (3ms)
+- **tests/hooks/useCurrency.test.jsx** - 6 tests (252ms)
+- **tests/layouts/Footer.test.jsx** - 4 tests (1020ms)
+- **tests/layouts/Header.test.jsx** - 3 tests (528ms)
+- **tests/layouts/MainLayout.test.jsx** - 4 tests (491ms)
+- **tests/layouts/Navigation.test.jsx** - 3 tests (733ms)
+- **tests/link-checker.test.js** - 4 tests (22ms)
+- **tests/pages/all-pages.test.jsx** - 5 tests (1983ms)
+- **tests/services/api.test.js** - 5 tests (8ms)
 - **tests/services/index.test.js** - 4 tests (6ms)
-- **tests/src/index.css.test.js** - 2 tests (9ms)
-- **tests/src/index.test.jsx** - 3 tests (11ms)
-- **tests/utils/analytics.test.js** - 9 tests (27ms)
-- **tests/utils/currency.test.js** - 7 tests (48ms)
-- **tests/utils/env.test.js** - 7 tests (30ms)
+- **tests/src/index.css.test.js** - 2 tests (14ms)
+- **tests/src/index.test.jsx** - 3 tests (8ms)
+- **tests/utils/analytics.test.js** - 9 tests (13ms)
+- **tests/utils/currency.test.js** - 7 tests (32ms)
+- **tests/utils/env.test.js** - 7 tests (9ms)
 - **tests/utils/index.test.js** - 4 tests (13ms)
-- **tests/utils/logger.test.js** - 6 tests (20ms)
-- **tests/utils/reportWebVitals.test.js** - 3 tests (11ms)
-- **tests/utils/scrollToAnchor.test.js** - 4 tests (32ms)
-- **tests/utils/seo.test.js** - 7 tests (28ms)
+- **tests/utils/logger.test.js** - 6 tests (19ms)
+- **tests/utils/reportWebVitals.test.js** - 3 tests (15ms)
+- **tests/utils/scrollToAnchor.test.js** - 4 tests (30ms)
+- **tests/utils/seo.test.js** - 7 tests (8ms)
 
 ---
 
@@ -93,12 +93,12 @@
 #### ✅ CredentialCard.test.jsx
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 183ms
+- **Duration:** 235ms
 
 #### ✅ TeamMember.test.jsx
 
 - **Tests:** 7 (7 passed, 0 failed)
-- **Duration:** 200ms
+- **Duration:** 213ms
 
 #### ✅ index.test.js
 
@@ -110,54 +110,54 @@
 #### ✅ CurrencySelector.test.jsx
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 1294ms
+- **Duration:** 1181ms
 
 #### ✅ ErrorBoundary.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 908ms
+- **Duration:** 821ms
 
 #### ✅ Loading.test.jsx
 
 - **Tests:** 9 (9 passed, 0 failed)
-- **Duration:** 161ms
+- **Duration:** 184ms
 
 #### ✅ PhoneLink.test.jsx
 
 - **Tests:** 8 (8 passed, 0 failed)
-- **Duration:** 1119ms
+- **Duration:** 817ms
 
 #### ✅ SEO.test.jsx
 
 - **Tests:** 8 (8 passed, 0 failed)
-- **Duration:** 268ms
+- **Duration:** 402ms
 
 #### ✅ WhatsAppButton.test.jsx
 
 - **Tests:** 10 (10 passed, 0 failed)
-- **Duration:** 967ms
+- **Duration:** 775ms
 
 #### ✅ index.test.js
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 4ms
+- **Duration:** 7ms
 
 ### 📁 courses
 
 #### ✅ CourseCard.test.jsx
 
 - **Tests:** 9 (9 passed, 0 failed)
-- **Duration:** 1374ms
+- **Duration:** 1394ms
 
 #### ✅ CourseComparison.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 1040ms
+- **Duration:** 836ms
 
 #### ✅ index.test.js
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 3ms
+- **Duration:** 4ms
 
 ### 📁 data
 
@@ -169,39 +169,39 @@
 #### ✅ courses.test.js
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 14ms
+- **Duration:** 8ms
 
 #### ✅ credentials.test.js
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 9ms
+- **Duration:** 6ms
 
 #### ✅ diveSites.test.js
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 16ms
+- **Duration:** 12ms
 
 #### ✅ gallery.test.js
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 11ms
+- **Duration:** 12ms
 
 #### ✅ team.test.js
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 22ms
+- **Duration:** 12ms
 
 ### 📁 dive-sites
 
 #### ✅ DiveMap.test.jsx
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 106ms
+- **Duration:** 100ms
 
 #### ✅ DiveSiteCard.test.jsx
 
 - **Tests:** 9 (9 passed, 0 failed)
-- **Duration:** 301ms
+- **Duration:** 294ms
 
 #### ✅ index.test.js
 
@@ -213,17 +213,17 @@
 #### ✅ FeaturedCarousel.test.jsx
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 163ms
+- **Duration:** 132ms
 
 #### ✅ GalleryGrid.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 213ms
+- **Duration:** 229ms
 
 #### ✅ Lightbox.test.jsx
 
 - **Tests:** 7 (7 passed, 0 failed)
-- **Duration:** 1019ms
+- **Duration:** 773ms
 
 #### ✅ index.test.js
 
@@ -235,92 +235,92 @@
 #### ✅ CTASection.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 761ms
+- **Duration:** 690ms
 
 #### ✅ FeaturesSection.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 281ms
+- **Duration:** 251ms
 
 #### ✅ HeroSection.test.jsx
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 931ms
+- **Duration:** 790ms
 
 #### ✅ ServicesSection.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 952ms
+- **Duration:** 1009ms
 
 #### ✅ TestimonialsSection.test.jsx
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 464ms
+- **Duration:** 393ms
 
 #### ✅ index.test.js
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 3ms
+- **Duration:** 4ms
 
 ### 📁 hooks
 
 #### ✅ index.test.js
 
 - **Tests:** 2 (2 passed, 0 failed)
-- **Duration:** 5ms
+- **Duration:** 3ms
 
 #### ✅ useCurrency.test.jsx
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 208ms
+- **Duration:** 252ms
 
 ### 📁 layouts
 
 #### ✅ Footer.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 1453ms
+- **Duration:** 1020ms
 
 #### ✅ Header.test.jsx
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 537ms
+- **Duration:** 528ms
 
 #### ✅ MainLayout.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 469ms
+- **Duration:** 491ms
 
 #### ✅ Navigation.test.jsx
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 931ms
+- **Duration:** 733ms
 
 ### 📁 modals
 
 #### ✅ BookingModal.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 1060ms
+- **Duration:** 994ms
 
 #### ✅ ContactModal.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 1414ms
+- **Duration:** 1359ms
 
 ### 📁 pages
 
 #### ✅ all-pages.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 2351ms
+- **Duration:** 1983ms
 
 ### 📁 services
 
 #### ✅ api.test.js
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 9ms
+- **Duration:** 8ms
 
 #### ✅ index.test.js
 
@@ -332,78 +332,78 @@
 #### ✅ BackToTop.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 97ms
+- **Duration:** 78ms
 
 #### ✅ ScrollProgress.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 142ms
+- **Duration:** 143ms
 
 ### 📁 src
 
 #### ✅ index.css.test.js
 
 - **Tests:** 2 (2 passed, 0 failed)
-- **Duration:** 9ms
+- **Duration:** 14ms
 
 #### ✅ index.test.jsx
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 11ms
+- **Duration:** 8ms
 
 ### 📁 tests
 
 #### ✅ AboutPage.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 2458ms
+- **Duration:** 2197ms
 
 #### ✅ App.test.jsx
 
 - **Tests:** 5 (5 passed, 0 failed)
-- **Duration:** 940ms
+- **Duration:** 981ms
 
 #### ✅ CoursesPage.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 2631ms
+- **Duration:** 2382ms
 
 #### ✅ DiveSitesPage.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 3704ms
+- **Duration:** 3305ms
 
 #### ✅ GalleryPage.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 4393ms
+- **Duration:** 3976ms
 
 #### ✅ HomePage.test.jsx
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 2148ms
+- **Duration:** 1721ms
 
 #### ✅ link-checker.test.js
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 27ms
+- **Duration:** 22ms
 
 ### 📁 utils
 
 #### ✅ analytics.test.js
 
 - **Tests:** 9 (9 passed, 0 failed)
-- **Duration:** 27ms
+- **Duration:** 13ms
 
 #### ✅ currency.test.js
 
 - **Tests:** 7 (7 passed, 0 failed)
-- **Duration:** 48ms
+- **Duration:** 32ms
 
 #### ✅ env.test.js
 
 - **Tests:** 7 (7 passed, 0 failed)
-- **Duration:** 30ms
+- **Duration:** 9ms
 
 #### ✅ index.test.js
 
@@ -413,45 +413,45 @@
 #### ✅ logger.test.js
 
 - **Tests:** 6 (6 passed, 0 failed)
-- **Duration:** 20ms
+- **Duration:** 19ms
 
 #### ✅ reportWebVitals.test.js
 
 - **Tests:** 3 (3 passed, 0 failed)
-- **Duration:** 11ms
+- **Duration:** 15ms
 
 #### ✅ scrollToAnchor.test.js
 
 - **Tests:** 4 (4 passed, 0 failed)
-- **Duration:** 32ms
+- **Duration:** 30ms
 
 #### ✅ seo.test.js
 
 - **Tests:** 7 (7 passed, 0 failed)
-- **Duration:** 28ms
+- **Duration:** 8ms
 
 ---
 
 ## Performance
 
-- **Total Duration:** 37790ms
-- **Average Test Duration:** 120.35ms
+- **Total Duration:** 33713ms
+- **Average Test Duration:** 107.37ms
 
 ### Slowest Tests
 
 | Test | File | Duration |
 |------|------|----------|
-| should render page heading | GalleryPage.test.jsx | 2065ms |
-| should render page heading | DiveSitesPage.test.jsx | 1840ms |
-| should render page heading | AboutPage.test.jsx | 1833ms |
-| should render page heading | CoursesPage.test.jsx | 1647ms |
-| should render without crashing | GalleryPage.test.jsx | 1506ms |
-| should render hero section with heading | HomePage.test.jsx | 1423ms |
-| should render without crashing | DiveSitesPage.test.jsx | 1306ms |
-| should render footer links | Footer.test.jsx | 1085ms |
-| should have submit button | ContactModal.test.jsx | 856ms |
-| should render without crashing | all-pages.test.jsx | 722ms |
+| should render page heading | GalleryPage.test.jsx | 2118ms |
+| should render page heading | DiveSitesPage.test.jsx | 1667ms |
+| should render page heading | AboutPage.test.jsx | 1614ms |
+| should render page heading | CoursesPage.test.jsx | 1512ms |
+| should render without crashing | GalleryPage.test.jsx | 1164ms |
+| should render without crashing | DiveSitesPage.test.jsx | 1124ms |
+| should render hero section with heading | HomePage.test.jsx | 1108ms |
+| should have submit button | ContactModal.test.jsx | 858ms |
+| should render footer links | Footer.test.jsx | 769ms |
+| should render without crashing | all-pages.test.jsx | 748ms |
 
 ---
 
-*Report generated automatically by Vitest on 10/21/2025, 1:24:44 PM*
+*Report generated automatically by Vitest on 10/21/2025, 1:30:34 PM*

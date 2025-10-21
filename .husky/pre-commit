@@ -1,1 +1,5 @@
 npm run precommit
+
+# Stage generated test reports
+
+git add docs/testing/testing.md docs/testing/test-results.json
