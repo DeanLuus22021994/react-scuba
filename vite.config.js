@@ -99,12 +99,19 @@ export default defineConfig({
   },
   // Server configuration
   server: {
+    host: '0.0.0.0',
     port: 3000,
-    open: true,
+    strictPort: true,
+    open: false,
     cors: true,
+    hmr: {
+      clientPort: 3000,
+    },
   },
   preview: {
+    host: '0.0.0.0',
     port: 4173,
-    open: true,
+    strictPort: true,
+    open: false,
   },
 });

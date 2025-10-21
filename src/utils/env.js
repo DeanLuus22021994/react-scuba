@@ -11,9 +11,9 @@ const envSchema = z.object({
   VITE_GA4_ID: z.string().optional(),
 
   // Contact Information
-  VITE_PHONE_NUMBER: z.string().optional(),
-  VITE_WHATSAPP_NUMBER: z.string().optional(),
-  VITE_EMAIL: z.string().email().or(z.literal('')).optional(),
+  VITE_PHONE_NUMBER: z.string().optional().default('+230 2634468'),
+  VITE_WHATSAPP_NUMBER: z.string().optional().default('+230 5255 2732'),
+  VITE_EMAIL: z.string().email().or(z.literal('')).optional().default('info@osdiving.com'),
 
   // API Configuration
   VITE_API_ENDPOINT: z.string().url().or(z.literal('')).optional(),

@@ -1,22 +1,26 @@
 /**
  * Team Members Data
- * Information about dive center instructors and staff
+ * Ocean Spirit Scuba Diving Mauritius - Professional PADI Instructors
  */
 
 export const TEAM_MEMBERS = [
   {
-    name: 'Jean-Pierre Rousseau',
-    role: 'Master Instructor & Founder',
-    certifications: ['PADI Master Instructor', 'EFR Instructor Trainer', '15+ years experience'],
-    image: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400',
-    bio: 'Started diving in 2008 and has been sharing the passion for underwater exploration ever since.',
+    name: 'Ocean Spirit Instructors',
+    role: 'PADI 5 Star ECO Centre Team',
+    certifications: [
+      'PADI 5 Star ECO Centre',
+      'Green Fins Member',
+      'Reef-World Federation Partner',
+    ],
+    image: '/photos/hero-ocean-spirit.jpg',
+    bio: 'Patient, skilled PADI instructors focused on safety. We know our fish and love our world. Committed to conservation, humility, respect, family values and career development.',
   },
   {
-    name: 'Sarah Thompson',
-    role: 'PADI Course Director',
-    certifications: ['PADI Course Director', 'Tec Deep Instructor', '12 years experience'],
+    name: 'Ocean Spirit Team',
+    role: 'Dive Professionals',
+    certifications: ['PADI Instructors', 'EFR Certified', 'Green Fins Trained'],
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400',
-    bio: 'Specializes in technical diving and has trained hundreds of divers to professional levels.',
+    bio: 'Friendly and sociable team providing a comfortable, club-like diving experience in Northern Mauritius with 65 great dive sites.',
   },
   {
     name: 'Raj Patel',

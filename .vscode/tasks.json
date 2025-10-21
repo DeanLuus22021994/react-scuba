@@ -152,6 +152,24 @@
             "detail": "Run tests with coverage report"
         },
         {
+            "label": "Dev Server",
+            "type": "shell",
+            "command": "npm start",
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": false,
+                "clear": false
+            },
+            "icon": {
+                "id": "server",
+                "color": "terminal.ansiCyan"
+            },
+            "detail": "Start Vite development server on port 3000"
+        },
+        {
             "label": "Full Quality Check",
             "dependsOn": [
                 "Run All Linters",
