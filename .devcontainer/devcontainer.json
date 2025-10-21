@@ -24,8 +24,8 @@
     },
     "waitFor": "onCreateCommand",
     "updateContentCommand": "npm install --legacy-peer-deps",
-    "postCreateCommand": "",
-    "postStartCommand": "git config --global --unset-all safe.directory || true && git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postCreateCommand": "sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename} && sudo mkdir -p /workspaces/${localWorkspaceFolderBasename}/node_modules && sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}/node_modules",
+    "postStartCommand": "sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}/node_modules 2>/dev/null || true && git config --global --unset-all safe.directory || true && git config --global --add safe.directory ${containerWorkspaceFolder}",
     "postAttachCommand": "",
     "customizations": {
         "codespaces": {
