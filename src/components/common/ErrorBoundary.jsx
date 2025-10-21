@@ -49,7 +49,7 @@ class ErrorBoundary extends Component {
                 Try Again
               </button>
             </div>
-            {import.meta.env.MODE === 'development' && this.state.error && (
+            {import.meta.env.MODE === 'development' && this.state.hasError && this.state.error && (
               <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md text-left">
                 <p className="text-xs font-mono text-red-900 break-all">
                   {this.state.error.toString()}
