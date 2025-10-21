@@ -13,7 +13,7 @@ const envSchema = z.object({
   // Contact Information
   VITE_PHONE_NUMBER: z.string().optional(),
   VITE_WHATSAPP_NUMBER: z.string().optional(),
-  VITE_EMAIL: z.string().email().optional(),
+  VITE_EMAIL: z.string().email().or(z.literal('')).optional(),
 
   // API Configuration
   VITE_API_ENDPOINT: z.string().url().optional(),
