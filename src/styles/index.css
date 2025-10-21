@@ -1,0 +1,37 @@
+/**
+ * Styles Index
+ * Central import for all custom styles
+ */
+
+/* Import custom utilities */
+@import './utilities.css';
+
+/* Import component styles */
+@import './components.css';
+
+/* Import animations */
+@import './animations.css';
+
+/* Custom Tailwind layers */
+@layer base {
+    html {
+        @apply smooth-scroll;
+    }
+
+    body {
+        @apply antialiased text-gray-900;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold;
+    }
+}
+
+@layer utilities {
+    /* Additional utilities can be added here */
+}
