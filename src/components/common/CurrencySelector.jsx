@@ -33,17 +33,13 @@ const CurrencySelector = ({ className = '' }) => {
                 {({ active }) => (
                   <button
                     onClick={() => setCurrency(code)}
-                    className={`${
-                      active ? 'bg-ocean-50 text-ocean-600' : 'text-gray-700'
-                    } ${
+                    className={`${active ? 'bg-ocean-50 text-ocean-600' : 'text-gray-700'} ${
                       currency === code ? 'font-semibold' : ''
                     } group flex w-full items-center px-4 py-2 text-sm`}
                   >
                     <span className="mr-2">{CURRENCIES[code].symbol}</span>
                     <span>{code}</span>
-                    {currency === code && (
-                      <span className="ml-auto text-ocean-600">✓</span>
-                    )}
+                    {currency === code && <span className="ml-auto text-ocean-600">✓</span>}
                   </button>
                 )}
               </Menu.Item>

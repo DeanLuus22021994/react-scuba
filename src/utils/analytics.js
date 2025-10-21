@@ -1,6 +1,6 @@
-import ReactGA from "react-ga4";
-import TagManager from "react-gtm-module";
-import logger from "./logger";
+import ReactGA from 'react-ga4';
+import TagManager from 'react-gtm-module';
+import logger from './logger';
 
 // Initialize GTM
 export const initializeGTM = () => {
@@ -10,9 +10,9 @@ export const initializeGTM = () => {
     TagManager.initialize({
       gtmId: gtmId,
     });
-    logger.info("GTM initialized:", gtmId);
+    logger.info('GTM initialized:', gtmId);
   } else {
-    logger.warn("GTM ID not found in environment variables");
+    logger.warn('GTM ID not found in environment variables');
   }
 };
 
@@ -22,21 +22,21 @@ export const initializeGA4 = () => {
 
   if (ga4Id) {
     ReactGA.initialize(ga4Id);
-    logger.info("GA4 initialized:", ga4Id);
+    logger.info('GA4 initialized:', ga4Id);
   } else {
-    logger.warn("GA4 ID not found in environment variables");
+    logger.warn('GA4 ID not found in environment variables');
   }
 };
 
 // Track page view
 export const trackPageView = (path, title) => {
   // GA4
-  ReactGA.send({ hitType: "pageview", page: path, title: title });
+  ReactGA.send({ hitType: 'pageview', page: path, title: title });
 
   // GTM dataLayer
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    event: "page_view",
+    event: 'page_view',
     page_path: path,
     page_title: title,
   });
@@ -57,84 +57,79 @@ export const trackConversion = (eventName, eventParams = {}) => {
 
 // Specific conversion tracking functions
 export const trackContactSubmit = (source, inquiryType) => {
-  trackConversion("contact_submit", {
+  trackConversion('contact_submit', {
     source: source,
     inquiry_type: inquiryType,
-    conversion_label: "contact_form",
+    conversion_label: 'contact_form',
   });
 };
 
 export const trackCourseInquiry = (courseName, coursePrice, currency) => {
-  trackConversion("course_inquiry", {
+  trackConversion('course_inquiry', {
     course_name: courseName,
     course_price: coursePrice,
     currency: currency,
-    conversion_label: "course_interest",
+    conversion_label: 'course_interest',
   });
 };
 
 export const trackBookingRequest = (bookingType, value, currency) => {
-  trackConversion("booking_request", {
+  trackConversion('booking_request', {
     booking_type: bookingType,
     value: value,
     currency: currency,
-    conversion_label: "booking_inquiry",
+    conversion_label: 'booking_inquiry',
   });
 };
 
-export const trackCalendarBookingComplete = (
-  bookingType,
-  value,
-  currency,
-  date
-) => {
-  trackConversion("calendar_booking_complete", {
+export const trackCalendarBookingComplete = (bookingType, value, currency, date) => {
+  trackConversion('calendar_booking_complete', {
     booking_type: bookingType,
     value: value,
     currency: currency,
     booking_date: date,
-    conversion_label: "booking_confirmed",
+    conversion_label: 'booking_confirmed',
   });
 };
 
 export const trackPhoneClick = (source) => {
-  trackConversion("phone_click", {
+  trackConversion('phone_click', {
     source: source,
-    conversion_label: "phone_call",
+    conversion_label: 'phone_call',
   });
 };
 
 export const trackEmailClick = (source) => {
-  trackConversion("email_click", {
+  trackConversion('email_click', {
     source: source,
-    conversion_label: "email_contact",
+    conversion_label: 'email_contact',
   });
 };
 
 export const trackWhatsAppClick = (source, messageType) => {
-  trackConversion("whatsapp_click", {
+  trackConversion('whatsapp_click', {
     source: source,
     message_type: messageType,
-    conversion_label: "whatsapp_contact",
+    conversion_label: 'whatsapp_contact',
   });
 };
 
 export const trackCurrencyChange = (fromCurrency, toCurrency) => {
-  trackConversion("currency_change", {
+  trackConversion('currency_change', {
     from_currency: fromCurrency,
     to_currency: toCurrency,
   });
 };
 
 export const trackFormStart = (formName, source) => {
-  trackConversion("form_start", {
+  trackConversion('form_start', {
     form_name: formName,
     source: source,
   });
 };
 
 export const trackFormAbandon = (formName, source, completionPercentage) => {
-  trackConversion("form_abandon", {
+  trackConversion('form_abandon', {
     form_name: formName,
     source: source,
     completion_percentage: completionPercentage,
@@ -144,9 +139,9 @@ export const trackFormAbandon = (formName, source, completionPercentage) => {
 // Send Web Vitals to GA4
 export const sendWebVitalsToGA4 = ({ name, delta, value, id }) => {
   ReactGA.event({
-    category: "Web Vitals",
+    category: 'Web Vitals',
     action: name,
-    value: Math.round(name === "CLS" ? delta * 1000 : delta),
+    value: Math.round(name === 'CLS' ? delta * 1000 : delta),
     label: id,
     nonInteraction: true,
   });

@@ -1,12 +1,12 @@
 // Currency utilities and conversion
 
-import logger from "./logger";
+import logger from './logger';
 
 export const CURRENCIES = {
-  MUR: { symbol: "Rs", name: "Mauritian Rupee", code: "MUR" },
-  USD: { symbol: "$", name: "US Dollar", code: "USD" },
-  EUR: { symbol: "€", name: "Euro", code: "EUR" },
-  GBP: { symbol: "£", name: "British Pound", code: "GBP" },
+  MUR: { symbol: 'Rs', name: 'Mauritian Rupee', code: 'MUR' },
+  USD: { symbol: '$', name: 'US Dollar', code: 'USD' },
+  EUR: { symbol: '€', name: 'Euro', code: 'EUR' },
+  GBP: { symbol: '£', name: 'British Pound', code: 'GBP' },
 };
 
 // Base exchange rates (MUR as base currency)
@@ -31,7 +31,7 @@ export const convertCurrency = (
   return convertedAmount;
 };
 
-export const formatCurrency = (amount, currencyCode, locale = "en-MU") => {
+export const formatCurrency = (amount, currencyCode, locale = 'en-MU') => {
   const currency = CURRENCIES[currencyCode];
 
   if (!currency) {
@@ -43,15 +43,11 @@ export const formatCurrency = (amount, currencyCode, locale = "en-MU") => {
 
   // For MUR, show as "Rs 1,500.00"
   // For others, show as "$1,500.00"
-  if (currencyCode === "MUR") {
-    return `${currency.symbol} ${parseFloat(formattedAmount).toLocaleString(
-      locale
-    )}`;
+  if (currencyCode === 'MUR') {
+    return `${currency.symbol} ${parseFloat(formattedAmount).toLocaleString(locale)}`;
   }
 
-  return `${currency.symbol}${parseFloat(formattedAmount).toLocaleString(
-    locale
-  )}`;
+  return `${currency.symbol}${parseFloat(formattedAmount).toLocaleString(locale)}`;
 };
 
 export const getCurrencySymbol = (currencyCode) => {
@@ -67,18 +63,16 @@ export const fetchExchangeRates = async () => {
   const apiKey = import.meta.env.VITE_EXCHANGE_RATE_API_KEY;
 
   if (!apiKey) {
-    logger.warn("Exchange rate API key not found, using default rates");
+    logger.warn('Exchange rate API key not found, using default rates');
     return DEFAULT_EXCHANGE_RATES;
   }
 
   try {
     // Example using exchangerate-api.com (free tier available)
-    const response = await fetch(
-      `https://v6.exchangerate-api.com/v6/${apiKey}/latest/MUR`
-    );
+    const response = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/MUR`);
     const data = await response.json();
 
-    if (data.result === "success") {
+    if (data.result === 'success') {
       return {
         MUR: 1,
         USD: data.conversion_rates.USD,
@@ -89,7 +83,7 @@ export const fetchExchangeRates = async () => {
 
     return DEFAULT_EXCHANGE_RATES;
   } catch (error) {
-    logger.error("Error fetching exchange rates:", error);
+    logger.error('Error fetching exchange rates:', error);
     return DEFAULT_EXCHANGE_RATES;
   }
 };

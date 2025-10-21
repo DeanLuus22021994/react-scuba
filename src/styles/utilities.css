@@ -5,239 +5,239 @@
 
 /* Custom Button Styles */
 .btn-primary {
-    @apply bg-ocean-600 hover:bg-ocean-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-lg;
+  @apply bg-ocean-600 hover:bg-ocean-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-lg;
 }
 
 .btn-secondary {
-    @apply bg-white hover:bg-gray-100 text-ocean-600 font-bold py-3 px-6 rounded-lg transition-all border-2 border-ocean-600;
+  @apply bg-white hover:bg-gray-100 text-ocean-600 font-bold py-3 px-6 rounded-lg transition-all border-2 border-ocean-600;
 }
 
 .btn-outline {
-    @apply bg-transparent hover:bg-ocean-50 text-ocean-600 font-semibold py-2 px-4 rounded-lg border-2 border-ocean-600 transition-all;
+  @apply bg-transparent hover:bg-ocean-50 text-ocean-600 font-semibold py-2 px-4 rounded-lg border-2 border-ocean-600 transition-all;
 }
 
 /* Container Utilities */
 .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
 .section-padding {
-    @apply py-16 px-4;
+  @apply py-16 px-4;
 }
 
 /* Card Styles */
 .card {
-    @apply bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow p-6;
+  @apply bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow p-6;
 }
 
 .card-hover {
-    @apply transform hover:-translate-y-1 transition-all duration-300;
+  @apply transform hover:-translate-y-1 transition-all duration-300;
 }
 
 /* Text Utilities */
 .text-gradient {
-    @apply bg-gradient-to-r from-ocean-600 to-ocean-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-ocean-600 to-ocean-400 bg-clip-text text-transparent;
 }
 
 .heading-primary {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4;
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4;
 }
 
 .heading-secondary {
-    @apply text-2xl md:text-3xl font-bold text-gray-900 mb-3;
+  @apply text-2xl md:text-3xl font-bold text-gray-900 mb-3;
 }
 
 /* Background Patterns */
 .bg-pattern-dots {
-    background-image: radial-gradient(circle, rgba(14, 116, 144, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
+  background-image: radial-gradient(circle, rgba(14, 116, 144, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .bg-pattern-grid {
-    background-image: linear-gradient(rgba(14, 116, 144, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(14, 116, 144, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
+  background-image:
+    linear-gradient(rgba(14, 116, 144, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 116, 144, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
 /* Loading Spinner */
 .spinner {
-    @apply animate-spin rounded-full border-4 border-gray-200 border-t-ocean-600;
+  @apply animate-spin rounded-full border-4 border-gray-200 border-t-ocean-600;
 }
 
 /* Focus Styles */
 .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2;
+  @apply focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2;
 }
 
 .focus-ring-inset {
-    @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ocean-500;
+  @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ocean-500;
 }
 
 .focus-visible-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2;
 }
 
 /* Focus visible for keyboard navigation */
 .keyboard-focus:focus-visible {
-    @apply ring-2 ring-ocean-500 ring-offset-2 outline-none;
+  @apply ring-2 ring-ocean-500 ring-offset-2 outline-none;
 }
 
 /* Overlay */
 .overlay {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-40;
+  @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-40;
 }
 
 /* Badge Styles */
 .badge {
-    @apply inline-block px-3 py-1 rounded-full text-sm font-semibold;
+  @apply inline-block px-3 py-1 rounded-full text-sm font-semibold;
 }
 
 .badge-success {
-    @apply bg-green-100 text-green-800;
+  @apply bg-green-100 text-green-800;
 }
 
 .badge-info {
-    @apply bg-blue-100 text-blue-800;
+  @apply bg-blue-100 text-blue-800;
 }
 
 .badge-warning {
-    @apply bg-yellow-100 text-yellow-800;
+  @apply bg-yellow-100 text-yellow-800;
 }
 
 .badge-danger {
-    @apply bg-red-100 text-red-800;
+  @apply bg-red-100 text-red-800;
 }
 
 /* Animation Utilities */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .animate-fade-in {
-    animation: fadeIn 0.5s ease-in;
+  animation: fadeIn 0.5s ease-in;
 }
 
 .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
+  animation: slideUp 0.6s ease-out;
 }
 
 .animate-pulse-slow {
-    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* Scroll Behavior & Anchors */
 .smooth-scroll {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 /* Scroll margin for fixed header navigation */
 .scroll-mt-header {
-    scroll-margin-top: 5rem;
+  scroll-margin-top: 5rem;
 }
 
 .scroll-mt-nav {
-    scroll-margin-top: 4rem;
+  scroll-margin-top: 4rem;
 }
 
 /* Anchor link styles */
 .anchor-link {
-    @apply text-ocean-600 hover:text-ocean-700 transition-colors duration-200 relative;
+  @apply text-ocean-600 hover:text-ocean-700 transition-colors duration-200 relative;
 }
 
 .anchor-link::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-ocean-600 transition-all duration-300;
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-ocean-600 transition-all duration-300;
 }
 
 .anchor-link:hover::after {
-    @apply w-full;
+  @apply w-full;
 }
 
 /* Skip to content link for accessibility */
 .skip-to-content {
-    @apply absolute left-0 top-0 bg-ocean-600 text-white px-4 py-2 transform -translate-y-full focus:translate-y-0 z-50 transition-transform;
+  @apply absolute left-0 top-0 bg-ocean-600 text-white px-4 py-2 transform -translate-y-full focus:translate-y-0 z-50 transition-transform;
 }
 
 /* Image Styles */
 .img-cover {
-    @apply w-full h-full object-cover;
+  @apply w-full h-full object-cover;
 }
 
 .img-contain {
-    @apply w-full h-full object-contain;
+  @apply w-full h-full object-contain;
 }
 
 /* Divider */
 .divider {
-    @apply border-t border-gray-200 my-8;
+  @apply border-t border-gray-200 my-8;
 }
 
 .divider-thick {
-    @apply border-t-4 border-ocean-600 my-8 w-24 mx-auto;
+  @apply border-t-4 border-ocean-600 my-8 w-24 mx-auto;
 }
 
 /* Link Styles */
 .link-hover {
-    @apply text-ocean-600 hover:text-ocean-700 transition-colors underline-offset-2 hover:underline;
+  @apply text-ocean-600 hover:text-ocean-700 transition-colors underline-offset-2 hover:underline;
 }
 
 /* Form Styles */
 .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-transparent transition-all;
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-transparent transition-all;
 }
 
 .input-error {
-    @apply border-red-500 focus:ring-red-500;
+  @apply border-red-500 focus:ring-red-500;
 }
 
 .label {
-    @apply block text-sm font-medium text-gray-700 mb-2;
+  @apply block text-sm font-medium text-gray-700 mb-2;
 }
 
 /* Status Indicators */
 .status-online {
-    @apply w-3 h-3 bg-green-500 rounded-full animate-pulse;
+  @apply w-3 h-3 bg-green-500 rounded-full animate-pulse;
 }
 
 .status-offline {
-    @apply w-3 h-3 bg-gray-400 rounded-full;
+  @apply w-3 h-3 bg-gray-400 rounded-full;
 }
 
 /* Tooltip */
 .tooltip {
-    @apply invisible absolute;
+  @apply invisible absolute;
 }
 
 .has-tooltip:hover .tooltip {
-    @apply visible z-50;
+  @apply visible z-50;
 }

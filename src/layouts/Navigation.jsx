@@ -18,9 +18,7 @@ const Navigation = ({ mobile = false, closeMenu }) => {
       : 'px-3 py-2 text-sm font-medium';
 
     return `${baseClass} ${
-      isActive
-        ? 'text-ocean-600'
-        : 'text-gray-700 hover:text-ocean-600'
+      isActive ? 'text-ocean-600' : 'text-gray-700 hover:text-ocean-600'
     } transition-colors duration-200`;
   };
 
@@ -33,12 +31,7 @@ const Navigation = ({ mobile = false, closeMenu }) => {
   return (
     <nav className={mobile ? 'space-y-1' : 'flex space-x-1'}>
       {navigationLinks.map((link) => (
-        <Link
-          key={link.path}
-          to={link.path}
-          className={linkClass(link.path)}
-          onClick={handleClick}
-        >
+        <Link key={link.path} to={link.path} className={linkClass(link.path)} onClick={handleClick}>
           {link.name}
         </Link>
       ))}

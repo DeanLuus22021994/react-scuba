@@ -18,7 +18,7 @@ assets/
 The logo can be imported in React components:
 
 ```jsx
-import logo from "../assets/logo.svg";
+import logo from '../assets/logo.svg';
 
 <img src={logo} alt="SCUBA Bali" />;
 ```
@@ -28,7 +28,7 @@ import logo from "../assets/logo.svg";
 Used as fallback for missing images:
 
 ```jsx
-import placeholder from "../assets/placeholder.svg";
+import placeholder from '../assets/placeholder.svg';
 
 <img src={placeholder} alt="Placeholder" />;
 ```

@@ -43,7 +43,7 @@ export const validateEnvVars = () => {
 
     // Log warnings for missing optional but recommended variables
     const env = result.data;
-    
+
     if (!env.VITE_GTM_ID && !env.VITE_GA4_ID) {
       logger.warn('No analytics tracking configured (GTM_ID or GA4_ID)');
     }

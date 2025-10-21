@@ -15,9 +15,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl md:text-3xl font-bold text-ocean-600">
-                Mauritius Scuba
-              </span>
+              <span className="text-2xl md:text-3xl font-bold text-ocean-600">Mauritius Scuba</span>
             </Link>
           </div>
 

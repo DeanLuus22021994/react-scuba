@@ -5,160 +5,159 @@
 
 /* React DatePicker Customization */
 .react-datepicker-wrapper {
-    @apply w-full;
+  @apply w-full;
 }
 
 .react-datepicker__input-container input {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-transparent;
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-transparent;
 }
 
 .react-datepicker {
-    @apply font-sans border border-gray-300 rounded-lg shadow-lg;
+  @apply font-sans border border-gray-300 rounded-lg shadow-lg;
 }
 
 .react-datepicker__header {
-    @apply bg-ocean-600 text-white rounded-t-lg border-b-0;
+  @apply bg-ocean-600 text-white rounded-t-lg border-b-0;
 }
 
 .react-datepicker__current-month {
-    @apply text-white font-semibold;
+  @apply text-white font-semibold;
 }
 
 .react-datepicker__day-name {
-    @apply text-ocean-100;
+  @apply text-ocean-100;
 }
 
 .react-datepicker__day--selected {
-    @apply bg-ocean-600 text-white hover:bg-ocean-700;
+  @apply bg-ocean-600 text-white hover:bg-ocean-700;
 }
 
 .react-datepicker__day:hover {
-    @apply bg-ocean-100;
+  @apply bg-ocean-100;
 }
 
 .react-datepicker__day--disabled {
-    @apply text-gray-400 cursor-not-allowed;
+  @apply text-gray-400 cursor-not-allowed;
 }
 
 /* Leaflet Map Customization */
 .leaflet-container {
-    @apply font-sans;
+  @apply font-sans;
 }
 
 .leaflet-popup-content-wrapper {
-    @apply rounded-lg shadow-lg;
+  @apply rounded-lg shadow-lg;
 }
 
 .leaflet-popup-content {
-    @apply m-0 p-4;
+  @apply m-0 p-4;
 }
 
 /* Swiper Customization */
 .swiper-button-next,
 .swiper-button-prev {
-    @apply text-white;
+  @apply text-white;
 }
 
 .swiper-pagination-bullet {
-    @apply bg-white opacity-50;
+  @apply bg-white opacity-50;
 }
 
 .swiper-pagination-bullet-active {
-    @apply opacity-100;
+  @apply opacity-100;
 }
 
 /* React Hot Toast Customization */
 .react-hot-toast {
-    @apply font-sans;
+  @apply font-sans;
 }
 
 /* Headless UI Dialog Customization */
 .dialog-overlay {
-    @apply fixed inset-0 bg-black/30 backdrop-blur-sm;
+  @apply fixed inset-0 bg-black/30 backdrop-blur-sm;
 }
 
 .dialog-panel {
-    @apply bg-white rounded-lg shadow-xl max-w-md w-full p-6;
+  @apply bg-white rounded-lg shadow-xl max-w-md w-full p-6;
 }
 
 /* Framer Motion Lightbox */
 .lightbox-overlay {
-    @apply fixed inset-0 bg-black/95 z-50;
+  @apply fixed inset-0 bg-black/95 z-50;
 }
 
 .lightbox-content {
-    @apply flex items-center justify-center min-h-screen p-4;
+  @apply flex items-center justify-center min-h-screen p-4;
 }
 
 /* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-    @apply w-2 h-2;
+  @apply w-2 h-2;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-gray-100 rounded;
+  @apply bg-gray-100 rounded;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-ocean-400 rounded hover:bg-ocean-500;
+  @apply bg-ocean-400 rounded hover:bg-ocean-500;
 }
 
 /* Section Anchors */
 .section-anchor {
-    @apply scroll-mt-20 relative;
+  @apply scroll-mt-20 relative;
 }
 
 .section-anchor::before {
-    content: '';
-    @apply block h-20 -mt-20 invisible;
+  content: '';
+  @apply block h-20 -mt-20 invisible;
 }
 
 /* Anchor link indicator */
 .has-anchor {
-    @apply relative;
+  @apply relative;
 }
 
 .has-anchor .anchor-icon {
-    @apply opacity-0 absolute -left-6 top-1/2 -translate-y-1/2 text-ocean-400 transition-opacity;
+  @apply opacity-0 absolute -left-6 top-1/2 -translate-y-1/2 text-ocean-400 transition-opacity;
 }
 
 .has-anchor:hover .anchor-icon {
-    @apply opacity-100;
+  @apply opacity-100;
 }
 
 /* Navigation active state */
 .nav-link {
-    @apply relative px-3 py-2 text-gray-700 hover:text-ocean-600 transition-colors;
+  @apply relative px-3 py-2 text-gray-700 hover:text-ocean-600 transition-colors;
 }
 
 .nav-link.active {
-    @apply text-ocean-600 font-semibold;
+  @apply text-ocean-600 font-semibold;
 }
 
 .nav-link.active::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-ocean-600;
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-0.5 bg-ocean-600;
 }
 
 /* Print Styles */
 @media print {
-    .no-print {
-        display: none !important;
-    }
+  .no-print {
+    display: none !important;
+  }
 
-    .print-only {
-        display: block !important;
-    }
+  .print-only {
+    display: block !important;
+  }
 }
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -20,42 +20,78 @@ A modern, conversion-optimized website for a scuba diving center in Mauritius. B
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ and npm
 - Git
 
 ### Installation
 
 1. Clone and install:
-\`\`\`bash
-git clone https://github.com/yourusername/react-scuba.git
-cd react-scuba
-npm install --legacy-peer-deps
-\`\`\`
+   \`\`\`bash
+   git clone https://github.com/yourusername/react-scuba.git
+   cd react-scuba
+   npm install --legacy-peer-deps
+   \`\`\`
 
 2. Configure environment:
-\`\`\`bash
-cp .env.example .env
+   \`\`\`bash
+   cp .env.example .env
+
 # Edit .env with your API keys
+
 \`\`\`
 
 3. Start development:
-\`\`\`bash
-npm run dev
-\`\`\`
+   \`\`\`bash
+   npm run dev
+   \`\`\`
 
 ## 📦 Scripts
 
-- \`npm run dev\` - Start development server
-- \`npm run build\` - Build for production
-- \`npm run preview\` - Preview production build
+### Development
+
+- `npm start` - Start development server (port 3000)
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+
+### Testing
+
+- `npm test` - Run tests in watch mode
+- `npm run test:ui` - Run tests with UI
+- `npm run test:coverage` - Generate coverage report
+
+### Code Quality
+
+- `npm run lint` - Check for lint errors
+- `npm run lint:fix` - Auto-fix lint errors
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+
+### Documentation
+
+- `npm run docs:dev` - Start documentation server
+- `npm run docs:build` - Build documentation
+- `npm run docs:preview` - Preview built documentation
 
 ## 📚 Documentation
 
-- [SETUP.md](./SETUP.md) - Production deployment guide
-- [ADWORDS.md](./ADWORDS.md) - Google Ads conversion tracking
-- [.env.example](./.env.example) - Environment variables
+### Primary Documentation
+
+- **[Online Documentation](https://deanluus22021994.github.io/react-scuba/)** - Complete VitePress documentation
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Development guidelines and contribution process
+- **[DEVELOPMENT_DEBT.md](./DEVELOPMENT_DEBT.md)** - Technical debt tracking
+
+### Guides
+
+- [docs/SETUP.md](./docs/SETUP.md) - Production deployment guide
+- [docs/ADWORDS.md](./docs/ADWORDS.md) - Google Ads conversion tracking
+- [.env.example](./.env.example) - Environment variables reference
+
+### Legacy Documentation
+
+Historical project documentation is archived in [docs/archive/](./docs/archive/)
 
 ## 📞 Support
 
-Email: info@mauritius-scuba.com  
+Email: info@mauritius-scuba.com
 Phone: +230 XXXX XXXX

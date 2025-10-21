@@ -10,44 +10,44 @@ import ServicesSection from './ServicesSection';
 import TestimonialsSection from './TestimonialsSection';
 
 const HomePage = () => {
-    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
-    const handleBookClick = () => {
-        trackConversion('home_hero_booking_click', { source: 'hero_section' });
-        setIsBookingModalOpen(true);
-    };
+  const handleBookClick = () => {
+    trackConversion('home_hero_booking_click', { source: 'hero_section' });
+    setIsBookingModalOpen(true);
+  };
 
-    const handleContactClick = () => {
-        trackConversion('home_cta_contact_click', { source: 'cta_section' });
-        setIsContactModalOpen(true);
-    };
+  const handleContactClick = () => {
+    trackConversion('home_cta_contact_click', { source: 'cta_section' });
+    setIsContactModalOpen(true);
+  };
 
-    return (
-        <>
-            <SEO page="home" />
+  return (
+    <>
+      <SEO page="home" />
 
-            <HeroSection onBookClick={handleBookClick} />
-            <FeaturesSection />
-            <ServicesSection />
-            <TestimonialsSection />
-            <CTASection onContactClick={handleContactClick} />
+      <HeroSection onBookClick={handleBookClick} />
+      <FeaturesSection />
+      <ServicesSection />
+      <TestimonialsSection />
+      <CTASection onContactClick={handleContactClick} />
 
-            {/* Modals */}
-            <BookingModal
-                isOpen={isBookingModalOpen}
-                onClose={() => setIsBookingModalOpen(false)}
-                bookingType="dive"
-                source="home_page"
-            />
+      {/* Modals */}
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        bookingType="dive"
+        source="home_page"
+      />
 
-            <ContactModal
-                isOpen={isContactModalOpen}
-                onClose={() => setIsContactModalOpen(false)}
-                source="home_page"
-            />
-        </>
-    );
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+        source="home_page"
+      />
+    </>
+  );
 };
 
 export default HomePage;

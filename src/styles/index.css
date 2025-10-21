@@ -14,36 +14,36 @@
 
 /* Custom Tailwind layers */
 @layer base {
-    html {
-        @apply smooth-scroll;
-        scroll-padding-top: 5rem;
-    }
+  html {
+    @apply smooth-scroll;
+    scroll-padding-top: 5rem;
+  }
 
-    body {
-        @apply antialiased text-gray-900;
-    }
+  body {
+    @apply antialiased text-gray-900;
+  }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply font-bold;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+  }
 
-    /* Anchor target highlighting */
-    :target {
-        animation: highlightAnchor 2s ease-out;
-    }
+  /* Anchor target highlighting */
+  :target {
+    animation: highlightAnchor 2s ease-out;
+  }
 
-    /* Focus visible for better keyboard navigation */
-    a:focus-visible,
-    button:focus-visible {
-        @apply outline-none ring-2 ring-ocean-500 ring-offset-2;
-    }
+  /* Focus visible for better keyboard navigation */
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-none ring-2 ring-ocean-500 ring-offset-2;
+  }
 }
 
 @layer utilities {
-    /* Additional utilities can be added here */
+  /* Additional utilities can be added here */
 }

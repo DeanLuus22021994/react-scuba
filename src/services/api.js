@@ -1,12 +1,12 @@
-import axios from "axios";
-import logger from "../utils/logger";
+import axios from 'axios';
+import logger from '../utils/logger';
 
 // Create axios instance with default config
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_ENDPOINT || "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_ENDPOINT || 'http://localhost:5000/api',
   timeout: 15000,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -28,9 +28,8 @@ api.interceptors.response.use(
   },
   (error) => {
     // Handle errors globally
-    const errorMessage =
-      error.response?.data?.message || error.message || "An error occurred";
-    logger.error("API Error:", errorMessage);
+    const errorMessage = error.response?.data?.message || error.message || 'An error occurred';
+    logger.error('API Error:', errorMessage);
     return Promise.reject(error);
   }
 );
@@ -44,7 +43,7 @@ api.interceptors.response.use(
  */
 export const submitContactForm = async (data) => {
   try {
-    const response = await api.post("/contact", data);
+    const response = await api.post('/contact', data);
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.response?.data || error.message };
@@ -58,7 +57,7 @@ export const submitContactForm = async (data) => {
  */
 export const submitBookingInquiry = async (data) => {
   try {
-    const response = await api.post("/booking/inquiry", data);
+    const response = await api.post('/booking/inquiry', data);
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.response?.data || error.message };
@@ -73,7 +72,7 @@ export const submitBookingInquiry = async (data) => {
  */
 export const checkCalendarAvailability = async (date, courseId) => {
   try {
-    const response = await api.get("/calendar/availability", {
+    const response = await api.get('/calendar/availability', {
       params: { date, courseId },
     });
     return { success: true, data: response };
@@ -89,7 +88,7 @@ export const checkCalendarAvailability = async (date, courseId) => {
  */
 export const createCalendarBooking = async (bookingData) => {
   try {
-    const response = await api.post("/calendar/booking", bookingData);
+    const response = await api.post('/calendar/booking', bookingData);
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.response?.data || error.message };
@@ -103,7 +102,7 @@ export const createCalendarBooking = async (bookingData) => {
  */
 export const subscribeNewsletter = async (email) => {
   try {
-    const response = await api.post("/newsletter/subscribe", { email });
+    const response = await api.post('/newsletter/subscribe', { email });
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.response?.data || error.message };
@@ -116,7 +115,7 @@ export const subscribeNewsletter = async (email) => {
  */
 export const getExchangeRates = async () => {
   try {
-    const response = await api.get("/exchange-rates");
+    const response = await api.get('/exchange-rates');
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.response?.data || error.message };

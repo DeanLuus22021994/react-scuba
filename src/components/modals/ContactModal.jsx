@@ -77,7 +77,7 @@ const ContactModal = ({
     if (formStartTime && !isSubmitting) {
       const timeSpent = (Date.now() - formStartTime) / 1000;
       const formData = watch();
-      const filledFields = Object.values(formData).filter(val => val && val.length > 0).length;
+      const filledFields = Object.values(formData).filter((val) => val && val.length > 0).length;
       const totalFields = Object.keys(formData).length;
       const completionPercentage = (filledFields / totalFields) * 100;
 
@@ -113,7 +113,7 @@ const ContactModal = ({
       const result = await submitContactForm(submissionData);
 
       if (result.success) {
-        toast.success('Thank you! We\'ll get back to you soon.');
+        toast.success("Thank you! We'll get back to you soon.");
         trackContactSubmit(source, data.inquiryType);
         handleClose();
       } else {
@@ -170,7 +170,10 @@ const ContactModal = ({
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Name *
                       </label>
                       <input
@@ -185,7 +188,10 @@ const ContactModal = ({
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Email *
                       </label>
                       <input
@@ -202,7 +208,10 @@ const ContactModal = ({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Phone *
                       </label>
                       <input
@@ -218,7 +227,10 @@ const ContactModal = ({
                     </div>
 
                     <div>
-                      <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="inquiryType"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Inquiry Type *
                       </label>
                       <select
@@ -241,7 +253,10 @@ const ContactModal = ({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="preferredContact" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="preferredContact"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Preferred Contact Method *
                       </label>
                       <select
@@ -257,12 +272,17 @@ const ContactModal = ({
                         ))}
                       </select>
                       {errors.preferredContact && (
-                        <p className="mt-1 text-sm text-red-600">{errors.preferredContact.message}</p>
+                        <p className="mt-1 text-sm text-red-600">
+                          {errors.preferredContact.message}
+                        </p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="preferredDate" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="preferredDate"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Preferred Date (Optional)
                       </label>
                       <DatePicker
@@ -277,7 +297,10 @@ const ContactModal = ({
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Message *
                     </label>
                     <textarea

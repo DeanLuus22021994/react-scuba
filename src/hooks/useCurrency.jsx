@@ -1,19 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { getExchangeRates } from "../services/api";
-import { trackCurrencyChange } from "../utils/analytics";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { getExchangeRates } from '../services/api';
+import { trackCurrencyChange } from '../utils/analytics';
 import {
   CURRENCIES,
   DEFAULT_EXCHANGE_RATES,
   convertCurrency,
   formatCurrency,
-} from "../utils/currency";
+} from '../utils/currency';
 
 const CurrencyContext = createContext();
 
 export const CurrencyProvider = ({ children }) => {
   const [currency, setCurrency] = useState(() => {
     // Get from localStorage or default to MUR
-    return localStorage.getItem("selectedCurrency") || "MUR";
+    return localStorage.getItem('selectedCurrency') || 'MUR';
   });
 
   const [exchangeRates, setExchangeRates] = useState(DEFAULT_EXCHANGE_RATES);
@@ -41,13 +41,13 @@ export const CurrencyProvider = ({ children }) => {
   const changeCurrency = (newCurrency) => {
     const oldCurrency = currency;
     setCurrency(newCurrency);
-    localStorage.setItem("selectedCurrency", newCurrency);
+    localStorage.setItem('selectedCurrency', newCurrency);
 
     // Track currency change
     trackCurrencyChange(oldCurrency, newCurrency);
   };
 
-  const convert = (amount, fromCurrency = "MUR", toCurrency = currency) => {
+  const convert = (amount, fromCurrency = 'MUR', toCurrency = currency) => {
     return convertCurrency(amount, fromCurrency, toCurrency, exchangeRates);
   };
 
@@ -66,18 +66,14 @@ export const CurrencyProvider = ({ children }) => {
     currencyInfo: CURRENCIES[currency],
   };
 
-  return (
-    <CurrencyContext.Provider value={value}>
-      {children}
-    </CurrencyContext.Provider>
-  );
+  return <CurrencyContext.Provider value={value}>{children}</CurrencyContext.Provider>;
 };
 
 export const useCurrency = () => {
   const context = useContext(CurrencyContext);
 
   if (!context) {
-    throw new Error("useCurrency must be used within a CurrencyProvider");
+    throw new Error('useCurrency must be used within a CurrencyProvider');
   }
 
   return context;

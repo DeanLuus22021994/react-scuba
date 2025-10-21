@@ -1,0 +1,11 @@
+# Ignore build output
+dist
+build
+coverage
+
+# Ignore node_modules
+node_modules
+
+# Ignore documentation build
+docs/.vitepress/dist
+docs/.vitepress/cache

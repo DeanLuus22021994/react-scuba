@@ -9,7 +9,11 @@ import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { useCurrency } from '../../hooks/useCurrency';
 import { checkCalendarAvailability, createCalendarBooking } from '../../services/api';
-import { trackCalendarBookingComplete, trackFormAbandon, trackFormStart } from '../../utils/analytics';
+import {
+  trackCalendarBookingComplete,
+  trackFormAbandon,
+  trackFormStart,
+} from '../../utils/analytics';
 import logger from '../../utils/logger';
 import Loading from '../common/Loading';
 
@@ -17,7 +21,10 @@ const bookingSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   phone: z.string().min(8, 'Please enter a valid phone number'),
-  participants: z.number().min(1, 'At least 1 participant required').max(12, 'Maximum 12 participants'),
+  participants: z
+    .number()
+    .min(1, 'At least 1 participant required')
+    .max(12, 'Maximum 12 participants'),
   experienceLevel: z.string().min(1, 'Please select experience level'),
   specialRequests: z.string().optional(),
 });
@@ -101,7 +108,9 @@ const BookingModal = ({
     if (formStartTime && !isSubmitting) {
       const timeSpent = (Date.now() - formStartTime) / 1000;
       const formData = watch();
-      const filledFields = Object.values(formData).filter(val => val && String(val).length > 0).length;
+      const filledFields = Object.values(formData).filter(
+        (val) => val && String(val).length > 0
+      ).length;
       const totalFields = Object.keys(formData).length;
       const completionPercentage = (filledFields / totalFields) * 100;
 
@@ -160,7 +169,7 @@ const BookingModal = ({
     setIsSubmitting(true);
 
     try {
-      const item = items.find(i => i.id === selectedItem);
+      const item = items.find((i) => i.id === selectedItem);
       const totalPrice = item.price * participants;
       const convertedPrice = convert(totalPrice, 'MUR', currency);
 
@@ -181,7 +190,7 @@ const BookingModal = ({
       const result = await createCalendarBooking(bookingData);
 
       if (result.success) {
-        toast.success('Booking request sent! We\'ll confirm your booking shortly.');
+        toast.success("Booking request sent! We'll confirm your booking shortly.");
         trackCalendarBookingComplete(bookingType, item.name, convertedPrice, currency);
         handleClose();
       } else {
@@ -293,7 +302,10 @@ const BookingModal = ({
                     </div>
 
                     <div>
-                      <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="time"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Preferred Time *
                       </label>
                       <select
@@ -320,7 +332,10 @@ const BookingModal = ({
                   {/* Personal Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Full Name *
                       </label>
                       <input
@@ -335,7 +350,10 @@ const BookingModal = ({
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Email *
                       </label>
                       <input
@@ -352,7 +370,10 @@ const BookingModal = ({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Phone *
                       </label>
                       <input
@@ -368,7 +389,10 @@ const BookingModal = ({
                     </div>
 
                     <div>
-                      <label htmlFor="participants" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="participants"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Number of Participants *
                       </label>
                       <input
@@ -386,7 +410,10 @@ const BookingModal = ({
                   </div>
 
                   <div>
-                    <label htmlFor="experienceLevel" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="experienceLevel"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Experience Level *
                     </label>
                     <select
@@ -407,7 +434,10 @@ const BookingModal = ({
                   </div>
 
                   <div>
-                    <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="specialRequests"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Special Requests (Optional)
                     </label>
                     <textarea
@@ -427,7 +457,7 @@ const BookingModal = ({
                         <span className="text-2xl font-bold text-ocean-600">
                           {format(
                             convert(
-                              items.find(i => i.id === selectedItem).price * participants,
+                              items.find((i) => i.id === selectedItem).price * participants,
                               'MUR',
                               currency
                             ),
@@ -451,7 +481,9 @@ const BookingModal = ({
                     </button>
                     <button
                       type="submit"
-                      disabled={isSubmitting || isCheckingAvailability || !selectedItem || !selectedDate}
+                      disabled={
+                        isSubmitting || isCheckingAvailability || !selectedItem || !selectedDate
+                      }
                       className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Processing...' : 'Request Booking'}

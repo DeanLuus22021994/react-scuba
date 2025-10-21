@@ -16,7 +16,7 @@ export const scrollToElement = (elementId, offset = 80) => {
 
   window.scrollTo({
     top: offsetPosition,
-    behavior: "smooth",
+    behavior: 'smooth',
   });
 
   // Update URL without triggering navigation
@@ -25,7 +25,7 @@ export const scrollToElement = (elementId, offset = 80) => {
   }
 
   // Focus the element for accessibility
-  element.setAttribute("tabindex", "-1");
+  element.setAttribute('tabindex', '-1');
   element.focus({ preventScroll: true });
 };
 
@@ -45,7 +45,7 @@ export const handleAnchorClick = (event, targetId) => {
 export const scrollToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
+    behavior: 'smooth',
   });
 };
 
@@ -59,14 +59,11 @@ export const isInViewport = (element, threshold = 0.5) => {
   if (!element) return false;
 
   const rect = element.getBoundingClientRect();
-  const windowHeight =
-    window.innerHeight || document.documentElement.clientHeight;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
   const windowWidth = window.innerWidth || document.documentElement.clientWidth;
 
-  const vertInView =
-    rect.top <= windowHeight && rect.top + rect.height * threshold >= 0;
-  const horInView =
-    rect.left <= windowWidth && rect.left + rect.width * threshold >= 0;
+  const vertInView = rect.top <= windowHeight && rect.top + rect.height * threshold >= 0;
+  const horInView = rect.left <= windowWidth && rect.left + rect.width * threshold >= 0;
 
   return vertInView && horInView;
 };
@@ -78,20 +75,20 @@ export const isInViewport = (element, threshold = 0.5) => {
  * @param {Object} options - IntersectionObserver options
  */
 export const observeScrollReveal = (
-  selector = ".reveal-on-scroll",
+  selector = '.reveal-on-scroll',
   callback = null,
   options = {}
 ) => {
   const defaultOptions = {
     threshold: 0.15,
-    rootMargin: "0px 0px -100px 0px",
+    rootMargin: '0px 0px -100px 0px',
     ...options,
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
+        entry.target.classList.add('revealed');
         if (callback) callback(entry.target);
         // Optionally unobserve after revealing
         observer.unobserve(entry.target);
@@ -110,9 +107,9 @@ export const observeScrollReveal = (
  * @returns {Array} Array of anchor IDs
  */
 export const getSectionAnchors = () => {
-  const sections = document.querySelectorAll("[id]");
+  const sections = document.querySelectorAll('[id]');
   return Array.from(sections)
-    .filter((section) => section.id && !section.id.startsWith("headlessui"))
+    .filter((section) => section.id && !section.id.startsWith('headlessui'))
     .map((section) => section.id);
 };
 
@@ -153,13 +150,13 @@ export const handleHashNavigation = () => {
  */
 export const initScrollReveal = () => {
   // Observe elements with reveal class
-  observeScrollReveal(".reveal-on-scroll");
+  observeScrollReveal('.reveal-on-scroll');
 
   // Handle hash navigation on load
   handleHashNavigation();
 
   // Handle hash changes
-  window.addEventListener("hashchange", handleHashNavigation);
+  window.addEventListener('hashchange', handleHashNavigation);
 };
 
 /**
@@ -167,23 +164,23 @@ export const initScrollReveal = () => {
  * @param {string} buttonId - ID for the back to top button
  * @param {number} showAfter - Scroll distance in pixels before showing button
  */
-export const initBackToTop = (buttonId = "back-to-top", showAfter = 300) => {
+export const initBackToTop = (buttonId = 'back-to-top', showAfter = 300) => {
   const button = document.getElementById(buttonId);
   if (!button) return;
 
   const handleScroll = () => {
     if (window.pageYOffset > showAfter) {
-      button.classList.add("visible");
+      button.classList.add('visible');
     } else {
-      button.classList.remove("visible");
+      button.classList.remove('visible');
     }
   };
 
-  window.addEventListener("scroll", handleScroll);
-  button.addEventListener("click", scrollToTop);
+  window.addEventListener('scroll', handleScroll);
+  button.addEventListener('click', scrollToTop);
 
   return () => {
-    window.removeEventListener("scroll", handleScroll);
-    button.removeEventListener("click", scrollToTop);
+    window.removeEventListener('scroll', handleScroll);
+    button.removeEventListener('click', scrollToTop);
   };
 };

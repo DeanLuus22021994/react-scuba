@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { defaultMetaTags, generatePageMetaTags } from '../../utils/seo';
 
-
 const SEO = ({ page = 'home', customTitle, customDescription, customImage }) => {
   const pageMeta = generatePageMetaTags(page);
   const title = customTitle || pageMeta.title;
