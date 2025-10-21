@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Loading = ({ size = 'md', text = 'Loading...' }) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
@@ -11,6 +13,11 @@ const Loading = ({ size = 'md', text = 'Loading...' }) => {
       {text && <p className="mt-4 text-gray-600">{text}</p>}
     </div>
   );
+};
+
+Loading.propTypes = {
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  text: PropTypes.string,
 };
 
 export default Loading;
