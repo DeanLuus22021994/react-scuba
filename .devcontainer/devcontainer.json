@@ -2,7 +2,7 @@
     "image": "node:22-alpine",
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {},
-        "ghcr.io/devcontainers/features/nvidia-cuda:1": {
+        "ghcr.io/devcontainers/features/nvidia-cuda:2.0.0": {
             "installToolkit": true
         }
     },
