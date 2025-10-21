@@ -456,14 +456,16 @@ const BookingModal = ({
                       <div className="flex justify-between items-center">
                         <span className="text-gray-700 font-medium">Estimated Total:</span>
                         <span className="text-2xl font-bold text-ocean-600">
-                          {format(
-                            convert(
-                              items.find((i) => i.id === selectedItem).price * participants,
-                              'MUR',
-                              currency
-                            ),
-                            currency
-                          )}
+                          {selectedItem && items.find((i) => i.id === selectedItem)
+                            ? format(
+                                convert(
+                                  items.find((i) => i.id === selectedItem).price * participants,
+                                  'MUR',
+                                  currency
+                                ),
+                                currency
+                              )
+                            : format(0, currency)}
                         </span>
                       </div>
                       <p className="text-sm text-gray-600 mt-2">

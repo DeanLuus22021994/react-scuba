@@ -37,7 +37,8 @@
                 "dbaeumer.vscode-eslint",
                 "github.vscode-github-actions",
                 "GitHub.vscode-pull-request-github",
-                "christian-kohler.npm-intellisense"
+                "christian-kohler.npm-intellisense",
+                "Orta.vscode-jest"
             ]
         }
     },

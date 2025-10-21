@@ -11,6 +11,9 @@ import Loading from './components/common/Loading';
 import BackToTop from './components/shared/BackToTop';
 import ScrollProgress from './components/shared/ScrollProgress';
 
+// Context Providers
+import { CurrencyProvider } from './hooks/useCurrency';
+
 // Utilities
 import { initScrollReveal } from './utils/scrollToAnchor';
 
@@ -28,41 +31,43 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="App min-h-screen flex flex-col">
-        <ScrollProgress />
-        <Header />
-        <main className="flex-grow">
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/dive-sites" element={<DiveSitesPage />} />
-              <Route path="/courses" element={<CoursesPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-        <BackToTop showAfter={400} position="right" />
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#fff',
-              color: '#1f2937',
-            },
-            success: {
-              iconTheme: {
-                primary: '#0e7490',
-                secondary: '#fff',
+    <CurrencyProvider>
+      <Router>
+        <div className="App min-h-screen flex flex-col">
+          <ScrollProgress />
+          <Header />
+          <main className="flex-grow">
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/dive-sites" element={<DiveSitesPage />} />
+                <Route path="/courses" element={<CoursesPage />} />
+                <Route path="/gallery" element={<GalleryPage />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+          <BackToTop showAfter={400} position="right" />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: '#fff',
+                color: '#1f2937',
               },
-            },
-          }}
-        />
-      </div>
-    </Router>
+              success: {
+                iconTheme: {
+                  primary: '#0e7490',
+                  secondary: '#fff',
+                },
+              },
+            }}
+          />
+        </div>
+      </Router>
+    </CurrencyProvider>
   );
 }
 

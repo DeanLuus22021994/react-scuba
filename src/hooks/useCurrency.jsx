@@ -22,21 +22,36 @@ export const CurrencyProvider = ({ children }) => {
 
   // Fetch exchange rates on mount
   useEffect(() => {
-    const fetchRates = async () => {
-      setLoading(true);
-      const result = await getExchangeRates();
+    let isMounted = true;
 
-      if (result.success && result.data.rates) {
-        setExchangeRates(result.data.rates);
+    const fetchRates = async () => {
+      if (!isMounted) return;
+      setLoading(true);
+
+      try {
+        const result = await getExchangeRates();
+
+        if (isMounted && result.success && result.data.rates) {
+          setExchangeRates(result.data.rates);
+        }
+      } catch (_error) {
+        // Silently fail and use default rates
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-      setLoading(false);
     };
 
     fetchRates();
 
     // Refresh rates every hour
     const interval = setInterval(fetchRates, 3600000);
-    return () => clearInterval(interval);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   const changeCurrency = (newCurrency) => {
