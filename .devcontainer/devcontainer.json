@@ -1,8 +1,20 @@
 {
-    "image": "node:22-slim",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "features": {
-        "ghcr.io/devcontainers/features/common-utils:2": {},
-        "ghcr.io/devcontainers/features/github-cli:1": {}
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest",
+            "moby": true,
+            "mobyBuildxVersion": "latest",
+            "dockerDashComposeVersion": "v2",
+            "azureDnsAutoDetection": true,
+            "dockerDefaultAddressPool": "-",
+            "installDockerBuildx": true,
+            "installDockerComposeSwitch": true,
+            "disableIp6tables": false
+        },
+        "ghcr.io/devcontainers-extra/features/actions-runner:1": {}
     },
     "runArgs": [
         "--gpus",
@@ -44,8 +56,36 @@
                 "GitHub.vscode-pull-request-github",
                 "christian-kohler.npm-intellisense",
                 "Orta.vscode-jest",
-                "VisualStudioExptTeam.intellicode-api-usage-examples"
-            ]
+                "VisualStudioExptTeam.intellicode-api-usage-examples",
+                "ms-azuretools.vscode-containers"
+            ],
+            "mcp": {
+                "servers": {
+                    "github-official": {
+                        "command": "docker",
+                        "args": [
+                            "run",
+                            "-i",
+                            "--rm",
+                            "-e",
+                            "GITHUB_PERSONAL_ACCESS_TOKEN",
+                            "ghcr.io/github/github-mcp-server"
+                        ],
+                        "env": {
+                            "GITHUB_PERSONAL_ACCESS_TOKEN": "${localEnv:GH_PAT}"
+                        }
+                    },
+                    "MCP_DOCKER": {
+                        "command": "docker",
+                        "args": [
+                            "mcp",
+                            "gateway",
+                            "run"
+                        ],
+                        "type": "stdio"
+                    }
+                }
+            }
         }
     },
     "portsAttributes": {
