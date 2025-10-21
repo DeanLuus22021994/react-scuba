@@ -69,6 +69,13 @@
             }
         }
     },
-    "portsAttributes": {},
-    "forwardPorts": []
+    "portsAttributes": {
+        "3001": {
+            "label": "Application",
+            "onAutoForward": "openPreview"
+        }
+    },
+    "forwardPorts": [
+        3001
+    ]
 }
