@@ -1,15 +1,18 @@
 {
     "image": "node:22-alpine",
     "features": {
-        "ghcr.io/devcontainers/features/common-utils:2": {}
+        "ghcr.io/devcontainers/features/common-utils:2": {},
+        "ghcr.io/devcontainers/features/nvidia-cuda:1": {
+            "installToolkit": true
+        }
     },
     "mounts": [
         "source=react-scuba-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
     ],
     "hostRequirements": {
-        "cpus": 2,
-        "memory": "4gb",
-        "storage": "8gb",
+        "cpus": 8,
+        "memory": "8gb",
+        "storage": "16gb",
         "gpu": "optional"
     },
     "waitFor": "onCreateCommand",
@@ -38,7 +41,10 @@
                 "github.vscode-github-actions",
                 "GitHub.vscode-pull-request-github",
                 "christian-kohler.npm-intellisense",
-                "Orta.vscode-jest"
+                "Orta.vscode-jest",
+                "VisualStudioExptTeam.intellicode-api-usage-examples",
+                "yzhang.markdown-all-in-one",
+                "DavidAnson.vscode-markdownlint"
             ]
         }
     },

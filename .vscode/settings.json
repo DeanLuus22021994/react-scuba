@@ -1,8 +1,41 @@
 {
-    "chat.tools.global.autoApprove": true,
+    // Auto-save to reduce batch processing
+    "files.autoSave": "onFocusChange",
+    // GPU acceleration for VS Code UI (not language servers)
+    "window.titleBarStyle": "custom",
+    "terminal.integrated.gpuAcceleration": "on",
+    // JavaScript/TypeScript language server optimization
+    "typescript.tsserver.maxTsServerMemory": 4096,
+    "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.suggest.autoImports": true,
+    "typescript.suggest.autoImports": true,
+    // Editor performance optimizations
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    // Reduce language server load
+    "files.watcherExclude": {
+        "**/node_modules/**": true,
+        "**/dist/**": true,
+        "**/.git/**": true,
+        "**/build/**": true,
+        "**/coverage/**": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/coverage": true,
+        "**/.git": true,
+        "**/package-lock.json": true
+    },
+    // CSS validation (Tailwind v4 compatible)
     "css.lint.unknownAtRules": "ignore",
-    "scss.lint.unknownAtRules": "ignore",
-    "less.lint.unknownAtRules": "ignore",
     "css.validate": true,
-    "scss.validate": true
+    // Copilot settings
+    "chat.tools.global.autoApprove": true
 }
