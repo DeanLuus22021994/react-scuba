@@ -16,6 +16,7 @@
 @layer base {
     html {
         @apply smooth-scroll;
+        scroll-padding-top: 5rem;
     }
 
     body {
@@ -29,6 +30,17 @@
     h5,
     h6 {
         @apply font-bold;
+    }
+
+    /* Anchor target highlighting */
+    :target {
+        animation: highlightAnchor 2s ease-out;
+    }
+
+    /* Focus visible for better keyboard navigation */
+    a:focus-visible,
+    button:focus-visible {
+        @apply outline-none ring-2 ring-ocean-500 ring-offset-2;
     }
 }
 

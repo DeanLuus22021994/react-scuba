@@ -1,3 +1,7 @@
 {
-    "files.autoSave": "afterDelay"
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
+  "css.validate": true,
+  "scss.validate": true
 }

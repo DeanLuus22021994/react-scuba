@@ -1,56 +1,66 @@
-import { HelmetProvider } from 'react-helmet-async';
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { CurrencyProvider } from './hooks/useCurrency';
-import MainLayout from './layouts/MainLayout';
+
+// Pages
 import AboutPage from './pages/AboutPage';
 import CoursesPage from './pages/CoursesPage';
 import DiveSitesPage from './pages/DiveSitesPage';
 import GalleryPage from './pages/GalleryPage';
 import HomePage from './pages/HomePage';
 
+// Layout Components
+import Footer from './layouts/Footer';
+import Header from './layouts/Header';
+
+// Shared Components
+import BackToTop from './components/shared/BackToTop';
+import ScrollProgress from './components/shared/ScrollProgress';
+
+// Utilities
+import { initScrollReveal } from './utils/scrollToAnchor';
+
 function App() {
+    // Initialize scroll reveal animations on mount
+    useEffect(() => {
+        initScrollReveal();
+    }, []);
+
     return (
-        <HelmetProvider>
-            <CurrencyProvider>
-                <Router>
+        <Router>
+            <div className="App min-h-screen flex flex-col">
+                <ScrollProgress />
+                <Header />
+                <main className="flex-grow">
                     <Routes>
-                        <Route path="/" element={<MainLayout />}>
-                            <Route index element={<HomePage />} />
-                            <Route path="about" element={<AboutPage />} />
-                            <Route path="dive-sites" element={<DiveSitesPage />} />
-                            <Route path="courses" element={<CoursesPage />} />
-                            <Route path="gallery" element={<GalleryPage />} />
-                        </Route>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/dive-sites" element={<DiveSitesPage />} />
+                        <Route path="/courses" element={<CoursesPage />} />
+                        <Route path="/gallery" element={<GalleryPage />} />
                     </Routes>
-                    <Toaster
-                        position="top-right"
-                        toastOptions={{
-                            duration: 4000,
-                            style: {
-                                background: '#363636',
-                                color: '#fff',
+                </main>
+                <Footer />
+                <BackToTop showAfter={400} position="right" />
+                <Toaster
+                    position="top-right"
+                    toastOptions={{
+                        duration: 4000,
+                        style: {
+                            background: '#fff',
+                            color: '#1f2937',
+                        },
+                        success: {
+                            iconTheme: {
+                                primary: '#0e7490',
+                                secondary: '#fff',
                             },
-                            success: {
-                                duration: 3000,
-                                iconTheme: {
-                                    primary: '#10b981',
-                                    secondary: '#fff',
-                                },
-                            },
-                            error: {
-                                duration: 4000,
-                                iconTheme: {
-                                    primary: '#ef4444',
-                                    secondary: '#fff',
-                                },
-                            },
-                        }}
-                    />
-                </Router>
-            </CurrencyProvider>
-        </HelmetProvider>
+                        },
+                    }}
+                />
+            </div>
+        </Router>
     );
 }
 

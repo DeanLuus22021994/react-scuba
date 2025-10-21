@@ -103,6 +103,43 @@
     @apply bg-ocean-400 rounded hover:bg-ocean-500;
 }
 
+/* Section Anchors */
+.section-anchor {
+    @apply scroll-mt-20 relative;
+}
+
+.section-anchor::before {
+    content: '';
+    @apply block h-20 -mt-20 invisible;
+}
+
+/* Anchor link indicator */
+.has-anchor {
+    @apply relative;
+}
+
+.has-anchor .anchor-icon {
+    @apply opacity-0 absolute -left-6 top-1/2 -translate-y-1/2 text-ocean-400 transition-opacity;
+}
+
+.has-anchor:hover .anchor-icon {
+    @apply opacity-100;
+}
+
+/* Navigation active state */
+.nav-link {
+    @apply relative px-3 py-2 text-gray-700 hover:text-ocean-600 transition-colors;
+}
+
+.nav-link.active {
+    @apply text-ocean-600 font-semibold;
+}
+
+.nav-link.active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-ocean-600;
+}
+
 /* Print Styles */
 @media print {
     .no-print {
