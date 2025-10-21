@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { useCurrency } from '../../hooks/useCurrency';
 import { checkCalendarAvailability, createCalendarBooking } from '../../services/api';
 import { trackCalendarBookingComplete, trackFormAbandon, trackFormStart } from '../../utils/analytics';
+import logger from '../../utils/logger';
 import Loading from '../common/Loading';
 
 const bookingSchema = z.object({
@@ -130,7 +131,7 @@ const BookingModal = ({
       });
       return result.available;
     } catch (error) {
-      console.error('Availability check error:', error);
+      logger.error('Availability check error:', error);
       toast.error('Could not check availability. Please try again.');
       return false;
     } finally {
@@ -187,7 +188,7 @@ const BookingModal = ({
         toast.error('Failed to create booking. Please try again or contact us directly.');
       }
     } catch (error) {
-      console.error('Booking error:', error);
+      logger.error('Booking error:', error);
       toast.error('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import logger from "../utils/logger";
 
 // Create axios instance with default config
 const api = axios.create({
@@ -29,7 +30,7 @@ api.interceptors.response.use(
     // Handle errors globally
     const errorMessage =
       error.response?.data?.message || error.message || "An error occurred";
-    console.error("API Error:", errorMessage);
+    logger.error("API Error:", errorMessage);
     return Promise.reject(error);
   }
 );

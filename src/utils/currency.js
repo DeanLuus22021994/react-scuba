@@ -1,5 +1,7 @@
 // Currency utilities and conversion
 
+import logger from "./logger";
+
 export const CURRENCIES = {
   MUR: { symbol: "Rs", name: "Mauritian Rupee", code: "MUR" },
   USD: { symbol: "$", name: "US Dollar", code: "USD" },
@@ -65,7 +67,7 @@ export const fetchExchangeRates = async () => {
   const apiKey = import.meta.env.VITE_EXCHANGE_RATE_API_KEY;
 
   if (!apiKey) {
-    console.warn("Exchange rate API key not found, using default rates");
+    logger.warn("Exchange rate API key not found, using default rates");
     return DEFAULT_EXCHANGE_RATES;
   }
 
@@ -87,7 +89,7 @@ export const fetchExchangeRates = async () => {
 
     return DEFAULT_EXCHANGE_RATES;
   } catch (error) {
-    console.error("Error fetching exchange rates:", error);
+    logger.error("Error fetching exchange rates:", error);
     return DEFAULT_EXCHANGE_RATES;
   }
 };

@@ -1,5 +1,6 @@
 import ReactGA from "react-ga4";
 import TagManager from "react-gtm-module";
+import logger from "./logger";
 
 // Initialize GTM
 export const initializeGTM = () => {
@@ -9,9 +10,9 @@ export const initializeGTM = () => {
     TagManager.initialize({
       gtmId: gtmId,
     });
-    console.log("GTM initialized:", gtmId);
+    logger.info("GTM initialized:", gtmId);
   } else {
-    console.warn("GTM ID not found in environment variables");
+    logger.warn("GTM ID not found in environment variables");
   }
 };
 
@@ -21,9 +22,9 @@ export const initializeGA4 = () => {
 
   if (ga4Id) {
     ReactGA.initialize(ga4Id);
-    console.log("GA4 initialized:", ga4Id);
+    logger.info("GA4 initialized:", ga4Id);
   } else {
-    console.warn("GA4 ID not found in environment variables");
+    logger.warn("GA4 ID not found in environment variables");
   }
 };
 

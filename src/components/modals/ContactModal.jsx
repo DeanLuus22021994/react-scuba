@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { submitContactForm } from '../../services/api';
 import { trackContactSubmit, trackFormAbandon, trackFormStart } from '../../utils/analytics';
+import logger from '../../utils/logger';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -119,7 +120,7 @@ const ContactModal = ({
         toast.error('Failed to send message. Please try again or contact us directly.');
       }
     } catch (error) {
-      console.error('Contact form error:', error);
+      logger.error('Contact form error:', error);
       toast.error('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
