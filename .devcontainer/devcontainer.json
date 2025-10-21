@@ -2,11 +2,12 @@
     "image": "node:22-slim",
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {},
-        "ghcr.io/devcontainers/features/nvidia-cuda:2.0.0": {
-            "installToolkit": true
-        },
         "ghcr.io/devcontainers/features/github-cli:1": {}
     },
+    "runArgs": [
+        "--gpus",
+        "all"
+    ],
     "mounts": [
         "source=react-scuba-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
     ],
