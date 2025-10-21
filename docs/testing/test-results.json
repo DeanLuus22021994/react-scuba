@@ -1,139 +1,133 @@
 {
-  "runTime": "2025-10-21T14:26:15.602Z",
+  "runTime": "2025-10-21T14:39:24.208Z",
   "summary": {
-    "totalFiles": 62,
-    "passedFiles": 62,
-    "failedFiles": 0,
-    "totalTests": 314,
-    "passedTests": 314,
-    "failedTests": 0,
-    "passRate": 100
+    "totalFiles": 2,
+    "passedFiles": 1,
+    "failedFiles": 1,
+    "totalTests": 10,
+    "passedTests": 8,
+    "failedTests": 2,
+    "passRate": 80
   },
   "performance": {
-    "totalDuration": 34548.297309,
-    "avgDuration": 110.02642455095541,
-    "testCount": 314,
+    "totalDuration": 30.228405999999836,
+    "avgDuration": 3.0228405999999834,
+    "testCount": 10,
     "slowestTests": [
       {
-        "name": "should render page heading",
-        "duration": 2067.3840550000004,
-        "state": "pass",
-        "errors": [],
-        "fileName": "tests/GalleryPage.test.jsx"
+        "name": "should validate all internal links",
+        "duration": 12.415956999999935,
+        "state": "fail",
+        "errors": [
+          {
+            "message": "Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)",
+            "actual": "undefined",
+            "expected": "undefined",
+            "name": "AssertionError",
+            "ok": false,
+            "stack": "AssertionError: Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)\n    at /workspaces/react-scuba/tests/docs-validation.test.js:215:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+            "stacks": [
+              {
+                "method": "",
+                "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
+                "line": 215,
+                "column": 14
+              }
+            ]
+          }
+        ],
+        "fileName": "tests/docs-validation.test.js"
       },
       {
-        "name": "should render page heading",
-        "duration": 1786.725223999999,
+        "name": "should validate all links in documentation",
+        "duration": 9.939806999999973,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/AboutPage.test.jsx"
+        "fileName": "tests/link-checker.test.js"
       },
       {
-        "name": "should render page heading",
-        "duration": 1657.498361,
+        "name": "should find all markdown files",
+        "duration": 2.0719429999999193,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/DiveSitesPage.test.jsx"
+        "fileName": "tests/link-checker.test.js"
       },
       {
-        "name": "should render page heading",
-        "duration": 1539.2878420000006,
-        "state": "pass",
-        "errors": [],
-        "fileName": "tests/CoursesPage.test.jsx"
+        "name": "should validate code blocks have language specified",
+        "duration": 1.764782999999852,
+        "state": "fail",
+        "errors": [
+          {
+            "message": "Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier",
+            "actual": "undefined",
+            "expected": "undefined",
+            "name": "AssertionError",
+            "ok": false,
+            "stack": "AssertionError: Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier\n    at /workspaces/react-scuba/tests/docs-validation.test.js:313:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+            "stacks": [
+              {
+                "method": "",
+                "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
+                "line": 313,
+                "column": 14
+              }
+            ]
+          }
+        ],
+        "fileName": "tests/docs-validation.test.js"
       },
       {
-        "name": "should render without crashing",
-        "duration": 1385.1492909999997,
+        "name": "should validate all image references",
+        "duration": 1.0126370000000406,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/GalleryPage.test.jsx"
+        "fileName": "tests/docs-validation.test.js"
       },
       {
-        "name": "should render hero section with heading",
-        "duration": 1296.6963320000004,
+        "name": "should find markdown files in docs directory",
+        "duration": 0.9211999999999989,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/HomePage.test.jsx"
+        "fileName": "tests/docs-validation.test.js"
       },
       {
-        "name": "should render without crashing",
-        "duration": 987.9914880000006,
+        "name": "should validate frontmatter in all markdown files",
+        "duration": 0.7778820000000906,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/DiveSitesPage.test.jsx"
+        "fileName": "tests/docs-validation.test.js"
       },
       {
-        "name": "should render service links",
-        "duration": 857.8527059999997,
+        "name": "should validate all links in README.md",
+        "duration": 0.6833259999999655,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/components/home/ServicesSection.test.jsx"
+        "fileName": "tests/link-checker.test.js"
       },
       {
-        "name": "should have submit button",
-        "duration": 838.2938189999995,
+        "name": "should detect common link issues",
+        "duration": 0.4565059999999903,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/components/modals/ContactModal.test.jsx"
+        "fileName": "tests/link-checker.test.js"
       },
       {
-        "name": "should render footer links",
-        "duration": 831.3739230000001,
+        "name": "should validate public assets exist",
+        "duration": 0.18436500000007072,
         "state": "pass",
         "errors": [],
-        "fileName": "tests/layouts/Footer.test.jsx"
+        "fileName": "tests/docs-validation.test.js"
       }
     ],
     "slowestFiles": [
       {
-        "fileName": "tests/GalleryPage.test.jsx",
-        "duration": 4163.534957999999,
-        "testCount": 4
+        "fileName": "tests/docs-validation.test.js",
+        "duration": 18.0633499999999,
+        "testCount": 6
       },
       {
-        "fileName": "tests/DiveSitesPage.test.jsx",
-        "duration": 3134.421879999999,
-        "testCount": 4
-      },
-      {
-        "fileName": "tests/CoursesPage.test.jsx",
-        "duration": 2390.966729999999,
-        "testCount": 4
-      },
-      {
-        "fileName": "tests/AboutPage.test.jsx",
-        "duration": 2343.3041220000005,
-        "testCount": 4
-      },
-      {
-        "fileName": "tests/pages/all-pages.test.jsx",
-        "duration": 2209.3188949999994,
-        "testCount": 5
-      },
-      {
-        "fileName": "tests/HomePage.test.jsx",
-        "duration": 1951.3635799999993,
-        "testCount": 4
-      },
-      {
-        "fileName": "tests/components/modals/BookingModal.test.jsx",
-        "duration": 1330.1050909999994,
-        "testCount": 4
-      },
-      {
-        "fileName": "tests/components/modals/ContactModal.test.jsx",
-        "duration": 1303.932817,
-        "testCount": 4
-      },
-      {
-        "fileName": "tests/components/home/ServicesSection.test.jsx",
-        "duration": 1163.59902,
-        "testCount": 5
-      },
-      {
-        "fileName": "tests/layouts/Footer.test.jsx",
-        "duration": 1158.2699740000003,
+        "fileName": "tests/link-checker.test.js",
+        "duration": 14.109725000000026,
         "testCount": 4
       }
     ],
@@ -142,2498 +136,154 @@
         "label": "< 10ms",
         "min": 0,
         "max": 10,
-        "count": 132
+        "count": 9
       },
       {
         "label": "10-50ms",
         "min": 10,
         "max": 50,
-        "count": 87
+        "count": 1
       },
       {
         "label": "50-100ms",
         "min": 50,
         "max": 100,
-        "count": 21
+        "count": 0
       },
       {
         "label": "100-500ms",
         "min": 100,
         "max": 500,
-        "count": 61
+        "count": 0
       },
       {
         "label": "> 500ms",
         "min": 500,
         "max": null,
-        "count": 13
+        "count": 0
       }
     ]
   },
   "categories": [
     {
-      "category": "about",
-      "fileCount": 3,
-      "totalTests": 17,
-      "passedTests": 17,
-      "failedTests": 0,
-      "totalDuration": 449.3679450000004,
-      "passRate": 100
-    },
-    {
-      "category": "common",
-      "fileCount": 7,
-      "totalTests": 52,
-      "passedTests": 52,
-      "failedTests": 0,
-      "totalDuration": 3994.3332090000004,
-      "passRate": 100
-    },
-    {
-      "category": "courses",
-      "fileCount": 3,
-      "totalTests": 17,
-      "passedTests": 17,
-      "failedTests": 0,
-      "totalDuration": 1880.622363,
-      "passRate": 100
-    },
-    {
-      "category": "data",
-      "fileCount": 6,
-      "totalTests": 27,
-      "passedTests": 27,
-      "failedTests": 0,
-      "totalDuration": 75.44890599999962,
-      "passRate": 100
-    },
-    {
-      "category": "dive-sites",
-      "fileCount": 3,
-      "totalTests": 15,
-      "passedTests": 15,
-      "failedTests": 0,
-      "totalDuration": 423.88505200000054,
-      "passRate": 100
-    },
-    {
-      "category": "gallery",
-      "fileCount": 4,
-      "totalTests": 19,
-      "passedTests": 19,
-      "failedTests": 0,
-      "totalDuration": 1127.2165949999999,
-      "passRate": 100
-    },
-    {
-      "category": "home",
-      "fileCount": 6,
-      "totalTests": 33,
-      "passedTests": 33,
-      "failedTests": 0,
-      "totalDuration": 3340.263747,
-      "passRate": 100
-    },
-    {
-      "category": "hooks",
-      "fileCount": 2,
-      "totalTests": 8,
-      "passedTests": 8,
-      "failedTests": 0,
-      "totalDuration": 223.14614800000004,
-      "passRate": 100
-    },
-    {
-      "category": "layouts",
-      "fileCount": 4,
-      "totalTests": 14,
-      "passedTests": 14,
-      "failedTests": 0,
-      "totalDuration": 3052.497115,
-      "passRate": 100
-    },
-    {
-      "category": "modals",
-      "fileCount": 2,
-      "totalTests": 8,
-      "passedTests": 8,
-      "failedTests": 0,
-      "totalDuration": 2634.0379079999993,
-      "passRate": 100
-    },
-    {
-      "category": "pages",
-      "fileCount": 1,
-      "totalTests": 5,
-      "passedTests": 5,
-      "failedTests": 0,
-      "totalDuration": 2209.3188949999994,
-      "passRate": 100
-    },
-    {
-      "category": "services",
-      "fileCount": 2,
-      "totalTests": 9,
-      "passedTests": 9,
-      "failedTests": 0,
-      "totalDuration": 13.234896000000163,
-      "passRate": 100
-    },
-    {
-      "category": "shared",
-      "fileCount": 2,
-      "totalTests": 9,
-      "passedTests": 9,
-      "failedTests": 0,
-      "totalDuration": 211.50288699999965,
-      "passRate": 100
-    },
-    {
-      "category": "src",
-      "fileCount": 2,
-      "totalTests": 5,
-      "passedTests": 5,
-      "failedTests": 0,
-      "totalDuration": 20.67154000000005,
-      "passRate": 100
-    },
-    {
       "category": "tests",
-      "fileCount": 7,
-      "totalTests": 29,
-      "passedTests": 29,
-      "failedTests": 0,
-      "totalDuration": 14982.345628,
-      "passRate": 100
-    },
-    {
-      "category": "utils",
-      "fileCount": 8,
-      "totalTests": 47,
-      "passedTests": 47,
-      "failedTests": 0,
-      "totalDuration": 140.85403600000018,
-      "passRate": 100
+      "fileCount": 2,
+      "totalTests": 10,
+      "passedTests": 8,
+      "failedTests": 2,
+      "totalDuration": 32.173074999999926,
+      "passRate": 80
     }
   ],
   "files": {
-    "tests/AboutPage.test.jsx": {
+    "tests/docs-validation.test.js": {
       "passed": [
         {
-          "name": "should render without crashing",
-          "duration": 318.32654600000023,
+          "name": "should find markdown files in docs directory",
+          "duration": 0.9211999999999989,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render page heading",
-          "duration": 1786.725223999999,
+          "name": "should validate all image references",
+          "duration": 1.0126370000000406,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render about content",
-          "duration": 134.82138200000009,
+          "name": "should validate frontmatter in all markdown files",
+          "duration": 0.7778820000000906,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should have page content loaded",
-          "duration": 99.85768900000039,
+          "name": "should validate public assets exist",
+          "duration": 0.18436500000007072,
           "state": "pass",
           "errors": []
         }
       ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2343.3041220000005
-    },
-    "tests/App.test.jsx": {
-      "passed": [
+      "failed": [
         {
-          "name": "should render without crashing",
-          "duration": 299.25856099999964,
-          "state": "pass",
-          "errors": []
+          "name": "should validate all internal links",
+          "duration": 12.415956999999935,
+          "state": "fail",
+          "errors": [
+            {
+              "message": "Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)",
+              "actual": "undefined",
+              "expected": "undefined",
+              "name": "AssertionError",
+              "ok": false,
+              "stack": "AssertionError: Found 1 broken link(s):\n  docs/guide/installation.md:216\n  Link: [Development Workflow](./workflow.md)\n  Error: Broken link: [Development Workflow](./workflow.md)\n    at /workspaces/react-scuba/tests/docs-validation.test.js:215:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+              "stacks": [
+                {
+                  "method": "",
+                  "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
+                  "line": 215,
+                  "column": 14
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "should render header component",
-          "duration": 324.4486109999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render main content area",
-          "duration": 184.62954600000012,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should wrap app with CurrencyProvider",
-          "duration": 60.42978200000016,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have scroll progress component",
-          "duration": 96.2941009999995,
-          "state": "pass",
-          "errors": []
+          "name": "should validate code blocks have language specified",
+          "duration": 1.764782999999852,
+          "state": "fail",
+          "errors": [
+            {
+              "message": "Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier",
+              "actual": "undefined",
+              "expected": "undefined",
+              "name": "AssertionError",
+              "ok": false,
+              "stack": "AssertionError: Found 95 code block(s) without language:\n  docs/LINTING.md:29 - Code block missing language identifier\n\n  docs/LINTING.md:45 - Code block missing language identifier\n\n  docs/LINTING.md:58 - Code block missing language identifier\n\n  docs/LINTING.md:170 - Code block missing language identifier\n\n  docs/LINTING.md:190 - Code block missing language identifier\n\n  docs/LINTING.md:200 - Code block missing language identifier\n\n  docs/contributing.md:41 - Code block missing language identifier\n\n  docs/contributing.md:53 - Code block missing language identifier\n\n  docs/contributing.md:59 - Code block missing language identifier\n\n  docs/contributing.md:65 - Code block missing language identifier\n\n  docs/contributing.md:98 - Code block missing language identifier\n\n  docs/contributing.md:102 - Code block missing language identifier\n\n  docs/contributing.md:124 - Code block missing language identifier\n\n  docs/contributing.md:135 - Code block missing language identifier\n\n  docs/guide/index.md:60 - Code block missing language identifier\n\n  docs/guide/index.md:66 - Code block missing language identifier\n\n  docs/guide/index.md:80 - Code block missing language identifier\n\n  docs/guide/index.md:88 - Code block missing language identifier\n\n  docs/guide/installation.md:54 - Code block missing language identifier\n\n  docs/guide/installation.md:72 - Code block missing language identifier\n\n  docs/guide/installation.md:78 - Code block missing language identifier\n\n  docs/guide/installation.md:121 - Code block missing language identifier\n\n  docs/guide/installation.md:136 - Code block missing language identifier\n\n  docs/guide/installation.md:145 - Code block missing language identifier\n\n  docs/guide/installation.md:155 - Code block missing language identifier\n\n  docs/guide/installation.md:168 - Code block missing language identifier\n\n  docs/guide/installation.md:176 - Code block missing language identifier\n\n  docs/guide/installation.md:185 - Code block missing language identifier\n\n  docs/guide/installation.md:198 - Code block missing language identifier\n\n  docs/guide/installation.md:210 - Code block missing language identifier\n\n  docs/guide/quick-start.md:37 - Code block missing language identifier\n\n  docs/guide/quick-start.md:48 - Code block missing language identifier\n\n  docs/guide/quick-start.md:54 - Code block missing language identifier\n\n  docs/guide/quick-start.md:64 - Code block missing language identifier\n\n  docs/guide/quick-start.md:79 - Code block missing language identifier\n\n  docs/guide/quick-start.md:89 - Code block missing language identifier\n\n  docs/guide/quick-start.md:98 - Code block missing language identifier\n\n  docs/guide/quick-start.md:112 - Code block missing language identifier\n\n  docs/guide/quick-start.md:122 - Code block missing language identifier\n\n  docs/guide/quick-start.md:128 - Code block missing language identifier\n\n  docs/guide/quick-start.md:136 - Code block missing language identifier\n\n  docs/guide/quick-start.md:145 - Code block missing language identifier\n\n  docs/guide/quick-start.md:151 - Code block missing language identifier\n\n  docs/guide/quick-start.md:163 - Code block missing language identifier\n\n  docs/guide/quick-start.md:208 - Code block missing language identifier\n\n  docs/guide/quick-start.md:216 - Code block missing language identifier\n\n  docs/guide/quick-start.md:225 - Code block missing language identifier\n\n  docs/guide/quick-start.md:238 - Code block missing language identifier\n\n  docs/guide/quick-start.md:253 - Code block missing language identifier\n\n  docs/guide/structure.md:7 - Code block missing language identifier\n\n  docs/guide/structure.md:16 - Code block missing language identifier\n\n  docs/guide/structure.md:22 - Code block missing language identifier\n\n  docs/guide/structure.md:73 - Code block missing language identifier\n\n  docs/guide/structure.md:81 - Code block missing language identifier\n\n  docs/guide/structure.md:91 - Code block missing language identifier\n\n  docs/guide/structure.md:116 - Code block missing language identifier\n\n  docs/guide/structure.md:152 - Code block missing language identifier\n\n  docs/guide/structure.md:158 - Code block missing language identifier\n\n  docs/guide/structure.md:163 - Code block missing language identifier\n\n  docs/guide/structure.md:169 - Code block missing language identifier\n\n  docs/guide/structure.md:178 - Code block missing language identifier\n\n  docs/guide/structure.md:189 - Code block missing language identifier\n\n  docs/guide/structure.md:206 - Code block missing language identifier\n\n  docs/guide/structure.md:216 - Code block missing language identifier\n\n  docs/guide/structure.md:228 - Code block missing language identifier\n\n  docs/guide/structure.md:259 - Code block missing language identifier\n\n  docs/guide/structure.md:273 - Code block missing language identifier\n\n  docs/guide/structure.md:277 - Code block missing language identifier\n\n  docs/guide/structure.md:287 - Code block missing language identifier\n\n  docs/guide/testing.md:49 - Code block missing language identifier\n\n  docs/guide/testing.md:57 - Code block missing language identifier\n\n  docs/guide/testing.md:63 - Code block missing language identifier\n\n  docs/guide/testing.md:69 - Code block missing language identifier\n\n  docs/guide/testing.md:75 - Code block missing language identifier\n\n  docs/guide/testing.md:98 - Code block missing language identifier\n\n  docs/guide/testing.md:121 - Code block missing language identifier\n\n  docs/guide/testing.md:138 - Code block missing language identifier\n\n  docs/guide/testing.md:164 - Code block missing language identifier\n\n  docs/guide/testing.md:190 - Code block missing language identifier\n\n  docs/guide/testing.md:230 - Code block missing language identifier\n\n  docs/guide/testing.md:245 - Code block missing language identifier\n\n  docs/guide/testing.md:260 - Code block missing language identifier\n\n  docs/guide/testing.md:290 - Code block missing language identifier\n\n  docs/guide/testing.md:298 - Code block missing language identifier\n\n  docs/guide/testing.md:306 - Code block missing language identifier\n\n  docs/guide/testing.md:320 - Code block missing language identifier\n\n  docs/guide/testing.md:330 - Code block missing language identifier\n\n  docs/guide/testing.md:341 - Code block missing language identifier\n\n  docs/guide/testing.md:353 - Code block missing language identifier\n\n  docs/guide/testing.md:365 - Code block missing language identifier\n\n  docs/guide/testing.md:377 - Code block missing language identifier\n\n  docs/index.md:89 - Code block missing language identifier\n\n  docs/index.md:176 - Code block missing language identifier\n\n  docs/index.md:196 - Code block missing language identifier\n\n  docs/testing/testing.md:10 - Code block missing language identifier\n    at /workspaces/react-scuba/tests/docs-validation.test.js:313:14\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///workspaces/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+              "stacks": [
+                {
+                  "method": "",
+                  "file": "/workspaces/react-scuba/tests/docs-validation.test.js",
+                  "line": 313,
+                  "column": 14
+                }
+              ]
+            }
+          ]
         }
       ],
-      "failed": [],
       "skipped": [],
-      "totalDuration": 970.270673
-    },
-    "tests/CoursesPage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 419.7501250000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render page heading",
-          "duration": 1539.2878420000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render courses content with currency provider",
-          "duration": 210.12525800000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have page content loaded",
-          "duration": 218.75426700000025,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2390.966729999999
-    },
-    "tests/DiveSitesPage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 987.9914880000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render page heading",
-          "duration": 1657.498361,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render dive sites content",
-          "duration": 260.12725599999976,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have page content loaded",
-          "duration": 225.6074120000012,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 3134.421879999999
-    },
-    "tests/GalleryPage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 1385.1492909999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render page heading",
-          "duration": 2067.3840550000004,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render gallery content",
-          "duration": 350.2130469999993,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have page content loaded",
-          "duration": 357.44967799999904,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 4163.534957999999
-    },
-    "tests/HomePage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 343.5534609999995,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render hero section with heading",
-          "duration": 1296.6963320000004,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render all main sections",
-          "duration": 159.70198600000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have page content loaded",
-          "duration": 147.66807599999993,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1951.3635799999993
+      "totalDuration": 18.0633499999999
     },
     "tests/link-checker.test.js": {
       "passed": [
         {
           "name": "should find all markdown files",
-          "duration": 7.833722999999964,
+          "duration": 2.0719429999999193,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should validate all links in documentation",
-          "duration": 15.090495000000146,
+          "duration": 9.939806999999973,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should validate all links in README.md",
-          "duration": 1.0124849999999697,
+          "duration": 0.6833259999999655,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should detect common link issues",
-          "duration": 1.5158039999998891,
+          "duration": 0.4565059999999903,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 28.48368500000015
-    },
-    "tests/data/bookingTypes.test.js": {
-      "passed": [
-        {
-          "name": "should export BOOKING_TYPES",
-          "duration": 3.33094600000004,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have course array",
-          "duration": 1.7218609999999899,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have dive array",
-          "duration": 0.9575239999999212,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid course structure",
-          "duration": 3.26882599999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid dive structure",
-          "duration": 1.0450940000000628,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 18.20833700000003
-    },
-    "tests/data/courses.test.js": {
-      "passed": [
-        {
-          "name": "should export COURSES array",
-          "duration": 5.56226700000002,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid course structure",
-          "duration": 4.1759360000000925,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getCourseById function",
-          "duration": 0.5609650000001238,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should find course by id",
-          "duration": 0.4255080000000362,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return undefined for invalid id",
-          "duration": 0.2907149999998637,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 13.653863999999885
-    },
-    "tests/data/credentials.test.js": {
-      "passed": [
-        {
-          "name": "should export CREDENTIALS array",
-          "duration": 2.3464449999999033,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid credential structure",
-          "duration": 1.1864649999999983,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have PADI 5 Star credential",
-          "duration": 0.2756739999999809,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 8.818536999999878
-    },
-    "tests/data/diveSites.test.js": {
-      "passed": [
-        {
-          "name": "should export DIVE_SITES array",
-          "duration": 3.5221299999998337,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export MAURITIUS_CENTER",
-          "duration": 5.326471999999967,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export DIFFICULTY_COLORS",
-          "duration": 0.9438729999999396,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid dive site structure",
-          "duration": 1.7416450000000623,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getDiveSiteById function",
-          "duration": 0.2924289999998564,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 16.35580600000003
-    },
-    "tests/data/gallery.test.js": {
-      "passed": [
-        {
-          "name": "should export GALLERY_IMAGES array",
-          "duration": 2.307878999999957,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export FEATURED_IMAGES array",
-          "duration": 0.5038920000001781,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CATEGORIES array",
-          "duration": 0.3014580000001388,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid gallery image structure",
-          "duration": 2.85741199999984,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getImagesByCategory function",
-          "duration": 0.43121800000017174,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 8.971671000000015
-    },
-    "tests/data/team.test.js": {
-      "passed": [
-        {
-          "name": "should export TEAM_MEMBERS array",
-          "duration": 2.6203310000000783,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid team member structure",
-          "duration": 2.671487999999954,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getTeamMemberByName function",
-          "duration": 0.380877000000055,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should find team member by name",
-          "duration": 1.497447000000193,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 9.440690999999788
-    },
-    "tests/hooks/HooksIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export useCurrency",
-          "duration": 1.9381699999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CurrencyProvider",
-          "duration": 0.4478189999999813,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 4.4707160000000385
-    },
-    "tests/hooks/useCurrency.test.jsx": {
-      "passed": [
-        {
-          "name": "should provide currency context",
-          "duration": 109.33659799999987,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have default currency",
-          "duration": 18.51575700000012,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide format function",
-          "duration": 47.86954000000014,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide convert function",
-          "duration": 9.515754000000015,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide setCurrency function",
-          "duration": 18.523137000000133,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide availableCurrencies",
-          "duration": 11.2856740000002,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 218.675432
-    },
-    "tests/layouts/Footer.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 247.361171,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display copyright text",
-          "duration": 34.48187800000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render footer links",
-          "duration": 831.3739230000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper structure",
-          "duration": 41.78490200000033,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1158.2699740000003
-    },
-    "tests/layouts/Header.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 478.62872100000004,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should contain navigation",
-          "duration": 44.5170890000004,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper structure",
-          "duration": 42.29759000000013,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 569.0413750000002
-    },
-    "tests/layouts/MainLayout.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 297.84682599999996,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render children",
-          "duration": 104.09090399999968,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should contain header",
-          "duration": 74.73064999999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should contain footer",
-          "duration": 81.31455200000028,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 561.1648869999999
-    },
-    "tests/layouts/Navigation.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 368.58456799999976,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render navigation links",
-          "duration": 363.78530899999987,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper navigation structure",
-          "duration": 26.682566999999835,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 764.0208789999997
-    },
-    "tests/pages/all-pages.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 379.6442870000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 207.586221999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 772.4873229999994,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 684.6306260000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 160.7206409999999,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2209.3188949999994
-    },
-    "tests/services/ServicesIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export api functions",
-          "duration": 1.4348030000001017,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have sendContactMessage",
-          "duration": 0.377083999999968,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have createCalendarBooking",
-          "duration": 0.14677099999994425,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have checkCalendarAvailability",
-          "duration": 0.16679399999998168,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 4.171391000000085
-    },
-    "tests/services/api.test.js": {
-      "passed": [
-        {
-          "name": "should export sendContactMessage",
-          "duration": 2.8549030000001494,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export createCalendarBooking",
-          "duration": 1.2719700000000103,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export checkCalendarAvailability",
-          "duration": 0.4020029999999224,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "sendContactMessage should handle successful response",
-          "duration": 0.6765969999999015,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "checkCalendarAvailability should return object",
-          "duration": 0.7411849999998594,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 9.063505000000077
-    },
-    "tests/src/SrcIndex.css.test.js": {
-      "passed": [
-        {
-          "name": "should have valid CSS structure",
-          "duration": 4.610818999999992,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should be importable",
-          "duration": 1.7210670000001755,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 11.339879999999994
-    },
-    "tests/src/SrcIndex.test.jsx": {
-      "passed": [
-        {
-          "name": "should have entry point",
-          "duration": 2.3097470000000158,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should import required modules",
-          "duration": 0.4634049999999661,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not throw on import",
-          "duration": 2.617484999999988,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 9.331660000000056
-    },
-    "tests/utils/UtilsIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export logger",
-          "duration": 2.0200559999998404,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export currency utilities",
-          "duration": 1.3394360000002052,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export analytics functions",
-          "duration": 0.5920260000000326,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export SEO utilities",
-          "duration": 1.7331380000000536,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 8.494459000000006
-    },
-    "tests/utils/analytics.test.js": {
-      "passed": [
-        {
-          "name": "should export trackFormStart",
-          "duration": 2.7292190000000573,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackFormComplete",
-          "duration": 0.709201000000121,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackFormAbandon",
-          "duration": 0.4373769999999695,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackPhoneClick",
-          "duration": 0.2957129999999779,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackWhatsAppClick",
-          "duration": 0.5646420000000489,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackCalendarBookingComplete",
-          "duration": 0.3762339999998403,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackFormStart without errors",
-          "duration": 2.094060000000127,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackPhoneClick without errors",
-          "duration": 0.5184699999999793,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackWhatsAppClick without errors",
-          "duration": 0.679349000000002,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 11.032423999999992
-    },
-    "tests/utils/currency.test.js": {
-      "passed": [
-        {
-          "name": "should export CURRENCIES",
-          "duration": 2.7163880000000518,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have USD currency",
-          "duration": 1.1721019999999953,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export formatCurrency",
-          "duration": 0.3275109999999586,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export convertCurrency",
-          "duration": 0.33306800000013936,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should format currency correctly",
-          "duration": 29.704058999999916,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should convert currency with rates",
-          "duration": 0.4962460000001556,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return same amount for same currency",
-          "duration": 0.26966700000002675,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 38.93005399999993
-    },
-    "tests/utils/env.test.js": {
-      "passed": [
-        {
-          "name": "should export isDevelopment",
-          "duration": 2.2987410000000637,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export isProduction",
-          "duration": 0.8423820000000433,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getApiUrl",
-          "duration": 0.6389409999999316,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getCalendarEmail",
-          "duration": 0.7910039999999299,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getCalendarApiKey",
-          "duration": 0.8323159999999916,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return string for getApiUrl",
-          "duration": 0.42810000000008586,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return string for getCalendarEmail",
-          "duration": 0.2422780000001694,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 9.298291000000063
-    },
-    "tests/utils/logger.test.js": {
-      "passed": [
-        {
-          "name": "should export logger object",
-          "duration": 5.064510000000155,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have info method",
-          "duration": 0.994466999999986,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have error method",
-          "duration": 2.319422999999915,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have warn method",
-          "duration": 1.6088920000001963,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have info method",
-          "duration": 1.3761130000002595,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call logger methods without errors",
-          "duration": 4.539312000000336,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 19.606806000000233
-    },
-    "tests/utils/reportWebVitals.test.js": {
-      "passed": [
-        {
-          "name": "should export reportWebVitals function",
-          "duration": 5.056481000000076,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept callback function",
-          "duration": 4.922309000000041,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should work without callback",
-          "duration": 0.6755640000001222,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 14.508784999999989
-    },
-    "tests/utils/scrollToAnchor.test.js": {
-      "passed": [
-        {
-          "name": "should export scrollToElement function",
-          "duration": 3.8143690000001698,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should handle valid anchor id",
-          "duration": 18.66649100000018,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should handle missing anchor",
-          "duration": 2.27256199999988,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export scrollToTop",
-          "duration": 0.5561459999998988,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 28.06557100000009
-    },
-    "tests/utils/seo.test.js": {
-      "passed": [
-        {
-          "name": "should export defaultMetaTags",
-          "duration": 2.5588900000000194,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have required default meta tags",
-          "duration": 2.4028749999999945,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export generatePageMetaTags function",
-          "duration": 0.4192490000000362,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should generate meta tags for home page",
-          "duration": 1.4472359999999753,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should generate meta tags for about page",
-          "duration": 0.6235980000001291,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should generate meta tags for courses page",
-          "duration": 0.4229119999999966,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should handle unknown page",
-          "duration": 0.29748899999981404,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 10.917645999999877
-    },
-    "tests/components/about/AboutIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export AboutPage",
-          "duration": 1.232086999999865,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CredentialCard",
-          "duration": 0.24443999999994048,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export TeamMember",
-          "duration": 0.1242629999997007,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct number of exports",
-          "duration": 0.9255080000002636,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 3.6930999999999585
-    },
-    "tests/components/about/CredentialCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 126.97642700000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display credential title",
-          "duration": 21.273343999999724,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display credential description",
-          "duration": 11.421462999999676,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render icon component",
-          "duration": 33.171675999999934,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply animation delay based on index",
-          "duration": 14.067657000000054,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 7.912489000000278,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 224.4979400000002
-    },
-    "tests/components/about/TeamMember.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 133.1432759999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member name",
-          "duration": 17.27119500000026,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member role",
-          "duration": 15.206055000000106,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member bio",
-          "duration": 13.030711000000338,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render member image with correct alt text",
-          "duration": 16.313408999999865,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all certifications",
-          "duration": 15.576519999999618,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 6.801963000000342,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 221.17690500000026
-    },
-    "tests/components/common/CommonIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CurrencySelector",
-          "duration": 2.299282999999832,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export ErrorBoundary",
-          "duration": 0.5118619999998373,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export Loading",
-          "duration": 0.31875700000000506,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export PhoneLink",
-          "duration": 0.5612750000000233,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export SEO",
-          "duration": 0.2874000000001615,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export WhatsAppButton",
-          "duration": 0.2938580000000002,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 9.079310999999961
-    },
-    "tests/components/common/CurrencySelector.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 140.43369100000018,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display current currency",
-          "duration": 21.392211000000316,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should open dropdown when clicked",
-          "duration": 351.56471599999986,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display currency dropdown with all options",
-          "duration": 204.11636099999987,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should change currency when option clicked",
-          "duration": 346.80517599999985,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display chevron icon",
-          "duration": 16.275794000000133,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1083.943119
-    },
-    "tests/components/common/ErrorBoundary.test.jsx": {
-      "passed": [
-        {
-          "name": "should render children when no error",
-          "duration": 97.30784300000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should catch errors and display error UI",
-          "duration": 55.629054,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display Try Again button on error",
-          "duration": 401.3832349999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should reset error when Try Again clicked",
-          "duration": 205.6796690000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render custom fallback when provided",
-          "duration": 7.187263999999686,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 773.3423730000004
-    },
-    "tests/components/common/Loading.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 71.44182499999988,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display loading text",
-          "duration": 8.411305999999968,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render with default text",
-          "duration": 8.857465000000047,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not display text when text prop is empty",
-          "duration": 4.4225249999999505,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render spinner element",
-          "duration": 17.29104099999995,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply small size class",
-          "duration": 7.031245000000126,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply medium size class by default",
-          "duration": 4.553236999999626,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply large size class",
-          "duration": 4.536853999999948,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 20.91126000000031,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 151.43885799999998
-    },
-    "tests/components/common/PhoneLink.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 370.589258,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display phone number by default",
-          "duration": 18.314002000000073,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display custom children when provided",
-          "duration": 18.33308799999986,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct tel href",
-          "duration": 107.33351099999982,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render phone icon",
-          "duration": 23.962437000000136,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have aria-label",
-          "duration": 62.40507499999967,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply custom className",
-          "duration": 51.70977999999968,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackPhoneClick on click",
-          "duration": 268.4655869999997,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 926.219462
-    },
-    "tests/components/common/SEO.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 67.63192100000015,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set custom title when provided",
-          "duration": 48.45084900000029,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set page-specific meta tags",
-          "duration": 41.13034800000014,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set default meta tags for home page",
-          "duration": 25.919441000000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set Open Graph meta tags",
-          "duration": 30.108893999999964,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set Twitter meta tags",
-          "duration": 27.235113999999612,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set canonical link",
-          "duration": 27.756023999999798,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set custom description when provided",
-          "duration": 45.28092800000013,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 316.5798669999999
-    },
-    "tests/components/common/WhatsAppButton.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 348.0128960000002,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render button variant by default",
-          "duration": 11.732895000000099,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render icon variant correctly",
-          "duration": 65.28534099999979,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render floating variant with fixed positioning",
-          "duration": 45.96734599999991,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct WhatsApp URL",
-          "duration": 33.552132000000256,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should encode custom message in URL",
-          "duration": 36.27176699999973,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should open in new tab",
-          "duration": 28.260447999999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render WhatsApp icon",
-          "duration": 5.604433999999856,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackWhatsAppClick on click",
-          "duration": 111.19820499999969,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply custom className",
-          "duration": 44.22739300000012,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 733.730219
-    },
-    "tests/components/courses/CourseCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 198.6857970000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course name",
-          "duration": 30.07607300000018,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course tagline",
-          "duration": 30.03821599999992,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course description",
-          "duration": 27.873927999999978,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course duration",
-          "duration": 30.316150000000107,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display minimum age",
-          "duration": 33.811649000000216,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display included items",
-          "duration": 27.804227999999966,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should toggle curriculum visibility",
-          "duration": 406.9449999999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onBookClick when book button clicked",
-          "duration": 252.1998649999996,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1041.185493
-    },
-    "tests/components/courses/CourseComparison.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 211.24320399999988,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display table headers",
-          "duration": 151.13799400000016,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course rows",
-          "duration": 57.52137800000037,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course data in table format",
-          "duration": 202.33595600000035,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper table structure",
-          "duration": 211.0463490000002,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 835.7098510000001
-    },
-    "tests/components/courses/CoursesIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CourseCard",
-          "duration": 1.5415219999999863,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CourseComparison",
-          "duration": 0.5142140000002655,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CoursesPage",
-          "duration": 0.2908810000003541,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 3.7270189999999275
-    },
-    "tests/components/dive-sites/DiveMap.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 49.71021500000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render map container",
-          "duration": 25.476044,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept selectedSite prop",
-          "duration": 8.196557000000212,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 88.33824000000004
-    },
-    "tests/components/dive-sites/DiveSiteCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 150.24836600000026,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display site name",
-          "duration": 17.766883999999664,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display site description",
-          "duration": 27.95901099999992,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display depth information",
-          "duration": 15.945540999999594,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display visibility",
-          "duration": 44.32616000000007,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display best season",
-          "duration": 19.14242099999956,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all highlights",
-          "duration": 14.446298999999726,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all marine life",
-          "duration": 23.962500999999975,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render site image",
-          "duration": 14.761492999999973,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 332.18015000000014
-    },
-    "tests/components/dive-sites/DiveSiteIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export DiveMap",
-          "duration": 1.1409730000000309,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export DiveSiteCard",
-          "duration": 0.33851499999991574,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export DiveSitesPage",
-          "duration": 0.18955400000004374,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 3.3666620000003604
-    },
-    "tests/components/gallery/FeaturedCarousel.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 84.11191300000019,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display heading",
-          "duration": 32.00169800000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Swiper component",
-          "duration": 13.343750999999884,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 132.8635650000001
-    },
-    "tests/components/gallery/GalleryGrid.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 115.53498400000035,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render all images",
-          "duration": 20.920362999999725,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image descriptions",
-          "duration": 18.652500000000146,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image categories",
-          "duration": 20.206398999999692,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have grid layout classes",
-          "duration": 32.77097100000037,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 211.40111500000012
-    },
-    "tests/components/gallery/GalleryIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export FeaturedCarousel",
-          "duration": 1.188202999999703,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export GalleryGrid",
-          "duration": 0.30371000000013737,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export GalleryPage",
-          "duration": 0.14960999999993874,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export Lightbox",
-          "duration": 0.14533699999992677,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 3.487811999999849
-    },
-    "tests/components/gallery/Lightbox.test.jsx": {
-      "passed": [
-        {
-          "name": "should not render when not open",
-          "duration": 104.34936000000016,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render when open",
-          "duration": 79.44248400000015,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image details",
-          "duration": 24.82533599999988,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onClose when close button clicked",
-          "duration": 276.4085909999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onNavigate with prev when previous button clicked",
-          "duration": 189.15505399999984,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onNavigate with next when next button clicked",
-          "duration": 88.22817000000032,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render image element",
-          "duration": 12.55191300000024,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 779.4641029999998
-    },
-    "tests/components/home/CTASection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 97.2720159999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 17.814930000000004,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display description",
-          "duration": 23.636917000000267,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Contact Us button",
-          "duration": 320.602946,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Call Us link",
-          "duration": 88.05490400000008,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 554.2469449999999
-    },
-    "tests/components/home/FeaturesSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 134.4718899999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 27.71917799999983,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display subtitle",
-          "duration": 27.330503000000135,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all features",
-          "duration": 38.35953800000016,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display feature stats",
-          "duration": 32.803617999999915,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 265.0418520000003
-    },
-    "tests/components/home/HeroSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 135.32602899999983,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 40.52741500000002,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display subtitle",
-          "duration": 25.56247399999984,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Book Your Dive button",
-          "duration": 397.2975399999996,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render View Courses link",
-          "duration": 275.2884949999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display scroll indicator",
-          "duration": 15.506307000000106,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 893.113679
-    },
-    "tests/components/home/HomeIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CTASection",
-          "duration": 1.8892040000000634,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export FeaturesSection",
-          "duration": 0.5750270000003184,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export HeroSection",
-          "duration": 0.30069000000003143,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export HomePage",
-          "duration": 0.3033269999996264,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export ServicesSection",
-          "duration": 0.23175099999980375,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export TestimonialsSection",
-          "duration": 0.2021359999998822,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 5.698738999999932
-    },
-    "tests/components/home/ServicesSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 201.25665200000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 25.622765000000072,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all service cards",
-          "duration": 37.043568999999934,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render service links",
-          "duration": 857.8527059999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display service descriptions",
-          "duration": 34.74101699999983,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1163.59902
-    },
-    "tests/components/home/TestimonialsSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 200.76764699999967,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 48.65359999999964,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all testimonials",
-          "duration": 49.27940099999978,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display testimonial locations",
-          "duration": 66.26661100000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display testimonial text",
-          "duration": 52.43561099999988,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render star ratings",
-          "duration": 36.8398729999999,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 458.5635119999997
-    },
-    "tests/components/modals/BookingModal.test.jsx": {
-      "passed": [
-        {
-          "name": "should render when open",
-          "duration": 598.716195,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not render when closed",
-          "duration": 24.465071999999964,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display booking type options",
-          "duration": 442.91234600000007,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept preSelectedItem prop",
-          "duration": 261.4190829999998,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1330.1050909999994
-    },
-    "tests/components/modals/ContactModal.test.jsx": {
-      "passed": [
-        {
-          "name": "should render when open",
-          "duration": 314.6734809999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not render when closed",
-          "duration": 9.496609000000717,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display form fields",
-          "duration": 138.2617960000007,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have submit button",
-          "duration": 838.2938189999995,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1303.932817
-    },
-    "tests/components/shared/BackToTop.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 40.44874499999969,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not be visible initially",
-          "duration": 32.6806160000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept showAfter prop",
-          "duration": 4.70953099999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept position prop",
-          "duration": 5.2839859999999135,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call scrollTo when button clicked",
-          "duration": 11.690276000000267,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 97.85979899999984
-    },
-    "tests/components/shared/ScrollProgress.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 66.19477000000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render progress bar element",
-          "duration": 20.684173999999985,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct styling classes",
-          "duration": 12.323781999999937,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render inner progress indicator",
-          "duration": 11.24154800000042,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 113.6430879999998
+      "totalDuration": 14.109725000000026
     }
   }
 }

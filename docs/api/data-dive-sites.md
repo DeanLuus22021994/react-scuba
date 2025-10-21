@@ -1,4 +1,4 @@
-# Index
+# Data: Dive Sites
 
 ::: warning Work in Progress
 API documentation is under construction.
@@ -6,7 +6,7 @@ API documentation is under construction.
 
 ## Overview
 
-API documentation for Index will be available soon.
+API documentation for Data: Dive Sites will be available soon.
 
 ## Related
 

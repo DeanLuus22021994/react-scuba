@@ -1,4 +1,4 @@
-# Index
+# Courses
 
 ::: warning Work in Progress
 Component documentation is under construction.
@@ -6,7 +6,7 @@ Component documentation is under construction.
 
 ## Overview
 
-Documentation for the Index component will be available soon.
+Documentation for the Courses component will be available soon.
 
 ## Related
 

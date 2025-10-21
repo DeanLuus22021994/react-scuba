@@ -1,4 +1,4 @@
-# Index
+# Domain
 
 ::: warning Work in Progress
 Deployment documentation is under construction.
@@ -6,7 +6,7 @@ Deployment documentation is under construction.
 
 ## Overview
 
-Deployment guide for Index will be available soon.
+Deployment guide for Domain will be available soon.
 
 ## Related
 

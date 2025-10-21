@@ -1,4 +1,4 @@
-# Index
+# Vercel
 
 ::: warning Work in Progress
 Deployment documentation is under construction.
@@ -6,7 +6,7 @@ Deployment documentation is under construction.
 
 ## Overview
 
-Deployment guide for Index will be available soon.
+Deployment guide for Vercel will be available soon.
 
 ## Related
 

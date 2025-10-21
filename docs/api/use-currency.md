@@ -1,4 +1,4 @@
-# Index
+# Use Currency
 
 ::: warning Work in Progress
 API documentation is under construction.
@@ -6,7 +6,7 @@ API documentation is under construction.
 
 ## Overview
 
-API documentation for Index will be available soon.
+API documentation for Use Currency will be available soon.
 
 ## Related
 
