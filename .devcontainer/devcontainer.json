@@ -12,7 +12,7 @@
         "gpu": "optional"
     },
     "waitFor": "onCreateCommand",
-    "updateContentCommand": "npm install",
+    "updateContentCommand": "npm install --legacy-peer-deps",
     "postCreateCommand": "",
     "postAttachCommand": {
         "server": "npm start"
