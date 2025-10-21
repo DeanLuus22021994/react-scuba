@@ -1,4 +1,5 @@
 ---
+# Homepage for React Scuba Documentation
 layout: home
 
 hero:
