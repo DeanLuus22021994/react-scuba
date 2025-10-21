@@ -1,6 +1,9 @@
 {
     "image": "node:22-alpine",
     "features": {},
+    "mounts": [
+        "source=react-scuba-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+    ],
     "hostRequirements": {
         "cpus": 2,
         "memory": "4gb",
