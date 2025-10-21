@@ -1,0 +1,1955 @@
+{
+  "runTime": "2025-10-21T13:24:44.708Z",
+  "summary": {
+    "totalFiles": 62,
+    "passedFiles": 62,
+    "failedFiles": 0,
+    "totalTests": 314,
+    "passedTests": 314,
+    "failedTests": 0
+  },
+  "files": {
+    "tests/AboutPage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 353.72841400000016,
+          "state": "pass"
+        },
+        {
+          "name": "should render page heading",
+          "duration": 1832.7608890000001,
+          "state": "pass"
+        },
+        {
+          "name": "should render about content",
+          "duration": 106.48251799999889,
+          "state": "pass"
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 161.49874199999977,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 2457.6690670000007
+    },
+    "tests/App.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 271.61176199999954,
+          "state": "pass"
+        },
+        {
+          "name": "should render header component",
+          "duration": 331.38227199999983,
+          "state": "pass"
+        },
+        {
+          "name": "should render main content area",
+          "duration": 182.64230899999984,
+          "state": "pass"
+        },
+        {
+          "name": "should wrap app with CurrencyProvider",
+          "duration": 64.97097099999974,
+          "state": "pass"
+        },
+        {
+          "name": "should have scroll progress component",
+          "duration": 85.55278299999918,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 939.8036030000003
+    },
+    "tests/CoursesPage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 532.6414480000003,
+          "state": "pass"
+        },
+        {
+          "name": "should render page heading",
+          "duration": 1646.5060779999994,
+          "state": "pass"
+        },
+        {
+          "name": "should render courses content with currency provider",
+          "duration": 256.5512480000016,
+          "state": "pass"
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 193.1866489999993,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 2631.3769679999996
+    },
+    "tests/DiveSitesPage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 1305.7253139999993,
+          "state": "pass"
+        },
+        {
+          "name": "should render page heading",
+          "duration": 1840.4340379999994,
+          "state": "pass"
+        },
+        {
+          "name": "should render dive sites content",
+          "duration": 333.36937300000136,
+          "state": "pass"
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 221.26788300000044,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 3703.766160000001
+    },
+    "tests/GalleryPage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 1506.3513990000001,
+          "state": "pass"
+        },
+        {
+          "name": "should render page heading",
+          "duration": 2065.1677679999993,
+          "state": "pass"
+        },
+        {
+          "name": "should render gallery content",
+          "duration": 393.0665310000004,
+          "state": "pass"
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 423.05264999999963,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 4392.995126
+    },
+    "tests/HomePage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 486.2396980000003,
+          "state": "pass"
+        },
+        {
+          "name": "should render hero section with heading",
+          "duration": 1422.5696119999993,
+          "state": "pass"
+        },
+        {
+          "name": "should render all main sections",
+          "duration": 121.61499800000092,
+          "state": "pass"
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 114.89854300000115,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 2148.3266330000006
+    },
+    "tests/link-checker.test.js": {
+      "passed": [
+        {
+          "name": "should find all markdown files",
+          "duration": 13.246352000000115,
+          "state": "pass"
+        },
+        {
+          "name": "should validate all links in documentation",
+          "duration": 6.190915000000132,
+          "state": "pass"
+        },
+        {
+          "name": "should validate all links in README.md",
+          "duration": 0.861594999999852,
+          "state": "pass"
+        },
+        {
+          "name": "should detect common link issues",
+          "duration": 4.1829589999999826,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 26.824584000000186
+    },
+    "tests/data/bookingTypes.test.js": {
+      "passed": [
+        {
+          "name": "should export BOOKING_TYPES",
+          "duration": 2.736808999999994,
+          "state": "pass"
+        },
+        {
+          "name": "should have course array",
+          "duration": 0.8001550000001316,
+          "state": "pass"
+        },
+        {
+          "name": "should have dive array",
+          "duration": 0.43295800000009876,
+          "state": "pass"
+        },
+        {
+          "name": "should have valid course structure",
+          "duration": 1.4428660000000946,
+          "state": "pass"
+        },
+        {
+          "name": "should have valid dive structure",
+          "duration": 1.28555799999981,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 9.899869999999964
+    },
+    "tests/data/courses.test.js": {
+      "passed": [
+        {
+          "name": "should export COURSES array",
+          "duration": 8.189020000000028,
+          "state": "pass"
+        },
+        {
+          "name": "should have valid course structure",
+          "duration": 2.6184430000000702,
+          "state": "pass"
+        },
+        {
+          "name": "should export getCourseById function",
+          "duration": 0.38446299999986877,
+          "state": "pass"
+        },
+        {
+          "name": "should find course by id",
+          "duration": 0.2765280000000985,
+          "state": "pass"
+        },
+        {
+          "name": "should return undefined for invalid id",
+          "duration": 0.2645119999999679,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 14.367263999999977
+    },
+    "tests/data/credentials.test.js": {
+      "passed": [
+        {
+          "name": "should export CREDENTIALS array",
+          "duration": 2.4413289999997687,
+          "state": "pass"
+        },
+        {
+          "name": "should have valid credential structure",
+          "duration": 2.321926000000076,
+          "state": "pass"
+        },
+        {
+          "name": "should have PADI 5 Star credential",
+          "duration": 0.5315630000000056,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 8.883764000000156
+    },
+    "tests/data/diveSites.test.js": {
+      "passed": [
+        {
+          "name": "should export DIVE_SITES array",
+          "duration": 2.946562999999969,
+          "state": "pass"
+        },
+        {
+          "name": "should export MAURITIUS_CENTER",
+          "duration": 1.8920310000000882,
+          "state": "pass"
+        },
+        {
+          "name": "should export DIFFICULTY_COLORS",
+          "duration": 0.7370859999998629,
+          "state": "pass"
+        },
+        {
+          "name": "should have valid dive site structure",
+          "duration": 6.075626000000057,
+          "state": "pass"
+        },
+        {
+          "name": "should export getDiveSiteById function",
+          "duration": 0.46405800000002273,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 16.187503000000106
+    },
+    "tests/data/gallery.test.js": {
+      "passed": [
+        {
+          "name": "should export GALLERY_IMAGES array",
+          "duration": 3.2390620000001036,
+          "state": "pass"
+        },
+        {
+          "name": "should export FEATURED_IMAGES array",
+          "duration": 0.6295039999999972,
+          "state": "pass"
+        },
+        {
+          "name": "should export CATEGORIES array",
+          "duration": 0.3215940000000046,
+          "state": "pass"
+        },
+        {
+          "name": "should have valid gallery image structure",
+          "duration": 2.895919000000049,
+          "state": "pass"
+        },
+        {
+          "name": "should export getImagesByCategory function",
+          "duration": 0.33100800000011077,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 10.991023999999925
+    },
+    "tests/data/team.test.js": {
+      "passed": [
+        {
+          "name": "should export TEAM_MEMBERS array",
+          "duration": 2.5084019999999327,
+          "state": "pass"
+        },
+        {
+          "name": "should have valid team member structure",
+          "duration": 1.6382989999999609,
+          "state": "pass"
+        },
+        {
+          "name": "should export getTeamMemberByName function",
+          "duration": 13.565072999999984,
+          "state": "pass"
+        },
+        {
+          "name": "should find team member by name",
+          "duration": 0.5043539999999211,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 22.21851300000003
+    },
+    "tests/hooks/index.test.js": {
+      "passed": [
+        {
+          "name": "should export useCurrency",
+          "duration": 1.9592039999997723,
+          "state": "pass"
+        },
+        {
+          "name": "should export CurrencyProvider",
+          "duration": 0.38201299999991534,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 4.74924800000008
+    },
+    "tests/hooks/useCurrency.test.jsx": {
+      "passed": [
+        {
+          "name": "should provide currency context",
+          "duration": 95.20237499999985,
+          "state": "pass"
+        },
+        {
+          "name": "should have default currency",
+          "duration": 22.174406999999974,
+          "state": "pass"
+        },
+        {
+          "name": "should provide format function",
+          "duration": 44.04475699999966,
+          "state": "pass"
+        },
+        {
+          "name": "should provide convert function",
+          "duration": 9.835811999999805,
+          "state": "pass"
+        },
+        {
+          "name": "should provide setCurrency function",
+          "duration": 21.970676999999796,
+          "state": "pass"
+        },
+        {
+          "name": "should provide availableCurrencies",
+          "duration": 10.85712599999988,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 207.6810690000002
+    },
+    "tests/layouts/Footer.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 274.72636000000057,
+          "state": "pass"
+        },
+        {
+          "name": "should display copyright text",
+          "duration": 52.32256700000016,
+          "state": "pass"
+        },
+        {
+          "name": "should render footer links",
+          "duration": 1085.4304949999996,
+          "state": "pass"
+        },
+        {
+          "name": "should have proper structure",
+          "duration": 37.783518000000186,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1453.125916
+    },
+    "tests/layouts/Header.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 454.9551769999998,
+          "state": "pass"
+        },
+        {
+          "name": "should contain navigation",
+          "duration": 42.44324000000006,
+          "state": "pass"
+        },
+        {
+          "name": "should have proper structure",
+          "duration": 36.47752199999968,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 537.1618860000003
+    },
+    "tests/layouts/MainLayout.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 253.27939000000015,
+          "state": "pass"
+        },
+        {
+          "name": "should render children",
+          "duration": 79.33578399999988,
+          "state": "pass"
+        },
+        {
+          "name": "should contain header",
+          "duration": 69.97832699999981,
+          "state": "pass"
+        },
+        {
+          "name": "should contain footer",
+          "duration": 63.743241000000125,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 468.86869799999977
+    },
+    "tests/layouts/Navigation.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 496.2539730000003,
+          "state": "pass"
+        },
+        {
+          "name": "should render navigation links",
+          "duration": 387.42308900000035,
+          "state": "pass"
+        },
+        {
+          "name": "should have proper navigation structure",
+          "duration": 43.45252300000038,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 930.9486860000002
+    },
+    "tests/pages/all-pages.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 476.99150799999916,
+          "state": "pass"
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 383.45996099999866,
+          "state": "pass"
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 721.7780679999996,
+          "state": "pass"
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 635.4869569999992,
+          "state": "pass"
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 130.21885600000132,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 2351.3178180000004
+    },
+    "tests/services/api.test.js": {
+      "passed": [
+        {
+          "name": "should export sendContactMessage",
+          "duration": 3.2381960000000163,
+          "state": "pass"
+        },
+        {
+          "name": "should export createCalendarBooking",
+          "duration": 0.6888149999999769,
+          "state": "pass"
+        },
+        {
+          "name": "should export checkCalendarAvailability",
+          "duration": 0.38283099999989645,
+          "state": "pass"
+        },
+        {
+          "name": "sendContactMessage should handle successful response",
+          "duration": 0.6663379999999961,
+          "state": "pass"
+        },
+        {
+          "name": "checkCalendarAvailability should return object",
+          "duration": 0.7728119999999308,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 9.088608999999906
+    },
+    "tests/services/index.test.js": {
+      "passed": [
+        {
+          "name": "should export api functions",
+          "duration": 2.0738440000000082,
+          "state": "pass"
+        },
+        {
+          "name": "should have sendContactMessage",
+          "duration": 0.503163000000086,
+          "state": "pass"
+        },
+        {
+          "name": "should have createCalendarBooking",
+          "duration": 0.33700999999996384,
+          "state": "pass"
+        },
+        {
+          "name": "should have checkCalendarAvailability",
+          "duration": 0.42744199999992816,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 6.447747000000163
+    },
+    "tests/src/index.css.test.js": {
+      "passed": [
+        {
+          "name": "should have valid CSS structure",
+          "duration": 2.8446779999999308,
+          "state": "pass"
+        },
+        {
+          "name": "should be importable",
+          "duration": 3.263336999999865,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 8.791475999999875
+    },
+    "tests/src/index.test.jsx": {
+      "passed": [
+        {
+          "name": "should have entry point",
+          "duration": 2.5333559999999125,
+          "state": "pass"
+        },
+        {
+          "name": "should import required modules",
+          "duration": 0.5225400000001628,
+          "state": "pass"
+        },
+        {
+          "name": "should not throw on import",
+          "duration": 2.8348660000001473,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 10.92024699999979
+    },
+    "tests/utils/analytics.test.js": {
+      "passed": [
+        {
+          "name": "should export trackFormStart",
+          "duration": 3.3587800000000243,
+          "state": "pass"
+        },
+        {
+          "name": "should export trackFormComplete",
+          "duration": 0.6704560000000583,
+          "state": "pass"
+        },
+        {
+          "name": "should export trackFormAbandon",
+          "duration": 0.5212089999999989,
+          "state": "pass"
+        },
+        {
+          "name": "should export trackPhoneClick",
+          "duration": 1.3682670000000599,
+          "state": "pass"
+        },
+        {
+          "name": "should export trackWhatsAppClick",
+          "duration": 0.8054520000000593,
+          "state": "pass"
+        },
+        {
+          "name": "should export trackCalendarBookingComplete",
+          "duration": 0.4634690000000319,
+          "state": "pass"
+        },
+        {
+          "name": "should call trackFormStart without errors",
+          "duration": 9.374642999999878,
+          "state": "pass"
+        },
+        {
+          "name": "should call trackPhoneClick without errors",
+          "duration": 0.8203290000001289,
+          "state": "pass"
+        },
+        {
+          "name": "should call trackWhatsAppClick without errors",
+          "duration": 1.0953230000000076,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 26.623843999999963
+    },
+    "tests/utils/currency.test.js": {
+      "passed": [
+        {
+          "name": "should export CURRENCIES",
+          "duration": 2.8851609999999255,
+          "state": "pass"
+        },
+        {
+          "name": "should have USD currency",
+          "duration": 0.9960410000001048,
+          "state": "pass"
+        },
+        {
+          "name": "should export formatCurrency",
+          "duration": 0.3667880000000423,
+          "state": "pass"
+        },
+        {
+          "name": "should export convertCurrency",
+          "duration": 0.6837620000001152,
+          "state": "pass"
+        },
+        {
+          "name": "should format currency correctly",
+          "duration": 36.790066000000024,
+          "state": "pass"
+        },
+        {
+          "name": "should convert currency with rates",
+          "duration": 1.5205769999997756,
+          "state": "pass"
+        },
+        {
+          "name": "should return same amount for same currency",
+          "duration": 1.36229000000003,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 48.09313800000018
+    },
+    "tests/utils/env.test.js": {
+      "passed": [
+        {
+          "name": "should export isDevelopment",
+          "duration": 2.8329140000000734,
+          "state": "pass"
+        },
+        {
+          "name": "should export isProduction",
+          "duration": 0.825731999999789,
+          "state": "pass"
+        },
+        {
+          "name": "should export getApiUrl",
+          "duration": 0.588745999999901,
+          "state": "pass"
+        },
+        {
+          "name": "should export getCalendarEmail",
+          "duration": 0.5362549999999828,
+          "state": "pass"
+        },
+        {
+          "name": "should export getCalendarApiKey",
+          "duration": 0.418688000000202,
+          "state": "pass"
+        },
+        {
+          "name": "should return string for getApiUrl",
+          "duration": 21.632239000000027,
+          "state": "pass"
+        },
+        {
+          "name": "should return string for getCalendarEmail",
+          "duration": 0.6429039999998167,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 30.405825999999706
+    },
+    "tests/utils/index.test.js": {
+      "passed": [
+        {
+          "name": "should export logger",
+          "duration": 4.364790999999968,
+          "state": "pass"
+        },
+        {
+          "name": "should export currency utilities",
+          "duration": 3.7434979999998177,
+          "state": "pass"
+        },
+        {
+          "name": "should export analytics functions",
+          "duration": 0.4778960000001007,
+          "state": "pass"
+        },
+        {
+          "name": "should export SEO utilities",
+          "duration": 0.5752139999999599,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 13.17832599999997
+    },
+    "tests/utils/logger.test.js": {
+      "passed": [
+        {
+          "name": "should export logger object",
+          "duration": 3.622005000000172,
+          "state": "pass"
+        },
+        {
+          "name": "should have info method",
+          "duration": 2.133624999999938,
+          "state": "pass"
+        },
+        {
+          "name": "should have error method",
+          "duration": 0.34624600000006467,
+          "state": "pass"
+        },
+        {
+          "name": "should have warn method",
+          "duration": 0.3134390000000167,
+          "state": "pass"
+        },
+        {
+          "name": "should have info method",
+          "duration": 0.46380900000008296,
+          "state": "pass"
+        },
+        {
+          "name": "should call logger methods without errors",
+          "duration": 3.766499000000067,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 19.591394000000037
+    },
+    "tests/utils/reportWebVitals.test.js": {
+      "passed": [
+        {
+          "name": "should export reportWebVitals function",
+          "duration": 5.01085299999977,
+          "state": "pass"
+        },
+        {
+          "name": "should accept callback function",
+          "duration": 2.098960000000261,
+          "state": "pass"
+        },
+        {
+          "name": "should work without callback",
+          "duration": 0.41537300000027244,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 10.538837000000058
+    },
+    "tests/utils/scrollToAnchor.test.js": {
+      "passed": [
+        {
+          "name": "should export scrollToElement function",
+          "duration": 2.4781070000001364,
+          "state": "pass"
+        },
+        {
+          "name": "should handle valid anchor id",
+          "duration": 20.58331700000008,
+          "state": "pass"
+        },
+        {
+          "name": "should handle missing anchor",
+          "duration": 2.406675999999834,
+          "state": "pass"
+        },
+        {
+          "name": "should export scrollToTop",
+          "duration": 0.8659809999999197,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 32.383195000000114
+    },
+    "tests/utils/seo.test.js": {
+      "passed": [
+        {
+          "name": "should export defaultMetaTags",
+          "duration": 3.8647609999998167,
+          "state": "pass"
+        },
+        {
+          "name": "should have required default meta tags",
+          "duration": 1.0808469999999488,
+          "state": "pass"
+        },
+        {
+          "name": "should export generatePageMetaTags function",
+          "duration": 4.3652770000001055,
+          "state": "pass"
+        },
+        {
+          "name": "should generate meta tags for home page",
+          "duration": 8.828879000000143,
+          "state": "pass"
+        },
+        {
+          "name": "should generate meta tags for about page",
+          "duration": 0.7409079999999904,
+          "state": "pass"
+        },
+        {
+          "name": "should generate meta tags for courses page",
+          "duration": 0.5097349999998642,
+          "state": "pass"
+        },
+        {
+          "name": "should handle unknown page",
+          "duration": 1.039543999999978,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 27.95024400000011
+    },
+    "tests/components/about/CredentialCard.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 104.0618730000001,
+          "state": "pass"
+        },
+        {
+          "name": "should display credential title",
+          "duration": 14.405424000000039,
+          "state": "pass"
+        },
+        {
+          "name": "should display credential description",
+          "duration": 13.976310999999896,
+          "state": "pass"
+        },
+        {
+          "name": "should render icon component",
+          "duration": 14.257536999999957,
+          "state": "pass"
+        },
+        {
+          "name": "should apply animation delay based on index",
+          "duration": 20.2775230000002,
+          "state": "pass"
+        },
+        {
+          "name": "should have proper styling classes",
+          "duration": 11.689740000000256,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 183.0270559999999
+    },
+    "tests/components/about/TeamMember.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 116.69889600000033,
+          "state": "pass"
+        },
+        {
+          "name": "should display member name",
+          "duration": 16.28364300000021,
+          "state": "pass"
+        },
+        {
+          "name": "should display member role",
+          "duration": 8.81322100000034,
+          "state": "pass"
+        },
+        {
+          "name": "should display member bio",
+          "duration": 12.195141999999578,
+          "state": "pass"
+        },
+        {
+          "name": "should render member image with correct alt text",
+          "duration": 16.236397000000125,
+          "state": "pass"
+        },
+        {
+          "name": "should display all certifications",
+          "duration": 13.551335999999992,
+          "state": "pass"
+        },
+        {
+          "name": "should have proper styling classes",
+          "duration": 11.878642000000127,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 199.76735000000008
+    },
+    "tests/components/about/index.test.js": {
+      "passed": [
+        {
+          "name": "should export AboutPage",
+          "duration": 1.3231740000001082,
+          "state": "pass"
+        },
+        {
+          "name": "should export CredentialCard",
+          "duration": 0.2341870000000199,
+          "state": "pass"
+        },
+        {
+          "name": "should export TeamMember",
+          "duration": 0.12596299999995608,
+          "state": "pass"
+        },
+        {
+          "name": "should have correct number of exports",
+          "duration": 0.8085690000002614,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 3.568439000000126
+    },
+    "tests/components/common/CurrencySelector.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 205.30094699999972,
+          "state": "pass"
+        },
+        {
+          "name": "should display current currency",
+          "duration": 37.57697300000018,
+          "state": "pass"
+        },
+        {
+          "name": "should open dropdown when clicked",
+          "duration": 434.48178499999995,
+          "state": "pass"
+        },
+        {
+          "name": "should display currency dropdown with all options",
+          "duration": 214.9499850000002,
+          "state": "pass"
+        },
+        {
+          "name": "should change currency when option clicked",
+          "duration": 375.19121499999983,
+          "state": "pass"
+        },
+        {
+          "name": "should display chevron icon",
+          "duration": 22.204493000000184,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1293.5977429999998
+    },
+    "tests/components/common/ErrorBoundary.test.jsx": {
+      "passed": [
+        {
+          "name": "should render children when no error",
+          "duration": 90.51317999999992,
+          "state": "pass"
+        },
+        {
+          "name": "should catch errors and display error UI",
+          "duration": 99.23943300000019,
+          "state": "pass"
+        },
+        {
+          "name": "should display Try Again button on error",
+          "duration": 435.3926799999999,
+          "state": "pass"
+        },
+        {
+          "name": "should reset error when Try Again clicked",
+          "duration": 268.3832339999999,
+          "state": "pass"
+        },
+        {
+          "name": "should render custom fallback when provided",
+          "duration": 9.24276299999974,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 908.20145
+    },
+    "tests/components/common/Loading.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 80.46836400000029,
+          "state": "pass"
+        },
+        {
+          "name": "should display loading text",
+          "duration": 12.09143800000038,
+          "state": "pass"
+        },
+        {
+          "name": "should render with default text",
+          "duration": 11.666261999999733,
+          "state": "pass"
+        },
+        {
+          "name": "should not display text when text prop is empty",
+          "duration": 6.498383999999987,
+          "state": "pass"
+        },
+        {
+          "name": "should render spinner element",
+          "duration": 25.2033449999999,
+          "state": "pass"
+        },
+        {
+          "name": "should apply small size class",
+          "duration": 6.73584800000026,
+          "state": "pass"
+        },
+        {
+          "name": "should apply medium size class by default",
+          "duration": 3.2403770000000804,
+          "state": "pass"
+        },
+        {
+          "name": "should apply large size class",
+          "duration": 4.9281230000001415,
+          "state": "pass"
+        },
+        {
+          "name": "should have proper styling classes",
+          "duration": 6.939167999999881,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 161.24837500000012
+    },
+    "tests/components/common/PhoneLink.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 549.510538,
+          "state": "pass"
+        },
+        {
+          "name": "should display phone number by default",
+          "duration": 28.949701000000005,
+          "state": "pass"
+        },
+        {
+          "name": "should display custom children when provided",
+          "duration": 10.795435999999881,
+          "state": "pass"
+        },
+        {
+          "name": "should have correct tel href",
+          "duration": 105.07967600000029,
+          "state": "pass"
+        },
+        {
+          "name": "should render phone icon",
+          "duration": 8.435519999999997,
+          "state": "pass"
+        },
+        {
+          "name": "should have aria-label",
+          "duration": 73.12490200000002,
+          "state": "pass"
+        },
+        {
+          "name": "should apply custom className",
+          "duration": 71.099917,
+          "state": "pass"
+        },
+        {
+          "name": "should call trackPhoneClick on click",
+          "duration": 268.16248300000007,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1118.811138
+    },
+    "tests/components/common/SEO.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 54.32077900000013,
+          "state": "pass"
+        },
+        {
+          "name": "should set custom title when provided",
+          "duration": 39.40909599999986,
+          "state": "pass"
+        },
+        {
+          "name": "should set page-specific meta tags",
+          "duration": 30.951352000000043,
+          "state": "pass"
+        },
+        {
+          "name": "should set default meta tags for home page",
+          "duration": 30.5883130000002,
+          "state": "pass"
+        },
+        {
+          "name": "should set Open Graph meta tags",
+          "duration": 30.78237799999988,
+          "state": "pass"
+        },
+        {
+          "name": "should set Twitter meta tags",
+          "duration": 27.57955600000014,
+          "state": "pass"
+        },
+        {
+          "name": "should set canonical link",
+          "duration": 25.52428000000009,
+          "state": "pass"
+        },
+        {
+          "name": "should set custom description when provided",
+          "duration": 24.066784000000098,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 267.9435930000004
+    },
+    "tests/components/common/WhatsAppButton.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 360.30453999999963,
+          "state": "pass"
+        },
+        {
+          "name": "should render button variant by default",
+          "duration": 15.697733999999855,
+          "state": "pass"
+        },
+        {
+          "name": "should render icon variant correctly",
+          "duration": 124.742659,
+          "state": "pass"
+        },
+        {
+          "name": "should render floating variant with fixed positioning",
+          "duration": 93.41588300000012,
+          "state": "pass"
+        },
+        {
+          "name": "should have correct WhatsApp URL",
+          "duration": 63.320784,
+          "state": "pass"
+        },
+        {
+          "name": "should encode custom message in URL",
+          "duration": 56.3691560000002,
+          "state": "pass"
+        },
+        {
+          "name": "should open in new tab",
+          "duration": 40.586964999999964,
+          "state": "pass"
+        },
+        {
+          "name": "should render WhatsApp icon",
+          "duration": 4.478082000000086,
+          "state": "pass"
+        },
+        {
+          "name": "should call trackWhatsAppClick on click",
+          "duration": 124.37024099999962,
+          "state": "pass"
+        },
+        {
+          "name": "should apply custom className",
+          "duration": 79.68177500000002,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 967.1679180000001
+    },
+    "tests/components/common/index.test.js": {
+      "passed": [
+        {
+          "name": "should export CurrencySelector",
+          "duration": 1.331307999999808,
+          "state": "pass"
+        },
+        {
+          "name": "should export ErrorBoundary",
+          "duration": 0.2808740000000398,
+          "state": "pass"
+        },
+        {
+          "name": "should export Loading",
+          "duration": 0.1370609999999033,
+          "state": "pass"
+        },
+        {
+          "name": "should export PhoneLink",
+          "duration": 0.15801199999987148,
+          "state": "pass"
+        },
+        {
+          "name": "should export SEO",
+          "duration": 0.10550699999976132,
+          "state": "pass"
+        },
+        {
+          "name": "should export WhatsAppButton",
+          "duration": 0.13539200000013807,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 3.9824649999995927
+    },
+    "tests/components/courses/CourseCard.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 283.3256449999999,
+          "state": "pass"
+        },
+        {
+          "name": "should display course name",
+          "duration": 49.52040599999964,
+          "state": "pass"
+        },
+        {
+          "name": "should display course tagline",
+          "duration": 59.46885800000018,
+          "state": "pass"
+        },
+        {
+          "name": "should display course description",
+          "duration": 46.40451200000007,
+          "state": "pass"
+        },
+        {
+          "name": "should display course duration",
+          "duration": 38.90567100000044,
+          "state": "pass"
+        },
+        {
+          "name": "should display minimum age",
+          "duration": 50.68687899999986,
+          "state": "pass"
+        },
+        {
+          "name": "should display included items",
+          "duration": 55.44303099999979,
+          "state": "pass"
+        },
+        {
+          "name": "should toggle curriculum visibility",
+          "duration": 585.6019200000001,
+          "state": "pass"
+        },
+        {
+          "name": "should call onBookClick when book button clicked",
+          "duration": 202.3785680000001,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1374.4109249999997
+    },
+    "tests/components/courses/CourseComparison.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 220.09629499999983,
+          "state": "pass"
+        },
+        {
+          "name": "should display table headers",
+          "duration": 61.45679500000006,
+          "state": "pass"
+        },
+        {
+          "name": "should display course rows",
+          "duration": 142.60968600000024,
+          "state": "pass"
+        },
+        {
+          "name": "should display course data in table format",
+          "duration": 331.7387719999997,
+          "state": "pass"
+        },
+        {
+          "name": "should have proper table structure",
+          "duration": 280.9812999999999,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1040.222761
+    },
+    "tests/components/courses/index.test.js": {
+      "passed": [
+        {
+          "name": "should export CourseCard",
+          "duration": 1.569046999999955,
+          "state": "pass"
+        },
+        {
+          "name": "should export CourseComparison",
+          "duration": 0.33993699999973614,
+          "state": "pass"
+        },
+        {
+          "name": "should export CoursesPage",
+          "duration": 0.14829699999972945,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 3.4880880000000616
+    },
+    "tests/components/dive-sites/DiveMap.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 64.8059659999999,
+          "state": "pass"
+        },
+        {
+          "name": "should render map container",
+          "duration": 25.052959999999985,
+          "state": "pass"
+        },
+        {
+          "name": "should accept selectedSite prop",
+          "duration": 12.155025000000023,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 105.86381299999994
+    },
+    "tests/components/dive-sites/DiveSiteCard.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 131.30724599999985,
+          "state": "pass"
+        },
+        {
+          "name": "should display site name",
+          "duration": 20.96765000000005,
+          "state": "pass"
+        },
+        {
+          "name": "should display site description",
+          "duration": 24.68646600000011,
+          "state": "pass"
+        },
+        {
+          "name": "should display depth information",
+          "duration": 22.97398099999964,
+          "state": "pass"
+        },
+        {
+          "name": "should display visibility",
+          "duration": 28.493971999999758,
+          "state": "pass"
+        },
+        {
+          "name": "should display best season",
+          "duration": 11.292289999999866,
+          "state": "pass"
+        },
+        {
+          "name": "should display all highlights",
+          "duration": 14.91382799999974,
+          "state": "pass"
+        },
+        {
+          "name": "should display all marine life",
+          "duration": 17.886925000000247,
+          "state": "pass"
+        },
+        {
+          "name": "should render site image",
+          "duration": 25.39024100000006,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 300.980137
+    },
+    "tests/components/dive-sites/index.test.js": {
+      "passed": [
+        {
+          "name": "should export DiveMap",
+          "duration": 1.175040000000081,
+          "state": "pass"
+        },
+        {
+          "name": "should export DiveSiteCard",
+          "duration": 0.3111060000001089,
+          "state": "pass"
+        },
+        {
+          "name": "should export DiveSitesPage",
+          "duration": 0.13241599999992104,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 2.806829999999991
+    },
+    "tests/components/gallery/FeaturedCarousel.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 106.14342299999998,
+          "state": "pass"
+        },
+        {
+          "name": "should display heading",
+          "duration": 35.900420999999824,
+          "state": "pass"
+        },
+        {
+          "name": "should render Swiper component",
+          "duration": 17.468618999999762,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 162.78077200000007
+    },
+    "tests/components/gallery/GalleryGrid.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 134.87677399999984,
+          "state": "pass"
+        },
+        {
+          "name": "should render all images",
+          "duration": 19.771183000000292,
+          "state": "pass"
+        },
+        {
+          "name": "should display image descriptions",
+          "duration": 20.235623000000032,
+          "state": "pass"
+        },
+        {
+          "name": "should display image categories",
+          "duration": 16.991531000000123,
+          "state": "pass"
+        },
+        {
+          "name": "should have grid layout classes",
+          "duration": 18.331363999999667,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 213.48505799999975
+    },
+    "tests/components/gallery/Lightbox.test.jsx": {
+      "passed": [
+        {
+          "name": "should not render when not open",
+          "duration": 108.10957600000029,
+          "state": "pass"
+        },
+        {
+          "name": "should render when open",
+          "duration": 179.02293500000042,
+          "state": "pass"
+        },
+        {
+          "name": "should display image details",
+          "duration": 81.38895200000024,
+          "state": "pass"
+        },
+        {
+          "name": "should call onClose when close button clicked",
+          "duration": 380.4586870000003,
+          "state": "pass"
+        },
+        {
+          "name": "should call onNavigate with prev when previous button clicked",
+          "duration": 140.35531899999978,
+          "state": "pass"
+        },
+        {
+          "name": "should call onNavigate with next when next button clicked",
+          "duration": 107.90170900000021,
+          "state": "pass"
+        },
+        {
+          "name": "should render image element",
+          "duration": 16.80117700000028,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1019.0251189999999
+    },
+    "tests/components/gallery/index.test.js": {
+      "passed": [
+        {
+          "name": "should export FeaturedCarousel",
+          "duration": 1.2865499999998065,
+          "state": "pass"
+        },
+        {
+          "name": "should export GalleryGrid",
+          "duration": 0.2816189999998642,
+          "state": "pass"
+        },
+        {
+          "name": "should export GalleryPage",
+          "duration": 0.13940699999966455,
+          "state": "pass"
+        },
+        {
+          "name": "should export Lightbox",
+          "duration": 0.22384299999976065,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 3.22629999999981
+    },
+    "tests/components/home/CTASection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 102.5782220000001,
+          "state": "pass"
+        },
+        {
+          "name": "should display main heading",
+          "duration": 14.149143999999978,
+          "state": "pass"
+        },
+        {
+          "name": "should display description",
+          "duration": 14.116169000000355,
+          "state": "pass"
+        },
+        {
+          "name": "should render Contact Us button",
+          "duration": 380.3113239999998,
+          "state": "pass"
+        },
+        {
+          "name": "should render Call Us link",
+          "duration": 246.32077400000026,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 760.6175829999997
+    },
+    "tests/components/home/FeaturesSection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 153.60654999999997,
+          "state": "pass"
+        },
+        {
+          "name": "should display main heading",
+          "duration": 25.216731999999865,
+          "state": "pass"
+        },
+        {
+          "name": "should display subtitle",
+          "duration": 19.6474189999999,
+          "state": "pass"
+        },
+        {
+          "name": "should display all features",
+          "duration": 30.05216500000006,
+          "state": "pass"
+        },
+        {
+          "name": "should display feature stats",
+          "duration": 45.223409000000174,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 280.6523870000001
+    },
+    "tests/components/home/HeroSection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 141.029184,
+          "state": "pass"
+        },
+        {
+          "name": "should display main heading",
+          "duration": 27.145430999999917,
+          "state": "pass"
+        },
+        {
+          "name": "should display subtitle",
+          "duration": 31.808097999999973,
+          "state": "pass"
+        },
+        {
+          "name": "should render Book Your Dive button",
+          "duration": 330.773404,
+          "state": "pass"
+        },
+        {
+          "name": "should render View Courses link",
+          "duration": 373.50129100000004,
+          "state": "pass"
+        },
+        {
+          "name": "should display scroll indicator",
+          "duration": 23.486152000000402,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 931.3143489999998
+    },
+    "tests/components/home/ServicesSection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 209.03558299999986,
+          "state": "pass"
+        },
+        {
+          "name": "should display main heading",
+          "duration": 46.87903000000006,
+          "state": "pass"
+        },
+        {
+          "name": "should display all service cards",
+          "duration": 33.89356299999963,
+          "state": "pass"
+        },
+        {
+          "name": "should render service links",
+          "duration": 622.6398170000002,
+          "state": "pass"
+        },
+        {
+          "name": "should display service descriptions",
+          "duration": 33.779787999999826,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 952.0197659999999
+    },
+    "tests/components/home/TestimonialsSection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 228.5744840000002,
+          "state": "pass"
+        },
+        {
+          "name": "should display main heading",
+          "duration": 52.38500500000009,
+          "state": "pass"
+        },
+        {
+          "name": "should display all testimonials",
+          "duration": 44.202358000000004,
+          "state": "pass"
+        },
+        {
+          "name": "should display testimonial locations",
+          "duration": 66.17453100000012,
+          "state": "pass"
+        },
+        {
+          "name": "should display testimonial text",
+          "duration": 41.25537799999984,
+          "state": "pass"
+        },
+        {
+          "name": "should render star ratings",
+          "duration": 28.518485000000055,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 463.83170100000007
+    },
+    "tests/components/home/index.test.js": {
+      "passed": [
+        {
+          "name": "should export CTASection",
+          "duration": 1.095860000000357,
+          "state": "pass"
+        },
+        {
+          "name": "should export FeaturesSection",
+          "duration": 0.302368000000115,
+          "state": "pass"
+        },
+        {
+          "name": "should export HeroSection",
+          "duration": 0.1380010000002585,
+          "state": "pass"
+        },
+        {
+          "name": "should export HomePage",
+          "duration": 0.14880499999981112,
+          "state": "pass"
+        },
+        {
+          "name": "should export ServicesSection",
+          "duration": 0.0915660000000571,
+          "state": "pass"
+        },
+        {
+          "name": "should export TestimonialsSection",
+          "duration": 0.10257899999987785,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 3.1614300000001094
+    },
+    "tests/components/modals/BookingModal.test.jsx": {
+      "passed": [
+        {
+          "name": "should render when open",
+          "duration": 545.9485299999997,
+          "state": "pass"
+        },
+        {
+          "name": "should not render when closed",
+          "duration": 12.851165000000037,
+          "state": "pass"
+        },
+        {
+          "name": "should display booking type options",
+          "duration": 263.97238300000026,
+          "state": "pass"
+        },
+        {
+          "name": "should accept preSelectedItem prop",
+          "duration": 230.5315129999999,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1059.659087
+    },
+    "tests/components/modals/ContactModal.test.jsx": {
+      "passed": [
+        {
+          "name": "should render when open",
+          "duration": 352.7469200000005,
+          "state": "pass"
+        },
+        {
+          "name": "should not render when closed",
+          "duration": 8.548459999999977,
+          "state": "pass"
+        },
+        {
+          "name": "should display form fields",
+          "duration": 193.34354199999962,
+          "state": "pass"
+        },
+        {
+          "name": "should have submit button",
+          "duration": 856.3199759999998,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 1413.875234
+    },
+    "tests/components/shared/BackToTop.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 55.14348799999971,
+          "state": "pass"
+        },
+        {
+          "name": "should not be visible initially",
+          "duration": 14.175416999999925,
+          "state": "pass"
+        },
+        {
+          "name": "should accept showAfter prop",
+          "duration": 7.006178000000091,
+          "state": "pass"
+        },
+        {
+          "name": "should accept position prop",
+          "duration": 4.42536599999994,
+          "state": "pass"
+        },
+        {
+          "name": "should call scrollTo when button clicked",
+          "duration": 12.171914999999899,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 96.6754719999999
+    },
+    "tests/components/shared/ScrollProgress.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 87.83936099999983,
+          "state": "pass"
+        },
+        {
+          "name": "should render progress bar element",
+          "duration": 23.311409999999796,
+          "state": "pass"
+        },
+        {
+          "name": "should have correct styling classes",
+          "duration": 13.607355000000098,
+          "state": "pass"
+        },
+        {
+          "name": "should render inner progress indicator",
+          "duration": 14.810031999999865,
+          "state": "pass"
+        }
+      ],
+      "failed": [],
+      "totalDuration": 142.22935800000005
+    }
+  }
+}
