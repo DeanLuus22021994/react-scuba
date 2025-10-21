@@ -2,30 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+/* Import all custom styles */
+@import './styles/index.css';
 
-  body {
-    @apply text-gray-900 bg-white;
-  }
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply text-gray-900 bg-white;
+    }
 }
 
 @layer components {
-  .btn-primary {
-    @apply px-6 py-3 bg-ocean-500 text-white font-semibold rounded-lg shadow-md hover:bg-ocean-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-400 focus:ring-offset-2;
-  }
+    .btn-primary {
+        @apply px-6 py-3 bg-ocean-500 text-white font-semibold rounded-lg shadow-md hover:bg-ocean-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-400 focus:ring-offset-2;
+    }
 
-  .btn-secondary {
-    @apply px-6 py-3 bg-white text-ocean-600 font-semibold rounded-lg shadow-md border-2 border-ocean-500 hover:bg-ocean-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-400 focus:ring-offset-2;
-  }
+    .btn-secondary {
+        @apply px-6 py-3 bg-white text-ocean-600 font-semibold rounded-lg shadow-md border-2 border-ocean-500 hover:bg-ocean-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ocean-400 focus:ring-offset-2;
+    }
 
-  .section-padding {
-    @apply py-16 md:py-24;
-  }
+    .section-padding {
+        @apply py-16 md:py-24;
+    }
 
-  .container-custom {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8;
-  }
+    .container-custom {
+        @apply container mx-auto px-4 sm:px-6 lg:px-8;
+    }
 }

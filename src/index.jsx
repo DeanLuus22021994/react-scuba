@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import { ErrorBoundary } from './components/common';
 import './index.css';
-import { reportWebVitalsToGA4 } from './reportWebVitals';
 import { initializeGA4, initializeGTM } from './utils/analytics';
 import { validateEnvVars } from './utils/env';
+import { reportWebVitalsToGA4 } from './utils/reportWebVitals';
 
 // Validate environment variables
 validateEnvVars();
@@ -16,11 +16,11 @@ initializeGA4();
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  </React.StrictMode>
+    <React.StrictMode>
+        <ErrorBoundary>
+            <App />
+        </ErrorBoundary>
+    </React.StrictMode>
 );
 
 // Send web vitals to GA4
