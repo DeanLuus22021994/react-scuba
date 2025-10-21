@@ -53,7 +53,6 @@
     "check:all": "npm run lint:all && npm run format:all:check",
     "fix": "npm run lint:fix && npm run format",
     "precommit": "npm run check && npm test -- --run",
-    "consolidate:css": "node scripts/consolidate-css.js",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",

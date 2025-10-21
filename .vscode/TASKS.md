@@ -12,10 +12,6 @@ This workspace includes several pre-configured VS Code tasks to streamline your 
 - **Prettier Check** - Check code formatting with Prettier
 - **Prettier Fix** - Format code with Prettier
 
-### CSS Management
-
-- **Consolidate CSS** - Run CSS consolidation tool to merge CSS files
-
 ### Build & Test
 
 - **Build Project** ⌨️ `Ctrl+Shift+B` - Build production bundle with Vite (default build task)
@@ -42,19 +38,6 @@ This workspace includes several pre-configured VS Code tasks to streamline your 
 2. Select the desired task
 
 ## 💡 Task Details
-
-### Consolidate CSS
-Runs the CSS consolidation script that merges multiple CSS files into a single file with proper Tailwind v4 structure.
-
-**When to use:**
-- After editing CSS files in `src/styles/`
-- Before committing CSS changes
-- To fix PostCSS @import warnings
-
-**Equivalent CLI:**
-```bash
-npm run consolidate:css
-```
 
 ### Run All Linters
 Executes both ESLint and Prettier checks to ensure code quality and formatting standards.
@@ -92,7 +75,7 @@ Each task has a color-coded icon for easy identification:
 - 💜 Magenta - Prettier
 - 🟡 Yellow - Linters/Tests
 - 🟢 Green - Build/Fix
-- 🔴 Cyan - CSS/Coverage
+- 🔴 Cyan - Coverage
 
 ## ⚙️ Customization
 
@@ -105,7 +88,6 @@ To add or modify tasks:
 
 | Task | NPM Script |
 |------|------------|
-| Consolidate CSS | `npm run consolidate:css` |
 | ESLint Check | `npm run lint` |
 | ESLint Fix | `npm run lint:fix` |
 | ESLint All Files | `npm run lint:all` |
