@@ -1,26 +1,14 @@
 {
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "app",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "build": {
+        "dockerfile": "dockerfile"
+    },
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            "version": "latest",
-            "moby": true,
-            "mobyBuildxVersion": "latest",
-            "dockerDashComposeVersion": "v2",
-            "azureDnsAutoDetection": true,
-            "dockerDefaultAddressPool": "-",
-            "installDockerBuildx": true,
-            "installDockerComposeSwitch": true,
-            "disableIp6tables": false
-        },
         "ghcr.io/devcontainers-extra/features/actions-runner:1": {}
     },
     "hostRequirements": {
         "cpus": 4,
         "memory": "4gb",
-        "storage": "8gb",
-        "gpu": "optional"
+        "storage": "8gb"
     },
     "waitFor": "onCreateCommand",
     "updateContentCommand": "npm install --legacy-peer-deps",
@@ -81,18 +69,6 @@
             }
         }
     },
-    "portsAttributes": {
-        "3001": {
-            "label": "Application",
-            "onAutoForward": "openPreview"
-        },
-        "3306": {
-            "label": "MariaDB",
-            "onAutoForward": "silent"
-        }
-    },
-    "forwardPorts": [
-        3001,
-        3306
-    ]
+    "portsAttributes": {},
+    "forwardPorts": []
 }

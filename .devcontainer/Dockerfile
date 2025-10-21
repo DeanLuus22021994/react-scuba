@@ -1,11 +1,18 @@
-FROM node:22-slim
+FROM mariadb:latest
+
+# Install Node.js
+RUN apt-get update && apt-get install -y \
+  curl \
+  gnupg \
+  && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+  && apt-get install -y nodejs \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install essential tools and utilities
 RUN apt-get update && apt-get install -y \
   # Basic shell and utilities
   bash \
   sudo \
-  curl \
   wget \
   git \
   # Build tools
@@ -17,7 +24,6 @@ RUN apt-get update && apt-get install -y \
   vim \
   # Package management and certificates
   ca-certificates \
-  gnupg \
   lsb-release \
   # Networking tools
   net-tools \
@@ -26,15 +32,19 @@ RUN apt-get update && apt-get install -y \
   # Development tools
   jq \
   unzip \
+  supervisor \
   && rm -rf /var/lib/apt/lists/*
 
-# Install GitHub CLI
-RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-  && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-  && apt-get update \
-  && apt-get install -y gh \
-  && rm -rf /var/lib/apt/lists/*
+# Copy MariaDB configuration
+COPY my.cnf /etc/mysql/my.cnf
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Create supervisord configuration
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Expose MariaDB port
+EXPOSE 3306
 
 # Create a non-root user with sudo access
 RUN useradd -m -s /bin/bash vscode \
@@ -51,3 +61,9 @@ USER vscode
 
 # Ensure the user has access to the workspace directory
 RUN mkdir -p /workspaces
+
+# Switch back to root for running supervisord
+USER root
+
+# Set the default command
+CMD ["/usr/bin/supervisord"]
