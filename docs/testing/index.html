@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results - 10/21/2025</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .timestamp { opacity: 0.9; font-size: 0.9em; }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+        .card.success { border-left: 4px solid #10b981; }
+        .card.warning { border-left: 4px solid #f59e0b; }
+        .card.error { border-left: 4px solid #ef4444; }
+
+        .card-icon { font-size: 3em; margin-right: 20px; }
+        .card-value { font-size: 2.5em; font-weight: bold; color: #667eea; }
+        .card-label { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .card-detail { font-size: 0.85em; color: #999; margin-top: 5px; }
+
+        .tabs { background: white; }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            padding: 0 30px;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-button:hover { color: #667eea; background: rgba(102, 126, 234, 0.1); }
+        .tab-button.active { color: #667eea; border-bottom-color: #667eea; font-weight: bold; }
+
+        .tab-content { padding: 30px; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.3s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .charts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .chart-container h3 { margin-bottom: 20px; color: #667eea; }
+
+        .metric-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value { font-size: 2.5em; font-weight: bold; }
+        .metric-label { font-size: 0.9em; opacity: 0.9; margin-top: 5px; }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #667eea;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .data-table tr:hover { background: #f8f9fa; }
+        .data-table tr.failed { background: #fef2f2; }
+
+        .truncate {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .success-text { color: #10b981; font-weight: 600; }
+        .error-text { color: #ef4444; font-weight: 600; }
+
+        .progress-bar {
+            position: relative;
+            height: 24px;
+            background: #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .charts, .two-columns {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 { font-size: 1.8em; }
+            .card-icon { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 Test Results Dashboard</h1>
+            <p class="timestamp">Generated: 10/21/2025, 2:07:45 PM</p>
+        </header>
+
+        
+        <div class="summary-cards">
+            <div class="card success">
+                <div class="card-icon">✅</div>
+                <div class="card-content">
+                    <div class="card-value">100.0%</div>
+                    <div class="card-label">Pass Rate</div>
+                    <div class="card-detail">314/314 tests</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📁</div>
+                <div class="card-content">
+                    <div class="card-value">62</div>
+                    <div class="card-label">Test Files</div>
+                    <div class="card-detail">100.0% passing</div>
+                </div>
+            </div>
+
+            <div class="card success">
+                <div class="card-icon">🎉</div>
+                <div class="card-content">
+                    <div class="card-value">0</div>
+                    <div class="card-label">Failures</div>
+                    <div class="card-detail">0 files affected</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="overview">📊 Overview</button>
+                <button class="tab-button" data-tab="performance">⚡ Performance</button>
+                <button class="tab-button" data-tab="categories">📁 Categories</button>
+                <button class="tab-button" data-tab="files">📄 Files</button>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-panel active" id="overview">
+                    
+        <div class="charts">
+            <div class="chart-container">
+                <h3>Test Results Distribution</h3>
+                <canvas id="resultsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Performance Distribution</h3>
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+                </div>
+                <div class="tab-panel" id="performance">
+                    
+        <div class="performance-section">
+            <div class="metric-cards">
+                <div class="metric-card">
+                    <div class="metric-value">39.13s</div>
+                    <div class="metric-label">Total Duration</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">124.62ms</div>
+                    <div class="metric-label">Avg Test Duration</div>
+                </div>
+            </div>
+
+            <div class="two-columns">
+                <div>
+                    <h3>🐌 Slowest Tests</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th>File</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">DiveSitesPage.test.jsx</td>
+                                    <td>2227ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">CoursesPage.test.jsx</td>
+                                    <td>2114ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">GalleryPage.test.jsx</td>
+                                    <td>2083ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">AboutPage.test.jsx</td>
+                                    <td>1694ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render hero section with heading</td>
+                                    <td class="truncate">HomePage.test.jsx</td>
+                                    <td>1398ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render without crashing</td>
+                                    <td class="truncate">GalleryPage.test.jsx</td>
+                                    <td>1376ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render without crashing</td>
+                                    <td class="truncate">DiveSitesPage.test.jsx</td>
+                                    <td>1131ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render service links</td>
+                                    <td class="truncate">ServicesSection.test.jsx</td>
+                                    <td>881ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render footer links</td>
+                                    <td class="truncate">Footer.test.jsx</td>
+                                    <td>873ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should have submit button</td>
+                                    <td class="truncate">ContactModal.test.jsx</td>
+                                    <td>864ms</td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h3>📁 Slowest Files</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>File</th>
+                                <th>Tests</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    <td class="truncate">GalleryPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>4424ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">DiveSitesPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>3943ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">CoursesPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>3064ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">all-pages.test.jsx</td>
+                                    <td>5</td>
+                                    <td>2344ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">AboutPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>2257ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">HomePage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>2157ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">CourseCard.test.jsx</td>
+                                    <td>9</td>
+                                    <td>1770ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">CurrencySelector.test.jsx</td>
+                                    <td>6</td>
+                                    <td>1466ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">ContactModal.test.jsx</td>
+                                    <td>4</td>
+                                    <td>1343ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">CourseComparison.test.jsx</td>
+                                    <td>5</td>
+                                    <td>1237ms</td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+                </div>
+                <div class="tab-panel" id="categories">
+                    
+        <div class="categories-section">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Files</th>
+                        <th>Tests</th>
+                        <th>Pass Rate</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        <tr>
+                            <td><strong>about</strong></td>
+                            <td>3</td>
+                            <td>17</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>654ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>common</strong></td>
+                            <td>7</td>
+                            <td>52</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>4862ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>courses</strong></td>
+                            <td>3</td>
+                            <td>17</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>3011ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>data</strong></td>
+                            <td>6</td>
+                            <td>27</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>67ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>dive-sites</strong></td>
+                            <td>3</td>
+                            <td>15</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>494ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>gallery</strong></td>
+                            <td>4</td>
+                            <td>19</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>1282ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>home</strong></td>
+                            <td>6</td>
+                            <td>33</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>3237ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>hooks</strong></td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>389ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>layouts</strong></td>
+                            <td>4</td>
+                            <td>14</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>3020ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>modals</strong></td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>2531ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>pages</strong></td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>2344ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>services</strong></td>
+                            <td>2</td>
+                            <td>9</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>20ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>shared</strong></td>
+                            <td>2</td>
+                            <td>9</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>313ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>src</strong></td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>27ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>tests</strong></td>
+                            <td>7</td>
+                            <td>29</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>16959ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>utils</strong></td>
+                            <td>8</td>
+                            <td>47</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>167ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+                </div>
+                <div class="tab-panel" id="files">
+                    
+        <div class="files-section">
+            <div class="search-box">
+                <input type="text" id="fileSearch" placeholder="🔍 Search files..." />
+            </div>
+            <table class="data-table" id="filesTable">
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Tests</th>
+                        <th>Passed</th>
+                        <th>Failed</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/AboutPage.test.jsx">tests/AboutPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>2257ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/App.test.jsx">tests/App.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>1091ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/about/AboutIndex.test.js">tests/components/about/AboutIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>5ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/about/CredentialCard.test.jsx">tests/components/about/CredentialCard.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>299ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/about/TeamMember.test.jsx">tests/components/about/TeamMember.test.jsx</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>351ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/common/CommonIndex.test.js">tests/components/common/CommonIndex.test.js</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>18ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/common/CurrencySelector.test.jsx">tests/components/common/CurrencySelector.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>1466ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/common/ErrorBoundary.test.jsx">tests/components/common/ErrorBoundary.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>905ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/common/Loading.test.jsx">tests/components/common/Loading.test.jsx</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>186ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/common/PhoneLink.test.jsx">tests/components/common/PhoneLink.test.jsx</td>
+                            <td>8</td>
+                            <td class="success-text">8</td>
+                            <td class="error-text">0</td>
+                            <td>835ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/common/SEO.test.jsx">tests/components/common/SEO.test.jsx</td>
+                            <td>8</td>
+                            <td class="success-text">8</td>
+                            <td class="error-text">0</td>
+                            <td>372ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/common/WhatsAppButton.test.jsx">tests/components/common/WhatsAppButton.test.jsx</td>
+                            <td>10</td>
+                            <td class="success-text">10</td>
+                            <td class="error-text">0</td>
+                            <td>1079ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/courses/CourseCard.test.jsx">tests/components/courses/CourseCard.test.jsx</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>1770ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/courses/CourseComparison.test.jsx">tests/components/courses/CourseComparison.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>1237ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/courses/CoursesIndex.test.js">tests/components/courses/CoursesIndex.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>5ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/dive-sites/DiveMap.test.jsx">tests/components/dive-sites/DiveMap.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>121ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/dive-sites/DiveSiteCard.test.jsx">tests/components/dive-sites/DiveSiteCard.test.jsx</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>367ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/dive-sites/DiveSiteIndex.test.js">tests/components/dive-sites/DiveSiteIndex.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>6ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/gallery/FeaturedCarousel.test.jsx">tests/components/gallery/FeaturedCarousel.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>203ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/gallery/GalleryGrid.test.jsx">tests/components/gallery/GalleryGrid.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>296ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/gallery/GalleryIndex.test.js">tests/components/gallery/GalleryIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>3ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/gallery/Lightbox.test.jsx">tests/components/gallery/Lightbox.test.jsx</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>779ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/home/CTASection.test.jsx">tests/components/home/CTASection.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>669ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/home/FeaturesSection.test.jsx">tests/components/home/FeaturesSection.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>277ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/home/HeroSection.test.jsx">tests/components/home/HeroSection.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>602ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/home/HomeIndex.test.js">tests/components/home/HomeIndex.test.js</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>6ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/home/ServicesSection.test.jsx">tests/components/home/ServicesSection.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>1214ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/home/TestimonialsSection.test.jsx">tests/components/home/TestimonialsSection.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>470ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/modals/BookingModal.test.jsx">tests/components/modals/BookingModal.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1188ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/modals/ContactModal.test.jsx">tests/components/modals/ContactModal.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1343ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/shared/BackToTop.test.jsx">tests/components/shared/BackToTop.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>130ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/components/shared/ScrollProgress.test.jsx">tests/components/shared/ScrollProgress.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>183ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/CoursesPage.test.jsx">tests/CoursesPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>3064ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/data/bookingTypes.test.js">tests/data/bookingTypes.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>11ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/data/courses.test.js">tests/data/courses.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>10ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/data/credentials.test.js">tests/data/credentials.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>6ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/data/diveSites.test.js">tests/data/diveSites.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>18ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/data/gallery.test.js">tests/data/gallery.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>11ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/data/team.test.js">tests/data/team.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>11ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/DiveSitesPage.test.jsx">tests/DiveSitesPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>3943ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/GalleryPage.test.jsx">tests/GalleryPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>4424ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/HomePage.test.jsx">tests/HomePage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>2157ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/hooks/HooksIndex.test.js">tests/hooks/HooksIndex.test.js</td>
+                            <td>2</td>
+                            <td class="success-text">2</td>
+                            <td class="error-text">0</td>
+                            <td>7ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/hooks/useCurrency.test.jsx">tests/hooks/useCurrency.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>382ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/layouts/Footer.test.jsx">tests/layouts/Footer.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1188ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/layouts/Header.test.jsx">tests/layouts/Header.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>707ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/layouts/MainLayout.test.jsx">tests/layouts/MainLayout.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>544ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/layouts/Navigation.test.jsx">tests/layouts/Navigation.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>580ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/link-checker.test.js">tests/link-checker.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>22ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/pages/all-pages.test.jsx">tests/pages/all-pages.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>2344ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/services/api.test.js">tests/services/api.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>13ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/services/ServicesIndex.test.js">tests/services/ServicesIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>6ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/src/SrcIndex.css.test.js">tests/src/SrcIndex.css.test.js</td>
+                            <td>2</td>
+                            <td class="success-text">2</td>
+                            <td class="error-text">0</td>
+                            <td>7ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/src/SrcIndex.test.jsx">tests/src/SrcIndex.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>19ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/analytics.test.js">tests/utils/analytics.test.js</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>15ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/currency.test.js">tests/utils/currency.test.js</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>62ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/env.test.js">tests/utils/env.test.js</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>15ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/logger.test.js">tests/utils/logger.test.js</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>13ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/reportWebVitals.test.js">tests/utils/reportWebVitals.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>9ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/scrollToAnchor.test.js">tests/utils/scrollToAnchor.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>35ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/seo.test.js">tests/utils/seo.test.js</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>11ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="tests/utils/UtilsIndex.test.js">tests/utils/UtilsIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>7ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const testData = {"summary":{"totalFiles":62,"passedFiles":62,"failedFiles":0,"totalTests":314,"passedTests":314,"failedTests":0,"files":{}},"performance":{"metrics":{"totalDuration":39129.71459699994,"avgDuration":124.61692546815267,"testCount":314},"slowestTests":[{"name":"should render page heading","duration":2227.346033,"state":"pass","errors":[],"fileName":"tests/DiveSitesPage.test.jsx"},{"name":"should render page heading","duration":2113.7939079999996,"state":"pass","errors":[],"fileName":"tests/CoursesPage.test.jsx"},{"name":"should render page heading","duration":2082.843984000001,"state":"pass","errors":[],"fileName":"tests/GalleryPage.test.jsx"},{"name":"should render page heading","duration":1694.2140059999992,"state":"pass","errors":[],"fileName":"tests/AboutPage.test.jsx"},{"name":"should render hero section with heading","duration":1398.4777530000001,"state":"pass","errors":[],"fileName":"tests/HomePage.test.jsx"},{"name":"should render without crashing","duration":1376.0278909999997,"state":"pass","errors":[],"fileName":"tests/GalleryPage.test.jsx"},{"name":"should render without crashing","duration":1131.050255,"state":"pass","errors":[],"fileName":"tests/DiveSitesPage.test.jsx"},{"name":"should render service links","duration":881.2200339999999,"state":"pass","errors":[],"fileName":"tests/components/home/ServicesSection.test.jsx"},{"name":"should render footer links","duration":872.5227160000004,"state":"pass","errors":[],"fileName":"tests/layouts/Footer.test.jsx"},{"name":"should have submit button","duration":864.3473670000003,"state":"pass","errors":[],"fileName":"tests/components/modals/ContactModal.test.jsx"}],"slowestFiles":[{"fileName":"tests/GalleryPage.test.jsx","duration":4423.9350890000005,"testCount":4},{"fileName":"tests/DiveSitesPage.test.jsx","duration":3943.4858270000004,"testCount":4},{"fileName":"tests/CoursesPage.test.jsx","duration":3064.2016220000005,"testCount":4},{"fileName":"tests/pages/all-pages.test.jsx","duration":2344.108865000001,"testCount":5},{"fileName":"tests/AboutPage.test.jsx","duration":2256.823454999999,"testCount":4},{"fileName":"tests/HomePage.test.jsx","duration":2157.478352,"testCount":4},{"fileName":"tests/components/courses/CourseCard.test.jsx","duration":1769.6780710000003,"testCount":9},{"fileName":"tests/components/common/CurrencySelector.test.jsx","duration":1466.086777,"testCount":6},{"fileName":"tests/components/modals/ContactModal.test.jsx","duration":1343.1359810000004,"testCount":4},{"fileName":"tests/components/courses/CourseComparison.test.jsx","duration":1236.568785,"testCount":5}],"distribution":[{"label":"< 10ms","min":0,"max":10,"count":121},{"label":"10-50ms","min":10,"max":50,"count":79},{"label":"50-100ms","min":50,"max":100,"count":34},{"label":"100-500ms","min":100,"max":500,"count":63},{"label":"> 500ms","min":500,"max":null,"count":17}]},"categories":[{"category":"about","fileCount":3,"totalTests":17,"passedTests":17,"failedTests":0,"totalDuration":654.044437,"passRate":100},{"category":"common","fileCount":7,"totalTests":52,"passedTests":52,"failedTests":0,"totalDuration":4861.5877789999995,"passRate":100},{"category":"courses","fileCount":3,"totalTests":17,"passedTests":17,"failedTests":0,"totalDuration":3010.817557,"passRate":100},{"category":"data","fileCount":6,"totalTests":27,"passedTests":27,"failedTests":0,"totalDuration":66.73874000000046,"passRate":100},{"category":"dive-sites","fileCount":3,"totalTests":15,"passedTests":15,"failedTests":0,"totalDuration":493.81261700000005,"passRate":100},{"category":"gallery","fileCount":4,"totalTests":19,"passedTests":19,"failedTests":0,"totalDuration":1281.6969910000007,"passRate":100},{"category":"home","fileCount":6,"totalTests":33,"passedTests":33,"failedTests":0,"totalDuration":3237.194963000001,"passRate":100},{"category":"hooks","fileCount":2,"totalTests":8,"passedTests":8,"failedTests":0,"totalDuration":389.04598399999986,"passRate":100},{"category":"layouts","fileCount":4,"totalTests":14,"passedTests":14,"failedTests":0,"totalDuration":3019.817408,"passRate":100},{"category":"modals","fileCount":2,"totalTests":8,"passedTests":8,"failedTests":0,"totalDuration":2531.05159,"passRate":100},{"category":"pages","fileCount":1,"totalTests":5,"passedTests":5,"failedTests":0,"totalDuration":2344.108865000001,"passRate":100},{"category":"services","fileCount":2,"totalTests":9,"passedTests":9,"failedTests":0,"totalDuration":19.832919999999376,"passRate":100},{"category":"shared","fileCount":2,"totalTests":9,"passedTests":9,"failedTests":0,"totalDuration":312.7431569999999,"passRate":100},{"category":"src","fileCount":2,"totalTests":5,"passedTests":5,"failedTests":0,"totalDuration":26.55271400000015,"passRate":100},{"category":"tests","fileCount":7,"totalTests":29,"passedTests":29,"failedTests":0,"totalDuration":16959.449886,"passRate":100},{"category":"utils","fileCount":8,"totalTests":47,"passedTests":47,"failedTests":0,"totalDuration":167.41363599999977,"passRate":100}],"runTime":"2025-10-21T14:07:45.298Z"};
+
+        // Tab switching
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tab = button.dataset.tab;
+
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(tab).classList.add('active');
+            });
+        });
+
+        // File search
+        const searchInput = document.getElementById('fileSearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const rows = document.querySelectorAll('#filesTable tbody tr');
+
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(query) ? '' : 'none';
+                });
+            });
+        }
+
+        // Charts using Chart.js (CDN loaded)
+        function loadCharts() {
+            if (typeof Chart === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+                script.onload = initCharts;
+                document.head.appendChild(script);
+            } else {
+                initCharts();
+            }
+        }
+
+        function initCharts() {
+            // Results distribution chart
+            const resultsCtx = document.getElementById('resultsChart');
+            if (resultsCtx) {
+                new Chart(resultsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Passed', 'Failed'],
+                        datasets: [{
+                            data: [testData.summary.passedTests, testData.summary.failedTests],
+                            backgroundColor: ['#10b981', '#ef4444'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        }
+                    }
+                });
+            }
+
+            // Performance distribution chart
+            const perfCtx = document.getElementById('performanceChart');
+            if (perfCtx && testData.performance.distribution) {
+                new Chart(perfCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: testData.performance.distribution.map(d => d.label),
+                        datasets: [{
+                            label: 'Test Count',
+                            data: testData.performance.distribution.map(d => d.count),
+                            backgroundColor: '#667eea',
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize
+        loadCharts();
+    </script>
+</body>
+</html>

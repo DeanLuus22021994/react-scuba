@@ -95,7 +95,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/setupTests.js',
     css: true,
-    reporters: ['default', './vitest.reporter.js'],
+    reporters: ['default', './tests/report/vitest.reporter.js'],
   },
   // Server configuration
   server: {

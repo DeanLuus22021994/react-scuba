@@ -38,5 +38,9 @@
     "css.validate": true,
     // Copilot settings
     "chat.tools.global.autoApprove": true,
-    "editor.experimentalGpuAcceleration": "on"
+    "editor.experimentalGpuAcceleration": "on",
+    // File associations
+    "files.associations": {
+        ".husky/*": "shellscript"
+    }
 }
