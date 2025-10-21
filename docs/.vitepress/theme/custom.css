@@ -1,44 +1,73 @@
 /**
  * Custom VitePress Theme Styles
  * Enhances visual appearance of React Scuba documentation
+ * Modern CSS with custom properties and container queries
  */
 
 /* ===== Color Variables ===== */
 :root {
+    /* Brand Colors */
     --vp-c-brand: #0ea5e9;
     --vp-c-brand-light: #38bdf8;
     --vp-c-brand-lighter: #7dd3fc;
     --vp-c-brand-dark: #0284c7;
     --vp-c-brand-darker: #0369a1;
 
+    /* Semantic Colors */
     --vp-c-green: #10b981;
     --vp-c-green-light: #34d399;
     --vp-c-yellow: #f59e0b;
     --vp-c-red: #ef4444;
     --vp-c-purple: #8b5cf6;
 
+    /* Modern Gradients */
     --gradient-brand: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
     --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
     --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+
+    /* Animation Variables */
+    --transition-fast: 0.15s;
+    --transition-normal: 0.3s;
+    --transition-slow: 0.5s;
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.6, 1);
+
+    /* Spacing Scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
 }
 
 /* ===== Enhanced Feature Cards ===== */
 .vp-feature {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--transition-normal) var(--ease-default);
     border: 1px solid var(--vp-c-divider);
     background: var(--vp-c-bg-soft);
+    border-radius: var(--radius-lg);
 }
 
 .vp-feature:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px -8px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 12px 24px -8px rgb(14 165 233 / 0.3);
     border-color: var(--vp-c-brand);
 }
 
 .vp-feature .icon {
     font-size: 2.5rem;
-    margin-bottom: 0.75rem;
+    margin-block-end: var(--space-md);
     display: block;
 }
 
@@ -46,34 +75,34 @@
 .feature-card {
     background: var(--vp-c-bg-soft);
     border: 1px solid var(--vp-c-divider);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    margin-block: var(--space-md);
+    transition: all var(--transition-normal) var(--ease-out);
 }
 
 .feature-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px -4px rgb(0 0 0 / 0.1);
     border-color: var(--vp-c-brand-light);
 }
 
 .feature-card h3 {
     color: var(--vp-c-brand);
-    margin-top: 0;
+    margin-block-start: 0;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
 }
 
 /* ===== Badge Styles ===== */
 .badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-xl);
     font-size: 0.85rem;
     font-weight: 600;
-    margin: 0.25rem;
+    margin: var(--space-xs);
 }
 
 .badge-success {
@@ -105,10 +134,10 @@
 /* ===== Enhanced Tables ===== */
 .vp-doc table {
     display: table;
-    width: 100%;
+    inline-size: 100%;
     border-collapse: collapse;
-    margin: 1.5rem 0;
-    border-radius: 8px;
+    margin-block: var(--space-lg);
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 
@@ -121,11 +150,11 @@
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.025em;
 }
 
 .vp-doc tbody tr {
-    transition: background-color 0.2s ease;
+    transition: background-color var(--transition-fast) var(--ease-out);
 }
 
 .vp-doc tbody tr:hover {
@@ -138,9 +167,9 @@
 
 /* ===== Code Block Enhancements ===== */
 .vp-doc div[class*='language-'] {
-    border-radius: 8px;
-    margin: 1.5rem 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-md);
+    margin-block: var(--space-lg);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
 .vp-doc div[class*='language-']:before {
@@ -150,10 +179,10 @@
 
 /* ===== Custom Containers ===== */
 .custom-block {
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    margin: 1.5rem 0;
-    border-left: 4px solid;
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    margin-block: var(--space-lg);
+    border-inline-start: 4px solid;
 }
 
 .custom-block.tip {
@@ -178,16 +207,16 @@
 
 .custom-block-title {
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-block-end: var(--space-sm);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
 }
 
 /* ===== Enhanced Lists ===== */
 .vp-doc ul li,
 .vp-doc ol li {
-    margin: 0.5rem 0;
+    margin-block: var(--space-sm);
 }
 
 .vp-doc ul li::marker {
@@ -207,16 +236,16 @@
 .platform-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
+    gap: var(--space-lg);
+    margin-block: var(--space-xl);
 }
 
 .platform-card {
     background: var(--vp-c-bg-soft);
     border: 2px solid var(--vp-c-divider);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    transition: all var(--transition-normal) var(--ease-out);
     position: relative;
     overflow: hidden;
 }
@@ -224,13 +253,12 @@
 .platform-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
+    inset-block-start: 0;
+    inset-inline: 0;
+    block-size: 4px;
     background: var(--gradient-brand);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-normal) var(--ease-out);
 }
 
 .platform-card:hover::before {
@@ -239,7 +267,7 @@
 
 .platform-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px -8px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 12px 24px -8px rgb(14 165 233 / 0.3);
     border-color: var(--vp-c-brand);
 }
 
@@ -301,29 +329,30 @@
 .quick-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
+    gap: var(--space-md);
+    margin-block: var(--space-xl);
 }
 
 .quick-link {
     background: var(--vp-c-bg-soft);
     border: 1px solid var(--vp-c-divider);
-    border-radius: 8px;
-    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal) var(--ease-out);
     display: block;
 }
 
 .quick-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px -4px rgba(14, 165, 233, 0.2);
+    box-shadow: 0 8px 16px -4px rgb(14 165 233 / 0.2);
     border-color: var(--vp-c-brand);
 }
 
 .quick-link h4 {
     color: var(--vp-c-brand);
-    margin: 0 0 0.5rem 0;
+    margin-block: 0;
+    margin-block-end: var(--space-sm);
 }
 
 .quick-link p {
@@ -335,19 +364,19 @@
 /* ===== Metrics Display ===== */
 .metrics {
     display: flex;
-    gap: 1.5rem;
+    gap: var(--space-lg);
     flex-wrap: wrap;
-    margin: 1.5rem 0;
+    margin-block: var(--space-lg);
 }
 
 .metric {
     background: var(--vp-c-bg-soft);
     border: 1px solid var(--vp-c-divider);
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
     text-align: center;
     flex: 1;
-    min-width: 150px;
+    min-inline-size: 150px;
 }
 
 .metric-value {
@@ -361,8 +390,8 @@
     font-size: 0.85rem;
     color: var(--vp-c-text-2);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 0.25rem;
+    letter-spacing: 0.025em;
+    margin-block-start: var(--space-xs);
 }
 
 /* ===== Responsive Adjustments ===== */
@@ -378,20 +407,39 @@
     }
 
     .metric {
-        min-width: 100%;
+        min-inline-size: 100%;
     }
 }
 
-/* ===== Smooth Scroll ===== */
+/* ===== Smooth Scroll & Accessibility ===== */
 html {
     scroll-behavior: smooth;
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* ===== Enhanced Links ===== */
 .vp-doc a {
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast) var(--ease-out);
 }
 
 .vp-doc a:hover {
     color: var(--vp-c-brand-light);
+}
+
+/* ===== Focus Visible for Better Accessibility ===== */
+*:focus-visible {
+    outline: 2px solid var(--vp-c-brand);
+    outline-offset: 2px;
 }
