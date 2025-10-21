@@ -11,8 +11,7 @@ const logger = {
    */
   info: (...args) => {
     if (isDevelopment) {
-      // eslint-disable-next-line no-console
-      console.log('[INFO]', ...args);
+      console.info('[INFO]', ...args);
     }
   },
 
@@ -21,7 +20,6 @@ const logger = {
    */
   warn: (...args) => {
     if (isDevelopment) {
-      // eslint-disable-next-line no-console
       console.warn('[WARN]', ...args);
     }
   },
@@ -30,7 +28,6 @@ const logger = {
    * Log error messages (always logged, can be sent to error tracking service)
    */
   error: (...args) => {
-    // eslint-disable-next-line no-console
     console.error('[ERROR]', ...args);
     // In production, this could send to error tracking service (e.g., Sentry)
   },
@@ -40,7 +37,6 @@ const logger = {
    */
   debug: (...args) => {
     if (isDevelopment) {
-      // eslint-disable-next-line no-console
       console.debug('[DEBUG]', ...args);
     }
   },

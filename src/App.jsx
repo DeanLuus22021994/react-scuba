@@ -22,48 +22,48 @@ const DiveSitesPage = lazy(() => import('./pages/DiveSitesPage'));
 const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 
 function App() {
-    // Initialize scroll reveal animations on mount
-    useEffect(() => {
-        initScrollReveal();
-    }, []);
+  // Initialize scroll reveal animations on mount
+  useEffect(() => {
+    initScrollReveal();
+  }, []);
 
-    return (
-        <Router>
-            <div className="App min-h-screen flex flex-col">
-                <ScrollProgress />
-                <Header />
-                <main className="flex-grow">
-                    <Suspense fallback={<Loading />}>
-                        <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/about" element={<AboutPage />} />
-                            <Route path="/dive-sites" element={<DiveSitesPage />} />
-                            <Route path="/courses" element={<CoursesPage />} />
-                            <Route path="/gallery" element={<GalleryPage />} />
-                        </Routes>
-                    </Suspense>
-                </main>
-                <Footer />
-                <BackToTop showAfter={400} position="right" />
-                <Toaster
-                    position="top-right"
-                    toastOptions={{
-                        duration: 4000,
-                        style: {
-                            background: '#fff',
-                            color: '#1f2937',
-                        },
-                        success: {
-                            iconTheme: {
-                                primary: '#0e7490',
-                                secondary: '#fff',
-                            },
-                        },
-                    }}
-                />
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="App min-h-screen flex flex-col">
+        <ScrollProgress />
+        <Header />
+        <main className="flex-grow">
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/dive-sites" element={<DiveSitesPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+        <BackToTop showAfter={400} position="right" />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#fff',
+              color: '#1f2937',
+            },
+            success: {
+              iconTheme: {
+                primary: '#0e7490',
+                secondary: '#fff',
+              },
+            },
+          }}
+        />
+      </div>
+    </Router>
+  );
 }
 
 export default App;

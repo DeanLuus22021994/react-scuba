@@ -1,11 +1,35 @@
-# Ignore build output
+# Dependencies
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
 dist
 build
 coverage
 
-# Ignore node_modules
-node_modules
-
-# Ignore documentation build
+# Documentation build
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# Backups
+*.backup
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db

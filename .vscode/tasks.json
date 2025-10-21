@@ -1,0 +1,193 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Consolidate CSS",
+            "type": "shell",
+            "command": "npm run consolidate:css",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "symbol-color",
+                "color": "terminal.ansiCyan"
+            },
+            "detail": "Run CSS consolidation tool to merge CSS files"
+        },
+        {
+            "label": "Run All Linters",
+            "type": "shell",
+            "command": "npm run lint && npm run format:check",
+            "problemMatcher": [
+                "$eslint-stylish"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "checklist",
+                "color": "terminal.ansiYellow"
+            },
+            "detail": "Run ESLint and Prettier checks on the entire codebase"
+        },
+        {
+            "label": "Lint & Fix",
+            "type": "shell",
+            "command": "npm run lint:fix && npm run format",
+            "problemMatcher": [
+                "$eslint-stylish"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "wrench",
+                "color": "terminal.ansiGreen"
+            },
+            "detail": "Run ESLint and Prettier with automatic fixes"
+        },
+        {
+            "label": "ESLint Check",
+            "type": "shell",
+            "command": "npm run lint",
+            "problemMatcher": [
+                "$eslint-stylish"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "code",
+                "color": "terminal.ansiBlue"
+            },
+            "detail": "Run ESLint on src directory"
+        },
+        {
+            "label": "Prettier Check",
+            "type": "shell",
+            "command": "npm run format:check",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "symbol-color",
+                "color": "terminal.ansiMagenta"
+            },
+            "detail": "Check code formatting with Prettier"
+        },
+        {
+            "label": "Prettier Fix",
+            "type": "shell",
+            "command": "npm run format",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "paintcan",
+                "color": "terminal.ansiMagenta"
+            },
+            "detail": "Format code with Prettier"
+        },
+        {
+            "label": "Build Project",
+            "type": "shell",
+            "command": "npm run build",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "package",
+                "color": "terminal.ansiGreen"
+            },
+            "detail": "Build production bundle with Vite"
+        },
+        {
+            "label": "Run Tests",
+            "type": "shell",
+            "command": "npm test -- --run",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "beaker",
+                "color": "terminal.ansiYellow"
+            },
+            "detail": "Run all tests with Vitest"
+        },
+        {
+            "label": "Test Coverage",
+            "type": "shell",
+            "command": "npm run test:coverage",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": false,
+                "clear": true
+            },
+            "icon": {
+                "id": "graph",
+                "color": "terminal.ansiCyan"
+            },
+            "detail": "Run tests with coverage report"
+        },
+        {
+            "label": "Full Quality Check",
+            "dependsOn": [
+                "Run All Linters",
+                "Run Tests",
+                "Build Project"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true,
+                "clear": true
+            },
+            "icon": {
+                "id": "verified-filled",
+                "color": "terminal.ansiGreen"
+            },
+            "detail": "Run linters, tests, and build in sequence"
+        }
+    ]
+}
