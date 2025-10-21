@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { getTeamMemberByName, TEAM_MEMBERS } from '@/data/team';
+import { describe, expect, it } from 'vitest';
 
 describe('team', () => {
   it('should export TEAM_MEMBERS array', () => {
@@ -24,8 +24,8 @@ describe('team', () => {
   });
 
   it('should find team member by name', () => {
-    const member = getTeamMemberByName('Jean-Pierre Rousseau');
+    const member = getTeamMemberByName('Raj Patel');
     expect(member).toBeDefined();
-    expect(member.name).toBe('Jean-Pierre Rousseau');
+    expect(member.name).toBe('Raj Patel');
   });
 });

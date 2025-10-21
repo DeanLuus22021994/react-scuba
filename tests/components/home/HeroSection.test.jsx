@@ -1,7 +1,7 @@
+import HeroSection from '@/components/home/HeroSection';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import HeroSection from '@/components/home/HeroSection';
 
 describe('HeroSection', () => {
     const mockOnBookClick = vi.fn();
@@ -12,17 +12,17 @@ describe('HeroSection', () => {
 
     it('should render without crashing', () => {
         renderWithRouter(<HeroSection onBookClick={mockOnBookClick} />);
-        expect(screen.getByText('Discover the Underwater Paradise')).toBeInTheDocument();
+        expect(screen.getByText('Welcome to Ocean Spirit Scuba Diving Mauritius')).toBeInTheDocument();
     });
 
     it('should display main heading', () => {
         renderWithRouter(<HeroSection onBookClick={mockOnBookClick} />);
-        expect(screen.getByText('Discover the Underwater Paradise')).toBeInTheDocument();
+        expect(screen.getByText('Welcome to Ocean Spirit Scuba Diving Mauritius')).toBeInTheDocument();
     });
 
     it('should display subtitle', () => {
         renderWithRouter(<HeroSection onBookClick={mockOnBookClick} />);
-        expect(screen.getByText(/Professional PADI certified/i)).toBeInTheDocument();
+        expect(screen.getByText(/PADI 5 Star ECO Green Fins/i)).toBeInTheDocument();
     });
 
     it('should render Book Your Dive button', () => {

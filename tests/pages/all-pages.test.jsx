@@ -61,6 +61,6 @@ describe('pages/GalleryPage', () => {
 describe('pages/HomePage', () => {
     it('should render without crashing', () => {
         renderWithProviders(<HomePageComponent />);
-        expect(screen.getByText(/Discover/i)).toBeInTheDocument();
+        expect(screen.getByText('Welcome to Ocean Spirit Scuba Diving Mauritius')).toBeInTheDocument();
     });
 });

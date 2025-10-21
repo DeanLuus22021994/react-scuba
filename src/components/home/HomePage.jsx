@@ -8,6 +8,7 @@ import FeaturesSection from './FeaturesSection';
 import HeroSection from './HeroSection';
 import ServicesSection from './ServicesSection';
 import TestimonialsSection from './TestimonialsSection';
+import VideoSection from './VideoSection';
 
 const HomePage = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -26,21 +27,18 @@ const HomePage = () => {
   return (
     <>
       <SEO page="home" />
-
       <HeroSection onBookClick={handleBookClick} />
       <FeaturesSection />
       <ServicesSection />
+      <VideoSection />
       <TestimonialsSection />
-      <CTASection onContactClick={handleContactClick} />
-
-      {/* Modals */}
+      <CTASection onContactClick={handleContactClick} /> {/* Modals */}
       <BookingModal
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
         bookingType="dive"
         source="home_page"
       />
-
       <ContactModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
