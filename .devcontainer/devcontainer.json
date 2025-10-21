@@ -1,15 +1,10 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/universal:2",
-    "features": {
-        "ghcr.io/devcontainers/features/python:1": {
-            "version": "3.11"
-        }
-    },
+    "image": "node:22-alpine",
+    "features": {},
     "hostRequirements": {
-        "cpus": 4,
-        "memory": "8gb",
-        "storage": "32gb",
-        "gpu": "optional"
+        "cpus": 2,
+        "memory": "4gb",
+        "storage": "8gb"
     },
     "waitFor": "onCreateCommand",
     "updateContentCommand": "npm install --legacy-peer-deps",
