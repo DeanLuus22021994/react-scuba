@@ -1,17 +1,8 @@
 /**
  * Styles Index
- * Central import for all custom styles
+ * Base styles for the application
  * Tailwind v4 compatible
  */
-
-/* Import custom utilities */
-@import './utilities.css';
-
-/* Import component styles */
-@import './components.css';
-
-/* Import animations */
-@import './animations.css';
 
 /* Base styles */
 html {

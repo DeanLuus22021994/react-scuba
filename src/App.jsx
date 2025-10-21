@@ -1,24 +1,25 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-// Pages
-import AboutPage from './pages/AboutPage';
-import CoursesPage from './pages/CoursesPage';
-import DiveSitesPage from './pages/DiveSitesPage';
-import GalleryPage from './pages/GalleryPage';
-import HomePage from './pages/HomePage';
-
-// Layout Components
+// Layout Components (loaded immediately - needed for all routes)
 import Footer from './layouts/Footer';
 import Header from './layouts/Header';
 
-// Shared Components
+// Shared Components (loaded immediately - used across app)
+import Loading from './components/common/Loading';
 import BackToTop from './components/shared/BackToTop';
 import ScrollProgress from './components/shared/ScrollProgress';
 
 // Utilities
 import { initScrollReveal } from './utils/scrollToAnchor';
+
+// Lazy-loaded Pages (code-split by route)
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const CoursesPage = lazy(() => import('./pages/CoursesPage'));
+const DiveSitesPage = lazy(() => import('./pages/DiveSitesPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 
 function App() {
     // Initialize scroll reveal animations on mount
@@ -32,13 +33,15 @@ function App() {
                 <ScrollProgress />
                 <Header />
                 <main className="flex-grow">
-                    <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/about" element={<AboutPage />} />
-                        <Route path="/dive-sites" element={<DiveSitesPage />} />
-                        <Route path="/courses" element={<CoursesPage />} />
-                        <Route path="/gallery" element={<GalleryPage />} />
-                    </Routes>
+                    <Suspense fallback={<Loading />}>
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/about" element={<AboutPage />} />
+                            <Route path="/dive-sites" element={<DiveSitesPage />} />
+                            <Route path="/courses" element={<CoursesPage />} />
+                            <Route path="/gallery" element={<GalleryPage />} />
+                        </Routes>
+                    </Suspense>
                 </main>
                 <Footer />
                 <BackToTop showAfter={400} position="right" />

@@ -21,13 +21,50 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
-    // Optimize chunk size for better performance
-    chunkSizeWarningLimit: 600,
+    // Target modern browsers for better optimization
+    target: 'esnext',
+    // Increase chunk size limit since we're code-splitting properly
+    chunkSizeWarningLimit: 500,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['@headlessui/react', '@heroicons/react', 'framer-motion'],
+        // Intelligent code-splitting strategy
+        manualChunks(id) {
+          // Core React libraries
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'react-vendor';
+          }
+          // React Router
+          if (id.includes('node_modules/react-router')) {
+            return 'router';
+          }
+          // UI libraries
+          if (id.includes('node_modules/@headlessui') || id.includes('node_modules/@heroicons')) {
+            return 'ui-headless';
+          }
+          // Animation library
+          if (id.includes('node_modules/framer-motion')) {
+            return 'framer-motion';
+          }
+          // Map libraries
+          if (id.includes('node_modules/leaflet') || id.includes('node_modules/react-leaflet')) {
+            return 'maps';
+          }
+          // Toast notifications
+          if (id.includes('node_modules/react-hot-toast')) {
+            return 'toast';
+          }
+          // Form libraries
+          if (id.includes('node_modules/react-hook-form') || id.includes('node_modules/zod')) {
+            return 'forms';
+          }
+          // Date picker
+          if (id.includes('node_modules/react-datepicker')) {
+            return 'datepicker';
+          }
+          // Remaining node_modules
+          if (id.includes('node_modules')) {
+            return 'vendor-misc';
+          }
         },
         // Use content hash for better caching
         entryFileNames: 'assets/[name]-[hash].js',
@@ -39,8 +76,15 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        // Additional optimizations
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.trace'],
+      },
+      format: {
+        comments: false,
       },
     },
+    // Enable CSS code splitting
+    cssCodeSplit: true,
   },
   // Optimize dependencies
   optimizeDeps: {
