@@ -1,35 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using @vitejs/plugin-react"
-    />
+    <meta name="theme-color" content="#0891b2" />
+
+    <!-- Primary Meta Tags -->
+    <title>Mauritius Scuba Diving | PADI 5 Star Dive Center | Professional Diving Courses</title>
+    <meta name="title" content="Mauritius Scuba Diving | PADI 5 Star Dive Center | Professional Diving Courses" />
+    <meta name="description"
+        content="Premier scuba diving center in Mauritius. PADI certified courses from beginner to professional. Explore Blue Bay, Cathedral, Coin de Mire. Expert instructors, modern equipment, best dive sites." />
+    <meta name="keywords"
+        content="scuba diving mauritius, PADI courses, dive center mauritius, diving courses, blue bay diving, mauritius dive sites, underwater mauritius, scuba certification, dive trips" />
+    <meta name="author" content="Mauritius Scuba Diving Center" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yourwebsite.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourwebsite.com/" />
+    <meta property="og:title" content="Mauritius Scuba Diving | PADI 5 Star Dive Center" />
+    <meta property="og:description"
+        content="Explore the underwater wonders of Mauritius with our expert PADI instructors. Professional diving courses and guided dives." />
+    <meta property="og:image" content="https://yourwebsite.com/og-image.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Mauritius Scuba Diving" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yourwebsite.com/" />
+    <meta property="twitter:title" content="Mauritius Scuba Diving | PADI 5 Star Dive Center" />
+    <meta property="twitter:description"
+        content="Explore the underwater wonders of Mauritius with our expert PADI instructors. Professional diving courses and guided dives." />
+    <meta property="twitter:image" content="https://yourwebsite.com/twitter-image.jpg" />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="MU" />
+    <meta name="geo.placename" content="Mauritius" />
+    <meta name="geo.position" content="-20.348404;57.552152" />
+    <meta name="ICBM" content="-20.348404, 57.552152" />
+
+    <!-- Contact Information -->
+    <meta name="contact" content="info@mauritius-scuba.com" />
+    <meta name="telephone" content="+230-XXXX-XXXX" />
+
     <link rel="apple-touch-icon" href="/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="/manifest.json" />
-    <title>React App</title>
-  </head>
-  <body>
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://yourwebsite.com/#organization",
+      "name": "Mauritius Scuba Diving Center",
+      "image": "https://yourwebsite.com/logo.png",
+      "description": "PADI 5 Star Dive Center offering professional scuba diving courses and guided dives in Mauritius",
+      "url": "https://yourwebsite.com",
+      "telephone": "+230-XXXX-XXXX",
+      "email": "info@mauritius-scuba.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Your Street Address",
+        "addressLocality": "Your City",
+        "addressRegion": "Mauritius",
+        "postalCode": "XXXXX",
+        "addressCountry": "MU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -20.348404,
+        "longitude": 57.552152
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "priceRange": "$$",
+      "sameAs": [
+        "https://facebook.com/yourpage",
+        "https://instagram.com/yourpage",
+        "https://twitter.com/yourpage"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "150"
+      }
+    }
+    </script>
+</head>
+
+<body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+</body>
+<script type="module" src="/src/index.jsx"></script>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-  <script type="module" src="/src/index.jsx"></script>
 </html>

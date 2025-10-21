@@ -1,3 +1,18 @@
 # https://www.robotstxt.org/robotstxt.html
+# Mauritius Scuba Diving - Production Robots.txt
+
 User-agent: *
-Disallow:
+Allow: /
+Allow: /about
+Allow: /dive-sites
+Allow: /courses
+Allow: /gallery
+
+# Disallow admin/private areas if any
+# Disallow: /admin
+
+# Sitemap location
+Sitemap: https://yourwebsite.com/sitemap.xml
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
