@@ -1,7 +1,7 @@
 {
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "version": "latest",
@@ -16,13 +16,6 @@
         },
         "ghcr.io/devcontainers-extra/features/actions-runner:1": {}
     },
-    "runArgs": [
-        "--gpus",
-        "all"
-    ],
-    "mounts": [
-        "source=react-scuba-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
-    ],
     "hostRequirements": {
         "cpus": 4,
         "memory": "4gb",
@@ -92,9 +85,14 @@
         "3001": {
             "label": "Application",
             "onAutoForward": "openPreview"
+        },
+        "3306": {
+            "label": "MariaDB",
+            "onAutoForward": "silent"
         }
     },
     "forwardPorts": [
-        3001
+        3001,
+        3306
     ]
 }

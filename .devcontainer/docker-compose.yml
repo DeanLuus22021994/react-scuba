@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    volumes:
+      - ../..:/workspaces:cached
+      - react-scuba-node_modules:/workspaces/${localWorkspaceFolderBasename}/node_modules
+    working_dir: /workspaces/${localWorkspaceFolderBasename}
+    command: sleep infinity
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3001:3001"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  db:
+    build: Dockerfile.db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: scuba_db
+      MYSQL_USER: scuba_user
+      MYSQL_PASSWORD: scubapassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  react-scuba-node_modules:
+  db_data:
