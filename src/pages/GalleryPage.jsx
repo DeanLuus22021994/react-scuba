@@ -8,7 +8,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SEO from '../components/common/SEO';
 import BookingModal from '../components/modals/BookingModal';
-import { trackEvent } from '../utils/analytics';
+import { trackConversion } from '../utils/analytics';
 
 const CATEGORIES = ['All', 'Underwater', 'Marine Life', 'Divers', 'Boats', 'Reefs'];
 
@@ -150,14 +150,12 @@ const GalleryPage = () => {
     const openLightbox = (image) => {
         setSelectedImage(image);
         setLightboxOpen(true);
-        trackEvent('gallery_image_view', {
+        trackConversion('gallery_image_view', {
             image_id: image.id,
             image_title: image.title,
             category: image.category,
         });
-    };
-
-    const closeLightbox = () => {
+    }; const closeLightbox = () => {
         setLightboxOpen(false);
         setTimeout(() => setSelectedImage(null), 300);
     };
@@ -171,16 +169,12 @@ const GalleryPage = () => {
     };
 
     const handleBookPhotoDive = () => {
-        trackEvent('gallery_page_cta', { action: 'book_photo_dive' });
+        trackConversion('gallery_page_cta', { action: 'book_photo_dive' });
         setIsBookingModalOpen(true);
-    };
-
-    const handleCategoryChange = (category) => {
+    }; const handleCategoryChange = (category) => {
         setSelectedCategory(category);
-        trackEvent('gallery_category_filter', { category });
-    };
-
-    return (
+        trackConversion('gallery_category_filter', { category });
+    }; return (
         <>
             <SEO
                 title="Dive Gallery - Underwater Photography from Mauritius"
@@ -271,8 +265,8 @@ const GalleryPage = () => {
                                     key={category}
                                     onClick={() => handleCategoryChange(category)}
                                     className={`px-4 py-2 rounded-lg font-semibold transition-colors ${selectedCategory === category
-                                            ? 'bg-ocean-600 text-white'
-                                            : 'bg-white text-gray-700 hover:bg-gray-100'
+                                        ? 'bg-ocean-600 text-white'
+                                        : 'bg-white text-gray-700 hover:bg-gray-100'
                                         }`}
                                 >
                                     {category}

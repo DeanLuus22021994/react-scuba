@@ -10,7 +10,7 @@ import SEO from '../components/common/SEO';
 import BookingModal from '../components/modals/BookingModal';
 import ContactModal from '../components/modals/ContactModal';
 import { useCurrency } from '../hooks/useCurrency';
-import { trackEvent } from '../utils/analytics';
+import { trackConversion, trackCourseInquiry } from '../utils/analytics';
 
 const COURSES = [
     {
@@ -167,26 +167,17 @@ const CoursesPage = () => {
     const { currency, convert, format } = useCurrency();
 
     const handleBookCourse = (course) => {
-        trackEvent('course_inquiry', {
-            course_name: course.name,
-            course_id: course.id,
-            course_price: convert(course.price, 'MUR', currency),
-            currency,
-        });
+        trackCourseInquiry(course.name, convert(course.price, 'MUR', currency), currency);
         setSelectedCourse(course);
         setIsBookingModalOpen(true);
-    };
-
-    const handleContactClick = (course) => {
-        trackEvent('course_contact_click', {
+    }; const handleContactClick = (course) => {
+        trackConversion('course_contact_click', {
             course_name: course.name,
             course_id: course.id,
         });
         setSelectedCourse(course);
         setIsContactModalOpen(true);
-    };
-
-    return (
+    }; return (
         <>
             <SEO
                 title="PADI Scuba Diving Courses in Mauritius - From Beginner to Professional"
