@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import CourseComparison from '../../../src/components/courses/CourseComparison';
-import { CurrencyProvider } from '../../../src/hooks/useCurrency';
+import CourseComparison from '../../src/components/courses/CourseComparison';
+import { CurrencyProvider } from '../../src/hooks/useCurrency';
 
 describe('CourseComparison', () => {
     const renderWithProvider = (component) => {

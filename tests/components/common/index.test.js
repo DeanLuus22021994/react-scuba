@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as commonExports from '../../../src/components/common/index';
+import * as commonExports from '../../src/components/common/index';
 
 describe('components/common/index', () => {
   it('should export CurrencySelector', () => {

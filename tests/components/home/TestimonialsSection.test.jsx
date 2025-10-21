@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import TestimonialsSection from '../../../src/components/home/TestimonialsSection';
+import TestimonialsSection from '../../src/components/home/TestimonialsSection';
 
 describe('TestimonialsSection', () => {
     it('should render without crashing', () => {

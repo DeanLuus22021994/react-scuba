@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import logger from '../../../src/utils/logger';
+import logger from '../../src/utils/logger';
 
 describe('logger', () => {
   beforeEach(() => {
@@ -11,9 +11,9 @@ describe('logger', () => {
     expect(typeof logger).toBe('object');
   });
 
-  it('should have log method', () => {
-    expect(logger.log).toBeDefined();
-    expect(typeof logger.log).toBe('function');
+  it('should have info method', () => {
+    expect(logger.info).toBeDefined();
+    expect(typeof logger.info).toBe('function');
   });
 
   it('should have error method', () => {
@@ -32,9 +32,9 @@ describe('logger', () => {
   });
 
   it('should call logger methods without errors', () => {
-    expect(() => logger.log('test')).not.toThrow();
+    expect(() => logger.info('test')).not.toThrow();
     expect(() => logger.error('test')).not.toThrow();
     expect(() => logger.warn('test')).not.toThrow();
-    expect(() => logger.info('test')).not.toThrow();
+    expect(() => logger.debug('test')).not.toThrow();
   });
 });

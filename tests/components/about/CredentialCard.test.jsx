@@ -1,7 +1,7 @@
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import CredentialCard from '../../../src/components/about/CredentialCard';
+import CredentialCard from '../../src/components/about/CredentialCard';
 
 describe('CredentialCard', () => {
     const mockCredential = {

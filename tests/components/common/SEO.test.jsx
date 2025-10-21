@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { describe, expect, it } from 'vitest';
-import SEO from '../../../src/components/common/SEO';
+import SEO from '../../src/components/common/SEO';
 
 describe('SEO', () => {
     const renderWithHelmet = (component) => {
@@ -13,48 +13,67 @@ describe('SEO', () => {
         expect(document.title).toBeDefined();
     });
 
-    it('should set custom title when provided', () => {
+    it('should set custom title when provided', async () => {
         renderWithHelmet(<SEO customTitle="Custom Title" />);
-        expect(document.title).toContain('Custom');
+        await waitFor(() => {
+            expect(document.title).toContain('Custom');
+        });
     });
 
-    it('should set page-specific meta tags', () => {
+    it('should set page-specific meta tags', async () => {
         renderWithHelmet(<SEO page="about" />);
-        const metaDescription = document.querySelector('meta[name="description"]');
-        expect(metaDescription).toBeInTheDocument();
+        await waitFor(() => {
+            const metaDescription = document.querySelector('meta[name="description"]');
+            expect(metaDescription).toBeTruthy();
+            expect(metaDescription?.getAttribute('content')).toBeTruthy();
+        });
     });
 
-    it('should set default meta tags for home page', () => {
+    it('should set default meta tags for home page', async () => {
         renderWithHelmet(<SEO page="home" />);
-        const metaDescription = document.querySelector('meta[name="description"]');
-        expect(metaDescription).toBeInTheDocument();
+        await waitFor(() => {
+            const metaDescription = document.querySelector('meta[name="description"]');
+            expect(metaDescription).toBeTruthy();
+            expect(metaDescription?.getAttribute('content')).toBeTruthy();
+        });
     });
 
-    it('should set Open Graph meta tags', () => {
+    it('should set Open Graph meta tags', async () => {
         renderWithHelmet(<SEO />);
-        const ogType = document.querySelector('meta[property="og:type"]');
-        const ogTitle = document.querySelector('meta[property="og:title"]');
-        expect(ogType).toBeInTheDocument();
-        expect(ogTitle).toBeInTheDocument();
+        await waitFor(() => {
+            const ogType = document.querySelector('meta[property="og:type"]');
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            expect(ogType).toBeTruthy();
+            expect(ogTitle).toBeTruthy();
+        });
     });
 
-    it('should set Twitter meta tags', () => {
+    it('should set Twitter meta tags', async () => {
         renderWithHelmet(<SEO />);
-        const twitterCard = document.querySelector('meta[name="twitter:card"]');
-        const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-        expect(twitterCard).toBeInTheDocument();
-        expect(twitterTitle).toBeInTheDocument();
+        await waitFor(() => {
+            const twitterCard = document.querySelector('meta[name="twitter:card"]');
+            const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+            expect(twitterCard).toBeTruthy();
+            expect(twitterTitle).toBeTruthy();
+        });
     });
 
-    it('should set canonical link', () => {
+    it('should set canonical link', async () => {
         renderWithHelmet(<SEO />);
-        const canonical = document.querySelector('link[rel="canonical"]');
-        expect(canonical).toBeInTheDocument();
+        await waitFor(() => {
+            const canonical = document.querySelector('link[rel="canonical"]');
+            expect(canonical).toBeTruthy();
+        });
     });
 
-    it('should set custom description when provided', () => {
+    it('should set custom description when provided', async () => {
         renderWithHelmet(<SEO customDescription="Custom description" />);
-        const metaDescription = document.querySelector('meta[name="description"]');
-        expect(metaDescription?.getAttribute('content')).toContain('Custom description');
+        await waitFor(() => {
+            const metaDescription = document.querySelector('meta[name="description"]');
+            expect(metaDescription).toBeTruthy();
+            const content = metaDescription?.getAttribute('content');
+            expect(content).toBeTruthy();
+            expect(content).toContain('Custom');
+        });
     });
 });

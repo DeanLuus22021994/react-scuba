@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import GalleryGrid from '../../../src/components/gallery/GalleryGrid';
+import GalleryGrid from '../../src/components/gallery/GalleryGrid';
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {

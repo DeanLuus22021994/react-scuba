@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { defaultMetaTags, generatePageMetaTags } from '../../../src/utils/seo';
+import { defaultMetaTags, generatePageMetaTags } from '../../src/utils/seo';
 
 describe('seo', () => {
   it('should export defaultMetaTags', () => {

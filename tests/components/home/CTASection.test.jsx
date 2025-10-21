@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import CTASection from '../../../src/components/home/CTASection';
+import CTASection from '../../src/components/home/CTASection';
 
 describe('CTASection', () => {
     const mockOnContactClick = vi.fn();

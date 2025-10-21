@@ -37,5 +37,6 @@
     "css.lint.unknownAtRules": "ignore",
     "css.validate": true,
     // Copilot settings
-    "chat.tools.global.autoApprove": true
+    "chat.tools.global.autoApprove": true,
+    "editor.experimentalGpuAcceleration": "on"
 }

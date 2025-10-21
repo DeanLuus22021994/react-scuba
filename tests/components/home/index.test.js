@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as homeExports from '../../../src/components/home/index';
+import * as homeExports from '../../src/components/home/index';
 
 describe('components/home/index', () => {
   it('should export CTASection', () => {

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider } from '../../../src/hooks/useCurrency';
-import Footer from '../../../src/layouts/Footer';
+import { CurrencyProvider } from '../../src/hooks/useCurrency';
+import Footer from '../../src/layouts/Footer';
 
 describe('Footer', () => {
     const renderWithProviders = (component) => {

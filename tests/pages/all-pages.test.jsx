@@ -2,14 +2,14 @@ import { render, screen } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider } from '../../../src/hooks/useCurrency';
+import { CurrencyProvider } from '../../src/hooks/useCurrency';
 
 // Import pages directly
-import AboutPageComponent from '../../../src/pages/AboutPage';
-import CoursesPageComponent from '../../../src/pages/CoursesPage';
-import DiveSitesPageComponent from '../../../src/pages/DiveSitesPage';
-import GalleryPageComponent from '../../../src/pages/GalleryPage';
-import HomePageComponent from '../../../src/pages/HomePage';
+import AboutPageComponent from '../../src/pages/AboutPage';
+import CoursesPageComponent from '../../src/pages/CoursesPage';
+import DiveSitesPageComponent from '../../src/pages/DiveSitesPage';
+import GalleryPageComponent from '../../src/pages/GalleryPage';
+import HomePageComponent from '../../src/pages/HomePage';
 
 const renderWithProviders = (component) => {
     return render(

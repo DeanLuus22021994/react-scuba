@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import FeaturedCarousel from '../../../src/components/gallery/FeaturedCarousel';
+import FeaturedCarousel from '../../src/components/gallery/FeaturedCarousel';
 
 // Mock Swiper
 vi.mock('swiper/react', () => ({

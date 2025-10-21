@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as utilsExports from '../../../src/utils/index';
+import * as utilsExports from '../../src/utils/index';
 
 describe('utils/index', () => {
   it('should export logger', () => {

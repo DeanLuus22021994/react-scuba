@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import ScrollProgress from '../../../src/components/shared/ScrollProgress';
+import ScrollProgress from '../../src/components/shared/ScrollProgress';
 
 describe('ScrollProgress', () => {
     it('should render without crashing', () => {

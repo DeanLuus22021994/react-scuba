@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  CATEGORIES,
   FEATURED_IMAGES,
-  filterImagesByCategory,
-  GALLERY_CATEGORIES,
   GALLERY_IMAGES,
-} from '../../../src/data/gallery';
+  getImagesByCategory,
+} from '../../src/data/gallery';
 
 describe('gallery', () => {
   it('should export GALLERY_IMAGES array', () => {
@@ -18,9 +18,9 @@ describe('gallery', () => {
     expect(Array.isArray(FEATURED_IMAGES)).toBe(true);
   });
 
-  it('should export GALLERY_CATEGORIES array', () => {
-    expect(GALLERY_CATEGORIES).toBeDefined();
-    expect(Array.isArray(GALLERY_CATEGORIES)).toBe(true);
+  it('should export CATEGORIES array', () => {
+    expect(CATEGORIES).toBeDefined();
+    expect(Array.isArray(CATEGORIES)).toBe(true);
   });
 
   it('should have valid gallery image structure', () => {
@@ -34,8 +34,8 @@ describe('gallery', () => {
     });
   });
 
-  it('should export filterImagesByCategory function', () => {
-    expect(filterImagesByCategory).toBeDefined();
-    expect(typeof filterImagesByCategory).toBe('function');
+  it('should export getImagesByCategory function', () => {
+    expect(getImagesByCategory).toBeDefined();
+    expect(typeof getImagesByCategory).toBe('function');
   });
 });

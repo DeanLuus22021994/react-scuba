@@ -1,32 +1,35 @@
 import { describe, expect, it, vi } from 'vitest';
-import { scrollToAnchor } from '../../../src/utils/scrollToAnchor';
+import { scrollToElement, scrollToTop } from '../../src/utils/scrollToAnchor';
 
 describe('scrollToAnchor', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('should export scrollToAnchor function', () => {
-    expect(scrollToAnchor).toBeDefined();
-    expect(typeof scrollToAnchor).toBe('function');
+  it('should export scrollToElement function', () => {
+    expect(scrollToElement).toBeDefined();
+    expect(typeof scrollToElement).toBe('function');
   });
 
   it('should handle valid anchor id', () => {
     const mockElement = {
-      scrollIntoView: vi.fn(),
+      getBoundingClientRect: () => ({ top: 100 }),
+      setAttribute: vi.fn(),
+      focus: vi.fn(),
     };
     document.getElementById = vi.fn(() => mockElement);
 
-    scrollToAnchor('test-anchor');
+    scrollToElement('test-anchor');
     expect(document.getElementById).toHaveBeenCalledWith('test-anchor');
   });
 
   it('should handle missing anchor', () => {
     document.getElementById = vi.fn(() => null);
-    expect(() => scrollToAnchor('missing-anchor')).not.toThrow();
+    expect(() => scrollToElement('missing-anchor')).not.toThrow();
   });
 
-  it('should handle empty string', () => {
-    expect(() => scrollToAnchor('')).not.toThrow();
+  it('should export scrollToTop', () => {
+    expect(scrollToTop).toBeDefined();
+    expect(typeof scrollToTop).toBe('function');
   });
 });

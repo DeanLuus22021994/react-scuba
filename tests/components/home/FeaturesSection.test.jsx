@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import FeaturesSection from '../../../src/components/home/FeaturesSection';
+import FeaturesSection from '../../src/components/home/FeaturesSection';
 
 describe('FeaturesSection', () => {
     it('should render without crashing', () => {

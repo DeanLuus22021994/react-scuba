@@ -5,7 +5,7 @@ import {
   getCalendarEmail,
   isDevelopment,
   isProduction,
-} from '../../../src/utils/env';
+} from '../../src/utils/env';
 
 describe('env', () => {
   it('should export isDevelopment', () => {

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import TeamMember from '../../../src/components/about/TeamMember';
+import TeamMember from '../../src/components/about/TeamMember';
 
 describe('TeamMember', () => {
     const mockMember = {

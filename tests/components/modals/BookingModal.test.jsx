@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import BookingModal from '../../../src/components/modals/BookingModal';
-import { CurrencyProvider } from '../../../src/hooks/useCurrency';
+import BookingModal from '../../src/components/modals/BookingModal';
+import { CurrencyProvider } from '../../src/hooks/useCurrency';
 
 // Mock dependencies
 vi.mock('../../../src/services/api', () => ({
@@ -25,13 +25,13 @@ describe('BookingModal', () => {
     it('should render when open', async () => {
         renderWithProvider(<BookingModal isOpen={true} onClose={mockOnClose} />);
         await waitFor(() => {
-            expect(screen.getByText(/Select Date/i)).toBeInTheDocument();
+            expect(screen.getByText(/Book a Dive/i)).toBeInTheDocument();
         });
     });
 
     it('should not render when closed', () => {
         renderWithProvider(<BookingModal isOpen={false} onClose={mockOnClose} />);
-        expect(screen.queryByText(/Select Date/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Book a Dive/i)).not.toBeInTheDocument();
     });
 
     it('should display booking type options', async () => {
@@ -42,12 +42,13 @@ describe('BookingModal', () => {
     });
 
     it('should accept preSelectedItem prop', async () => {
-        const preSelected = { id: 'test', name: 'Test Dive', duration: '2 hours', price: 2500 };
+        const preSelected = 'single-dive';
         renderWithProvider(
             <BookingModal isOpen={true} onClose={mockOnClose} preSelectedItem={preSelected} />
         );
         await waitFor(() => {
-            expect(screen.getByText(/Test Dive/i)).toBeInTheDocument();
+            expect(screen.getByText(/Book a Dive/i)).toBeInTheDocument();
+            expect(screen.getByText(/Single Dive/i)).toBeInTheDocument();
         });
     });
 });

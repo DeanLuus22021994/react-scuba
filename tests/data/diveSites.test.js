@@ -4,7 +4,7 @@ import {
   DIVE_SITES,
   getDiveSiteById,
   MAURITIUS_CENTER,
-} from '../../../src/data/diveSites';
+} from '../../src/data/diveSites';
 
 describe('diveSites', () => {
   it('should export DIVE_SITES array', () => {

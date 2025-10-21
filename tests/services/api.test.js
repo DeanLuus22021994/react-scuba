@@ -3,7 +3,7 @@ import {
   checkCalendarAvailability,
   createCalendarBooking,
   sendContactMessage,
-} from '../../../src/services/api';
+} from '../../src/services/api';
 
 // Mock fetch
 global.fetch = vi.fn();

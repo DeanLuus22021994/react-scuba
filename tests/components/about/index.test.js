@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as aboutExports from '../../../src/components/about/index';
+import * as aboutExports from '../../src/components/about/index';
 
 describe('components/about/index', () => {
   it('should export AboutPage', () => {
