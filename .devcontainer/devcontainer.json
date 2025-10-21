@@ -24,7 +24,7 @@
         "source=react-scuba-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
     ],
     "hostRequirements": {
-        "cpus": 2,
+        "cpus": 4,
         "memory": "4gb",
         "storage": "8gb",
         "gpu": "optional"
