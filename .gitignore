@@ -146,3 +146,4 @@ Thumbs.db
 # VitePress build output
 docs/.vitepress/dist
 docs/.vitepress/cache
+*.backup
