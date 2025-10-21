@@ -1,4 +1,4 @@
-import { sendWebVitalsToGA4 } from './utils/analytics';
+import { sendWebVitalsToGA4 } from './analytics.js';
 
 const reportWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
