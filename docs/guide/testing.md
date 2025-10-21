@@ -10,7 +10,7 @@ The project maintains 100% test coverage across all components, utilities, hooks
 
 ### Interactive Dashboard
 
-View the complete test results in our **[Interactive Test Dashboard](../testing/)** which includes:
+View the complete test results in our **[Interactive Test Dashboard](../contributing/)** which includes:
 
 - 📊 Visual charts and metrics
 - ⏱️ Performance analysis
@@ -19,7 +19,7 @@ View the complete test results in our **[Interactive Test Dashboard](../testing/
 
 ### Quick Summary
 
-For a quick overview, check the [Markdown Summary](../testing/testing.md) which provides:
+For a quick overview, check the [Markdown Summary](../contributing/testing.md) which provides:
 
 - Pass/fail statistics
 - Failed test highlights
@@ -275,7 +275,7 @@ The CI pipeline includes:
 4. Coverage reporting
 5. Test report generation
 
-- **JSON Data** - Complete test data at `docs/testing/test-results.json`
+- **JSON Data** - Complete test data at `docs/contributing/test-results.json`
 
 These reports are:
 
@@ -382,9 +382,4 @@ act(() => {
 - [React Testing Library](https://testing-library.com/react)
 - [Testing Library Queries](https://testing-library.com/docs/queries/about)
 - [Common Testing Mistakes](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
-- [Test Reports Dashboard](../testing/)
-
-## Related
-
-- [Contributing Guide](/contributing) - How to contribute with tests
-- [CI/CD Setup](/deployment/github-pages) - Automated testing pipeline
+- [Test Reports Dashboard](../contributing/)

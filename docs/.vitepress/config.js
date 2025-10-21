@@ -20,173 +20,18 @@ export default defineConfig({
 
     nav: [
       { text: 'Guide', link: '/guide/' },
-      { text: 'Components', link: '/components/' },
-      { text: 'API', link: '/api/' },
+      { text: 'Reference', link: '/reference/' },
       {
         text: 'Resources',
         items: [
           { text: 'Deployment', link: '/deployment/' },
-          { text: 'Contributing', link: '/contributing' },
-          { text: 'Changelog', link: '/changelog' },
+          { text: 'Contributing', link: '/contributing/' },
+          { text: 'Changelog', link: '/contributing/changelog' },
         ],
       },
     ],
 
-    sidebar: {
-      '/guide/': [
-        {
-          text: 'Introduction',
-          collapsed: false,
-          items: [
-            { text: 'What is React Scuba?', link: '/guide/' },
-            { text: 'Quick Start', link: '/guide/quick-start' },
-            { text: 'Installation', link: '/guide/installation' },
-            { text: 'Project Structure', link: '/guide/structure' },
-          ],
-        },
-        {
-          text: 'Essentials',
-          collapsed: false,
-          items: [
-            { text: 'Configuration', link: '/guide/configuration' },
-            { text: 'Environment Variables', link: '/guide/environment' },
-            { text: 'Styling', link: '/guide/styling' },
-            { text: 'Routing', link: '/guide/routing' },
-          ],
-        },
-        {
-          text: 'Features',
-          collapsed: false,
-          items: [
-            { text: 'Analytics & Tracking', link: '/guide/analytics' },
-            { text: 'SEO Optimization', link: '/guide/seo' },
-            { text: 'Multi-Currency', link: '/guide/currency' },
-            { text: 'Forms & Validation', link: '/guide/forms' },
-          ],
-        },
-        {
-          text: 'Best Practices',
-          collapsed: false,
-          items: [
-            { text: 'Code Quality', link: '/guide/code-quality' },
-            { text: 'Testing', link: '/guide/testing' },
-            { text: 'Performance', link: '/guide/performance' },
-            { text: 'Accessibility', link: '/guide/accessibility' },
-          ],
-        },
-      ],
-      '/components/': [
-        {
-          text: 'Overview',
-          items: [{ text: 'Component Library', link: '/components/' }],
-        },
-        {
-          text: 'Layout',
-          collapsed: false,
-          items: [
-            { text: 'Header', link: '/components/header' },
-            { text: 'Footer', link: '/components/footer' },
-            { text: 'Navigation', link: '/components/navigation' },
-          ],
-        },
-        {
-          text: 'Pages',
-          collapsed: false,
-          items: [
-            { text: 'Home', link: '/components/home' },
-            { text: 'About', link: '/components/about' },
-            { text: 'Courses', link: '/components/courses' },
-            { text: 'Dive Sites', link: '/components/dive-sites' },
-            { text: 'Gallery', link: '/components/gallery' },
-          ],
-        },
-        {
-          text: 'Common',
-          collapsed: false,
-          items: [
-            { text: 'Error Boundary', link: '/components/error-boundary' },
-            { text: 'Loading States', link: '/components/loading' },
-            { text: 'SEO Component', link: '/components/seo' },
-            { text: 'Currency Selector', link: '/components/currency-selector' },
-            { text: 'CTA Buttons', link: '/components/cta-buttons' },
-          ],
-        },
-        {
-          text: 'Interactive',
-          collapsed: false,
-          items: [
-            { text: 'Modals', link: '/components/modals' },
-            { text: 'Forms', link: '/components/forms' },
-            { text: 'Maps', link: '/components/maps' },
-            { text: 'Carousels', link: '/components/carousels' },
-            { text: 'Lightbox', link: '/components/lightbox' },
-          ],
-        },
-      ],
-      '/api/': [
-        {
-          text: 'API Reference',
-          items: [{ text: 'Overview', link: '/api/' }],
-        },
-        {
-          text: 'Utilities',
-          collapsed: false,
-          items: [
-            { text: 'Analytics', link: '/api/analytics' },
-            { text: 'Currency', link: '/api/currency' },
-            { text: 'Logger', link: '/api/logger' },
-            { text: 'SEO Helpers', link: '/api/seo-helpers' },
-            { text: 'Environment', link: '/api/environment' },
-          ],
-        },
-        {
-          text: 'Hooks',
-          collapsed: false,
-          items: [{ text: 'useCurrency', link: '/api/use-currency' }],
-        },
-        {
-          text: 'Services',
-          collapsed: false,
-          items: [{ text: 'API Client', link: '/api/client' }],
-        },
-        {
-          text: 'Data',
-          collapsed: false,
-          items: [
-            { text: 'Courses', link: '/api/data-courses' },
-            { text: 'Dive Sites', link: '/api/data-dive-sites' },
-            { text: 'Team Members', link: '/api/data-team' },
-            { text: 'Gallery', link: '/api/data-gallery' },
-          ],
-        },
-      ],
-      '/deployment/': [
-        {
-          text: 'Deployment',
-          items: [{ text: 'Overview', link: '/deployment/' }],
-        },
-        {
-          text: 'Platforms',
-          collapsed: false,
-          items: [
-            { text: 'Vercel', link: '/deployment/vercel' },
-            { text: 'Netlify', link: '/deployment/netlify' },
-            { text: 'GitHub Pages', link: '/deployment/github-pages' },
-            { text: 'Docker', link: '/deployment/docker' },
-          ],
-        },
-        {
-          text: 'Services',
-          collapsed: false,
-          items: [
-            { text: 'Google Tag Manager', link: '/deployment/gtm' },
-            { text: 'Google Analytics', link: '/deployment/analytics' },
-            { text: 'reCAPTCHA', link: '/deployment/recaptcha' },
-            { text: 'Custom Domain', link: '/deployment/domain' },
-          ],
-        },
-      ],
-    },
+    sidebar: '/toc.yml',
 
     socialLinks: [
       {

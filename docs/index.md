@@ -15,7 +15,7 @@ hero:
       link: /guide/quick-start
     - theme: alt
       text: View Components
-      link: /components/
+      link: /reference/components/
     - theme: alt
       text: GitHub
       link: https://github.com/DeanLuus22021994/react-scuba
@@ -155,7 +155,7 @@ react-scuba/
 
 - [🚀 Quick Start](/guide/quick-start): Get up and running in 5 minutes
 - [📦 Installation](/guide/installation): Detailed setup instructions
-- [🧩 Components](/components/): Explore 38+ React components
+- [🧩 Components](/reference/components/): Explore 38+ React components
 - [🌐 Deploy](/deployment/): Production deployment guides
 
 ## Community & Support
@@ -163,7 +163,7 @@ react-scuba/
 - 🐛 [Report Issues](https://github.com/DeanLuus22021994/react-scuba/issues)
 - 💬 [Discussions](https://github.com/DeanLuus22021994/react-scuba/discussions)
 - 📖 [Contributing Guide](/contributing)
-- 📝 [Changelog](/changelog)
+- 📝 [Changelog](/contributing/changelog)
 
 ## License
 

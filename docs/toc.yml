@@ -1,0 +1,426 @@
+- text: Home
+  link: /
+
+- text: Guide
+  collapsed: false
+  items:
+    - text: Overview
+      link: guide/index
+      next: guide/quick-start
+      related: [reference/api/index, contributing/index]
+    - text: Quick Start
+      link: guide/quick-start
+      prev: guide/index
+      next: guide/installation
+      related: [guide/configuration, guide/structure]
+    - text: Installation
+      link: guide/installation
+      prev: guide/quick-start
+      next: guide/configuration
+      related: [guide/environment, deployment/index]
+    - text: Configuration
+      link: guide/configuration
+      prev: guide/installation
+      next: guide/structure
+      related: [guide/environment, guide/quick-start]
+    - text: Structure
+      link: guide/structure
+      prev: guide/configuration
+      next: guide/workflow
+      related: [reference/components/index, guide/configuration]
+    - text: Workflow
+      link: guide/workflow
+      prev: guide/structure
+      next: guide/routing
+      related: [contributing/index, guide/code-quality]
+    - text: Routing
+      link: guide/routing
+      prev: guide/workflow
+      next: guide/forms
+      related: [reference/components/shared/navigation, guide/structure]
+    - text: Forms
+      link: guide/forms
+      prev: guide/routing
+      next: guide/styling
+      related: [reference/components/shared/forms, deployment/recaptcha]
+    - text: Styling
+      link: guide/styling
+      prev: guide/forms
+      next: guide/analytics
+      related: [guide/performance, guide/accessibility]
+    - text: Analytics
+      link: guide/analytics
+      prev: guide/styling
+      next: guide/seo
+      related: [deployment/analytics, deployment/gtm]
+    - text: SEO
+      link: guide/seo
+      prev: guide/analytics
+      next: guide/performance
+      related: [reference/api/seo-helpers, guide/accessibility]
+    - text: Performance
+      link: guide/performance
+      prev: guide/seo
+      next: guide/accessibility
+      related: [reference/api/reportWebVitals, guide/styling]
+    - text: Accessibility
+      link: guide/accessibility
+      prev: guide/performance
+      next: guide/code-quality
+      related: [guide/seo, guide/testing]
+    - text: Code Quality
+      link: guide/code-quality
+      prev: guide/accessibility
+      next: guide/testing
+      related: [contributing/linting, guide/workflow]
+    - text: Testing
+      link: guide/testing
+      prev: guide/code-quality
+      next: guide/currency
+      related: [testing/testing, guide/code-quality]
+    - text: Currency
+      link: guide/currency
+      prev: guide/testing
+      next: guide/environment
+      related: [reference/api/currency, reference/api/use-currency]
+    - text: Environment
+      link: guide/environment
+      prev: guide/currency
+      next: reference/api/index
+      related: [deployment/index, guide/configuration]
+
+- text: Reference
+  collapsed: false
+  items:
+    - text: API
+      collapsed: false
+      items:
+        - text: Overview
+          link: reference/api/index
+          prev: guide/environment
+          next: reference/api/analytics
+          parent: reference/api/index
+          related: [guide/index, reference/components/index]
+        - text: Analytics
+          link: reference/api/analytics
+          prev: reference/api/index
+          next: reference/api/client
+          parent: reference/api/index
+          related: [guide/analytics, deployment/analytics]
+        - text: Client
+          link: reference/api/client
+          prev: reference/api/analytics
+          next: reference/api/currency
+          parent: reference/api/index
+          related: [reference/api/environment, guide/environment]
+        - text: Currency
+          link: reference/api/currency
+          prev: reference/api/client
+          next: reference/api/environment
+          parent: reference/api/index
+          related: [guide/currency, reference/api/use-currency]
+        - text: Environment
+          link: reference/api/environment
+          prev: reference/api/currency
+          next: reference/api/logger
+          parent: reference/api/index
+          related: [guide/environment, reference/api/client]
+        - text: Logger
+          link: reference/api/logger
+          prev: reference/api/environment
+          next: reference/api/reportWebVitals
+          parent: reference/api/index
+          related: [guide/code-quality, guide/testing]
+        - text: Report Web Vitals
+          link: reference/api/reportWebVitals
+          prev: reference/api/logger
+          next: reference/api/scrollToAnchor
+          parent: reference/api/index
+          related: [guide/performance, guide/analytics]
+        - text: Scroll to Anchor
+          link: reference/api/scrollToAnchor
+          prev: reference/api/reportWebVitals
+          next: reference/api/seo-helpers
+          parent: reference/api/index
+          related: [guide/routing, guide/accessibility]
+        - text: SEO Helpers
+          link: reference/api/seo-helpers
+          prev: reference/api/scrollToAnchor
+          next: reference/api/use-currency
+          parent: reference/api/index
+          related: [guide/seo, reference/api/currency]
+        - text: Use Currency
+          link: reference/api/use-currency
+          prev: reference/api/seo-helpers
+          next: reference/api/data/booking-types
+          parent: reference/api/index
+          related: [guide/currency, reference/api/currency]
+        - text: Data
+          collapsed: false
+          items:
+            - text: Booking Types
+              link: reference/api/data/booking-types
+              prev: reference/api/use-currency
+              next: reference/api/data/courses
+              parent: reference/api/index
+              related: [guide/forms, reference/components/shared/forms]
+            - text: Courses
+              link: reference/api/data/courses
+              prev: reference/api/data/booking-types
+              next: reference/api/data/credentials
+              parent: reference/api/index
+              related: [reference/components/courses/courses, guide/currency]
+            - text: Credentials
+              link: reference/api/data/credentials
+              prev: reference/api/data/courses
+              next: reference/api/data/dive-sites
+              parent: reference/api/index
+              related: [guide/environment, reference/api/environment]
+            - text: Dive Sites
+              link: reference/api/data/dive-sites
+              prev: reference/api/data/credentials
+              next: reference/api/data/gallery
+              parent: reference/api/index
+              related:
+                [
+                  reference/components/dive-sites/dive-sites,
+                  reference/components/dive-sites/maps,
+                ]
+            - text: Gallery
+              link: reference/api/data/gallery
+              prev: reference/api/data/dive-sites
+              next: reference/api/data/ocean-spirit
+              parent: reference/api/index
+              related:
+                [
+                  reference/components/gallery/gallery,
+                  reference/components/gallery/lightbox,
+                ]
+            - text: Ocean Spirit
+              link: reference/api/data/ocean-spirit
+              prev: reference/api/data/gallery
+              next: reference/api/data/team
+              parent: reference/api/index
+              related: [reference/components/about/about, guide/structure]
+            - text: Team
+              link: reference/api/data/team
+              prev: reference/api/data/ocean-spirit
+              next: reference/components/index
+              parent: reference/api/index
+              related: [reference/components/about/about, guide/structure]
+    - text: Components
+      collapsed: false
+      items:
+        - text: Overview
+          link: reference/components/index
+          prev: reference/api/data/team
+          next: reference/components/about/about
+          parent: reference/components/index
+          related: [guide/structure, reference/api/index]
+        - text: About
+          link: reference/components/about/about
+          prev: reference/components/index
+          next: reference/components/courses/courses
+          parent: reference/components/index
+          related: [reference/api/data/ocean-spirit, reference/api/data/team]
+        - text: Courses
+          link: reference/components/courses/courses
+          prev: reference/components/about/about
+          next: reference/components/dive-sites/dive-sites
+          parent: reference/components/index
+          related: [reference/api/data/courses, guide/currency]
+        - text: Dive Sites
+          collapsed: false
+          items:
+            - text: Overview
+              link: reference/components/dive-sites/dive-sites
+              prev: reference/components/courses/courses
+              next: reference/components/dive-sites/maps
+              parent: reference/components/index
+              related: [reference/api/data/dive-sites, guide/routing]
+            - text: Maps
+              link: reference/components/dive-sites/maps
+              prev: reference/components/dive-sites/dive-sites
+              next: reference/components/gallery/gallery
+              parent: reference/components/index
+              related:
+                [reference/components/dive-sites/dive-sites, guide/performance]
+        - text: Gallery
+          collapsed: false
+          items:
+            - text: Overview
+              link: reference/components/gallery/gallery
+              prev: reference/components/dive-sites/maps
+              next: reference/components/gallery/lightbox
+              parent: reference/components/index
+              related: [reference/api/data/gallery, guide/performance]
+            - text: Lightbox
+              link: reference/components/gallery/lightbox
+              prev: reference/components/gallery/gallery
+              next: reference/components/home/home
+              parent: reference/components/index
+              related:
+                [reference/components/gallery/gallery, guide/accessibility]
+        - text: Home
+          collapsed: false
+          items:
+            - text: Overview
+              link: reference/components/home/home
+              prev: reference/components/gallery/lightbox
+              next: reference/components/home/carousels
+              parent: reference/components/index
+              related: [guide/quick-start, guide/structure]
+            - text: Carousels
+              link: reference/components/home/carousels
+              prev: reference/components/home/home
+              next: reference/components/home/cta-buttons
+              parent: reference/components/index
+              related: [reference/components/home/home, guide/performance]
+            - text: CTA Buttons
+              link: reference/components/home/cta-buttons
+              prev: reference/components/home/carousels
+              next: reference/components/shared/currency-selector
+              parent: reference/components/index
+              related: [reference/components/home/home, guide/forms]
+        - text: Shared
+          collapsed: false
+          items:
+            - text: Currency Selector
+              link: reference/components/shared/currency-selector
+              prev: reference/components/home/cta-buttons
+              next: reference/components/shared/error-boundary
+              parent: reference/components/index
+              related: [reference/api/currency, guide/currency]
+            - text: Error Boundary
+              link: reference/components/shared/error-boundary
+              prev: reference/components/shared/currency-selector
+              next: reference/components/shared/footer
+              parent: reference/components/index
+              related: [guide/testing, guide/code-quality]
+            - text: Footer
+              link: reference/components/shared/footer
+              prev: reference/components/shared/error-boundary
+              next: reference/components/shared/forms
+              parent: reference/components/index
+              related: [reference/components/shared/header, guide/structure]
+            - text: Forms
+              link: reference/components/shared/forms
+              prev: reference/components/shared/footer
+              next: reference/components/shared/header
+              parent: reference/components/index
+              related: [guide/forms, deployment/recaptcha]
+            - text: Header
+              link: reference/components/shared/header
+              prev: reference/components/shared/forms
+              next: reference/components/shared/loading
+              parent: reference/components/index
+              related:
+                [
+                  reference/components/shared/footer,
+                  reference/components/shared/navigation,
+                ]
+            - text: Loading
+              link: reference/components/shared/loading
+              prev: reference/components/shared/header
+              next: reference/components/shared/modals
+              parent: reference/components/index
+              related: [guide/performance, guide/accessibility]
+            - text: Modals
+              link: reference/components/shared/modals
+              prev: reference/components/shared/loading
+              next: reference/components/shared/navigation
+              parent: reference/components/index
+              related: [guide/forms, guide/accessibility]
+            - text: Navigation
+              link: reference/components/shared/navigation
+              prev: reference/components/shared/modals
+              next: reference/components/shared/seo
+              parent: reference/components/index
+              related: [guide/routing, reference/components/shared/header]
+            - text: SEO
+              link: reference/components/shared/seo
+              prev: reference/components/shared/navigation
+              next: contributing/index
+              parent: reference/components/index
+              related: [guide/seo, reference/api/seo-helpers]
+
+- text: Contributing
+  collapsed: false
+  items:
+    - text: Overview
+      link: contributing/index
+      prev: reference/components/shared/seo
+      next: contributing/linting
+      related: [guide/workflow, guide/code-quality]
+    - text: Code Quality
+      link: contributing/linting
+      prev: contributing/index
+      next: contributing/testing
+      related: [guide/code-quality, guide/testing]
+    - text: Testing
+      link: contributing/testing
+      prev: contributing/linting
+      next: contributing/changelog
+      related: [guide/testing, testing/testing]
+    - text: Changelog
+      link: contributing/changelog
+      prev: contributing/testing
+      next: deployment/index
+      related: [contributing/index, guide/workflow]
+
+- text: Deployment
+  collapsed: false
+  items:
+    - text: Overview
+      link: deployment/index
+      prev: contributing/changelog
+      next: deployment/github-pages
+      related: [guide/environment, guide/installation]
+    - text: GitHub Pages
+      link: deployment/github-pages
+      prev: deployment/index
+      next: deployment/netlify
+      related: [deployment/domain, guide/environment]
+    - text: Netlify
+      link: deployment/netlify
+      prev: deployment/github-pages
+      next: deployment/vercel
+      related: [deployment/domain, deployment/analytics]
+    - text: Vercel
+      link: deployment/vercel
+      prev: deployment/netlify
+      next: deployment/docker
+      related: [deployment/domain, deployment/analytics]
+    - text: Docker
+      link: deployment/docker
+      prev: deployment/vercel
+      next: deployment/domain
+      related: [guide/installation, guide/environment]
+    - text: Domain
+      link: deployment/domain
+      prev: deployment/docker
+      next: deployment/analytics
+      related: [deployment/github-pages, deployment/netlify, deployment/vercel]
+    - text: Analytics
+      link: deployment/analytics
+      prev: deployment/domain
+      next: deployment/gtm
+      related: [guide/analytics, reference/api/analytics]
+    - text: GTM
+      link: deployment/gtm
+      prev: deployment/analytics
+      next: deployment/recaptcha
+      related: [deployment/analytics, guide/analytics]
+    - text: reCAPTCHA
+      link: deployment/recaptcha
+      prev: deployment/gtm
+      next: testing/testing
+      related: [guide/forms, reference/components/shared/forms]
+
+- text: Testing
+  collapsed: false
+  items:
+    - text: Overview
+      link: testing/testing
+      prev: deployment/recaptcha
+      related: [guide/testing, contributing/testing]

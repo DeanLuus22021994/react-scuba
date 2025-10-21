@@ -342,10 +342,3 @@ export default async (request, context) => {
 2. Update build command to `npm run build`
 3. Set publish directory to `dist`
 4. Configure custom domain
-
-## Related
-
-- [Deployment Overview](/deployment/)
-- [Environment Variables](/guide/environment)
-- [GitHub Pages](/deployment/github-pages)
-- [Vercel](/deployment/vercel)

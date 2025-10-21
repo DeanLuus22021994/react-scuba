@@ -208,9 +208,3 @@ npm install -D vitepress --legacy-peer-deps
 # Start docs dev server
 npm run docs:dev
 ```
-
-## Next Steps
-
-- [Project Structure](./structure.md) - Understand the codebase
-- [Configuration](./configuration.md) - Configure the app
-- [Development Workflow](./workflow.md) - Learn the workflow

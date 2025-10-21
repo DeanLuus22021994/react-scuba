@@ -88,17 +88,3 @@ npm run build
 ```
 
 Optimized files will be in the `dist/` directory.
-
-## Next Steps
-
-- [Installation Guide](./installation.md) - Detailed setup instructions
-- [Project Structure](./structure.md) - Understand the codebase organization
-- [Configuration](./configuration.md) - Environment variables and settings
-- [Components](../components/) - Explore available components
-
-## Need Help?
-
-- Check the [API Reference](../api/)
-- Review [Component Examples](../components/)
-- Read the [Deployment Guide](../deployment/)
-- Open an issue on [GitHub](https://github.com/DeanLuus22021994/react-scuba/issues)

@@ -105,10 +105,10 @@ Centralized data management:
 // data/courses.js
 export const COURSES = [
   {
-    id: "open-water",
-    title: "Open Water Diver",
+    id: 'open-water',
+    title: 'Open Water Diver',
     price: 350,
-    duration: "3-4 days",
+    duration: '3-4 days',
     // ... more fields
   },
   // ... more courses
@@ -192,7 +192,7 @@ export default defineConfig({
 
 ```javascript
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
@@ -211,8 +211,8 @@ export default {
 
 ```javascript
 // Configured in jsconfig.json
-import { HomePage } from "@/pages/HomePage";
-import { courses } from "@/data/courses";
+import { HomePage } from '@/pages/HomePage';
+import { courses } from '@/data/courses';
 ```
 
 ### Barrel Exports
@@ -224,7 +224,7 @@ export { ServicesSection } from "./ServicesSection";
 // ... more exports
 
 // Usage
-import { HeroSection, ServicesSection } from "@/components/home";
+import { HeroSection, ServicesSection } from ../reference/components/home";
 ```
 
 ## File Size Guidelines
@@ -285,9 +285,3 @@ docs/
 ├── contributing/        # Contribution guide
 └── index.md            # Homepage
 ```
-
-## Next Steps
-
-- [Configuration Guide](./configuration.md)
-- [Component Documentation](../components/)
-- [API Reference](../api/)
