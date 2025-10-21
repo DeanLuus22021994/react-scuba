@@ -16,7 +16,7 @@ const envSchema = z.object({
   VITE_EMAIL: z.string().email().or(z.literal('')).optional(),
 
   // API Configuration
-  VITE_API_ENDPOINT: z.string().url().optional(),
+  VITE_API_ENDPOINT: z.string().url().or(z.literal('')).optional(),
   VITE_EXCHANGE_RATE_API_KEY: z.string().optional(),
 
   // ReCAPTCHA
