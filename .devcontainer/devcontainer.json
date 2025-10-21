@@ -16,9 +16,7 @@
     "updateContentCommand": "npm install --legacy-peer-deps",
     "postCreateCommand": "",
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-    "postAttachCommand": {
-        "server": "npm start"
-    },
+    "postAttachCommand": "",
     "customizations": {
         "codespaces": {
             "openFiles": [
