@@ -2,16 +2,16 @@
 layout: home
 
 hero:
-  name: "SCUBA Bali"
-  text: "Documentation"
-  tagline: Professional dive center website built with React, Vite, and Tailwind CSS
+  name: 'React Scuba'
+  text: 'Modern Dive Center Platform'
+  tagline: Production-ready website built with React 19, Vite, and Tailwind CSS
   image:
     src: /logo.svg
     alt: SCUBA Bali
   actions:
     - theme: brand
-      text: Get Started
-      link: /getting-started/
+      text: Quick Start
+      link: /guide/quick-start
     - theme: alt
       text: View Components
       link: /components/
@@ -20,108 +20,148 @@ hero:
       link: https://github.com/DeanLuus22021994/react-scuba
 
 features:
+  - icon: ⚡
+    title: Lightning Fast
+    details: Built with Vite 6 for instant hot module replacement and optimized production builds under 350KB gzipped.
+
   - icon: 🎨
     title: Modern UI/UX
-    details: Built with React 19, Tailwind CSS, and Framer Motion for smooth animations and responsive design.
+    details: React 19, Tailwind CSS 3, and Framer Motion deliver beautiful animations and responsive design.
 
   - icon: 📱
-    title: Mobile-First
-    details: Fully responsive design optimized for mobile, tablet, and desktop viewing experiences.
+    title: Mobile First
+    details: Pixel-perfect responsive design optimized for all devices with touch gestures and adaptive layouts.
 
-  - icon: ♿
-    title: Accessible
-    details: WCAG 2.1 AA compliant with keyboard navigation, screen reader support, and focus management.
-
-  - icon: 🚀
-    title: Performance
-    details: Optimized bundle size, lazy loading, code splitting, and Core Web Vitals optimization.
+  - icon: �️
+    title: Production Ready
+    details: Error boundaries, environment validation, comprehensive testing, and battle-tested code quality.
 
   - icon: 📊
-    title: Analytics Ready
-    details: Integrated Google Analytics 4, Google Tag Manager, and conversion tracking.
+    title: Full Analytics
+    details: Google Analytics 4, GTM integration, conversion tracking, and custom event monitoring built-in.
 
   - icon: 🔍
     title: SEO Optimized
-    details: Meta tags, Open Graph, structured data (JSON-LD), and sitemap for better search rankings.
+    details: Meta tags, JSON-LD structured data, sitemap, and perfect Lighthouse scores out of the box.
 
   - icon: 🎯
-    title: Component Library
-    details: 30+ reusable components with PropTypes validation and comprehensive documentation.
+    title: 38+ Components
+    details: Fully typed React components with PropTypes, comprehensive docs, and live examples.
 
   - icon: 🌊
-    title: Dive-Focused
-    details: Custom features for dive centers including booking system, dive site maps, and course management.
+    title: Dive Features
+    details: Booking system, interactive maps, course catalog, gallery with lightbox, and multi-currency support.
 
-  - icon: 📖
-    title: Well Documented
-    details: Comprehensive guides, API documentation, and examples for every component and feature.
+  - icon: ♿
+    title: Accessible
+    details: WCAG 2.1 AA compliant with keyboard navigation, ARIA labels, and screen reader support.
 ---
 
 ## Quick Start
 
 ```bash
-# Clone the repository
+# Clone and install
 git clone https://github.com/DeanLuus22021994/react-scuba.git
-
-# Install dependencies
+cd react-scuba
 npm install
 
-# Start development server
-npm run dev
+# Start development
+npm start
+
+# Run tests
+npm test
 
 # Build for production
 npm run build
 ```
 
-## Tech Stack
+## Modern Tech Stack
 
-- **Framework:** React 19.0.0
-- **Build Tool:** Vite 6.3.6
-- **Styling:** Tailwind CSS 3.4.17
-- **Routing:** React Router 7.1.0
-- **Animations:** Framer Motion 11.18.0
-- **Forms:** React Hook Form + Zod
-- **UI Components:** Headless UI
-- **Icons:** Heroicons
-- **Maps:** React Leaflet
-- **Documentation:** VitePress 1.x
+| Category       | Technology               | Version  |
+| -------------- | ------------------------ | -------- |
+| **Framework**  | React                    | 19.0.0   |
+| **Build Tool** | Vite                     | 6.3.6    |
+| **Styling**    | Tailwind CSS             | 3.4.18   |
+| **Routing**    | React Router             | 7.9.4    |
+| **Animations** | Framer Motion            | 12.23.24 |
+| **Forms**      | React Hook Form + Zod    | Latest   |
+| **UI Library** | Headless UI              | 2.2.9    |
+| **Icons**      | Heroicons                | 2.2.0    |
+| **Maps**       | React Leaflet            | 5.0.0    |
+| **Testing**    | Vitest + Testing Library | 3.0.7    |
+| **Docs**       | VitePress                | 1.6.4    |
 
-## Features
+## What's Included
 
-- 🏠 **Homepage** with hero section, services, features, testimonials, and CTAs
-- 📖 **About Page** with team profiles, certifications, and company story
-- 🗺️ **Dive Sites** with interactive map and detailed site information
-- 🎓 **Courses** with PADI offerings, pricing, and comparison
-- 🖼️ **Gallery** with lightbox, categories, and lazy loading
-- 📧 **Contact Modal** with form validation and reCAPTCHA
-- 📅 **Booking System** with calendar integration
-- 🔝 **Back to Top** button with smooth scroll
-- 📊 **Scroll Progress** indicator
-- 🎨 **Custom CSS** utilities and animations
+::: tip Complete Feature Set
+**5 Main Pages** • **38+ Components** • **6 Utilities** • **Comprehensive Testing** • **Full Analytics Integration**
+:::
 
-## Project Structure
+- ✅ **Homepage** - Hero, services, features, testimonials, CTAs
+- ✅ **About Page** - Team profiles, certifications, company story
+- ✅ **Dive Sites** - Interactive maps, detailed site info
+- ✅ **Courses** - PADI offerings, pricing, comparison tables
+- ✅ **Gallery** - Lightbox, categories, lazy loading, filters
+- ✅ **Contact & Booking** - Forms with validation and reCAPTCHA
+- ✅ **Multi-Currency** - Live exchange rates (MUR, USD, EUR, GBP)
+- ✅ **SEO Ready** - Meta tags, JSON-LD, sitemap generation
+- ✅ **Analytics** - GA4, GTM, conversion tracking
+- ✅ **Accessibility** - WCAG 2.1 AA compliant
+- ✅ **Error Handling** - Error boundaries, validation, logging
+- ✅ **Performance** - Code splitting, lazy loading, optimized images
+
+## Project Architecture
 
 ```
 react-scuba/
-├── docs/              # VitePress documentation
-├── public/            # Static assets
+├── docs/                    # 📚 VitePress documentation
 ├── src/
-│   ├── assets/        # Images, icons, SVGs
-│   ├── components/    # React components
-│   ├── data/          # Static data files
-│   ├── layouts/       # Layout components
-│   ├── pages/         # Page components
-│   ├── styles/        # CSS utilities
-│   └── utils/         # Helper functions
-├── ARCHITECTURE.md    # Architecture guide
-├── CSS_ENHANCEMENTS.md # CSS documentation
+│   ├── components/          # 🧩 38+ React components
+│   │   ├── about/          # About page components
+│   │   ├── common/         # Shared components
+│   │   ├── courses/        # Course components
+│   │   ├── dive-sites/     # Dive site components
+│   │   ├── gallery/        # Gallery components
+│   │   ├── home/           # Homepage sections
+│   │   ├── modals/         # Modal dialogs
+│   │   └── shared/         # Cross-page components
+│   ├── utils/              # 🛠️ Utilities (analytics, logger, SEO, etc.)
+│   ├── hooks/              # 🪝 Custom React hooks
+│   ├── services/           # 🔌 API clients
+│   ├── data/               # 📊 Static data
+│   ├── layouts/            # 🏗️ Layout components
+│   └── styles/             # 🎨 Global styles
 └── package.json
 ```
 
-## Contributing
+## Next Steps
 
-We welcome contributions! See our [Contributing Guide](/contributing/) for details.
+<div class="vp-card-container">
+  <a href="/guide/quick-start" class="vp-card">
+    <h3>🚀 Quick Start</h3>
+    <p>Get up and running in 5 minutes</p>
+  </a>
+  <a href="/guide/installation" class="vp-card">
+    <h3>📦 Installation</h3>
+    <p>Complete setup guide with troubleshooting</p>
+  </a>
+  <a href="/components/" class="vp-card">
+    <h3>🧩 Components</h3>
+    <p>Explore 38+ documented components</p>
+  </a>
+  <a href="/api/" class="vp-card">
+    <h3>⚙️ API Reference</h3>
+    <p>Utilities, hooks, and services</p>
+  </a>
+</div>
+
+## Community & Support
+
+- 🐛 [Report Issues](https://github.com/DeanLuus22021994/react-scuba/issues)
+- 💬 [Discussions](https://github.com/DeanLuus22021994/react-scuba/discussions)
+- 📖 [Contributing Guide](/contributing)
+- 📝 [Changelog](/changelog)
 
 ## License
 
-MIT License - see [LICENSE](https://github.com/DeanLuus22021994/react-scuba/blob/main/LICENSE) for details.
+[MIT License](https://github.com/DeanLuus22021994/react-scuba/blob/main/LICENSE) © 2025 React Scuba
