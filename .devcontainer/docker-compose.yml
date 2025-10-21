@@ -19,7 +19,9 @@ services:
               capabilities: [gpu]
 
   db:
-    build: Dockerfile.db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     env_file:
       - .env
     environment:
