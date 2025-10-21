@@ -1,21 +1,40 @@
-# Mauritius Scuba Diving Website
+# React Scuba 🤿
 
-A modern, conversion-optimized website for a scuba diving center in Mauritius. Built with React 19, Vite, and Tailwind CSS, featuring comprehensive Google AdWords conversion tracking, multi-currency support, and Google Calendar booking integration.
+A modern, production-ready website platform for dive centers and marine tourism businesses. Built with React 19, Vite, and Tailwind CSS.
 
-## 🌊 Features
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![React](https://img.shields.io/badge/React-19.0.0-61dafb.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.3.6-646cff.svg)](https://vitejs.dev/)
+[![Documentation](https://img.shields.io/badge/docs-live-success.svg)](https://deanluus22021994.github.io/react-scuba/)
 
-- **React 19** - Latest React with modern hooks and features
-- **Vite 6.3** - Lightning-fast build tool and dev server
-- **Tailwind CSS v3** - Utility-first CSS with custom ocean theme
-- **Multi-Currency** - Support for MUR, USD, EUR, GBP with live conversion
-- **Google Analytics 4 & GTM** - Comprehensive conversion tracking
-- **SEO Optimized** - Meta tags, JSON-LD structured data, sitemap
-- **Responsive Design** - Mobile-first, works on all devices
-- **Contact & Booking Modals** - Unified forms with reCAPTCHA
-- **Google Calendar Integration** - Real-time availability and booking
-- **Interactive Map** - Leaflet map showing dive sites in Mauritius
-- **Image Gallery** - Lazy-loaded with lightbox and filters
-- **Phone & WhatsApp CTAs** - Trackable click-to-call/message
+## ✨ Features
+
+### Core Technology
+
+- ⚡ **React 19** - Latest features with concurrent rendering
+- 🚀 **Vite 6** - Lightning-fast dev server and builds (< 10s)
+- 🎨 **Tailwind CSS 3** - Utility-first styling with custom theme
+- 🧪 **Vitest** - Fast unit testing with Testing Library
+- 📚 **VitePress** - Beautiful documentation site
+
+### Business Features
+
+- 💱 **Multi-Currency** - MUR, USD, EUR, GBP with live exchange rates
+- 📊 **Analytics** - Google Analytics 4 & GTM integration
+- 🔍 **SEO Optimized** - Meta tags, JSON-LD, sitemap, perfect scores
+- 📱 **Mobile-First** - Fully responsive, touch-optimized
+- 🗺️ **Interactive Maps** - Dive site locations with React Leaflet
+- 🖼️ **Photo Gallery** - Lightbox, filters, lazy loading
+- 📧 **Forms** - Contact & booking with validation & reCAPTCHA
+- 📞 **CTAs** - Click-to-call, WhatsApp integration
+
+### Code Quality
+
+- ✅ **ESLint** - Code quality enforcement
+- ✨ **Prettier** - Consistent code formatting
+- 🛡️ **Error Boundaries** - Graceful error handling
+- 📝 **PropTypes** - Runtime type checking
+- 🧹 **Clean Code** - Well-organized, documented
 
 ## 🚀 Quick Start
 
@@ -75,21 +94,12 @@ A modern, conversion-optimized website for a scuba diving center in Mauritius. B
 
 ## 📚 Documentation
 
-### Primary Documentation
-
 - **[Online Documentation](https://deanluus22021994.github.io/react-scuba/)** - Complete VitePress documentation
-- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Development guidelines and contribution process
-- **[DEVELOPMENT_DEBT.md](./DEVELOPMENT_DEBT.md)** - Technical debt tracking
-
-### Guides
-
-- [docs/SETUP.md](./docs/SETUP.md) - Production deployment guide
-- [docs/ADWORDS.md](./docs/ADWORDS.md) - Google Ads conversion tracking
-- [.env.example](./.env.example) - Environment variables reference
-
-### Legacy Documentation
-
-Historical project documentation is archived in [docs/archive/](./docs/archive/)
+- **[Contributing Guide](https://deanluus22021994.github.io/react-scuba/contributing.html)** - Development guidelines and contribution process
+- **[Quick Start](https://deanluus22021994.github.io/react-scuba/guide/quick-start.html)** - Get up and running in 5 minutes
+- **[API Reference](https://deanluus22021994.github.io/react-scuba/api/)** - Component documentation
+- **[Deployment Guide](https://deanluus22021994.github.io/react-scuba/deployment/)** - Production deployment
+- **[.env.example](./.env.example)** - Environment variables reference
 
 ## 📞 Support
 
