@@ -3,8 +3,6 @@
     "files.autoSave": "onFocusChange",
     // GPU acceleration for VS Code UI (not language servers)
     "window.titleBarStyle": "custom",
-    "terminal.integrated.gpuAcceleration": "on",
-    "terminal.integrated.strictEnv": false,  // Utilize TerminalOptions.strictEnv from #vscodeAPI
     // JavaScript/TypeScript language server optimization
     "typescript.tsserver.maxTsServerMemory": 4096,
     "typescript.tsserver.experimental.enableProjectDiagnostics": false,
@@ -121,7 +119,7 @@
     "ruff.enable": true,
     "ruff.organizeImports": true,
     "ruff.fixAll": true,
-    "ruff.nativeServer": false,  // DISABLE native server to prevent crashes
+    "ruff.nativeServer": true,  // Enable native server as recommended
     "ruff.interpreter": ["C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"],  // Use freethreaded Python
     "ruff.path": ["./.venv/Scripts/ruff.exe"],
     "isort.check": true,
@@ -137,6 +135,7 @@
     // Disable problematic language servers
     "pylint.enabled": false,  // Disable Pylint native server
     "mypy.enabled": false,    // Disable MyPy native server
+    "python.formatting.provider": "none",  // Disable Black formatter to prevent connection issues
     "python.languageServer": "Pylance",
     "pylance.enable": true,
     // Pylance settings for Python 3.14 compatibility

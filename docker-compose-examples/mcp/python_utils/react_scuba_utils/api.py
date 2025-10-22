@@ -6,18 +6,19 @@ Provides REST API endpoints for documentation utilities,
 leveraging Python 3.14 features for enhanced performance.
 """
 
-import sys
+import asyncio
 import json
+import subprocess
+import sys
 import threading
 import time
-import subprocess
-import asyncio
 import uuid
 from pathlib import Path
+from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Request, Response
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 # Import our utilities (moved to functions to allow startup without them)
 # from react_scuba_utils.config.settings import PathConfig, get_python_features, HTTPConfig
@@ -30,13 +31,19 @@ init_status = {
     "status": "ready",
     "message": "API is fully operational",
     "packages_installed": True,
-    "services_ready": True
+    "services_ready": True,
 }
 
 # Thread lock for status updates
 status_lock = threading.Lock()
 
-def update_init_status(status: str, message: str, packages_installed: bool = None, services_ready: bool = None):
+
+def update_init_status(
+    status: str,
+    message: str,
+    packages_installed: bool | None = None,
+    services_ready: bool | None = None,
+):
     """Update the global initialization status."""
     with status_lock:
         init_status["status"] = status
@@ -46,6 +53,7 @@ def update_init_status(status: str, message: str, packages_installed: bool = Non
         if services_ready is not None:
             init_status["services_ready"] = services_ready
 
+
 # Remove the async package installation since packages are installed in Dockerfile
 # install_packages_async function removed
 # install_thread removed
@@ -54,7 +62,7 @@ def update_init_status(status: str, message: str, packages_installed: bool = Non
 app = FastAPI(
     title="React Scuba Python Utilities API",
     description="Documentation utilities API with Python 3.14 enhancements",
-    version="0.2.0"
+    version="0.2.0",
 )
 
 # Add CORS middleware
@@ -68,10 +76,10 @@ app.add_middleware(
 
 # Initialize configurations
 from react_scuba_utils.config.settings import (
+    HTTPConfig,
+    LoggingConfig,
     PathConfig,
     get_python_features,
-    HTTPConfig,
-    LoggingConfig
 )
 
 path_config = PathConfig()
@@ -81,6 +89,7 @@ features = get_python_features()
 # Configure structured logging
 logging_config = LoggingConfig(level="INFO")
 logging_config.configure_logging()
+
 
 # Correlation ID middleware
 @app.middleware("http")
@@ -97,10 +106,13 @@ async def add_correlation_id(request: Request, call_next):
 
     return response
 
+
 @app.get("/")
 async def root(request: Request):
     """Root endpoint with API information."""
-    correlation_logger = logging_config.get_correlation_logger(request.state.correlation_id)
+    correlation_logger = logging_config.get_correlation_logger(
+        request.state.correlation_id
+    )
     correlation_logger.info("Root endpoint accessed", extra={"endpoint": "/"})
 
     return {
@@ -112,44 +124,52 @@ async def root(request: Request):
         "endpoints": {
             "/inventory": "Component inventory",
             "/health": "Health check",
-            "/links/check": "Link validation"
-        }
+            "/links/check": "Link validation",
+        },
     }
+
 
 @app.get("/health")
 async def health(request: Request):
     """Health check endpoint with initialization status."""
-    correlation_logger = logging_config.get_correlation_logger(request.state.correlation_id)
+    correlation_logger = logging_config.get_correlation_logger(
+        request.state.correlation_id
+    )
     correlation_logger.info("Health check requested", extra={"endpoint": "/health"})
 
     with status_lock:
         current_status = init_status.copy()
 
     # Add Python version and features to response
-    current_status.update({
-        "python_version": sys.version,
-        "features": features
-    })
+    current_status.update({"python_version": sys.version, "features": features})
 
-    correlation_logger.info("Health check completed", extra={
-        "status": current_status["status"],
-        "response_size": len(json.dumps(current_status))
-    })
+    correlation_logger.info(
+        "Health check completed",
+        extra={
+            "status": current_status["status"],
+            "response_size": len(json.dumps(current_status)),
+        },
+    )
 
     return JSONResponse(content=current_status)
+
 
 @app.get("/inventory")
 async def get_inventory(request: Request, src_path: str = "src"):
     """Generate and return component inventory."""
-    correlation_logger = logging_config.get_correlation_logger(request.state.correlation_id)
-    correlation_logger.info("Inventory generation requested", extra={
-        "endpoint": "/inventory",
-        "src_path": src_path
-    })
+    correlation_logger = logging_config.get_correlation_logger(
+        request.state.correlation_id
+    )
+    correlation_logger.info(
+        "Inventory generation requested",
+        extra={"endpoint": "/inventory", "src_path": src_path},
+    )
 
     try:
-        from react_scuba_utils.services.component_inventory import ComponentInventoryService
         from react_scuba_utils.models.models import ComponentInventoryConfig
+        from react_scuba_utils.services.component_inventory import (
+            ComponentInventoryService,
+        )
 
         config = ComponentInventoryConfig(src_path=src_path)
         service = ComponentInventoryService(config, path_config)
@@ -159,46 +179,47 @@ async def get_inventory(request: Request, src_path: str = "src"):
             "pages": len(inventory.get("pages", [])),
             "components": len(inventory.get("components", [])),
             "hooks": len(inventory.get("hooks", [])),
-            "utils": len(inventory.get("utils", []))
+            "utils": len(inventory.get("utils", [])),
         }
 
-        correlation_logger.info("Inventory generation completed", extra={
-            "summary": summary,
-            "success": True
-        })
+        correlation_logger.info(
+            "Inventory generation completed",
+            extra={"summary": summary, "success": True},
+        )
 
         return JSONResponse(
-            content={
-                "status": "success",
-                "data": inventory,
-                "summary": summary
-            }
+            content={"status": "success", "data": inventory, "summary": summary}
         )
     except Exception as e:
-        correlation_logger.error("Inventory generation failed", extra={
-            "error": str(e),
-            "src_path": src_path
-        }, exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Error generating inventory: {str(e)}")
+        correlation_logger.error(
+            "Inventory generation failed",
+            extra={"error": str(e), "src_path": src_path},
+            exc_info=True,
+        )
+        raise HTTPException(
+            status_code=500, detail=f"Error generating inventory: {str(e)}"
+        )
+
 
 @app.get("/links/check")
 async def check_links(request: Request, workers: int = 10, timeout: int = 10):
     """Check documentation links."""
-    correlation_logger = logging_config.get_correlation_logger(request.state.correlation_id)
-    correlation_logger.info("Link checking requested", extra={
-        "endpoint": "/links/check",
-        "workers": workers,
-        "timeout": timeout
-    })
+    correlation_logger = logging_config.get_correlation_logger(
+        request.state.correlation_id
+    )
+    correlation_logger.info(
+        "Link checking requested",
+        extra={"endpoint": "/links/check", "workers": workers, "timeout": timeout},
+    )
 
     try:
-        from react_scuba_utils.services.link_checker import LinkCheckerService
         from react_scuba_utils.models.models import LinkCheckConfig
+        from react_scuba_utils.services.link_checker import LinkCheckerService
 
         config = LinkCheckConfig(
             max_workers=workers,
             timeout=timeout,
-            use_interpreters=features["has_interpreters"]
+            use_interpreters=features["has_interpreters"],
         )
 
         service = LinkCheckerService(config, path_config, http_config)
@@ -207,37 +228,38 @@ async def check_links(request: Request, workers: int = 10, timeout: int = 10):
         summary = {
             "valid": len(results.get("valid", [])),
             "broken": len(results.get("broken", [])),
-            "skipped": len(results.get("skipped", []))
+            "skipped": len(results.get("skipped", [])),
         }
 
-        correlation_logger.info("Link checking completed", extra={
-            "summary": summary,
-            "success": True
-        })
+        correlation_logger.info(
+            "Link checking completed", extra={"summary": summary, "success": True}
+        )
 
         return JSONResponse(
-            content={
-                "status": "success",
-                "data": results,
-                "summary": summary
-            }
+            content={"status": "success", "data": results, "summary": summary}
         )
     except Exception as e:
-        correlation_logger.error("Link checking failed", extra={
-            "error": str(e),
-            "workers": workers,
-            "timeout": timeout
-        }, exc_info=True)
+        correlation_logger.error(
+            "Link checking failed",
+            extra={"error": str(e), "workers": workers, "timeout": timeout},
+            exc_info=True,
+        )
         raise HTTPException(status_code=500, detail=f"Error checking links: {str(e)}")
+
 
 if __name__ == "__main__":
     import uvicorn
 
     try:
         from react_scuba_utils.config.settings import get_python_features
+
         features = get_python_features()
     except ImportError:
-        features = {"version_string": "unknown", "is_free_threaded": False, "has_interpreters": False}
+        features = {
+            "version_string": "unknown",
+            "is_free_threaded": False,
+            "has_interpreters": False,
+        }
 
     print("🐍 React Scuba Python Utilities API")
     print(f"📍 Python {features['version_string']}")
@@ -252,5 +274,5 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=8000,
         reload=False,
-        log_level="info"
+        log_level="info",
     )
