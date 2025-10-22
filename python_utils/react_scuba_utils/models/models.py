@@ -5,8 +5,8 @@ This module contains all data models and type definitions used throughout
 the react-scuba-utils package.
 """
 
-from dataclasses import dataclass, asdict
-from typing import Any, Dict, List, Optional
+from dataclasses import asdict, dataclass
+from typing import Any, Optional
 
 
 @dataclass
@@ -21,13 +21,14 @@ class LinkResult:
         error_message: Error message (if any)
         response_time: Time taken for the request in seconds
     """
+
     url: str
     is_valid: bool
-    status_code: Optional[int] = None
-    error_message: Optional[str] = None
-    response_time: Optional[float] = None
+    status_code: int | None = None
+    error_message: str | None = None
+    response_time: float | None = None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary representation."""
         return asdict(self)
 
@@ -46,15 +47,16 @@ class ComponentInfo:
         imports: List of imported modules
         size_bytes: File size in bytes
     """
+
     name: str
     file: str
     path: str
     category: str
-    exports: List[str]
-    imports: List[str]
+    exports: list[str]
+    imports: list[str]
     size_bytes: int
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary representation."""
         return asdict(self)
 
@@ -71,15 +73,16 @@ class LinkCheckConfig:
         use_interpreters: Whether to use concurrent interpreters
         skip_domains: Domains to skip during checking
     """
+
     max_workers: int = 10
     timeout: int = 10
     retry_attempts: int = 3
     use_interpreters: bool = True
-    skip_domains: List[str] = None
+    skip_domains: list[str] | None = None
 
     def __post_init__(self):
         if self.skip_domains is None:
-            self.skip_domains = ['localhost', '127.0.0.1', '0.0.0.0']
+            self.skip_domains = ["localhost", "127.0.0.1", "0.0.0.0"]
 
 
 @dataclass
@@ -92,12 +95,13 @@ class ComponentInventoryConfig:
         extensions: File extensions to scan
         categories: Component categories to include
     """
+
     src_path: str = "src"
-    extensions: List[str] = None
-    categories: List[str] = None
+    extensions: list[str] | None = None
+    categories: list[str] | None = None
 
     def __post_init__(self):
         if self.extensions is None:
-            self.extensions = ['*.jsx', '*.js', '*.tsx', '*.ts']
+            self.extensions = ["*.jsx", "*.js", "*.tsx", "*.ts"]
         if self.categories is None:
-            self.categories = ['pages', 'components', 'hooks', 'utils']
+            self.categories = ["pages", "components", "hooks", "utils"]

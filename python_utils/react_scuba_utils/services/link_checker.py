@@ -10,11 +10,11 @@ import re
 import sys
 import time
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Any
 from urllib.parse import urljoin
 
-from ..config.settings import HTTPConfig, PathConfig, HAS_INTERPRETERS
-from ..models.models import LinkResult, LinkCheckConfig
+from ..config.settings import HAS_INTERPRETERS, HTTPConfig, PathConfig
+from ..models.models import LinkCheckConfig, LinkResult
 
 if HAS_INTERPRETERS:
     from concurrent.futures import InterpreterPoolExecutor
@@ -30,17 +30,19 @@ class LinkCheckerService:
     support for concurrent interpreters and free-threaded execution.
     """
 
-    def __init__(self, config: LinkCheckConfig, path_config: PathConfig, http_config: HTTPConfig):
+    def __init__(
+        self, config: LinkCheckConfig, path_config: PathConfig, http_config: HTTPConfig
+    ):
         self.config = config
         self.path_config = path_config
         self.http_config = http_config
 
-    def find_markdown_files(self) -> List[Path]:
+    def find_markdown_files(self) -> list[Path]:
         """Find all markdown files in the docs directory."""
         docs_path = self.path_config.resolve_docs_path()
         return list(docs_path.rglob("*.md"))
 
-    def extract_links(self, file_path: Path) -> List[str]:
+    def extract_links(self, file_path: Path) -> list[str]:
         """
         Extract all links from a markdown file.
 
@@ -48,12 +50,12 @@ class LinkCheckerService:
         """
         links = []
         try:
-            content = file_path.read_text(encoding='utf-8')
+            content = file_path.read_text(encoding="utf-8")
 
             # Extract markdown links [text](url)
-            md_links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
+            md_links = re.findall(r"\[([^\]]+)\]\(([^)]+)\)", content)
             for _, url in md_links:
-                if not url.startswith(('http://', 'https://', '#')):
+                if not url.startswith(("http://", "https://", "#")):
                     # Convert relative links to absolute
                     links.append(urljoin(self.path_config.base_url, url))
                 else:
@@ -62,7 +64,7 @@ class LinkCheckerService:
             # Extract HTML links
             html_links = re.findall(r'href=["\']([^"\']+)["\']', content)
             for url in html_links:
-                if url.startswith(('http://', 'https://')):
+                if url.startswith(("http://", "https://")):
                     links.append(url)
 
         except Exception as e:
@@ -70,7 +72,7 @@ class LinkCheckerService:
 
         return list(set(links))  # Remove duplicates
 
-    def check_links_concurrent(self) -> Dict[str, List[str]]:
+    def check_links_concurrent(self) -> dict[str, list[str]]:
         """
         Check all links using concurrent execution.
 
@@ -101,7 +103,9 @@ class LinkCheckerService:
 
         # Check links concurrently
         with executor_class(max_workers=self.config.max_workers) as executor:
-            futures = [executor.submit(self._check_single_link, url) for url in all_links]
+            futures = [
+                executor.submit(self._check_single_link, url) for url in all_links
+            ]
 
             for future in futures:
                 result: LinkResult = future.result()
@@ -110,7 +114,9 @@ class LinkCheckerService:
                 elif result.is_valid:
                     results["valid"].append(result.url)
                 else:
-                    status_info = f" (status: {result.status_code})" if result.status_code else ""
+                    status_info = (
+                        f" (status: {result.status_code})" if result.status_code else ""
+                    )
                     results["broken"].append(f"{result.url}{status_info}")
 
         return results
@@ -130,7 +136,7 @@ class LinkCheckerService:
                     url=url,
                     is_valid=True,
                     error_message="skipped",
-                    response_time=time.time() - start_time
+                    response_time=time.time() - start_time,
                 )
 
             if not self.http_config.is_available():
@@ -138,7 +144,7 @@ class LinkCheckerService:
                     url=url,
                     is_valid=False,
                     error_message="requests not available",
-                    response_time=time.time() - start_time
+                    response_time=time.time() - start_time,
                 )
 
             session = self.http_config.session
@@ -147,21 +153,25 @@ class LinkCheckerService:
                     url=url,
                     is_valid=False,
                     error_message="HTTP session not available",
-                    response_time=time.time() - start_time
+                    response_time=time.time() - start_time,
                 )
 
             # Use HEAD request for efficiency, fallback to GET if needed
-            response = session.head(url, timeout=self.config.timeout, allow_redirects=True)
+            response = session.head(
+                url, timeout=self.config.timeout, allow_redirects=True
+            )
 
             # Some servers don't support HEAD, try GET for 405 responses
             if response.status_code == 405:
-                response = session.get(url, timeout=self.config.timeout, allow_redirects=True)
+                response = session.get(
+                    url, timeout=self.config.timeout, allow_redirects=True
+                )
 
             return LinkResult(
                 url=url,
                 is_valid=response.status_code < 400,
                 status_code=response.status_code,
-                response_time=time.time() - start_time
+                response_time=time.time() - start_time,
             )
 
         except Exception as e:
@@ -169,10 +179,10 @@ class LinkCheckerService:
                 url=url,
                 is_valid=False,
                 error_message=str(e),
-                response_time=time.time() - start_time
+                response_time=time.time() - start_time,
             )
 
-    async def async_check_links(self, urls: List[str]) -> Dict[str, List[str]]:
+    async def async_check_links(self, urls: list[str]) -> dict[str, list[str]]:
         """
         Asynchronous link checking using asyncio.
 
@@ -186,10 +196,12 @@ class LinkCheckerService:
 
         semaphore = asyncio.Semaphore(self.config.max_workers)
 
-        async def check_single_url(url: str) -> Tuple[str, bool, str]:
+        async def check_single_url(url: str) -> tuple[str, bool, str]:
             async with semaphore:
                 try:
-                    if any(skip_domain in url for skip_domain in self.config.skip_domains):
+                    if any(
+                        skip_domain in url for skip_domain in self.config.skip_domains
+                    ):
                         return url, True, "skipped"
 
                     session = self.http_config.session
@@ -198,26 +210,38 @@ class LinkCheckerService:
 
                     # Use asyncio.to_thread for I/O bound operations
                     response = await asyncio.to_thread(
-                        session.head, url, timeout=self.config.timeout, allow_redirects=True
+                        session.head,
+                        url,
+                        timeout=self.config.timeout,
+                        allow_redirects=True,
                     )
 
                     if response.status_code == 405:  # HEAD not allowed
                         response = await asyncio.to_thread(
-                            session.get, url, timeout=self.config.timeout, allow_redirects=True
+                            session.get,
+                            url,
+                            timeout=self.config.timeout,
+                            allow_redirects=True,
                         )
 
-                    return url, response.status_code < 400, f"status: {response.status_code}"
+                    return (
+                        url,
+                        response.status_code < 400,
+                        f"status: {response.status_code}",
+                    )
 
                 except Exception as e:
                     return url, False, str(e)
 
         # Create tasks for all URLs
         tasks = [check_single_url(url) for url in urls]
-        completed_results = await asyncio.gather(*tasks, return_exceptions=True)
+        completed_results: list[
+            tuple[str, bool, str] | BaseException
+        ] = await asyncio.gather(*tasks, return_exceptions=True)
 
         # Process results
         for result in completed_results:
-            if isinstance(result, Exception):
+            if isinstance(result, BaseException):
                 print(f"Async task error: {result}", file=sys.stderr)
                 continue
 

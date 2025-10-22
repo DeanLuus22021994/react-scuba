@@ -6,23 +6,25 @@ Enhanced for Python 3.14 with free-threaded execution,
 concurrent interpreters, and improved parallelism.
 """
 
+import asyncio
+import json
 import os
 import re
 import sys
-import asyncio
-import json
-import yaml
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import List, Dict, Set, Tuple, Optional, Any
+from typing import Any, Optional, Union
 from urllib.parse import urljoin, urlparse
-from dataclasses import dataclass, asdict
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
+
+import yaml
 
 # Python 3.14+ features
 if sys.version_info >= (3, 14):
     try:
         import concurrent.interpreters as interpreters
         from concurrent.futures import InterpreterPoolExecutor
+
         HAS_INTERPRETERS = True
     except ImportError:
         HAS_INTERPRETERS = False
@@ -40,28 +42,30 @@ except ImportError:
 @dataclass
 class LinkResult:
     """Result of a link check operation."""
+
     url: str
     is_valid: bool
-    status_code: Optional[int] = None
-    error_message: Optional[str] = None
-    response_time: Optional[float] = None
+    status_code: int | None = None
+    error_message: str | None = None
+    response_time: float | None = None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
 
 @dataclass
 class ComponentInfo:
     """Information about a React component."""
+
     name: str
     file: str
     path: str
     category: str
-    exports: List[str]
-    imports: List[str]
+    exports: list[str]
+    imports: list[str]
     size_bytes: int
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
 
@@ -85,9 +89,7 @@ class DocUtils:
         if requests:
             self.session = requests.Session()
             retry_strategy = Retry(
-                total=3,
-                status_forcelist=[429, 500, 502, 503, 504],
-                backoff_factor=1
+                total=3, status_forcelist=[429, 500, 502, 503, 504], backoff_factor=1
             )
             adapter = HTTPAdapter(max_retries=retry_strategy)
             self.session.mount("http://", adapter)
@@ -95,20 +97,20 @@ class DocUtils:
         else:
             self.session = None
 
-    def find_markdown_files(self) -> List[Path]:
+    def find_markdown_files(self) -> list[Path]:
         """Find all markdown files in the docs directory using pathlib."""
         return list(self.docs_path.rglob("*.md"))
 
-    def extract_links(self, file_path: Path) -> List[str]:
+    def extract_links(self, file_path: Path) -> list[str]:
         """Extract all links from a markdown file with improved regex."""
         links = []
         try:
-            content = file_path.read_text(encoding='utf-8')
+            content = file_path.read_text(encoding="utf-8")
 
             # Enhanced regex for markdown links with better pattern matching
-            md_links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
+            md_links = re.findall(r"\[([^\]]+)\]\(([^)]+)\)", content)
             for _, url in md_links:
-                if not url.startswith(('http://', 'https://', '#')):
+                if not url.startswith(("http://", "https://", "#")):
                     # Relative link - convert to absolute
                     links.append(urljoin(self.base_url, url))
                 else:
@@ -117,7 +119,7 @@ class DocUtils:
             # Also find HTML links
             html_links = re.findall(r'href=["\']([^"\']+)["\']', content)
             for url in html_links:
-                if url.startswith(('http://', 'https://')):
+                if url.startswith(("http://", "https://")):
                     links.append(url)
 
         except Exception as e:
@@ -125,7 +127,7 @@ class DocUtils:
 
         return list(set(links))  # Remove duplicates
 
-    def check_links_concurrent(self, max_workers: int = 10) -> Dict[str, List[str]]:
+    def check_links_concurrent(self, max_workers: int = 10) -> dict[str, list[str]]:
         """
         Check all links using concurrent execution.
 
@@ -157,7 +159,9 @@ class DocUtils:
 
         # Check links concurrently
         with executor_class(max_workers=max_workers) as executor:
-            futures = [executor.submit(self._check_single_link, url) for url in all_links]
+            futures = [
+                executor.submit(self._check_single_link, url) for url in all_links
+            ]
 
             for future in as_completed(futures):
                 result: LinkResult = future.result()
@@ -166,7 +170,9 @@ class DocUtils:
                 elif result.is_valid:
                     results["valid"].append(result.url)
                 else:
-                    status_info = f" (status: {result.status_code})" if result.status_code else ""
+                    status_info = (
+                        f" (status: {result.status_code})" if result.status_code else ""
+                    )
                     results["broken"].append(f"{result.url}{status_info}")
 
         return results
@@ -178,17 +184,29 @@ class DocUtils:
         Optimized for concurrent execution in free-threaded Python.
         """
         import time
+
         start_time = time.time()
 
         try:
             # Skip local development URLs
-            if any(skip_domain in url for skip_domain in ['localhost', '127.0.0.1', '0.0.0.0']):
-                return LinkResult(url=url, is_valid=True, error_message="skipped",
-                                response_time=time.time() - start_time)
+            if any(
+                skip_domain in url
+                for skip_domain in ["localhost", "127.0.0.1", "0.0.0.0"]
+            ):
+                return LinkResult(
+                    url=url,
+                    is_valid=True,
+                    error_message="skipped",
+                    response_time=time.time() - start_time,
+                )
 
             if not self.session:
-                return LinkResult(url=url, is_valid=False, error_message="requests not available",
-                                response_time=time.time() - start_time)
+                return LinkResult(
+                    url=url,
+                    is_valid=False,
+                    error_message="requests not available",
+                    response_time=time.time() - start_time,
+                )
 
             # Use HEAD request for efficiency, fallback to GET if needed
             response = self.session.head(url, timeout=10, allow_redirects=True)
@@ -201,7 +219,7 @@ class DocUtils:
                 url=url,
                 is_valid=response.status_code < 400,
                 status_code=response.status_code,
-                response_time=time.time() - start_time
+                response_time=time.time() - start_time,
             )
 
         except Exception as e:
@@ -209,10 +227,12 @@ class DocUtils:
                 url=url,
                 is_valid=False,
                 error_message=str(e),
-                response_time=time.time() - start_time
+                response_time=time.time() - start_time,
             )
 
-    def generate_component_inventory(self, src_path: str = "src") -> Dict[str, List[Dict[str, Any]]]:
+    def generate_component_inventory(
+        self, src_path: str = "src"
+    ) -> dict[str, list[dict[str, Any]]]:
         """
         Generate an enhanced inventory of React components.
 
@@ -223,7 +243,7 @@ class DocUtils:
         src_dir = Path(src_path)
 
         # Find component files with multiple extensions
-        extensions = ['*.jsx', '*.js', '*.tsx', '*.ts']
+        extensions = ["*.jsx", "*.js", "*.tsx", "*.ts"]
         component_files = []
         for ext in extensions:
             component_files.extend(src_dir.rglob(ext))
@@ -231,14 +251,16 @@ class DocUtils:
         for file_path in component_files:
             try:
                 relative_path = file_path.relative_to(src_dir)
-                content = file_path.read_text(encoding='utf-8')
+                content = file_path.read_text(encoding="utf-8")
                 size_bytes = file_path.stat().st_size
 
                 # Determine category with improved logic
                 category = self._determine_category(str(relative_path))
 
                 # Extract enhanced component information
-                component_info = self._extract_component_info(content, file_path, category)
+                component_info = self._extract_component_info(
+                    content, file_path, category
+                )
 
                 if component_info:
                     component_info.size_bytes = size_bytes
@@ -262,7 +284,9 @@ class DocUtils:
         else:
             return "components"
 
-    def _extract_component_info(self, content: str, file_path: Path, category: str) -> Optional[ComponentInfo]:
+    def _extract_component_info(
+        self, content: str, file_path: Path, category: str
+    ) -> ComponentInfo | None:
         """Extract comprehensive component information."""
         # Extract component name
         component_name = self._extract_component_name(content, file_path.name)
@@ -280,17 +304,17 @@ class DocUtils:
             category=category,
             exports=exports,
             imports=imports,
-            size_bytes=0  # Will be set by caller
+            size_bytes=0,  # Will be set by caller
         )
 
     def _extract_component_name(self, content: str, filename: str) -> str:
         """Extract component name with improved patterns."""
         # Try various export patterns
         patterns = [
-            r'export default (\w+)',
-            r'export \{ default as (\w+) \}',
-            r'(?:export )?(?:const|function|class) (\w+)',
-            r'module\.exports = (\w+)',
+            r"export default (\w+)",
+            r"export \{ default as (\w+) \}",
+            r"(?:export )?(?:const|function|class) (\w+)",
+            r"module\.exports = (\w+)",
         ]
 
         for pattern in patterns:
@@ -299,26 +323,33 @@ class DocUtils:
                 return match.group(1)
 
         # Fallback to filename
-        return filename.replace('.jsx', '').replace('.js', '').replace('.tsx', '').replace('.ts', '')
+        return (
+            filename.replace(".jsx", "")
+            .replace(".js", "")
+            .replace(".tsx", "")
+            .replace(".ts", "")
+        )
 
-    def _extract_exports(self, content: str) -> List[str]:
+    def _extract_exports(self, content: str) -> list[str]:
         """Extract all exports from the file."""
         exports = []
 
         # Named exports
-        named_exports = re.findall(r'export (?:const|function|class|let|var) (\w+)', content)
+        named_exports = re.findall(
+            r"export (?:const|function|class|let|var) (\w+)", content
+        )
         exports.extend(named_exports)
 
         # Export statements
-        export_statements = re.findall(r'export \{([^}]+)\}', content)
+        export_statements = re.findall(r"export \{([^}]+)\}", content)
         for statement in export_statements:
             # Handle aliases like "Component as Comp"
-            items = [item.split(' as ')[0].strip() for item in statement.split(',')]
+            items = [item.split(" as ")[0].strip() for item in statement.split(",")]
             exports.extend(items)
 
         return list(set(exports))  # Remove duplicates
 
-    def _extract_imports(self, content: str) -> List[str]:
+    def _extract_imports(self, content: str) -> list[str]:
         """Extract all imports from the file."""
         imports = []
 
@@ -339,10 +370,11 @@ class DocUtils:
         Falls back to shutil for older versions.
         """
         try:
-            if hasattr(src, 'copy'):  # Python 3.14+
+            if hasattr(src, "copy"):  # Python 3.14+
                 src.copy(dst, follow_symlinks=follow_symlinks)
             else:
                 import shutil
+
                 shutil.copy2(src, dst, follow_symlinks=follow_symlinks)
             return True
         except Exception as e:
@@ -356,10 +388,11 @@ class DocUtils:
         Falls back to shutil for older versions.
         """
         try:
-            if hasattr(src, 'move'):  # Python 3.14+
+            if hasattr(src, "move"):  # Python 3.14+
                 src.move(dst)
             else:
                 import shutil
+
                 shutil.move(src, dst)
             return True
         except Exception as e:
@@ -367,7 +400,9 @@ class DocUtils:
             return False
 
 
-async def async_check_links(self, urls: List[str], max_concurrency: int = 10) -> Dict[str, List[str]]:
+async def async_check_links(
+    self, urls: list[str], max_concurrency: int = 10
+) -> dict[str, list[str]]:
     """
     Asynchronous link checking using asyncio for Python 3.14+ free-threaded execution.
 
@@ -381,10 +416,13 @@ async def async_check_links(self, urls: List[str], max_concurrency: int = 10) ->
 
     semaphore = asyncio.Semaphore(max_concurrency)
 
-    async def check_single_url(url: str) -> Tuple[str, bool, str]:
+    async def check_single_url(url: str) -> tuple[str, bool, str]:
         async with semaphore:
             try:
-                if any(skip_domain in url for skip_domain in ['localhost', '127.0.0.1', '0.0.0.0']):
+                if any(
+                    skip_domain in url
+                    for skip_domain in ["localhost", "127.0.0.1", "0.0.0.0"]
+                ):
                     return url, True, "skipped"
 
                 # Use asyncio.to_thread for I/O bound operations
@@ -397,18 +435,24 @@ async def async_check_links(self, urls: List[str], max_concurrency: int = 10) ->
                         self.session.get, url, timeout=10, allow_redirects=True
                     )
 
-                return url, response.status_code < 400, f"status: {response.status_code}"
+                return (
+                    url,
+                    response.status_code < 400,
+                    f"status: {response.status_code}",
+                )
 
             except Exception as e:
                 return url, False, str(e)
 
     # Create tasks for all URLs
     tasks = [check_single_url(url) for url in urls]
-    completed_results = await asyncio.gather(*tasks, return_exceptions=True)
+    completed_results: list[
+        tuple[str, bool, str] | BaseException
+    ] = await asyncio.gather(*tasks, return_exceptions=True)
 
     # Process results
     for result in completed_results:
-        if isinstance(result, Exception):
+        if isinstance(result, BaseException):
             print(f"Async task error: {result}", file=sys.stderr)
             continue
 
@@ -441,16 +485,24 @@ Python 3.14 Features:
   - Concurrent interpreters for isolated processing
   - Enhanced pathlib operations
   - Improved concurrent.futures support
-        """
+        """,
     )
 
-    parser.add_argument("command", choices=["check-links", "inventory", "async-check"],
-                       help="Command to run")
+    parser.add_argument(
+        "command",
+        choices=["check-links", "inventory", "async-check"],
+        help="Command to run",
+    )
     parser.add_argument("--docs-path", default="docs", help="Path to docs directory")
     parser.add_argument("--src-path", default="src", help="Path to source directory")
-    parser.add_argument("--workers", type=int, default=10, help="Number of worker threads/interpreters")
-    parser.add_argument("--no-interpreters", action="store_true",
-                       help="Disable concurrent interpreters (use threads only)")
+    parser.add_argument(
+        "--workers", type=int, default=10, help="Number of worker threads/interpreters"
+    )
+    parser.add_argument(
+        "--no-interpreters",
+        action="store_true",
+        help="Disable concurrent interpreters (use threads only)",
+    )
     parser.add_argument("--output", help="Output file for results")
 
     args = parser.parse_args()
@@ -460,7 +512,9 @@ Python 3.14 Features:
     utils = DocUtils(args.docs_path, use_interpreters=use_interpreters)
 
     print(f"🐍 Python {sys.version}")
-    print(f"🔧 Using {'InterpreterPoolExecutor' if use_interpreters else 'ThreadPoolExecutor'}")
+    print(
+        f"🔧 Using {'InterpreterPoolExecutor' if use_interpreters else 'ThreadPoolExecutor'}"
+    )
 
     if args.command == "check-links":
         print("🔗 Checking documentation links...")
@@ -489,7 +543,9 @@ Python 3.14 Features:
                 all_links.update(links)
 
             # Run async check
-            results = asyncio.run(utils.async_check_links(list(all_links), args.workers))
+            results = asyncio.run(
+                utils.async_check_links(list(all_links), args.workers)
+            )
 
             print(f"✅ Valid links: {len(results['valid'])}")
             print(f"❌ Broken links: {len(results['broken'])}")
@@ -508,7 +564,7 @@ Python 3.14 Features:
 
         # Save to JSON with pretty printing
         output_file = args.output or "docs/testing/component-inventory.json"
-        with open(output_file, "w", encoding='utf-8') as f:
+        with open(output_file, "w", encoding="utf-8") as f:
             json.dump(inventory, f, indent=2, ensure_ascii=False)
 
         print(f"📝 Inventory saved to {output_file}")
@@ -516,7 +572,7 @@ Python 3.14 Features:
     # Save results if requested
     if args.output and args.command in ["check-links", "async-check"]:
         results_file = f"{args.output}.json"
-        with open(results_file, "w", encoding='utf-8') as f:
+        with open(results_file, "w", encoding="utf-8") as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
         print(f"📊 Results saved to {results_file}")
 
