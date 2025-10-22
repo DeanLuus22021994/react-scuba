@@ -34,8 +34,7 @@ const CoursesPage = () => {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage:
-                'url(https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920)',
+              backgroundImage: 'url(https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-ocean-900/80 to-ocean-600/80" />
@@ -69,32 +68,21 @@ const CoursesPage = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-4">
-                Choose Your Course
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-4">Choose Your Course</h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Whether you&apos;re taking your first breath underwater or training to become a
-                professional, we have the perfect course for you.
+                Whether you&apos;re taking your first breath underwater or training to become a professional, we have the perfect course for
+                you.
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               {COURSES.map((course, index) => (
-                <CourseCard
-                  key={course.id}
-                  course={course}
-                  onBookClick={handleBookCourse}
-                  index={index}
-                />
+                <CourseCard key={course.id} course={course} onBookClick={handleBookCourse} index={index} />
               ))}
             </div>
 
             {/* Course Comparison Table */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
               <CourseComparison />
             </motion.div>
 
@@ -107,8 +95,7 @@ const CoursesPage = () => {
             >
               <h3 className="text-3xl font-bold mb-4">Not Sure Which Course is Right for You?</h3>
               <p className="text-xl text-ocean-100 mb-8 max-w-2xl mx-auto">
-                Contact our experienced instructors for personalized course recommendations based on
-                your goals and experience level.
+                Contact our experienced instructors for personalized course recommendations based on your goals and experience level.
               </p>
               <button
                 onClick={() => setIsContactModalOpen(true)}

@@ -34,12 +34,8 @@ class ErrorBoundary extends Component {
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md w-full space-y-8 text-center">
             <div>
-              <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-                Oops! Something went wrong
-              </h2>
-              <p className="mt-2 text-sm text-gray-600">
-                We apologize for the inconvenience. An unexpected error has occurred.
-              </p>
+              <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Oops! Something went wrong</h2>
+              <p className="mt-2 text-sm text-gray-600">We apologize for the inconvenience. An unexpected error has occurred.</p>
             </div>
             <div className="mt-5">
               <button
@@ -51,13 +47,9 @@ class ErrorBoundary extends Component {
             </div>
             {import.meta.env.MODE === 'development' && this.state.hasError && this.state.error && (
               <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md text-left">
-                <p className="text-xs font-mono text-red-900 break-all">
-                  {this.state.error.toString()}
-                </p>
+                <p className="text-xs font-mono text-red-900 break-all">{this.state.error.toString()}</p>
                 {this.state.errorInfo && (
-                  <pre className="mt-2 text-xs font-mono text-red-800 overflow-auto max-h-40">
-                    {this.state.errorInfo.componentStack}
-                  </pre>
+                  <pre className="mt-2 text-xs font-mono text-red-800 overflow-auto max-h-40">{this.state.errorInfo.componentStack}</pre>
                 )}
               </div>
             )}

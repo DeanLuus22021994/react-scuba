@@ -74,11 +74,7 @@ export const isInViewport = (element, threshold = 0.5) => {
  * @param {Function} callback - Optional callback function
  * @param {Object} options - IntersectionObserver options
  */
-export const observeScrollReveal = (
-  selector = '.reveal-on-scroll',
-  callback = null,
-  options = {}
-) => {
+export const observeScrollReveal = (selector = '.reveal-on-scroll', callback = null, options = {}) => {
   const defaultOptions = {
     threshold: 0.15,
     rootMargin: '0px 0px -100px 0px',

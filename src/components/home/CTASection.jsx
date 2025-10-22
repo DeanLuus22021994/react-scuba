@@ -13,8 +13,7 @@ const CTASection = ({ onContactClick }) => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Dive In?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-ocean-50">
-            Join us for an unforgettable underwater adventure in the beautiful waters of Mauritius.
-            Book your dive or course today!
+            Join us for an unforgettable underwater adventure in the beautiful waters of Mauritius. Book your dive or course today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button

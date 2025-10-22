@@ -2,12 +2,7 @@ import PropTypes from 'prop-types';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getExchangeRates } from '../services/api';
 import { trackCurrencyChange } from '../utils/analytics';
-import {
-  CURRENCIES,
-  DEFAULT_EXCHANGE_RATES,
-  convertCurrency,
-  formatCurrency,
-} from '../utils/currency';
+import { CURRENCIES, DEFAULT_EXCHANGE_RATES, convertCurrency, formatCurrency } from '../utils/currency';
 
 const CurrencyContext = createContext();
 

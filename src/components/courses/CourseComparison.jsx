@@ -14,24 +14,12 @@ const CourseComparison = () => {
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Course
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Duration
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Min Age
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Prerequisites
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Max Depth
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Price
-              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Min Age</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prerequisites</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Max Depth</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -41,16 +29,10 @@ const CourseComparison = () => {
                   <div className="font-medium text-gray-900">{course.name}</div>
                   <div className="text-sm text-gray-500">{course.certification}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {course.duration}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {course.minAge} years
-                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{course.duration}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{course.minAge} years</td>
                 <td className="px-6 py-4 text-sm text-gray-700 max-w-xs">{course.prerequisites}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {course.maxDepth}
-                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{course.maxDepth}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="font-semibold text-ocean-600">{format(course.price)}</span>
                 </td>

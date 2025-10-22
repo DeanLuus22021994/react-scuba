@@ -22,14 +22,7 @@ const contactSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
-const INQUIRY_TYPES = [
-  'General Inquiry',
-  'Course Information',
-  'Dive Booking',
-  'Equipment Rental',
-  'Group Booking',
-  'Other',
-];
+const INQUIRY_TYPES = ['General Inquiry', 'Course Information', 'Dive Booking', 'Equipment Rental', 'Group Booking', 'Other'];
 
 const CONTACT_METHODS = ['Email', 'Phone', 'WhatsApp'];
 
@@ -156,14 +149,8 @@ const ContactModal = ({
             >
               <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 shadow-xl transition-all">
                 <div className="flex items-center justify-between mb-6">
-                  <Dialog.Title className="text-2xl font-bold text-gray-900">
-                    Contact Us
-                  </Dialog.Title>
-                  <button
-                    onClick={handleClose}
-                    className="text-gray-400 hover:text-gray-500 transition-colors"
-                    aria-label="Close"
-                  >
+                  <Dialog.Title className="text-2xl font-bold text-gray-900">Contact Us</Dialog.Title>
+                  <button onClick={handleClose} className="text-gray-400 hover:text-gray-500 transition-colors" aria-label="Close">
                     <XMarkIcon className="w-6 h-6" />
                   </button>
                 </div>
@@ -171,10 +158,7 @@ const ContactModal = ({
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                         Name *
                       </label>
                       <input
@@ -183,16 +167,11 @@ const ContactModal = ({
                         id="name"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                       />
-                      {errors.name && (
-                        <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-                      )}
+                      {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                         Email *
                       </label>
                       <input
@@ -201,18 +180,13 @@ const ContactModal = ({
                         id="email"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                       />
-                      {errors.email && (
-                        <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                      )}
+                      {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label
-                        htmlFor="phone"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                         Phone *
                       </label>
                       <input
@@ -222,16 +196,11 @@ const ContactModal = ({
                         placeholder="+230 XXXX XXXX"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                       />
-                      {errors.phone && (
-                        <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
-                      )}
+                      {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="inquiryType"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
+                      <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-1">
                         Inquiry Type *
                       </label>
                       <select
@@ -246,18 +215,13 @@ const ContactModal = ({
                           </option>
                         ))}
                       </select>
-                      {errors.inquiryType && (
-                        <p className="mt-1 text-sm text-red-600">{errors.inquiryType.message}</p>
-                      )}
+                      {errors.inquiryType && <p className="mt-1 text-sm text-red-600">{errors.inquiryType.message}</p>}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label
-                        htmlFor="preferredContact"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
+                      <label htmlFor="preferredContact" className="block text-sm font-medium text-gray-700 mb-1">
                         Preferred Contact Method *
                       </label>
                       <select
@@ -272,18 +236,11 @@ const ContactModal = ({
                           </option>
                         ))}
                       </select>
-                      {errors.preferredContact && (
-                        <p className="mt-1 text-sm text-red-600">
-                          {errors.preferredContact.message}
-                        </p>
-                      )}
+                      {errors.preferredContact && <p className="mt-1 text-sm text-red-600">{errors.preferredContact.message}</p>}
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="preferredDate"
-                        className="block text-sm font-medium text-gray-700 mb-1"
-                      >
+                      <label htmlFor="preferredDate" className="block text-sm font-medium text-gray-700 mb-1">
                         Preferred Date (Optional)
                       </label>
                       <DatePicker
@@ -298,10 +255,7 @@ const ContactModal = ({
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                       Message *
                     </label>
                     <textarea
@@ -310,9 +264,7 @@ const ContactModal = ({
                       rows={4}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none"
                     />
-                    {errors.message && (
-                      <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
-                    )}
+                    {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
                   </div>
 
                   {recaptchaSiteKey && (

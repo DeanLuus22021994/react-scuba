@@ -7,8 +7,7 @@ const SERVICES = [
   {
     icon: AcademicCapIcon,
     title: 'PADI Courses',
-    description:
-      'Get certified with our comprehensive PADI courses from beginner to professional level',
+    description: 'Get certified with our comprehensive PADI courses from beginner to professional level',
     link: '/courses',
     linkText: 'View Courses',
     color: 'ocean',
@@ -16,8 +15,7 @@ const SERVICES = [
   {
     icon: MapIcon,
     title: 'Guided Dives',
-    description:
-      "Explore Mauritius' best dive sites with our experienced instructors and dive guides",
+    description: "Explore Mauritius' best dive sites with our experienced instructors and dive guides",
     link: '/dive-sites',
     linkText: 'Explore Sites',
     color: 'ocean',
@@ -25,8 +23,7 @@ const SERVICES = [
   {
     icon: CameraIcon,
     title: 'Photo Dives',
-    description:
-      'Capture stunning underwater moments with our specialized photography dive packages',
+    description: 'Capture stunning underwater moments with our specialized photography dive packages',
     link: '/gallery',
     linkText: 'View Gallery',
     color: 'ocean',
@@ -49,10 +46,7 @@ const ServiceCard = ({ service, index }) => {
       </div>
       <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
       <p className="text-gray-600 mb-4">{service.description}</p>
-      <Link
-        to={service.link}
-        className="text-ocean-600 font-semibold hover:text-ocean-700 inline-flex items-center"
-      >
+      <Link to={service.link} className="text-ocean-600 font-semibold hover:text-ocean-700 inline-flex items-center">
         {service.linkText}
         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -87,8 +81,7 @@ const ServicesSection = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            From beginner courses to advanced certifications, we offer comprehensive scuba diving
-            services
+            From beginner courses to advanced certifications, we offer comprehensive scuba diving services
           </p>
         </motion.div>
 

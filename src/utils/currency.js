@@ -18,12 +18,7 @@ export const DEFAULT_EXCHANGE_RATES = {
   GBP: 0.017, // 1 MUR = 0.017 GBP
 };
 
-export const convertCurrency = (
-  amount,
-  fromCurrency,
-  toCurrency,
-  rates = DEFAULT_EXCHANGE_RATES
-) => {
+export const convertCurrency = (amount, fromCurrency, toCurrency, rates = DEFAULT_EXCHANGE_RATES) => {
   // Convert to MUR first (base currency)
   const amountInMUR = amount / rates[fromCurrency];
   // Then convert to target currency

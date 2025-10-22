@@ -12,15 +12,10 @@ export const DIVE_SITES = [
     visibility: 'Excellent (20-30m)',
     difficulty: 'Beginner',
     marineLife: ['Parrotfish', 'Butterflyfish', 'Sea turtles', 'Moray eels', 'Coral gardens'],
-    description:
-      'A stunning marine park with crystal-clear waters and vibrant coral reefs. Perfect for beginners and snorkelers.',
+    description: 'A stunning marine park with crystal-clear waters and vibrant coral reefs. Perfect for beginners and snorkelers.',
     bestSeason: 'Year-round',
     image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
-    highlights: [
-      'Protected marine park',
-      'Shallow reef perfect for training',
-      'Abundant marine life',
-    ],
+    highlights: ['Protected marine park', 'Shallow reef perfect for training', 'Abundant marine life'],
   },
   {
     id: 'cathedral',
@@ -34,11 +29,7 @@ export const DIVE_SITES = [
       'An impressive underwater cave system with cathedral-like formations. Light beams penetrate through openings creating magical effects.',
     bestSeason: 'May to December',
     image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800',
-    highlights: [
-      'Dramatic cave formations',
-      'Light beam displays',
-      'Advanced navigation challenge',
-    ],
+    highlights: ['Dramatic cave formations', 'Light beam displays', 'Advanced navigation challenge'],
   },
   {
     id: 'coin-de-mire',
@@ -52,11 +43,7 @@ export const DIVE_SITES = [
       "An iconic island off the north coast with dramatic walls and pelagic action. One of Mauritius's most spectacular dive sites.",
     bestSeason: 'October to April',
     image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
-    highlights: [
-      'Big fish encounters',
-      'Drift diving opportunities',
-      'Dramatic underwater topography',
-    ],
+    highlights: ['Big fish encounters', 'Drift diving opportunities', 'Dramatic underwater topography'],
   },
   {
     id: 'whale-rock',
@@ -66,15 +53,10 @@ export const DIVE_SITES = [
     visibility: 'Very Good (18-28m)',
     difficulty: 'Intermediate',
     marineLife: ['Sea turtles', 'Eagle rays', 'Snappers', 'Sweetlips', 'Nudibranchs'],
-    description:
-      'A massive rock formation rising from the seabed, covered in hard and soft corals with plenty of swim-throughs.',
+    description: 'A massive rock formation rising from the seabed, covered in hard and soft corals with plenty of swim-throughs.',
     bestSeason: 'Year-round',
     image: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=800',
-    highlights: [
-      'Unique rock formations',
-      'Multiple swim-throughs',
-      'Excellent for underwater photography',
-    ],
+    highlights: ['Unique rock formations', 'Multiple swim-throughs', 'Excellent for underwater photography'],
   },
   {
     id: 'holts-rocks',
@@ -84,15 +66,10 @@ export const DIVE_SITES = [
     visibility: 'Good (15-20m)',
     difficulty: 'Beginner to Intermediate',
     marineLife: ['Clownfish', 'Lionfish', 'Trumpetfish', 'Scorpionfish', 'Batfish'],
-    description:
-      'A series of rocky outcrops with diverse marine life and excellent for macro photography.',
+    description: 'A series of rocky outcrops with diverse marine life and excellent for macro photography.',
     bestSeason: 'Year-round',
     image: 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?w=800',
-    highlights: [
-      'Macro photography paradise',
-      'Diverse fish species',
-      'Multiple dive levels available',
-    ],
+    highlights: ['Macro photography paradise', 'Diverse fish species', 'Multiple dive levels available'],
   },
 ];
 
@@ -110,7 +87,5 @@ export const getDiveSiteById = (id) => {
 };
 
 export const getDiveSitesByDifficulty = (difficulty) => {
-  return DIVE_SITES.filter((site) =>
-    site.difficulty.toLowerCase().includes(difficulty.toLowerCase())
-  );
+  return DIVE_SITES.filter((site) => site.difficulty.toLowerCase().includes(difficulty.toLowerCase()));
 };

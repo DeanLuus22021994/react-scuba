@@ -23,7 +23,7 @@ root.render(
         <App />
       </ErrorBoundary>
     </HelmetProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // Send web vitals to GA4

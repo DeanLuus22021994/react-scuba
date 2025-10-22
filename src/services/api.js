@@ -18,7 +18,7 @@ api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Response interceptor
@@ -31,7 +31,7 @@ api.interceptors.response.use(
     const errorMessage = error.response?.data?.message || error.message || 'An error occurred';
     logger.error('API Error:', errorMessage);
     return Promise.reject(error);
-  }
+  },
 );
 
 // API methods

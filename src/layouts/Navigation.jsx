@@ -13,13 +13,9 @@ const Navigation = ({ mobile = false, closeMenu }) => {
 
   const linkClass = (path) => {
     const isActive = location.pathname === path;
-    const baseClass = mobile
-      ? 'block px-3 py-2 text-base font-medium'
-      : 'px-3 py-2 text-sm font-medium';
+    const baseClass = mobile ? 'block px-3 py-2 text-base font-medium' : 'px-3 py-2 text-sm font-medium';
 
-    return `${baseClass} ${
-      isActive ? 'text-ocean-600' : 'text-gray-700 hover:text-ocean-600'
-    } transition-colors duration-200`;
+    return `${baseClass} ${isActive ? 'text-ocean-600' : 'text-gray-700 hover:text-ocean-600'} transition-colors duration-200`;
   };
 
   const handleClick = () => {

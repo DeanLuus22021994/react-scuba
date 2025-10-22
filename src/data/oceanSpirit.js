@@ -16,20 +16,14 @@ export const oceanSpiritContent = {
   about: {
     description:
       'Scuba diving in Mauritius means that from the day you arrive, you are among friends. Ocean Spirit Scuba Diving Mauritius is a friendly sociable PADI 5 Star ECO Green Fins Scuba Diving centre with a Green Star, and comfortable club like facilities.',
-    instructors:
-      'Our patient skilled PADI Instructors focus on safety, they know their fish and love their world.',
+    instructors: 'Our patient skilled PADI Instructors focus on safety, they know their fish and love their world.',
     diving:
       'Diving Mauritius is in warm water, with good visibility and 65 great dive sites around the Northern Mauritius Islands. Wreck diving, Turtle diving, Shark diving, macro photography, deep diving, and exquisite healthy coral reefs.',
     values:
       'Ocean Spirit Scuba Diving has grown in its commitment to promote the core principles of conservation, humility, respect, family values and career development.',
   },
 
-  certifications: [
-    'PADI 5 Star ECO Centre',
-    'Green Fins Member',
-    'Reef-World Federation Partner',
-    'Green Star Rating',
-  ],
+  certifications: ['PADI 5 Star ECO Centre', 'Green Fins Member', 'Reef-World Federation Partner', 'Green Star Rating'],
 
   specialties: [
     'Wreck Diving',
@@ -71,11 +65,7 @@ export const oceanSpiritContent = {
     {
       name: 'Best of the North - 10 Dive Package',
       price: 'MUR 20,000',
-      includes: [
-        '10 dives total',
-        '2 dive Safari to Coin de Mire island',
-        'Trou Aux Biches diving',
-      ],
+      includes: ['10 dives total', '2 dive Safari to Coin de Mire island', 'Trou Aux Biches diving'],
     },
   ],
 
@@ -93,8 +83,7 @@ export const oceanSpiritContent = {
     instagram: 'https://www.instagram.com/divingmauritius/',
     twitter: 'https://twitter.com/OceanSpirit13',
     youtube: 'https://www.youtube.com/user/oceandivermu',
-    tripAdvisor:
-      'https://www.tripadvisor.com.my/Attraction_Review-g1905319-d1717410-Reviews-Ocean_Spirit_Dive_Center-Pereybere.html',
+    tripAdvisor: 'https://www.tripadvisor.com.my/Attraction_Review-g1905319-d1717410-Reviews-Ocean_Spirit_Dive_Center-Pereybere.html',
   },
 
   images: {

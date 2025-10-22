@@ -44,8 +44,7 @@ export const COURSES = [
     maxDepth: '18m',
     certification: 'PADI Open Water Diver',
     image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
-    description:
-      "The world's most popular scuba certification. Learn to dive independently with a buddy to a maximum depth of 18 meters.",
+    description: "The world's most popular scuba certification. Learn to dive independently with a buddy to a maximum depth of 18 meters.",
     included: [
       'PADI eLearning or classroom sessions',
       '5 confined water training dives',
@@ -155,14 +154,7 @@ export const COURSES = [
   },
 ];
 
-export const COURSE_COMPARISON_HEADERS = [
-  'Course',
-  'Duration',
-  'Min Age',
-  'Prerequisites',
-  'Max Depth',
-  'Price',
-];
+export const COURSE_COMPARISON_HEADERS = ['Course', 'Duration', 'Min Age', 'Prerequisites', 'Max Depth', 'Price'];
 
 export const getCourseById = (id) => {
   return COURSES.find((course) => course.id === id);

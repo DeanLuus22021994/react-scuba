@@ -14,8 +14,8 @@ const Footer = () => {
           <div>
             <h3 className="text-white text-lg font-bold mb-4">Mauritius Scuba</h3>
             <p className="text-sm mb-4">
-              Professional scuba diving center offering PADI courses and unforgettable diving
-              experiences in the crystal-clear waters of Mauritius.
+              Professional scuba diving center offering PADI courses and unforgettable diving experiences in the crystal-clear waters of
+              Mauritius.
             </p>
             <div className="flex space-x-4">
               {/* Social Media Icons - Placeholder */}
@@ -130,11 +130,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <WhatsAppButton
-                  source="footer"
-                  variant="icon"
-                  className="text-gray-300 hover:text-green-400"
-                />
+                <WhatsAppButton source="footer" variant="icon" className="text-gray-300 hover:text-green-400" />
               </li>
             </ul>
           </div>

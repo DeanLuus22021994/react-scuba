@@ -7,11 +7,7 @@ export const TEAM_MEMBERS = [
   {
     name: 'Ocean Spirit Instructors',
     role: 'PADI 5 Star ECO Centre Team',
-    certifications: [
-      'PADI 5 Star ECO Centre',
-      'Green Fins Member',
-      'Reef-World Federation Partner',
-    ],
+    certifications: ['PADI 5 Star ECO Centre', 'Green Fins Member', 'Reef-World Federation Partner'],
     image: '/photos/hero-ocean-spirit.jpg',
     bio: 'Patient, skilled PADI instructors focused on safety. We know our fish and love our world. Committed to conservation, humility, respect, family values and career development.',
   },

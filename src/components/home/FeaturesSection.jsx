@@ -62,8 +62,7 @@ const FeaturesSection = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We&apos;re committed to providing the best diving experience with safety,
-            professionalism, and passion
+            We&apos;re committed to providing the best diving experience with safety, professionalism, and passion
           </p>
         </motion.div>
 

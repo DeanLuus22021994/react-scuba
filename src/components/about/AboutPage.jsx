@@ -30,8 +30,7 @@ const AboutPage = () => {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage:
-                'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920)',
+              backgroundImage: 'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-ocean-900/80 to-ocean-600/80" />
@@ -59,31 +58,22 @@ const AboutPage = () => {
         {/* Our Story */}
         <section className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6 text-center">
-                Our Story
-              </h2>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6 text-center">Our Story</h2>
               <div className="prose prose-lg max-w-none text-gray-700 space-y-4">
                 <p>
-                  Founded in 2013, we started with a simple mission: to share the incredible
-                  underwater world of Mauritius with adventurers from around the globe. What began
-                  as a small operation with two instructors has grown into one of the island&apos;s
-                  most respected dive centers.
+                  Founded in 2013, we started with a simple mission: to share the incredible underwater world of Mauritius with adventurers
+                  from around the globe. What began as a small operation with two instructors has grown into one of the island&apos;s most
+                  respected dive centers.
                 </p>
                 <p>
-                  Our PADI 5 Star rating reflects our commitment to excellence in training, safety,
-                  and customer service. Every member of our team is passionate about diving and
-                  dedicated to ensuring your underwater experience is safe, educational, and
+                  Our PADI 5 Star rating reflects our commitment to excellence in training, safety, and customer service. Every member of
+                  our team is passionate about diving and dedicated to ensuring your underwater experience is safe, educational, and
                   unforgettable.
                 </p>
                 <p>
-                  With over 10 years of operations and zero major incidents, we&apos;ve established
-                  ourselves as the trusted choice for both beginners taking their first breaths
-                  underwater and experienced divers seeking new adventures in Mauritian waters.
+                  With over 10 years of operations and zero major incidents, we&apos;ve established ourselves as the trusted choice for both
+                  beginners taking their first breaths underwater and experienced divers seeking new adventures in Mauritian waters.
                 </p>
               </div>
             </motion.div>
@@ -93,9 +83,7 @@ const AboutPage = () => {
         {/* Mission & Values */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-12 text-center">
-              Our Mission & Values
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-12 text-center">Our Mission & Values</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -116,8 +104,8 @@ const AboutPage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Safety First</h3>
                 <p className="text-gray-700">
-                  Your safety is our top priority. We maintain the highest equipment standards and
-                  follow strict safety protocols on every dive.
+                  Your safety is our top priority. We maintain the highest equipment standards and follow strict safety protocols on every
+                  dive.
                 </p>
               </motion.div>
 
@@ -133,8 +121,8 @@ const AboutPage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Education Excellence</h3>
                 <p className="text-gray-700">
-                  We believe in quality education. Our instructors use proven teaching methods to
-                  help you become a confident, skilled diver.
+                  We believe in quality education. Our instructors use proven teaching methods to help you become a confident, skilled
+                  diver.
                 </p>
               </motion.div>
 
@@ -147,12 +135,7 @@ const AboutPage = () => {
               >
                 <div className="text-ocean-600 mb-4">
                   <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -163,8 +146,8 @@ const AboutPage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Marine Conservation</h3>
                 <p className="text-gray-700">
-                  We&apos;re dedicated to protecting our oceans. Through education and responsible
-                  diving practices, we work to preserve marine ecosystems.
+                  We&apos;re dedicated to protecting our oceans. Through education and responsible diving practices, we work to preserve
+                  marine ecosystems.
                 </p>
               </motion.div>
             </div>
@@ -176,9 +159,7 @@ const AboutPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Credentials</h2>
-              <p className="text-lg text-gray-700">
-                Trusted, certified, and recognized for excellence
-              </p>
+              <p className="text-lg text-gray-700">Trusted, certified, and recognized for excellence</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -194,9 +175,7 @@ const AboutPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
-              <p className="text-lg text-gray-700">
-                Experienced, passionate, and dedicated to your diving success
-              </p>
+              <p className="text-lg text-gray-700">Experienced, passionate, and dedicated to your diving success</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -210,12 +189,10 @@ const AboutPage = () => {
         {/* Equipment & Safety */}
         <section className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">
-              Modern Equipment & Safety Record
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">Modern Equipment & Safety Record</h2>
             <p className="text-lg text-gray-700 mb-8">
-              We invest in the best equipment to ensure your comfort and safety. All our gear is
-              professionally maintained and regularly serviced to manufacturer specifications.
+              We invest in the best equipment to ensure your comfort and safety. All our gear is professionally maintained and regularly
+              serviced to manufacturer specifications.
             </p>
             <div className="grid md:grid-cols-3 gap-6 mb-12">
               <div className="bg-ocean-50 p-6 rounded-lg">

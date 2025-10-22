@@ -9,9 +9,7 @@ const Loading = ({ size = 'md', text = 'Loading...' }) => {
 
   return (
     <div className="flex flex-col items-center justify-center p-8">
-      <div
-        className={`${sizeClasses[size]} border-4 border-ocean-200 border-t-ocean-500 rounded-full animate-spin`}
-      />
+      <div className={`${sizeClasses[size]} border-4 border-ocean-200 border-t-ocean-500 rounded-full animate-spin`} />
       {text && <p className="mt-4 text-gray-600">{text}</p>}
     </div>
   );

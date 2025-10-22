@@ -33,17 +33,8 @@ const HomePage = () => {
       <VideoSection />
       <TestimonialsSection />
       <CTASection onContactClick={handleContactClick} /> {/* Modals */}
-      <BookingModal
-        isOpen={isBookingModalOpen}
-        onClose={() => setIsBookingModalOpen(false)}
-        bookingType="dive"
-        source="home_page"
-      />
-      <ContactModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        source="home_page"
-      />
+      <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} bookingType="dive" source="home_page" />
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} source="home_page" />
     </>
   );
 };

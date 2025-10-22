@@ -72,10 +72,7 @@ export default [
       'func-call-spacing': ['error', 'never'],
       'key-spacing': ['error', { beforeColon: false, afterColon: true }],
       'space-before-blocks': 'error',
-      'space-before-function-paren': [
-        'error',
-        { anonymous: 'always', named: 'never', asyncArrow: 'always' },
-      ],
+      'space-before-function-paren': ['error', { anonymous: 'always', named: 'never', asyncArrow: 'always' }],
       'space-in-parens': ['error', 'never'],
       'space-infix-ops': 'error',
       'space-unary-ops': 'error',
@@ -96,7 +93,7 @@ export default [
       'no-spaced-func': 'error',
       'no-unneeded-ternary': 'error',
       'operator-assignment': ['error', 'always'],
-      'operator-linebreak': ['error', 'before'],
+      // 'operator-linebreak': ['error', 'before'], // Removed to avoid conflict with Prettier
       'quote-props': ['error', 'as-needed'],
       yoda: ['error', 'never'],
 
@@ -138,10 +135,7 @@ export default [
       'react/jsx-no-duplicate-props': 'error',
       'react/jsx-no-undef': 'error',
       'react/jsx-pascal-case': 'off',
-      'react/jsx-tag-spacing': [
-        'error',
-        { closingSlash: 'never', beforeSelfClosing: 'always', afterOpening: 'never' },
-      ],
+      'react/jsx-tag-spacing': ['error', { closingSlash: 'never', beforeSelfClosing: 'always', afterOpening: 'never' }],
       'react/jsx-uses-vars': 'error',
       'react/jsx-wrap-multilines': [
         'error',
