@@ -1,72 +1,69 @@
-# Docker Cluster Example with Devcontainer
+---
+started: 2025-10-22
+completed: 2025-10-22
+author: AI Assistant
+version: 1.0
+status: active
+description: Load-balanced cluster configuration with multiple nginx web servers
+tags: [docker, compose, cluster, load-balancer, nginx]
+---
 
-This simulates a simple cluster with devcontainer load balancer.
+# [CLUSTER-EXAMPLE-001](#cluster-example-001) Cluster Example
 
-## Services
+<a id="fr-cluster-example-001-functional-requirements"></a>
 
-- **loadbalancer**: Devcontainer with Node.js, Python, NVIDIA GPU
-- **web1-3**: Nginx web servers
-- **db**: PostgreSQL database
+## [FR-CLUSTER-EXAMPLE-001](#fr-cluster-example-001-functional-requirements) Functional Requirements
 
-## Devcontainer Usage
+- Load-balanced cluster configuration
+- Multiple nginx web servers
+- Devcontainer as load balancer
+- Service health checks
+- Named volumes and networking
 
-Open in VS Code Insiders, use "Dev Containers: Reopen in Container" command.
+### FR Validation Criteria
 
-## Manual Usage
+- Docker Compose file defines load balancer and multiple app instances
+- Nginx configured as reverse proxy with upstream servers
+- Devcontainer includes load balancing configuration
+- Health check endpoints defined for all services
+- Named volumes configured for data persistence
 
-```bash
-cd cluster-example
-docker-compose up -d
-```
+<a id="uac-cluster-example-001-user-acceptance-criteria"></a>
 
-## Access
+## [UAC-CLUSTER-EXAMPLE-001](#uac-cluster-example-001-user-acceptance-criteria) User Acceptance Criteria
 
-- Load balanced web: <http://localhost:8080>
-- DB: localhost:5432
+- All services start successfully
+- Load balancer distributes traffic
+- Health checks pass for all services
+- Applications accessible via HTTP
+- Cleanup removes all containers and volumes
 
-## User Acceptance Testing Results
+### UAC Validation Criteria
 
-### UAT Session: 2025-10-22 13:47 UTC
+- All containers running via `docker-compose ps`
+- Load balancer verified with multiple requests showing different servers
+- Health check URLs return success status codes
+- HTTP traffic flows through load balancer to applications
+- Cleanup confirmed with `docker volume ls` showing no volumes
 
-**Environment**: Clean Docker slate (all images, volumes, cache pruned)
+<a id="blk-cluster-example-001-blockers"></a>
 
-**Test Summary**:
+## [BLK-CLUSTER-EXAMPLE-001](#blk-cluster-example-001-blockers) Blockers
 
-- **Validation**: ✅ Configuration valid
-- **Build**: ✅ Successful (fresh builds)
-- **Startup**: ✅ All services started successfully
-- **Health Checks**:
-  - DB: ✅ Healthy (PostgreSQL ready)
-  - Web1-3: ✅ Healthy (nginx serving static content)
-  - Node: ✅ Healthy (Vite dev server running on port 3000)
-  - Python: ✅ Completed successfully (inventory generation batch job)
-- **Loadbalancer**: ✅ Started (devcontainer environment available)
-- **Application Access**:
-  - React App: ✅ `http://localhost:3000` (Vite dev server)
-  - Static Web: ✅ nginx web servers healthy
-  - Database: ✅ `localhost:5432` (PostgreSQL)
-- **Cleanup**: ✅ Completed successfully
+- Port conflicts on host
+- Build failures in containers
+- Network connectivity issues
+- Resource limitations
 
-### Infrastructure Status
+### BLK Validation Criteria
 
-- ✅ Docker Compose v3.8 compatibility confirmed
-- ✅ Load-balanced cluster with 3 nginx instances
-- ✅ Named volumes and bind mounts functional
-- ✅ PostgreSQL health checks pass
-- ✅ Python batch job execution successful
-- ✅ Node.js application serves content correctly
-- ✅ Devcontainer loadbalancer builds and starts
+- Host port 80 available for load balancer
+- Container images build successfully without errors
+- Docker network allows inter-container communication
+- System resources sufficient for multiple containers
 
-### Issues Resolved
+## [`LNK-CLUSTER-EXAMPLE-001`]: Links
 
-- Fixed HTML accessibility (added charset, viewport, lang attributes)
-- Fixed Python command (added missing "inventory" subcommand)
-- Fixed React 19 conflicts (added --legacy-peer-deps to npm install)
-- Fixed Node health check (changed from /health to root endpoint with wget)
-- Removed Python dependency from loadbalancer (batch job design)
-
-## Cleanup
-
-```bash
-docker-compose down -v
-```
+- [Main README](../README.md)
+- [Testing Protocol](../TESTING.md)
+- [Changelog](../CHANGELOG.md)

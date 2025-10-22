@@ -47,7 +47,14 @@
     },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.formatOnSave": false
+    },
+    // Markdown linting configuration
+    "markdownlint.config": {
+        "MD022": false,  // Allow headings without blank lines for anchor tags
+        "MD051": false,  // Disable link fragments validation for clickable headings
+        "MD033": false   // Allow inline HTML for anchor tags
     },
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit",

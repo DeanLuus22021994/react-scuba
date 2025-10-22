@@ -1,68 +1,69 @@
-# Basic Docker Compose Stack with Devcontainer
+---
+started: 2025-10-22
+completed: 2025-10-22
+author: AI Assistant
+version: 1.0
+status: active
+description: Basic multi-service Docker Compose stack with Node.js, Python, and PostgreSQL
+tags: [docker, compose, basic, stack, nodejs, python, postgresql]
+---
 
-This is a simple multi-service application with devcontainer support.
+# [BASIC-STACK-001](#basic-stack-001) Basic Stack
 
-## Services
+<a id="fr-basic-stack-001-functional-requirements"></a>
 
-- **app**: Devcontainer with Node.js, Python, NVIDIA GPU
-- **db**: PostgreSQL database
+## [FR-BASIC-STACK-001](#fr-basic-stack-001-functional-requirements) Functional Requirements
 
-## Devcontainer Usage
+- Simple multi-service setup
+- Node.js and Python services
+- PostgreSQL database
+- Devcontainer support
+- Health checks and volumes
 
-Open in VS Code Insiders, use "Dev Containers: Reopen in Container" command.
+### FR Validation Criteria
 
-## Manual Usage
+- Docker Compose file defines three services (app, api, db)
+- Node.js service configured with appropriate runtime
+- Python service includes required dependencies
+- PostgreSQL database with persistent volume
+- Devcontainer configuration includes VS Code extensions
 
-```bash
-cd basic-stack
-docker-compose up -d
-```
+<a id="uac-basic-stack-001-user-acceptance-criteria"></a>
 
-## Access
+## [UAC-BASIC-STACK-001](#uac-basic-stack-001-user-acceptance-criteria) User Acceptance Criteria
 
-- DB: localhost:5432 (user: user, password: password, db: mydb)
+- All services start and run
+- Database connections work
+- Applications serve content correctly
+- Health checks pass where possible
+- Cleanup removes all artifacts
 
-## User Acceptance Testing Results
+### UAC Validation Criteria
 
-### UAT Session: 2025-10-22 13:45 UTC
+- Service startup verified via `docker-compose ps`
+- Database connectivity tested with connection strings
+- HTTP endpoints return expected content and status codes
+- Health check endpoints respond with success
+- Cleanup verified with `docker system df` showing zero usage
 
-**Environment**: Clean Docker slate (all images, volumes, cache pruned)
+<a id="blk-basic-stack-001-blockers"></a>
 
-**Test Summary**:
+## [BLK-BASIC-STACK-001](#blk-basic-stack-001-blockers) Blockers
 
-- **Validation**: ✅ Configuration valid
-- **Build**: ✅ Successful (fresh builds)
-- **Startup**: ✅ All services started successfully
-- **Health Checks**:
-  - DB: ✅ Healthy (PostgreSQL pg_isready)
-  - Python: ✅ Completed successfully (inventory generation batch job)
-  - Node: ⚠️ Running but health check fails (curl not available in Alpine)
-- **Application Access**:
-  - React App: ✅ `http://localhost:3000` (Vite dev server fully functional)
-  - Database: ✅ `localhost:5432` (PostgreSQL accessible)
-- **Cleanup**: ✅ Completed successfully
+- Missing dependencies
+- Port allocation failures
+- Build errors in containers
+- Health check tool limitations
 
-### Infrastructure Status
+### BLK Validation Criteria
 
-- ✅ Docker Compose v3.8 compatibility confirmed
-- ✅ Named volumes and bind mounts functional
-- ✅ PostgreSQL health checks pass
-- ✅ Python batch job execution successful
-- ✅ Node.js application serves content correctly
-- ⚠️ Health check tooling limitations (curl unavailable in Alpine)
+- All required system dependencies installed and available
+- Host ports 3000, 8000, 5432 available for binding
+- Container builds complete without errors
+- Health check commands compatible with container OS
 
-### Known Issues
+## [`LNK-BASIC-STACK-001`]: Links
 
-1. **Health Check Tooling**: Node service health check fails due to missing curl in Alpine image, but application is fully functional
-2. **Esbuild Performance**: Previous deadlock issues not observed in clean environment testing
-
-### Recommendations
-
-- Consider using wget or alternative health check tools for Alpine-based images
-- Health checks could be enhanced to use application-specific endpoints when available
-
-## Cleanup
-
-```bash
-docker-compose down -v
-```
+- [Main README](../README.md)
+- [Testing Protocol](../TESTING.md)
+- [Changelog](../CHANGELOG.md)

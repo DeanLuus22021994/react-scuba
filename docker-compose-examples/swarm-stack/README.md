@@ -1,84 +1,84 @@
-# Docker Swarm Stack with Devcontainer
+---
+started: 2025-10-22
+completed: 2025-10-22
+author: AI Assistant
+version: 1.0
+status: active
+description: Docker Swarm deployment configuration with service replication and constraints
+tags: [docker, swarm, compose, replication, constraints]
+---
 
-This demonstrates deploying a stack to Docker Swarm with devcontainer.
+# [`SWARM-STACK-001`](#swarm-stack-001) Swarm Stack
 
-## Prerequisites
+<a id="fr-swarm-stack-001-functional-requirements"></a>
 
-- Docker Swarm initialized: `docker swarm init`
-- Or join existing swarm
+## [`FR-SWARM-STACK-001`](#fr-swarm-stack-001-functional-requirements) Functional Requirements
 
-## Services
+- Docker Swarm deployment capability
+- Service replication and constraints
+- Overlay networking between services
+- Resource limits and placement policies
+- Devcontainer integration
 
-- **app**: Devcontainer with Node.js, Python, NVIDIA GPU
-- **db**: PostgreSQL on manager node
-
-## Devcontainer Usage
-
-Open in VS Code Insiders, use "Dev Containers: Reopen in Container" command.
-
-## Swarm Deployment
-
-```bash
-cd swarm-stack
-docker stack deploy -c docker-compose.yml myapp
-```
-
-## Check
+### [`FR-SWARM-STACK-001`] Validation Criteria
 
 ```bash
-docker stack services myapp
+# Check Docker Compose compatibility
+docker-compose config --services
+# Verify replicas and constraints
+docker stack deploy --compose-file docker-compose.yml test-stack
 ```
 
-## Access
+<a id="uac-swarm-stack-001-user-acceptance-criteria"></a>
 
-- DB: localhost:5432
+## [`UAC-SWARM-STACK-001`](#uac-swarm-stack-001-user-acceptance-criteria) User Acceptance Criteria
 
-## Cleanup
+- Swarm initialization successful
+- Services deploy and run in swarm mode
+- Overlay network functional
+- Applications accessible via HTTP
+- Cleanup removes all swarm artifacts
+
+### [`UAC-SWARM-STACK-001`] Validation Criteria
 
 ```bash
-docker stack rm myapp
+# Initialize and deploy swarm
+docker swarm init
+docker stack deploy -c docker-compose.yml swarm-stack
+# Verify services and network
+docker service ls
+curl http://localhost:8080
 ```
 
-## User Acceptance Testing Results
+<a id="blk-swarm-stack-001-blockers"></a>
 
-### UAT Session: 2025-10-22 13:51 UTC
+## [`BLK-SWARM-STACK-001`](#blk-swarm-stack-001-blockers) Blockers
 
-**Environment**: Clean Docker slate with initialized Swarm (all images, volumes, cache pruned)
+- Docker Swarm not initialized
+- Incompatible service configurations
+- Network connectivity issues
+- Resource constraints not met
 
-**Test Summary**:
+### [`BLK-SWARM-STACK-001`] Validation Criteria
 
-- **Validation**: ✅ Configuration valid
-- **Swarm Deploy**: ✅ Successful (services created and running)
-- **Services Status**:
-  - db: ✅ Running (PostgreSQL on manager node)
-  - node: ✅ Running (Vite dev server on port 3000)
-  - python: ✅ Completed (inventory generation batch job)
-- **Application Access**:
-  - React App: ✅ `http://localhost:3000` (Vite dev server)
-  - Database: ✅ Internal swarm networking (overlay network)
-- **Cleanup**: ✅ Completed successfully
+```bash
+# Check swarm status and resources
+docker node ls
+docker system df
+# Verify network drivers
+docker network ls --filter driver=overlay
+```
 
-### Issues Resolved
+<a id="lnk-swarm-stack-001-links"></a>
 
-1. **Removed Incompatible Swarm Options**: Removed `runtime`, `profiles`, `build` properties not supported in Docker Swarm
-2. **Fixed Service Dependencies**: Changed `depends_on` from condition-based to simple list format for Swarm compatibility
-3. **Fixed Node Health Check**: Updated to use wget with correct endpoint and CMD-SHELL syntax
-4. **Removed App Service**: Not needed for swarm testing, was causing deployment issues
+## [`LNK-SWARM-STACK-001`](#lnk-swarm-stack-001-links) Links
 
-### Infrastructure Status
+- [Main README](../README.md)
+- [Testing Protocol](../TESTING.md)
+- [Changelog](../CHANGELOG.md)
 
-- ✅ Docker Swarm initialization successful
-- ✅ Overlay network creation and attachable configuration
-- ✅ Service deployment with resource limits and constraints
-- ✅ Named volumes and bind mounts functional
-- ✅ Health checks working (where applicable)
-- ✅ Application services running successfully
-- ✅ Batch job completion (Python inventory generation)
+### Cross-Section References
 
-### Swarm-Specific Features Tested
-
-- ✅ Service replication and placement constraints
-- ✅ Overlay networking between services
-- ✅ Resource limits and reservations
-- ✅ Restart policies with delays and windows
-- ✅ Manager node constraints for database
+- [`FR-SWARM-STACK-001`](#fr-swarm-stack-001-functional-requirements)
+- [`UAC-SWARM-STACK-001`](#uac-swarm-stack-001-user-acceptance-criteria)
+- [`BLK-SWARM-STACK-001`](#blk-swarm-stack-001-blockers)
