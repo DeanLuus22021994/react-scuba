@@ -27,7 +27,9 @@ services:
       - dev
 
   node:
-    image: node:20-alpine
+    build:
+      context: ../..
+      dockerfile: docker-compose-examples/basic-stack/dockerfiles/node.Dockerfile
     volumes:
       - ../..:/app:cached
       - node_modules:/app/node_modules
@@ -51,7 +53,9 @@ services:
       start_period: 30s
 
   python:
-    image: python:3.14-slim
+    build:
+      context: ../..
+      dockerfile: docker-compose-examples/basic-stack/dockerfiles/python.Dockerfile
     volumes:
       - ../..:/app:cached
       - python_venv:/app/.venv
@@ -77,7 +81,9 @@ services:
       start_period: 20s
 
   db:
-    image: postgres:13-alpine
+    build:
+      context: ../..
+      dockerfile: docker-compose-examples/basic-stack/dockerfiles/postgres.Dockerfile
     environment:
       POSTGRES_DB: mydb
       POSTGRES_USER: user
@@ -96,14 +102,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
-    command:
-      [
-        "postgres",
-        "-c",
-        "shared_preload_libraries=pg_stat_statements",
-        "-c",
-        "pg_stat_statements.track=all",
-      ]
 
 volumes:
   db_data:

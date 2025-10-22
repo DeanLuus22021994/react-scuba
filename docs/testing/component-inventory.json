@@ -2,344 +2,932 @@
   "pages": [
     {
       "name": "AboutPage",
-      "file": "pages/AboutPage.jsx",
-      "path": "src/pages/AboutPage.jsx"
+      "file": "src/pages/AboutPage.jsx",
+      "path": "src/pages/AboutPage.jsx",
+      "category": "pages",
+      "exports": [
+        "AboutPage"
+      ],
+      "imports": [],
+      "size_bytes": 60
     },
     {
       "name": "CoursesPage",
-      "file": "pages/CoursesPage.jsx",
-      "path": "src/pages/CoursesPage.jsx"
+      "file": "src/pages/CoursesPage.jsx",
+      "path": "src/pages/CoursesPage.jsx",
+      "category": "pages",
+      "exports": [
+        "CoursesPage"
+      ],
+      "imports": [],
+      "size_bytes": 64
     },
     {
       "name": "DiveSitesPage",
-      "file": "pages/DiveSitesPage.jsx",
-      "path": "src/pages/DiveSitesPage.jsx"
+      "file": "src/pages/DiveSitesPage.jsx",
+      "path": "src/pages/DiveSitesPage.jsx",
+      "category": "pages",
+      "exports": [
+        "DiveSitesPage"
+      ],
+      "imports": [],
+      "size_bytes": 69
     },
     {
       "name": "GalleryPage",
-      "file": "pages/GalleryPage.jsx",
-      "path": "src/pages/GalleryPage.jsx"
+      "file": "src/pages/GalleryPage.jsx",
+      "path": "src/pages/GalleryPage.jsx",
+      "category": "pages",
+      "exports": [
+        "GalleryPage"
+      ],
+      "imports": [],
+      "size_bytes": 64
     },
     {
       "name": "HomePage",
-      "file": "pages/HomePage.jsx",
-      "path": "src/pages/HomePage.jsx"
-    }
-  ],
-  "components": [
-    {
-      "name": "App",
-      "file": "App.jsx",
-      "path": "src/App.jsx"
-    },
-    {
-      "name": "root",
-      "file": "index.jsx",
-      "path": "src/index.jsx"
-    },
-    {
-      "name": "Footer",
-      "file": "layouts/Footer.jsx",
-      "path": "src/layouts/Footer.jsx"
-    },
-    {
-      "name": "Header",
-      "file": "layouts/Header.jsx",
-      "path": "src/layouts/Header.jsx"
-    },
-    {
-      "name": "MainLayout",
-      "file": "layouts/MainLayout.jsx",
-      "path": "src/layouts/MainLayout.jsx"
-    },
-    {
-      "name": "Navigation",
-      "file": "layouts/Navigation.jsx",
-      "path": "src/layouts/Navigation.jsx"
+      "file": "src/pages/HomePage.jsx",
+      "path": "src/pages/HomePage.jsx",
+      "category": "pages",
+      "exports": [
+        "HomePage"
+      ],
+      "imports": [],
+      "size_bytes": 58
     },
     {
       "name": "AboutPage",
       "file": "components/about/AboutPage.jsx",
-      "path": "src/components/about/AboutPage.jsx"
-    },
-    {
-      "name": "CredentialCard",
-      "file": "components/about/CredentialCard.jsx",
-      "path": "src/components/about/CredentialCard.jsx"
-    },
-    {
-      "name": "TeamMember",
-      "file": "components/about/TeamMember.jsx",
-      "path": "src/components/about/TeamMember.jsx"
-    },
-    {
-      "name": "CurrencySelector",
-      "file": "components/common/CurrencySelector.jsx",
-      "path": "src/components/common/CurrencySelector.jsx"
-    },
-    {
-      "name": "ErrorBoundary",
-      "file": "components/common/ErrorBoundary.jsx",
-      "path": "src/components/common/ErrorBoundary.jsx"
-    },
-    {
-      "name": "Loading",
-      "file": "components/common/Loading.jsx",
-      "path": "src/components/common/Loading.jsx"
-    },
-    {
-      "name": "PhoneLink",
-      "file": "components/common/PhoneLink.jsx",
-      "path": "src/components/common/PhoneLink.jsx"
-    },
-    {
-      "name": "SEO",
-      "file": "components/common/SEO.jsx",
-      "path": "src/components/common/SEO.jsx"
-    },
-    {
-      "name": "WhatsAppButton",
-      "file": "components/common/WhatsAppButton.jsx",
-      "path": "src/components/common/WhatsAppButton.jsx"
-    },
-    {
-      "name": "CourseCard",
-      "file": "components/courses/CourseCard.jsx",
-      "path": "src/components/courses/CourseCard.jsx"
-    },
-    {
-      "name": "CourseComparison",
-      "file": "components/courses/CourseComparison.jsx",
-      "path": "src/components/courses/CourseComparison.jsx"
+      "path": "src/components/about/AboutPage.jsx",
+      "category": "pages",
+      "exports": [],
+      "imports": [
+        "./CredentialCard",
+        "./TeamMember",
+        "../common/SEO",
+        "../modals/BookingModal",
+        "../../utils/analytics",
+        "../../data/credentials",
+        "framer-motion",
+        "../../data/team",
+        "@heroicons/react/24/outline",
+        "react"
+      ],
+      "size_bytes": 10773
     },
     {
       "name": "CoursesPage",
       "file": "components/courses/CoursesPage.jsx",
-      "path": "src/components/courses/CoursesPage.jsx"
-    },
-    {
-      "name": "DiveMap",
-      "file": "components/dive-sites/DiveMap.jsx",
-      "path": "src/components/dive-sites/DiveMap.jsx"
-    },
-    {
-      "name": "DiveSiteCard",
-      "file": "components/dive-sites/DiveSiteCard.jsx",
-      "path": "src/components/dive-sites/DiveSiteCard.jsx"
+      "path": "src/components/courses/CoursesPage.jsx",
+      "category": "pages",
+      "exports": [],
+      "imports": [
+        "../../data/courses",
+        "../../hooks/useCurrency",
+        "../common/SEO",
+        "../modals/BookingModal",
+        "../../utils/analytics",
+        "../modals/ContactModal",
+        "framer-motion",
+        "./CourseCard",
+        "./CourseComparison",
+        "react"
+      ],
+      "size_bytes": 5373
     },
     {
       "name": "DiveSitesPage",
       "file": "components/dive-sites/DiveSitesPage.jsx",
-      "path": "src/components/dive-sites/DiveSitesPage.jsx"
-    },
-    {
-      "name": "FeaturedCarousel",
-      "file": "components/gallery/FeaturedCarousel.jsx",
-      "path": "src/components/gallery/FeaturedCarousel.jsx"
-    },
-    {
-      "name": "GalleryGrid",
-      "file": "components/gallery/GalleryGrid.jsx",
-      "path": "src/components/gallery/GalleryGrid.jsx"
+      "path": "src/components/dive-sites/DiveSitesPage.jsx",
+      "category": "pages",
+      "exports": [],
+      "imports": [
+        "./DiveMap",
+        "../common/SEO",
+        "../modals/BookingModal",
+        "../../utils/analytics",
+        "framer-motion",
+        "react",
+        "../../data/diveSites",
+        "./DiveSiteCard"
+      ],
+      "size_bytes": 6492
     },
     {
       "name": "GalleryPage",
       "file": "components/gallery/GalleryPage.jsx",
-      "path": "src/components/gallery/GalleryPage.jsx"
-    },
-    {
-      "name": "Lightbox",
-      "file": "components/gallery/Lightbox.jsx",
-      "path": "src/components/gallery/Lightbox.jsx"
-    },
-    {
-      "name": "CTASection",
-      "file": "components/home/CTASection.jsx",
-      "path": "src/components/home/CTASection.jsx"
-    },
-    {
-      "name": "FeaturesSection",
-      "file": "components/home/FeaturesSection.jsx",
-      "path": "src/components/home/FeaturesSection.jsx"
-    },
-    {
-      "name": "HeroSection",
-      "file": "components/home/HeroSection.jsx",
-      "path": "src/components/home/HeroSection.jsx"
+      "path": "src/components/gallery/GalleryPage.jsx",
+      "category": "pages",
+      "exports": [],
+      "imports": [
+        "./Lightbox",
+        "../common/SEO",
+        "../modals/BookingModal",
+        "../../utils/analytics",
+        "../../data/gallery",
+        "framer-motion",
+        "./GalleryGrid",
+        "./FeaturedCarousel",
+        "react"
+      ],
+      "size_bytes": 6239
     },
     {
       "name": "HomePage",
       "file": "components/home/HomePage.jsx",
-      "path": "src/components/home/HomePage.jsx"
+      "path": "src/components/home/HomePage.jsx",
+      "category": "pages",
+      "exports": [],
+      "imports": [
+        "./FeaturesSection",
+        "./CTASection",
+        "../common/SEO",
+        "../modals/BookingModal",
+        "./HeroSection",
+        "../../utils/analytics",
+        "../modals/ContactModal",
+        "./VideoSection",
+        "./TestimonialsSection",
+        "react",
+        "./ServicesSection"
+      ],
+      "size_bytes": 1536
+    }
+  ],
+  "components": [
+    {
+      "name": "Footer",
+      "file": "src/layouts/Footer.jsx",
+      "path": "src/layouts/Footer.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "@heroicons/react/24/outline",
+        "../components/common",
+        "react-router-dom"
+      ],
+      "size_bytes": 6787
+    },
+    {
+      "name": "Header",
+      "file": "src/layouts/Header.jsx",
+      "path": "src/layouts/Header.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "@headlessui/react",
+        "./Navigation",
+        "react",
+        "@heroicons/react/24/outline",
+        "../components/common",
+        "react-router-dom"
+      ],
+      "size_bytes": 3752
+    },
+    {
+      "name": "MainLayout",
+      "file": "src/layouts/MainLayout.jsx",
+      "path": "src/layouts/MainLayout.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "./Header",
+        "../utils/analytics",
+        "./Footer",
+        "react",
+        "../components/common",
+        "react-router-dom"
+      ],
+      "size_bytes": 798
+    },
+    {
+      "name": "Navigation",
+      "file": "src/layouts/Navigation.jsx",
+      "path": "src/layouts/Navigation.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "react-router-dom",
+        "prop-types"
+      ],
+      "size_bytes": 1154
+    },
+    {
+      "name": "CredentialCard",
+      "file": "components/about/CredentialCard.jsx",
+      "path": "src/components/about/CredentialCard.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "prop-types"
+      ],
+      "size_bytes": 1207
+    },
+    {
+      "name": "TeamMember",
+      "file": "components/about/TeamMember.jsx",
+      "path": "src/components/about/TeamMember.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "prop-types"
+      ],
+      "size_bytes": 1550
+    },
+    {
+      "name": "CurrencySelector",
+      "file": "components/common/CurrencySelector.jsx",
+      "path": "src/components/common/CurrencySelector.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "../../hooks/useCurrency",
+        "../../utils/currency",
+        "@headlessui/react",
+        "@heroicons/react/24/outline",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 2312
+    },
+    {
+      "name": "ErrorBoundary",
+      "file": "components/common/ErrorBoundary.jsx",
+      "path": "src/components/common/ErrorBoundary.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "react",
+        "../../utils/logger",
+        "prop-types"
+      ],
+      "size_bytes": 2390
+    },
+    {
+      "name": "Loading",
+      "file": "components/common/Loading.jsx",
+      "path": "src/components/common/Loading.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "prop-types"
+      ],
+      "size_bytes": 589
+    },
+    {
+      "name": "PhoneLink",
+      "file": "components/common/PhoneLink.jsx",
+      "path": "src/components/common/PhoneLink.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "@heroicons/react/24/outline",
+        "../../utils/analytics",
+        "prop-types"
+      ],
+      "size_bytes": 828
+    },
+    {
+      "name": "SEO",
+      "file": "components/common/SEO.jsx",
+      "path": "src/components/common/SEO.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "../../utils/seo",
+        "react-helmet-async",
+        "prop-types"
+      ],
+      "size_bytes": 1454
+    },
+    {
+      "name": "WhatsAppButton",
+      "file": "components/common/WhatsAppButton.jsx",
+      "path": "src/components/common/WhatsAppButton.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "@heroicons/react/24/solid",
+        "../../utils/analytics",
+        "prop-types"
+      ],
+      "size_bytes": 2233
+    },
+    {
+      "name": "CourseCard",
+      "file": "components/courses/CourseCard.jsx",
+      "path": "src/components/courses/CourseCard.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "../../hooks/useCurrency",
+        "framer-motion",
+        "@heroicons/react/24/outline",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 4390
+    },
+    {
+      "name": "CourseComparison",
+      "file": "components/courses/CourseComparison.jsx",
+      "path": "src/components/courses/CourseComparison.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "../../data/courses",
+        "../../hooks/useCurrency"
+      ],
+      "size_bytes": 2565
+    },
+    {
+      "name": "DiveMap",
+      "file": "components/dive-sites/DiveMap.jsx",
+      "path": "src/components/dive-sites/DiveMap.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "leaflet",
+        "../../data/diveSites",
+        "react-leaflet",
+        "prop-types"
+      ],
+      "size_bytes": 2526
+    },
+    {
+      "name": "DiveSiteCard",
+      "file": "components/dive-sites/DiveSiteCard.jsx",
+      "path": "src/components/dive-sites/DiveSiteCard.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "../../data/diveSites",
+        "prop-types"
+      ],
+      "size_bytes": 3628
+    },
+    {
+      "name": "FeaturedCarousel",
+      "file": "components/gallery/FeaturedCarousel.jsx",
+      "path": "src/components/gallery/FeaturedCarousel.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "../../data/gallery",
+        "swiper/modules",
+        "swiper/react"
+      ],
+      "size_bytes": 1574
+    },
+    {
+      "name": "GalleryGrid",
+      "file": "components/gallery/GalleryGrid.jsx",
+      "path": "src/components/gallery/GalleryGrid.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 3432
+    },
+    {
+      "name": "Lightbox",
+      "file": "components/gallery/Lightbox.jsx",
+      "path": "src/components/gallery/Lightbox.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "@heroicons/react/24/outline",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 3610
+    },
+    {
+      "name": "CTASection",
+      "file": "components/home/CTASection.jsx",
+      "path": "src/components/home/CTASection.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "prop-types"
+      ],
+      "size_bytes": 1531
+    },
+    {
+      "name": "FeaturesSection",
+      "file": "components/home/FeaturesSection.jsx",
+      "path": "src/components/home/FeaturesSection.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "prop-types"
+      ],
+      "size_bytes": 2323
+    },
+    {
+      "name": "HeroSection",
+      "file": "components/home/HeroSection.jsx",
+      "path": "src/components/home/HeroSection.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "react-router-dom",
+        "prop-types"
+      ],
+      "size_bytes": 3136
     },
     {
       "name": "ServicesSection",
       "file": "components/home/ServicesSection.jsx",
-      "path": "src/components/home/ServicesSection.jsx"
+      "path": "src/components/home/ServicesSection.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "@heroicons/react/24/outline",
+        "react-router-dom",
+        "prop-types"
+      ],
+      "size_bytes": 3347
     },
     {
       "name": "TestimonialsSection",
       "file": "components/home/TestimonialsSection.jsx",
-      "path": "src/components/home/TestimonialsSection.jsx"
+      "path": "src/components/home/TestimonialsSection.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "@heroicons/react/24/solid",
+        "prop-types"
+      ],
+      "size_bytes": 3454
     },
     {
       "name": "VideoSection",
       "file": "components/home/VideoSection.jsx",
-      "path": "src/components/home/VideoSection.jsx"
+      "path": "src/components/home/VideoSection.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion"
+      ],
+      "size_bytes": 1520
     },
     {
       "name": "BookingModal",
       "file": "components/modals/BookingModal.jsx",
-      "path": "src/components/modals/BookingModal.jsx"
+      "path": "src/components/modals/BookingModal.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "@hookform/resolvers/zod",
+        "../../utils/logger",
+        "react-hook-form",
+        "../../hooks/useCurrency",
+        "@headlessui/react",
+        "../../utils/analytics",
+        "../common/Loading",
+        "../../services/api",
+        "react-datepicker",
+        "zod",
+        "@heroicons/react/24/outline",
+        "react-hot-toast",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 18772
     },
     {
       "name": "ContactModal",
       "file": "components/modals/ContactModal.jsx",
-      "path": "src/components/modals/ContactModal.jsx"
+      "path": "src/components/modals/ContactModal.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "@hookform/resolvers/zod",
+        "../../utils/logger",
+        "react-hook-form",
+        "react-google-recaptcha",
+        "@headlessui/react",
+        "../../utils/analytics",
+        "../../services/api",
+        "react-datepicker",
+        "zod",
+        "@heroicons/react/24/outline",
+        "react-hot-toast",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 12749
     },
     {
       "name": "function",
       "file": "components/shared/BackToTop.jsx",
-      "path": "src/components/shared/BackToTop.jsx"
+      "path": "src/components/shared/BackToTop.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "@heroicons/react/24/outline",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 1912
     },
     {
       "name": "function",
       "file": "components/shared/ScrollProgress.jsx",
-      "path": "src/components/shared/ScrollProgress.jsx"
-    },
-    {
-      "name": "IntersectionObserver",
-      "file": "setupTests.js",
-      "path": "src/setupTests.js"
+      "path": "src/components/shared/ScrollProgress.jsx",
+      "category": "components",
+      "exports": [],
+      "imports": [
+        "framer-motion",
+        "react"
+      ],
+      "size_bytes": 1109
     },
     {
       "name": "EXPERIENCE_LEVELS",
-      "file": "data/bookingTypes.js",
-      "path": "src/data/bookingTypes.js"
+      "file": "src/data/bookingTypes.js",
+      "path": "src/data/bookingTypes.js",
+      "category": "components",
+      "exports": [
+        "getBookingItemById",
+        "EXPERIENCE_LEVELS",
+        "getBookingItems",
+        "BOOKING_TYPES"
+      ],
+      "imports": [],
+      "size_bytes": 1576
     },
     {
       "name": "COURSES",
-      "file": "data/courses.js",
-      "path": "src/data/courses.js"
+      "file": "src/data/courses.js",
+      "path": "src/data/courses.js",
+      "category": "components",
+      "exports": [
+        "getCourseById",
+        "COURSES",
+        "COURSE_COMPARISON_HEADERS",
+        "getCoursesByLevel"
+      ],
+      "imports": [],
+      "size_bytes": 5890
     },
     {
       "name": "CREDENTIALS",
-      "file": "data/credentials.js",
-      "path": "src/data/credentials.js"
+      "file": "src/data/credentials.js",
+      "path": "src/data/credentials.js",
+      "category": "components",
+      "exports": [
+        "CREDENTIALS"
+      ],
+      "imports": [
+        "@heroicons/react/24/outline"
+      ],
+      "size_bytes": 835
     },
     {
       "name": "DIVE_SITES",
-      "file": "data/diveSites.js",
-      "path": "src/data/diveSites.js"
+      "file": "src/data/diveSites.js",
+      "path": "src/data/diveSites.js",
+      "category": "components",
+      "exports": [
+        "DIVE_SITES",
+        "getDiveSitesByDifficulty",
+        "MAURITIUS_CENTER",
+        "getDiveSiteById",
+        "DIFFICULTY_COLORS"
+      ],
+      "imports": [],
+      "size_bytes": 3810
     },
     {
       "name": "CATEGORIES",
-      "file": "data/gallery.js",
-      "path": "src/data/gallery.js"
+      "file": "src/data/gallery.js",
+      "path": "src/data/gallery.js",
+      "category": "components",
+      "exports": [
+        "getImagesByCategory",
+        "GALLERY_IMAGES",
+        "FEATURED_IMAGES",
+        "CATEGORIES",
+        "getImageById"
+      ],
+      "imports": [],
+      "size_bytes": 4282
     },
     {
       "name": "oceanSpiritContent",
-      "file": "data/oceanSpirit.js",
-      "path": "src/data/oceanSpirit.js"
+      "file": "src/data/oceanSpirit.js",
+      "path": "src/data/oceanSpirit.js",
+      "category": "components",
+      "exports": [
+        "oceanSpiritContent"
+      ],
+      "imports": [],
+      "size_bytes": 3150
     },
     {
       "name": "TEAM_MEMBERS",
-      "file": "data/team.js",
-      "path": "src/data/team.js"
+      "file": "src/data/team.js",
+      "path": "src/data/team.js",
+      "category": "components",
+      "exports": [
+        "TEAM_MEMBERS",
+        "getTeamMemberByName"
+      ],
+      "imports": [],
+      "size_bytes": 1741
     },
     {
       "name": "api",
-      "file": "services/api.js",
-      "path": "src/services/api.js"
+      "file": "src/services/api.js",
+      "path": "src/services/api.js",
+      "category": "components",
+      "exports": [
+        "checkCalendarAvailability",
+        "subscribeNewsletter",
+        "submitBookingInquiry",
+        "getExchangeRates",
+        "createCalendarBooking",
+        "submitContactForm"
+      ],
+      "imports": [
+        "axios",
+        "../utils/logger"
+      ],
+      "size_bytes": 3194
     },
     {
       "name": "index",
-      "file": "services/index.js",
-      "path": "src/services/index.js"
+      "file": "src/services/index.js",
+      "path": "src/services/index.js",
+      "category": "components",
+      "exports": [
+        "checkCalendarAvailability",
+        "default",
+        "createCalendarBooking",
+        "submitContactForm"
+      ],
+      "imports": [],
+      "size_bytes": 235
     },
     {
-      "name": "index",
+      "name": "AboutPage",
       "file": "components/about/index.js",
-      "path": "src/components/about/index.js"
+      "path": "src/components/about/index.js",
+      "category": "components",
+      "exports": [
+        "default"
+      ],
+      "imports": [],
+      "size_bytes": 168
     },
     {
-      "name": "index",
+      "name": "CurrencySelector",
       "file": "components/common/index.js",
-      "path": "src/components/common/index.js"
+      "path": "src/components/common/index.js",
+      "category": "components",
+      "exports": [
+        "default"
+      ],
+      "imports": [],
+      "size_bytes": 363
     },
     {
-      "name": "index",
+      "name": "CourseCard",
       "file": "components/courses/index.js",
-      "path": "src/components/courses/index.js"
+      "path": "src/components/courses/index.js",
+      "category": "components",
+      "exports": [
+        "default"
+      ],
+      "imports": [],
+      "size_bytes": 176
     },
     {
-      "name": "index",
+      "name": "DiveMap",
       "file": "components/dive-sites/index.js",
-      "path": "src/components/dive-sites/index.js"
+      "path": "src/components/dive-sites/index.js",
+      "category": "components",
+      "exports": [
+        "default"
+      ],
+      "imports": [],
+      "size_bytes": 166
     },
     {
-      "name": "index",
+      "name": "FeaturedCarousel",
       "file": "components/gallery/index.js",
-      "path": "src/components/gallery/index.js"
+      "path": "src/components/gallery/index.js",
+      "category": "components",
+      "exports": [
+        "default"
+      ],
+      "imports": [],
+      "size_bytes": 228
     },
     {
-      "name": "index",
+      "name": "CTASection",
       "file": "components/home/index.js",
-      "path": "src/components/home/index.js"
+      "path": "src/components/home/index.js",
+      "category": "components",
+      "exports": [
+        "default"
+      ],
+      "imports": [],
+      "size_bytes": 418
     }
   ],
   "hooks": [
     {
       "name": "useCurrency",
-      "file": "hooks/useCurrency.jsx",
-      "path": "src/hooks/useCurrency.jsx"
+      "file": "src/hooks/useCurrency.jsx",
+      "path": "src/hooks/useCurrency.jsx",
+      "category": "hooks",
+      "exports": [
+        "CurrencyProvider",
+        "useCurrency"
+      ],
+      "imports": [
+        "../services/api",
+        "../utils/analytics",
+        "../utils/currency",
+        "react",
+        "prop-types"
+      ],
+      "size_bytes": 2904
     },
     {
       "name": "index",
-      "file": "hooks/index.js",
-      "path": "src/hooks/index.js"
+      "file": "src/hooks/index.js",
+      "path": "src/hooks/index.js",
+      "category": "hooks",
+      "exports": [
+        "CurrencyProvider",
+        "default"
+      ],
+      "imports": [],
+      "size_bytes": 163
     }
   ],
   "utils": [
     {
       "name": "initializeGTM",
-      "file": "utils/analytics.js",
-      "path": "src/utils/analytics.js"
+      "file": "src/utils/analytics.js",
+      "path": "src/utils/analytics.js",
+      "category": "utils",
+      "exports": [
+        "initializeGA4",
+        "trackFormComplete",
+        "trackCourseInquiry",
+        "trackFormStart",
+        "trackCurrencyChange",
+        "trackContactSubmit",
+        "trackFormAbandon",
+        "trackCalendarBookingComplete",
+        "trackBookingRequest",
+        "trackWhatsAppClick",
+        "initializeGTM",
+        "sendWebVitalsToGA4",
+        "trackPhoneClick",
+        "trackConversion",
+        "trackEmailClick",
+        "trackPageView"
+      ],
+      "imports": [
+        "react-gtm-module",
+        "./logger",
+        "react-ga4"
+      ],
+      "size_bytes": 3730
     },
     {
       "name": "CURRENCIES",
-      "file": "utils/currency.js",
-      "path": "src/utils/currency.js"
+      "file": "src/utils/currency.js",
+      "path": "src/utils/currency.js",
+      "category": "utils",
+      "exports": [
+        "DEFAULT_EXCHANGE_RATES",
+        "getCurrencySymbol",
+        "convertCurrency",
+        "formatCurrency",
+        "getCurrencyName",
+        "fetchExchangeRates",
+        "CURRENCIES"
+      ],
+      "imports": [
+        "./logger"
+      ],
+      "size_bytes": 2538
     },
     {
       "name": "envSchema",
-      "file": "utils/env.js",
-      "path": "src/utils/env.js"
-    },
-    {
-      "name": "index",
-      "file": "utils/index.js",
-      "path": "src/utils/index.js"
+      "file": "src/utils/env.js",
+      "path": "src/utils/env.js",
+      "category": "utils",
+      "exports": [
+        "getEnvVar",
+        "getCalendarApiKey",
+        "isDevelopment",
+        "getApiUrl",
+        "validateEnvVars",
+        "getCalendarEmail",
+        "isProduction"
+      ],
+      "imports": [
+        "./logger",
+        "zod"
+      ],
+      "size_bytes": 3181
     },
     {
       "name": "logger",
-      "file": "utils/logger.js",
-      "path": "src/utils/logger.js"
+      "file": "src/utils/index.js",
+      "path": "src/utils/index.js",
+      "category": "utils",
+      "exports": [
+        "",
+        "getEnvVar",
+        "getCalendarApiKey",
+        "default",
+        "isDevelopment",
+        "getApiUrl",
+        "validateEnvVars",
+        "getCalendarEmail",
+        "isProduction"
+      ],
+      "imports": [],
+      "size_bytes": 410
+    },
+    {
+      "name": "logger",
+      "file": "src/utils/logger.js",
+      "path": "src/utils/logger.js",
+      "category": "utils",
+      "exports": [],
+      "imports": [],
+      "size_bytes": 946
     },
     {
       "name": "reportWebVitals",
-      "file": "utils/reportWebVitals.js",
-      "path": "src/utils/reportWebVitals.js"
+      "file": "src/utils/reportWebVitals.js",
+      "path": "src/utils/reportWebVitals.js",
+      "category": "utils",
+      "exports": [
+        "reportWebVitalsToGA4"
+      ],
+      "imports": [
+        "./analytics.js"
+      ],
+      "size_bytes": 628
     },
     {
       "name": "scrollToElement",
-      "file": "utils/scrollToAnchor.js",
-      "path": "src/utils/scrollToAnchor.js"
+      "file": "src/utils/scrollToAnchor.js",
+      "path": "src/utils/scrollToAnchor.js",
+      "category": "utils",
+      "exports": [
+        "initBackToTop",
+        "scrollToTop",
+        "observeScrollReveal",
+        "getActiveSection",
+        "handleAnchorClick",
+        "scrollToElement",
+        "getSectionAnchors",
+        "initScrollReveal",
+        "handleHashNavigation",
+        "isInViewport"
+      ],
+      "imports": [],
+      "size_bytes": 5216
     },
     {
       "name": "generateLocalBusinessSchema",
-      "file": "utils/seo.js",
-      "path": "src/utils/seo.js"
+      "file": "src/utils/seo.js",
+      "path": "src/utils/seo.js",
+      "category": "utils",
+      "exports": [
+        "generatePageMetaTags",
+        "defaultMetaTags",
+        "generateCourseSchema",
+        "generateBreadcrumbSchema",
+        "generateLocalBusinessSchema"
+      ],
+      "imports": [],
+      "size_bytes": 4872
     }
   ]
 }

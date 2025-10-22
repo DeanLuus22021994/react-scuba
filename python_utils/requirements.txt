@@ -1,9 +1,34 @@
+# Python 3.14 Enhanced Requirements for React Scuba Documentation Utilities
+# Optimized for free-threaded execution and concurrent interpreters
+
+# Core dependencies
 mkdocs>=1.5.0
 mkdocs-material>=9.0.0
 mkdocs-git-revision-date-localized-plugin>=1.2.0
 mkdocs-minify-plugin>=0.7.0
 mkdocs-redirects>=1.2.0
-python-dotenv>=1.0.0
+
+# HTTP and web utilities (with retry support)
 requests>=2.31.0
+urllib3>=2.0.0
+
+# Data processing and parsing
 beautifulsoup4>=4.12.0
 lxml>=4.9.0
+PyYAML>=6.0
+
+# Development and testing
+python-dotenv>=1.0.0
+
+# Python 3.14+ specific optimizations
+# Note: concurrent.interpreters is built-in, no additional package needed
+# Free-threaded execution optimizations are handled at runtime
+
+# Type hints and dataclasses (enhanced in 3.14)
+typing-extensions>=4.8.0; python_version < "3.14"
+
+# Path and file operations (pathlib enhancements in 3.14)
+# No additional packages needed - using built-in pathlib improvements
+
+# AsyncIO enhancements (improved in 3.14)
+# Using built-in asyncio with free-threading support

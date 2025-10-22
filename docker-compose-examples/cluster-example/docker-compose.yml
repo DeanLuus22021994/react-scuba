@@ -10,10 +10,6 @@ services:
       - node_modules:/workspaces/node_modules
       - python_venv:/workspaces/.venv
     working_dir: /workspaces
-    command: sleep infinity
-    runtime: nvidia
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
     ports:
       - "8080:80"
     depends_on:
@@ -29,9 +25,17 @@ services:
       - cluster-network
     profiles:
       - dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
   node:
-    image: node:20-alpine
+    build:
+      context: ../..
+      dockerfile: docker-compose-examples/cluster-example/dockerfiles/node.Dockerfile
     volumes:
       - ../..:/app:cached
       - node_modules:/app/node_modules
@@ -59,7 +63,9 @@ services:
       start_period: 45s
 
   python:
-    image: python:3.14-slim
+    build:
+      context: ../..
+      dockerfile: docker-compose-examples/cluster-example/dockerfiles/python.Dockerfile
     volumes:
       - ../..:/app:cached
       - python_venv:/app/.venv
@@ -88,7 +94,9 @@ services:
       start_period: 20s
 
   web1:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.Dockerfile
     volumes:
       - ./web-content:/usr/share/nginx/html:ro
       - nginx_cache:/var/cache/nginx
@@ -107,7 +115,9 @@ services:
         condition: on-failure
 
   web2:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.Dockerfile
     volumes:
       - ./web-content:/usr/share/nginx/html:ro
       - nginx_cache:/var/cache/nginx
@@ -126,7 +136,9 @@ services:
         condition: on-failure
 
   web3:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.Dockerfile
     volumes:
       - ./web-content:/usr/share/nginx/html:ro
       - nginx_cache:/var/cache/nginx
@@ -145,7 +157,9 @@ services:
         condition: on-failure
 
   db:
-    image: postgres:13-alpine
+    build:
+      context: .
+      dockerfile: dockerfiles/postgres.Dockerfile
     environment:
       POSTGRES_DB: mydb
       POSTGRES_USER: user
@@ -164,14 +178,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
-    command:
-      [
-        "postgres",
-        "-c",
-        "shared_preload_libraries=pg_stat_statements",
-        "-c",
-        "pg_stat_statements.track=all",
-      ]
 
 volumes:
   db_data:
