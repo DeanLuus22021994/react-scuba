@@ -13,31 +13,19 @@ export async function setup() {
 
   try {
     // Pull images first
-    await new Promise((resolve, reject) => {
-      const pullProcess = spawn('C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe', ['compose', 'pull'], {
-        cwd: dockerComposePath,
-        stdio: 'inherit',
-      });
-      pullProcess.on('close', (code) => {
-        if (code === 0) {
-          resolve();
-        } else {
-          reject(new Error(`docker compose pull exited with code ${code}`));
-        }
-      });
-      pullProcess.on('error', reject);
+    execSync('docker compose pull', {
+      cwd: dockerComposePath,
+      stdio: 'inherit',
+      shell: true,
     });
 
     // Start services in detached mode
-    dockerProcess = spawn(
-      'C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe',
-      ['compose', 'up', '--build', '--force-recreate'],
-      {
-        cwd: dockerComposePath,
-        stdio: 'inherit',
-        detached: false,
-      },
-    );
+    dockerProcess = spawn('docker', ['compose', 'up', '--build', '--force-recreate'], {
+      cwd: dockerComposePath,
+      stdio: 'inherit',
+      detached: false,
+      shell: true,
+    });
 
     // Wait for services to be ready
     await new Promise((resolve, reject) => {
@@ -82,7 +70,7 @@ export function teardown() {
   }
 
   try {
-    execSync('"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" compose down --volumes --remove-orphans', {
+    execSync('docker compose down --volumes --remove-orphans', {
       cwd: dockerComposePath,
       stdio: 'inherit',
       shell: true,
