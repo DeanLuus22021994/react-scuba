@@ -15,7 +15,8 @@
     "editor.formatOnSave": true,
     "editor.formatOnPaste": false,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit"
+        "source.organizeImports": "explicit",
+        "source.fixAll": "explicit"
     },
     // Reduce language server load
     "files.watcherExclude": {
@@ -42,5 +43,30 @@
     // File associations
     "files.associations": {
         ".husky/*": "shellscript"
-    }
+    },
+    // Python settings (optimized for UV and project-specific interpreter)
+    "python.defaultInterpreterPath": "./.venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.terminal.shellIntegration.enabled": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "",
+            "depth": 2,
+            "includeAllSymbols": true
+        }
+    ],
+    // UV integration - disable default venv creation
+    "python.createEnvironment.contentButton": "hide",
+    "python.createEnvironment.trigger": "off",
+    // Python formatting and linting
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.sortImports.args": [
+        "--profile",
+        "black"
+    ]
 }

@@ -25,38 +25,47 @@ This workspace includes several pre-configured VS Code tasks to streamline your 
 ## 🚀 How to Use
 
 ### Method 1: Command Palette
+
 1. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac)
 2. Type "Tasks: Run Task"
 3. Select the task you want to run
 
 ### Method 2: Keyboard Shortcuts
+
 - **Build**: `Ctrl+Shift+B` (Windows/Linux) or `Cmd+Shift+B` (Mac)
 - **Test**: `Ctrl+Shift+T` (configured if using Test Explorer)
 
 ### Method 3: Terminal Menu
+
 1. Go to **Terminal** → **Run Task...**
 2. Select the desired task
 
 ## 💡 Task Details
 
 ### Run All Linters
+
 Executes both ESLint and Prettier checks to ensure code quality and formatting standards.
 
 **Equivalent CLI:**
+
 ```bash
 npm run lint && npm run format:check
 ```
 
 ### Lint & Fix
+
 Automatically fixes ESLint and Prettier issues where possible.
 
 **Equivalent CLI:**
+
 ```bash
 npm run lint:fix && npm run format
 ```
 
 ### Full Quality Check
+
 Comprehensive check that runs:
+
 1. All linters (ESLint + Prettier)
 2. All tests (Vitest)
 3. Production build (Vite)
@@ -64,6 +73,7 @@ Comprehensive check that runs:
 This is perfect for running before pushing code or creating a PR.
 
 **Equivalent CLI:**
+
 ```bash
 npm run check && npm test -- --run && npm run build
 ```
@@ -71,6 +81,7 @@ npm run check && npm test -- --run && npm run build
 ## 🎨 Task Icons
 
 Each task has a color-coded icon for easy identification:
+
 - 🔵 Blue - ESLint
 - 💜 Magenta - Prettier
 - 🟡 Yellow - Linters/Tests
@@ -80,6 +91,7 @@ Each task has a color-coded icon for easy identification:
 ## ⚙️ Customization
 
 To add or modify tasks:
+
 1. Open `.vscode/tasks.json`
 2. Add/edit task configuration
 3. Refer to [VS Code Tasks Documentation](https://code.visualstudio.com/docs/editor/tasks)

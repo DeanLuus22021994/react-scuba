@@ -42,6 +42,25 @@
             ]
         },
         "vscode": {
+            "settings": {
+                // Python settings for container environment
+                "python.defaultInterpreterPath": "/usr/bin/python3.13",
+                "python.terminal.activateEnvironment": true,
+                "python.terminal.activateEnvInCurrentTerminal": true,
+                "python.terminal.shellIntegration.enabled": true,
+                "python.analysis.typeCheckingMode": "basic",
+                "python.analysis.autoImportCompletions": true,
+                "python.analysis.packageIndexDepths": [
+                    {
+                        "name": "",
+                        "depth": 2,
+                        "includeAllSymbols": true
+                    }
+                ],
+                // UV integration
+                "python.createEnvironment.contentButton": "hide",
+                "python.createEnvironment.trigger": "off"
+            },
             "extensions": [
                 "GitHub.copilot-chat",
                 "GitHub.copilot",
@@ -58,7 +77,11 @@
                 "christian-kohler.npm-intellisense",
                 "Orta.vscode-jest",
                 "VisualStudioExptTeam.intellicode-api-usage-examples",
-                "ms-azuretools.vscode-containers"
+                "ms-azuretools.vscode-containers",
+                "ms-python.python",
+                "ms-python.black-formatter",
+                "ms-python.isort",
+                "ms-python.pylint"
             ],
             "mcp": {
                 "servers": {

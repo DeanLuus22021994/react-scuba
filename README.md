@@ -41,28 +41,41 @@ A modern, production-ready website platform for dive centers and marine tourism 
 ### Prerequisites
 
 - Node.js 18+ and npm
+- Python 3.13+ (optional, for documentation utilities)
 - Git
 
 ### Installation
 
 1. Clone and install:
    \`\`\`bash
-   git clone https://github.com/yourusername/react-scuba.git
+   git clone <https://github.com/yourusername/react-scuba.git>
    cd react-scuba
    npm install --legacy-peer-deps
    \`\`\`
 
-2. Configure environment:
+2. **Optional: Set up Python environment with UV:**
+   \`\`\`bash
+
+   # Install UV (fast Python package manager)
+
+   curl -LsSf <https://astral.sh/uv/install.sh> | sh
+
+   # Set up Python environment
+
+   npm run python:setup
+   \`\`\`
+
+3. Configure environment:
    \`\`\`bash
    cp .env.example .env
 
-# Edit .env with your API keys
+   # Edit .env with your API keys
 
-\`\`\`
+   \`\`\`
 
-3. Start development:
+4. Start development:
    \`\`\`bash
-   npm run dev
+   npm start
    \`\`\`
 
 ## 📦 Scripts
@@ -92,6 +105,12 @@ A modern, production-ready website platform for dive centers and marine tourism 
 - `npm run docs:build` - Build documentation
 - `npm run docs:preview` - Preview built documentation
 
+### Python Utilities (Optional)
+
+- `npm run python:setup` - Set up Python environment with UV
+- `npm run python:check-links` - Check documentation links for validity
+- `npm run python:inventory` - Generate component inventory
+
 ## 📚 Documentation
 
 - **[Online Documentation](https://deanluus22021994.github.io/react-scuba/)** - Complete VitePress documentation
@@ -103,5 +122,5 @@ A modern, production-ready website platform for dive centers and marine tourism 
 
 ## 📞 Support
 
-Email: info@mauritius-scuba.com
+Email: <info@mauritius-scuba.com>
 Phone: +230 XXXX XXXX

@@ -1,0 +1,345 @@
+{
+  "pages": [
+    {
+      "name": "AboutPage",
+      "file": "pages/AboutPage.jsx",
+      "path": "src/pages/AboutPage.jsx"
+    },
+    {
+      "name": "CoursesPage",
+      "file": "pages/CoursesPage.jsx",
+      "path": "src/pages/CoursesPage.jsx"
+    },
+    {
+      "name": "DiveSitesPage",
+      "file": "pages/DiveSitesPage.jsx",
+      "path": "src/pages/DiveSitesPage.jsx"
+    },
+    {
+      "name": "GalleryPage",
+      "file": "pages/GalleryPage.jsx",
+      "path": "src/pages/GalleryPage.jsx"
+    },
+    {
+      "name": "HomePage",
+      "file": "pages/HomePage.jsx",
+      "path": "src/pages/HomePage.jsx"
+    }
+  ],
+  "components": [
+    {
+      "name": "App",
+      "file": "App.jsx",
+      "path": "src/App.jsx"
+    },
+    {
+      "name": "root",
+      "file": "index.jsx",
+      "path": "src/index.jsx"
+    },
+    {
+      "name": "Footer",
+      "file": "layouts/Footer.jsx",
+      "path": "src/layouts/Footer.jsx"
+    },
+    {
+      "name": "Header",
+      "file": "layouts/Header.jsx",
+      "path": "src/layouts/Header.jsx"
+    },
+    {
+      "name": "MainLayout",
+      "file": "layouts/MainLayout.jsx",
+      "path": "src/layouts/MainLayout.jsx"
+    },
+    {
+      "name": "Navigation",
+      "file": "layouts/Navigation.jsx",
+      "path": "src/layouts/Navigation.jsx"
+    },
+    {
+      "name": "AboutPage",
+      "file": "components/about/AboutPage.jsx",
+      "path": "src/components/about/AboutPage.jsx"
+    },
+    {
+      "name": "CredentialCard",
+      "file": "components/about/CredentialCard.jsx",
+      "path": "src/components/about/CredentialCard.jsx"
+    },
+    {
+      "name": "TeamMember",
+      "file": "components/about/TeamMember.jsx",
+      "path": "src/components/about/TeamMember.jsx"
+    },
+    {
+      "name": "CurrencySelector",
+      "file": "components/common/CurrencySelector.jsx",
+      "path": "src/components/common/CurrencySelector.jsx"
+    },
+    {
+      "name": "ErrorBoundary",
+      "file": "components/common/ErrorBoundary.jsx",
+      "path": "src/components/common/ErrorBoundary.jsx"
+    },
+    {
+      "name": "Loading",
+      "file": "components/common/Loading.jsx",
+      "path": "src/components/common/Loading.jsx"
+    },
+    {
+      "name": "PhoneLink",
+      "file": "components/common/PhoneLink.jsx",
+      "path": "src/components/common/PhoneLink.jsx"
+    },
+    {
+      "name": "SEO",
+      "file": "components/common/SEO.jsx",
+      "path": "src/components/common/SEO.jsx"
+    },
+    {
+      "name": "WhatsAppButton",
+      "file": "components/common/WhatsAppButton.jsx",
+      "path": "src/components/common/WhatsAppButton.jsx"
+    },
+    {
+      "name": "CourseCard",
+      "file": "components/courses/CourseCard.jsx",
+      "path": "src/components/courses/CourseCard.jsx"
+    },
+    {
+      "name": "CourseComparison",
+      "file": "components/courses/CourseComparison.jsx",
+      "path": "src/components/courses/CourseComparison.jsx"
+    },
+    {
+      "name": "CoursesPage",
+      "file": "components/courses/CoursesPage.jsx",
+      "path": "src/components/courses/CoursesPage.jsx"
+    },
+    {
+      "name": "DiveMap",
+      "file": "components/dive-sites/DiveMap.jsx",
+      "path": "src/components/dive-sites/DiveMap.jsx"
+    },
+    {
+      "name": "DiveSiteCard",
+      "file": "components/dive-sites/DiveSiteCard.jsx",
+      "path": "src/components/dive-sites/DiveSiteCard.jsx"
+    },
+    {
+      "name": "DiveSitesPage",
+      "file": "components/dive-sites/DiveSitesPage.jsx",
+      "path": "src/components/dive-sites/DiveSitesPage.jsx"
+    },
+    {
+      "name": "FeaturedCarousel",
+      "file": "components/gallery/FeaturedCarousel.jsx",
+      "path": "src/components/gallery/FeaturedCarousel.jsx"
+    },
+    {
+      "name": "GalleryGrid",
+      "file": "components/gallery/GalleryGrid.jsx",
+      "path": "src/components/gallery/GalleryGrid.jsx"
+    },
+    {
+      "name": "GalleryPage",
+      "file": "components/gallery/GalleryPage.jsx",
+      "path": "src/components/gallery/GalleryPage.jsx"
+    },
+    {
+      "name": "Lightbox",
+      "file": "components/gallery/Lightbox.jsx",
+      "path": "src/components/gallery/Lightbox.jsx"
+    },
+    {
+      "name": "CTASection",
+      "file": "components/home/CTASection.jsx",
+      "path": "src/components/home/CTASection.jsx"
+    },
+    {
+      "name": "FeaturesSection",
+      "file": "components/home/FeaturesSection.jsx",
+      "path": "src/components/home/FeaturesSection.jsx"
+    },
+    {
+      "name": "HeroSection",
+      "file": "components/home/HeroSection.jsx",
+      "path": "src/components/home/HeroSection.jsx"
+    },
+    {
+      "name": "HomePage",
+      "file": "components/home/HomePage.jsx",
+      "path": "src/components/home/HomePage.jsx"
+    },
+    {
+      "name": "ServicesSection",
+      "file": "components/home/ServicesSection.jsx",
+      "path": "src/components/home/ServicesSection.jsx"
+    },
+    {
+      "name": "TestimonialsSection",
+      "file": "components/home/TestimonialsSection.jsx",
+      "path": "src/components/home/TestimonialsSection.jsx"
+    },
+    {
+      "name": "VideoSection",
+      "file": "components/home/VideoSection.jsx",
+      "path": "src/components/home/VideoSection.jsx"
+    },
+    {
+      "name": "BookingModal",
+      "file": "components/modals/BookingModal.jsx",
+      "path": "src/components/modals/BookingModal.jsx"
+    },
+    {
+      "name": "ContactModal",
+      "file": "components/modals/ContactModal.jsx",
+      "path": "src/components/modals/ContactModal.jsx"
+    },
+    {
+      "name": "function",
+      "file": "components/shared/BackToTop.jsx",
+      "path": "src/components/shared/BackToTop.jsx"
+    },
+    {
+      "name": "function",
+      "file": "components/shared/ScrollProgress.jsx",
+      "path": "src/components/shared/ScrollProgress.jsx"
+    },
+    {
+      "name": "IntersectionObserver",
+      "file": "setupTests.js",
+      "path": "src/setupTests.js"
+    },
+    {
+      "name": "EXPERIENCE_LEVELS",
+      "file": "data/bookingTypes.js",
+      "path": "src/data/bookingTypes.js"
+    },
+    {
+      "name": "COURSES",
+      "file": "data/courses.js",
+      "path": "src/data/courses.js"
+    },
+    {
+      "name": "CREDENTIALS",
+      "file": "data/credentials.js",
+      "path": "src/data/credentials.js"
+    },
+    {
+      "name": "DIVE_SITES",
+      "file": "data/diveSites.js",
+      "path": "src/data/diveSites.js"
+    },
+    {
+      "name": "CATEGORIES",
+      "file": "data/gallery.js",
+      "path": "src/data/gallery.js"
+    },
+    {
+      "name": "oceanSpiritContent",
+      "file": "data/oceanSpirit.js",
+      "path": "src/data/oceanSpirit.js"
+    },
+    {
+      "name": "TEAM_MEMBERS",
+      "file": "data/team.js",
+      "path": "src/data/team.js"
+    },
+    {
+      "name": "api",
+      "file": "services/api.js",
+      "path": "src/services/api.js"
+    },
+    {
+      "name": "index",
+      "file": "services/index.js",
+      "path": "src/services/index.js"
+    },
+    {
+      "name": "index",
+      "file": "components/about/index.js",
+      "path": "src/components/about/index.js"
+    },
+    {
+      "name": "index",
+      "file": "components/common/index.js",
+      "path": "src/components/common/index.js"
+    },
+    {
+      "name": "index",
+      "file": "components/courses/index.js",
+      "path": "src/components/courses/index.js"
+    },
+    {
+      "name": "index",
+      "file": "components/dive-sites/index.js",
+      "path": "src/components/dive-sites/index.js"
+    },
+    {
+      "name": "index",
+      "file": "components/gallery/index.js",
+      "path": "src/components/gallery/index.js"
+    },
+    {
+      "name": "index",
+      "file": "components/home/index.js",
+      "path": "src/components/home/index.js"
+    }
+  ],
+  "hooks": [
+    {
+      "name": "useCurrency",
+      "file": "hooks/useCurrency.jsx",
+      "path": "src/hooks/useCurrency.jsx"
+    },
+    {
+      "name": "index",
+      "file": "hooks/index.js",
+      "path": "src/hooks/index.js"
+    }
+  ],
+  "utils": [
+    {
+      "name": "initializeGTM",
+      "file": "utils/analytics.js",
+      "path": "src/utils/analytics.js"
+    },
+    {
+      "name": "CURRENCIES",
+      "file": "utils/currency.js",
+      "path": "src/utils/currency.js"
+    },
+    {
+      "name": "envSchema",
+      "file": "utils/env.js",
+      "path": "src/utils/env.js"
+    },
+    {
+      "name": "index",
+      "file": "utils/index.js",
+      "path": "src/utils/index.js"
+    },
+    {
+      "name": "logger",
+      "file": "utils/logger.js",
+      "path": "src/utils/logger.js"
+    },
+    {
+      "name": "reportWebVitals",
+      "file": "utils/reportWebVitals.js",
+      "path": "src/utils/reportWebVitals.js"
+    },
+    {
+      "name": "scrollToElement",
+      "file": "utils/scrollToAnchor.js",
+      "path": "src/utils/scrollToAnchor.js"
+    },
+    {
+      "name": "generateLocalBusinessSchema",
+      "file": "utils/seo.js",
+      "path": "src/utils/seo.js"
+    }
+  ]
+}

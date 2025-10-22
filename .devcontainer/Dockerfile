@@ -6,18 +6,24 @@ ENV TZ=Etc/UTC
 # Install tzdata first to avoid prompts
 RUN apt-get update && apt-get install -y tzdata && apt-get clean
 
-# Python layer - install Python 3.13
+# Python layer - install Python 3.13 and UV
 RUN apt-get update && apt-get install -y \
   curl \
   gnupg \
   software-properties-common \
   && add-apt-repository ppa:deadsnakes/ppa \
   && apt-get update \
-  && apt-get install -y python3.13 python3.13-venv \
+  && apt-get install -y python3.13 python3.13-venv python3.13-dev \
   && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.13 1 \
+  && update-alternatives --install /usr/bin/python python /usr/bin/python3.13 1 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /var/cache/apt/*
+
+# Install UV (fast Python package manager)
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
+  && mv /root/.local/bin/uv /usr/local/bin/uv \
+  && chmod +x /usr/local/bin/uv
 
 # Node.js layer - install Node.js 22
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
