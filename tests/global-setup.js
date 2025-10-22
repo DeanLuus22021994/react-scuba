@@ -9,23 +9,35 @@ const dockerComposePath = path.resolve(__dirname, '../../docker-compose-examples
 let dockerProcess;
 
 export async function setup() {
-  console.log('Starting Docker Compose stack for tests...');
+  console.warn('Starting Docker Compose stack for tests...');
 
   try {
     // Pull images first
-    execSync('docker compose pull', {
-      cwd: dockerComposePath,
-      stdio: 'inherit',
-      shell: true,
+    await new Promise((resolve, reject) => {
+      const pullProcess = spawn('C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe', ['compose', 'pull'], {
+        cwd: dockerComposePath,
+        stdio: 'inherit',
+      });
+      pullProcess.on('close', (code) => {
+        if (code === 0) {
+          resolve();
+        } else {
+          reject(new Error(`docker compose pull exited with code ${code}`));
+        }
+      });
+      pullProcess.on('error', reject);
     });
 
     // Start services in detached mode
-    dockerProcess = spawn('docker compose up --build --force-recreate', [], {
-      cwd: dockerComposePath,
-      stdio: 'inherit',
-      detached: false,
-      shell: true,
-    });
+    dockerProcess = spawn(
+      'C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe',
+      ['compose', 'up', '--build', '--force-recreate'],
+      {
+        cwd: dockerComposePath,
+        stdio: 'inherit',
+        detached: false,
+      },
+    );
 
     // Wait for services to be ready
     await new Promise((resolve, reject) => {
@@ -55,27 +67,27 @@ export async function setup() {
       }, 30000); // Wait 30 seconds
     });
 
-    console.log('Docker Compose stack started successfully');
+    console.warn('Docker Compose stack started successfully');
   } catch (error) {
     console.error('Failed to start Docker Compose:', error);
     throw error;
   }
 }
 
-export async function teardown() {
-  console.log('Stopping Docker Compose stack...');
+export function teardown() {
+  console.warn('Stopping Docker Compose stack...');
 
   if (dockerProcess) {
     dockerProcess.kill();
   }
 
   try {
-    execSync('docker compose down --volumes --remove-orphans', {
+    execSync('"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" compose down --volumes --remove-orphans', {
       cwd: dockerComposePath,
       stdio: 'inherit',
       shell: true,
     });
-    console.log('Docker Compose stack stopped successfully');
+    console.warn('Docker Compose stack stopped successfully');
   } catch (error) {
     console.error('Failed to stop Docker Compose:', error);
     // Don't throw in teardown
