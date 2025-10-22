@@ -198,7 +198,7 @@ async def get_inventory(request: Request, src_path: str = "src"):
         )
         raise HTTPException(
             status_code=500, detail=f"Error generating inventory: {str(e)}"
-        )
+        ) from e
 
 
 @app.get("/links/check")
@@ -244,7 +244,9 @@ async def check_links(request: Request, workers: int = 10, timeout: int = 10):
             extra={"error": str(e), "workers": workers, "timeout": timeout},
             exc_info=True,
         )
-        raise HTTPException(status_code=500, detail=f"Error checking links: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error checking links: {str(e)}"
+        ) from e
 
 
 if __name__ == "__main__":

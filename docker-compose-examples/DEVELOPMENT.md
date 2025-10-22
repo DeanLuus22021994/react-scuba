@@ -243,6 +243,7 @@ Week 7-8: Polish        ░░░░░░░░░░░░░░░░░░�
 1. **Re-enable CI/CD**: Remove .disabled extension when ready
 2. **Error Handling**: Add circuit breakers and graceful degradation
 3. **Fix Python Type Errors**: Resolve remaining type annotations and import issues in Python utilities
+4. **Fix MCP Server**: Update MCP server implementation for Python 3.14 compatibility
 
 <a id="lnk-dev-roadmap-001-links"></a>
 

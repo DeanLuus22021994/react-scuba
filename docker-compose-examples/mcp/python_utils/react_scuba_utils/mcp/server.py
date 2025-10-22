@@ -6,30 +6,30 @@ as MCP tools for integration with AI assistants and other MCP clients.
 """
 
 import asyncio
-import json
-from typing import Any, Dict, List, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 from ..config.settings import HTTPConfig, PathConfig
+from ..models.models import ComponentInventoryConfig, LinkCheckConfig
 from ..services.component_inventory import ComponentInventoryService
 from ..services.link_checker import LinkCheckerService
-from ..models.models import ComponentInventoryConfig, LinkCheckConfig
 
 try:
+    import mcp.server.stdio
     from mcp import Tool
     from mcp.server import Server
-    from mcp.types import (
-        TextContent,
-        ImageContent,
-        EmbeddedResource,
-        LoggingLevel
-    )
-    import mcp.server.stdio
+    from mcp.types import TextContent
+
     MCP_AVAILABLE = True
 except ImportError:
     MCP_AVAILABLE = False
+
     # Define dummy classes for type checking
-    class Tool: pass
-    class Server: pass
+    class Tool:
+        pass
+
+    class Server:
+        pass
 
 
 class ReactScubaMCPServer:
@@ -55,7 +55,7 @@ class ReactScubaMCPServer:
         """Register MCP tools."""
 
         @self.server.list_tools()
-        async def list_tools() -> List[Tool]:
+        async def list_tools() -> list[Tool]:
             """List available MCP tools."""
             return [
                 Tool(
@@ -67,20 +67,20 @@ class ReactScubaMCPServer:
                             "docs_path": {
                                 "type": "string",
                                 "description": "Path to documentation directory",
-                                "default": "docs"
+                                "default": "docs",
                             },
                             "max_workers": {
                                 "type": "integer",
                                 "description": "Maximum number of concurrent workers",
-                                "default": 10
+                                "default": 10,
                             },
                             "use_interpreters": {
                                 "type": "boolean",
                                 "description": "Use concurrent interpreters if available",
-                                "default": True
-                            }
-                        }
-                    }
+                                "default": True,
+                            },
+                        },
+                    },
                 ),
                 Tool(
                     name="generate_component_inventory",
@@ -91,16 +91,16 @@ class ReactScubaMCPServer:
                             "src_path": {
                                 "type": "string",
                                 "description": "Path to source directory",
-                                "default": "src"
+                                "default": "src",
                             },
                             "extensions": {
                                 "type": "array",
                                 "items": {"type": "string"},
                                 "description": "File extensions to scan",
-                                "default": ["*.jsx", "*.js", "*.tsx", "*.ts"]
-                            }
-                        }
-                    }
+                                "default": ["*.jsx", "*.js", "*.tsx", "*.ts"],
+                            },
+                        },
+                    },
                 ),
                 Tool(
                     name="get_component_info",
@@ -110,21 +110,23 @@ class ReactScubaMCPServer:
                         "properties": {
                             "component_name": {
                                 "type": "string",
-                                "description": "Name of the component to analyze"
+                                "description": "Name of the component to analyze",
                             },
                             "src_path": {
                                 "type": "string",
                                 "description": "Path to source directory",
-                                "default": "src"
-                            }
+                                "default": "src",
+                            },
                         },
-                        "required": ["component_name"]
-                    }
-                )
+                        "required": ["component_name"],
+                    },
+                ),
             ]
 
         @self.server.call_tool()
-        async def call_tool(name: str, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+        async def call_tool(
+            name: str, arguments: dict[str, Any]
+        ) -> Sequence[TextContent]:
             """Handle tool calls."""
             if name == "check_documentation_links":
                 return await self._check_links_tool(arguments)
@@ -135,7 +137,9 @@ class ReactScubaMCPServer:
             else:
                 raise ValueError(f"Unknown tool: {name}")
 
-    async def _check_links_tool(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+    async def _check_links_tool(
+        self, arguments: dict[str, Any]
+    ) -> Sequence[TextContent]:
         """Handle link checking tool calls."""
         docs_path = arguments.get("docs_path", "docs")
         max_workers = arguments.get("max_workers", 10)
@@ -145,14 +149,16 @@ class ReactScubaMCPServer:
         self.path_config = PathConfig(docs_path=docs_path)
 
         # Create link checker service
-        config = LinkCheckConfig(max_workers=max_workers, use_interpreters=use_interpreters)
+        config = LinkCheckConfig(
+            max_workers=max_workers, use_interpreters=use_interpreters
+        )
         service = LinkCheckerService(config, self.path_config, self.http_config)
 
         # Run link check
         results = service.check_links_concurrent()
 
         # Format results
-        output = f"Link Check Results:\n"
+        output = "Link Check Results:\n"
         output += f"✅ Valid links: {len(results['valid'])}\n"
         output += f"❌ Broken links: {len(results['broken'])}\n"
         output += f"⏭️  Skipped links: {len(results['skipped'])}\n"
@@ -166,7 +172,9 @@ class ReactScubaMCPServer:
 
         return [TextContent(type="text", text=output)]
 
-    async def _generate_inventory_tool(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+    async def _generate_inventory_tool(
+        self, arguments: dict[str, Any]
+    ) -> Sequence[TextContent]:
         """Handle component inventory tool calls."""
         src_path = arguments.get("src_path", "src")
         extensions = arguments.get("extensions", ["*.jsx", "*.js", "*.tsx", "*.ts"])
@@ -199,7 +207,9 @@ class ReactScubaMCPServer:
 
         return [TextContent(type="text", text=output)]
 
-    async def _get_component_info_tool(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+    async def _get_component_info_tool(
+        self, arguments: dict[str, Any]
+    ) -> Sequence[TextContent]:
         """Handle component info tool calls."""
         component_name = arguments["component_name"]
         src_path = arguments.get("src_path", "src")
@@ -217,7 +227,7 @@ class ReactScubaMCPServer:
         # Search for component
         for category, components in inventory.items():
             for comp in components:
-                if comp['name'] == component_name:
+                if comp["name"] == component_name:
                     output = f"Component Information: {component_name}\n"
                     output += f"Category: {category}\n"
                     output += f"File: {comp['file']}\n"
@@ -227,15 +237,15 @@ class ReactScubaMCPServer:
                     output += f"Imports: {', '.join(comp['imports']) if comp['imports'] else 'None'}\n"
                     return [TextContent(type="text", text=output)]
 
-        return [TextContent(type="text", text=f"Component '{component_name}' not found")]
+        return [
+            TextContent(type="text", text=f"Component '{component_name}' not found")
+        ]
 
     async def run(self):
         """Run the MCP server."""
         async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
             await self.server.run(
-                read_stream,
-                write_stream,
-                self.server.create_initialization_options()
+                read_stream, write_stream, self.server.create_initialization_options()
             )
 
 
