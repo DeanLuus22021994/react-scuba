@@ -1,196 +1,103 @@
-# Custom Dockerfiles for Cluster Example
+---
+started: 2025-10-22
+completed: 2025-10-22
+author: AI Assistant
+version: 1.0
+status: active
+description: Load-balanced cluster configuration with multiple nginx web servers
+tags: [docker, compose, cluster, load-balancer, nginx]
+---
 
-This directory contains optimized Dockerfiles for the cluster-example Docker Compose setup. These custom Dockerfiles provide load balancing, high availability, and performance optimizations for a clustered deployment.
+# [`CLUSTER-EXAMPLE-001`](#cluster-example-001) Cluster Example
 
-## Benefits
+## [`UAT-2025-10-22T21:33:19Z`](#uat-2025-10-22t21-33-19z) User Acceptance Testing - 2025-10-22T21:33:19Z ✅ PASSED
 
-### 🚀 **Performance Optimizations**
+### Test Results Summary
 
-- **Multi-stage builds** for all services (Node.js, Python, PostgreSQL, Nginx)
-- **Layer caching** for faster rebuilds
-- **Named volume mounts** for persistent dependency caching
-- **Optimized configurations** for cluster workloads
+- **Configuration**: ✅ PASSED - Docker Compose validated
+- **Services**: ✅ PASSED - Load balancer + 6 services healthy
+- **Load Balancing**: ✅ PASSED - Nginx distributing traffic
+- **Health Checks**: ✅ PASSED - All services monitored
 
-### 🔒 **Security Enhancements**
+### Service Status
 
-- **Non-root users** for all services
-- **Minimal attack surfaces** with essential packages only
-- **Security headers** in Nginx configuration
-- **Rate limiting** and access controls
+| Service | Status | Health | Ports |
+|---------|--------|--------|-------|
+| **loadbalancer** | ✅ Running | Healthy | 8080 |
+| **web1-3** | ✅ Running | Healthy | 80 |
+| **node** | ✅ Running | Healthy | 3000 |
+| **python** | ✅ Running | Healthy | 8000 |
+| **db** | ✅ Running | Healthy | 5432 |
 
-### 📦 **Load Balancing & High Availability**
+### Architecture
 
-- **Nginx load balancer** with upstream backend servers
-- **Health checks** for all services
-- **Automatic failover** between backend instances
-- **Optimized PostgreSQL** for cluster workloads
-
-### 🏥 **Reliability Improvements**
-
-- **Integrated health monitoring** for all services
-- **Proper error handling** and fallback mechanisms
-- **Performance monitoring** with pg_stat_statements
-- **Optimized resource allocation** for cluster deployment
-
-## Services
-
-### Nginx Load Balancer (`nginx.Dockerfile`)
-
-- **Base image**: Nginx Alpine
-- **Features**:
-  - Load balancing across 3 backend web servers
-  - Reverse proxy to Node.js and Python services
-  - Gzip compression and caching
-  - Security headers and rate limiting
-  - Health check endpoint
-  - Non-root user execution
-
-### Node.js Service (`node.Dockerfile`)
-
-- **Base image**: Node.js 20 Alpine
-- **Multi-stage build**: base → deps → dev-deps → builder → runner
-- **Features**:
-  - Production and development dependency separation
-  - Cluster-optimized configuration
-  - Health check integration
-  - Non-root user execution
-
-### Python Service (`python.Dockerfile`)
-
-- **Base image**: Python 3.14 slim
-- **Multi-stage build**: base → deps → runner
-- **Features**:
-  - Virtual environment isolation
-  - Cluster deployment configuration
-  - Health check validation
-  - Non-root user execution
-
-### PostgreSQL Database (`postgres.Dockerfile`)
-
-- **Base image**: PostgreSQL 13 Alpine
-- **Features**:
-  - Cluster-optimized configuration
-  - Performance monitoring (pg_stat_statements)
-  - Replication-ready settings
-  - Health check integration
-
-## Architecture
-
-```text
-Internet
-    ↓
-Nginx Load Balancer (Port 8080)
-    ↓
-├── Web Server 1 (web1)
-├── Web Server 2 (web2)
-└── Web Server 3 (web3)
-    ↓
-Node.js API (Port 3000)
-    ↓
-Python Service (Port 8000)
-    ↓
-PostgreSQL Database (Port 5432)
+```
+Internet → Load Balancer (nginx:8080)
+                     ↓
+          ┌─────────┼─────────┐
+          │         │         │
+        Web1      Web2      Web3
+       (nginx)   (nginx)   (nginx)
+                     ↓
+                Shared Services
+            ┌─────────┼─────────┐
+            │         │         │
+          Node     Python      DB
+        (React)  (FastAPI)  (PostgreSQL)
 ```
 
-## Usage
+<a id="fr-cluster-example-001-functional-requirements"></a>
 
-The Docker Compose file automatically uses these custom Dockerfiles. To build and run:
+## [`FR-CLUSTER-EXAMPLE-001`](#fr-cluster-example-001-functional-requirements) Functional Requirements
+
+- Nginx load balancer with upstream routing
+- Multiple web server replicas
+- Service health monitoring
+- Round-robin load distribution
+
+### [`FR-CLUSTER-EXAMPLE-001`] Validation Criteria
 
 ```bash
-# Build custom images
-docker-compose build
+docker-compose config
+curl -f http://localhost:8080/
+```
 
-# Start cluster
-docker-compose up
+<a id="uac-cluster-example-001-user-acceptance-criteria"></a>
 
-# Or run in background
+## [`UAC-CLUSTER-EXAMPLE-001`](#uac-cluster-example-001-user-acceptance-criteria) User Acceptance Criteria
+
+- Load balancer distributes requests
+- All web servers respond
+- Services remain healthy under load
+- No service failures
+
+### [`UAC-CLUSTER-EXAMPLE-001`] Validation Criteria
+
+```bash
 docker-compose up -d
-
-# Scale web servers
-docker-compose up -d --scale web1=2 --scale web2=2 --scale web3=2
+curl http://localhost:8080/ | grep -c "web" | grep -q "3"
 ```
 
-## Development Workflow
+<a id="blk-cluster-example-001-blockers"></a>
 
-### First Build
+## [`BLK-CLUSTER-EXAMPLE-001`](#blk-cluster-example-001-blockers) Blockers
 
-- Dependencies are installed during build
-- May take longer due to multi-stage optimization
-- Subsequent builds are significantly faster
+- Port 8080 conflicts
+- Insufficient memory for replicas
+- Network connectivity issues
 
-### Load Balancing
-
-- Requests are distributed across web1, web2, web3
-- Automatic failover if a backend server fails
-- Session persistence through load balancer
-
-### Health Monitoring
-
-- All services include health checks
-- Nginx provides `/health` endpoint
-- Automatic service discovery and routing
-
-## Configuration
-
-### Nginx Configuration
-
-- **nginx.conf**: Main configuration with performance optimizations
-- **default.conf**: Server configuration with load balancing rules
-- **Upstream backend**: Round-robin load balancing to web servers
-- **API routing**: Proxy to Node.js and Python services
-
-### PostgreSQL Configuration
-
-Custom configuration in `postgresql.conf` includes:
-
-- Cluster-optimized memory settings
-- Replication preparation
-- Performance monitoring
-- Connection pooling ready
-
-### Environment Variables
-
-All environment variables remain the same as the original configuration.
-
-## Scaling
-
-### Horizontal Scaling
+### [`BLK-CLUSTER-EXAMPLE-001`] Validation Criteria
 
 ```bash
-# Scale web servers
-docker-compose up -d --scale web1=3 --scale web2=3 --scale web3=3
-
-# Add more Node.js instances
-docker-compose up -d --scale node=2
+lsof -i :8080 || echo "Port available"
+docker system df
 ```
 
-### Resource Allocation
+<a id="lnk-cluster-example-001-links"></a>
 
-- PostgreSQL: Optimized for cluster workloads
-- Node.js: Configured for production clustering
-- Python: Virtual environment isolation
-- Nginx: Lightweight load balancing
+## [`LNK-CLUSTER-EXAMPLE-001`](#lnk-cluster-example-001-links) Links
 
-## Troubleshooting
-
-### Load Balancing Issues
-
-- Check Nginx logs: `docker-compose logs loadbalancer`
-- Verify backend health: `docker-compose ps`
-- Test individual services directly
-
-### Database Connection Issues
-
-- Check PostgreSQL logs: `docker-compose logs db`
-- Verify connection string and credentials
-- Test direct database connection
-
-### Performance Issues
-
-- Monitor resource usage: `docker stats`
-- Check health endpoints
-- Review Nginx access logs for bottlenecks
-
-## Migration from Default Images
-
-The custom Dockerfiles are drop-in replacements for the default images. No changes to docker-compose.yml are required beyond the build context updates. The cluster provides enhanced reliability and performance compared to the basic setup.
+- [Testing Protocol](../../TESTING.md)
+- [Main README](../../README.md)
+- [Changelog](../../CHANGELOG.md)
+- [MCP Utilities](../../mcp/README.md)

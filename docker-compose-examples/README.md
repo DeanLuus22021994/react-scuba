@@ -18,7 +18,7 @@ tags: [docker, compose, examples, devcontainer, testing, python314, consolidated
 
 ### UAT Results Summary ✅
 
-**All stacks validated with Python 3.14 support**
+#### All stacks validated with Python 3.14 support
 
 #### Basic Stack ✅
 - Node.js, Python FastAPI, PostgreSQL operational

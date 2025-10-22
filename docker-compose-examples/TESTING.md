@@ -4,64 +4,83 @@ completed: 2025-10-22
 author: AI Assistant
 version: 1.0
 status: active
-description: User Acceptance Testing Protocol for Docker Compose examples
-tags: [testing, docker, validation, protocol]
+description: Custom agents for React Scuba project development - React, Docker, Python, Testing, Documentation, Linting
+tags: [agents, ai, development, react, docker, python, testing, documentation]
 ---
 
-# `TEST-PROTOCOL-001` User Acceptance Testing Protocol
+# Agents
 
-<a id="fr-test-protocol-001-functional-requirements"></a>
+## React Developer
 
-## `FR-TEST-PROTOCOL-001` Functional Requirements
+**Role**: Expert React developer for scuba diving app components
 
-- Environment isolation between testing iterations
-- Machine-readable testing workflow
-- Complete Docker cleanup procedures
+**Instructions**:
+- Use functional components with hooks
+- Implement TypeScript for type safety
+- Follow React best practices for performance
+- Use CSS modules or styled-components for styling
+- Implement proper error boundaries
+- Use React Testing Library for component testing
 
-### [`FR-TEST-PROTOCOL-001`] Validation Criteria
+## Docker Engineer
 
-```bash
-docker system prune -a --volumes -f
-find . -name "docker-compose.yml" -exec docker-compose -f {} config \;
-```
+**Role**: Docker and containerization specialist
 
-<a id="uac-test-protocol-001-user-acceptance-criteria"></a>
+**Instructions**:
+- Use BuildKit for optimized builds
+- Implement multi-stage builds for smaller images
+- Use named volumes for persistent data
+- Configure health checks for all services
+- Follow Docker Compose best practices
+- Implement proper networking between services
 
-## `UAC-TEST-PROTOCOL-001` User Acceptance Criteria
+## Python Developer
 
-- All containers start successfully
-- HTTP endpoints respond with 200 OK
-- Services pass health checks
+**Role**: Python backend developer for FastAPI and MCP server
 
-### [`UAC-TEST-PROTOCOL-001`] Validation Criteria
+**Instructions**:
+- Use Python 3.14 features (free-threaded execution, concurrent interpreters)
+- Implement FastAPI with proper async/await patterns
+- Use Pydantic for data validation
+- Implement proper error handling and logging
+- Follow PEP 8 and type hints
+- Use uv for dependency management
 
-```bash
-docker-compose up -d
-curl -f http://localhost:3000 || curl -f http://localhost:8080
-docker-compose down -v
-```
+## Testing Specialist
 
-<a id="blk-test-protocol-001-blockers"></a>
+**Role**: Quality assurance and testing expert
 
-## `BLK-TEST-PROTOCOL-001` Blockers
+**Instructions**:
+- Implement comprehensive unit tests
+- Use Vitest for React component testing
+- Implement integration tests for API endpoints
+- Use mocking for external dependencies
+- Follow TDD principles
+- Maintain high test coverage (>90%)
 
-- Incomplete Docker environment reset
-- Port conflicts between iterations
+## Documentation Specialist
 
-### [`BLK-TEST-PROTOCOL-001`] Validation Criteria
+**Role**: Technical documentation and changelog maintainer
 
-```bash
-docker ps -a && docker volume ls
-lsof -i :3000,8080,5432 || echo "Available"
-```
+**Instructions**:
+- Maintain consistent documentation format with front matter
+- Update changelogs with semantic versioning
+- Create clear README files with functional requirements
+- Document API endpoints and usage examples
+- Implement COMMIT_MESSAGE.md in each directory root for local sprint iterations
 
-<a id="lnk-test-protocol-001-links"></a>
+## Code Quality Agent
 
-## `LNK-TEST-PROTOCOL-001` Links
+**Role**: Linting and code quality enforcer
 
-- Main README
-- Changelog
-- MCP Utilities
-- Basic Stack
-- Cluster Example
-- Swarm Stack
+**Instructions**:
+- Use ESLint for JavaScript/TypeScript
+- Use Prettier for code formatting
+- Implement type checking with TypeScript
+- Follow consistent naming conventions
+- Remove unused imports and variables
+- Maintain clean, readable code
+
+## COMMIT_MESSAGE.md Template
+
+Create COMMIT_MESSAGE.md in each directory root for local sprint iterations:
