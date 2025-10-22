@@ -36,7 +36,7 @@ dependencies = [
   "click>=8.1.0",
   "rich>=13.7.0",
   "urllib3>=2.0.0",
-  "lxml>=4.9.0",
+  "lxml>=5.1.0",
   "python-dotenv>=1.0.0",
 ]
 
@@ -56,6 +56,17 @@ docs = [
   "mkdocs-git-revision-date-localized-plugin>=1.2.0",
   "mkdocs-minify-plugin>=0.7.0",
   "mkdocs-redirects>=1.2.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+  "black>=24.0.0",
+  "isort>=5.13.0",
+  "pylint>=3.0.0",
+  "mypy>=1.8.0",
+  "pytest>=8.0.0",
+  "pytest-cov>=4.1.0",
+  "ruff>=0.3.0",
 ]
 
 [project.scripts]
@@ -136,7 +147,7 @@ known-first-party = ["react_scuba_utils"]
 "tests/**/*" = ["B011"]
 
 [tool.pytest.ini_options]
-minversion = "7.4"
+minversion = "8.0"
 addopts = "-ra -q --strict-markers --strict-config --cov=react_scuba_utils --cov-report=term-missing --cov-report=html --cov-report=xml"
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
@@ -189,6 +200,15 @@ profile = "black"
 multi_line_output = 3
 line_length = 88
 known_first_party = ["react_scuba_utils"]
+
+[tool.pylint.messages_control]
+disable = [
+  "C0114", # missing-module-docstring
+  "C0115", # missing-class-docstring
+  "C0116", # missing-function-docstring
+  "R0903", # too-few-public-methods
+  "R0913", # too-many-arguments
+]
 known_third_party = ["fastapi", "pydantic", "uvicorn"]
 
 [tool.taplo]
