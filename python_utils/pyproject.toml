@@ -28,12 +28,16 @@ dependencies = [
   "beautifulsoup4>=4.12.0",
   "PyYAML>=6.0",
   "pydantic>=2.5.0",
+  "pydantic-settings>=2.0.0",
   "fastapi>=0.104.0",
   "uvicorn[standard]>=0.24.0",
   "mcp>=0.1.0",
   "structlog>=23.2.0",
   "click>=8.1.0",
   "rich>=13.7.0",
+  "urllib3>=2.0.0",
+  "lxml>=4.9.0",
+  "python-dotenv>=1.0.0",
 ]
 
 [project.optional-dependencies]
@@ -46,7 +50,13 @@ dev = [
   "isort>=5.12.0",
   "pre-commit>=3.5.0",
 ]
-docs = ["mkdocs-material>=9.4.0", "mkdocstrings[python]>=0.24.0"]
+docs = [
+  "mkdocs-material>=9.4.0",
+  "mkdocstrings[python]>=0.24.0",
+  "mkdocs-git-revision-date-localized-plugin>=1.2.0",
+  "mkdocs-minify-plugin>=0.7.0",
+  "mkdocs-redirects>=1.2.0",
+]
 
 [project.scripts]
 react-scuba-utils = "react_scuba_utils.cli:main"
