@@ -50,11 +50,14 @@
         "editor.tabSize": 2,
         "editor.formatOnSave": false
     },
-    // Markdown linting configuration
+    // Markdown linting configuration - disabled rules for documentation aesthetics
     "markdownlint.config": {
         "MD022": false,  // Allow headings without blank lines for anchor tags
-        "MD051": false,  // Disable link fragments validation for clickable headings
-        "MD033": false   // Allow inline HTML for anchor tags
+        "MD031": false,  // Allow fenced code blocks without surrounding blank lines (aesthetics)
+        "MD032": false,  // Allow lists without surrounding blank lines (aesthetics)
+        "MD033": false,  // Allow inline HTML for anchor tags
+        "MD040": false,  // Allow fenced code blocks without language specification
+        "MD051": false   // Disable link fragments validation for clickable headings
     },
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit",
