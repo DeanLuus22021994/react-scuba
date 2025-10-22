@@ -21,7 +21,7 @@ COPY package*.json ./
 ENV npm_config_ignore_scripts=true
 # Install dependencies with npm cache mounting
 RUN --mount=type=cache,target=/root/.npm,uid=0 \
-  npm install --only=production --legacy-peer-deps && npm cache clean --force
+  npm install --only=production --legacy-peer-deps
 
 FROM base AS dev-deps
 # Copy package files for development dependencies
@@ -30,7 +30,7 @@ COPY package*.json ./
 ENV npm_config_ignore_scripts=true
 # Install all dependencies including dev dependencies with caching
 RUN --mount=type=cache,target=/root/.npm,uid=0 \
-  npm install --legacy-peer-deps && npm cache clean --force
+  npm install --legacy-peer-deps
 
 FROM dev-deps AS builder
 # Copy source code (changes frequently, so separate stage)

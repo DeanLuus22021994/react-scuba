@@ -10,65 +10,44 @@ tags: [docker, compose, examples, devcontainer, testing, python314, uat]
 
 # [`DOCKER-COMPOSE-EXAMPLES-001`](#docker-compose-examples-001) Docker Compose Examples
 
-## [`UAT-2025-10-22T16:45:00Z`](#uat-2025-10-22t16-45-00z) User Acceptance Testing - 2025-10-22T16:45:00Z
+## [`UAT-2025-10-22T20:46:36Z`](#uat-2025-10-22t20-46-36z) User Acceptance Testing - 2025-10-22T20:46:36Z
 
 ### Pre-UAT Cleanup Verification ✅
 
-**Cleanup completed at 2025-10-22T16:40:00Z:**
+**Cleanup completed at 2025-10-22T20:46:36Z:**
 
-- **Images**: 16 → 0 (17.53GB reclaimed)
-- **Containers**: 0 (clean)
-- **Volumes**: 16 → 0 (1.459GB reclaimed)
-- **Build Cache**: 123 → 0 (10.65GB reclaimed)
-- **Total Reclaimed**: 11.57GB
+- **Images**: 3 → 0 (4.848GB reclaimed)
+- **Containers**: 7 → 0 (151.6kB reclaimed)
+- **Volumes**: 16 → 0 (965.4MB reclaimed)
+- **Build Cache**: 0 (already clean)
+- **Total Reclaimed**: 5.96GB
 - **Verification**: `docker system df` shows 0B usage across all categories
 
-**Environment Status**: Clean slate confirmed - no residual artifacts from previous testing cycles.
+**Environment Status**: Complete clean slate achieved - zero residual artifacts from all previous testing cycles.
 
-### UAT Results Summary ✅
+### UAT Results Summary 🔄
 
-**All stacks validated successfully with Python 3.14 features at 2025-10-22T16:45:00Z:**
+**User Acceptance Testing in progress - Clean environment validated at 2025-10-22T20:46:36Z**
 
-#### Basic Stack UAT ✅
+#### Basic Stack UAT 🔄
 
-- **Deployment**: Successful deployment with 4 services (web, api, db, redis)
-- **Health Checks**: All services passed health validation
-- **Python 3.14**: Free-threaded execution and concurrent interpreters confirmed
-- **Endpoints**: HTTP services accessible on ports 3000/8080
-- **Cleanup**: Complete removal of containers and volumes
+**Testing in progress...**
 
-#### Cluster Example UAT ✅
+#### Cluster Example UAT 🔄
 
-- **Deployment**: Successful deployment with 6 services (web1, web2, api, db, redis, loadbalancer)
-- **Load Balancing**: nginx proxy with round-robin distribution confirmed
-- **Health Checks**: All services passed health validation with Python 3.14 features
-- **Python 3.14**: Concurrent interpreters and free-threaded execution validated
-- **Endpoints**: Load balanced access via port 8080
-- **Cleanup**: Complete removal of containers and volumes
+**Testing in progress...**
 
-#### Swarm Stack UAT ✅
+#### Swarm Stack UAT 🔄
 
-- **Deployment**: Successful deployment with 5 services (web, api, db, redis, monitor)
-- **Swarm Mode**: Docker Swarm orchestration confirmed
-- **Health Checks**: All services passed health validation
-- **Python 3.14**: Free-threaded execution and concurrent processing validated
-- **Endpoints**: Services accessible via Swarm networking
-- **Cleanup**: Complete removal of containers and volumes
+**Testing in progress...**
 
-#### Cross-Stack Validation ✅
+#### Cross-Stack Validation 🔄
 
-- **Compatibility**: No conflicts between stack configurations
-- **Resource Usage**: Efficient resource allocation across all stacks
-- **Python 3.14**: Consistent feature availability across architectures
-- **Documentation**: Component inventories generated for all stacks
+**Testing in progress...**
 
-#### Final Environment State ✅
+#### Final Environment State 🔄
 
-- **Containers**: 0 active containers
-- **Volumes**: 0 active volumes (15 volumes removed)
-- **Images**: 13 images retained for future use
-- **Build Cache**: Clean build cache maintained
-- **Total Usage**: 0B active usage confirmed
+**Testing in progress...**
 
 <a id="fr-docker-compose-examples-001-functional-requirements"></a>
 
