@@ -62,16 +62,16 @@
       "category": "pages",
       "exports": [],
       "imports": [
-        "./CredentialCard",
-        "./TeamMember",
-        "../common/SEO",
-        "../modals/BookingModal",
-        "../../utils/analytics",
-        "../../data/credentials",
-        "framer-motion",
         "../../data/team",
+        "../modals/BookingModal",
+        "../../data/credentials",
+        "./CredentialCard",
         "@heroicons/react/24/outline",
-        "react"
+        "react",
+        "./TeamMember",
+        "../../utils/analytics",
+        "../common/SEO",
+        "framer-motion"
       ],
       "size_bytes": 10773
     },
@@ -82,16 +82,16 @@
       "category": "pages",
       "exports": [],
       "imports": [
-        "../../data/courses",
-        "../../hooks/useCurrency",
-        "../common/SEO",
         "../modals/BookingModal",
-        "../../utils/analytics",
-        "../modals/ContactModal",
-        "framer-motion",
-        "./CourseCard",
         "./CourseComparison",
-        "react"
+        "../../hooks/useCurrency",
+        "react",
+        "../../data/courses",
+        "../../utils/analytics",
+        "./CourseCard",
+        "../modals/ContactModal",
+        "../common/SEO",
+        "framer-motion"
       ],
       "size_bytes": 5373
     },
@@ -102,14 +102,14 @@
       "category": "pages",
       "exports": [],
       "imports": [
-        "./DiveMap",
-        "../common/SEO",
         "../modals/BookingModal",
-        "../../utils/analytics",
-        "framer-motion",
+        "./DiveMap",
         "react",
+        "./DiveSiteCard",
         "../../data/diveSites",
-        "./DiveSiteCard"
+        "../../utils/analytics",
+        "../common/SEO",
+        "framer-motion"
       ],
       "size_bytes": 6492
     },
@@ -120,15 +120,15 @@
       "category": "pages",
       "exports": [],
       "imports": [
-        "./Lightbox",
-        "../common/SEO",
         "../modals/BookingModal",
-        "../../utils/analytics",
         "../../data/gallery",
-        "framer-motion",
+        "./Lightbox",
         "./GalleryGrid",
+        "react",
         "./FeaturedCarousel",
-        "react"
+        "../../utils/analytics",
+        "../common/SEO",
+        "framer-motion"
       ],
       "size_bytes": 6239
     },
@@ -139,17 +139,17 @@
       "category": "pages",
       "exports": [],
       "imports": [
-        "./FeaturesSection",
-        "./CTASection",
-        "../common/SEO",
         "../modals/BookingModal",
+        "./FeaturesSection",
+        "./TestimonialsSection",
+        "./VideoSection",
+        "react",
         "./HeroSection",
+        "./CTASection",
         "../../utils/analytics",
         "../modals/ContactModal",
-        "./VideoSection",
-        "./TestimonialsSection",
-        "react",
-        "./ServicesSection"
+        "./ServicesSection",
+        "../common/SEO"
       ],
       "size_bytes": 1536
     }
@@ -162,9 +162,9 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "@heroicons/react/24/outline",
         "../components/common",
-        "react-router-dom"
+        "react-router-dom",
+        "@heroicons/react/24/outline"
       ],
       "size_bytes": 6787
     },
@@ -177,9 +177,9 @@
       "imports": [
         "@headlessui/react",
         "./Navigation",
-        "react",
-        "@heroicons/react/24/outline",
         "../components/common",
+        "@heroicons/react/24/outline",
+        "react",
         "react-router-dom"
       ],
       "size_bytes": 3752
@@ -191,12 +191,12 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "./Header",
         "../utils/analytics",
-        "./Footer",
-        "react",
         "../components/common",
-        "react-router-dom"
+        "react",
+        "react-router-dom",
+        "./Footer",
+        "./Header"
       ],
       "size_bytes": 798
     },
@@ -219,8 +219,8 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 1207
     },
@@ -231,8 +231,8 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 1550
     },
@@ -243,9 +243,9 @@
       "category": "components",
       "exports": [],
       "imports": [
+        "@headlessui/react",
         "../../hooks/useCurrency",
         "../../utils/currency",
-        "@headlessui/react",
         "@heroicons/react/24/outline",
         "react",
         "prop-types"
@@ -283,9 +283,9 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "@heroicons/react/24/outline",
         "../../utils/analytics",
-        "prop-types"
+        "prop-types",
+        "@heroicons/react/24/outline"
       ],
       "size_bytes": 828
     },
@@ -296,9 +296,9 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "../../utils/seo",
         "react-helmet-async",
-        "prop-types"
+        "prop-types",
+        "../../utils/seo"
       ],
       "size_bytes": 1454
     },
@@ -310,8 +310,8 @@
       "exports": [],
       "imports": [
         "@heroicons/react/24/solid",
-        "../../utils/analytics",
-        "prop-types"
+        "prop-types",
+        "../../utils/analytics"
       ],
       "size_bytes": 2233
     },
@@ -323,10 +323,10 @@
       "exports": [],
       "imports": [
         "../../hooks/useCurrency",
-        "framer-motion",
         "@heroicons/react/24/outline",
         "react",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 4390
     },
@@ -337,8 +337,8 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "../../data/courses",
-        "../../hooks/useCurrency"
+        "../../hooks/useCurrency",
+        "../../data/courses"
       ],
       "size_bytes": 2565
     },
@@ -350,9 +350,9 @@
       "exports": [],
       "imports": [
         "leaflet",
+        "prop-types",
         "../../data/diveSites",
-        "react-leaflet",
-        "prop-types"
+        "react-leaflet"
       ],
       "size_bytes": 2526
     },
@@ -363,9 +363,9 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
+        "prop-types",
         "../../data/diveSites",
-        "prop-types"
+        "framer-motion"
       ],
       "size_bytes": 3628
     },
@@ -377,8 +377,8 @@
       "exports": [],
       "imports": [
         "../../data/gallery",
-        "swiper/modules",
-        "swiper/react"
+        "swiper/react",
+        "swiper/modules"
       ],
       "size_bytes": 1574
     },
@@ -389,9 +389,9 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
         "react",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 3432
     },
@@ -403,9 +403,9 @@
       "exports": [],
       "imports": [
         "framer-motion",
-        "@heroicons/react/24/outline",
         "react",
-        "prop-types"
+        "prop-types",
+        "@heroicons/react/24/outline"
       ],
       "size_bytes": 3610
     },
@@ -416,8 +416,8 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 1531
     },
@@ -428,8 +428,8 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 2323
     },
@@ -440,9 +440,9 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
         "react-router-dom",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 3136
     },
@@ -454,9 +454,9 @@
       "exports": [],
       "imports": [
         "framer-motion",
-        "@heroicons/react/24/outline",
+        "prop-types",
         "react-router-dom",
-        "prop-types"
+        "@heroicons/react/24/outline"
       ],
       "size_bytes": 3347
     },
@@ -467,9 +467,9 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
         "@heroicons/react/24/solid",
-        "prop-types"
+        "prop-types",
+        "framer-motion"
       ],
       "size_bytes": 3454
     },
@@ -491,20 +491,20 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "@hookform/resolvers/zod",
-        "../../utils/logger",
-        "react-hook-form",
-        "../../hooks/useCurrency",
-        "@headlessui/react",
-        "../../utils/analytics",
-        "../common/Loading",
         "../../services/api",
-        "react-datepicker",
-        "zod",
-        "@heroicons/react/24/outline",
+        "@headlessui/react",
         "react-hot-toast",
+        "../../hooks/useCurrency",
+        "../../utils/logger",
+        "@hookform/resolvers/zod",
+        "@heroicons/react/24/outline",
         "react",
-        "prop-types"
+        "zod",
+        "../common/Loading",
+        "prop-types",
+        "react-datepicker",
+        "../../utils/analytics",
+        "react-hook-form"
       ],
       "size_bytes": 18772
     },
@@ -515,19 +515,19 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "@hookform/resolvers/zod",
-        "../../utils/logger",
-        "react-hook-form",
-        "react-google-recaptcha",
-        "@headlessui/react",
-        "../../utils/analytics",
         "../../services/api",
-        "react-datepicker",
-        "zod",
-        "@heroicons/react/24/outline",
+        "@headlessui/react",
         "react-hot-toast",
+        "../../utils/logger",
+        "@hookform/resolvers/zod",
+        "react-google-recaptcha",
+        "@heroicons/react/24/outline",
         "react",
-        "prop-types"
+        "zod",
+        "prop-types",
+        "react-datepicker",
+        "../../utils/analytics",
+        "react-hook-form"
       ],
       "size_bytes": 12749
     },
@@ -539,9 +539,9 @@
       "exports": [],
       "imports": [
         "framer-motion",
-        "@heroicons/react/24/outline",
         "react",
-        "prop-types"
+        "prop-types",
+        "@heroicons/react/24/outline"
       ],
       "size_bytes": 1912
     },
@@ -552,8 +552,8 @@
       "category": "components",
       "exports": [],
       "imports": [
-        "framer-motion",
-        "react"
+        "react",
+        "framer-motion"
       ],
       "size_bytes": 1109
     },
@@ -564,8 +564,8 @@
       "category": "components",
       "exports": [
         "getBookingItemById",
-        "EXPERIENCE_LEVELS",
         "getBookingItems",
+        "EXPERIENCE_LEVELS",
         "BOOKING_TYPES"
       ],
       "imports": [],
@@ -578,9 +578,9 @@
       "category": "components",
       "exports": [
         "getCourseById",
-        "COURSES",
+        "getCoursesByLevel",
         "COURSE_COMPARISON_HEADERS",
-        "getCoursesByLevel"
+        "COURSES"
       ],
       "imports": [],
       "size_bytes": 5890
@@ -604,11 +604,11 @@
       "path": "src/data/diveSites.js",
       "category": "components",
       "exports": [
+        "MAURITIUS_CENTER",
         "DIVE_SITES",
         "getDiveSitesByDifficulty",
-        "MAURITIUS_CENTER",
-        "getDiveSiteById",
-        "DIFFICULTY_COLORS"
+        "DIFFICULTY_COLORS",
+        "getDiveSiteById"
       ],
       "imports": [],
       "size_bytes": 3810
@@ -619,11 +619,11 @@
       "path": "src/data/gallery.js",
       "category": "components",
       "exports": [
+        "FEATURED_IMAGES",
         "getImagesByCategory",
         "GALLERY_IMAGES",
-        "FEATURED_IMAGES",
-        "CATEGORIES",
-        "getImageById"
+        "getImageById",
+        "CATEGORIES"
       ],
       "imports": [],
       "size_bytes": 4282
@@ -645,8 +645,8 @@
       "path": "src/data/team.js",
       "category": "components",
       "exports": [
-        "TEAM_MEMBERS",
-        "getTeamMemberByName"
+        "getTeamMemberByName",
+        "TEAM_MEMBERS"
       ],
       "imports": [],
       "size_bytes": 1741
@@ -658,11 +658,11 @@
       "category": "components",
       "exports": [
         "checkCalendarAvailability",
-        "subscribeNewsletter",
-        "submitBookingInquiry",
-        "getExchangeRates",
         "createCalendarBooking",
-        "submitContactForm"
+        "getExchangeRates",
+        "submitBookingInquiry",
+        "submitContactForm",
+        "subscribeNewsletter"
       ],
       "imports": [
         "axios",
@@ -677,8 +677,8 @@
       "category": "components",
       "exports": [
         "checkCalendarAvailability",
-        "default",
         "createCalendarBooking",
+        "default",
         "submitContactForm"
       ],
       "imports": [],
@@ -758,13 +758,13 @@
       "path": "src/hooks/useCurrency.jsx",
       "category": "hooks",
       "exports": [
-        "CurrencyProvider",
-        "useCurrency"
+        "useCurrency",
+        "CurrencyProvider"
       ],
       "imports": [
         "../services/api",
-        "../utils/analytics",
         "../utils/currency",
+        "../utils/analytics",
         "react",
         "prop-types"
       ],
@@ -776,8 +776,8 @@
       "path": "src/hooks/index.js",
       "category": "hooks",
       "exports": [
-        "CurrencyProvider",
-        "default"
+        "default",
+        "CurrencyProvider"
       ],
       "imports": [],
       "size_bytes": 163
@@ -790,27 +790,27 @@
       "path": "src/utils/analytics.js",
       "category": "utils",
       "exports": [
-        "initializeGA4",
-        "trackFormComplete",
-        "trackCourseInquiry",
-        "trackFormStart",
-        "trackCurrencyChange",
         "trackContactSubmit",
-        "trackFormAbandon",
-        "trackCalendarBookingComplete",
-        "trackBookingRequest",
-        "trackWhatsAppClick",
-        "initializeGTM",
-        "sendWebVitalsToGA4",
-        "trackPhoneClick",
         "trackConversion",
+        "trackBookingRequest",
+        "trackCourseInquiry",
+        "initializeGTM",
+        "trackCurrencyChange",
+        "initializeGA4",
+        "trackPageView",
+        "trackCalendarBookingComplete",
+        "trackFormComplete",
         "trackEmailClick",
-        "trackPageView"
+        "sendWebVitalsToGA4",
+        "trackWhatsAppClick",
+        "trackFormStart",
+        "trackFormAbandon",
+        "trackPhoneClick"
       ],
       "imports": [
-        "react-gtm-module",
+        "react-ga4",
         "./logger",
-        "react-ga4"
+        "react-gtm-module"
       ],
       "size_bytes": 3730
     },
@@ -820,13 +820,13 @@
       "path": "src/utils/currency.js",
       "category": "utils",
       "exports": [
-        "DEFAULT_EXCHANGE_RATES",
         "getCurrencySymbol",
-        "convertCurrency",
         "formatCurrency",
-        "getCurrencyName",
         "fetchExchangeRates",
-        "CURRENCIES"
+        "convertCurrency",
+        "CURRENCIES",
+        "getCurrencyName",
+        "DEFAULT_EXCHANGE_RATES"
       ],
       "imports": [
         "./logger"
@@ -839,17 +839,17 @@
       "path": "src/utils/env.js",
       "category": "utils",
       "exports": [
-        "getEnvVar",
-        "getCalendarApiKey",
+        "getCalendarEmail",
+        "validateEnvVars",
         "isDevelopment",
         "getApiUrl",
-        "validateEnvVars",
-        "getCalendarEmail",
+        "getEnvVar",
+        "getCalendarApiKey",
         "isProduction"
       ],
       "imports": [
-        "./logger",
-        "zod"
+        "zod",
+        "./logger"
       ],
       "size_bytes": 3181
     },
@@ -860,14 +860,14 @@
       "category": "utils",
       "exports": [
         "",
-        "getEnvVar",
-        "getCalendarApiKey",
-        "default",
+        "validateEnvVars",
+        "isProduction",
         "isDevelopment",
         "getApiUrl",
-        "validateEnvVars",
+        "getEnvVar",
+        "getCalendarApiKey",
         "getCalendarEmail",
-        "isProduction"
+        "default"
       ],
       "imports": [],
       "size_bytes": 410
@@ -900,16 +900,16 @@
       "path": "src/utils/scrollToAnchor.js",
       "category": "utils",
       "exports": [
+        "initScrollReveal",
         "initBackToTop",
         "scrollToTop",
-        "observeScrollReveal",
         "getActiveSection",
-        "handleAnchorClick",
+        "isInViewport",
         "scrollToElement",
-        "getSectionAnchors",
-        "initScrollReveal",
+        "handleAnchorClick",
+        "observeScrollReveal",
         "handleHashNavigation",
-        "isInViewport"
+        "getSectionAnchors"
       ],
       "imports": [],
       "size_bytes": 5216
@@ -920,11 +920,11 @@
       "path": "src/utils/seo.js",
       "category": "utils",
       "exports": [
-        "generatePageMetaTags",
-        "defaultMetaTags",
         "generateCourseSchema",
+        "defaultMetaTags",
+        "generateLocalBusinessSchema",
         "generateBreadcrumbSchema",
-        "generateLocalBusinessSchema"
+        "generatePageMetaTags"
       ],
       "imports": [],
       "size_bytes": 4872

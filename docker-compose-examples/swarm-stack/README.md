@@ -93,7 +93,8 @@ docker network ls --filter driver=overlay
 ### Detailed Test Logs
 
 #### Service Status (Final)
-```
+
+```text
 NAME                 IMAGE              COMMAND                  SERVICE   CREATED          STATUS                    PORTS
 swarm-stack-db-1     swarm-stack-db     "docker-entrypoint.s…"   db        45 seconds ago   Up 19 seconds (healthy)   0.0.0.0:5432->5432/tcp
 swarm-stack-node-1   swarm-stack-node   "docker-entrypoint.s…"   node      42 seconds ago   Up 17 seconds (healthy)   0.0.0.0:3000->3000/tcp
@@ -112,6 +113,7 @@ swarm-stack-node-1   swarm-stack-node   "docker-entrypoint.s…"   node      42 
 3. **Network Connectivity:** Verified inter-container communication within swarm-network
 
 ### Test Environment Cleanup
+
 - All containers removed: ✅
 - Networks cleaned up: ✅
 - Volumes intact for data persistence: ✅
