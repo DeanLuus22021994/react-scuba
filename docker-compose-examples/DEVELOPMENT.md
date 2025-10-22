@@ -113,11 +113,11 @@ grep -E "Week [0-9]+-[0-9]+.*[0-9]%" DEVELOPMENT.md
   - **Success Criteria**: No import errors in any environment
   - **Current State**: Working but fragile
 
-- [ ] **CSS Externalization**: Move inline styles from generated HTML to external CSS file
+- [x] **CSS Externalization**: Move inline styles from generated HTML to external CSS file
   - **Owner**: Backend Developer
   - **Due**: End of Week 1
   - **Success Criteria**: Generated index.html links to custom.css, no inline styles
-  - **Current State**: Inline styles causing lint errors
+  - **Current State**: ✅ **COMPLETED** - Externalized CSS from docs/testing/index.html and docs/contributing/index.html
 
 #### 🟢 GREEN: On Track
 
