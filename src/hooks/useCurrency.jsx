@@ -8,8 +8,12 @@ const CurrencyContext = createContext();
 
 export const CurrencyProvider = ({ children }) => {
   const [currency, setCurrency] = useState(() => {
-    // Get from localStorage or default to MUR
-    return localStorage.getItem('selectedCurrency') || 'MUR';
+    // Get from localStorage or default to MUR (check if localStorage is available)
+    try {
+      return (typeof localStorage !== 'undefined' && localStorage.getItem('selectedCurrency')) || 'MUR';
+    } catch {
+      return 'MUR';
+    }
   });
 
   const [exchangeRates, setExchangeRates] = useState(DEFAULT_EXCHANGE_RATES);
@@ -52,7 +56,15 @@ export const CurrencyProvider = ({ children }) => {
   const changeCurrency = (newCurrency) => {
     const oldCurrency = currency;
     setCurrency(newCurrency);
-    localStorage.setItem('selectedCurrency', newCurrency);
+
+    // Save to localStorage if available
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('selectedCurrency', newCurrency);
+      }
+    } catch {
+      // localStorage not available, continue without saving
+    }
 
     // Track currency change
     trackCurrencyChange(oldCurrency, newCurrency);
