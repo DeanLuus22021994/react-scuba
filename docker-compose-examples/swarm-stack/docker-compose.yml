@@ -2,16 +2,14 @@ version: "3.8"
 
 services:
   node:
-    image: node:20-alpine
-    volumes:
-      - ../..:/app:cached
-      - node_modules:/app/node_modules
-    working_dir: /app
-    command: sh -c "npm install --legacy-peer-deps && npm start"
+    build:
+      context: ../..
+      dockerfile: docker-compose-examples/swarm-stack/dockerfiles/node.Dockerfile
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+    command: npx vite preview --port 3000 --host 0.0.0.0
     depends_on:
       - db
     networks:
@@ -26,21 +24,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 45s
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      resources:
-        limits:
-          memory: 1G
-        reservations:
-          memory: 256M
 
   python:
-    image: python:3.14-slim
+    build:
+      context: ../..
+      dockerfile: docker-compose-examples/swarm-stack/dockerfiles/python.Dockerfile
     volumes:
       - ../..:/app:cached
       - python_venv:/app/.venv
@@ -63,21 +51,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 20s
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      resources:
-        limits:
-          memory: 512M
-        reservations:
-          memory: 128M
 
   db:
-    image: postgres:13-alpine
+    build:
+      context: .
+      dockerfile: dockerfiles/postgres.Dockerfile
     environment:
       POSTGRES_DB: mydb
       POSTGRES_USER: user
@@ -96,31 +74,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
-    command:
-      [
-        "postgres",
-        "-c",
-        "shared_preload_libraries=pg_stat_statements",
-        "-c",
-        "pg_stat_statements.track=all",
-      ]
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      resources:
-        limits:
-          memory: 1G
-          cpus: "1.0"
-        reservations:
-          memory: 512M
-          cpus: "0.5"
 
 volumes:
   db_data:
@@ -136,5 +89,4 @@ volumes:
 
 networks:
   swarm-network:
-    driver: overlay
-    attachable: true
+    driver: bridge
