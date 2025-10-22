@@ -4,9 +4,11 @@
     // GPU acceleration for VS Code UI (not language servers)
     "window.titleBarStyle": "custom",
     "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.strictEnv": false,  // Utilize TerminalOptions.strictEnv from #vscodeAPI
     // JavaScript/TypeScript language server optimization
     "typescript.tsserver.maxTsServerMemory": 4096,
     "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+    "typescript.preferences.includePackageJsonAutoImports": "auto",  // Utilize Extension.packageJSON from #vscodeAPI
     "javascript.updateImportsOnFileMove.enabled": "always",
     "typescript.updateImportsOnFileMove.enabled": "always",
     "javascript.suggest.autoImports": true,

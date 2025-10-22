@@ -1,0 +1,38 @@
+{
+    "recommendations": [
+        // Copilot and AI tools (from devcontainer.json)
+        "GitHub.copilot-chat",
+        "GitHub.copilot",
+        "ms-vscode.copilot-mermaid-diagram",
+        "ms-vscode.vscode-copilot-vision",
+        "ms-vscode.vscode-websearchforcopilot",
+        // JavaScript/TypeScript and React (for extension development, per #vscodeAPI)
+        "ms-vscode.vscode-typescript-next",  // TypeScript support
+        "dbaeumer.vscode-eslint",            // ESLint (from devcontainer.json)
+        "esbenp.prettier-vscode",            // Prettier (from devcontainer.json)
+        "christian-kohler.npm-intellisense", // NPM IntelliSense (from devcontainer.json)
+        "Orta.vscode-jest",                  // Jest testing (from devcontainer.json)
+        "VisualStudioExptTeam.intellicode-api-usage-examples",  // IntelliCode (from devcontainer.json)
+        // Python (for MCP backend, matches your settings.json)
+        "ms-python.python",                  // Python support (from devcontainer.json)
+        "ms-python.black-formatter",         // Black formatter (from devcontainer.json)
+        "ms-python.isort",                   // isort (from devcontainer.json)
+        "ms-python.pylint",                  // Pylint (from devcontainer.json)
+        "ms-python.ruff",                    // Ruff (additional, for consistency with settings.json)
+        // GitHub and CI/CD (from devcontainer.json)
+        "github.vscode-github-actions",      // GitHub Actions
+        "GitHub.vscode-pull-request-github", // GitHub PRs (from devcontainer.json)
+        // Azure and cloud (from devcontainer.json, for deployment)
+        "ms-azuretools.vscode-containers",   // Containers (from devcontainer.json)
+        "vscjava.migrate-java-to-azure",     // Azure migration (from devcontainer.json)
+        "vscjava.vscode-java-upgrade",       // Java upgrade (from devcontainer.json)
+        // Other utilities (from devcontainer.json)
+        "redhat.vscode-yaml",                // YAML support (from devcontainer.json)
+        "bierner.markdown-preview-github-styles",  // Markdown preview (additional)
+        "ms-vscode.vscode-markdownlint"      // Markdown linting (additional)
+    ],
+    "unwantedRecommendations": [
+        "ms-vscode.vscode-typescript",  // Avoid older TypeScript if using next
+        "ms-python.pylint"             // Avoid if preferring Ruff (optional, based on settings.json)
+    ]
+}
