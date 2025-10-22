@@ -9,8 +9,8 @@ import json
 from typing import Any, Dict, Optional
 from unittest.mock import Mock
 
-from .database_mock import database_mock
-from .redis_mock import redis_client_mock
+from database_mock import database_mock
+from redis_mock import redis_client_mock
 
 
 class APIMock:
@@ -48,7 +48,7 @@ class APIMock:
             },
         }
 
-    def get_mock_response(self, url: str) -> Optional[Dict[str, Any]]:
+    def get_mock_response(self, url: str) -> dict[str, Any] | None:
         """Get mock response for a URL."""
         return self.mock_responses.get(url)
 
