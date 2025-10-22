@@ -1,315 +1,1161 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Results - 2025/10/22</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results - 2025/10/22</title>
+    <link rel="stylesheet" href="../.vitepress/theme/custom.css">
 </head>
-
 <body>
-  <div class="container">
-    <header>
-      <h1>🧪 Test Results Dashboard</h1>
-      <p class="timestamp">Generated: 2025/10/22, 20:02:51</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>🧪 Test Results Dashboard</h1>
+            <p class="timestamp">Generated: 2025/10/22, 20:15:51</p>
+        </header>
 
+        
+        <div class="summary-cards">
+            <div class="card success">
+                <div class="card-icon">✅</div>
+                <div class="card-content">
+                    <div class="card-value">100.0%</div>
+                    <div class="card-label">Pass Rate</div>
+                    <div class="card-detail">314/314 tests</div>
+                </div>
+            </div>
 
-    <div class="summary-cards">
-      <div class="card success">
-        <div class="card-icon">✅</div>
-        <div class="card-content">
-          <div class="card-value">100.0%</div>
-          <div class="card-label">Pass Rate</div>
-          <div class="card-detail">4/4 tests</div>
+            <div class="card">
+                <div class="card-icon">📁</div>
+                <div class="card-content">
+                    <div class="card-value">62</div>
+                    <div class="card-label">Test Files</div>
+                    <div class="card-detail">100.0% passing</div>
+                </div>
+            </div>
+
+            <div class="card success">
+                <div class="card-icon">🎉</div>
+                <div class="card-content">
+                    <div class="card-value">0</div>
+                    <div class="card-label">Failures</div>
+                    <div class="card-detail">0 files affected</div>
+                </div>
+            </div>
         </div>
-      </div>
+        
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="overview">📊 Overview</button>
+                <button class="tab-button" data-tab="performance">⚡ Performance</button>
+                <button class="tab-button" data-tab="categories">📁 Categories</button>
+                <button class="tab-button" data-tab="files">📄 Files</button>
+            </div>
 
-      <div class="card">
-        <div class="card-icon">📁</div>
-        <div class="card-content">
-          <div class="card-value">1</div>
-          <div class="card-label">Test Files</div>
-          <div class="card-detail">100.0% passing</div>
-        </div>
-      </div>
-
-      <div class="card success">
-        <div class="card-icon">🎉</div>
-        <div class="card-content">
-          <div class="card-value">0</div>
-          <div class="card-label">Failures</div>
-          <div class="card-detail">0 files affected</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tabs">
-      <div class="tab-buttons">
-        <button class="tab-button active" data-tab="overview">📊 Overview</button>
-        <button class="tab-button" data-tab="performance">⚡ Performance</button>
-        <button class="tab-button" data-tab="categories">📁 Categories</button>
-        <button class="tab-button" data-tab="files">📄 Files</button>
-      </div>
-
-      <div class="tab-content">
-        <div class="tab-panel active" id="overview">
-
-          <div class="charts">
+            <div class="tab-content">
+                <div class="tab-panel active" id="overview">
+                    
+        <div class="charts">
             <div class="chart-container">
-              <h3>Test Results Distribution</h3>
-              <canvas id="resultsChart"></canvas>
+                <h3>Test Results Distribution</h3>
+                <canvas id="resultsChart"></canvas>
             </div>
             <div class="chart-container">
-              <h3>Performance Distribution</h3>
-              <canvas id="performanceChart"></canvas>
+                <h3>Performance Distribution</h3>
+                <canvas id="performanceChart"></canvas>
             </div>
-          </div>
         </div>
-        <div class="tab-panel" id="performance">
-
-          <div class="performance-section">
+                </div>
+                <div class="tab-panel" id="performance">
+                    
+        <div class="performance-section">
             <div class="metric-cards">
-              <div class="metric-card">
-                <div class="metric-value">0.01s</div>
-                <div class="metric-label">Total Duration</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-value">3.32ms</div>
-                <div class="metric-label">Avg Test Duration</div>
-              </div>
+                <div class="metric-card">
+                    <div class="metric-value">28.76s</div>
+                    <div class="metric-label">Total Duration</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">91.59ms</div>
+                    <div class="metric-label">Avg Test Duration</div>
+                </div>
             </div>
 
             <div class="two-columns">
-              <div>
-                <h3>🐌 Slowest Tests</h3>
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>Test Name</th>
-                      <th>File</th>
-                      <th>Duration</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr>
-                      <td class="truncate">should validate all links in documentation</td>
-                      <td class="truncate">link-checker.test.js</td>
-                      <td>8ms</td>
-                    </tr>
-
-                    <tr>
-                      <td class="truncate">should find all markdown files</td>
-                      <td class="truncate">link-checker.test.js</td>
-                      <td>4ms</td>
-                    </tr>
-
-                    <tr>
-                      <td class="truncate">should validate all links in README.md</td>
-                      <td class="truncate">link-checker.test.js</td>
-                      <td>1ms</td>
-                    </tr>
-
-                    <tr>
-                      <td class="truncate">should detect common link issues</td>
-                      <td class="truncate">link-checker.test.js</td>
-                      <td>0ms</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-              <div>
-                <h3>📁 Slowest Files</h3>
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>File</th>
-                      <th>Tests</th>
-                      <th>Duration</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr>
-                      <td class="truncate">link-checker.test.js</td>
-                      <td>4</td>
-                      <td>14ms</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
+                <div>
+                    <h3>🐌 Slowest Tests</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th>File</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">GalleryPage.test.jsx</td>
+                                    <td>1190ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">AboutPage.test.jsx</td>
+                                    <td>1056ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render without crashing</td>
+                                    <td class="truncate">GalleryPage.test.jsx</td>
+                                    <td>943ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render when open</td>
+                                    <td class="truncate">BookingModal.test.jsx</td>
+                                    <td>867ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">CoursesPage.test.jsx</td>
+                                    <td>829ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render page heading</td>
+                                    <td class="truncate">DiveSitesPage.test.jsx</td>
+                                    <td>817ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render hero section with heading</td>
+                                    <td class="truncate">HomePage.test.jsx</td>
+                                    <td>779ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should have submit button</td>
+                                    <td class="truncate">ContactModal.test.jsx</td>
+                                    <td>767ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render without crashing</td>
+                                    <td class="truncate">DiveSitesPage.test.jsx</td>
+                                    <td>757ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should render without crashing</td>
+                                    <td class="truncate">all-pages.test.jsx</td>
+                                    <td>589ms</td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h3>📁 Slowest Files</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>File</th>
+                                <th>Tests</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    <td class="truncate">GalleryPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>2660ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">DiveSitesPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>1919ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">AboutPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>1785ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">all-pages.test.jsx</td>
+                                    <td>5</td>
+                                    <td>1754ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">BookingModal.test.jsx</td>
+                                    <td>4</td>
+                                    <td>1606ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">HomePage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>1588ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">CoursesPage.test.jsx</td>
+                                    <td>4</td>
+                                    <td>1577ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">App.test.jsx</td>
+                                    <td>5</td>
+                                    <td>1510ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">CurrencySelector.test.jsx</td>
+                                    <td>6</td>
+                                    <td>1344ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">ContactModal.test.jsx</td>
+                                    <td>4</td>
+                                    <td>1295ms</td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="tab-panel" id="categories">
-
-          <div class="categories-section">
+                </div>
+                <div class="tab-panel" id="categories">
+                    
+        <div class="categories-section">
             <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Files</th>
-                  <th>Tests</th>
-                  <th>Pass Rate</th>
-                  <th>Duration</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <tr>
-                  <td><strong>tests</strong></td>
-                  <td>1</td>
-                  <td>4</td>
-                  <td>
-                    <div class="progress-bar">
-                      <div class="progress-fill"></div>
-                      <span class="progress-text">100.0%</span>
-                    </div>
-                  </td>
-                  <td>14ms</td>
-                  <td>✅</td>
-                </tr>
-
-              </tbody>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Files</th>
+                        <th>Tests</th>
+                        <th>Pass Rate</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        <tr>
+                            <td><strong>about</strong></td>
+                            <td>3</td>
+                            <td>17</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>343ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>common</strong></td>
+                            <td>7</td>
+                            <td>52</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>3772ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>courses</strong></td>
+                            <td>3</td>
+                            <td>17</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>1892ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>data</strong></td>
+                            <td>6</td>
+                            <td>27</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>46ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>dive-sites</strong></td>
+                            <td>3</td>
+                            <td>15</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>280ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>gallery</strong></td>
+                            <td>4</td>
+                            <td>19</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>1083ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>home</strong></td>
+                            <td>6</td>
+                            <td>33</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>2054ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>hooks</strong></td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>270ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>layouts</strong></td>
+                            <td>4</td>
+                            <td>14</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>2940ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>modals</strong></td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>2901ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>pages</strong></td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>1754ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>services</strong></td>
+                            <td>2</td>
+                            <td>9</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>211ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>shared</strong></td>
+                            <td>2</td>
+                            <td>9</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>187ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>src</strong></td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>13ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>tests</strong></td>
+                            <td>7</td>
+                            <td>29</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>11076ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>utils</strong></td>
+                            <td>8</td>
+                            <td>47</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>112ms</td>
+                            <td>✅</td>
+                        </tr>
+                    
+                </tbody>
             </table>
-          </div>
         </div>
-        <div class="tab-panel" id="files">
-
-          <div class="files-section">
+                </div>
+                <div class="tab-panel" id="files">
+                    
+        <div class="files-section">
             <div class="search-box">
-              <input type="text" id="fileSearch" placeholder="🔍 Search files..." />
+                <input type="text" id="fileSearch" placeholder="🔍 Search files..." />
             </div>
             <table class="data-table" id="filesTable">
-              <thead>
-                <tr>
-                  <th>File</th>
-                  <th>Tests</th>
-                  <th>Passed</th>
-                  <th>Failed</th>
-                  <th>Duration</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <tr class="">
-                  <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/link-checker.test.js">
-                    C:/react_scuba_runner/react-scuba/tests/link-checker.test.js</td>
-                  <td>4</td>
-                  <td class="success-text">4</td>
-                  <td class="error-text">0</td>
-                  <td>14ms</td>
-                  <td>✅ Pass</td>
-                </tr>
-
-              </tbody>
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Tests</th>
+                        <th>Passed</th>
+                        <th>Failed</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx">C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1785ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/App.test.jsx">C:/react_scuba_runner/react-scuba/tests/App.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>1510ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/about/AboutIndex.test.js">C:/react_scuba_runner/react-scuba/tests/components/about/AboutIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>4ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/about/CredentialCard.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/about/CredentialCard.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>164ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/about/TeamMember.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/about/TeamMember.test.jsx</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>175ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/common/CommonIndex.test.js">C:/react_scuba_runner/react-scuba/tests/components/common/CommonIndex.test.js</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>5ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>1344ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/common/ErrorBoundary.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/common/ErrorBoundary.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>690ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/common/Loading.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/common/Loading.test.jsx</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>175ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/common/PhoneLink.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/common/PhoneLink.test.jsx</td>
+                            <td>8</td>
+                            <td class="success-text">8</td>
+                            <td class="error-text">0</td>
+                            <td>534ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/common/SEO.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/common/SEO.test.jsx</td>
+                            <td>8</td>
+                            <td class="success-text">8</td>
+                            <td class="error-text">0</td>
+                            <td>440ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/common/WhatsAppButton.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/common/WhatsAppButton.test.jsx</td>
+                            <td>10</td>
+                            <td class="success-text">10</td>
+                            <td class="error-text">0</td>
+                            <td>584ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>1224ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/courses/CourseComparison.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/courses/CourseComparison.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>665ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/courses/CoursesIndex.test.js">C:/react_scuba_runner/react-scuba/tests/components/courses/CoursesIndex.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>2ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveMap.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveMap.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>68ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteCard.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteCard.test.jsx</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>209ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteIndex.test.js">C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteIndex.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>3ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/gallery/FeaturedCarousel.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/gallery/FeaturedCarousel.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>104ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryGrid.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryGrid.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>177ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryIndex.test.js">C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>3ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/gallery/Lightbox.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/gallery/Lightbox.test.jsx</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>798ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/home/CTASection.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/home/CTASection.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>501ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/home/FeaturesSection.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/home/FeaturesSection.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>226ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/home/HeroSection.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/home/HeroSection.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>421ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/home/HomeIndex.test.js">C:/react_scuba_runner/react-scuba/tests/components/home/HomeIndex.test.js</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>3ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/home/ServicesSection.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/home/ServicesSection.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>635ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/home/TestimonialsSection.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/home/TestimonialsSection.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>268ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1606ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1295ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/shared/BackToTop.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/shared/BackToTop.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>72ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/components/shared/ScrollProgress.test.jsx">C:/react_scuba_runner/react-scuba/tests/components/shared/ScrollProgress.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>115ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx">C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1577ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/data/bookingTypes.test.js">C:/react_scuba_runner/react-scuba/tests/data/bookingTypes.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>8ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/data/courses.test.js">C:/react_scuba_runner/react-scuba/tests/data/courses.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>8ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/data/credentials.test.js">C:/react_scuba_runner/react-scuba/tests/data/credentials.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>5ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/data/diveSites.test.js">C:/react_scuba_runner/react-scuba/tests/data/diveSites.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>9ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/data/gallery.test.js">C:/react_scuba_runner/react-scuba/tests/data/gallery.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>8ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/data/team.test.js">C:/react_scuba_runner/react-scuba/tests/data/team.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>8ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx">C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1919ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx">C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>2660ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx">C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>1588ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/hooks/HooksIndex.test.js">C:/react_scuba_runner/react-scuba/tests/hooks/HooksIndex.test.js</td>
+                            <td>2</td>
+                            <td class="success-text">2</td>
+                            <td class="error-text">0</td>
+                            <td>5ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/hooks/useCurrency.test.jsx">C:/react_scuba_runner/react-scuba/tests/hooks/useCurrency.test.jsx</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>265ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/layouts/Footer.test.jsx">C:/react_scuba_runner/react-scuba/tests/layouts/Footer.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>916ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/layouts/Header.test.jsx">C:/react_scuba_runner/react-scuba/tests/layouts/Header.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>565ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/layouts/MainLayout.test.jsx">C:/react_scuba_runner/react-scuba/tests/layouts/MainLayout.test.jsx</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>584ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/layouts/Navigation.test.jsx">C:/react_scuba_runner/react-scuba/tests/layouts/Navigation.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>875ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/link-checker.test.js">C:/react_scuba_runner/react-scuba/tests/link-checker.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>36ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx">C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>1754ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/services/api.test.js">C:/react_scuba_runner/react-scuba/tests/services/api.test.js</td>
+                            <td>5</td>
+                            <td class="success-text">5</td>
+                            <td class="error-text">0</td>
+                            <td>206ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/services/ServicesIndex.test.js">C:/react_scuba_runner/react-scuba/tests/services/ServicesIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>5ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.css.test.js">C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.css.test.js</td>
+                            <td>2</td>
+                            <td class="success-text">2</td>
+                            <td class="error-text">0</td>
+                            <td>6ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.test.jsx">C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.test.jsx</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>7ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/analytics.test.js">C:/react_scuba_runner/react-scuba/tests/utils/analytics.test.js</td>
+                            <td>9</td>
+                            <td class="success-text">9</td>
+                            <td class="error-text">0</td>
+                            <td>9ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/currency.test.js">C:/react_scuba_runner/react-scuba/tests/utils/currency.test.js</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>37ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/env.test.js">C:/react_scuba_runner/react-scuba/tests/utils/env.test.js</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>6ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/logger.test.js">C:/react_scuba_runner/react-scuba/tests/utils/logger.test.js</td>
+                            <td>6</td>
+                            <td class="success-text">6</td>
+                            <td class="error-text">0</td>
+                            <td>11ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/reportWebVitals.test.js">C:/react_scuba_runner/react-scuba/tests/utils/reportWebVitals.test.js</td>
+                            <td>3</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">0</td>
+                            <td>7ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/scrollToAnchor.test.js">C:/react_scuba_runner/react-scuba/tests/utils/scrollToAnchor.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>29ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/seo.test.js">C:/react_scuba_runner/react-scuba/tests/utils/seo.test.js</td>
+                            <td>7</td>
+                            <td class="success-text">7</td>
+                            <td class="error-text">0</td>
+                            <td>7ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/utils/UtilsIndex.test.js">C:/react_scuba_runner/react-scuba/tests/utils/UtilsIndex.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>5ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
+                </tbody>
             </table>
-          </div>
         </div>
-      </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    const testData = { "summary": { "totalFiles": 1, "passedFiles": 1, "failedFiles": 0, "totalTests": 4, "passedTests": 4, "failedTests": 0, "files": {} }, "performance": { "metrics": { "totalDuration": 13.289000000000215, "avgDuration": 3.3222500000000537, "testCount": 4 }, "slowestTests": [{ "name": "should validate all links in documentation", "duration": 8.476400000000012, "state": "pass", "errors": [], "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js" }, { "name": "should find all markdown files", "duration": 3.7167000000001735, "state": "pass", "errors": [], "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js" }, { "name": "should validate all links in README.md", "duration": 0.6148000000000593, "state": "pass", "errors": [], "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js" }, { "name": "should detect common link issues", "duration": 0.48109999999996944, "state": "pass", "errors": [], "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js" }], "slowestFiles": [{ "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js", "duration": 14.209700000000112, "testCount": 4 }], "distribution": [{ "label": "< 10ms", "min": 0, "max": 10, "count": 4 }, { "label": "10-50ms", "min": 10, "max": 50, "count": 0 }, { "label": "50-100ms", "min": 50, "max": 100, "count": 0 }, { "label": "100-500ms", "min": 100, "max": 500, "count": 0 }, { "label": "> 500ms", "min": 500, "max": null, "count": 0 }] }, "categories": [{ "category": "tests", "fileCount": 1, "totalTests": 4, "passedTests": 4, "failedTests": 0, "totalDuration": 14.209700000000112, "passRate": 100 }], "runTime": "2025-10-22T18:02:51.104Z" };
+    <script>
+        const testData = {"summary":{"totalFiles":62,"passedFiles":62,"failedFiles":0,"totalTests":314,"passedTests":314,"failedTests":0,"files":{}},"performance":{"metrics":{"totalDuration":28758.11839999999,"avgDuration":91.58636433121015,"testCount":314},"slowestTests":[{"name":"should render page heading","duration":1190.4796999999999,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx"},{"name":"should render page heading","duration":1056.0884999999998,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx"},{"name":"should render without crashing","duration":942.5113000000001,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx"},{"name":"should render when open","duration":867.4525000000003,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx"},{"name":"should render page heading","duration":828.9192999999996,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx"},{"name":"should render page heading","duration":816.5891999999985,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx"},{"name":"should render hero section with heading","duration":779.2776000000013,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx"},{"name":"should have submit button","duration":766.7052000000003,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx"},{"name":"should render without crashing","duration":756.898000000001,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx"},{"name":"should render without crashing","duration":589.0931999999993,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx"}],"slowestFiles":[{"fileName":"C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx","duration":2660.2829,"testCount":4},{"fileName":"C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx","duration":1919.2937999999995,"testCount":4},{"fileName":"C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx","duration":1785.1926000000003,"testCount":4},{"fileName":"C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx","duration":1754.3210999999992,"testCount":5},{"fileName":"C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx","duration":1606.0591999999997,"testCount":4},{"fileName":"C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx","duration":1588.1629999999986,"testCount":4},{"fileName":"C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx","duration":1576.9115000000002,"testCount":4},{"fileName":"C:/react_scuba_runner/react-scuba/tests/App.test.jsx","duration":1510.3491999999997,"testCount":5},{"fileName":"C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx","duration":1344.0622000000003,"testCount":6},{"fileName":"C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx","duration":1295.2147000000004,"testCount":4}],"distribution":[{"label":"< 10ms","min":0,"max":10,"count":139},{"label":"10-50ms","min":10,"max":50,"count":87},{"label":"50-100ms","min":50,"max":100,"count":13},{"label":"100-500ms","min":100,"max":500,"count":60},{"label":"> 500ms","min":500,"max":null,"count":15}]},"categories":[{"category":"about","fileCount":3,"totalTests":17,"passedTests":17,"failedTests":0,"totalDuration":343.47440000000006,"passRate":100},{"category":"common","fileCount":7,"totalTests":52,"passedTests":52,"failedTests":0,"totalDuration":3772.4417999999996,"passRate":100},{"category":"courses","fileCount":3,"totalTests":17,"passedTests":17,"failedTests":0,"totalDuration":1891.5427999999993,"passRate":100},{"category":"data","fileCount":6,"totalTests":27,"passedTests":27,"failedTests":0,"totalDuration":46.35080000000016,"passRate":100},{"category":"dive-sites","fileCount":3,"totalTests":15,"passedTests":15,"failedTests":0,"totalDuration":280.1772000000001,"passRate":100},{"category":"gallery","fileCount":4,"totalTests":19,"passedTests":19,"failedTests":0,"totalDuration":1082.6224000000002,"passRate":100},{"category":"home","fileCount":6,"totalTests":33,"passedTests":33,"failedTests":0,"totalDuration":2053.8472,"passRate":100},{"category":"hooks","fileCount":2,"totalTests":8,"passedTests":8,"failedTests":0,"totalDuration":270.1531,"passRate":100},{"category":"layouts","fileCount":4,"totalTests":14,"passedTests":14,"failedTests":0,"totalDuration":2940.4945000000007,"passRate":100},{"category":"modals","fileCount":2,"totalTests":8,"passedTests":8,"failedTests":0,"totalDuration":2901.2739,"passRate":100},{"category":"pages","fileCount":1,"totalTests":5,"passedTests":5,"failedTests":0,"totalDuration":1754.3210999999992,"passRate":100},{"category":"services","fileCount":2,"totalTests":9,"passedTests":9,"failedTests":0,"totalDuration":211.1959999999999,"passRate":100},{"category":"shared","fileCount":2,"totalTests":9,"passedTests":9,"failedTests":0,"totalDuration":186.9306999999999,"passRate":100},{"category":"src","fileCount":2,"totalTests":5,"passedTests":5,"failedTests":0,"totalDuration":13.110400000000482,"passRate":100},{"category":"tests","fileCount":7,"totalTests":29,"passedTests":29,"failedTests":0,"totalDuration":11076.489999999998,"passRate":100},{"category":"utils","fileCount":8,"totalTests":47,"passedTests":47,"failedTests":0,"totalDuration":112.4094,"passRate":100}],"runTime":"2025-10-22T18:15:51.784Z"};
 
-    // Tab switching
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
+        // Tab switching
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tab = button.dataset.tab;
 
-        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
 
-        button.classList.add('active');
-        document.getElementById(tab).classList.add('active');
-      });
-    });
-
-    // File search
-    const searchInput = document.getElementById('fileSearch');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const rows = document.querySelectorAll('#filesTable tbody tr');
-
-        rows.forEach(row => {
-          const text = row.textContent.toLowerCase();
-          row.style.display = text.includes(query) ? '' : 'none';
+                button.classList.add('active');
+                document.getElementById(tab).classList.add('active');
+            });
         });
-      });
-    }
 
-    // Charts using Chart.js (CDN loaded)
-    function loadCharts() {
-      if (typeof Chart === 'undefined') {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-        script.onload = initCharts;
-        document.head.appendChild(script);
-      } else {
-        initCharts();
-      }
-    }
+        // File search
+        const searchInput = document.getElementById('fileSearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const rows = document.querySelectorAll('#filesTable tbody tr');
 
-    function initCharts() {
-      // Results distribution chart
-      const resultsCtx = document.getElementById('resultsChart');
-      if (resultsCtx) {
-        new Chart(resultsCtx, {
-          type: 'doughnut',
-          data: {
-            labels: ['Passed', 'Failed'],
-            datasets: [{
-              data: [testData.summary.passedTests, testData.summary.failedTests],
-              backgroundColor: ['#10b981', '#ef4444'],
-              borderWidth: 0
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { position: 'bottom' }
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(query) ? '' : 'none';
+                });
+            });
+        }
+
+        // Charts using Chart.js (CDN loaded)
+        function loadCharts() {
+            if (typeof Chart === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+                script.onload = initCharts;
+                document.head.appendChild(script);
+            } else {
+                initCharts();
             }
-          }
-        });
-      }
+        }
 
-      // Performance distribution chart
-      const perfCtx = document.getElementById('performanceChart');
-      if (perfCtx && testData.performance.distribution) {
-        new Chart(perfCtx, {
-          type: 'bar',
-          data: {
-            labels: testData.performance.distribution.map(d => d.label),
-            datasets: [{
-              label: 'Test Count',
-              data: testData.performance.distribution.map(d => d.count),
-              backgroundColor: '#667eea',
-              borderRadius: 8
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: false }
-            },
-            scales: {
-              y: { beginAtZero: true }
+        function initCharts() {
+            // Results distribution chart
+            const resultsCtx = document.getElementById('resultsChart');
+            if (resultsCtx) {
+                new Chart(resultsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Passed', 'Failed'],
+                        datasets: [{
+                            data: [testData.summary.passedTests, testData.summary.failedTests],
+                            backgroundColor: ['#10b981', '#ef4444'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        }
+                    }
+                });
             }
-          }
-        });
-      }
-    }
 
-    // Initialize
-    loadCharts();
-  </script>
+            // Performance distribution chart
+            const perfCtx = document.getElementById('performanceChart');
+            if (perfCtx && testData.performance.distribution) {
+                new Chart(perfCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: testData.performance.distribution.map(d => d.label),
+                        datasets: [{
+                            label: 'Test Count',
+                            data: testData.performance.distribution.map(d => d.count),
+                            backgroundColor: '#667eea',
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize
+        loadCharts();
+    </script>
 </body>
-
 </html>
