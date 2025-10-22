@@ -58,12 +58,12 @@ services:
       dockerfile: docker-compose-examples/basic-stack/dockerfiles/python.Dockerfile
     volumes:
       - ../..:/app:cached
-      - python_venv:/app/.venv
+      - react_scuba_python_venv:/app/python_utils/.venv
       - python_cache:/root/.cache/pip
     working_dir: /app
-    command: sh -c "pip install -r python_utils/requirements.txt && python -m python_utils.doc_utils inventory"
+    command: sh -c "pip install -e python_utils && python -m react_scuba_utils.api"
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHONPATH=/app
@@ -110,7 +110,7 @@ volumes:
     driver: local
   node_modules:
     driver: local
-  python_venv:
+  react_scuba_python_venv:
     driver: local
   python_cache:
     driver: local
