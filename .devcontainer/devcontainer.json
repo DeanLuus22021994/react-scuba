@@ -3,17 +3,37 @@
         "dockerfile": "dockerfile"
     },
     "features": {
-        "ghcr.io/devcontainers-extra/features/actions-runner:1": {}
+        "ghcr.io/devcontainers/features/nvidia-cuda:2": {
+            "installCudnn": false,
+            "installNvtx": false
+        }
     },
+    "mounts": [
+        {
+            "type": "volume",
+            "source": "react-scuba-python-cache",
+            "target": "/home/vscode/.cache/pip"
+        },
+        {
+            "type": "volume",
+            "source": "react-scuba-node-cache",
+            "target": "/home/vscode/.npm"
+        },
+        {
+            "type": "volume",
+            "source": "react-scuba-mariadb-data",
+            "target": "/var/lib/mysql"
+        }
+    ],
     "hostRequirements": {
         "cpus": 4,
         "memory": "4gb",
-        "storage": "8gb"
+        "storage": "8gb",
+        "gpu": "optional"
     },
     "waitFor": "onCreateCommand",
     "updateContentCommand": "npm install --legacy-peer-deps",
-    "postCreateCommand": "sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename} && sudo mkdir -p /workspaces/${localWorkspaceFolderBasename}/node_modules && sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}/node_modules",
-    "postStartCommand": "sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}/node_modules 2>/dev/null || true && git config --global --unset-all safe.directory || true && git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postStartCommand": "chown -R mysql:mysql /var/lib/mysql && service mariadb start && sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}/node_modules 2>/dev/null || true",
     "postAttachCommand": "",
     "customizations": {
         "codespaces": {
