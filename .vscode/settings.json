@@ -76,6 +76,10 @@
     // Copilot settings
     "chat.tools.global.autoApprove": true,
     "editor.experimentalGpuAcceleration": "on",
+    // ESLint settings for flat config consistency
+    "eslint.useFlatConfig": true,
+    "eslint.validate": ["javascript", "javascriptreact"],
+    "eslint.run": "onType",
     // File associations
     "files.associations": {
         ".husky/*": "shellscript"
