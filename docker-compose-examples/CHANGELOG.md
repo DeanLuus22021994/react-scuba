@@ -77,6 +77,7 @@ markdownlint CHANGELOG.md
 
 - [Testing Protocol](TESTING.md)
 - [Main README](README.md)
+- [MCP Utilities](mcp/README.md)
 - [Basic Stack](basic-stack/README.md)
 - [Cluster Example](cluster-example/README.md)
 - [Swarm Stack](swarm-stack/README.md)

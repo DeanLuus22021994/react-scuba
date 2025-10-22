@@ -626,6 +626,7 @@ Week 7-8: Polish        ░░░░░░░░░░░░░░░░░░�
 - Testing Protocol
 - Changelog
 - Main README
+- MCP Utilities
 - Basic Stack
 - Cluster Example
 - Swarm Stack
