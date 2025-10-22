@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run application",
+      "name": "Run React App",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -14,7 +14,104 @@
       ],
       "skipFiles": [
         "<node_internals>/**"
+      ],
+      "env": {
+        "BROWSER": "none",
+        "WDS_SOCKET_PORT": "0"
+      }
+    },
+    {
+      "name": "Debug React App",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    },
+    {
+      "name": "Debug FastAPI Server",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "react_scuba_utils.api:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--reload"
+      ],
+      "cwd": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+      "python": "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
+      }
+    },
+    {
+      "name": "Debug MCP Server",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "react_scuba_utils.cli",
+      "args": [
+        "serve"
+      ],
+      "cwd": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+      "python": "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
+      }
+    },
+    {
+      "name": "Debug Python Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/",
+        "-v",
+        "--tb=short"
+      ],
+      "cwd": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+      "python": "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
+      }
+    },
+    {
+      "name": "Attach to Python Process",
+      "type": "debugpy",
+      "request": "attach",
+      "listen": {
+        "host": "localhost",
+        "port": 5678
+      },
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+          "remoteRoot": "/app"
+        }
       ]
+    },
+    {
+      "name": "Debug Docker Container",
+      "type": "docker",
+      "request": "attach",
+      "platform": "netCore",
+      "containerName": "react-scuba-mcp",
+      "netCore": {
+        "debuggerPath": "/remote_debugger/debugpy",
+        "pathMappings": [
+          {
+            "localRoot": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+            "remoteRoot": "/app"
+          }
+        ]
+      }
     }
   ]
 }

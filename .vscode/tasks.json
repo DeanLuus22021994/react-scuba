@@ -3,8 +3,12 @@
     "tasks": [
         {
             "label": "Run All Linters",
-            "type": "shell",
-            "command": "npm run lint && npm run format:check",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm run lint && npm run format:check"
+            ],
             "problemMatcher": [
                 "$eslint-stylish"
             ],
@@ -13,17 +17,16 @@
                 "panel": "shared",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "checklist",
-                "color": "terminal.ansiYellow"
-            },
-            "detail": "Run ESLint and Prettier checks on the entire codebase"
+            }
         },
         {
             "label": "Lint & Fix",
-            "type": "shell",
-            "command": "npm run lint:fix && npm run format",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm run lint:fix && npm run format"
+            ],
             "problemMatcher": [
                 "$eslint-stylish"
             ],
@@ -32,17 +35,16 @@
                 "panel": "shared",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "wrench",
-                "color": "terminal.ansiGreen"
-            },
-            "detail": "Run ESLint and Prettier with automatic fixes"
+            }
         },
         {
             "label": "ESLint Check",
-            "type": "shell",
-            "command": "npm run lint",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm run lint"
+            ],
             "problemMatcher": [
                 "$eslint-stylish"
             ],
@@ -51,51 +53,48 @@
                 "panel": "shared",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "code",
-                "color": "terminal.ansiBlue"
-            },
-            "detail": "Run ESLint on src directory"
+            }
         },
         {
             "label": "Prettier Check",
-            "type": "shell",
-            "command": "npm run format:check",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm run format:check"
+            ],
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
                 "panel": "shared",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "symbol-color",
-                "color": "terminal.ansiMagenta"
-            },
-            "detail": "Check code formatting with Prettier"
+            }
         },
         {
             "label": "Prettier Fix",
-            "type": "shell",
-            "command": "npm run format",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm run format"
+            ],
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
                 "panel": "shared",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "paintcan",
-                "color": "terminal.ansiMagenta"
-            },
-            "detail": "Format code with Prettier"
+            }
         },
         {
             "label": "Build Project",
-            "type": "shell",
-            "command": "npm run build",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm run build"
+            ],
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -106,17 +105,16 @@
                 "panel": "shared",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "package",
-                "color": "terminal.ansiGreen"
-            },
-            "detail": "Build production bundle with Vite"
+            }
         },
         {
             "label": "Run Tests",
-            "type": "shell",
-            "command": "npm test -- --run",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm test -- --run"
+            ],
             "problemMatcher": [],
             "group": {
                 "kind": "test",
@@ -127,34 +125,32 @@
                 "panel": "shared",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "beaker",
-                "color": "terminal.ansiYellow"
-            },
-            "detail": "Run all tests with Vitest"
+            }
         },
         {
             "label": "Test Coverage",
-            "type": "shell",
-            "command": "npm run test:coverage",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm run test:coverage"
+            ],
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
                 "panel": "dedicated",
                 "focus": false,
                 "clear": true
-            },
-            "icon": {
-                "id": "graph",
-                "color": "terminal.ansiCyan"
-            },
-            "detail": "Run tests with coverage report"
+            }
         },
         {
             "label": "Dev Server",
-            "type": "shell",
-            "command": "npm start",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "npm start"
+            ],
             "isBackground": true,
             "problemMatcher": [],
             "presentation": {
@@ -162,12 +158,7 @@
                 "panel": "dedicated",
                 "focus": false,
                 "clear": false
-            },
-            "icon": {
-                "id": "server",
-                "color": "terminal.ansiCyan"
-            },
-            "detail": "Start Vite development server on port 3000"
+            }
         },
         {
             "label": "Full Quality Check",
@@ -183,12 +174,365 @@
                 "panel": "dedicated",
                 "focus": true,
                 "clear": true
-            },
-            "icon": {
-                "id": "verified-filled",
-                "color": "terminal.ansiGreen"
-            },
-            "detail": "Run linters, tests, and build in sequence"
+            }
+        },
+        {
+            "label": "Python Setup",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "setup-python.ps1"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Ruff Lint",
+            "type": "process",
+            "command": "uv",
+            "args": [
+                "run",
+                "--python",
+                "3.14t",
+                "ruff",
+                "check",
+                "docker-compose-examples/mcp/python_utils/",
+                "--config",
+                "docker-compose-examples/mcp/python_utils/pyproject.toml"
+            ],
+            "problemMatcher": [
+                {
+                    "owner": "ruff",
+                    "source": "ruff",
+                    "fileLocation": "relative",
+                    "pattern": {
+                        "regexp": "^(.+?):(\\d+):(\\d+): (\\w+) (.+)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "message": 5
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Ruff Fix",
+            "type": "process",
+            "command": "uv",
+            "args": [
+                "run",
+                "--python",
+                "3.14t",
+                "ruff",
+                "check",
+                "--fix",
+                "docker-compose-examples/mcp/python_utils/",
+                "--config",
+                "docker-compose-examples/mcp/python_utils/pyproject.toml"
+            ],
+            "problemMatcher": [
+                {
+                    "owner": "ruff",
+                    "source": "ruff",
+                    "fileLocation": "relative",
+                    "pattern": {
+                        "regexp": "^(.+?):(\\d+):(\\d+): (\\w+) (.+)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "message": 5
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "isort Check",
+            "type": "process",
+            "command": "uv",
+            "args": [
+                "run",
+                "--python",
+                "3.14t",
+                "isort",
+                "--check-only",
+                "--diff",
+                "--settings-path",
+                "docker-compose-examples/mcp/python_utils/pyproject.toml",
+                "docker-compose-examples/mcp/python_utils/"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "isort Fix",
+            "type": "process",
+            "command": "uv",
+            "args": [
+                "run",
+                "--python",
+                "3.14t",
+                "isort",
+                "--settings-path",
+                "docker-compose-examples/mcp/python_utils/pyproject.toml",
+                "docker-compose-examples/mcp/python_utils/"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Python Test",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "uv run --python 3.14t pytest docker-compose-examples/mcp/python_utils/tests/ -v --tb=short"
+            ],
+            "problemMatcher": [
+                {
+                    "owner": "pytest",
+                    "source": "pytest",
+                    "fileLocation": "relative",
+                    "pattern": {
+                        "regexp": "^(.+?)::(.+?) (.+?)$",
+                        "file": 1,
+                        "message": 3
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Python Coverage",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "uv run --python 3.14t pytest docker-compose-examples/mcp/python_utils/tests/ --cov=react_scuba_utils --cov-report=html --cov-report=term-missing"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Python Quality Check",
+            "dependsOn": [
+                "Ruff Lint",
+                "isort Check",
+                "Python Test"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true,
+                "clear": true
+            }
+        },
+        {
+            "label": "Docker Build Basic",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/basic-stack/docker-compose.yml build"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Docker Up Basic",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/basic-stack/docker-compose.yml up -d"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "Docker Down Basic",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/basic-stack/docker-compose.yml down"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Docker Build Cluster",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/cluster-example/docker-compose.yml build"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Docker Up Cluster",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/cluster-example/docker-compose.yml up -d"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "Docker Down Cluster",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/cluster-example/docker-compose.yml down"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Docker Build Swarm",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/swarm-stack/docker-compose.yml build"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Docker Up Swarm",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/swarm-stack/docker-compose.yml up -d"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "Docker Down Swarm",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose-examples/swarm-stack/docker-compose.yml down"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "MCP Server Start",
+            "type": "process",
+            "command": "pwsh.exe",
+            "args": [
+                "-c",
+                "uv run --python 3.14t python -m react_scuba_utils.cli serve"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": false,
+                "clear": false
+            }
         }
     ]
 }

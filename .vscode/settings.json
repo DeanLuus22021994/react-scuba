@@ -94,8 +94,9 @@
     "files.associations": {
         ".husky/*": "shellscript"
     },
-    // Python settings (optimized for UV and project-specific interpreter)
-    "python.defaultInterpreterPath": "./.venv/bin/python",
+    // Python settings - FIXED for Python 3.14 compatibility issues
+    // Use freethreaded Python 3.14 for linting tools to avoid GIL errors
+    "python.defaultInterpreterPath": "./.venv/Scripts/python.exe",
     "python.terminal.activateEnvironment": true,
     "python.terminal.activateEnvInCurrentTerminal": true,
     "python.terminal.shellIntegration.enabled": true,
@@ -111,12 +112,51 @@
     // UV integration - disable default venv creation
     "python.createEnvironment.contentButton": "hide",
     "python.createEnvironment.trigger": "off",
-    // Python formatting and linting
-    "python.formatting.provider": "black",
+    // Python linting - DISABLE native servers to prevent crashes
     "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
+    "python.linting.ruffEnabled": true,
+    "python.linting.ruffArgs": ["--config", "docker-compose-examples/mcp/python_utils/pyproject.toml"],
+    "ruff.enable": true,
+    "ruff.organizeImports": true,
+    "ruff.fixAll": true,
+    "ruff.nativeServer": false,  // DISABLE native server to prevent crashes
+    "ruff.interpreter": ["C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"],  // Use freethreaded Python
+    "ruff.path": ["./.venv/Scripts/ruff.exe"],
+    "isort.check": true,
+    "isort.importStrategy": "fromEnvironment",
+    "isort.args": ["--settings-path", "docker-compose-examples/mcp/python_utils/pyproject.toml"],
+    "isort.interpreter": ["C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"],  // Use freethreaded Python
     "python.sortImports.args": [
         "--profile",
-        "black"
-    ]
+        "black",
+        "--settings-path",
+        "docker-compose-examples/mcp/python_utils/pyproject.toml"
+    ],
+    // Disable problematic language servers
+    "pylint.enabled": false,  // Disable Pylint native server
+    "mypy.enabled": false,    // Disable MyPy native server
+    "python.languageServer": "Pylance",
+    "pylance.enable": true,
+    // Pylance settings for Python 3.14 compatibility
+    "python.analysis.indexing": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.includeFileSpecs": [
+        "**/*.py"
+    ],
+    "python.analysis.exclude": [
+        "**/node_modules/**",
+        "**/__pycache__/**",
+        "**/.venv/**",
+        "**/dist/**",
+        "**/build/**"
+    ],
+    // Docker settings for containerized Python development
+    "docker.languageserver.diagnostics.deprecatedMaintainer": "ignore",
+    "docker.languageserver.diagnostics.emptyContinuationLine": "ignore",
+    "docker.languageserver.diagnostics.instructionCasing": "ignore",
+    // Remote development settings
+    "remote.SSH.configFile": "~/.ssh/config",
+    "remote.SSH.showLoginTerminal": true
 }
