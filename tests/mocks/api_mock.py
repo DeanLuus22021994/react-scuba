@@ -6,8 +6,8 @@ fast, isolated unit testing without external service dependencies.
 """
 
 import json
-from unittest.mock import Mock, patch
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
+from unittest.mock import Mock
 
 from .database_mock import database_mock
 from .redis_mock import redis_client_mock
@@ -31,21 +31,21 @@ class APIMock:
                     "description": "React Scuba diving application",
                     "html_url": "https://github.com/deanluus22021994/react-scuba",
                     "stargazers_count": 42,
-                    "forks_count": 7
-                }
+                    "forks_count": 7,
+                },
             },
             "https://docs.docker.com/compose/": {
                 "status_code": 200,
-                "json": {"title": "Docker Compose Documentation"}
+                "json": {"title": "Docker Compose Documentation"},
             },
             "https://fastapi.tiangolo.com/tutorial/": {
                 "status_code": 200,
-                "json": {"title": "FastAPI Tutorial"}
+                "json": {"title": "FastAPI Tutorial"},
             },
             "https://www.python.org/": {
                 "status_code": 200,
-                "json": {"title": "Python Programming Language"}
-            }
+                "json": {"title": "Python Programming Language"},
+            },
         }
 
     def get_mock_response(self, url: str) -> Optional[Dict[str, Any]]:
@@ -92,34 +92,42 @@ def mock_external_dependencies():
     Patches requests, database connections, and Redis operations
     for isolated unit testing.
     """
-    from unittest.mock import patch
+    from contextlib import contextmanager
 
-    # Mock requests session
-    session_mock = Mock()
-    session_mock.get.side_effect = api_mock.mock_session_get
-    session_mock.head.side_effect = api_mock.mock_session_head
+    @contextmanager
+    def _mock_context():
+        from unittest.mock import patch
 
-    # Mock database connections
-    db_mock = Mock()
-    db_mock.connect.side_effect = database_mock.mock_connect
+        # Mock requests session
+        session_mock = Mock()
+        session_mock.get.side_effect = api_mock.mock_session_get
+        session_mock.head.side_effect = api_mock.mock_session_head
 
-    # Mock Redis
-    redis_client_mock_instance = Mock()
-    redis_client_mock_instance.get.side_effect = redis_client_mock.get
-    redis_client_mock_instance.set.side_effect = redis_client_mock.set
-    redis_client_mock_instance.delete.side_effect = redis_client_mock.delete
-    redis_client_mock_instance.exists.side_effect = redis_client_mock.exists
+        # Mock database connections
+        db_mock = Mock()
+        db_mock.connect.side_effect = database_mock.mock_connect
 
-    return patch.multiple(
-        'react_scuba_utils.config.settings.HTTPConfig',
-        session=session_mock
-    ), patch.multiple(
-        'psycopg2',
-        connect=database_mock.mock_connect
-    ), patch.multiple(
-        'redis',
-        Redis=lambda **kwargs: redis_client_mock_instance
-    )
+        # Mock Redis
+        redis_client_mock_instance = Mock()
+        redis_client_mock_instance.get.side_effect = redis_client_mock.get
+        redis_client_mock_instance.set.side_effect = redis_client_mock.set
+        redis_client_mock_instance.delete.side_effect = redis_client_mock.delete
+        redis_client_mock_instance.exists.side_effect = redis_client_mock.exists
+
+        with (
+            patch.multiple(
+                "react_scuba_utils.config.settings.HTTPConfig", session=session_mock
+            ),
+            patch.multiple("psycopg2", connect=database_mock.mock_connect),
+            patch.multiple("redis", Redis=lambda **kwargs: redis_client_mock_instance),
+        ):
+            yield {
+                "session": session_mock,
+                "database": db_mock,
+                "redis": redis_client_mock_instance,
+            }
+
+    return _mock_context()
 
 
 def setup_test_mocks():

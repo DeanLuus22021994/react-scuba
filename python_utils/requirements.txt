@@ -24,15 +24,12 @@ python-dotenv>=1.0.0
 pydantic>=2.0.0
 pydantic-settings>=2.0.0
 
-# Python 3.14+ specific optimizations
-# Note: concurrent.interpreters is built-in, no additional package needed
-# Free-threaded execution optimizations are handled at runtime
+# Web framework and server
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
 
-# Type hints and dataclasses (enhanced in 3.14)
-typing-extensions>=4.8.0; python_version < "3.14"
+# Structured logging
+structlog>=23.0.0
 
-# Path and file operations (pathlib enhancements in 3.14)
-# No additional packages needed - using built-in pathlib improvements
-
-# AsyncIO enhancements (improved in 3.14)
-# Using built-in asyncio with free-threading support
+# MCP (Model Context Protocol) - optional dependency
+mcp>=0.1.0; python_version >= "3.8"
