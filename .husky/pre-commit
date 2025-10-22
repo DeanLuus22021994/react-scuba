@@ -3,11 +3,11 @@
 # Check if vitest can actually run (not just if command exists)
 if npx vitest --version &> /dev/null; then
   echo "Running full pre-commit checks..."
-  npm run precommit
+  npm_config_loglevel=error npm run precommit
 else
   echo "Running simplified pre-commit checks (vitest not available)..."
   # Run only linting and formatting checks
-  npm run check
+  npm_config_loglevel=error npm run check
 fi
 
 # Stage generated test reports if they exist
