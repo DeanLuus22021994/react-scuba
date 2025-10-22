@@ -1,11 +1,15 @@
+# syntax=docker/dockerfile:1
+
 # Multi-stage Python Dockerfile for swarm-stack
-# Optimized for Python 3.14 free-threaded execution and Docker Swarm
+# Optimized for Python 3.14 free-threaded execution and Docker Swarm with BuildKit
 
 FROM python:3.14-slim AS base
 WORKDIR /app
 
-# Install system dependencies optimized for Python 3.14 and Swarm
-RUN apt-get update && apt-get install -y \
+# Install system dependencies with BuildKit caching
+RUN --mount=type=cache,target=/var/cache/apt \
+  --mount=type=cache,target=/var/lib/apt \
+  apt-get update && apt-get install -y \
   curl \
   build-essential \
   pkg-config \
@@ -20,12 +24,13 @@ RUN useradd --create-home --shell /bin/bash --uid 1001 app \
 USER app
 
 FROM base AS deps
-# Copy requirements file
+# Copy requirements file first for better caching
 COPY --chown=app:app python_utils/requirements.txt ./
 # Copy the package itself for editable install
 COPY --chown=app:app python_utils/ ./
-# Create virtual environment optimized for Python 3.14
-RUN python -m venv /app/.venv \
+# Create virtual environment with pip cache mounting
+RUN --mount=type=cache,target=/tmp/.cache/pip,uid=1001 \
+  python -m venv /app/.venv \
   && /app/.venv/bin/pip install --no-cache-dir --upgrade pip \
   && /app/.venv/bin/pip install --no-cache-dir -r requirements.txt \
   && /app/.venv/bin/pip install --no-cache-dir -e .
@@ -33,12 +38,12 @@ RUN python -m venv /app/.venv \
 FROM deps AS runner
 # Copy virtual environment from deps stage
 COPY --from=deps --chown=app:app /app/.venv /app/.venv
-# Copy application code
+# Copy application code (changes less frequently than requirements)
 COPY --chown=app:app . .
 
 # Activate virtual environment
 ENV PATH="/app/.venv/bin:$PATH"
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/app/python_utils:/app
 ENV PYTHONUNBUFFERED=1
 ENV HOST=0.0.0.0
 ENV PORT=8000
@@ -59,7 +64,8 @@ COPY --chown=app:app docker-compose-examples/swarm-stack/dockerfiles/healthcheck
 
 # Health check optimized for Python 3.14 and Swarm monitoring
 HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=5 \
-  CMD ["python", "/app/healthcheck.py"]EXPOSE 8000
+  CMD ["python", "/app/healthcheck.py"]
+EXPOSE 8000
 
 # Default command leveraging Python 3.14 concurrent features for Swarm
 CMD ["/app/.venv/bin/python", "-m", "uvicorn", "react_scuba_utils.api:app", "--host", "0.0.0.0", "--port", "8000"]

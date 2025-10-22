@@ -20,6 +20,10 @@ PyYAML>=6.0
 # Development and testing
 python-dotenv>=1.0.0
 
+# Configuration and validation
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
 # Python 3.14+ specific optimizations
 # Note: concurrent.interpreters is built-in, no additional package needed
 # Free-threaded execution optimizations are handled at runtime
