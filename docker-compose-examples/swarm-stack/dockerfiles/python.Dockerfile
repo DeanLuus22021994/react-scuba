@@ -22,10 +22,13 @@ USER app
 FROM base AS deps
 # Copy requirements file
 COPY --chown=app:app python_utils/requirements.txt ./
+# Copy the package itself for editable install
+COPY --chown=app:app python_utils/ ./
 # Create virtual environment optimized for Python 3.14
 RUN python -m venv /app/.venv \
   && /app/.venv/bin/pip install --no-cache-dir --upgrade pip \
-  && /app/.venv/bin/pip install --no-cache-dir -r requirements.txt
+  && /app/.venv/bin/pip install --no-cache-dir -r requirements.txt \
+  && /app/.venv/bin/pip install --no-cache-dir -e .
 
 FROM deps AS runner
 # Copy virtual environment from deps stage
@@ -59,4 +62,4 @@ HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=5 \
   CMD ["python", "/app/healthcheck.py"]EXPOSE 8000
 
 # Default command leveraging Python 3.14 concurrent features for Swarm
-CMD ["python", "-m", "python_utils.doc_utils", "inventory", "--swarm"]
+CMD ["/app/.venv/bin/python", "-m", "uvicorn", "react_scuba_utils.api:app", "--host", "0.0.0.0", "--port", "8000"]

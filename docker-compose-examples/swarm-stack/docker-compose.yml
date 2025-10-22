@@ -2,9 +2,7 @@ version: "3.8"
 
 services:
   node:
-    build:
-      context: ../..
-      dockerfile: docker-compose-examples/swarm-stack/dockerfiles/node.Dockerfile
+    image: react-scuba-node:latest
     ports:
       - "3000:3000"
     environment:
@@ -26,20 +24,18 @@ services:
       start_period: 45s
 
   python:
-    build:
-      context: ../..
-      dockerfile: docker-compose-examples/swarm-stack/dockerfiles/python.Dockerfile
+    image: react-scuba-python:latest
     volumes:
       - ../..:/app:cached
-      - python_venv:/app/.venv
+      - react_scuba_python_venv:/app/.venv
       - python_cache:/root/.cache/pip
     working_dir: /app
-    command: sh -c "pip install -r python_utils/requirements.txt && python -m python_utils.doc_utils inventory"
+    command: /app/.venv/bin/python -m uvicorn react_scuba_utils.api:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
     environment:
       - PYTHONUNBUFFERED=1
-      - PYTHONPATH=/app
+      - PYTHONPATH=/app/python_utils:/app
     depends_on:
       - db
     networks:
@@ -53,9 +49,7 @@ services:
       start_period: 20s
 
   db:
-    build:
-      context: .
-      dockerfile: dockerfiles/postgres.Dockerfile
+    image: react-scuba-postgres:latest
     environment:
       POSTGRES_DB: mydb
       POSTGRES_USER: user
@@ -82,11 +76,11 @@ volumes:
     driver: local
   node_modules:
     driver: local
-  python_venv:
+  react_scuba_python_venv:
     driver: local
   python_cache:
     driver: local
-
 networks:
   swarm-network:
-    driver: bridge
+    external: true
+    name: react-scuba-swarm_swarm-network
