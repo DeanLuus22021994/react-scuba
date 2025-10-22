@@ -1,5 +1,5 @@
 {
-  "runTime": "2025-10-22T10:36:41.889Z",
+  "runTime": "2025-10-22T10:41:04.009Z",
   "summary": {
     "totalFiles": 1,
     "passedFiles": 1,
@@ -10,34 +10,34 @@
     "passRate": 100
   },
   "performance": {
-    "totalDuration": 11.512500000000045,
-    "avgDuration": 2.8781250000000114,
+    "totalDuration": 11.529500000000098,
+    "avgDuration": 2.8823750000000246,
     "testCount": 4,
     "slowestTests": [
       {
         "name": "should validate all links in documentation",
-        "duration": 7.2041000000000395,
+        "duration": 7.610400000000027,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
       },
       {
         "name": "should find all markdown files",
-        "duration": 3.42349999999999,
+        "duration": 3.0704000000000633,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
       },
       {
         "name": "should validate all links in README.md",
-        "duration": 0.4714999999999918,
+        "duration": 0.455600000000004,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
       },
       {
         "name": "should detect common link issues",
-        "duration": 0.4134000000000242,
+        "duration": 0.393100000000004,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
@@ -46,7 +46,7 @@
     "slowestFiles": [
       {
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js",
-        "duration": 12.321100000000001,
+        "duration": 12.318100000000072,
         "testCount": 4
       }
     ],
@@ -90,7 +90,7 @@
       "totalTests": 4,
       "passedTests": 4,
       "failedTests": 0,
-      "totalDuration": 12.321100000000001,
+      "totalDuration": 12.318100000000072,
       "passRate": 100
     }
   ],
@@ -99,32 +99,32 @@
       "passed": [
         {
           "name": "should find all markdown files",
-          "duration": 3.42349999999999,
+          "duration": 3.0704000000000633,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should validate all links in documentation",
-          "duration": 7.2041000000000395,
+          "duration": 7.610400000000027,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should validate all links in README.md",
-          "duration": 0.4714999999999918,
+          "duration": 0.455600000000004,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should detect common link issues",
-          "duration": 0.4134000000000242,
+          "duration": 0.393100000000004,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 12.321100000000001
+      "totalDuration": 12.318100000000072
     }
   }
 }

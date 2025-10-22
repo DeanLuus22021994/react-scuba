@@ -16,24 +16,89 @@ services:
       - web1
       - web2
       - web3
+      - node
+      - python
+    networks:
+      - cluster-network
+
+  node:
+    image: node:20-alpine
+    volumes:
+      - ../..:/app:cached
+    working_dir: /app
+    command: sh -c "npm install && npm start"
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - db
+    networks:
+      - cluster-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  python:
+    image: python:3.14-slim
+    volumes:
+      - ../..:/app:cached
+    working_dir: /app
+    command: sh -c "pip install -r python_utils/requirements.txt && python -m python_utils.doc_utils"
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - db
+    networks:
+      - cluster-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   web1:
     image: nginx:alpine
     volumes:
       - ./web-content:/usr/share/nginx/html
     command: nginx -g 'daemon off;'
+    networks:
+      - cluster-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   web2:
     image: nginx:alpine
     volumes:
       - ./web-content:/usr/share/nginx/html
     command: nginx -g 'daemon off;'
+    networks:
+      - cluster-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   web3:
     image: nginx:alpine
     volumes:
       - ./web-content:/usr/share/nginx/html
     command: nginx -g 'daemon off;'
+    networks:
+      - cluster-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   db:
     image: postgres:13-alpine
@@ -45,6 +110,20 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - cluster-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d mydb"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 volumes:
   db_data:
+
+networks:
+  cluster-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
