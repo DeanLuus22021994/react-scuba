@@ -11,6 +11,7 @@ else
 fi
 
 # Stage generated test reports if they exist
-if [ -f "docs/testing/testing.md" ]; then
-  git add docs/testing/testing.md docs/testing/test-results.json docs/testing/index.html
-fi
+# DISABLED: Temporarily disabled to prevent overwriting CSS externalization changes
+# if [ -f "docs/testing/testing.md" ]; then
+#   git add docs/testing/testing.md docs/testing/test-results.json docs/testing/index.html
+# fi
