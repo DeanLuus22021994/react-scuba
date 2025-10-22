@@ -222,7 +222,7 @@
     <div class="container">
         <header>
             <h1>🧪 Test Results Dashboard</h1>
-            <p class="timestamp">Generated: 2025/10/22, 12:12:51</p>
+            <p class="timestamp">Generated: 2025/10/22, 12:28:02</p>
         </header>
 
         
@@ -230,18 +230,18 @@
             <div class="card success">
                 <div class="card-icon">✅</div>
                 <div class="card-content">
-                    <div class="card-value">0%</div>
+                    <div class="card-value">100.0%</div>
                     <div class="card-label">Pass Rate</div>
-                    <div class="card-detail">0/0 tests</div>
+                    <div class="card-detail">4/4 tests</div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-icon">📁</div>
                 <div class="card-content">
-                    <div class="card-value">0</div>
+                    <div class="card-value">1</div>
                     <div class="card-label">Test Files</div>
-                    <div class="card-detail">0% passing</div>
+                    <div class="card-detail">100.0% passing</div>
                 </div>
             </div>
 
@@ -282,11 +282,11 @@
         <div class="performance-section">
             <div class="metric-cards">
                 <div class="metric-card">
-                    <div class="metric-value">0.00s</div>
+                    <div class="metric-value">0.01s</div>
                     <div class="metric-label">Total Duration</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">0.00ms</div>
+                    <div class="metric-value">2.91ms</div>
                     <div class="metric-label">Avg Test Duration</div>
                 </div>
             </div>
@@ -304,6 +304,30 @@
                         </thead>
                         <tbody>
                             
+                                <tr>
+                                    <td class="truncate">should validate all links in documentation</td>
+                                    <td class="truncate">link-checker.test.js</td>
+                                    <td>8ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should find all markdown files</td>
+                                    <td class="truncate">link-checker.test.js</td>
+                                    <td>3ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should validate all links in README.md</td>
+                                    <td class="truncate">link-checker.test.js</td>
+                                    <td>0ms</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td class="truncate">should detect common link issues</td>
+                                    <td class="truncate">link-checker.test.js</td>
+                                    <td>0ms</td>
+                                </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -318,6 +342,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
+                                <tr>
+                                    <td class="truncate">link-checker.test.js</td>
+                                    <td>4</td>
+                                    <td>13ms</td>
+                                </tr>
                             
                         </tbody>
                     </table>
@@ -340,6 +370,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
+                        <tr>
+                            <td><strong>tests</strong></td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                    <span class="progress-text">100.0%</span>
+                                </div>
+                            </td>
+                            <td>13ms</td>
+                            <td>✅</td>
+                        </tr>
                     
                 </tbody>
             </table>
@@ -364,6 +408,15 @@
                 </thead>
                 <tbody>
                     
+                        <tr class="">
+                            <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/link-checker.test.js">C:/react_scuba_runner/react-scuba/tests/link-checker.test.js</td>
+                            <td>4</td>
+                            <td class="success-text">4</td>
+                            <td class="error-text">0</td>
+                            <td>13ms</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -373,7 +426,7 @@
     </div>
 
     <script>
-        const testData = {"summary":{"totalFiles":0,"passedFiles":0,"failedFiles":0,"totalTests":0,"passedTests":0,"failedTests":0,"files":{}},"performance":{"metrics":{"totalDuration":0,"avgDuration":0,"testCount":0},"slowestTests":[],"slowestFiles":[],"distribution":[{"label":"< 10ms","min":0,"max":10,"count":0},{"label":"10-50ms","min":10,"max":50,"count":0},{"label":"50-100ms","min":50,"max":100,"count":0},{"label":"100-500ms","min":100,"max":500,"count":0},{"label":"> 500ms","min":500,"max":null,"count":0}]},"categories":[],"runTime":"2025-10-22T10:12:51.326Z"};
+        const testData = {"summary":{"totalFiles":1,"passedFiles":1,"failedFiles":0,"totalTests":4,"passedTests":4,"failedTests":0,"files":{}},"performance":{"metrics":{"totalDuration":11.656299999999987,"avgDuration":2.914074999999997,"testCount":4},"slowestTests":[{"name":"should validate all links in documentation","duration":7.7929000000000315,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should find all markdown files","duration":2.9616999999999507,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should validate all links in README.md","duration":0.4735000000000582,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should detect common link issues","duration":0.42819999999994707,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"}],"slowestFiles":[{"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js","duration":12.578500000000076,"testCount":4}],"distribution":[{"label":"< 10ms","min":0,"max":10,"count":4},{"label":"10-50ms","min":10,"max":50,"count":0},{"label":"50-100ms","min":50,"max":100,"count":0},{"label":"100-500ms","min":100,"max":500,"count":0},{"label":"> 500ms","min":500,"max":null,"count":0}]},"categories":[{"category":"tests","fileCount":1,"totalTests":4,"passedTests":4,"failedTests":0,"totalDuration":12.578500000000076,"passRate":100}],"runTime":"2025-10-22T10:28:02.479Z"};
 
         // Tab switching
         document.querySelectorAll('.tab-button').forEach(button => {
