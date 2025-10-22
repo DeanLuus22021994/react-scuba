@@ -1,16 +1,10 @@
 {
-    "compilerOptions": {
-        "moduleResolution": "node",
-        "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "src/*"
-            ]
-        }
-    },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "build"
-    ]
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "build"]
 }

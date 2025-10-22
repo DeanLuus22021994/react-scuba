@@ -18,6 +18,8 @@ export default [
       '.vscode',
       '.github',
       '*.backup',
+      '.scrapers',
+      '.venv',
     ],
   },
   js.configs.recommended,

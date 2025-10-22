@@ -6,42 +6,42 @@ import { CurrencyProvider } from '../src/hooks/useCurrency';
 import GalleryPage from '../src/pages/GalleryPage';
 
 const renderWithProviders = (component) => {
-    return render(
-        <HelmetProvider>
-            <CurrencyProvider>
-                <MemoryRouter>{component}</MemoryRouter>
-            </CurrencyProvider>
-        </HelmetProvider>
-    );
+  return render(
+    <HelmetProvider>
+      <CurrencyProvider>
+        <MemoryRouter>{component}</MemoryRouter>
+      </CurrencyProvider>
+    </HelmetProvider>
+  );
 };
 
 describe('GalleryPage', () => {
-    it('should render without crashing', async () => {
-        const { container } = renderWithProviders(<GalleryPage />);
-        await waitFor(() => {
-            expect(container).toBeInTheDocument();
-        });
+  it('should render without crashing', async () => {
+    const { container } = renderWithProviders(<GalleryPage />);
+    await waitFor(() => {
+      expect(container).toBeInTheDocument();
     });
+  });
 
-    it('should render page heading', async () => {
-        renderWithProviders(<GalleryPage />);
-        await waitFor(() => {
-            const headings = screen.getAllByRole('heading');
-            expect(headings.length).toBeGreaterThan(0);
-        });
+  it('should render page heading', async () => {
+    renderWithProviders(<GalleryPage />);
+    await waitFor(() => {
+      const headings = screen.getAllByRole('heading');
+      expect(headings.length).toBeGreaterThan(0);
     });
+  });
 
-    it('should render gallery content', async () => {
-        const { container } = renderWithProviders(<GalleryPage />);
-        await waitFor(() => {
-            expect(container.textContent).toBeTruthy();
-        });
+  it('should render gallery content', async () => {
+    const { container } = renderWithProviders(<GalleryPage />);
+    await waitFor(() => {
+      expect(container.textContent).toBeTruthy();
     });
+  });
 
-    it('should have page content loaded', async () => {
-        const { container } = renderWithProviders(<GalleryPage />);
-        await waitFor(() => {
-            expect(container.innerHTML.length).toBeGreaterThan(100);
-        });
+  it('should have page content loaded', async () => {
+    const { container } = renderWithProviders(<GalleryPage />);
+    await waitFor(() => {
+      expect(container.innerHTML.length).toBeGreaterThan(100);
     });
+  });
 });

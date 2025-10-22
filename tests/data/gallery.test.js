@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  CATEGORIES,
-  FEATURED_IMAGES,
-  GALLERY_IMAGES,
-  getImagesByCategory,
-} from '@/data/gallery';
+import { CATEGORIES, FEATURED_IMAGES, GALLERY_IMAGES, getImagesByCategory } from '@/data/gallery';
 
 describe('gallery', () => {
   it('should export GALLERY_IMAGES array', () => {

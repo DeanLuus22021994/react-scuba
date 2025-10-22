@@ -4,90 +4,90 @@ import { describe, expect, it, vi } from 'vitest';
 import Lightbox from '@/components/gallery/Lightbox';
 
 describe('Lightbox', () => {
-    const mockImage = {
-        id: 1,
-        url: 'https://example.com/image.jpg',
-        title: 'Test Image',
-        description: 'Test description',
-        category: 'Marine Life',
-    };
+  const mockImage = {
+    id: 1,
+    url: 'https://example.com/image.jpg',
+    title: 'Test Image',
+    description: 'Test description',
+    category: 'Marine Life',
+  };
 
-    const mockOnClose = vi.fn();
-    const mockOnNavigate = vi.fn();
+  const mockOnClose = vi.fn();
+  const mockOnNavigate = vi.fn();
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
-    it('should not render when not open', () => {
-        render(
-            <Lightbox
-                image={mockImage}
-                isOpen={false}
-                onClose={mockOnClose}
-                onNavigate={mockOnNavigate}
-            />
-        );
-        expect(screen.queryByText(mockImage.title)).not.toBeInTheDocument();
-    });
+  it('should not render when not open', () => {
+    render(
+      <Lightbox
+        image={mockImage}
+        isOpen={false}
+        onClose={mockOnClose}
+        onNavigate={mockOnNavigate}
+      />
+    );
+    expect(screen.queryByText(mockImage.title)).not.toBeInTheDocument();
+  });
 
-    it('should render when open', () => {
-        render(
-            <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
-        );
-        expect(screen.getByText(mockImage.title)).toBeInTheDocument();
-    });
+  it('should render when open', () => {
+    render(
+      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+    );
+    expect(screen.getByText(mockImage.title)).toBeInTheDocument();
+  });
 
-    it('should display image details', () => {
-        render(
-            <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
-        );
-        expect(screen.getByText(mockImage.title)).toBeInTheDocument();
-        expect(screen.getByText(mockImage.description)).toBeInTheDocument();
-        expect(screen.getByText(mockImage.category)).toBeInTheDocument();
-    });
+  it('should display image details', () => {
+    render(
+      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+    );
+    expect(screen.getByText(mockImage.title)).toBeInTheDocument();
+    expect(screen.getByText(mockImage.description)).toBeInTheDocument();
+    expect(screen.getByText(mockImage.category)).toBeInTheDocument();
+  });
 
-    it('should call onClose when close button clicked', async () => {
-        const user = userEvent.setup();
-        render(
-            <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
-        );
+  it('should call onClose when close button clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+    );
 
-        const closeButton = screen.getByLabelText('Close lightbox');
-        await user.click(closeButton);
+    const closeButton = screen.getByLabelText('Close lightbox');
+    await user.click(closeButton);
 
-        expect(mockOnClose).toHaveBeenCalled();
-    });
+    expect(mockOnClose).toHaveBeenCalled();
+  });
 
-    it('should call onNavigate with prev when previous button clicked', async () => {
-        const user = userEvent.setup();
-        render(
-            <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
-        );
+  it('should call onNavigate with prev when previous button clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+    );
 
-        const prevButton = screen.getByLabelText('Previous image');
-        await user.click(prevButton);
+    const prevButton = screen.getByLabelText('Previous image');
+    await user.click(prevButton);
 
-        expect(mockOnNavigate).toHaveBeenCalledWith('prev');
-    });
+    expect(mockOnNavigate).toHaveBeenCalledWith('prev');
+  });
 
-    it('should call onNavigate with next when next button clicked', async () => {
-        const user = userEvent.setup();
-        render(
-            <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
-        );
+  it('should call onNavigate with next when next button clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+    );
 
-        const nextButton = screen.getByLabelText('Next image');
-        await user.click(nextButton);
+    const nextButton = screen.getByLabelText('Next image');
+    await user.click(nextButton);
 
-        expect(mockOnNavigate).toHaveBeenCalledWith('next');
-    });
+    expect(mockOnNavigate).toHaveBeenCalledWith('next');
+  });
 
-    it('should render image element', () => {
-        render(
-            <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
-        );
-        const img = screen.getByAltText(mockImage.title);
-        expect(img).toHaveAttribute('src', mockImage.url);
-    });
+  it('should render image element', () => {
+    render(
+      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+    );
+    const img = screen.getByAltText(mockImage.title);
+    expect(img).toHaveAttribute('src', mockImage.url);
+  });
 });
