@@ -172,16 +172,16 @@ export class HtmlGenerator {
                         </thead>
                         <tbody>
                             ${slowestTests
-                              .map(
-                                (test) => `
+    .map(
+      (test) => `
                                 <tr>
                                     <td class="truncate">${test.name}</td>
                                     <td class="truncate">${test.fileName.split('/').pop()}</td>
                                     <td>${test.duration.toFixed(0)}ms</td>
                                 </tr>
                             `,
-                              )
-                              .join('')}
+    )
+    .join('')}
                         </tbody>
                     </table>
                 </div>
@@ -197,16 +197,16 @@ export class HtmlGenerator {
                         </thead>
                         <tbody>
                             ${slowestFiles
-                              .map(
-                                (file) => `
+    .map(
+      (file) => `
                                 <tr>
                                     <td class="truncate">${file.fileName.split('/').pop()}</td>
                                     <td>${file.testCount}</td>
                                     <td>${file.duration.toFixed(0)}ms</td>
                                 </tr>
                             `,
-                              )
-                              .join('')}
+    )
+    .join('')}
                         </tbody>
                     </table>
                 </div>
@@ -233,8 +233,8 @@ export class HtmlGenerator {
                 </thead>
                 <tbody>
                     ${categories
-                      .map(
-                        (cat) => `
+    .map(
+      (cat) => `
                         <tr>
                             <td><strong>${cat.category}</strong></td>
                             <td>${cat.fileCount}</td>
@@ -249,8 +249,8 @@ export class HtmlGenerator {
                             <td>${cat.failedTests === 0 ? '✅' : `❌ ${cat.failedTests} failed`}</td>
                         </tr>
                     `,
-                      )
-                      .join('')}
+    )
+    .join('')}
                 </tbody>
             </table>
         </div>`;
@@ -280,10 +280,10 @@ export class HtmlGenerator {
                 </thead>
                 <tbody>
                     ${fileArray
-                      .map(([fileName, data]) => {
-                        const total = data.passed.length + data.failed.length;
-                        const status = data.failed.length === 0 ? '✅ Pass' : '❌ Fail';
-                        return `
+    .map(([fileName, data]) => {
+      const total = data.passed.length + data.failed.length;
+      const status = data.failed.length === 0 ? '✅ Pass' : '❌ Fail';
+      return `
                         <tr class="${data.failed.length > 0 ? 'failed' : ''}">
                             <td class="truncate" title="${fileName}">${fileName}</td>
                             <td>${total}</td>
@@ -293,8 +293,8 @@ export class HtmlGenerator {
                             <td>${status}</td>
                         </tr>
                     `;
-                      })
-                      .join('')}
+    })
+    .join('')}
                 </tbody>
             </table>
         </div>`;
