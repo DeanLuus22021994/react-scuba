@@ -1,6 +1,6 @@
 {
   "build": {
-    "dockerfile": "dockerfile"
+    "dockerfile": "devcontainer.dockerfile"
   },
   "features": {
     "ghcr.io/devcontainers/features/nvidia-cuda:2": {
