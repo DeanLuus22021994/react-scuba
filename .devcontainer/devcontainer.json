@@ -1,6 +1,6 @@
 {
   "build": {
-    "dockerfile": "dockerfile"
+    "dockerfile": "Dockerfile"
   },
   "features": {
     "ghcr.io/devcontainers/features/nvidia-cuda:2": {
@@ -85,14 +85,7 @@
         "servers": {
           "github-official": {
             "command": "docker",
-            "args": [
-              "run",
-              "-i",
-              "--rm",
-              "-e",
-              "GITHUB_PERSONAL_ACCESS_TOKEN",
-              "ghcr.io/github/github-mcp-server"
-            ],
+            "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"],
             "env": {
               "GITHUB_PERSONAL_ACCESS_TOKEN": "${localEnv:GH_PAT}"
             }
