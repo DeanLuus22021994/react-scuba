@@ -37,7 +37,7 @@ export class HtmlGenerator {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Results - ${new Date(data.runTime).toLocaleDateString()}</title>
-    <style>${this.getStyles()}</style>
+    <link rel="stylesheet" href="custom.css">
 </head>
 <body>
     <div class="container">
@@ -59,10 +59,8 @@ export class HtmlGenerator {
    * Build summary cards
    */
   buildSummaryCards(summary) {
-    const passRate =
-      summary.totalTests > 0 ? ((summary.passedTests / summary.totalTests) * 100).toFixed(1) : '0';
-    const filePassRate =
-      summary.totalFiles > 0 ? ((summary.passedFiles / summary.totalFiles) * 100).toFixed(1) : '0';
+    const passRate = summary.totalTests > 0 ? ((summary.passedTests / summary.totalTests) * 100).toFixed(1) : '0';
+    const filePassRate = summary.totalFiles > 0 ? ((summary.passedFiles / summary.totalFiles) * 100).toFixed(1) : '0';
 
     return `
         <div class="summary-cards">
@@ -181,7 +179,7 @@ export class HtmlGenerator {
                                     <td class="truncate">${test.fileName.split('/').pop()}</td>
                                     <td>${test.duration.toFixed(0)}ms</td>
                                 </tr>
-                            `
+                            `,
                               )
                               .join('')}
                         </tbody>
@@ -206,7 +204,7 @@ export class HtmlGenerator {
                                     <td>${file.testCount}</td>
                                     <td>${file.duration.toFixed(0)}ms</td>
                                 </tr>
-                            `
+                            `,
                               )
                               .join('')}
                         </tbody>
@@ -250,7 +248,7 @@ export class HtmlGenerator {
                             <td>${cat.totalDuration.toFixed(0)}ms</td>
                             <td>${cat.failedTests === 0 ? '✅' : `❌ ${cat.failedTests} failed`}</td>
                         </tr>
-                    `
+                    `,
                       )
                       .join('')}
                 </tbody>
