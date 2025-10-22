@@ -53,7 +53,9 @@ const WhatsAppButton = ({
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className={`inline-flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors ${
+        className
+      }`}
       aria-label="Chat on WhatsApp"
     >
       <ChatBubbleLeftRightIcon className="w-5 h-5" />

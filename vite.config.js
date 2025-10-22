@@ -94,6 +94,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.js',
+    globalSetup: './tests/global-setup.js',
     css: true,
     reporters: ['default', './tests/report/vitest.reporter.js'],
   },

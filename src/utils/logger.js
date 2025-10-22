@@ -11,7 +11,7 @@ const logger = {
    */
   info: (...args) => {
     if (isDevelopment) {
-      console.info('[INFO]', ...args);
+      console.warn('[INFO]', ...args);
     }
   },
 
@@ -37,7 +37,7 @@ const logger = {
    */
   debug: (...args) => {
     if (isDevelopment) {
-      console.debug('[DEBUG]', ...args);
+      console.warn('[DEBUG]', ...args);
     }
   },
 };

@@ -68,9 +68,9 @@ export const validateEnvVars = () => {
  * Gets a validated environment variable
  * @param {string} key - The environment variable key
  * @param {string} defaultValue - Optional default value
- * @returns {string|undefined} The environment variable value
+ * @returns {string} The environment variable value
  */
-export const getEnvVar = (key, defaultValue = undefined) => {
+export const getEnvVar = (key, defaultValue) => {
   const value = import.meta.env[key];
   return value || defaultValue;
 };

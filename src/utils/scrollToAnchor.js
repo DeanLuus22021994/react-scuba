@@ -135,7 +135,7 @@ export const getActiveSection = (sectionIds) => {
  * Handle hash change and scroll to anchor on page load
  */
 export const handleHashNavigation = () => {
-  const hash = window.location.hash;
+  const { hash } = window.location;
   if (hash) {
     const elementId = hash.substring(1);
     // Small delay to ensure page is fully loaded

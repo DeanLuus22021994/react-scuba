@@ -1,25 +1,9 @@
-import { describe, expect, it, vi } from 'vitest';
 import {
   checkCalendarAvailability,
   createCalendarBooking,
   submitContactForm as sendContactMessage,
 } from '@/services/api';
-
-// Mock axios
-vi.mock('axios', () => {
-  return {
-    default: {
-      create: () => ({
-        post: vi.fn(),
-        get: vi.fn(),
-        interceptors: {
-          request: { use: vi.fn() },
-          response: { use: vi.fn() },
-        },
-      }),
-    },
-  };
-});
+import { describe, expect, it } from 'vitest';
 
 describe('api', () => {
   beforeEach(() => {

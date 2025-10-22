@@ -287,10 +287,14 @@ const BookingModal = ({
                   {/* Date and Time Selection */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="preferred-date"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Preferred Date *
                       </label>
                       <DatePicker
+                        id="preferred-date"
                         selected={selectedDate}
                         onChange={(date) => setSelectedDate(date)}
                         minDate={new Date()}
@@ -298,6 +302,7 @@ const BookingModal = ({
                         dateFormat="MMMM d, yyyy"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                         placeholderText="Select a date..."
+                        aria-label="Preferred Date"
                         inline
                       />
                     </div>

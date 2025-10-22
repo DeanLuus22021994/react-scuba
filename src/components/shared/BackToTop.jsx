@@ -42,7 +42,8 @@ export default function BackToTop({ showAfter = 300, position = 'right' }) {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className={`fixed bottom-6 ${positionClasses} z-50 p-3 bg-ocean-600 text-white rounded-full shadow-lg hover:bg-ocean-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2`}
+          className={`fixed bottom-6 ${positionClasses} z-50 p-3 bg-ocean-600 text-white rounded-full shadow-lg
+            hover:bg-ocean-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2`}
           aria-label="Back to top"
           title="Back to top"
         >
