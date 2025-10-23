@@ -212,17 +212,6 @@ async def check_links(
 if __name__ == "__main__":
     import uvicorn
 
-    try:
-        from react_scuba_utils.config.settings import get_python_features
-
-        features = get_python_features()
-    except ImportError:
-        features = {
-            "version_string": "unknown",
-            "is_free_threaded": False,
-            "has_interpreters": False,
-        }
-
     print("🐍 React Scuba Python Utilities API")
     print(f"📍 Python {features['version_string']}")
     if features["is_free_threaded"]:

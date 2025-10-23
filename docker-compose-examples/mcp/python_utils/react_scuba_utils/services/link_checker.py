@@ -17,7 +17,7 @@ from ..config.settings import HAS_INTERPRETERS, HTTPConfig, PathConfig
 from ..models.models import LinkCheckConfig, LinkResult
 
 if TYPE_CHECKING:
-    from concurrent.futures import Executor, ThreadPoolExecutor
+    from concurrent.futures import ThreadPoolExecutor
 
     try:
         from concurrent.futures import ProcessPoolExecutor as InterpreterPoolExecutor
@@ -107,6 +107,9 @@ class LinkCheckerService:
             return results
 
         # Choose execution strategy
+        from concurrent.futures import ProcessPoolExecutor
+
+        executor_class: type[ThreadPoolExecutor] | type[ProcessPoolExecutor]
         if self.config.use_interpreters and HAS_INTERPRETERS:
             print("🚀 Using InterpreterPoolExecutor for true parallelism")
             executor_class = InterpreterPoolExecutor

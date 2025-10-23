@@ -10,10 +10,10 @@ import asyncio
 import json
 import re
 import sys
-from concurrent.futures import Executor, ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Optional, cast
+from typing import TYPE_CHECKING, Any, cast
 from urllib.parse import urljoin
 
 # Python 3.14+ features
@@ -94,7 +94,7 @@ class DocUtils:
             self.session.mount("http://", adapter)
             self.session.mount("https://", adapter)
         else:
-            self.session: Session | None = None
+            self.session = None
 
     def find_markdown_files(self) -> list[Path]:
         """Find all markdown files in the docs directory using pathlib."""
@@ -149,7 +149,9 @@ class DocUtils:
             return results
 
         # Choose execution strategy based on Python version and availability
-        executor_class: type[Executor]
+        from concurrent.futures import ProcessPoolExecutor
+
+        executor_class: type[ThreadPoolExecutor] | type[ProcessPoolExecutor]
         if self.use_interpreters and HAS_INTERPRETERS:
             print("🚀 Using InterpreterPoolExecutor for true parallelism")
             executor_class = InterpreterPoolExecutor
