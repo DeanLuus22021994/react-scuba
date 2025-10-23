@@ -96,6 +96,7 @@
     },
     // Python settings - FIXED for Python 3.14 compatibility issues
     // Use freethreaded Python 3.14 for linting tools to avoid GIL errors
+    // Note: docker-compose-examples paths work both as directory and as git submodule
     "python.defaultInterpreterPath": "./.venv/Scripts/python.exe",
     "python.terminal.activateEnvironment": true,
     "python.terminal.activateEnvInCurrentTerminal": true,
