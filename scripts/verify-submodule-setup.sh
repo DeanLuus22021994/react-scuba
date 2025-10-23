@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e
+# Don't exit on error - we want to run all tests
+set +e
 
 # Submodule Setup Verification Script
 # This script verifies that the docker-compose-examples submodule is set up correctly

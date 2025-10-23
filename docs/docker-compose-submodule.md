@@ -264,6 +264,8 @@ git pull origin main
 
 ## References
 
+- **[Quick Reference Card](./submodule-quick-reference.md)** - Common commands and scenarios
+- **[Extraction Guide](../EXTRACTION_GUIDE.md)** - Step-by-step extraction instructions
 - [Git Submodules Documentation](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 - [Docker Compose Examples Repository](https://github.com/DeanLuus22021994/docker-compose-examples)
 - [React Scuba Repository](https://github.com/DeanLuus22021994/react-scuba)
