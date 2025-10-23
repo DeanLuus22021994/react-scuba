@@ -68,7 +68,9 @@ Python 3.14 Features:
         print("🔄 Concurrent interpreters available")
 
     # Initialize configurations
-    path_config = PathConfig(args.docs_path, args.src_path)
+    path_config = PathConfig(
+        docs_path=Path(args.docs_path), src_path=Path(args.src_path)
+    )
     http_config = HTTPConfig(timeout=args.timeout)
     use_interpreters = not args.no_interpreters and features["has_interpreters"]
 
@@ -90,7 +92,7 @@ Python 3.14 Features:
 
 def _run_link_check(
     args, path_config: PathConfig, http_config: HTTPConfig, use_interpreters: bool
-):
+) -> None:
     """Run synchronous link checking."""
     print("🔗 Checking documentation links...")
 
@@ -106,7 +108,9 @@ def _run_link_check(
     _display_link_results(results, args.output, args.json)
 
 
-def _run_async_link_check(args, path_config: PathConfig, http_config: HTTPConfig):
+def _run_async_link_check(
+    args, path_config: PathConfig, http_config: HTTPConfig
+) -> None:
     """Run asynchronous link checking."""
     if sys.version_info < (3, 14):
         print("❌ Async checking requires Python 3.14+")
@@ -135,7 +139,7 @@ def _run_async_link_check(args, path_config: PathConfig, http_config: HTTPConfig
     _display_link_results(results, args.output, args.json)
 
 
-def _run_inventory(args, path_config: PathConfig):
+def _run_inventory(args, path_config: PathConfig) -> None:
     """Run component inventory generation."""
     print("📦 Generating component inventory...")
 
@@ -160,8 +164,10 @@ def _run_inventory(args, path_config: PathConfig):
 
 
 def _display_link_results(
-    results: dict, output_file: str | None = None, json_output: bool = False
-):
+    results: dict[str, list[str]],
+    output_file: str | None = None,
+    json_output: bool = False,
+) -> None:
     """Display link check results."""
     print(f"✅ Valid links: {len(results['valid'])}")
     print(f"❌ Broken links: {len(results['broken'])}")

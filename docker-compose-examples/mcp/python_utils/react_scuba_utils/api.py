@@ -11,10 +11,10 @@ import json
 import sys
 import threading
 import uuid
+from collections.abc import Awaitable, Callable
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 
 from react_scuba_utils.config.config import LogLevel
@@ -51,7 +51,9 @@ init_status = {
 
 # Correlation ID middleware
 @app.middleware("http")
-async def add_correlation_id(request: Request, call_next):
+async def add_correlation_id(
+    request: Request, call_next: Callable[[Request], Awaitable[Response]]
+) -> Response:
     """Add correlation ID to request and logs."""
     correlation_id = request.headers.get("X-Correlation-ID", str(uuid.uuid4()))
 

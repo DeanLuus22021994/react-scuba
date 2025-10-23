@@ -128,6 +128,10 @@ class PathConfig(BaseModel):
                 raise ValueError(f"Path does not exist: {v}")
         return v
 
+    def resolve_src_path(self) -> Path:
+        """Resolve the source path."""
+        return self.src_path
+
 
 class LoggingConfig(BaseModel):
     """Logging configuration schema."""

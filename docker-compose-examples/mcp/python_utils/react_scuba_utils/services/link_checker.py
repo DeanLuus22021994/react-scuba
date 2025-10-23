@@ -16,7 +16,7 @@ from ..config.settings import HAS_INTERPRETERS, HTTPConfig, PathConfig
 from ..models.models import LinkCheckConfig, LinkResult
 
 if HAS_INTERPRETERS:
-    from concurrent.futures import InterpreterPoolExecutor
+    from concurrent.futures import ProcessPoolExecutor as InterpreterPoolExecutor
 else:
     from concurrent.futures import ThreadPoolExecutor
 
@@ -77,7 +77,7 @@ class LinkCheckerService:
 
         Uses InterpreterPoolExecutor for true parallelism in Python 3.14+.
         """
-        results = {"valid": [], "broken": [], "skipped": []}
+        results: dict[str, list[str]] = {"valid": [], "broken": [], "skipped": []}
 
         # Find all markdown files and collect links
         md_files = self.find_markdown_files()
@@ -205,7 +205,7 @@ class LinkCheckerService:
 
         Leverages free-threaded execution in Python 3.14+ for true parallelism.
         """
-        results = {"valid": [], "broken": [], "skipped": []}
+        results: dict[str, list[str]] = {"valid": [], "broken": [], "skipped": []}
 
         # Check if requests is available
         if not hasattr(self, "_requests_available"):

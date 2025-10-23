@@ -5,6 +5,8 @@ This module provides the main DocUtils class that orchestrates
 all documentation utilities and services.
 """
 
+from pathlib import Path
+
 from ..config.settings import HTTPConfig, PathConfig
 from ..models.models import ComponentInventoryConfig, LinkCheckConfig
 from ..services.component_inventory import ComponentInventoryService
@@ -20,7 +22,12 @@ class DocUtils:
     to all documentation utilities and services.
     """
 
-    def __init__(self, docs_path: str = "docs", src_path: str = "src", use_interpreters: bool = True):
+    def __init__(
+        self,
+        docs_path: str = "docs",
+        src_path: str = "src",
+        use_interpreters: bool = True,
+    ):
         """
         Initialize DocUtils with configuration.
 
@@ -29,7 +36,9 @@ class DocUtils:
             src_path: Path to source directory
             use_interpreters: Whether to use concurrent interpreters
         """
-        self.path_config = PathConfig(docs_path=docs_path, src_path=src_path)
+        self.path_config = PathConfig(
+            docs_path=Path(docs_path), src_path=Path(src_path)
+        )
         self.http_config = HTTPConfig()
 
         # Initialize service configurations
@@ -37,8 +46,12 @@ class DocUtils:
         self.inventory_config = ComponentInventoryConfig(src_path=src_path)
 
         # Initialize services
-        self.link_checker = LinkCheckerService(self.link_config, self.path_config, self.http_config)
-        self.component_inventory = ComponentInventoryService(self.inventory_config, self.path_config)
+        self.link_checker = LinkCheckerService(
+            self.link_config, self.path_config, self.http_config
+        )
+        self.component_inventory = ComponentInventoryService(
+            self.inventory_config, self.path_config
+        )
         self.file_operations = FileOperationsService()
 
     def check_links_concurrent(self, max_workers: int = 10) -> dict:

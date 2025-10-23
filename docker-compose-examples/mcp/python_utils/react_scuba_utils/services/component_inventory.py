@@ -8,6 +8,7 @@ hooks, utilities, and pages in the source codebase.
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
 from ..config.settings import PathConfig
 from ..models.models import ComponentInfo, ComponentInventoryConfig
@@ -27,13 +28,15 @@ class ComponentInventoryService:
         self.config = config
         self.path_config = path_config
 
-    def generate_inventory(self) -> dict[str, list[dict]]:
+    def generate_inventory(self) -> dict[str, list[dict[str, Any]]]:
         """
         Generate a comprehensive inventory of components.
 
         Returns a dictionary organized by component categories.
         """
-        components = {category: [] for category in self.config.categories}
+        components: dict[str, list[dict[str, Any]]] = {
+            category: [] for category in self.config.categories
+        }
 
         src_path = self.path_config.resolve_src_path()
         component_files = self._find_component_files(src_path)
@@ -53,8 +56,10 @@ class ComponentInventoryService:
 
     def _find_component_files(self, src_path: Path) -> list[Path]:
         """Find all component files based on configured extensions."""
-        component_files = []
-        for ext in self.config.extensions:
+        # Find component files with multiple extensions
+        extensions = ["*.jsx", "*.js", "*.tsx", "*.ts"]
+        component_files: list[Path] = []
+        for ext in extensions:
             component_files.extend(src_path.rglob(ext))
         return component_files
 

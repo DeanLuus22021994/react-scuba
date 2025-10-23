@@ -19,7 +19,7 @@ from urllib.parse import urljoin
 # Python 3.14+ features
 if sys.version_info >= (3, 14):
     try:
-        from concurrent.futures import InterpreterPoolExecutor
+        from concurrent.futures import ProcessPoolExecutor as InterpreterPoolExecutor
 
         HAS_INTERPRETERS = True
     except ImportError:
@@ -129,7 +129,7 @@ class DocUtils:
 
         Uses InterpreterPoolExecutor for true parallelism in Python 3.14+.
         """
-        results = {"valid": [], "broken": [], "skipped": []}
+        results: dict[str, list[str]] = {"valid": [], "broken": [], "skipped": []}
 
         # Find all markdown files
         md_files = self.find_markdown_files()
@@ -234,13 +234,18 @@ class DocUtils:
 
         Uses pathlib improvements and better analysis.
         """
-        components = {"pages": [], "components": [], "hooks": [], "utils": []}
+        components: dict[str, list[dict[str, Any]]] = {
+            "pages": [],
+            "components": [],
+            "hooks": [],
+            "utils": [],
+        }
 
         src_dir = Path(src_path)
 
         # Find component files with multiple extensions
         extensions = ["*.jsx", "*.js", "*.tsx", "*.ts"]
-        component_files = []
+        component_files: list[Path] = []
         for ext in extensions:
             component_files.extend(src_dir.rglob(ext))
 
@@ -395,72 +400,71 @@ class DocUtils:
             print(f"Error moving {src} to {dst}: {e}", file=sys.stderr)
             return False
 
+    async def async_check_links(
+        self, urls: list[str], max_concurrency: int = 10
+    ) -> dict[str, list[str]]:
+        """
+        Asynchronous link checking using asyncio for Python 3.14+ free-threaded execution.
 
-async def async_check_links(
-    self, urls: list[str], max_concurrency: int = 10
-) -> dict[str, list[str]]:
-    """
-    Asynchronous link checking using asyncio for Python 3.14+ free-threaded execution.
+        This method leverages the free-threaded nature of Python 3.14 for true parallelism.
+        """
+        results: dict[str, list[str]] = {"valid": [], "broken": [], "skipped": []}
 
-    This method leverages the free-threaded nature of Python 3.14 for true parallelism.
-    """
-    results = {"valid": [], "broken": [], "skipped": []}
+        if not self.session:
+            results["broken"] = [f"{url} (requests not available)" for url in urls]
+            return results
 
-    if not self.session:
-        results["broken"] = [f"{url} (requests not available)" for url in urls]
-        return results
+        semaphore = asyncio.Semaphore(max_concurrency)
 
-    semaphore = asyncio.Semaphore(max_concurrency)
+        async def check_single_url(url: str) -> tuple[str, bool, str]:
+            async with semaphore:
+                try:
+                    if any(
+                        skip_domain in url
+                        for skip_domain in ["localhost", "127.0.0.1", "0.0.0.0"]
+                    ):
+                        return url, True, "skipped"
 
-    async def check_single_url(url: str) -> tuple[str, bool, str]:
-        async with semaphore:
-            try:
-                if any(
-                    skip_domain in url
-                    for skip_domain in ["localhost", "127.0.0.1", "0.0.0.0"]
-                ):
-                    return url, True, "skipped"
-
-                # Use asyncio.to_thread for I/O bound operations
-                response = await asyncio.to_thread(
-                    self.session.head, url, timeout=10, allow_redirects=True
-                )
-
-                if response.status_code == 405:  # HEAD not allowed
+                    # Use asyncio.to_thread for I/O bound operations
                     response = await asyncio.to_thread(
-                        self.session.get, url, timeout=10, allow_redirects=True
+                        self.session.head, url, timeout=10, allow_redirects=True
                     )
 
-                return (
-                    url,
-                    response.status_code < 400,
-                    f"status: {response.status_code}",
-                )
+                    if response.status_code == 405:  # HEAD not allowed
+                        response = await asyncio.to_thread(
+                            self.session.get, url, timeout=10, allow_redirects=True
+                        )
 
-            except Exception as e:
-                return url, False, str(e)
+                    return (
+                        url,
+                        response.status_code < 400,
+                        f"status: {response.status_code}",
+                    )
 
-    # Create tasks for all URLs
-    tasks = [check_single_url(url) for url in urls]
-    completed_results: list[
-        tuple[str, bool, str] | BaseException
-    ] = await asyncio.gather(*tasks, return_exceptions=True)
+                except Exception as e:
+                    return url, False, str(e)
 
-    # Process results
-    for result in completed_results:
-        if isinstance(result, BaseException):
-            print(f"Async task error: {result}", file=sys.stderr)
-            continue
+        # Create tasks for all URLs
+        tasks = [check_single_url(url) for url in urls]
+        completed_results: list[
+            tuple[str, bool, str] | BaseException
+        ] = await asyncio.gather(*tasks, return_exceptions=True)
 
-        url, is_valid, reason = result
-        if "skipped" in reason:
-            results["skipped"].append(url)
-        elif is_valid:
-            results["valid"].append(url)
-        else:
-            results["broken"].append(f"{url} ({reason})")
+        # Process results
+        for result in completed_results:
+            if isinstance(result, BaseException):
+                print(f"Async task error: {result}", file=sys.stderr)
+                continue
 
-    return results
+            url, is_valid, reason = result
+            if "skipped" in reason:
+                results["skipped"].append(url)
+            elif is_valid:
+                results["valid"].append(url)
+            else:
+                results["broken"].append(f"{url} ({reason})")
+
+        return results
 
 
 def main() -> int:
