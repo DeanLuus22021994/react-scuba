@@ -36,23 +36,24 @@ services:
   python:
     build:
       context: ../..
-      dockerfile: docker-compose-examples/swarm-stack/dockerfiles/python.Dockerfile
+      dockerfile: docker-compose-examples/mcp/python_utils/dockerfiles/python.Dockerfile
       args:
         DOCKER_BUILDKIT: 1
     volumes:
-      - ../..:/app:cached
+      - ../mcp/python_utils:/app:cached
       - react_scuba_python_venv:/app/.venv
       - python_cache:/root/.cache/pip
       - python_pytest_cache:/tmp/.cache/pytest
       - python_mypy_cache:/tmp/.cache/mypy
       - python_ruff_cache:/tmp/.cache/ruff
     working_dir: /app
-    command: /app/.venv/bin/python -m uvicorn react_scuba_utils.api:app --host 0.0.0.0 --port 8000
+    command: sh -c "pip install -e . && python -m react_scuba_utils.api"
     ports:
       - "8000:8000"
     environment:
       - PYTHONUNBUFFERED=1
-      - PYTHONPATH=/app/python_utils:/app
+      - PYTHONPATH=/app:/app
+      - SWARM_MODE=true
     depends_on:
       - db
     networks:
