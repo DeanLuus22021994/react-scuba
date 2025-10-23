@@ -8,7 +8,6 @@ hooks, utilities, and pages in the source codebase.
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional
 
 from ..config.settings import PathConfig
 from ..models.models import ComponentInfo, ComponentInventoryConfig
@@ -22,11 +21,13 @@ class ComponentInventoryService:
     dependencies, and metadata.
     """
 
-    def __init__(self, config: ComponentInventoryConfig, path_config: PathConfig):
+    def __init__(
+        self, config: ComponentInventoryConfig, path_config: PathConfig
+    ) -> None:
         self.config = config
         self.path_config = path_config
 
-    def generate_inventory(self) -> Dict[str, List[Dict]]:
+    def generate_inventory(self) -> dict[str, list[dict]]:
         """
         Generate a comprehensive inventory of components.
 
@@ -50,21 +51,21 @@ class ComponentInventoryService:
 
         return components
 
-    def _find_component_files(self, src_path: Path) -> List[Path]:
+    def _find_component_files(self, src_path: Path) -> list[Path]:
         """Find all component files based on configured extensions."""
         component_files = []
         for ext in self.config.extensions:
             component_files.extend(src_path.rglob(ext))
         return component_files
 
-    def _analyze_component_file(self, file_path: Path) -> Optional[ComponentInfo]:
+    def _analyze_component_file(self, file_path: Path) -> ComponentInfo | None:
         """
         Analyze a single component file and extract metadata.
 
         Returns ComponentInfo if the file contains valid component code.
         """
         try:
-            content = file_path.read_text(encoding='utf-8')
+            content = file_path.read_text(encoding="utf-8")
             size_bytes = file_path.stat().st_size
 
             # Determine category
@@ -95,7 +96,9 @@ class ComponentInventoryService:
         else:
             return "components"
 
-    def _extract_component_info(self, content: str, file_path: Path, category: str) -> Optional[ComponentInfo]:
+    def _extract_component_info(
+        self, content: str, file_path: Path, category: str
+    ) -> ComponentInfo | None:
         """Extract comprehensive component information from source code."""
         # Extract component name
         component_name = self._extract_component_name(content, file_path.name)
@@ -113,17 +116,17 @@ class ComponentInventoryService:
             category=category,
             exports=exports,
             imports=imports,
-            size_bytes=0  # Will be set by caller
+            size_bytes=0,  # Will be set by caller
         )
 
-    def _extract_component_name(self, content: str, filename: str) -> Optional[str]:
+    def _extract_component_name(self, content: str, filename: str) -> str | None:
         """Extract component name using various export patterns."""
         # Try different export patterns
         patterns = [
-            r'export default (\w+)',
-            r'export \{ default as (\w+) \}',
-            r'(?:export )?(?:const|function|class) (\w+)',
-            r'module\.exports = (\w+)',
+            r"export default (\w+)",
+            r"export \{ default as (\w+) \}",
+            r"(?:export )?(?:const|function|class) (\w+)",
+            r"module\.exports = (\w+)",
         ]
 
         for pattern in patterns:
@@ -132,26 +135,33 @@ class ComponentInventoryService:
                 return match.group(1)
 
         # Fallback to filename
-        return filename.replace('.jsx', '').replace('.js', '').replace('.tsx', '').replace('.ts', '')
+        return (
+            filename.replace(".jsx", "")
+            .replace(".js", "")
+            .replace(".tsx", "")
+            .replace(".ts", "")
+        )
 
-    def _extract_exports(self, content: str) -> List[str]:
+    def _extract_exports(self, content: str) -> list[str]:
         """Extract all exports from the file."""
         exports = []
 
         # Named exports
-        named_exports = re.findall(r'export (?:const|function|class|let|var) (\w+)', content)
+        named_exports = re.findall(
+            r"export (?:const|function|class|let|var) (\w+)", content
+        )
         exports.extend(named_exports)
 
         # Export statements with potential aliases
-        export_statements = re.findall(r'export \{([^}]+)\}', content)
+        export_statements = re.findall(r"export \{([^}]+)\}", content)
         for statement in export_statements:
             # Handle aliases like "Component as Comp"
-            items = [item.split(' as ')[0].strip() for item in statement.split(',')]
+            items = [item.split(" as ")[0].strip() for item in statement.split(",")]
             exports.extend(items)
 
         return list(set(exports))  # Remove duplicates
 
-    def _extract_imports(self, content: str) -> List[str]:
+    def _extract_imports(self, content: str) -> list[str]:
         """Extract all imports from the file."""
         imports = []
 

@@ -40,7 +40,7 @@ class ReactScubaMCPServer:
     through the Model Context Protocol.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         if not MCP_AVAILABLE:
             raise ImportError("MCP package is required for MCP server functionality")
 
@@ -51,7 +51,7 @@ class ReactScubaMCPServer:
         # Register tools
         self._register_tools()
 
-    def _register_tools(self):
+    def _register_tools(self) -> None:
         """Register MCP tools."""
 
         @self.server.list_tools()
@@ -76,7 +76,9 @@ class ReactScubaMCPServer:
                             },
                             "use_interpreters": {
                                 "type": "boolean",
-                                "description": "Use concurrent interpreters if available",
+                                "description": (
+                                    "Use concurrent interpreters if available"
+                                ),
                                 "default": True,
                             },
                         },
@@ -84,7 +86,9 @@ class ReactScubaMCPServer:
                 ),
                 Tool(
                     name="generate_component_inventory",
-                    description="Generate an inventory of React components in the source code",
+                    description=(
+                        "Generate an inventory of React components in the source code"
+                    ),
                     inputSchema={
                         "type": "object",
                         "properties": {
@@ -233,15 +237,21 @@ class ReactScubaMCPServer:
                     output += f"File: {comp['file']}\n"
                     output += f"Path: {comp['path']}\n"
                     output += f"Size: {comp['size_bytes']} bytes\n"
-                    output += f"Exports: {', '.join(comp['exports']) if comp['exports'] else 'None'}\n"
-                    output += f"Imports: {', '.join(comp['imports']) if comp['imports'] else 'None'}\n"
+                    exports_str = (
+                        ", ".join(comp["exports"]) if comp["exports"] else "None"
+                    )
+                    output += f"Exports: {exports_str}\n"
+                    imports_str = (
+                        ", ".join(comp["imports"]) if comp["imports"] else "None"
+                    )
+                    output += f"Imports: {imports_str}\n"
                     return [TextContent(type="text", text=output)]
 
         return [
             TextContent(type="text", text=f"Component '{component_name}' not found")
         ]
 
-    async def run(self):
+    async def run(self) -> None:
         """Run the MCP server."""
         async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
             await self.server.run(
@@ -249,7 +259,7 @@ class ReactScubaMCPServer:
             )
 
 
-def main():
+def main() -> int:
     """MCP server entry point."""
     if not MCP_AVAILABLE:
         print("❌ MCP package is required. Install with: pip install mcp")

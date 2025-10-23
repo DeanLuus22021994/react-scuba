@@ -12,12 +12,12 @@ import sys
 from pathlib import Path
 
 from ..config.settings import HTTPConfig, PathConfig, get_python_features
+from ..models.models import ComponentInventoryConfig, LinkCheckConfig
 from ..services.component_inventory import ComponentInventoryService
 from ..services.link_checker import LinkCheckerService
-from ..models.models import ComponentInventoryConfig, LinkCheckConfig
 
 
-def main():
+def main() -> int:
     """Enhanced CLI entry point with Python 3.14 features."""
     parser = argparse.ArgumentParser(
         description="React Scuba Documentation Utilities (Python 3.14 Enhanced)",
@@ -33,17 +33,27 @@ Python 3.14 Features:
   - Concurrent interpreters for isolated processing
   - Enhanced pathlib operations
   - Improved concurrent.futures support
-        """
+        """,
     )
 
-    parser.add_argument("command", choices=["check-links", "inventory", "async-check"],
-                       help="Command to run")
+    parser.add_argument(
+        "command",
+        choices=["check-links", "inventory", "async-check"],
+        help="Command to run",
+    )
     parser.add_argument("--docs-path", default="docs", help="Path to docs directory")
     parser.add_argument("--src-path", default="src", help="Path to source directory")
-    parser.add_argument("--workers", type=int, default=10, help="Number of worker threads/interpreters")
-    parser.add_argument("--timeout", type=int, default=10, help="HTTP request timeout in seconds")
-    parser.add_argument("--no-interpreters", action="store_true",
-                       help="Disable concurrent interpreters (use threads only)")
+    parser.add_argument(
+        "--workers", type=int, default=10, help="Number of worker threads/interpreters"
+    )
+    parser.add_argument(
+        "--timeout", type=int, default=10, help="HTTP request timeout in seconds"
+    )
+    parser.add_argument(
+        "--no-interpreters",
+        action="store_true",
+        help="Disable concurrent interpreters (use threads only)",
+    )
     parser.add_argument("--output", help="Output file for results")
     parser.add_argument("--json", action="store_true", help="Output results as JSON")
 
@@ -52,17 +62,20 @@ Python 3.14 Features:
     # Display Python version and features
     features = get_python_features()
     print(f"🐍 Python {features['version_string']}")
-    if features['is_free_threaded']:
+    if features["is_free_threaded"]:
         print("🧵 Running in free-threaded mode")
-    if features['has_interpreters']:
+    if features["has_interpreters"]:
         print("🔄 Concurrent interpreters available")
 
     # Initialize configurations
     path_config = PathConfig(args.docs_path, args.src_path)
     http_config = HTTPConfig(timeout=args.timeout)
-    use_interpreters = not args.no_interpreters and features['has_interpreters']
+    use_interpreters = not args.no_interpreters and features["has_interpreters"]
 
-    print(f"🔧 Using {'InterpreterPoolExecutor' if use_interpreters else 'ThreadPoolExecutor'}")
+    executor_name = (
+        "InterpreterPoolExecutor" if use_interpreters else "ThreadPoolExecutor"
+    )
+    print(f"🔧 Using {executor_name}")
 
     # Execute command
     if args.command == "check-links":
@@ -72,15 +85,19 @@ Python 3.14 Features:
     elif args.command == "inventory":
         _run_inventory(args, path_config)
 
+    return 0
 
-def _run_link_check(args, path_config: PathConfig, http_config: HTTPConfig, use_interpreters: bool):
+
+def _run_link_check(
+    args, path_config: PathConfig, http_config: HTTPConfig, use_interpreters: bool
+):
     """Run synchronous link checking."""
     print("🔗 Checking documentation links...")
 
     config = LinkCheckConfig(
         max_workers=args.workers,
         timeout=args.timeout,
-        use_interpreters=use_interpreters
+        use_interpreters=use_interpreters,
     )
 
     service = LinkCheckerService(config, path_config, http_config)
@@ -100,7 +117,7 @@ def _run_async_link_check(args, path_config: PathConfig, http_config: HTTPConfig
     config = LinkCheckConfig(
         max_workers=args.workers,
         timeout=args.timeout,
-        use_interpreters=False  # Async uses asyncio instead
+        use_interpreters=False,  # Async uses asyncio instead
     )
 
     service = LinkCheckerService(config, path_config, http_config)
@@ -136,13 +153,15 @@ def _run_inventory(args, path_config: PathConfig):
     output_file = args.output or "docs/testing/component-inventory.json"
     Path(output_file).parent.mkdir(parents=True, exist_ok=True)
 
-    with open(output_file, "w", encoding='utf-8') as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(inventory, f, indent=2, ensure_ascii=False)
 
     print(f"📝 Inventory saved to {output_file}")
 
 
-def _display_link_results(results: dict, output_file: str = None, json_output: bool = False):
+def _display_link_results(
+    results: dict, output_file: str | None = None, json_output: bool = False
+):
     """Display link check results."""
     print(f"✅ Valid links: {len(results['valid'])}")
     print(f"❌ Broken links: {len(results['broken'])}")
@@ -158,7 +177,7 @@ def _display_link_results(results: dict, output_file: str = None, json_output: b
     # Save results if requested
     if output_file:
         results_file = f"{output_file}.json"
-        with open(results_file, "w", encoding='utf-8') as f:
+        with open(results_file, "w", encoding="utf-8") as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
         print(f"📊 Results saved to {results_file}")
 

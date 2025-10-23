@@ -6,75 +6,18 @@ Provides REST API endpoints for documentation utilities,
 leveraging Python 3.14 features for enhanced performance.
 """
 
-import asyncio
+import datetime
 import json
-import subprocess
 import sys
 import threading
-import time
 import uuid
-from pathlib import Path
-from typing import Optional
+from typing import Any
 
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-# Import our utilities (moved to functions to allow startup without them)
-# from react_scuba_utils.config.settings import PathConfig, get_python_features, HTTPConfig
-# from react_scuba_utils.services.component_inventory import ComponentInventoryService
-# from react_scuba_utils.services.link_checker import LinkCheckerService
-# from react_scuba_utils.types.models import ComponentInventoryConfig, LinkCheckConfig
-
-# Global initialization status
-init_status = {
-    "status": "ready",
-    "message": "API is fully operational",
-    "packages_installed": True,
-    "services_ready": True,
-}
-
-# Thread lock for status updates
-status_lock = threading.Lock()
-
-
-def update_init_status(
-    status: str,
-    message: str,
-    packages_installed: bool | None = None,
-    services_ready: bool | None = None,
-):
-    """Update the global initialization status."""
-    with status_lock:
-        init_status["status"] = status
-        init_status["message"] = message
-        if packages_installed is not None:
-            init_status["packages_installed"] = packages_installed
-        if services_ready is not None:
-            init_status["services_ready"] = services_ready
-
-
-# Remove the async package installation since packages are installed in Dockerfile
-# install_packages_async function removed
-# install_thread removed
-
-# Initialize FastAPI app
-app = FastAPI(
-    title="React Scuba Python Utilities API",
-    description="Documentation utilities API with Python 3.14 enhancements",
-    version="0.2.0",
-)
-
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Initialize configurations
+from react_scuba_utils.config.config import LogLevel
 from react_scuba_utils.config.settings import (
     HTTPConfig,
     LoggingConfig,
@@ -87,8 +30,23 @@ http_config = HTTPConfig()
 features = get_python_features()
 
 # Configure structured logging
-logging_config = LoggingConfig(level="INFO")
+logging_config = LoggingConfig(level=LogLevel.INFO)
 logging_config.configure_logging()
+
+# FastAPI app instance
+app = FastAPI(
+    title="React Scuba Python Utilities API",
+    description="Python utilities for React Scuba project",
+    version="0.2.0",
+)
+
+# Global status tracking
+status_lock = threading.Lock()
+init_status = {
+    "status": "initializing",
+    "timestamp": datetime.datetime.now().isoformat(),
+    "services": {},
+}
 
 
 # Correlation ID middleware
@@ -108,7 +66,7 @@ async def add_correlation_id(request: Request, call_next):
 
 
 @app.get("/")
-async def root(request: Request):
+async def root(request: Request) -> dict[str, Any]:
     """Root endpoint with API information."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
@@ -130,7 +88,7 @@ async def root(request: Request):
 
 
 @app.get("/health")
-async def health(request: Request):
+async def health(request: Request) -> JSONResponse:
     """Health check endpoint with initialization status."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
@@ -155,7 +113,7 @@ async def health(request: Request):
 
 
 @app.get("/inventory")
-async def get_inventory(request: Request, src_path: str = "src"):
+async def get_inventory(request: Request, src_path: str = "src") -> JSONResponse:
     """Generate and return component inventory."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
@@ -194,7 +152,6 @@ async def get_inventory(request: Request, src_path: str = "src"):
         correlation_logger.error(
             "Inventory generation failed",
             extra={"error": str(e), "src_path": src_path},
-            exc_info=True,
         )
         raise HTTPException(
             status_code=500, detail=f"Error generating inventory: {str(e)}"
@@ -202,7 +159,9 @@ async def get_inventory(request: Request, src_path: str = "src"):
 
 
 @app.get("/links/check")
-async def check_links(request: Request, workers: int = 10, timeout: int = 10):
+async def check_links(
+    request: Request, workers: int = 10, timeout: int = 10
+) -> JSONResponse:
     """Check documentation links."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
@@ -242,7 +201,6 @@ async def check_links(request: Request, workers: int = 10, timeout: int = 10):
         correlation_logger.error(
             "Link checking failed",
             extra={"error": str(e), "workers": workers, "timeout": timeout},
-            exc_info=True,
         )
         raise HTTPException(
             status_code=500, detail=f"Error checking links: {str(e)}"

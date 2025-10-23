@@ -10,7 +10,6 @@ import re
 import sys
 import time
 from pathlib import Path
-from typing import Any
 from urllib.parse import urljoin
 
 from ..config.settings import HAS_INTERPRETERS, HTTPConfig, PathConfig
@@ -32,14 +31,14 @@ class LinkCheckerService:
 
     def __init__(
         self, config: LinkCheckConfig, path_config: PathConfig, http_config: HTTPConfig
-    ):
+    ) -> None:
         self.config = config
         self.path_config = path_config
         self.http_config = http_config
 
     def find_markdown_files(self) -> list[Path]:
         """Find all markdown files in the docs directory."""
-        docs_path = self.path_config.resolve_docs_path()
+        docs_path = self.path_config.docs_path
         return list(docs_path.rglob("*.md"))
 
     def extract_links(self, file_path: Path) -> list[str]:
@@ -139,7 +138,32 @@ class LinkCheckerService:
                     response_time=time.time() - start_time,
                 )
 
-            if not self.http_config.is_available():
+            # Check if requests is available
+            if not hasattr(self, "_requests_available"):
+                try:
+                    import requests
+                    from requests.adapters import HTTPAdapter
+                    from urllib3.util.retry import Retry
+
+                    self._requests_available = True
+                    # Create session with retry strategy
+                    self._session = requests.Session()
+                    retry_strategy = Retry(
+                        total=self.http_config.max_retries,
+                        status_forcelist=self.http_config.retry_status_codes,
+                        backoff_factor=self.http_config.backoff_factor,
+                    )
+                    adapter = HTTPAdapter(max_retries=retry_strategy)
+                    self._session.mount("http://", adapter)
+                    self._session.mount("https://", adapter)
+                    self._session.headers.update(
+                        {"User-Agent": self.http_config.user_agent}
+                    )
+                except ImportError:
+                    self._requests_available = False
+                    self._session = None
+
+            if not self._requests_available or self._session is None:
                 return LinkResult(
                     url=url,
                     is_valid=False,
@@ -147,14 +171,7 @@ class LinkCheckerService:
                     response_time=time.time() - start_time,
                 )
 
-            session = self.http_config.session
-            if session is None:
-                return LinkResult(
-                    url=url,
-                    is_valid=False,
-                    error_message="HTTP session not available",
-                    response_time=time.time() - start_time,
-                )
+            session = self._session
 
             # Use HEAD request for efficiency, fallback to GET if needed
             response = session.head(
@@ -190,7 +207,32 @@ class LinkCheckerService:
         """
         results = {"valid": [], "broken": [], "skipped": []}
 
-        if not self.http_config.is_available():
+        # Check if requests is available
+        if not hasattr(self, "_requests_available"):
+            try:
+                import requests
+                from requests.adapters import HTTPAdapter
+                from urllib3.util.retry import Retry
+
+                self._requests_available = True
+                # Create session with retry strategy
+                self._session = requests.Session()
+                retry_strategy = Retry(
+                    total=self.http_config.max_retries,
+                    status_forcelist=self.http_config.retry_status_codes,
+                    backoff_factor=self.http_config.backoff_factor,
+                )
+                adapter = HTTPAdapter(max_retries=retry_strategy)
+                self._session.mount("http://", adapter)
+                self._session.mount("https://", adapter)
+                self._session.headers.update(
+                    {"User-Agent": self.http_config.user_agent}
+                )
+            except ImportError:
+                self._requests_available = False
+                self._session = None
+
+        if not self._requests_available or self._session is None:
             results["broken"] = [f"{url} (requests not available)" for url in urls]
             return results
 
@@ -204,7 +246,7 @@ class LinkCheckerService:
                     ):
                         return url, True, "skipped"
 
-                    session = self.http_config.session
+                    session = self._session
                     if session is None:
                         return url, False, "HTTP session not available"
 

@@ -8,21 +8,17 @@ concurrent interpreters, and improved parallelism.
 
 import asyncio
 import json
-import os
 import re
 import sys
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Optional, Union
-from urllib.parse import urljoin, urlparse
-
-import yaml
+from typing import Any
+from urllib.parse import urljoin
 
 # Python 3.14+ features
 if sys.version_info >= (3, 14):
     try:
-        import concurrent.interpreters as interpreters
         from concurrent.futures import InterpreterPoolExecutor
 
         HAS_INTERPRETERS = True
@@ -80,7 +76,7 @@ class DocUtils:
     - Enhanced error handling and type safety
     """
 
-    def __init__(self, docs_path: str = "docs", use_interpreters: bool = True):
+    def __init__(self, docs_path: str = "docs", use_interpreters: bool = True) -> None:
         self.docs_path = Path(docs_path)
         self.base_url = "https://deanluus22021994.github.io/react-scuba/"
         self.use_interpreters = use_interpreters and HAS_INTERPRETERS
@@ -467,7 +463,7 @@ async def async_check_links(
     return results
 
 
-def main():
+def main() -> int:
     """Enhanced CLI entry point with Python 3.14 features."""
     import argparse
 
@@ -512,9 +508,10 @@ Python 3.14 Features:
     utils = DocUtils(args.docs_path, use_interpreters=use_interpreters)
 
     print(f"🐍 Python {sys.version}")
-    print(
-        f"🔧 Using {'InterpreterPoolExecutor' if use_interpreters else 'ThreadPoolExecutor'}"
+    executor_name = (
+        "InterpreterPoolExecutor" if use_interpreters else "ThreadPoolExecutor"
     )
+    print(f"🔧 Using {executor_name}")
 
     if args.command == "check-links":
         print("🔗 Checking documentation links...")
@@ -575,6 +572,8 @@ Python 3.14 Features:
         with open(results_file, "w", encoding="utf-8") as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
         print(f"📊 Results saved to {results_file}")
+
+    return 0
 
 
 if __name__ == "__main__":
