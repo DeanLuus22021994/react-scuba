@@ -18,25 +18,37 @@ tags: [docker, compose, examples, devcontainer, testing, python314, consolidated
 
 ### UAT Results Summary ✅
 
-#### All stacks validated with Python 3.14 support
+#### All stacks validated with Python 3.14 support and enhanced caching
 
 #### Basic Stack ✅
 - Node.js, Python FastAPI, PostgreSQL operational
+- Enhanced with comprehensive build caching
+- Named volumes for instant rebuilds
 
 #### Cluster Example ✅
 - Load-balanced nginx cluster with 7 services
+- Optimized Dockerfiles with BuildKit
+- Cross-stack volume compatibility
 
 #### Swarm Stack ✅
 - Docker Swarm orchestration with overlay networking
+- Resource constraints and placement rules
+- Production-ready configurations
+
+#### MCP Python Utils ✅
+- New testing and validation stack
+- Python 3.14 optimizations with free-threaded execution
+- Comprehensive tool caching (pytest, mypy, ruff)
 
 <a id="fr-docker-compose-examples-001-functional-requirements"></a>
 
 ## [`FR-DOCKER-COMPOSE-EXAMPLES-001`](#fr-docker-compose-examples-001-functional-requirements) Functional Requirements
 
-- Multiple Docker Compose stacks with Python 3.14
-- Consolidated Dockerfile in `mcp/python_utils/`
-- Named volume mounts for persistence
-- Health checks and monitoring
+- Multiple Docker Compose stacks with Python 3.14 and enhanced caching
+- Dedicated `dockerfiles` folders for each stack with optimized builds
+- Named volume mounts for build caching and instant subsequent rebuilds
+- Comprehensive testing integration with `mcp/python_utils` stack
+- Automated validation and health check verification
 
 ### [`FR-DOCKER-COMPOSE-EXAMPLES-001`] Validation Criteria
 
