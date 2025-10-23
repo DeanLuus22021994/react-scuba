@@ -21,14 +21,10 @@ This module implements an MCP server that exposes documentation utilities
 as MCP tools for integration with AI assistants and other MCP clients.
 """
 
-# Declare variables for optional imports
 _MCPTool: Any = None
 _MCPServerImpl: Any = None
 _MCPTextContent: Any = None
 
-# Runtime imports guarded so the module can be imported in environments
-# where `mcp` is not installed while still providing accurate types to
-# type checkers.
 try:
     import mcp.server.stdio
     from mcp import Tool as _MCPTool_import
@@ -40,16 +36,13 @@ try:
     _MCPTextContent = _MCPTextContent_import
     MCP_AVAILABLE = True
 except Exception:
-    # If MCP isn't installed at runtime, we won't instantiate the server.
     MCP_AVAILABLE = False
 
-# Types for static analysis only
 if TYPE_CHECKING:
     from mcp import Tool
     from mcp.server import Server
     from mcp.types import TextContent
 else:
-    # Provide runtime-compatible names (used only when MCP is present).
     Tool = Any
     Server = Any
     TextContent = Any
@@ -103,15 +96,12 @@ class ReactScubaMCPServer:
         if not MCP_AVAILABLE or _MCPServerImpl is None:
             raise ImportError("MCP package is required for MCP server functionality")
 
-        # Instantiate the real server implementation at runtime.
-        # Type-checkers will treat self.server as _MCPServerLike.
         self.server: _MCPServerLike = cast(
             _MCPServerLike, _MCPServerImpl("react-scuba-utils")
         )
         self.path_config = PathConfig()
         self.http_config = HTTPConfig()
 
-        # Register tools explicitly (no decorator).
         self._register_tools()
 
     def _tool_definitions(self) -> list[Tool]:
@@ -186,18 +176,12 @@ class ReactScubaMCPServer:
         ]
 
     def _register_tools(self) -> None:
-        """
-        Register tool metadata and the call handler with the server.
-
-        We avoid decorator-based registration (which confuses Mypy) and
-        instead perform explicit registration with a well-typed handler.
-        """
+        """Register tool metadata and handlers with the server."""
 
         async def call_tool_handler(
             name: str,
             arguments: dict[str, Any],
         ) -> Sequence[TextContent]:
-            """Dispatch incoming tool calls to the appropriate coroutine."""
             if name == "check_documentation_links":
                 return await self._check_links_tool(arguments)
             if name == "generate_component_inventory":
@@ -206,62 +190,43 @@ class ReactScubaMCPServer:
                 return await self._get_component_info_tool(arguments)
             raise ValueError(f"Unknown tool: {name}")
 
-        # Register tool metadata if the runtime server supports it.
         if hasattr(self.server, "register_tool"):
-            # Some MCP server APIs want metadata registration separately.
             for tool in self._tool_definitions():
-                # Register metadata with the server if available.
-                # The concrete `register_tool` API may differ between MCP versions;
-                # we attempt to call a metadata registration method if present.
                 try:
-                    # Try metadata registration first, if provided by server.
                     metadata_register = getattr(
                         self.server, "register_tool_metadata", None
                     )
                     if metadata_register:
                         metadata_register(tool)
                 except Exception:
-                    # Ignore metadata registration failures — still register handler.
                     pass
 
-            # Finally register our handler in the manner the server expects.
-            # Here we prefer `register_tool(handler)` if it accepts a handler.
             self.server.register_tool(call_tool_handler)
             return
 
-        # Fallback: older/more minimal MCP implementations might accept direct
-        # call_tool(handler) style registration.
         if hasattr(self.server, "call_tool"):
             self.server.call_tool(call_tool_handler)
             return
 
-        # If we reach here, the server object does not expose a known register
-        # API. That's unexpected because `_MCPServerImpl` should match the
-        # MCP implementation. Raise to make the problem explicit.
         raise RuntimeError("MCP server does not expose a tool registration API")
 
     async def _check_links_tool(
         self,
         arguments: dict[str, Any],
     ) -> Sequence[TextContent]:
-        """Handle link checking tool calls."""
         docs_path = arguments.get("docs_path", "docs")
         max_workers = arguments.get("max_workers", 10)
         use_interpreters = arguments.get("use_interpreters", True)
 
-        # Update path config
         self.path_config = PathConfig(docs_path=docs_path)
 
-        # Create link checker service
         config = LinkCheckConfig(
             max_workers=max_workers, use_interpreters=use_interpreters
         )
         service = LinkCheckerService(config, self.path_config, self.http_config)
 
-        # Run link check
         results = service.check_links_concurrent()
 
-        # Format results
         output = "Link Check Results:\n"
         output += f"✅ Valid links: {len(results['valid'])}\n"
         output += f"❌ Broken links: {len(results['broken'])}\n"
@@ -276,27 +241,22 @@ class ReactScubaMCPServer:
                 output += f"  ... and {remaining} more\n"
 
         assert _MCPTextContent is not None
-        return [_MCPTextContent(type="text", text=output)]  # runtime TextContent
+        return [_MCPTextContent(type="text", text=output)]
 
     async def _generate_inventory_tool(
         self,
         arguments: dict[str, Any],
     ) -> Sequence[TextContent]:
-        """Handle component inventory tool calls."""
         src_path = arguments.get("src_path", "src")
         extensions = arguments.get("extensions", ["*.jsx", "*.js", "*.tsx", "*.ts"])
 
-        # Update path config
         self.path_config = PathConfig(src_path=src_path)
 
-        # Create inventory service
         config = ComponentInventoryConfig(src_path=src_path, extensions=extensions)
         service = ComponentInventoryService(config, self.path_config)
 
-        # Generate inventory
         inventory = service.generate_inventory()
 
-        # Format results
         output = "Component Inventory:\n"
         output += f"📄 Pages: {len(inventory['pages'])}\n"
         output += f"🧩 Components: {len(inventory['components'])}\n"
@@ -319,18 +279,14 @@ class ReactScubaMCPServer:
         self,
         arguments: dict[str, Any],
     ) -> Sequence[TextContent]:
-        """Handle component info tool calls."""
         component_name = arguments["component_name"]
         src_path = arguments.get("src_path", "src")
 
-        # Update path config
         self.path_config = PathConfig(src_path=src_path)
 
-        # Create inventory service
         config = ComponentInventoryConfig(src_path=src_path)
         service = ComponentInventoryService(config, self.path_config)
 
-        # Generate inventory and find component
         inventory = service.generate_inventory()
 
         for category, components in inventory.items():
@@ -358,7 +314,6 @@ class ReactScubaMCPServer:
         ]
 
     async def run(self) -> None:
-        """Run the MCP server using stdio transport."""
         async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
             await self.server.run(
                 read_stream,
