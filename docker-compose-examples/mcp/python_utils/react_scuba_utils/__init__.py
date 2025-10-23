@@ -20,7 +20,7 @@ Usage:
     inventory = utils.generate_component_inventory()
 """
 
-from .config.settings import get_python_features, is_free_threaded, has_interpreters
+from .config.settings import get_python_features, has_interpreters, is_free_threaded
 from .core.utils import DocUtils
 
 __version__ = "0.2.0"

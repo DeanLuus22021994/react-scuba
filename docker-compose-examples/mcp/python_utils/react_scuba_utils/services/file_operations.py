@@ -18,7 +18,7 @@ class FileOperationsService:
     when available, with fallbacks for older Python versions.
     """
 
-    def copy_file(self, src: Union[str, Path], dst: Union[str, Path], follow_symlinks: bool = True) -> bool:
+    def copy_file(self, src: str | Path, dst: str | Path, follow_symlinks: bool = True) -> bool:
         """
         Copy a file using pathlib's copy method (Python 3.14+).
 
@@ -47,7 +47,7 @@ class FileOperationsService:
             print(f"Error copying {src_path} to {dst_path}: {e}", file=sys.stderr)
             return False
 
-    def move_file(self, src: Union[str, Path], dst: Union[str, Path]) -> bool:
+    def move_file(self, src: str | Path, dst: str | Path) -> bool:
         """
         Move a file using pathlib's move method (Python 3.14+).
 
@@ -75,7 +75,7 @@ class FileOperationsService:
             print(f"Error moving {src_path} to {dst_path}: {e}", file=sys.stderr)
             return False
 
-    def create_directory(self, path: Union[str, Path], parents: bool = True, exist_ok: bool = True) -> bool:
+    def create_directory(self, path: str | Path, parents: bool = True, exist_ok: bool = True) -> bool:
         """
         Create a directory with pathlib.
 
@@ -96,7 +96,7 @@ class FileOperationsService:
             print(f"Error creating directory {dir_path}: {e}", file=sys.stderr)
             return False
 
-    def remove_file(self, path: Union[str, Path], missing_ok: bool = True) -> bool:
+    def remove_file(self, path: str | Path, missing_ok: bool = True) -> bool:
         """
         Remove a file safely.
 
@@ -123,7 +123,7 @@ class FileOperationsService:
             print(f"Error removing {file_path}: {e}", file=sys.stderr)
             return False
 
-    def get_file_info(self, path: Union[str, Path]) -> dict:
+    def get_file_info(self, path: str | Path) -> dict:
         """
         Get comprehensive file information.
 

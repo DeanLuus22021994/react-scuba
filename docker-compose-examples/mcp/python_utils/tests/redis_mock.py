@@ -5,7 +5,7 @@ Provides in-memory Redis simulation for caching and session operations
 to enable fast, isolated unit testing.
 """
 
-from typing import Optional, Any, Dict
+from typing import Any, Dict, Optional
 from unittest.mock import Mock
 
 
@@ -17,10 +17,10 @@ class RedisMock:
     """
 
     def __init__(self):
-        self.data: Dict[str, Any] = {}
-        self.expire_times: Dict[str, float] = {}
+        self.data: dict[str, Any] = {}
+        self.expire_times: dict[str, float] = {}
 
-    def get(self, key: str) -> Optional[str]:
+    def get(self, key: str) -> str | None:
         """Mock Redis GET."""
         if key in self.expire_times:
             import time
@@ -30,7 +30,7 @@ class RedisMock:
                 return None
         return self.data.get(key)
 
-    def set(self, key: str, value: str, ex: Optional[int] = None, **kwargs) -> bool:
+    def set(self, key: str, value: str, ex: int | None = None, **kwargs) -> bool:
         """Mock Redis SET with optional expiration."""
         self.data[key] = value
         if ex is not None:
@@ -89,10 +89,10 @@ class RedisClientMock:
     def __init__(self, **kwargs):
         self.mock = RedisMock()
 
-    def get(self, key: str) -> Optional[str]:
+    def get(self, key: str) -> str | None:
         return self.mock.get(key)
 
-    def set(self, key: str, value: str, ex: Optional[int] = None, **kwargs) -> bool:
+    def set(self, key: str, value: str, ex: int | None = None, **kwargs) -> bool:
         return self.mock.set(key, value, ex, **kwargs)
 
     def delete(self, key: str) -> int:

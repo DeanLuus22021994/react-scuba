@@ -5,7 +5,7 @@ This module contains all data models and type definitions used throughout
 the react-scuba-utils package.
 """
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from typing import Any, Optional
 
 
@@ -78,11 +78,9 @@ class LinkCheckConfig:
     timeout: int = 10
     retry_attempts: int = 3
     use_interpreters: bool = True
-    skip_domains: list[str] | None = None
-
-    def __post_init__(self):
-        if self.skip_domains is None:
-            self.skip_domains = ["localhost", "127.0.0.1", "0.0.0.0"]
+    skip_domains: list[str] = field(
+        default_factory=lambda: ["localhost", "127.0.0.1", "0.0.0.0"]
+    )
 
 
 @dataclass
@@ -97,11 +95,9 @@ class ComponentInventoryConfig:
     """
 
     src_path: str = "src"
-    extensions: list[str] | None = None
-    categories: list[str] | None = None
-
-    def __post_init__(self):
-        if self.extensions is None:
-            self.extensions = ["*.jsx", "*.js", "*.tsx", "*.ts"]
-        if self.categories is None:
-            self.categories = ["pages", "components", "hooks", "utils"]
+    extensions: list[str] = field(
+        default_factory=lambda: ["*.jsx", "*.js", "*.tsx", "*.ts"]
+    )
+    categories: list[str] = field(
+        default_factory=lambda: ["pages", "components", "hooks", "utils"]
+    )

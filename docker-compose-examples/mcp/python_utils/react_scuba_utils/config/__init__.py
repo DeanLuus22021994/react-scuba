@@ -3,31 +3,36 @@
 from .config import (
     ApplicationConfig,
     DatabaseConfig,
-    RedisConfig,
-    HTTPConfig,
-    PathConfig,
-    LoggingConfig,
-    ServiceConfig,
     Environment,
+    HTTPConfig,
+    LoggingConfig,
     LogLevel,
+    PathConfig,
+    RedisConfig,
+    ServiceConfig,
     get_config,
+    get_database_config,
+    get_http_config,
+    get_logging_config,
+    get_path_config,
+    get_redis_config,
     reload_config,
     validate_config,
-    get_database_config,
-    get_redis_config,
-    get_http_config,
-    get_path_config,
-    get_logging_config,
 )
-
 from .settings import (
-    LoggingConfig as LegacyLoggingConfig,
-    HTTPConfig as LegacyHTTPConfig,
-    PathConfig as LegacyPathConfig,
     CorrelationLogger,
     get_python_features,
-    is_free_threaded,
     has_interpreters,
+    is_free_threaded,
+)
+from .settings import (
+    HTTPConfig as LegacyHTTPConfig,
+)
+from .settings import (
+    LoggingConfig as LegacyLoggingConfig,
+)
+from .settings import (
+    PathConfig as LegacyPathConfig,
 )
 
 __all__ = [

@@ -20,6 +20,8 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+.coverage
+coverage.xml
 *.lcov
 
 # nyc test coverage
@@ -46,6 +48,12 @@ typings/
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # Optional npm cache directory
 .npm

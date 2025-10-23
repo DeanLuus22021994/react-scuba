@@ -5,8 +5,8 @@ Provides in-memory database simulation for PostgreSQL operations
 to enable fast, isolated unit testing.
 """
 
+from typing import Any, Dict, List, Optional
 from unittest.mock import Mock
-from typing import List, Dict, Any, Optional
 
 
 class DatabaseMock:
@@ -44,7 +44,7 @@ class DatabaseMock:
         """Mock database cursor with query simulation."""
         cursor_mock = Mock()
 
-        def mock_execute(query: str, params: Optional[tuple] = None):
+        def mock_execute(query: str, params: tuple | None = None):
             """Simulate SQL execution."""
             if "SELECT" in query.upper():
                 if "users" in query.lower():

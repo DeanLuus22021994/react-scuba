@@ -6,10 +6,10 @@ all documentation utilities and services.
 """
 
 from ..config.settings import HTTPConfig, PathConfig
+from ..models.models import ComponentInventoryConfig, LinkCheckConfig
 from ..services.component_inventory import ComponentInventoryService
 from ..services.file_operations import FileOperationsService
 from ..services.link_checker import LinkCheckerService
-from ..models.models import ComponentInventoryConfig, LinkCheckConfig
 
 
 class DocUtils:

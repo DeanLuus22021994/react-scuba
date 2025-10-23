@@ -5,22 +5,22 @@ This module provides backward compatibility and convenience functions
 while delegating to the centralized configuration system.
 """
 
-import sys
 import logging
-from typing import Optional, TYPE_CHECKING
+import sys
+from typing import TYPE_CHECKING, Optional
 
 # Import from centralized config
 from .config import (
-    get_config,
-    get_logging_config,
-    get_http_config,
-    get_path_config,
     ApplicationConfig,
-    LoggingConfig as BaseLoggingConfig,
-    HTTPConfig as BaseHTTPConfig,
-    PathConfig as BasePathConfig,
-    CorrelationLogger as BaseCorrelationLogger
+    get_config,
+    get_http_config,
+    get_logging_config,
+    get_path_config,
 )
+from .config import CorrelationLogger as BaseCorrelationLogger
+from .config import HTTPConfig as BaseHTTPConfig
+from .config import LoggingConfig as BaseLoggingConfig
+from .config import PathConfig as BasePathConfig
 
 # Re-export for backward compatibility
 LoggingConfig = BaseLoggingConfig
