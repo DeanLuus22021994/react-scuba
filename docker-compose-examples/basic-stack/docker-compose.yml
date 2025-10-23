@@ -58,23 +58,24 @@ services:
   python:
     build:
       context: ../..
-      dockerfile: docker-compose-examples/basic-stack/dockerfiles/python.Dockerfile
+      dockerfile: docker-compose-examples/mcp/python_utils/dockerfiles/python.Dockerfile
       args:
         DOCKER_BUILDKIT: 1
     volumes:
-      - ../..:/app:cached
-      - react_scuba_python_venv:/app/python_utils/.venv
+      - ../mcp/python_utils:/app:cached
+      - react_scuba_python_venv:/app/.venv
       - python_cache:/root/.cache/pip
       - python_pytest_cache:/tmp/.cache/pytest
       - python_mypy_cache:/tmp/.cache/mypy
       - python_ruff_cache:/tmp/.cache/ruff
     working_dir: /app
-    command: sh -c "pip install -e python_utils && python -m react_scuba_utils.api"
+    command: sh -c "pip install -e . && python -m react_scuba_utils.api"
     ports:
       - "8001:8000"
     environment:
       - PYTHONUNBUFFERED=1
-      - PYTHONPATH=/app/python_utils:/app
+      - PYTHONPATH=/app:/app
+      - BASIC_MODE=true
     depends_on:
       db:
         condition: service_healthy
