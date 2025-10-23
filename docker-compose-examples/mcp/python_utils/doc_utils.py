@@ -10,10 +10,10 @@ import asyncio
 import json
 import re
 import sys
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import Executor, ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any, Optional, cast
 from urllib.parse import urljoin
 
 # Python 3.14+ features
@@ -32,7 +32,10 @@ try:
     from requests.adapters import HTTPAdapter
     from urllib3.util.retry import Retry
 except ImportError:
-    requests = None
+    requests = None  # type: ignore[assignment]
+
+if TYPE_CHECKING or requests:
+    from requests import Session
 
 
 @dataclass
@@ -83,7 +86,7 @@ class DocUtils:
 
         # Configure HTTP session with retries
         if requests:
-            self.session = requests.Session()
+            self.session: Session | None = requests.Session()
             retry_strategy = Retry(
                 total=3, status_forcelist=[429, 500, 502, 503, 504], backoff_factor=1
             )
@@ -91,7 +94,7 @@ class DocUtils:
             self.session.mount("http://", adapter)
             self.session.mount("https://", adapter)
         else:
-            self.session = None
+            self.session: Session | None = None
 
     def find_markdown_files(self) -> list[Path]:
         """Find all markdown files in the docs directory using pathlib."""
@@ -146,6 +149,7 @@ class DocUtils:
             return results
 
         # Choose execution strategy based on Python version and availability
+        executor_class: type[Executor]
         if self.use_interpreters and HAS_INTERPRETERS:
             print("🚀 Using InterpreterPoolExecutor for true parallelism")
             executor_class = InterpreterPoolExecutor
@@ -404,9 +408,11 @@ class DocUtils:
         self, urls: list[str], max_concurrency: int = 10
     ) -> dict[str, list[str]]:
         """
-        Asynchronous link checking using asyncio for Python 3.14+ free-threaded execution.
+        Asynchronous link checking using asyncio for Python 3.14+ free-threaded
+        execution.
 
-        This method leverages the free-threaded nature of Python 3.14 for true parallelism.
+        This method leverages the free-threaded nature of Python 3.14 for true
+        parallelism.
         """
         results: dict[str, list[str]] = {"valid": [], "broken": [], "skipped": []}
 
@@ -415,6 +421,10 @@ class DocUtils:
             return results
 
         semaphore = asyncio.Semaphore(max_concurrency)
+
+        assert self.session is not None, (
+            "Session should be available for async checking"
+        )
 
         async def check_single_url(url: str) -> tuple[str, bool, str]:
             async with semaphore:
@@ -426,13 +436,14 @@ class DocUtils:
                         return url, True, "skipped"
 
                     # Use asyncio.to_thread for I/O bound operations
+                    session = cast(Session, self.session)
                     response = await asyncio.to_thread(
-                        self.session.head, url, timeout=10, allow_redirects=True
+                        session.head, url, timeout=10, allow_redirects=True
                     )
 
                     if response.status_code == 405:  # HEAD not allowed
                         response = await asyncio.to_thread(
-                            self.session.get, url, timeout=10, allow_redirects=True
+                            session.get, url, timeout=10, allow_redirects=True
                         )
 
                     return (

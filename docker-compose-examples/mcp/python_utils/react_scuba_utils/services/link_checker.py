@@ -10,10 +10,22 @@ import re
 import sys
 import time
 from pathlib import Path
+from typing import TYPE_CHECKING
 from urllib.parse import urljoin
 
 from ..config.settings import HAS_INTERPRETERS, HTTPConfig, PathConfig
 from ..models.models import LinkCheckConfig, LinkResult
+
+if TYPE_CHECKING:
+    from concurrent.futures import Executor, ThreadPoolExecutor
+
+    try:
+        from concurrent.futures import ProcessPoolExecutor as InterpreterPoolExecutor
+
+        from requests import Session
+    except ImportError:
+        InterpreterPoolExecutor = ThreadPoolExecutor  # type: ignore[misc,assignment]
+        pass
 
 if HAS_INTERPRETERS:
     from concurrent.futures import ProcessPoolExecutor as InterpreterPoolExecutor
@@ -35,6 +47,8 @@ class LinkCheckerService:
         self.config = config
         self.path_config = path_config
         self.http_config = http_config
+        self._session: Session | None = None
+        self._requests_available: bool = False
 
     def find_markdown_files(self) -> list[Path]:
         """Find all markdown files in the docs directory."""

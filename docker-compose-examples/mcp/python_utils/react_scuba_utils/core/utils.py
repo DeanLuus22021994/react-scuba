@@ -6,6 +6,7 @@ all documentation utilities and services.
 """
 
 from pathlib import Path
+from typing import Any
 
 from ..config.settings import HTTPConfig, PathConfig
 from ..models.models import ComponentInventoryConfig, LinkCheckConfig
@@ -54,7 +55,7 @@ class DocUtils:
         )
         self.file_operations = FileOperationsService()
 
-    def check_links_concurrent(self, max_workers: int = 10) -> dict:
+    def check_links_concurrent(self, max_workers: int = 10) -> dict[str, list[str]]:
         """
         Check all documentation links concurrently.
 
@@ -67,7 +68,7 @@ class DocUtils:
         self.link_config.max_workers = max_workers
         return self.link_checker.check_links_concurrent()
 
-    def generate_component_inventory(self) -> dict:
+    def generate_component_inventory(self) -> dict[str, list[dict[str, Any]]]:
         """
         Generate component inventory from source code.
 
@@ -76,7 +77,9 @@ class DocUtils:
         """
         return self.component_inventory.generate_inventory()
 
-    def copy_file(self, src, dst, follow_symlinks: bool = True) -> bool:
+    def copy_file(
+        self, src: str | Path, dst: str | Path, follow_symlinks: bool = True
+    ) -> bool:
         """
         Copy a file using enhanced file operations.
 
@@ -90,7 +93,7 @@ class DocUtils:
         """
         return self.file_operations.copy_file(src, dst, follow_symlinks)
 
-    def move_file(self, src, dst) -> bool:
+    def move_file(self, src: str | Path, dst: str | Path) -> bool:
         """
         Move a file using enhanced file operations.
 

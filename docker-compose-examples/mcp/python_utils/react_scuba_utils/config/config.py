@@ -10,7 +10,7 @@ import logging
 import os
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field, ValidationError, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -186,7 +186,10 @@ class LoggingConfig(BaseModel):
                 # Fallback to basic JSON-like formatting
                 logging.basicConfig(
                     level=level,
-                    format='{"time": "%(asctime)s", "level": "%(levelname)s", "logger": "%(name)s", "message": "%(message)s"}',
+                    format=(
+                        '{"time": "%(asctime)s", "level": "%(levelname)s", '
+                        '"logger": "%(name)s", "message": "%(message)s"}'
+                    ),
                     datefmt="%Y-%m-%dT%H:%M:%S%z",
                 )
         else:
@@ -362,7 +365,7 @@ class ApplicationConfig(BaseSettings):
             ),
         }
 
-    def __init__(self, **data):
+    def __init__(self, **data: Any) -> None:
         # Set default services if not provided
         if "services" not in data:
             data["services"] = self.create_default_services()

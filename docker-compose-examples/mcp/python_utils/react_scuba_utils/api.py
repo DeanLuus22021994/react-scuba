@@ -17,8 +17,8 @@ from typing import Any
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 
-from react_scuba_utils.config.config import LogLevel
-from react_scuba_utils.config.settings import (
+from .config.config import LogLevel
+from .config.settings import (
     HTTPConfig,
     LoggingConfig,
     PathConfig,
@@ -126,8 +126,8 @@ async def get_inventory(request: Request, src_path: str = "src") -> JSONResponse
     )
 
     try:
-        from react_scuba_utils.models.models import ComponentInventoryConfig
-        from react_scuba_utils.services.component_inventory import (
+        from .models.models import ComponentInventoryConfig
+        from .services.component_inventory import (
             ComponentInventoryService,
         )
 
@@ -174,8 +174,8 @@ async def check_links(
     )
 
     try:
-        from react_scuba_utils.models.models import LinkCheckConfig
-        from react_scuba_utils.services.link_checker import LinkCheckerService
+        from .models.models import LinkCheckConfig
+        from .services.link_checker import LinkCheckerService
 
         config = LinkCheckConfig(
             max_workers=workers,

@@ -91,7 +91,10 @@ Python 3.14 Features:
 
 
 def _run_link_check(
-    args, path_config: PathConfig, http_config: HTTPConfig, use_interpreters: bool
+    args: argparse.Namespace,
+    path_config: PathConfig,
+    http_config: HTTPConfig,
+    use_interpreters: bool,
 ) -> None:
     """Run synchronous link checking."""
     print("🔗 Checking documentation links...")
@@ -109,7 +112,7 @@ def _run_link_check(
 
 
 def _run_async_link_check(
-    args, path_config: PathConfig, http_config: HTTPConfig
+    args: argparse.Namespace, path_config: PathConfig, http_config: HTTPConfig
 ) -> None:
     """Run asynchronous link checking."""
     if sys.version_info < (3, 14):
@@ -139,7 +142,7 @@ def _run_async_link_check(
     _display_link_results(results, args.output, args.json)
 
 
-def _run_inventory(args, path_config: PathConfig) -> None:
+def _run_inventory(args: argparse.Namespace, path_config: PathConfig) -> None:
     """Run component inventory generation."""
     print("📦 Generating component inventory...")
 
