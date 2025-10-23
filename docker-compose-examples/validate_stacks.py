@@ -58,7 +58,7 @@ class StackValidator:
         """Validate docker-compose configuration"""
         print(f"🔍 Validating {stack} configuration...")
 
-        stack_path = self.base_path / "docker-compose-examples" / stack
+        stack_path = self.base_path / stack
         if not stack_path.exists():
             print(f"❌ Stack directory not found: {stack_path}")
             return False
@@ -83,7 +83,7 @@ class StackValidator:
         """Build docker images for a stack"""
         print(f"🏗️  Building {stack}...")
 
-        stack_path = self.base_path / "docker-compose-examples" / stack
+        stack_path = self.base_path / stack
         compose_file = stack_path / "docker-compose.yml"
 
         exit_code, stdout, stderr = self.run_command(
@@ -101,7 +101,7 @@ class StackValidator:
         """Test stack services health"""
         print(f"🏥 Testing {stack} health...")
 
-        stack_path = self.base_path / "docker-compose-examples" / stack
+        stack_path = self.base_path / stack
         compose_file = stack_path / "docker-compose.yml"
 
         # Start services
@@ -149,7 +149,7 @@ class StackValidator:
         """Clean up stack containers and volumes"""
         print(f"🧹 Cleaning up {stack}...")
 
-        stack_path = self.base_path / "docker-compose-examples" / stack
+        stack_path = self.base_path / stack
         compose_file = stack_path / "docker-compose.yml"
 
         exit_code, stdout, stderr = self.run_command(
@@ -193,7 +193,7 @@ class StackValidator:
         found_volumes = set()
 
         for stack in self.stacks:
-            stack_path = self.base_path / "docker-compose-examples" / stack
+            stack_path = self.base_path / stack
             compose_file = stack_path / "docker-compose.yml"
 
             if not compose_file.exists():
@@ -288,7 +288,7 @@ class StackValidator:
             return False
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Validate Docker Compose Examples")
     parser.add_argument("--build", action="store_true", help="Build all stack images")
     parser.add_argument("--test", action="store_true", help="Run integration tests")

@@ -3,12 +3,12 @@ version: "3.8"
 services:
   python:
     build:
-      context: .
-      dockerfile: dockerfiles/python.Dockerfile
+      context: ../../../..
+      dockerfile: docker-compose-examples/mcp/python_utils/dockerfiles/python.Dockerfile
       args:
         DOCKER_BUILDKIT: 1
     volumes:
-      - .:/app:cached
+      - ./docker-compose-examples/mcp/python_utils:/app:cached
       - react_scuba_python_venv:/app/.venv
       - python_cache:/root/.cache/pip
       - python_pytest_cache:/tmp/.cache/pytest
@@ -37,12 +37,12 @@ services:
 
   test-runner:
     build:
-      context: .
-      dockerfile: dockerfiles/python.Dockerfile
+      context: ../../../..
+      dockerfile: docker-compose-examples/mcp/python_utils/dockerfiles/python.Dockerfile
       args:
         DOCKER_BUILDKIT: 1
     volumes:
-      - .:/app:cached
+      - ./docker-compose-examples/mcp/python_utils:/app:cached
       - react_scuba_python_venv:/app/.venv
       - python_cache:/root/.cache/pip
       - python_pytest_cache:/tmp/.cache/pytest
