@@ -176,8 +176,6 @@ class ReactScubaMCPServer:
         ]
 
     def _register_tools(self) -> None:
-        """Register tool metadata and handlers with the server."""
-
         async def call_tool_handler(
             name: str,
             arguments: dict[str, Any],

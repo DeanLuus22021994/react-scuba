@@ -9,22 +9,19 @@ __version__ = "0.2.0"
 __python_requires__ = ">=3.14"
 
 # Python 3.14+ features detection
+import importlib.util
 import sys
+from typing import Any
 
 PYTHON_314_FEATURES = {
     "free_threaded": hasattr(sys, "_is_gil_enabled") and not sys._is_gil_enabled(),
-    "interpreters": False,
-    "pathlib_copy_move": hasattr(__import__('pathlib').Path, 'copy'),
+    "interpreters": importlib.util.find_spec("concurrent.interpreters") is not None,
+    "pathlib_copy_move": hasattr(__import__("pathlib").Path, "copy"),
     "tail_call_optimization": sys.version_info >= (3, 14),
 }
 
-try:
-    import concurrent.interpreters
-    PYTHON_314_FEATURES["interpreters"] = True
-except ImportError:
-    pass
 
-def get_python_features() -> dict:
+def get_python_features() -> dict[str, Any]:
     """
     Get information about available Python 3.14+ features.
 
@@ -32,6 +29,7 @@ def get_python_features() -> dict:
         dict: Dictionary of feature availability
     """
     return PYTHON_314_FEATURES.copy()
+
 
 def is_free_threaded() -> bool:
     """
@@ -41,6 +39,7 @@ def is_free_threaded() -> bool:
         bool: True if GIL is disabled
     """
     return PYTHON_314_FEATURES["free_threaded"]
+
 
 def has_interpreters() -> bool:
     """

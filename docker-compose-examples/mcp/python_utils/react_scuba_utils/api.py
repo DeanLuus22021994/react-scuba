@@ -29,18 +29,15 @@ path_config = PathConfig()
 http_config = HTTPConfig()
 features = get_python_features()
 
-# Configure structured logging
 logging_config = LoggingConfig(level=LogLevel.INFO)
 logging_config.configure_logging()
 
-# FastAPI app instance
 app = FastAPI(
     title="React Scuba Python Utilities API",
     description="Python utilities for React Scuba project",
     version="0.2.0",
 )
 
-# Global status tracking
 status_lock = threading.Lock()
 init_status = {
     "status": "initializing",
@@ -49,18 +46,14 @@ init_status = {
 }
 
 
-# Correlation ID middleware
 @app.middleware("http")
 async def add_correlation_id(
     request: Request, call_next: Callable[[Request], Awaitable[Response]]
 ) -> Response:
-    """Add correlation ID to request and logs."""
     correlation_id = request.headers.get("X-Correlation-ID", str(uuid.uuid4()))
 
-    # Add to request state for use in handlers
     request.state.correlation_id = correlation_id
 
-    # Add correlation ID to response headers
     response = await call_next(request)
     response.headers["X-Correlation-ID"] = correlation_id
 
@@ -69,7 +62,6 @@ async def add_correlation_id(
 
 @app.get("/")
 async def root(request: Request) -> dict[str, Any]:
-    """Root endpoint with API information."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
     )
@@ -91,7 +83,6 @@ async def root(request: Request) -> dict[str, Any]:
 
 @app.get("/health")
 async def health(request: Request) -> JSONResponse:
-    """Health check endpoint with initialization status."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
     )
@@ -100,7 +91,6 @@ async def health(request: Request) -> JSONResponse:
     with status_lock:
         current_status = init_status.copy()
 
-    # Add Python version and features to response
     current_status.update({"python_version": sys.version, "features": features})
 
     correlation_logger.info(
@@ -116,7 +106,6 @@ async def health(request: Request) -> JSONResponse:
 
 @app.get("/inventory")
 async def get_inventory(request: Request, src_path: str = "src") -> JSONResponse:
-    """Generate and return component inventory."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
     )
@@ -164,7 +153,6 @@ async def get_inventory(request: Request, src_path: str = "src") -> JSONResponse
 async def check_links(
     request: Request, workers: int = 10, timeout: int = 10
 ) -> JSONResponse:
-    """Check documentation links."""
     correlation_logger = logging_config.get_correlation_logger(
         request.state.correlation_id
     )
@@ -219,7 +207,6 @@ if __name__ == "__main__":
     if features["has_interpreters"]:
         print("🔄 Concurrent interpreters available")
 
-    # Start server
     uvicorn.run(
         "react_scuba_utils.api:app",
         host="0.0.0.0",

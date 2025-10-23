@@ -7,7 +7,7 @@ Python 3.14+ pathlib improvements.
 
 import sys
 from pathlib import Path
-from typing import Union
+from typing import Any
 
 
 class FileOperationsService:
@@ -18,7 +18,9 @@ class FileOperationsService:
     when available, with fallbacks for older Python versions.
     """
 
-    def copy_file(self, src: str | Path, dst: str | Path, follow_symlinks: bool = True) -> bool:
+    def copy_file(
+        self, src: str | Path, dst: str | Path, follow_symlinks: bool = True
+    ) -> bool:
         """
         Copy a file using pathlib's copy method (Python 3.14+).
 
@@ -36,11 +38,12 @@ class FileOperationsService:
         dst_path = Path(dst)
 
         try:
-            if hasattr(src_path, 'copy'):  # Python 3.14+
+            if hasattr(src_path, "copy"):  # Python 3.14+
                 src_path.copy(dst_path, follow_symlinks=follow_symlinks)
             else:
                 # Fallback to shutil
                 import shutil
+
                 shutil.copy2(src_path, dst_path, follow_symlinks=follow_symlinks)
             return True
         except Exception as e:
@@ -64,18 +67,21 @@ class FileOperationsService:
         dst_path = Path(dst)
 
         try:
-            if hasattr(src_path, 'move'):  # Python 3.14+
+            if hasattr(src_path, "move"):  # Python 3.14+
                 src_path.move(dst_path)
             else:
                 # Fallback to shutil
                 import shutil
+
                 shutil.move(src_path, dst_path)
             return True
         except Exception as e:
             print(f"Error moving {src_path} to {dst_path}: {e}", file=sys.stderr)
             return False
 
-    def create_directory(self, path: str | Path, parents: bool = True, exist_ok: bool = True) -> bool:
+    def create_directory(
+        self, path: str | Path, parents: bool = True, exist_ok: bool = True
+    ) -> bool:
         """
         Create a directory with pathlib.
 
@@ -110,7 +116,7 @@ class FileOperationsService:
         file_path = Path(path)
 
         try:
-            if hasattr(file_path, 'unlink'):  # Python 3.14+
+            if hasattr(file_path, "unlink"):  # Python 3.14+
                 file_path.unlink(missing_ok=missing_ok)
             else:
                 # Fallback for older versions
@@ -123,7 +129,7 @@ class FileOperationsService:
             print(f"Error removing {file_path}: {e}", file=sys.stderr)
             return False
 
-    def get_file_info(self, path: str | Path) -> dict:
+    def get_file_info(self, path: str | Path) -> dict[str, Any]:
         """
         Get comprehensive file information.
 
@@ -138,22 +144,22 @@ class FileOperationsService:
         try:
             stat = file_path.stat()
             return {
-                'path': str(file_path),
-                'name': file_path.name,
-                'stem': file_path.stem,
-                'suffix': file_path.suffix,
-                'size': stat.st_size,
-                'modified': stat.st_mtime,
-                'created': stat.st_ctime,
-                'exists': file_path.exists(),
-                'is_file': file_path.is_file(),
-                'is_dir': file_path.is_dir(),
-                'is_symlink': file_path.is_symlink(),
+                "path": str(file_path),
+                "name": file_path.name,
+                "stem": file_path.stem,
+                "suffix": file_path.suffix,
+                "size": stat.st_size,
+                "modified": stat.st_mtime,
+                "created": stat.st_ctime,
+                "exists": file_path.exists(),
+                "is_file": file_path.is_file(),
+                "is_dir": file_path.is_dir(),
+                "is_symlink": file_path.is_symlink(),
             }
         except Exception as e:
             print(f"Error getting info for {file_path}: {e}", file=sys.stderr)
             return {
-                'path': str(file_path),
-                'error': str(e),
-                'exists': False,
+                "path": str(file_path),
+                "error": str(e),
+                "exists": False,
             }

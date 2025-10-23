@@ -56,25 +56,17 @@ class LinkCheckerService:
         return list(docs_path.rglob("*.md"))
 
     def extract_links(self, file_path: Path) -> list[str]:
-        """
-        Extract all links from a markdown file.
-
-        Returns absolute URLs for both relative and external links.
-        """
         links = []
         try:
             content = file_path.read_text(encoding="utf-8")
 
-            # Extract markdown links [text](url)
             md_links = re.findall(r"\[([^\]]+)\]\(([^)]+)\)", content)
             for _, url in md_links:
                 if not url.startswith(("http://", "https://", "#")):
-                    # Convert relative links to absolute
                     links.append(urljoin(self.path_config.base_url, url))
                 else:
                     links.append(url)
 
-            # Extract HTML links
             html_links = re.findall(r'href=["\']([^"\']+)["\']', content)
             for url in html_links:
                 if url.startswith(("http://", "https://")):
@@ -83,17 +75,11 @@ class LinkCheckerService:
         except Exception as e:
             print(f"Error reading {file_path}: {e}", file=sys.stderr)
 
-        return list(set(links))  # Remove duplicates
+        return list(set(links))
 
     def check_links_concurrent(self) -> dict[str, list[str]]:
-        """
-        Check all links using concurrent execution.
-
-        Uses InterpreterPoolExecutor for true parallelism in Python 3.14+.
-        """
         results: dict[str, list[str]] = {"valid": [], "broken": [], "skipped": []}
 
-        # Find all markdown files and collect links
         md_files = self.find_markdown_files()
         all_links = set()
 
@@ -106,7 +92,6 @@ class LinkCheckerService:
         if not all_links:
             return results
 
-        # Choose execution strategy
         from concurrent.futures import ProcessPoolExecutor
 
         executor_class: type[ThreadPoolExecutor] | type[ProcessPoolExecutor]
@@ -117,7 +102,6 @@ class LinkCheckerService:
             print("⚡ Using ThreadPoolExecutor for concurrent execution")
             executor_class = ThreadPoolExecutor
 
-        # Check links concurrently
         with executor_class(max_workers=self.config.max_workers) as executor:
             futures = [
                 executor.submit(self._check_single_link, url) for url in all_links
@@ -138,15 +122,9 @@ class LinkCheckerService:
         return results
 
     def _check_single_link(self, url: str) -> LinkResult:
-        """
-        Check a single link with enhanced error handling.
-
-        Optimized for concurrent execution in free-threaded Python.
-        """
         start_time = time.time()
 
         try:
-            # Skip configured domains
             if any(skip_domain in url for skip_domain in self.config.skip_domains):
                 return LinkResult(
                     url=url,
@@ -155,7 +133,6 @@ class LinkCheckerService:
                     response_time=time.time() - start_time,
                 )
 
-            # Check if requests is available
             if not hasattr(self, "_requests_available"):
                 try:
                     import requests
@@ -163,7 +140,6 @@ class LinkCheckerService:
                     from urllib3.util.retry import Retry
 
                     self._requests_available = True
-                    # Create session with retry strategy
                     self._session = requests.Session()
                     retry_strategy = Retry(
                         total=self.http_config.max_retries,
@@ -190,12 +166,10 @@ class LinkCheckerService:
 
             session = self._session
 
-            # Use HEAD request for efficiency, fallback to GET if needed
             response = session.head(
                 url, timeout=self.config.timeout, allow_redirects=True
             )
 
-            # Some servers don't support HEAD, try GET for 405 responses
             if response.status_code == 405:
                 response = session.get(
                     url, timeout=self.config.timeout, allow_redirects=True
@@ -217,14 +191,8 @@ class LinkCheckerService:
             )
 
     async def async_check_links(self, urls: list[str]) -> dict[str, list[str]]:
-        """
-        Asynchronous link checking using asyncio.
-
-        Leverages free-threaded execution in Python 3.14+ for true parallelism.
-        """
         results: dict[str, list[str]] = {"valid": [], "broken": [], "skipped": []}
 
-        # Check if requests is available
         if not hasattr(self, "_requests_available"):
             try:
                 import requests
@@ -232,7 +200,6 @@ class LinkCheckerService:
                 from urllib3.util.retry import Retry
 
                 self._requests_available = True
-                # Create session with retry strategy
                 self._session = requests.Session()
                 retry_strategy = Retry(
                     total=self.http_config.max_retries,
@@ -267,7 +234,6 @@ class LinkCheckerService:
                     if session is None:
                         return url, False, "HTTP session not available"
 
-                    # Use asyncio.to_thread for I/O bound operations
                     response = await asyncio.to_thread(
                         session.head,
                         url,
@@ -275,7 +241,7 @@ class LinkCheckerService:
                         allow_redirects=True,
                     )
 
-                    if response.status_code == 405:  # HEAD not allowed
+                    if response.status_code == 405:
                         response = await asyncio.to_thread(
                             session.get,
                             url,
@@ -292,13 +258,11 @@ class LinkCheckerService:
                 except Exception as e:
                     return url, False, str(e)
 
-        # Create tasks for all URLs
         tasks = [check_single_url(url) for url in urls]
         completed_results: list[
             tuple[str, bool, str] | BaseException
         ] = await asyncio.gather(*tasks, return_exceptions=True)
 
-        # Process results
         for result in completed_results:
             if isinstance(result, BaseException):
                 print(f"Async task error: {result}", file=sys.stderr)

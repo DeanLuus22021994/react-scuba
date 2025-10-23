@@ -121,8 +121,6 @@ class PathConfig(BaseModel):
     @field_validator("docs_path", "src_path")
     @classmethod
     def validate_path_exists(cls, v: Path) -> Path:
-        """Validate that paths exist when possible."""
-        # Only validate if we're not in a container build context
         if not os.getenv("DOCKER_BUILDKIT"):
             if not v.exists():
                 raise ValueError(f"Path does not exist: {v}")
@@ -147,16 +145,11 @@ class LoggingConfig(BaseModel):
     log_file_path: Path | None = Field(default=None, description="Log file path")
 
     def configure_logging(self) -> None:
-        """Configure the logging system based on this configuration."""
-        import logging
         import sys
 
-        # Set logging level
         level = getattr(logging, self.level.value)
 
-        # Configure basic logging
         if self.format == "json":
-            # Use structlog for JSON formatting if available
             try:
                 import structlog
 
@@ -183,7 +176,6 @@ class LoggingConfig(BaseModel):
                     level=level,
                 )
             except ImportError:
-                # Fallback to basic JSON-like formatting
                 logging.basicConfig(
                     level=level,
                     format=(
@@ -366,11 +358,9 @@ class ApplicationConfig(BaseSettings):
         }
 
     def __init__(self, **data: Any) -> None:
-        # Set default services if not provided
         if "services" not in data:
             data["services"] = self.create_default_services()
 
-        # Set database config from environment if not provided
         if "database" not in data:
             data["database"] = {
                 "host": os.getenv("POSTGRES_HOST", "localhost"),
@@ -385,9 +375,7 @@ class ApplicationConfig(BaseSettings):
     @field_validator("environment")
     @classmethod
     def validate_environment_settings(cls, v: Environment) -> Environment:
-        """Validate environment-specific settings."""
         if v == Environment.PRODUCTION:
-            # In production, ensure debug is False
             if os.getenv("REACT_SCUBA__DEBUG", "").lower() in ("true", "1"):
                 raise ValueError("Debug mode cannot be enabled in production")
         return v
@@ -401,21 +389,17 @@ class ApplicationConfig(BaseSettings):
         """Validate the entire configuration and return any issues."""
         issues = []
 
-        # Check database connectivity (if in appropriate environment)
         if self.environment != Environment.DEVELOPMENT:
             try:
-                # This would be a real connectivity check in production
                 pass
             except Exception as e:
                 issues.append(f"Database connectivity issue: {e}")
 
-        # Check required paths exist
         try:
             self.paths.docs_path.exists()
         except Exception:
             issues.append(f"Docs path does not exist: {self.paths.docs_path}")
 
-        # Check service configurations
         for name, service in self.services.items():
             if not service.name:
                 issues.append(f"Service {name} has no name configured")

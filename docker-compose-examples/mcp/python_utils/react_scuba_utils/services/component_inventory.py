@@ -55,8 +55,6 @@ class ComponentInventoryService:
         return components
 
     def _find_component_files(self, src_path: Path) -> list[Path]:
-        """Find all component files based on configured extensions."""
-        # Find component files with multiple extensions
         extensions = ["*.jsx", "*.js", "*.tsx", "*.ts"]
         component_files: list[Path] = []
         for ext in extensions:
@@ -64,20 +62,13 @@ class ComponentInventoryService:
         return component_files
 
     def _analyze_component_file(self, file_path: Path) -> ComponentInfo | None:
-        """
-        Analyze a single component file and extract metadata.
-
-        Returns ComponentInfo if the file contains valid component code.
-        """
         try:
             content = file_path.read_text(encoding="utf-8")
             size_bytes = file_path.stat().st_size
 
-            # Determine category
             relative_path = file_path.relative_to(self.path_config.src_path)
             category = self._determine_category(str(relative_path))
 
-            # Extract component information
             component_info = self._extract_component_info(content, file_path, category)
             if component_info:
                 component_info.size_bytes = size_bytes
@@ -104,29 +95,24 @@ class ComponentInventoryService:
     def _extract_component_info(
         self, content: str, file_path: Path, category: str
     ) -> ComponentInfo | None:
-        """Extract comprehensive component information from source code."""
-        # Extract component name
         component_name = self._extract_component_name(content, file_path.name)
         if not component_name:
             return None
 
-        # Extract exports and imports
         exports = self._extract_exports(content)
         imports = self._extract_imports(content)
 
         return ComponentInfo(
             name=component_name,
-            file=str(file_path.relative_to(file_path.parents[2])),  # Relative to src
+            file=str(file_path.relative_to(file_path.parents[2])),
             path=str(file_path),
             category=category,
             exports=exports,
             imports=imports,
-            size_bytes=0,  # Will be set by caller
+            size_bytes=0,
         )
 
     def _extract_component_name(self, content: str, filename: str) -> str | None:
-        """Extract component name using various export patterns."""
-        # Try different export patterns
         patterns = [
             r"export default (\w+)",
             r"export \{ default as (\w+) \}",
@@ -139,7 +125,6 @@ class ComponentInventoryService:
             if match:
                 return match.group(1)
 
-        # Fallback to filename
         return (
             filename.replace(".jsx", "")
             .replace(".js", "")
@@ -148,34 +133,27 @@ class ComponentInventoryService:
         )
 
     def _extract_exports(self, content: str) -> list[str]:
-        """Extract all exports from the file."""
         exports = []
 
-        # Named exports
         named_exports = re.findall(
             r"export (?:const|function|class|let|var) (\w+)", content
         )
         exports.extend(named_exports)
 
-        # Export statements with potential aliases
         export_statements = re.findall(r"export \{([^}]+)\}", content)
         for statement in export_statements:
-            # Handle aliases like "Component as Comp"
             items = [item.split(" as ")[0].strip() for item in statement.split(",")]
             exports.extend(items)
 
-        return list(set(exports))  # Remove duplicates
+        return list(set(exports))
 
     def _extract_imports(self, content: str) -> list[str]:
-        """Extract all imports from the file."""
         imports = []
 
-        # ES6 imports
         es6_imports = re.findall(r'import .* from ["\']([^"\']+)["\']', content)
         imports.extend(es6_imports)
 
-        # CommonJS requires
         cjs_imports = re.findall(r'require\(["\']([^"\']+)["\']', content)
         imports.extend(cjs_imports)
 
-        return list(set(imports))  # Remove duplicates
+        return list(set(imports))
