@@ -101,12 +101,12 @@ export default defineConfig({
   // Server configuration
   server: {
     host: '0.0.0.0',
-    port: 3000,
-    strictPort: true,
+    port: 3001,
+    strictPort: false,
     open: false,
     cors: true,
     hmr: {
-      clientPort: 3000,
+      clientPort: 3001,
     },
   },
   preview: {
