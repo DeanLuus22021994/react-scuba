@@ -1,17 +1,10 @@
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react({
-      // Enable Fast Refresh
-      fastRefresh: true,
-      // Use automatic JSX runtime
-      jsxRuntime: 'automatic',
-    }),
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -36,6 +29,14 @@ export default defineConfig({
           // React Router
           if (id.includes('node_modules/react-router')) {
             return 'router';
+          }
+          // TanStack Query
+          if (id.includes('node_modules/@tanstack/react-query')) {
+            return 'query';
+          }
+          // Zustand
+          if (id.includes('node_modules/zustand')) {
+            return 'zustand';
           }
           // UI libraries
           if (id.includes('node_modules/@headlessui') || id.includes('node_modules/@heroicons')) {
@@ -88,7 +89,7 @@ export default defineConfig({
   },
   // Optimize dependencies
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
+    include: ['react', 'react-dom', 'react-router-dom', '@tanstack/react-query', 'zustand'],
   },
   test: {
     globals: true,

@@ -14,6 +14,7 @@ import ScrollProgress from './components/shared/ScrollProgress';
 
 // Context Providers
 import { CurrencyProvider } from './hooks/useCurrency';
+import { QueryProvider } from './providers/QueryProvider';
 
 // Utilities
 import { initScrollReveal } from './utils/scrollToAnchor';
@@ -32,44 +33,46 @@ function App() {
   }, []);
 
   return (
-    <CurrencyProvider>
-      <Router>
-        <div className="App min-h-screen flex flex-col">
-          <ScrollProgress />
-          <Header />
-          <main className="flex-grow">
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/dive-sites" element={<DiveSitesPage />} />
-                <Route path="/courses" element={<CoursesPage />} />
-                <Route path="/gallery" element={<GalleryPage />} />
-              </Routes>
-            </Suspense>
-          </main>
-          <Footer />
-          <BackToTop showAfter={400} position="right" />
-          <WhatsAppWidget />
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: '#fff',
-                color: '#1f2937',
-              },
-              success: {
-                iconTheme: {
-                  primary: '#0e7490',
-                  secondary: '#fff',
+    <QueryProvider>
+      <CurrencyProvider>
+        <Router>
+          <div className="App min-h-screen flex flex-col">
+            <ScrollProgress />
+            <Header />
+            <main className="flex-grow">
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/dive-sites" element={<DiveSitesPage />} />
+                  <Route path="/courses" element={<CoursesPage />} />
+                  <Route path="/gallery" element={<GalleryPage />} />
+                </Routes>
+              </Suspense>
+            </main>
+            <Footer />
+            <BackToTop showAfter={400} position="right" />
+            <WhatsAppWidget />
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  background: '#fff',
+                  color: '#1f2937',
                 },
-              },
-            }}
-          />
-        </div>
-      </Router>
-    </CurrencyProvider>
+                success: {
+                  iconTheme: {
+                    primary: '#0e7490',
+                    secondary: '#fff',
+                  },
+                },
+              }}
+            />
+          </div>
+        </Router>
+      </CurrencyProvider>
+    </QueryProvider>
   );
 }
 
