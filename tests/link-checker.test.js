@@ -136,12 +136,8 @@ function validateLink(link) {
   ];
 
   // Check if it's an allowed placeholder
-  const urlPart = url.split('#')[0];
-  if (
-    allowedPlaceholders.some(
-      (placeholder) => urlPart === placeholder || urlPart.endsWith(placeholder)
-    )
-  ) {
+  const [urlPart] = url.split('#');
+  if (allowedPlaceholders.some((placeholder) => urlPart === placeholder || urlPart.endsWith(placeholder))) {
     return errors; // Skip validation for planned documentation pages
   }
 
@@ -166,8 +162,8 @@ function validateLink(link) {
   if (!fs.existsSync(targetPath)) {
     // Try with .md extension if not already present
     if (!targetPath.endsWith('.md') && !targetPath.endsWith('.html')) {
-      const mdPath = targetPath + '.md';
-      const htmlPath = targetPath + '.html';
+      const mdPath = `${targetPath}.md`;
+      const htmlPath = `${targetPath}.html`;
 
       if (!fs.existsSync(mdPath) && !fs.existsSync(htmlPath)) {
         // Check if it's a directory with index.md
@@ -219,7 +215,7 @@ describe('Link Checker', () => {
       const errorMessage = allErrors
         .map(
           (err) =>
-            `\n  File: ${path.relative(rootDir, err.file)}\n  Line: ${err.line}\n  Link: [${err.text}](${err.url})\n  Error: ${err.error}`
+            `\n  File: ${path.relative(rootDir, err.file)}\n  Line: ${err.line}\n  Link: [${err.text}](${err.url})\n  Error: ${err.error}`,
         )
         .join('\n');
 
@@ -242,9 +238,7 @@ describe('Link Checker', () => {
 
     if (allErrors.length > 0) {
       const errorMessage = allErrors
-        .map(
-          (err) => `\n  Line: ${err.line}\n  Link: [${err.text}](${err.url})\n  Error: ${err.error}`
-        )
+        .map((err) => `\n  Line: ${err.line}\n  Link: [${err.text}](${err.url})\n  Error: ${err.error}`)
         .join('\n');
 
       expect.fail(`Found ${allErrors.length} broken link(s) in README.md:${errorMessage}`);

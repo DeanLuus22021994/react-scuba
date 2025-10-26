@@ -49,10 +49,14 @@ export default class ModularTestReporter {
       const html = htmlGenerator.generate(performanceAnalyzer, categoryAnalyzer);
       writeFileSync(join(outputDir, 'index.html'), html);
 
+      // eslint-disable-next-line no-console
       console.info(`\n✅ Test reports generated in ${outputDir}/`);
-      console.info(`   📊 HTML Dashboard: index.html`);
-      console.info(`   📝 Markdown Summary: testing.md`);
-      console.info(`   📋 JSON Data: test-results.json\n`);
+      // eslint-disable-next-line no-console
+      console.info('   📊 HTML Dashboard: index.html');
+      // eslint-disable-next-line no-console
+      console.info('   📝 Markdown Summary: testing.md');
+      // eslint-disable-next-line no-console
+      console.info('   📋 JSON Data: test-results.json\n');
     } catch (error) {
       console.error('Failed to generate test reports:', error);
     }

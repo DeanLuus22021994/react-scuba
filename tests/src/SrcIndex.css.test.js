@@ -6,7 +6,7 @@ describe('index.css', () => {
     expect(true).toBe(true);
   });
 
-  it('should be importable', async () => {
+  it('should be importable', () => {
     // CSS files are handled by Vite, so we just verify the module system works
     expect(() => {
       // In a Vite test environment, CSS imports are transformed

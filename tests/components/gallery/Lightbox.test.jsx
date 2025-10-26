@@ -26,21 +26,21 @@ describe('Lightbox', () => {
         isOpen={false}
         onClose={mockOnClose}
         onNavigate={mockOnNavigate}
-      />
+      />,
     );
     expect(screen.queryByText(mockImage.title)).not.toBeInTheDocument();
   });
 
   it('should render when open', () => {
     render(
-      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+      <Lightbox image={mockImage} isOpen onClose={mockOnClose} onNavigate={mockOnNavigate} />,
     );
     expect(screen.getByText(mockImage.title)).toBeInTheDocument();
   });
 
   it('should display image details', () => {
     render(
-      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+      <Lightbox image={mockImage} isOpen onClose={mockOnClose} onNavigate={mockOnNavigate} />,
     );
     expect(screen.getByText(mockImage.title)).toBeInTheDocument();
     expect(screen.getByText(mockImage.description)).toBeInTheDocument();
@@ -50,7 +50,7 @@ describe('Lightbox', () => {
   it('should call onClose when close button clicked', async () => {
     const user = userEvent.setup();
     render(
-      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+      <Lightbox image={mockImage} isOpen onClose={mockOnClose} onNavigate={mockOnNavigate} />,
     );
 
     const closeButton = screen.getByLabelText('Close lightbox');
@@ -62,7 +62,7 @@ describe('Lightbox', () => {
   it('should call onNavigate with prev when previous button clicked', async () => {
     const user = userEvent.setup();
     render(
-      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+      <Lightbox image={mockImage} isOpen onClose={mockOnClose} onNavigate={mockOnNavigate} />,
     );
 
     const prevButton = screen.getByLabelText('Previous image');
@@ -74,7 +74,7 @@ describe('Lightbox', () => {
   it('should call onNavigate with next when next button clicked', async () => {
     const user = userEvent.setup();
     render(
-      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+      <Lightbox image={mockImage} isOpen onClose={mockOnClose} onNavigate={mockOnNavigate} />,
     );
 
     const nextButton = screen.getByLabelText('Next image');
@@ -85,7 +85,7 @@ describe('Lightbox', () => {
 
   it('should render image element', () => {
     render(
-      <Lightbox image={mockImage} isOpen={true} onClose={mockOnClose} onNavigate={mockOnNavigate} />
+      <Lightbox image={mockImage} isOpen onClose={mockOnClose} onNavigate={mockOnNavigate} />,
     );
     const img = screen.getByAltText(mockImage.title);
     expect(img).toHaveAttribute('src', mockImage.url);

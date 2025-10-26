@@ -44,7 +44,7 @@ describe('WhatsAppButton', () => {
     const link = screen.getByRole('link');
     expect(link).toHaveAttribute(
       'href',
-      expect.stringContaining(encodeURIComponent(customMessage))
+      expect.stringContaining(encodeURIComponent(customMessage)),
     );
   });
 

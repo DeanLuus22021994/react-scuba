@@ -20,7 +20,7 @@ describe('ErrorBoundary', () => {
     render(
       <ErrorBoundary>
         <div>Test content</div>
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
     expect(screen.getByText('Test content')).toBeInTheDocument();
   });
@@ -30,8 +30,8 @@ describe('ErrorBoundary', () => {
 
     render(
       <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+        <ThrowError shouldThrow />
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
@@ -43,8 +43,8 @@ describe('ErrorBoundary', () => {
 
     render(
       <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+        <ThrowError shouldThrow />
+      </ErrorBoundary>,
     );
 
     expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
@@ -57,8 +57,8 @@ describe('ErrorBoundary', () => {
 
     const { rerender } = render(
       <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+        <ThrowError shouldThrow />
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe('ErrorBoundary', () => {
     rerender(
       <ErrorBoundary>
         <ThrowError shouldThrow={false} />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     consoleError.mockRestore();
@@ -81,8 +81,8 @@ describe('ErrorBoundary', () => {
 
     render(
       <ErrorBoundary fallback={customFallback}>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+        <ThrowError shouldThrow />
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText('Custom error message')).toBeInTheDocument();

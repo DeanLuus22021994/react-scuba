@@ -1,10 +1,9 @@
+import GalleryGrid from '@/components/gallery/GalleryGrid';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import GalleryGrid from '@/components/gallery/GalleryGrid';
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
   observe() {}
   unobserve() {}
   disconnect() {}
@@ -59,9 +58,7 @@ describe('GalleryGrid', () => {
   });
 
   it('should have grid layout classes', () => {
-    const { container } = render(
-      <GalleryGrid images={mockImages} onImageClick={mockOnImageClick} />
-    );
+    const { container } = render(<GalleryGrid images={mockImages} onImageClick={mockOnImageClick} />);
     const grid = container.firstChild;
     expect(grid).toHaveClass('grid');
   });

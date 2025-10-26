@@ -1,8 +1,8 @@
+import CurrencySelector from '@/components/common/CurrencySelector';
+import { CurrencyProvider } from '@/hooks/useCurrency';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import CurrencySelector from '@/components/common/CurrencySelector';
-import { CurrencyProvider } from '@/hooks/useCurrency';
 
 describe('CurrencySelector', () => {
   const renderWithProvider = (component) => {
@@ -59,13 +59,11 @@ describe('CurrencySelector', () => {
     await user.click(button);
 
     await waitFor(() => {
-      const eurOption = screen.getAllByText('EUR')[0];
+      const [eurOption] = screen.getAllByText('EUR');
       return eurOption;
     });
 
-    const eurButtons = screen
-      .getAllByRole('button')
-      .filter((btn) => btn.textContent.includes('EUR'));
+    const eurButtons = screen.getAllByRole('button').filter((btn) => btn.textContent.includes('EUR'));
     if (eurButtons.length > 1) {
       await user.click(eurButtons[1]);
     }

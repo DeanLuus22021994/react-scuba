@@ -9,7 +9,7 @@ describe('Navigation', () => {
     return render(
       <CurrencyProvider>
         <BrowserRouter>{component}</BrowserRouter>
-      </CurrencyProvider>
+      </CurrencyProvider>,
     );
   };
 

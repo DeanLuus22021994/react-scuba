@@ -9,7 +9,7 @@ describe('Header', () => {
     return render(
       <CurrencyProvider>
         <BrowserRouter>{component}</BrowserRouter>
-      </CurrencyProvider>
+      </CurrencyProvider>,
     );
   };
 

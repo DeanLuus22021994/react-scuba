@@ -17,7 +17,7 @@ describe('ContactModal', () => {
   const mockOnClose = vi.fn();
 
   it('should render when open', () => {
-    render(<ContactModal isOpen={true} onClose={mockOnClose} />);
+    render(<ContactModal isOpen onClose={mockOnClose} />);
     expect(screen.getByText(/Contact Us/i)).toBeInTheDocument();
   });
 
@@ -27,14 +27,14 @@ describe('ContactModal', () => {
   });
 
   it('should display form fields', () => {
-    render(<ContactModal isOpen={true} onClose={mockOnClose} />);
+    render(<ContactModal isOpen onClose={mockOnClose} />);
     expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Message/i)).toBeInTheDocument();
   });
 
   it('should have submit button', () => {
-    render(<ContactModal isOpen={true} onClose={mockOnClose} />);
+    render(<ContactModal isOpen onClose={mockOnClose} />);
     expect(screen.getByRole('button', { name: /Send Message/i })).toBeInTheDocument();
   });
 });

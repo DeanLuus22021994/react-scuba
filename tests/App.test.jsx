@@ -8,7 +8,7 @@ describe('App', () => {
     return render(
       <HelmetProvider>
         <App />
-      </HelmetProvider>
+      </HelmetProvider>,
     );
   };
 

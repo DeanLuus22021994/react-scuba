@@ -65,7 +65,7 @@ export class DataCollector {
    * Get relative file path
    */
   getRelativePath(filepath) {
-    return filepath.replace(process.cwd() + '/', '');
+    return filepath.replace(`${process.cwd()  }/`, '');
   }
 
   /**
@@ -74,7 +74,7 @@ export class DataCollector {
   getStatistics() {
     const totalFiles = this.testFiles.size;
     const passedFiles = Array.from(this.testFiles.values()).filter(
-      (f) => f.failed.length === 0
+      (f) => f.failed.length === 0,
     ).length;
     const failedFiles = totalFiles - passedFiles;
 

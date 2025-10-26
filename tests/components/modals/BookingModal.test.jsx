@@ -23,7 +23,7 @@ describe('BookingModal', () => {
   };
 
   it('should render when open', async () => {
-    renderWithProvider(<BookingModal isOpen={true} onClose={mockOnClose} />);
+    renderWithProvider(<BookingModal isOpen onClose={mockOnClose} />);
     await waitFor(() => {
       expect(screen.getByText(/Book a Dive/i)).toBeInTheDocument();
     });
@@ -35,7 +35,7 @@ describe('BookingModal', () => {
   });
 
   it('should display booking type options', async () => {
-    renderWithProvider(<BookingModal isOpen={true} onClose={mockOnClose} bookingType="dive" />);
+    renderWithProvider(<BookingModal isOpen onClose={mockOnClose} bookingType="dive" />);
     await waitFor(() => {
       expect(screen.getByText(/Single Dive/i)).toBeInTheDocument();
     });
@@ -44,7 +44,7 @@ describe('BookingModal', () => {
   it('should accept preSelectedItem prop', async () => {
     const preSelected = 'single-dive';
     renderWithProvider(
-      <BookingModal isOpen={true} onClose={mockOnClose} preSelectedItem={preSelected} />
+      <BookingModal isOpen onClose={mockOnClose} preSelectedItem={preSelected} />,
     );
     await waitFor(() => {
       expect(screen.getByText(/Book a Dive/i)).toBeInTheDocument();

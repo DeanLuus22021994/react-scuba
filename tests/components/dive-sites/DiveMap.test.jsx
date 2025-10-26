@@ -30,7 +30,7 @@ describe('DiveMap', () => {
       coordinates: [-20.2833, 57.5833],
     };
     const { container } = render(
-      <DiveMap selectedSite={selectedSite} onMarkerClick={mockOnMarkerClick} />
+      <DiveMap selectedSite={selectedSite} onMarkerClick={mockOnMarkerClick} />,
     );
     expect(container).toBeInTheDocument();
   });

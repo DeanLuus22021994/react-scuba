@@ -15,7 +15,7 @@ describe('MainLayout', () => {
             </Route>
           </Routes>
         </MemoryRouter>
-      </CurrencyProvider>
+      </CurrencyProvider>,
     );
   };
 
