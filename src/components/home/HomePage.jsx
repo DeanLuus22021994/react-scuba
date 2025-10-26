@@ -7,6 +7,7 @@ import CTASection from './CTASection';
 import FeaturesSection from './FeaturesSection';
 import HeroSection from './HeroSection';
 import ServicesSection from './ServicesSection';
+import SpecialOffersSection from './SpecialOffersSection';
 import TestimonialsSection from './TestimonialsSection';
 import VideoSection from './VideoSection';
 
@@ -29,6 +30,7 @@ const HomePage = () => {
       <SEO page="home" />
       <HeroSection onBookClick={handleBookClick} />
       <FeaturesSection />
+      <SpecialOffersSection />
       <ServicesSection />
       <VideoSection />
       <TestimonialsSection />

@@ -11,12 +11,18 @@ export const DIVE_SITES = [
     depth: '15-40m',
     visibility: 'Excellent (25-35m)',
     difficulty: 'Advanced',
-    marineLife: ['Barracudas', 'Tuna', 'Dolphins', 'Manta rays', 'Whale sharks (seasonal)', 'Sharks'],
+    marineLife: ['Barracudas', 'Tuna', 'Dolphins', 'Manta rays', 'Whale sharks (seasonal)', 'Sharks', 'Pelagic fish'],
     description:
-      "An iconic island off the north coast with dramatic walls and pelagic action. Part of Ocean Spirit's Best of the North 10 dive package. One of Mauritius's most spectacular dive sites.",
+      "An iconic island off the north coast with dramatic walls and pelagic action. Part of Ocean Spirit's Best of the North 10 dive package. One of Mauritius's most spectacular dive sites featuring dramatic underwater topography and big fish encounters.",
     bestSeason: 'October to April',
     image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
-    highlights: ['2 dive Safari destination', 'Big fish encounters', 'Drift diving opportunities', 'Dramatic underwater topography'],
+    highlights: [
+      '2 dive Safari destination',
+      'Big fish encounters',
+      'Drift diving opportunities',
+      'Dramatic underwater topography',
+      'Excellent visibility',
+    ],
   },
   {
     id: 'trou-aux-biches',
@@ -25,12 +31,12 @@ export const DIVE_SITES = [
     depth: '10-25m',
     visibility: 'Very Good (18-25m)',
     difficulty: 'Beginner to Intermediate',
-    marineLife: ['Sea turtles', 'Parrotfish', 'Butterflyfish', 'Moray eels', 'Coral gardens', 'Reef fish'],
+    marineLife: ['Sea turtles', 'Parrotfish', 'Butterflyfish', 'Moray eels', 'Coral gardens', 'Reef fish', 'Clownfish'],
     description:
-      'Beautiful dive site in Northern Mauritius with healthy coral reefs. Part of the Best of the North package. Popular for turtle encounters.',
+      'Beautiful dive site in Northern Mauritius with healthy coral reefs. Part of the Best of the North package. Popular for turtle encounters and perfect for all skill levels with warm water and excellent visibility.',
     bestSeason: 'Year-round',
     image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
-    highlights: ['Turtle diving', 'Shallow coral reef', 'Part of Best of North package', 'Great for all levels'],
+    highlights: ['Turtle diving', 'Shallow coral reef', 'Part of Best of North package', 'Great for all levels', 'Healthy coral gardens'],
   },
   {
     id: 'djabeda-wreck',
