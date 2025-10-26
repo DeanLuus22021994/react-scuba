@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 
 const FEATURES = [
   {
-    title: 'PADI 5 Star Certified',
-    description: 'Highest quality training standards',
+    title: 'PADI 5 Star ECO',
+    description: 'Green Fins with Green Star',
     stat: '5★',
   },
   {
-    title: 'Years of Experience',
-    description: 'Established dive center since 2013',
-    stat: '10+',
+    title: 'Dive Sites',
+    description: 'Around Northern Mauritius',
+    stat: '65',
   },
   {
-    title: 'Successful Dives',
-    description: 'Safe and memorable experiences',
-    stat: '5000+',
+    title: 'Own Facility',
+    description: 'Opened March 2020',
+    stat: '2020',
   },
   {
-    title: 'Perfect Safety Record',
-    description: 'Zero major incidents',
-    stat: '100%',
+    title: 'Coffee Shop',
+    description: 'Breakfast Bar & Ocean Views',
+    stat: '☕',
   },
 ];
 

@@ -10,17 +10,17 @@
     <div class="container">
         <header>
             <h1>🧪 Test Results Dashboard</h1>
-            <p class="timestamp">Generated: 2025/10/26, 22:46:41</p>
+            <p class="timestamp">Generated: 2025/10/26, 22:49:26</p>
         </header>
 
         
         <div class="summary-cards">
-            <div class="card success">
-                <div class="card-icon">✅</div>
+            <div class="card warning">
+                <div class="card-icon">⚠️</div>
                 <div class="card-content">
-                    <div class="card-value">100.0%</div>
+                    <div class="card-value">75.0%</div>
                     <div class="card-label">Pass Rate</div>
-                    <div class="card-detail">4/4 tests</div>
+                    <div class="card-detail">3/4 tests</div>
                 </div>
             </div>
 
@@ -29,16 +29,16 @@
                 <div class="card-content">
                     <div class="card-value">1</div>
                     <div class="card-label">Test Files</div>
-                    <div class="card-detail">100.0% passing</div>
+                    <div class="card-detail">0.0% passing</div>
                 </div>
             </div>
 
-            <div class="card success">
-                <div class="card-icon">🎉</div>
+            <div class="card error">
+                <div class="card-icon">❌</div>
                 <div class="card-content">
-                    <div class="card-value">0</div>
+                    <div class="card-value">1</div>
                     <div class="card-label">Failures</div>
-                    <div class="card-detail">0 files affected</div>
+                    <div class="card-detail">1 files affected</div>
                 </div>
             </div>
         </div>
@@ -70,11 +70,11 @@
         <div class="performance-section">
             <div class="metric-cards">
                 <div class="metric-card">
-                    <div class="metric-value">0.05s</div>
+                    <div class="metric-value">0.07s</div>
                     <div class="metric-label">Total Duration</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">11.26ms</div>
+                    <div class="metric-value">18.63ms</div>
                     <div class="metric-label">Avg Test Duration</div>
                 </div>
             </div>
@@ -95,19 +95,19 @@
                                 <tr>
                                     <td class="truncate">should validate all links in documentation</td>
                                     <td class="truncate">link-checker.test.js</td>
-                                    <td>36ms</td>
+                                    <td>55ms</td>
                                 </tr>
                             
                                 <tr>
                                     <td class="truncate">should find all markdown files</td>
                                     <td class="truncate">link-checker.test.js</td>
-                                    <td>7ms</td>
+                                    <td>14ms</td>
                                 </tr>
                             
                                 <tr>
                                     <td class="truncate">should validate all links in README.md</td>
                                     <td class="truncate">link-checker.test.js</td>
-                                    <td>1ms</td>
+                                    <td>4ms</td>
                                 </tr>
                             
                                 <tr>
@@ -134,7 +134,7 @@
                                 <tr>
                                     <td class="truncate">link-checker.test.js</td>
                                     <td>4</td>
-                                    <td>47ms</td>
+                                    <td>78ms</td>
                                 </tr>
                             
                         </tbody>
@@ -165,12 +165,12 @@
                             <td>4</td>
                             <td>
                                 <div class="progress-bar">
-                                    <div class="progress-fill" data-width="100%"></div>
-                                    <span class="progress-text">100.0%</span>
+                                    <div class="progress-fill" data-width="75%"></div>
+                                    <span class="progress-text">75.0%</span>
                                 </div>
                             </td>
-                            <td>47ms</td>
-                            <td>✅</td>
+                            <td>78ms</td>
+                            <td>❌ 1 failed</td>
                         </tr>
                     
                 </tbody>
@@ -196,13 +196,13 @@
                 </thead>
                 <tbody>
                     
-                        <tr class="">
+                        <tr class="failed">
                             <td class="truncate" title="C:/react_scuba_runner/react-scuba/tests/link-checker.test.js">C:/react_scuba_runner/react-scuba/tests/link-checker.test.js</td>
                             <td>4</td>
-                            <td class="success-text">4</td>
-                            <td class="error-text">0</td>
-                            <td>47ms</td>
-                            <td>✅ Pass</td>
+                            <td class="success-text">3</td>
+                            <td class="error-text">1</td>
+                            <td>78ms</td>
+                            <td>❌ Fail</td>
                         </tr>
                     
                 </tbody>
@@ -214,7 +214,7 @@
     </div>
 
     <script>
-        const testData = {"summary":{"totalFiles":1,"passedFiles":1,"failedFiles":0,"totalTests":4,"passedTests":4,"failedTests":0,"files":{}},"performance":{"metrics":{"totalDuration":45.02059999999983,"avgDuration":11.255149999999958,"testCount":4},"slowestTests":[{"name":"should validate all links in documentation","duration":36.098099999999704,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should find all markdown files","duration":6.8297999999999774,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should validate all links in README.md","duration":1.2550000000001091,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should detect common link issues","duration":0.8377000000000407,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"}],"slowestFiles":[{"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js","duration":46.51000000000022,"testCount":4}],"distribution":[{"label":"< 10ms","min":0,"max":10,"count":3},{"label":"10-50ms","min":10,"max":50,"count":1},{"label":"50-100ms","min":50,"max":100,"count":0},{"label":"100-500ms","min":100,"max":500,"count":0},{"label":"> 500ms","min":500,"max":null,"count":0}]},"categories":[{"category":"tests","fileCount":1,"totalTests":4,"passedTests":4,"failedTests":0,"totalDuration":46.51000000000022,"passRate":100}],"runTime":"2025-10-26T20:46:41.648Z"};
+        const testData = {"summary":{"totalFiles":1,"passedFiles":0,"failedFiles":1,"totalTests":4,"passedTests":3,"failedTests":1,"files":{}},"performance":{"metrics":{"totalDuration":74.5098999999991,"avgDuration":18.627474999999777,"testCount":4},"slowestTests":[{"name":"should validate all links in documentation","duration":55.18529999999964,"state":"fail","errors":[{"message":"Found 2 broken link(s) in documentation:\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 24\n  Link: [SUBMODULE_EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 108\n  Link: [EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md","actual":"undefined","expected":"undefined","name":"AssertionError","ok":false,"stack":"AssertionError: Found 2 broken link(s) in documentation:\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 24\n  Link: [SUBMODULE_EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 108\n  Link: [EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n    at C:\\react_scuba_runner\\react-scuba\\tests\\link-checker.test.js:226:14\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)","stacks":[{"method":"","file":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js","line":226,"column":14}]}],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should find all markdown files","duration":14.19439999999986,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should validate all links in README.md","duration":3.784599999999955,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"},{"name":"should detect common link issues","duration":1.3455999999996493,"state":"pass","errors":[],"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"}],"slowestFiles":[{"fileName":"C:/react_scuba_runner/react-scuba/tests/link-checker.test.js","duration":77.58859999999959,"testCount":4}],"distribution":[{"label":"< 10ms","min":0,"max":10,"count":2},{"label":"10-50ms","min":10,"max":50,"count":1},{"label":"50-100ms","min":50,"max":100,"count":1},{"label":"100-500ms","min":100,"max":500,"count":0},{"label":"> 500ms","min":500,"max":null,"count":0}]},"categories":[{"category":"tests","fileCount":1,"totalTests":4,"passedTests":3,"failedTests":1,"totalDuration":77.58859999999959,"passRate":75}],"runTime":"2025-10-26T20:49:26.970Z"};
 
         // Tab switching
         document.querySelectorAll('.tab-button').forEach(button => {

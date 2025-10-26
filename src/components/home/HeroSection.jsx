@@ -32,8 +32,8 @@ const HeroSection = ({ onBookClick }) => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-ocean-50"
         >
-          PADI 5 Star ECO Green Fins Dive Centre in Pereybere. Explore 65 dive sites, wreck diving, turtle diving, shark diving, and
-          exquisite coral reefs in warm crystal-clear waters.
+          From the day you arrive, you are among friends. PADI 5 Star ECO Green Fins Dive Centre with a Green Star in Pereybere. Explore 65
+          dive sites around Northern Mauritius - wreck diving, turtle diving, shark diving, and exquisite healthy coral reefs.
         </motion.p>
 
         <motion.div

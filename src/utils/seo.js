@@ -1,48 +1,56 @@
 // SEO utilities and structured data
 
 export const generateLocalBusinessSchema = () => {
-  const phoneNumber = import.meta.env.VITE_PHONE_NUMBER || '+230XXXXXXXX';
-  const email = import.meta.env.VITE_EMAIL || 'info@mauritiusscuba.com';
+  const phoneNumber = import.meta.env.VITE_PHONE_NUMBER || '+2302634468';
+  const email = import.meta.env.VITE_EMAIL || 'info@osdiving.com';
 
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://www.mauritiusscuba.com',
-    name: 'Mauritius Scuba Diving Center',
+    '@id': 'https://www.osdiving.com',
+    name: 'Ocean Spirit Scuba Diving Mauritius',
     description:
-      'Professional scuba diving center in Mauritius offering PADI courses, guided dives, and unforgettable underwater experiences in the crystal-clear waters of the Indian Ocean.',
-    image: 'https://www.mauritiusscuba.com/images/logo.jpg',
-    url: 'https://www.mauritiusscuba.com',
+      'PADI 5 Star ECO Green Fins Scuba Diving Centre with a Green Star. Friendly, sociable dive center with comfortable club-like facilities offering professional diving courses and guided dives in Pereybere, Northern Mauritius.',
+    image: 'https://www.osdiving.com/images/logo.jpg',
+    url: 'https://www.osdiving.com',
     telephone: phoneNumber,
     email: email,
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Coastal Road',
-      addressLocality: 'Grand Baie',
+      addressLocality: 'Pereybere',
       addressRegion: 'Rivière du Rempart',
-      postalCode: '30501',
+      postalCode: '30546',
       addressCountry: 'MU',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: -20.348404,
-      longitude: 57.552152,
+      latitude: -20.01748,
+      longitude: 57.57789,
     },
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         opens: '08:00',
-        closes: '18:00',
+        closes: '16:30',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: 'Sunday',
+        opens: '08:00',
+        closes: '13:30',
       },
     ],
     priceRange: '$$',
     currenciesAccepted: 'MUR, USD, EUR, GBP',
     paymentAccepted: 'Cash, Credit Card, Bank Transfer',
     sameAs: [
-      'https://www.facebook.com/mauritiusscuba',
-      'https://www.instagram.com/mauritiusscuba',
-      'https://www.twitter.com/mauritiusscuba',
+      'https://www.facebook.com/oceanspiritdiving/',
+      'https://www.instagram.com/divingmauritius/',
+      'https://twitter.com/OceanSpirit13',
+      'https://www.youtube.com/user/oceandivermu',
+      'https://www.tripadvisor.com.my/Attraction_Review-g1905319-d1717410-Reviews-Ocean_Spirit_Dive_Center-Pereybere.html',
     ],
   };
 };
@@ -68,8 +76,8 @@ export const generateCourseSchema = (course) => {
     description: course.description,
     provider: {
       '@type': 'Organization',
-      name: 'Mauritius Scuba Diving Center',
-      sameAs: 'https://www.mauritiusscuba.com',
+      name: 'Ocean Spirit Scuba Diving Mauritius',
+      sameAs: 'https://www.osdiving.com',
     },
     offers: {
       '@type': 'Offer',
@@ -81,47 +89,47 @@ export const generateCourseSchema = (course) => {
 };
 
 export const defaultMetaTags = {
-  title: 'Mauritius Scuba Diving Center | PADI Certified Diving Courses & Tours',
+  title: 'Ocean Spirit Scuba Diving Mauritius | PADI 5 Star ECO Centre',
   description:
-    'Discover the underwater paradise of Mauritius with our PADI certified scuba diving courses and guided tours. Experience crystal-clear waters, vibrant coral reefs, and diverse marine life.',
+    'PADI 5 Star ECO Green Fins dive center in Pereybere, Mauritius. Patient skilled PADI instructors, 65 dive sites around Northern Mauritius. Wreck diving, turtle diving, shark diving, and exquisite healthy coral reefs.',
   keywords:
-    'mauritius scuba diving, padi courses mauritius, diving center mauritius, scuba lessons, underwater tours, coral reef diving, blue bay diving, grand baie scuba',
-  ogImage: 'https://www.mauritiusscuba.com/images/og-image.jpg',
+    'ocean spirit, mauritius scuba diving, padi 5 star eco, padi courses mauritius, diving center pereybere, scuba lessons, dive sites mauritius, coral reef diving, coin de mire diving, green fins mauritius, eco diving',
+  ogImage: 'https://www.osdiving.com/images/og-image.jpg',
   twitterCard: 'summary_large_image',
 };
 
 export const generatePageMetaTags = (page) => {
-  const baseUrl = 'https://www.mauritiusscuba.com';
+  const baseUrl = 'https://www.osdiving.com';
 
   const pages = {
     home: {
-      title: 'Mauritius Scuba Diving Center | PADI Certified Diving Courses & Tours',
+      title: 'Ocean Spirit Scuba Diving Mauritius | PADI 5 Star ECO Centre',
       description:
-        'Discover the underwater paradise of Mauritius with our PADI certified scuba diving courses and guided tours. Experience crystal-clear waters, vibrant coral reefs, and diverse marine life.',
+        'From the day you arrive, you are among friends. PADI 5 Star ECO Green Fins dive center in Pereybere. Explore 65 dive sites around Northern Mauritius with patient skilled PADI instructors. Wreck diving, turtle diving, shark diving.',
       canonical: baseUrl,
     },
     about: {
-      title: 'About Us | Mauritius Scuba Diving Center',
+      title: 'About Ocean Spirit | PADI 5 Star ECO Dive Centre Pereybere',
       description:
-        'Learn about our experienced team, PADI certifications, and commitment to safe, memorable scuba diving experiences in Mauritius. Over 10 years of excellence in diving education.',
+        'Ocean Spirit Scuba Diving opened March 2020 in our own building with ocean views. Comprehensive gear selection, Coffee Shop, and comfortable facilities. Promoting conservation, respect, and family values.',
       canonical: `${baseUrl}/about`,
     },
     'dive-sites': {
-      title: 'Dive Sites in Mauritius | Best Diving Locations',
+      title: 'Dive Sites Northern Mauritius | 65 Best Diving Locations',
       description:
-        'Explore the best diving sites in Mauritius including Blue Bay, Cathedral, Coin de Mire, and more. Detailed information about depth, visibility, and marine life at each location.',
+        'Explore 65 great dive sites around Northern Mauritius Islands. Coin de Mire, Trou Aux Biches, wreck diving, turtle diving, shark diving, macro photography, deep diving, and exquisite healthy coral reefs.',
       canonical: `${baseUrl}/dive-sites`,
     },
     courses: {
-      title: 'PADI Diving Courses | Scuba Certification in Mauritius',
+      title: 'PADI Diving Courses | Ocean Spirit Scuba Certification Mauritius',
       description:
-        'Get PADI certified in Mauritius! We offer Discover Scuba Diving, Open Water Diver, Advanced Open Water, Rescue Diver, and Divemaster courses with experienced instructors.',
+        'Get PADI certified with Ocean Spirit in Pereybere! Discover Scuba Diving, Open Water Diver, Advanced Open Water, Rescue Diver, and Divemaster courses with patient skilled instructors.',
       canonical: `${baseUrl}/courses`,
     },
     gallery: {
-      title: 'Diving Gallery | Underwater Photos from Mauritius',
+      title: 'Diving Gallery | Underwater Photos from Ocean Spirit Mauritius',
       description:
-        'Browse stunning underwater photography from our diving expeditions in Mauritius. See the vibrant marine life, coral reefs, and unforgettable diving moments.',
+        'Browse stunning underwater photography from Ocean Spirit diving expeditions in Northern Mauritius. See the vibrant marine life, coral reefs, turtles, sharks, and unforgettable diving moments.',
       canonical: `${baseUrl}/gallery`,
     },
   };

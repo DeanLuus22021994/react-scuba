@@ -11,9 +11,10 @@ const CTASection = ({ onContactClick }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Dive In?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Book the Diving Holiday of Your Life?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-ocean-50">
-            Join us for an unforgettable underwater adventure in the beautiful waters of Mauritius. Book your dive or course today!
+            Going places, making friends and sharing experiences - that's what diving is all about. Join Ocean Spirit in Pereybere for
+            unforgettable underwater adventures in Northern Mauritius!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -23,10 +24,10 @@ const CTASection = ({ onContactClick }) => {
               Contact Us Today
             </button>
             <a
-              href="tel:+230"
+              href="tel:+2302634468"
               className="bg-ocean-700 hover:bg-ocean-800 text-white font-bold text-lg px-8 py-4 rounded-lg border-2 border-white/30 transition-all"
             >
-              Call Us Now
+              Call +230 263 44 68
             </a>
           </div>
         </motion.div>

@@ -5,45 +5,46 @@
 
 export const DIVE_SITES = [
   {
-    id: 'blue-bay',
-    name: 'Blue Bay Marine Park',
-    coordinates: [-20.4453, 57.7089],
-    depth: '5-12m',
-    visibility: 'Excellent (20-30m)',
-    difficulty: 'Beginner',
-    marineLife: ['Parrotfish', 'Butterflyfish', 'Sea turtles', 'Moray eels', 'Coral gardens'],
-    description: 'A stunning marine park with crystal-clear waters and vibrant coral reefs. Perfect for beginners and snorkelers.',
-    bestSeason: 'Year-round',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
-    highlights: ['Protected marine park', 'Shallow reef perfect for training', 'Abundant marine life'],
-  },
-  {
-    id: 'cathedral',
-    name: 'The Cathedral',
-    coordinates: [-20.2897, 57.4531],
-    depth: '18-30m',
-    visibility: 'Very Good (15-25m)',
-    difficulty: 'Intermediate',
-    marineLife: ['Lobsters', 'Groupers', 'Octopus', 'Nudibranchs', 'Reef sharks'],
-    description:
-      'An impressive underwater cave system with cathedral-like formations. Light beams penetrate through openings creating magical effects.',
-    bestSeason: 'May to December',
-    image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800',
-    highlights: ['Dramatic cave formations', 'Light beam displays', 'Advanced navigation challenge'],
-  },
-  {
     id: 'coin-de-mire',
-    name: 'Coin de Mire',
+    name: 'Coin de Mire Island',
     coordinates: [-19.8786, 57.8683],
     depth: '15-40m',
     visibility: 'Excellent (25-35m)',
     difficulty: 'Advanced',
-    marineLife: ['Barracudas', 'Tuna', 'Dolphins', 'Manta rays', 'Whale sharks (seasonal)'],
+    marineLife: ['Barracudas', 'Tuna', 'Dolphins', 'Manta rays', 'Whale sharks (seasonal)', 'Sharks'],
     description:
-      "An iconic island off the north coast with dramatic walls and pelagic action. One of Mauritius's most spectacular dive sites.",
+      "An iconic island off the north coast with dramatic walls and pelagic action. Part of Ocean Spirit's Best of the North 10 dive package. One of Mauritius's most spectacular dive sites.",
     bestSeason: 'October to April',
     image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
-    highlights: ['Big fish encounters', 'Drift diving opportunities', 'Dramatic underwater topography'],
+    highlights: ['2 dive Safari destination', 'Big fish encounters', 'Drift diving opportunities', 'Dramatic underwater topography'],
+  },
+  {
+    id: 'trou-aux-biches',
+    name: 'Trou Aux Biches',
+    coordinates: [-20.0389, 57.5467],
+    depth: '10-25m',
+    visibility: 'Very Good (18-25m)',
+    difficulty: 'Beginner to Intermediate',
+    marineLife: ['Sea turtles', 'Parrotfish', 'Butterflyfish', 'Moray eels', 'Coral gardens', 'Reef fish'],
+    description:
+      'Beautiful dive site in Northern Mauritius with healthy coral reefs. Part of the Best of the North package. Popular for turtle encounters.',
+    bestSeason: 'Year-round',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
+    highlights: ['Turtle diving', 'Shallow coral reef', 'Part of Best of North package', 'Great for all levels'],
+  },
+  {
+    id: 'djabeda-wreck',
+    name: 'Djabeda Ship Wreck',
+    coordinates: [-20.0125, 57.5789],
+    depth: '18-30m',
+    visibility: 'Good (15-20m)',
+    difficulty: 'Intermediate',
+    marineLife: ['Lionfish', 'Groupers', 'Moray eels', 'Snappers', 'Octopus'],
+    description:
+      'Historic shipwreck offering exciting wreck diving exploration. Great for underwater photography and marine life encounters.',
+    bestSeason: 'May to December',
+    image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800',
+    highlights: ['Wreck diving specialty', 'Historic vessel', 'Abundant marine life', 'Photography opportunities'],
   },
   {
     id: 'whale-rock',
@@ -73,7 +74,7 @@ export const DIVE_SITES = [
   },
 ];
 
-export const MAURITIUS_CENTER = [-20.348404, 57.552152];
+export const MAURITIUS_CENTER = [-20.01748, 57.57789]; // Pereybere, Ocean Spirit location
 
 export const DIFFICULTY_COLORS = {
   Beginner: 'bg-green-100 text-green-800',

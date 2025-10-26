@@ -8,22 +8,22 @@ import { AcademicCapIcon, ShieldCheckIcon, TrophyIcon, UserGroupIcon } from '@he
 export const CREDENTIALS = [
   {
     icon: AcademicCapIcon,
-    title: 'PADI 5 Star Dive Center',
-    description: 'Highest rating awarded by PADI, ensuring quality training and services.',
+    title: 'PADI 5 Star ECO Centre',
+    description: 'Green Fins member with Green Star rating. Committed to conservation and sustainable diving practices.',
   },
   {
     icon: ShieldCheckIcon,
-    title: 'Fully Insured',
-    description: 'Comprehensive dive insurance and liability coverage for all activities.',
+    title: 'Reef-World Federation Partner',
+    description: 'Promoting best environmental practices and marine conservation in Northern Mauritius.',
   },
   {
     icon: UserGroupIcon,
-    title: 'Experienced Team',
-    description: '50+ years combined diving experience across all instructors.',
+    title: 'Patient Skilled Instructors',
+    description: 'Focused on safety, knowing our fish and loving our world. Comprehensive facilities and personal service.',
   },
   {
     icon: TrophyIcon,
-    title: 'Award Winning',
-    description: "Recognized as Mauritius's top-rated dive center for 3 consecutive years.",
+    title: '65 Dive Sites',
+    description: 'Access to the best dive sites around Northern Mauritius Islands. Wreck, turtle, shark diving and exquisite coral reefs.',
   },
 ];

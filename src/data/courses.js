@@ -16,12 +16,12 @@ export const COURSES = [
     certification: 'Experience recognition (not full certification)',
     image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
     description:
-      'Your first adventure underwater! Experience the thrill of scuba diving in a controlled environment with expert supervision.',
+      "Your first adventure underwater! Step one of your PADI Open Water Certification. Experience the thrill of scuba diving with Ocean Spirit's patient, skilled instructors.",
     included: [
       'Theory session and safety briefing',
       'Confined water practice session',
       'Open water dive (up to 12m)',
-      'All equipment rental',
+      'All equipment rental with personal mouthpieces',
       'PADI instructor supervision',
       'Recognition certificate',
     ],
@@ -32,6 +32,7 @@ export const COURSES = [
       'Safety procedures',
       'Marine life awareness',
     ],
+    specialOffer: 'Couples DSD Special - Contact us for pricing',
   },
   {
     id: 'open-water',
@@ -170,3 +171,22 @@ export const getCoursesByLevel = (level) => {
   const courseIds = levels[level] || [];
   return COURSES.filter((course) => courseIds.includes(course.id));
 };
+
+// Special Ocean Spirit Dive Packages
+export const DIVE_PACKAGES = [
+  {
+    id: 'best-of-north-10',
+    name: 'Best of the North - 10 Dive Package',
+    price: 20000, // MUR
+    description: '10 dive package including a 2 dive Safari to Coin de Mire island and Trou Aux Biches',
+    included: [
+      '10 dives total',
+      '2 dive Safari to Coin de Mire island',
+      'Trou Aux Biches diving',
+      'All equipment rental',
+      'Personal mouthpieces',
+      'Gear reserved for exclusive use',
+    ],
+    highlights: ['Wreck diving', 'Turtle diving', 'Shark diving', 'Healthy coral reefs'],
+  },
+];

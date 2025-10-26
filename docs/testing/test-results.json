@@ -1,43 +1,60 @@
 {
-  "runTime": "2025-10-26T20:46:41.648Z",
+  "runTime": "2025-10-26T20:49:26.970Z",
   "summary": {
     "totalFiles": 1,
-    "passedFiles": 1,
-    "failedFiles": 0,
+    "passedFiles": 0,
+    "failedFiles": 1,
     "totalTests": 4,
-    "passedTests": 4,
-    "failedTests": 0,
-    "passRate": 100
+    "passedTests": 3,
+    "failedTests": 1,
+    "passRate": 75
   },
   "performance": {
-    "totalDuration": 45.02059999999983,
-    "avgDuration": 11.255149999999958,
+    "totalDuration": 74.5098999999991,
+    "avgDuration": 18.627474999999777,
     "testCount": 4,
     "slowestTests": [
       {
         "name": "should validate all links in documentation",
-        "duration": 36.098099999999704,
-        "state": "pass",
-        "errors": [],
+        "duration": 55.18529999999964,
+        "state": "fail",
+        "errors": [
+          {
+            "message": "Found 2 broken link(s) in documentation:\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 24\n  Link: [SUBMODULE_EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 108\n  Link: [EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md",
+            "actual": "undefined",
+            "expected": "undefined",
+            "name": "AssertionError",
+            "ok": false,
+            "stack": "AssertionError: Found 2 broken link(s) in documentation:\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 24\n  Link: [SUBMODULE_EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 108\n  Link: [EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n    at C:\\react_scuba_runner\\react-scuba\\tests\\link-checker.test.js:226:14\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+            "stacks": [
+              {
+                "method": "",
+                "file": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js",
+                "line": 226,
+                "column": 14
+              }
+            ]
+          }
+        ],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
       },
       {
         "name": "should find all markdown files",
-        "duration": 6.8297999999999774,
+        "duration": 14.19439999999986,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
       },
       {
         "name": "should validate all links in README.md",
-        "duration": 1.2550000000001091,
+        "duration": 3.784599999999955,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
       },
       {
         "name": "should detect common link issues",
-        "duration": 0.8377000000000407,
+        "duration": 1.3455999999996493,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js"
@@ -46,7 +63,7 @@
     "slowestFiles": [
       {
         "fileName": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js",
-        "duration": 46.51000000000022,
+        "duration": 77.58859999999959,
         "testCount": 4
       }
     ],
@@ -55,7 +72,7 @@
         "label": "< 10ms",
         "min": 0,
         "max": 10,
-        "count": 3
+        "count": 2
       },
       {
         "label": "10-50ms",
@@ -67,7 +84,7 @@
         "label": "50-100ms",
         "min": 50,
         "max": 100,
-        "count": 0
+        "count": 1
       },
       {
         "label": "100-500ms",
@@ -88,10 +105,10 @@
       "category": "tests",
       "fileCount": 1,
       "totalTests": 4,
-      "passedTests": 4,
-      "failedTests": 0,
-      "totalDuration": 46.51000000000022,
-      "passRate": 100
+      "passedTests": 3,
+      "failedTests": 1,
+      "totalDuration": 77.58859999999959,
+      "passRate": 75
     }
   ],
   "files": {
@@ -99,32 +116,50 @@
       "passed": [
         {
           "name": "should find all markdown files",
-          "duration": 6.8297999999999774,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should validate all links in documentation",
-          "duration": 36.098099999999704,
+          "duration": 14.19439999999986,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should validate all links in README.md",
-          "duration": 1.2550000000001091,
+          "duration": 3.784599999999955,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should detect common link issues",
-          "duration": 0.8377000000000407,
+          "duration": 1.3455999999996493,
           "state": "pass",
           "errors": []
         }
       ],
-      "failed": [],
+      "failed": [
+        {
+          "name": "should validate all links in documentation",
+          "duration": 55.18529999999964,
+          "state": "fail",
+          "errors": [
+            {
+              "message": "Found 2 broken link(s) in documentation:\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 24\n  Link: [SUBMODULE_EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 108\n  Link: [EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md",
+              "actual": "undefined",
+              "expected": "undefined",
+              "name": "AssertionError",
+              "ok": false,
+              "stack": "AssertionError: Found 2 broken link(s) in documentation:\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 24\n  Link: [SUBMODULE_EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n\n  File: docs\\SUBMODULE_INDEX.md\n  Line: 108\n  Link: [EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)\n  Error: Target file not found: ../SUBMODULE_EXTRACTION_SUMMARY.md\n    at C:\\react_scuba_runner\\react-scuba\\tests\\link-checker.test.js:226:14\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+              "stacks": [
+                {
+                  "method": "",
+                  "file": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js",
+                  "line": 226,
+                  "column": 14
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "skipped": [],
-      "totalDuration": 46.51000000000022
+      "totalDuration": 77.58859999999959
     }
   }
 }

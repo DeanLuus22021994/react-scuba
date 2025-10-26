@@ -59,21 +59,27 @@ const AboutPage = () => {
         <section className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6 text-center">Our Story</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6 text-center">The Ocean Spirit New Dive Centre</h2>
               <div className="prose prose-lg max-w-none text-gray-700 space-y-4">
                 <p>
-                  Founded in 2013, we started with a simple mission: to share the incredible underwater world of Mauritius with adventurers
-                  from around the globe. What began as a small operation with two instructors has grown into one of the island&apos;s most
-                  respected dive centers.
+                  Ocean Spirit Scuba Diving, together with Ocean Spirit Training and the Ocean Spirit Coffee Shop and Breakfast Bar are
+                  proudly housed in our own building with a gorgeous view of the ocean we love. Opened on 2 March 2020, this is the perfect
+                  solution to a scuba diving holiday in the North in Mauritius.
                 </p>
                 <p>
-                  Our PADI 5 Star rating reflects our commitment to excellence in training, safety, and customer service. Every member of
-                  our team is passionate about diving and dedicated to ensuring your underwater experience is safe, educational, and
-                  unforgettable.
+                  The Diving centre offers hospitality, comprehensive gear selection, personal mouthpieces, and careful disinfectant gear
+                  rinsing. For the duration of your visit your gear is reserved for your exclusive use. The Coffee shop offers everything a
+                  diver could wish for in the line of food, beverages, snacks, beach barbecues, catered functions and of course superb
+                  Coffee.
                 </p>
                 <p>
-                  With over 10 years of operations and zero major incidents, we&apos;ve established ourselves as the trusted choice for both
-                  beginners taking their first breaths underwater and experienced divers seeking new adventures in Mauritian waters.
+                  Our patient skilled PADI Instructors focus on safety, they know their fish and love their world. Diving Mauritius is in
+                  warm water, with good visibility and 65 great dive sites around the Northern Mauritius Islands. Wreck diving, Turtle
+                  diving, Shark diving, macro photography, deep diving, and exquisite healthy coral reefs.
+                </p>
+                <p>
+                  Because that's what diving is all about. Going places, making friends and sharing experiences. Why not join us? And book
+                  the diving holiday of your life.
                 </p>
               </div>
             </motion.div>
@@ -144,10 +150,10 @@ const AboutPage = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Marine Conservation</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Conservation & Family Values</h3>
                 <p className="text-gray-700">
-                  We&apos;re dedicated to protecting our oceans. Through education and responsible diving practices, we work to preserve
-                  marine ecosystems.
+                  Ocean Spirit has grown in its commitment to promote conservation, humility, respect, family values and career development
+                  for our team and community.
                 </p>
               </motion.div>
             </div>
