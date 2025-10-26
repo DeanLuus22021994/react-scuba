@@ -39,16 +39,24 @@ const ServiceCard = ({ service, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="p-6 bg-ocean-50 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1"
+      className="p-8 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
     >
-      <div className="w-12 h-12 bg-ocean-600 rounded-full flex items-center justify-center mb-4">
-        <Icon className="w-6 h-6 text-white" />
+      <div className="w-14 h-14 bg-gradient-to-br from-ocean-500 to-ocean-700 rounded-xl flex items-center justify-center mb-6 shadow-md">
+        <Icon className="w-7 h-7 text-white" />
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-      <p className="text-gray-600 mb-4">{service.description}</p>
-      <Link to={service.link} className="text-ocean-600 font-semibold hover:text-ocean-700 inline-flex items-center">
+      <h3 className="text-xl font-display font-bold text-gray-900 mb-3 tracking-tight">{service.title}</h3>
+      <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+      <Link
+        to={service.link}
+        className="text-ocean-600 font-semibold hover:text-ocean-700 inline-flex items-center transition-all duration-200 group"
+      >
         {service.linkText}
-        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </Link>
@@ -79,8 +87,8 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4 tracking-tight">Our Services</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             From beginner courses to advanced certifications, we offer comprehensive scuba diving services
           </p>
         </motion.div>

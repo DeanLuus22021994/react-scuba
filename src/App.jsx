@@ -8,6 +8,7 @@ import Header from './layouts/Header';
 
 // Shared Components (loaded immediately - used across app)
 import Loading from './components/common/Loading';
+import WhatsAppWidget from './components/common/WhatsAppWidget';
 import BackToTop from './components/shared/BackToTop';
 import ScrollProgress from './components/shared/ScrollProgress';
 
@@ -49,6 +50,7 @@ function App() {
           </main>
           <Footer />
           <BackToTop showAfter={400} position="right" />
+          <WhatsAppWidget />
           <Toaster
             position="top-right"
             toastOptions={{

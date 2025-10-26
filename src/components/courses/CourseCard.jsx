@@ -13,19 +13,23 @@ const CourseCard = ({ course, onBookClick, index = 0 }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+      whileHover={{ y: -4 }}
+      className="bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 overflow-hidden flex flex-col h-full"
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden group">
         <img
           src={course.image}
           alt={course.name}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute top-4 right-4 bg-ocean-600 text-white px-4 py-2 rounded-full font-bold">{format(course.price)}</div>
+        <div className="absolute inset-0 bg-gradient-to-t from-ocean-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute top-4 right-4 bg-ocean-600 text-white px-4 py-2 rounded-full font-bold shadow-md">
+          {format(course.price)}
+        </div>
       </div>
 
-      <div className="p-6">
-        <h3 className="text-2xl font-bold text-ocean-800 mb-2">{course.name}</h3>
+      <div className="p-6 flex-1 flex flex-col">
+        <h3 className="text-2xl font-display font-bold text-ocean-800 mb-2 tracking-tight">{course.name}</h3>
         <p className="text-gray-600 mb-4 italic">{course.tagline}</p>
         <p className="text-gray-700 mb-6">{course.description}</p>
 
@@ -81,12 +85,14 @@ const CourseCard = ({ course, onBookClick, index = 0 }) => {
           )}
         </div>
 
-        <button
-          onClick={() => onBookClick(course)}
-          className="w-full bg-ocean-600 hover:bg-ocean-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
-        >
-          Book {course.name}
-        </button>
+        <div className="mt-auto pt-4">
+          <button
+            onClick={() => onBookClick(course)}
+            className="w-full bg-ocean-600 hover:bg-ocean-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
+          >
+            Book {course.name}
+          </button>
+        </div>
       </div>
     </motion.div>
   );

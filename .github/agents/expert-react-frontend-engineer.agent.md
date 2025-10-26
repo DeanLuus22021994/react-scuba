@@ -2,24 +2,21 @@
 description: 'Provide expert React frontend engineering guidance using modern TypeScript and design patterns.'
 tools:
   [
-    'changes',
-    'search/codebase',
-    'edit/editFiles',
-    'extensions',
-    'fetch',
-    'githubRepo',
-    'new',
-    'openSimpleBrowser',
-    'problems',
     'runCommands',
     'runTasks',
+    'edit/editFiles',
     'search',
-    'search/searchResults',
-    'runCommands/terminalLastCommand',
-    'runCommands/terminalSelection',
-    'testFailure',
+    'new',
+    'extensions',
+    'todos',
     'usages',
     'vscodeAPI',
+    'problems',
+    'changes',
+    'testFailure',
+    'openSimpleBrowser',
+    'fetch',
+    'githubRepo',
   ]
 ---
 

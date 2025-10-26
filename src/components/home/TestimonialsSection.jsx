@@ -33,7 +33,7 @@ const TestimonialCard = ({ testimonial, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white p-6 rounded-lg shadow-lg"
+      className="bg-white p-8 rounded-xl shadow-soft hover:shadow-medium transition-all duration-300"
     >
       <div className="flex items-center mb-4">
         <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover mr-4" />
