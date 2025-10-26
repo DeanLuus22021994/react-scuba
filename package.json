@@ -34,7 +34,7 @@
     "react-helmet-async": "$react-helmet-async"
   },
   "scripts": {
-    "start": "$env:BROWSER='none'; $env:WDS_SOCKET_PORT='0'; vite --port 3001",
+    "start": "vite --port 3001 --host",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest --run",
