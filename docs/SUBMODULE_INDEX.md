@@ -7,7 +7,7 @@ Complete index of all documentation related to the docker-compose-examples submo
 **New to this?** Start here:
 
 1. 📖 [EXTRACTION_GUIDE.md](../EXTRACTION_GUIDE.md) - Complete step-by-step instructions
-2. 📋 [EXTRACTION_CHECKLIST.md](../.github/EXTRACTION_CHECKLIST.md) - Track your progress
+2. 📋 EXTRACTION_CHECKLIST.md - Track your progress (archived)
 3. ✅ [verify-submodule-setup.sh](../scripts/verify-submodule-setup.sh) - Verify your setup
 
 **Already set up?** Use this:
@@ -21,8 +21,8 @@ Complete index of all documentation related to the docker-compose-examples submo
 | Document | Size | Purpose | Audience |
 |----------|------|---------|----------|
 | [EXTRACTION_GUIDE.md](../EXTRACTION_GUIDE.md) | 8.1 KB | Complete extraction instructions | DevOps, Maintainers |
-| [SUBMODULE_EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md) | 9.7 KB | Executive summary and metrics | Project Leads, Managers |
-| [EXTRACTION_CHECKLIST.md](../.github/EXTRACTION_CHECKLIST.md) | 7.8 KB | Trackable checklist (60+ items) | Everyone (for tracking) |
+| SUBMODULE_EXTRACTION_SUMMARY.md | 9.7 KB | Executive summary (archived) | Project Leads, Managers |
+| EXTRACTION_CHECKLIST.md | 7.8 KB | Trackable checklist (archived) | Everyone (for tracking) |
 
 ### Daily Use
 
@@ -37,7 +37,7 @@ Complete index of all documentation related to the docker-compose-examples submo
 | Document | Size | Purpose | Audience |
 |----------|------|---------|----------|
 | [Scripts README](../scripts/README.md) | 1.8 KB | Scripts documentation | Developers |
-| [Workflow Updates](../.github/WORKFLOW_UPDATES.md) | 6.2 KB | CI/CD integration guide | DevOps, CI/CD |
+| WORKFLOW_UPDATES.md | 6.2 KB | CI/CD integration (archived) | DevOps, CI/CD |
 | [README.md](../README.md) | Updated | Main repository docs | All Users |
 
 ### Tools
@@ -86,7 +86,7 @@ Visual Guide → Usage Guide → Extraction Guide
 ### "I need to extract docker-compose-examples"
 
 **Primary**: [EXTRACTION_GUIDE.md](../EXTRACTION_GUIDE.md)  
-**Track**: [EXTRACTION_CHECKLIST.md](../.github/EXTRACTION_CHECKLIST.md)  
+**Track**: EXTRACTION_CHECKLIST.md (archived)  
 **Execute**: [extract-docker-compose-examples.sh](../scripts/extract-docker-compose-examples.sh)  
 **Verify**: [verify-submodule-setup.sh](../scripts/verify-submodule-setup.sh)
 
@@ -98,14 +98,14 @@ Visual Guide → Usage Guide → Extraction Guide
 
 ### "I need to update CI/CD"
 
-**Primary**: [WORKFLOW_UPDATES.md](../.github/WORKFLOW_UPDATES.md)  
+**Primary**: WORKFLOW_UPDATES.md (archived)  
 **Context**: [Usage Guide](./docker-compose-submodule.md)  
 **Examples**: [Visual Guide](./submodule-visualization.md)
 
 ### "I need to understand the architecture"
 
 **Visual**: [Visual Guide](./submodule-visualization.md)  
-**Summary**: [EXTRACTION_SUMMARY.md](../SUBMODULE_EXTRACTION_SUMMARY.md)  
+**Summary**: EXTRACTION_SUMMARY.md (archived)  
 **Technical**: [Usage Guide](./docker-compose-submodule.md)
 
 ### "I'm stuck / having issues"

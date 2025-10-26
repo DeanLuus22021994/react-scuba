@@ -1,6 +1,6 @@
+import TestimonialsSection from '@/components/home/TestimonialsSection';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import TestimonialsSection from '@/components/home/TestimonialsSection';
 
 describe('TestimonialsSection', () => {
   it('should render without crashing', () => {
@@ -29,9 +29,9 @@ describe('TestimonialsSection', () => {
 
   it('should display testimonial text', () => {
     render(<TestimonialsSection />);
-    expect(screen.getByText(/Amazing experience/i)).toBeInTheDocument();
-    expect(screen.getByText(/Best dive center/i)).toBeInTheDocument();
-    expect(screen.getByText(/Completed my Advanced/i)).toBeInTheDocument();
+    expect(screen.getByText(/From the day I arrived/i)).toBeInTheDocument();
+    expect(screen.getByText(/Best dive center in Pereybere/i)).toBeInTheDocument();
+    expect(screen.getByText(/Completed my Advanced certification/i)).toBeInTheDocument();
   });
 
   it('should render star ratings', () => {

@@ -1,6 +1,6 @@
+import FeaturesSection from '@/components/home/FeaturesSection';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import FeaturesSection from '@/components/home/FeaturesSection';
 
 describe('FeaturesSection', () => {
   it('should render without crashing', () => {
@@ -20,17 +20,17 @@ describe('FeaturesSection', () => {
 
   it('should display all features', () => {
     render(<FeaturesSection />);
-    expect(screen.getByText('PADI 5 Star Certified')).toBeInTheDocument();
-    expect(screen.getByText('Years of Experience')).toBeInTheDocument();
-    expect(screen.getByText('Successful Dives')).toBeInTheDocument();
-    expect(screen.getByText('Perfect Safety Record')).toBeInTheDocument();
+    expect(screen.getByText('PADI 5 Star ECO')).toBeInTheDocument();
+    expect(screen.getByText('Dive Sites')).toBeInTheDocument();
+    expect(screen.getByText('Own Facility')).toBeInTheDocument();
+    expect(screen.getByText('Coffee Shop')).toBeInTheDocument();
   });
 
   it('should display feature stats', () => {
     render(<FeaturesSection />);
     expect(screen.getByText('5★')).toBeInTheDocument();
-    expect(screen.getByText('10+')).toBeInTheDocument();
-    expect(screen.getByText('5000+')).toBeInTheDocument();
-    expect(screen.getByText('100%')).toBeInTheDocument();
+    expect(screen.getByText('65')).toBeInTheDocument();
+    expect(screen.getByText('2020')).toBeInTheDocument();
+    expect(screen.getByText('☕')).toBeInTheDocument();
   });
 });
