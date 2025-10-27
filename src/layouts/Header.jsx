@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CurrencySelector, PhoneLink } from '../components/common';
+import { CurrencySelector, PhoneLink } from '../components/ui';
 import Navigation from './Navigation';
 
 const Header = () => {

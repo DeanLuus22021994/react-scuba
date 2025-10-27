@@ -1,6 +1,6 @@
 import { EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { PhoneLink, WhatsAppButton } from '../components/common';
+import { PhoneLink, WhatsAppButton } from '../components/ui';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
