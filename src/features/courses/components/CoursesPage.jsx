@@ -1,6 +1,6 @@
+import { COURSES } from '@config/constants/COURSES';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { COURSES } from '../../data/courses';
 import { useCurrency } from '../../hooks/useCurrency';
 import { trackCourseInquiry } from '../../utils/analytics';
 import SEO from '../common/SEO';

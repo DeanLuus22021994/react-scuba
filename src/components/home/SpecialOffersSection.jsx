@@ -1,6 +1,6 @@
+import { OCEAN_SPIRIT_CONTENT as oceanSpiritContent } from '@config/constants/OCEAN_SPIRIT';
 import { CurrencyDollarIcon, GiftIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
-import oceanSpiritContent from '../../data/oceanSpirit';
 
 const SpecialOffersSection = () => {
   const handleEmailOffer = (subject) => {

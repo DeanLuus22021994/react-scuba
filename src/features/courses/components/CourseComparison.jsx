@@ -1,4 +1,4 @@
-import { COURSES } from '../../data/courses';
+import { COURSES } from '@config/constants/COURSES';
 import { useCurrency } from '../../hooks/useCurrency';
 
 const CourseComparison = () => {

@@ -1,8 +1,8 @@
+import { CREDENTIALS } from '@config/constants/CREDENTIALS';
+import { TEAM_MEMBERS } from '@config/constants/TEAM';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { CREDENTIALS } from '../../data/credentials';
-import { TEAM_MEMBERS } from '../../data/team';
 import { trackConversion } from '../../utils/analytics';
 import SEO from '../common/SEO';
 import BookingModal from '../modals/BookingModal';

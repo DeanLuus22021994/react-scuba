@@ -1,6 +1,6 @@
+import { DIVE_SITES } from '@config/constants/DIVE_SITES';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { DIVE_SITES } from '../../data/diveSites';
 import { trackConversion } from '../../utils/analytics';
 import SEO from '../common/SEO';
 import BookingModal from '../modals/BookingModal';

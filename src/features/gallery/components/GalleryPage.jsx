@@ -1,6 +1,6 @@
+import { CATEGORIES, getImagesByCategory } from '@config/constants/GALLERY';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { CATEGORIES, getImagesByCategory } from '../../data/gallery';
 import { trackConversion } from '../../utils/analytics';
 import SEO from '../common/SEO';
 import BookingModal from '../modals/BookingModal';
