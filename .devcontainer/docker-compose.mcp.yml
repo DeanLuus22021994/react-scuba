@@ -150,8 +150,8 @@ services:
   # ==== TIER 3: Experimental & Tools (after databases) ====
   python-experimental:
     build:
-      context: ./mcp/python-experimental
-      dockerfile: Dockerfile
+      context: ./mcp
+      dockerfile: Dockerfile.python.exp
     image: python-experimental:3.15.0a1
     container_name: python-experimental
     hostname: python-experimental
