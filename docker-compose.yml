@@ -11,7 +11,7 @@ services:
     hostname: postgres-db
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.20
+        ipv4_address: 172.28.0.20
     ports:
       - "5432:5432"
     env_file:
@@ -22,7 +22,7 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=C
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - react_scuba_postgres-data:/var/lib/postgresql/data
     command:
       - postgres
       - -c
@@ -57,7 +57,7 @@ services:
     hostname: mariadb
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.21
+        ipv4_address: 172.28.0.21
     ports:
       - "3306:3306"
     env_file:
@@ -66,7 +66,7 @@ services:
       - MARIADB_ROOT_PASSWORD=${MARIADB_PASSWORD:-password}
       - MARIADB_DATABASE=mcp_db
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - react_scuba_mariadb-data:/var/lib/mysql
     command: --innodb-buffer-pool-size=256M --max-connections=200
     restart: unless-stopped
     healthcheck:
@@ -79,21 +79,21 @@ services:
   # ==== TIER 2: MCP Database Services (after databases) ====
   postgres-mcp:
     build:
-      context: ./containers
+      context: ./.devcontainer/containers
       dockerfile: dockerfile.postgre
     image: mcp-postgres:latest
     container_name: postgres-mcp
     hostname: postgres-mcp
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.31
+        ipv4_address: 172.28.0.31
     env_file:
       - devcontainer.env
     environment:
       - POSTGRES_CONNECTION=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres
     volumes:
-      - postgres-node-cache:/cache/node
-      - postgres-cache:/cache/pg
+      - react_scuba_postgres-node-cache:/cache/node
+      - react_scuba_postgres-cache:/cache/pg
     stdin_open: true
     restart: unless-stopped
     healthcheck:
@@ -108,22 +108,22 @@ services:
 
   mariadb-mcp:
     build:
-      context: ./containers
+      context: ./.devcontainer/containers
       dockerfile: Dockerfile.mariadb
     image: mcp-mariadb:latest
     container_name: mariadb-mcp
     hostname: mariadb-mcp
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.32
+        ipv4_address: 172.28.0.32
     env_file:
       - devcontainer.env
     environment:
       - MARIADB_CONNECTION=mysql://root:${MARIADB_PASSWORD:-password}@mariadb:3306/mcp_db
       - MARIADB_PASSWORD=${MARIADB_PASSWORD:-password}
     volumes:
-      - mariadb-node-cache:/cache/node
-      - mariadb-cache:/cache/mariadb
+      - react_scuba_mariadb-node-cache:/cache/node
+      - react_scuba_mariadb-cache:/cache/mariadb
     stdin_open: true
     restart: unless-stopped
     healthcheck:
@@ -148,31 +148,31 @@ services:
         condition: service_healthy
 
   # ==== TIER 3: Experimental & Tools (after databases) ====
-  python-experimental:
-    build:
-      context: ./mcp
-      dockerfile: Dockerfile.python.exp
-    image: python-experimental:3.15.0a1
-    container_name: python-experimental
-    hostname: python-experimental
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.40
-    env_file:
-      - devcontainer.env
-    volumes:
-      - python-exp-cache:/cache/python
-      - ../:/workspace
-    working_dir: /workspace
-    stdin_open: true
-    tty: true
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "python3", "/app/health.py"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 15s
+  # python-experimental:
+  #   build:
+  #     context: ./mcp
+  #     dockerfile: Dockerfile.python.exp
+  #   image: python-experimental:3.15.0a1
+  #   container_name: python-experimental
+  #   hostname: python-experimental
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.40
+  #   env_file:
+  #     - devcontainer.env
+  #   volumes:
+  #     - python-exp-cache:/cache/python
+  #     - ../:/workspace
+  #   working_dir: /workspace
+  #   stdin_open: true
+  #   tty: true
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD", "python3", "/app/health.py"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 15s
 
   # k8s-plugin:
   #   build:
@@ -215,11 +215,11 @@ services:
       - "1234:1234"
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.55
+        ipv4_address: 172.28.0.55
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - buildkit-cache:/var/lib/buildkit
-      - buildkit-tmp:/tmp
+      - react_scuba_buildkit-cache:/var/lib/buildkit
+      - react_scuba_buildkit-tmp:/tmp
     environment:
       - BUILDKIT_STEP_LOG_MAX_SIZE=10485760
     command:
@@ -235,27 +235,19 @@ services:
       retries: 3
 
   runner:
-    image: myoung34/github-runner:latest
-    container_name: github-actions-runner
-    hostname: gh-runner-01
-    privileged: true
+    build:
+      context: ./.devcontainer/containers/runner
+      dockerfile: Dockerfile
+    container_name: github-runner
+    hostname: github-runner
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.56
-    volumes:
-      - runner-work:/work
-      - runner-cache:/.cache
-      - /var/run/docker.sock:/var/run/docker.sock
+        ipv4_address: 172.28.0.56
     env_file:
       - devcontainer.env
-    environment:
-      - ACCESS_TOKEN=${GITHUB_TOKEN}
-      - REPO_URL=https://github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}
-      - RUNNER_NAME=docker-runner-01
-      - RUNNER_WORKDIR=/work
-      - LABELS=docker,linux,x64,self-hosted
-      - EPHEMERAL=true
-      - START_DOCKER_SERVICE=true
+    volumes:
+      - react_scuba_runner-work:/home/runner/_work
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "pgrep", "Runner.Listener"]
@@ -266,164 +258,164 @@ services:
 
   # ==== Gateway Monitoring Stack ====
   # cAdvisor - Container metrics exporter
-  cadvisor:
-    build:
-      context: ./exporters
-      dockerfile: dockerfile.cadvisor
-    image: mcp-cadvisor:latest
-    container_name: mcp-cadvisor
-    hostname: cadvisor
-    privileged: true
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.75
-    ports:
-      - "8081:8080"
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
-    devices:
-      - /dev/kmsg
-    restart: unless-stopped
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost:8080/healthz",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+  # cadvisor:
+  #   build:
+  #     context: ./exporters
+  #     dockerfile: dockerfile.cadvisor
+  #   image: mcp-cadvisor:latest
+  #   container_name: mcp-cadvisor
+  #   hostname: cadvisor
+  #   privileged: true
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.75
+  #   ports:
+  #     - "8081:8080"
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:ro
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #     - /dev/disk/:/dev/disk:ro
+  #   devices:
+  #     - /dev/kmsg
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD",
+  #         "wget",
+  #         "--quiet",
+  #         "--tries=1",
+  #         "--spider",
+  #         "http://localhost:8080/healthz",
+  #       ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
 
   # Node Exporter - Host metrics
-  node-exporter:
-    build:
-      context: ./exporters
-      dockerfile: dockerfile.node
-    image: mcp-node-exporter:latest
-    container_name: mcp-node-exporter
-    hostname: node-exporter
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.76
-    ports:
-      - "9100:9100"
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    command:
-      - "--path.procfs=/host/proc"
-      - "--path.sysfs=/host/sys"
-      - "--path.rootfs=/rootfs"
-      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
-    restart: unless-stopped
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost:9100/metrics",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+  # node-exporter:
+  #   build:
+  #     context: ./exporters
+  #     dockerfile: dockerfile.node
+  #   image: mcp-node-exporter:latest
+  #   container_name: mcp-node-exporter
+  #   hostname: node-exporter
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.76
+  #   ports:
+  #     - "9100:9100"
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #     - /sys:/host/sys:ro
+  #     - /:/rootfs:ro
+  #   command:
+  #     - "--path.procfs=/host/proc"
+  #     - "--path.sysfs=/host/sys"
+  #     - "--path.rootfs=/rootfs"
+  #     - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD",
+  #         "wget",
+  #         "--quiet",
+  #         "--tries=1",
+  #         "--spider",
+  #         "http://localhost:9100/metrics",
+  #       ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
 
   # PostgreSQL Exporter
-  postgres-exporter:
-    build:
-      context: ./exporters
-      dockerfile: dockerfile.postgres
-    image: mcp-postgres-exporter:latest
-    container_name: mcp-postgres-exporter
-    hostname: postgres-exporter
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.77
-    ports:
-      - "9187:9187"
-    environment:
-      - DATA_SOURCE_NAME=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres?sslmode=disable
-    restart: unless-stopped
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost:9187/",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    depends_on:
-      postgres-db:
-        condition: service_healthy
+  # postgres-exporter:
+  #   build:
+  #     context: ./exporters
+  #     dockerfile: dockerfile.postgres
+  #   image: mcp-postgres-exporter:latest
+  #   container_name: mcp-postgres-exporter
+  #   hostname: postgres-exporter
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.77
+  #   ports:
+  #     - "9187:9187"
+  #   environment:
+  #     - DATA_SOURCE_NAME=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres?sslmode=disable
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD",
+  #         "wget",
+  #         "--quiet",
+  #         "--tries=1",
+  #         "--spider",
+  #         "http://localhost:9187/",
+  #       ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #   depends_on:
+  #     postgres-db:
+  #       condition: service_healthy
 
   # MySQL/MariaDB Exporter
-  mysql-exporter:
-    build:
-      context: ./exporters
-      dockerfile: dockerfile.mysql
-    image: mcp-mysql-exporter:latest
-    container_name: mcp-mysql-exporter
-    hostname: mysql-exporter
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.78
-    ports:
-      - "9104:9104"
-    env_file:
-      - devcontainer.env
-    environment:
-      - DATA_SOURCE_NAME=root:${MARIADB_PASSWORD:-password}@tcp(mariadb:3306)/
-    command:
-      - --collect.global_status
-      - --collect.info_schema.innodb_metrics
-      - --collect.auto_increment.columns
-      - --collect.info_schema.processlist
-      - --collect.binlog_size
-      - --collect.info_schema.tablestats
-      - --collect.global_variables
-      - --collect.info_schema.query_response_time
-      - --collect.info_schema.userstats
-      - --collect.info_schema.tables
-      - --collect.perf_schema.tablelocks
-      - --collect.perf_schema.file_events
-      - --collect.perf_schema.eventswaits
-      - --collect.perf_schema.indexiowaits
-      - --collect.perf_schema.tableiowaits
-      - --collect.slave_status
-      - --web.listen-address=:9104
-    restart: unless-stopped
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost:9104/metrics",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    depends_on:
-      mariadb:
-        condition: service_healthy
+  # mysql-exporter:
+  #   build:
+  #     context: ./exporters
+  #     dockerfile: dockerfile.mysql
+  #   image: mcp-mysql-exporter:latest
+  #   container_name: mcp-mysql-exporter
+  #   hostname: mysql-exporter
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.78
+  #   ports:
+  #     - "9104:9104"
+  #   env_file:
+  #     - devcontainer.env
+  #   environment:
+  #     - DATA_SOURCE_NAME=root:${MARIADB_PASSWORD:-password}@tcp(mariadb:3306)/
+  #   command:
+  #     - --collect.global_status
+  #     - --collect.info_schema.innodb_metrics
+  #     - --collect.auto_increment.columns
+  #     - --collect.info_schema.processlist
+  #     - --collect.binlog_size
+  #     - --collect.info_schema.tablestats
+  #     - --collect.global_variables
+  #     - --collect.info_schema.query_response_time
+  #     - --collect.info_schema.userstats
+  #     - --collect.info_schema.tables
+  #     - --collect.perf_schema.tablelocks
+  #     - --collect.perf_schema.file_events
+  #     - --collect.perf_schema.eventswaits
+  #     - --collect.perf_schema.indexiowaits
+  #     - --collect.perf_schema.tableiowaits
+  #     - --collect.slave_status
+  #     - --web.listen-address=:9104
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD",
+  #         "wget",
+  #         "--quiet",
+  #         "--tries=1",
+  #         "--spider",
+  #         "http://localhost:9104/metrics",
+  #       ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #   depends_on:
+  #     mariadb:
+  #       condition: service_healthy
 
   nginx:
     image: nginx:alpine
@@ -434,26 +426,13 @@ services:
       - "443:443"
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.70
+        ipv4_address: 172.28.0.70
     volumes:
-      - ./containers/gateway/config/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./containers/gateway/config/ssl:/etc/nginx/ssl:ro
+      - ./.devcontainer/containers/gateway/config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./.devcontainer/containers/gateway/config/ssl:/etc/nginx/ssl:ro
     env_file:
       - devcontainer.env
     restart: unless-stopped
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost/health",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   prometheus:
     image: prom/prometheus:latest
@@ -463,10 +442,13 @@ services:
       - "9090:9090"
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.71
+        ipv4_address: 172.28.0.71
     volumes:
-      - ./containers/gateway/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - prometheus-data:/prometheus
+      - type: bind
+        source: ./.devcontainer/containers/gateway/config/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+      - react_scuba_prometheus-data:/prometheus
     env_file:
       - devcontainer.env
     command:
@@ -496,10 +478,10 @@ services:
       - "3000:3000"
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.72
+        ipv4_address: 172.28.0.72
     volumes:
-      - grafana-data:/var/lib/grafana
-      - ./containers/gateway/config/grafana/provisioning:/etc/grafana/provisioning:ro
+      - react_scuba_grafana-data:/var/lib/grafana
+      - ./.devcontainer/containers/gateway/config/grafana/provisioning:/etc/grafana/provisioning:ro
     env_file:
       - devcontainer.env
     environment:
@@ -522,192 +504,176 @@ services:
       retries: 3
 
   # ==== TIER 4: DevContainer (after all services) ====
-  react-app-dev:
-    build:
-      context: ../server
-      dockerfile: ../.devcontainer/Dockerfile.dev
-    image: react-app-dev:latest
-    container_name: react-app-dev
-    hostname: react-app-dev
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.59
-    ports:
-      - "3001:5173"
-      - "4173:4173"
-    environment:
-      - NODE_ENV=development
-      - VITE_PORT=5173
-      - VITE_HOST=0.0.0.0
-    env_file:
-      - devcontainer.env
-    volumes:
-      - ../server:/app:rw
-      - react_node_modules:/app/node_modules
-      - react-vite-cache:/app/.vite
-      - react-npm-cache:/root/.npm
-    working_dir: /app
-    command: ["npm", "start"]
-    stdin_open: true
-    tty: true
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: "2.0"
-          memory: 1024M
-        reservations:
-          memory: 512M
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "wget --quiet --tries=1 --spider http://localhost:5173 || exit 1",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+  # react-app-dev:
+  #   build:
+  #     context: ./server
+  #     dockerfile: ../.devcontainer/Dockerfile.dev
+  #   image: react-app-dev:latest
+  #   container_name: react-app-dev
+  #   hostname: react-app-dev
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.59
+  #   ports:
+  #     - "3001:5173"
+  #     - "4173:4173"
+  #   environment:
+  #     - NODE_ENV=development
+  #     - VITE_PORT=5173
+  #     - VITE_HOST=0.0.0.0
+  #   env_file:
+  #     - devcontainer.env
+  #   volumes:
+  #     - ../server:/app:rw
+  #     - react_node_modules:/app/node_modules
+  #     - react-vite-cache:/app/.vite
+  #     - react-npm-cache:/root/.npm
+  #   working_dir: /app
+  #   command: ["npm", "start"]
+  #   stdin_open: true
+  #   tty: true
+  #   restart: unless-stopped
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: "2.0"
+  #         memory: 1024M
+  #       reservations:
+  #         memory: 512M
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD-SHELL",
+  #         "wget --quiet --tries=1 --spider http://localhost:5173 || exit 1",
+  #       ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 40s
 
   node-builder:
     build:
-      context: ..
+      context: .
       dockerfile: .devcontainer/containers/Dockerfile.node
     image: react-scuba-node:latest
     container_name: node-builder
     hostname: node-builder
     networks:
       mcp-cluster:
-        ipv4_address: 172.20.0.61
+        ipv4_address: 172.28.0.61
     volumes:
-      - ../server:/workspace
-      - node-builder-node-modules:/cache/node_modules
-      - node-builder-npm:/cache/npm
-      - node-builder-turbo:/cache/turbo
-      - node-builder-git-hooks:/cache/git-hooks
-      - node-builder-husky:/cache/husky
+      - ./server:/workspace
+      - react_scuba_node-builder-node-modules:/cache/node_modules
+      - react_scuba_node-builder-npm:/cache/npm
+      - react_scuba_node-builder-turbo:/cache/turbo
+      - react_scuba_node-builder-git-hooks:/cache/git-hooks
+      - react_scuba_node-builder-husky:/cache/husky
     working_dir: /workspace
     environment:
       - NODE_ENV=development
       - TURBO_TELEMETRY_DISABLED=1
     env_file:
       - devcontainer.env
-    command: ["sleep", "infinity"]
+    command: /sbin/tini -- tail -f /dev/null
     stdin_open: true
     tty: true
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: "2.0"
-          memory: 2048M
-        reservations:
-          memory: 512M
-    healthcheck:
-      test: ["CMD", "node", "--version"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-    labels:
-      - "purpose=node-development"
-      - "tier=development"
 
-  devcontainer:
-    build:
-      context: ../server
-      dockerfile: ../.devcontainer/Dockerfile.dev
-    image: mcp-devcontainer:latest
-    container_name: devcontainer
-    hostname: devcontainer
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.60
-    ports:
-      - "5173:5173"
-      - "8080:8080"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu, compute, utility]
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
-    env_file:
-      - devcontainer.env
-    volumes:
-      - ../:/workspaces
-      - devcontainer-cache:/cache
-    working_dir: /workspaces
-    command: sleep infinity
-    stdin_open: true
-    tty: true
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "node", "--version"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
-    depends_on:
-      postgres-db:
-        condition: service_healthy
-      mariadb:
-        condition: service_healthy
+  # devcontainer:
+  #   build:
+  #     context: .
+  #     dockerfile: ./.devcontainer/Dockerfile.dev
+  #   image: mcp-devcontainer:latest
+  #   container_name: devcontainer
+  #   hostname: devcontainer
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.60
+  #   ports:
+  #     - "5173:5173"
+  #     - "8080:8080"
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu, compute, utility]
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #     - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+  #   env_file:
+  #     - devcontainer.env
+  #   volumes:
+  #     - ../:/workspaces
+  #     - devcontainer-cache:/cache
+  #   working_dir: /workspaces
+  #   command: sleep infinity
+  #   stdin_open: true
+  #   tty: true
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD", "node", "--version"]
+  #     interval: 30s
+  #     timeout: 5s
+  #     retries: 3
+  #     start_period: 20s
+  #   depends_on:
+  #     postgres-db:
+  #       condition: service_healthy
+  #     mariadb:
+  #       condition: service_healthy
 
 # Named volumes for persistence
 volumes:
-  postgres-data:
-    name: postgres-data
-  postgres-node-cache:
-    name: postgres-node-cache
-  postgres-cache:
-    name: postgres-cache
-  mariadb-data:
-    name: mariadb-data
-  mariadb-node-cache:
-    name: mariadb-node-cache
-  mariadb-cache:
-    name: mariadb-cache
-  python-exp-cache:
-    name: python-exp-cache
-  k8s-config:
-    name: k8s-config
-  k8s-cache:
-    name: k8s-cache
-  buildkit-cache:
-    name: buildkit-cache
-  buildkit-tmp:
-    name: buildkit-tmp
-  runner-work:
-    name: runner-work
-  runner-cache:
-    name: runner-cache
-  prometheus-data:
-    name: prometheus-data
-  grafana-data:
-    name: grafana-data
-  devcontainer-cache:
-    name: devcontainer-cache
-  node-builder-node-modules:
-    name: node-builder-node-modules
-  node-builder-npm:
-    name: node-builder-npm
-  node-builder-turbo:
-    name: node-builder-turbo
-  node-builder-git-hooks:
-    name: node-builder-git-hooks
-  node-builder-husky:
-    name: node-builder-husky
-  react_node_modules:
-    name: react_node_modules
-  react-vite-cache:
-    name: react-vite-cache
-  react-npm-cache:
-    name: react-npm-cache
+  react_scuba_postgres-data:
+    name: react_scuba_postgres-data
+  react_scuba_postgres-node-cache:
+    name: react_scuba_postgres-node-cache
+  react_scuba_postgres-cache:
+    name: react_scuba_postgres-cache
+  react_scuba_mariadb-data:
+    name: react_scuba_mariadb-data
+  react_scuba_mariadb-node-cache:
+    name: react_scuba_mariadb-node-cache
+  react_scuba_mariadb-cache:
+    name: react_scuba_mariadb-cache
+  react_scuba_python-exp-cache:
+    name: react_scuba_python-exp-cache
+  react_scuba_k8s-config:
+    name: react_scuba_k8s-config
+  react_scuba_k8s-cache:
+    name: react_scuba_k8s-cache
+  react_scuba_buildkit-cache:
+    name: react_scuba_buildkit-cache
+  react_scuba_buildkit-tmp:
+    name: react_scuba_buildkit-tmp
+  react_scuba_runner-work:
+    name: react_scuba_runner-work
+  react_scuba_runner-cache:
+    name: react_scuba_runner-cache
+  react_scuba_prometheus-data:
+    name: react_scuba_prometheus-data
+  react_scuba_grafana-data:
+    name: react_scuba_grafana-data
+  react_scuba_devcontainer-cache:
+    name: react_scuba_devcontainer-cache
+  react_scuba_node-builder-node-modules:
+    name: react_scuba_node-builder-node-modules
+  react_scuba_node-builder-npm:
+    name: react_scuba_node-builder-npm
+  react_scuba_node-builder-turbo:
+    name: react_scuba_node-builder-turbo
+  react_scuba_node-builder-git-hooks:
+    name: react_scuba_node-builder-git-hooks
+  react_scuba_node-builder-husky:
+    name: react_scuba_node-builder-husky
+  react_scuba_react_node_modules:
+    name: react_scuba_react_node_modules
+  react_scuba_react-vite-cache:
+    name: react_scuba_react-vite-cache
+  react_scuba_react-npm-cache:
+    name: react_scuba_react-npm-cache
 
 # Custom network with static IPs
 networks:
@@ -715,5 +681,5 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.0.0/16
-          gateway: 172.20.0.1
+        - subnet: 172.28.0.0/16
+          gateway: 172.28.0.1

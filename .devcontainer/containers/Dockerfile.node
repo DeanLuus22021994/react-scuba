@@ -55,7 +55,7 @@ ENV NPM_CONFIG_CACHE=/cache/npm \
   HUSKY=1
 
 # Volume mount points (will be mounted at runtime)
-VOLUME [\"/cache/node_modules\", \"/cache/npm\", \"/cache/turbo\", \"/cache/git-hooks\", \"/cache/husky\"]
+VOLUME ["/cache/node_modules", "/cache/npm", "/cache/turbo", "/cache/git-hooks", "/cache/husky"]
 
 # ==============================================================================
 # Stage: Workspace Clone & Setup
