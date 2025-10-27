@@ -48,4 +48,4 @@ uv pip install -r requirements.txt
 
 Import from `scripts.python.utils` to avoid code duplication.
 
-See [configuration management guide](agent-configuration.md) for config details.
+See [configuration management guide](configuration.md) for config details.

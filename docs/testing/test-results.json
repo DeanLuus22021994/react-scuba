@@ -1,140 +1,140 @@
 {
-  "runTime": "2025-10-27T12:07:23.769Z",
+  "runTime": "2025-10-27T12:08:50.705Z",
   "summary": {
     "totalFiles": 62,
     "passedFiles": 61,
     "failedFiles": 1,
-    "totalTests": 282,
-    "passedTests": 280,
+    "totalTests": 317,
+    "passedTests": 315,
     "failedTests": 2,
-    "passRate": 99.29078014184397
+    "passRate": 99.36908517350159
   },
   "performance": {
-    "totalDuration": 16995.6543,
-    "avgDuration": 60.268277659574466,
-    "testCount": 282,
+    "totalDuration": 30372.903199999997,
+    "avgDuration": 95.81357476340693,
+    "testCount": 317,
     "slowestTests": [
       {
-        "name": "should render hero section with heading",
-        "duration": 872.2598999999991,
+        "name": "should render page heading",
+        "duration": 1399.1082999999999,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx"
       },
       {
-        "name": "should render footer links",
-        "duration": 599.7155999999995,
+        "name": "should render page heading",
+        "duration": 1232.5733,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/layouts/Footer.test.jsx"
-      },
-      {
-        "name": "should have submit button",
-        "duration": 583.1450999999997,
-        "state": "pass",
-        "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx"
       },
       {
         "name": "should render header component",
-        "duration": 547.8725000000004,
+        "duration": 1167.0472,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/App.test.jsx"
       },
       {
         "name": "should render without crashing",
-        "duration": 524.1137999999992,
+        "duration": 1141.851700000001,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx"
+      },
+      {
+        "name": "should render page heading",
+        "duration": 1135.9817999999996,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx"
+      },
+      {
+        "name": "should render page heading",
+        "duration": 1112.2165000000005,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx"
+      },
+      {
+        "name": "should render main content area",
+        "duration": 1106.4144000000006,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/App.test.jsx"
+      },
+      {
+        "name": "should render hero section with heading",
+        "duration": 1074.1218000000008,
         "state": "pass",
         "errors": [],
         "fileName": "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx"
       },
       {
-        "name": "should render service links",
-        "duration": 513.6930999999995,
-        "state": "pass",
-        "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/home/ServicesSection.test.jsx"
-      },
-      {
         "name": "should render without crashing",
-        "duration": 484.87819999999965,
+        "duration": 1010.5360000000001,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/layouts/Navigation.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx"
       },
       {
-        "name": "should render without crashing",
-        "duration": 469.8005999999996,
+        "name": "should have submit button",
+        "duration": 970.0278999999991,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/layouts/Header.test.jsx"
-      },
-      {
-        "name": "should open dropdown when clicked",
-        "duration": 438.89760000000024,
-        "state": "pass",
-        "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx"
-      },
-      {
-        "name": "should render when open",
-        "duration": 435.83910000000105,
-        "state": "pass",
-        "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx"
       }
     ],
     "slowestFiles": [
       {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx",
-        "duration": 1604.7162000000008,
-        "testCount": 4
-      },
-      {
         "fileName": "C:/react_scuba_runner/react-scuba/tests/App.test.jsx",
-        "duration": 1358.6321000000007,
+        "duration": 2982.7366999999995,
         "testCount": 5
       },
       {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx",
-        "duration": 1033.3075,
-        "testCount": 6
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx",
+        "duration": 2859.6728000000003,
+        "testCount": 4
       },
       {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx",
-        "duration": 946.8872999999994,
-        "testCount": 9
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx",
+        "duration": 2462.9069999999992,
+        "testCount": 4
+      },
+      {
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx",
+        "duration": 2028.8011999999999,
+        "testCount": 4
+      },
+      {
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx",
+        "duration": 1844.0529000000006,
+        "testCount": 4
+      },
+      {
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx",
+        "duration": 1807.8438000000006,
+        "testCount": 5
+      },
+      {
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx",
+        "duration": 1718.4812999999995,
+        "testCount": 4
       },
       {
         "fileName": "C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx",
-        "duration": 929.5425999999998,
+        "duration": 1642.6713999999993,
         "testCount": 4
       },
       {
         "fileName": "C:/react_scuba_runner/react-scuba/tests/layouts/Footer.test.jsx",
-        "duration": 902.1253999999999,
+        "duration": 1035.2205999999996,
         "testCount": 4
       },
       {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/home/ServicesSection.test.jsx",
-        "duration": 845.7357000000002,
-        "testCount": 5
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/gallery/Lightbox.test.jsx",
-        "duration": 769.5146999999997,
-        "testCount": 7
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseComparison.test.jsx",
-        "duration": 730.0228999999995,
-        "testCount": 5
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx",
-        "duration": 704.1544999999987,
-        "testCount": 4
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx",
+        "duration": 994.3937000000005,
+        "testCount": 9
       }
     ],
     "distribution": [
@@ -142,13 +142,13 @@
         "label": "< 10ms",
         "min": 0,
         "max": 10,
-        "count": 131
+        "count": 144
       },
       {
         "label": "10-50ms",
         "min": 10,
         "max": 50,
-        "count": 78
+        "count": 77
       },
       {
         "label": "50-100ms",
@@ -160,13 +160,13 @@
         "label": "100-500ms",
         "min": 100,
         "max": 500,
-        "count": 43
+        "count": 60
       },
       {
         "label": "> 500ms",
         "min": 500,
         "max": null,
-        "count": 6
+        "count": 12
       }
     ]
   },
@@ -174,10 +174,10 @@
     {
       "category": "about",
       "fileCount": 3,
-      "totalTests": 13,
-      "passedTests": 13,
+      "totalTests": 17,
+      "passedTests": 17,
       "failedTests": 0,
-      "totalDuration": 312.74029999999993,
+      "totalDuration": 336.2064999999993,
       "passRate": 100
     },
     {
@@ -186,16 +186,16 @@
       "totalTests": 52,
       "passedTests": 52,
       "failedTests": 0,
-      "totalDuration": 3424.9480000000003,
+      "totalDuration": 3129.7064000000005,
       "passRate": 100
     },
     {
       "category": "courses",
       "fileCount": 3,
-      "totalTests": 14,
-      "passedTests": 14,
+      "totalTests": 17,
+      "passedTests": 17,
       "failedTests": 0,
-      "totalDuration": 1676.910199999999,
+      "totalDuration": 1780.4132000000009,
       "passRate": 100
     },
     {
@@ -204,25 +204,25 @@
       "totalTests": 27,
       "passedTests": 27,
       "failedTests": 0,
-      "totalDuration": 45.669500000001335,
+      "totalDuration": 50.47999999999956,
       "passRate": 100
     },
     {
       "category": "dive-sites",
       "fileCount": 3,
-      "totalTests": 12,
-      "passedTests": 12,
+      "totalTests": 15,
+      "passedTests": 15,
       "failedTests": 0,
-      "totalDuration": 261.37689999999975,
+      "totalDuration": 307.9280000000008,
       "passRate": 100
     },
     {
       "category": "gallery",
       "fileCount": 4,
-      "totalTests": 15,
-      "passedTests": 15,
+      "totalTests": 19,
+      "passedTests": 19,
       "failedTests": 0,
-      "totalDuration": 1036.1758999999997,
+      "totalDuration": 1021.2192999999993,
       "passRate": 100
     },
     {
@@ -231,7 +231,7 @@
       "totalTests": 36,
       "passedTests": 36,
       "failedTests": 0,
-      "totalDuration": 2396.2249,
+      "totalDuration": 2375.4027000000006,
       "passRate": 100
     },
     {
@@ -240,7 +240,7 @@
       "totalTests": 8,
       "passedTests": 8,
       "failedTests": 0,
-      "totalDuration": 213.54230000000007,
+      "totalDuration": 229.43420000000015,
       "passRate": 100
     },
     {
@@ -249,7 +249,7 @@
       "totalTests": 14,
       "passedTests": 14,
       "failedTests": 0,
-      "totalDuration": 2667.3475,
+      "totalDuration": 2597.1649,
       "passRate": 100
     },
     {
@@ -258,17 +258,17 @@
       "totalTests": 8,
       "passedTests": 8,
       "failedTests": 0,
-      "totalDuration": 1633.6970999999985,
+      "totalDuration": 2478.6768999999986,
       "passRate": 100
     },
     {
       "category": "pages",
       "fileCount": 1,
-      "totalTests": 0,
-      "passedTests": 0,
+      "totalTests": 5,
+      "passedTests": 5,
       "failedTests": 0,
-      "totalDuration": 0,
-      "passRate": 0
+      "totalDuration": 1807.8438000000006,
+      "passRate": 100
     },
     {
       "category": "services",
@@ -276,7 +276,7 @@
       "totalTests": 9,
       "passedTests": 9,
       "failedTests": 0,
-      "totalDuration": 164.90220000000045,
+      "totalDuration": 157.07230000000027,
       "passRate": 100
     },
     {
@@ -285,7 +285,7 @@
       "totalTests": 9,
       "passedTests": 9,
       "failedTests": 0,
-      "totalDuration": 185.77940000000035,
+      "totalDuration": 213.36689999999953,
       "passRate": 100
     },
     {
@@ -294,17 +294,17 @@
       "totalTests": 5,
       "passedTests": 5,
       "failedTests": 0,
-      "totalDuration": 11.066299999999956,
+      "totalDuration": 15.363100000000031,
       "passRate": 100
     },
     {
       "category": "tests",
       "fileCount": 7,
-      "totalTests": 13,
-      "passedTests": 11,
+      "totalTests": 29,
+      "passedTests": 27,
       "failedTests": 2,
-      "totalDuration": 3015.8100000000013,
-      "passRate": 84.61538461538461
+      "totalDuration": 13945.096399999999,
+      "passRate": 93.10344827586206
     },
     {
       "category": "utils",
@@ -312,114 +312,214 @@
       "totalTests": 47,
       "passedTests": 47,
       "failedTests": 0,
-      "totalDuration": 121.81249999999955,
+      "totalDuration": 125.56209999999965,
       "passRate": 100
     }
   ],
   "files": {
     "C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/App.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 355.8081000000002,
+          "duration": 447.0679,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render header component",
-          "duration": 547.8725000000004,
+          "name": "should render page heading",
+          "duration": 1399.1082999999999,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render main content area",
-          "duration": 328.3221000000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should wrap app with CurrencyProvider",
-          "duration": 47.92630000000008,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have scroll progress component",
-          "duration": 68.47809999999936,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1358.6321000000007
-    },
-    "C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 524.1137999999992,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render hero section with heading",
-          "duration": 872.2598999999991,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render all main sections",
-          "duration": 94.34779999999955,
+          "name": "should render about content",
+          "duration": 78.95860000000175,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have page content loaded",
-          "duration": 111.27089999999953,
+          "duration": 94.48689999999988,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 1604.7162000000008
+      "totalDuration": 2028.8011999999999
+    },
+    "C:/react_scuba_runner/react-scuba/tests/App.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 329.7512999999999,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render header component",
+          "duration": 1167.0472,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render main content area",
+          "duration": 1106.4144000000006,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should wrap app with CurrencyProvider",
+          "duration": 124.90439999999944,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have scroll progress component",
+          "duration": 242.86169999999947,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 2982.7366999999995
+    },
+    "C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 466.59250000000065,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render page heading",
+          "duration": 1112.2165000000005,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render courses content with currency provider",
+          "duration": 144.1324999999997,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 118.08160000000134,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 1844.0529000000006
+    },
+    "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 1010.5360000000001,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render page heading",
+          "duration": 1135.9817999999996,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render dive sites content",
+          "duration": 146.95000000000073,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 165.08629999999903,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 2462.9069999999992
+    },
+    "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 1141.851700000001,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render page heading",
+          "duration": 1232.5733,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render gallery content",
+          "duration": 229.2584999999999,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 253.03189999999995,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 2859.6728000000003
+    },
+    "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 408.3738000000012,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render hero section with heading",
+          "duration": 1074.1218000000008,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render all main sections",
+          "duration": 108.70319999999992,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have page content loaded",
+          "duration": 124.60510000000068,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 1718.4812999999995
     },
     "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js": {
       "passed": [
         {
           "name": "should find all markdown files",
-          "duration": 9.940800000000309,
+          "duration": 9.373999999999796,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should detect common link issues",
-          "duration": 2.258600000000115,
+          "duration": 3.2379000000000815,
           "state": "pass",
           "errors": []
         }
@@ -427,7 +527,7 @@
       "failed": [
         {
           "name": "should validate all links in documentation",
-          "duration": 35.29769999999962,
+          "duration": 31.602499999999964,
           "state": "fail",
           "errors": [
             {
@@ -450,7 +550,7 @@
         },
         {
           "name": "should validate all links in README.md",
-          "duration": 2.6813999999999396,
+          "duration": 2.012200000000121,
           "state": "fail",
           "errors": [
             {
@@ -473,2001 +573,2120 @@
         }
       ],
       "skipped": [],
-      "totalDuration": 52.46169999999984
+      "totalDuration": 48.44450000000006
     },
     "C:/react_scuba_runner/react-scuba/tests/data/bookingTypes.test.js": {
       "passed": [
         {
           "name": "should export BOOKING_TYPES",
-          "duration": 2.69380000000001,
+          "duration": 2.3384000000000924,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have course array",
-          "duration": 0.5923999999999978,
+          "duration": 0.6087000000002263,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have dive array",
-          "duration": 0.3405000000002474,
+          "duration": 0.3767000000002554,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have valid course structure",
-          "duration": 0.9870999999998276,
+          "duration": 1.3416000000001986,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have valid dive structure",
-          "duration": 0.6403000000000247,
+          "duration": 0.7796000000003005,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 7.366100000000188
+      "totalDuration": 7.951599999999871
     },
     "C:/react_scuba_runner/react-scuba/tests/data/courses.test.js": {
       "passed": [
         {
           "name": "should export COURSES array",
-          "duration": 2.4767000000001644,
+          "duration": 3.0679000000000087,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have valid course structure",
-          "duration": 2.731800000000021,
+          "duration": 2.9339999999997417,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export getCourseById function",
-          "duration": 0.3524999999999636,
+          "duration": 0.4902999999999338,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should find course by id",
-          "duration": 0.3259000000002743,
+          "duration": 0.38540000000011787,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should return undefined for invalid id",
-          "duration": 0.27149999999983265,
+          "duration": 0.3251000000000204,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 8.33159999999998
+      "totalDuration": 9.916799999999967
     },
     "C:/react_scuba_runner/react-scuba/tests/data/credentials.test.js": {
       "passed": [
         {
           "name": "should export CREDENTIALS array",
-          "duration": 1.5979999999999563,
+          "duration": 2.6400000000003274,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have valid credential structure",
-          "duration": 0.7865999999999076,
+          "duration": 0.8555999999998676,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have PADI 5 Star credential",
-          "duration": 0.18580000000019936,
+          "duration": 0.2035000000000764,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 3.929500000000189
+      "totalDuration": 5.655799999999999
     },
     "C:/react_scuba_runner/react-scuba/tests/data/diveSites.test.js": {
       "passed": [
         {
           "name": "should export DIVE_SITES array",
-          "duration": 2.76279999999997,
+          "duration": 2.8814000000002125,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export MAURITIUS_CENTER",
-          "duration": 1.8188999999997577,
+          "duration": 2.0585000000000946,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export DIFFICULTY_COLORS",
-          "duration": 0.7934000000000196,
+          "duration": 0.931999999999789,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have valid dive site structure",
-          "duration": 1.690900000000056,
+          "duration": 1.886000000000422,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export getDiveSiteById function",
-          "duration": 0.2990999999997257,
+          "duration": 0.3261000000002241,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 9.744800000000396
+      "totalDuration": 10.58349999999973
     },
     "C:/react_scuba_runner/react-scuba/tests/data/gallery.test.js": {
       "passed": [
         {
           "name": "should export GALLERY_IMAGES array",
-          "duration": 2.7849999999998545,
+          "duration": 2.62480000000005,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export FEATURED_IMAGES array",
-          "duration": 0.3924000000001797,
+          "duration": 0.3912000000000262,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export CATEGORIES array",
-          "duration": 0.32900000000017826,
+          "duration": 0.31890000000021246,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have valid gallery image structure",
-          "duration": 2.7689000000000306,
+          "duration": 3.0471000000002277,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export getImagesByCategory function",
-          "duration": 0.391399999999976,
+          "duration": 0.33359999999993306,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 8.946000000000367
+      "totalDuration": 9.375699999999597
     },
     "C:/react_scuba_runner/react-scuba/tests/data/team.test.js": {
       "passed": [
         {
           "name": "should export TEAM_MEMBERS array",
-          "duration": 2.6896999999999025,
+          "duration": 2.602899999999863,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have valid team member structure",
-          "duration": 1.4888999999998305,
+          "duration": 1.4402000000000044,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export getTeamMemberByName function",
-          "duration": 0.37310000000024957,
+          "duration": 0.4030000000002474,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should find team member by name",
-          "duration": 0.29819999999972424,
+          "duration": 0.2883999999999105,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 7.351500000000215
-    },
-    "C:/react_scuba_runner/react-scuba/tests/hooks/HooksIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export useCurrency",
-          "duration": 1.3090000000001965,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CurrencyProvider",
-          "duration": 0.22260000000005675,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2.7413000000001375
-    },
-    "C:/react_scuba_runner/react-scuba/tests/hooks/useCurrency.test.jsx": {
-      "passed": [
-        {
-          "name": "should provide currency context",
-          "duration": 136.9949999999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have default currency",
-          "duration": 10.360999999999876,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide format function",
-          "duration": 9.369500000000244,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide convert function",
-          "duration": 31.75610000000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide setCurrency function",
-          "duration": 10.016799999999876,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide availableCurrencies",
-          "duration": 9.441499999999905,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 210.80099999999993
+      "totalDuration": 6.996600000000399
     },
     "C:/react_scuba_runner/react-scuba/tests/layouts/Footer.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 239.6323000000002,
+          "duration": 211.2528000000002,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display copyright text",
-          "duration": 33.01310000000012,
+          "duration": 69.86590000000069,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should render footer links",
-          "duration": 599.7155999999995,
+          "duration": 716.1252999999997,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have proper structure",
-          "duration": 26.66150000000016,
+          "duration": 35.26050000000032,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 902.1253999999999
+      "totalDuration": 1035.2205999999996
     },
     "C:/react_scuba_runner/react-scuba/tests/layouts/Header.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 469.8005999999996,
+          "duration": 451.8895999999995,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should contain navigation",
-          "duration": 32.14390000000003,
+          "duration": 38.55749999999989,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have proper structure",
-          "duration": 42.04389999999967,
+          "duration": 25.774099999999635,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 547.2555000000002
+      "totalDuration": 519.8989000000001
     },
     "C:/react_scuba_runner/react-scuba/tests/layouts/MainLayout.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 287.1216000000004,
+          "duration": 244.58839999999964,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should render children",
-          "duration": 65.09079999999994,
+          "duration": 75.41850000000068,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should contain header",
-          "duration": 99.86459999999988,
+          "duration": 76.8753999999999,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should contain footer",
-          "duration": 76.20589999999993,
+          "duration": 45.0635999999995,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 531.3764999999994
+      "totalDuration": 444.9343000000008
     },
     "C:/react_scuba_runner/react-scuba/tests/layouts/Navigation.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 484.87819999999965,
+          "duration": 330.94569999999976,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should render navigation links",
-          "duration": 186.15279999999984,
+          "duration": 251.40859999999975,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have proper navigation structure",
-          "duration": 12.51890000000003,
+          "duration": 11.72400000000016,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 686.5901000000003
+      "totalDuration": 597.1110999999996
     },
-    "C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx": {
-      "passed": [],
+    "C:/react_scuba_runner/react-scuba/tests/hooks/HooksIndex.test.js": {
+      "passed": [
+        {
+          "name": "should export useCurrency",
+          "duration": 1.46120000000019,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export CurrencyProvider",
+          "duration": 0.21000000000003638,
+          "state": "pass",
+          "errors": []
+        }
+      ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 0
+      "totalDuration": 2.8732999999997446
+    },
+    "C:/react_scuba_runner/react-scuba/tests/hooks/useCurrency.test.jsx": {
+      "passed": [
+        {
+          "name": "should provide currency context",
+          "duration": 152.087,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have default currency",
+          "duration": 11.23849999999993,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should provide format function",
+          "duration": 8.941299999999956,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should provide convert function",
+          "duration": 30.90059999999994,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should provide setCurrency function",
+          "duration": 10.588700000000244,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should provide availableCurrencies",
+          "duration": 9.803899999999885,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 226.5609000000004
+    },
+    "C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 410.9349999999995,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 223.58100000000013,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 682.5321999999996,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 376.41389999999956,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render without crashing",
+          "duration": 110.90370000000075,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 1807.8438000000006
     },
     "C:/react_scuba_runner/react-scuba/tests/services/api.test.js": {
       "passed": [
         {
           "name": "should export sendContactMessage",
-          "duration": 2.904399999999896,
+          "duration": 2.7216000000003078,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export createCalendarBooking",
-          "duration": 0.5709000000001652,
+          "duration": 0.5202999999996791,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export checkCalendarAvailability",
-          "duration": 0.4272000000000844,
+          "duration": 0.39330000000018117,
           "state": "pass",
           "errors": []
         },
         {
           "name": "sendContactMessage should handle successful response",
-          "duration": 141.73520000000008,
+          "duration": 134.32479999999987,
           "state": "pass",
           "errors": []
         },
         {
           "name": "checkCalendarAvailability should return object",
-          "duration": 13.721300000000156,
+          "duration": 13.085100000000239,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 161.85450000000037
+      "totalDuration": 153.94259999999986
     },
     "C:/react_scuba_runner/react-scuba/tests/services/ServicesIndex.test.js": {
       "passed": [
         {
           "name": "should export api functions",
-          "duration": 1.2388999999998305,
+          "duration": 1.297399999999925,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have sendContactMessage",
-          "duration": 0.22630000000026484,
+          "duration": 0.20409999999992579,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have createCalendarBooking",
-          "duration": 0.16960000000017317,
+          "duration": 0.14390000000003056,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have checkCalendarAvailability",
-          "duration": 0.13999999999987267,
+          "duration": 0.14249999999992724,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 3.047700000000077
+      "totalDuration": 3.129700000000412
     },
     "C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.css.test.js": {
       "passed": [
         {
           "name": "should have valid CSS structure",
-          "duration": 1.3106000000002496,
+          "duration": 2.6123999999999796,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should be importable",
-          "duration": 0.8519999999998618,
+          "duration": 1.8250000000002728,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 3.4682000000002517
+      "totalDuration": 6.906099999999697
     },
     "C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.test.jsx": {
       "passed": [
         {
           "name": "should have entry point",
-          "duration": 2.20470000000023,
+          "duration": 2.3489999999997053,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should import required modules",
-          "duration": 0.37909999999965294,
+          "duration": 0.3692000000000917,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should not throw on import",
-          "duration": 2.9076999999997497,
+          "duration": 3.395799999999781,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 7.598099999999704
+      "totalDuration": 8.457000000000335
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/analytics.test.js": {
       "passed": [
         {
           "name": "should export trackFormStart",
-          "duration": 2.8423000000002503,
+          "duration": 3.0482999999999265,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export trackFormComplete",
-          "duration": 0.5113000000001193,
+          "duration": 0.779399999999896,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export trackFormAbandon",
-          "duration": 0.3843000000001666,
+          "duration": 0.5300000000002001,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export trackPhoneClick",
-          "duration": 0.2931000000003223,
+          "duration": 0.380500000000211,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export trackWhatsAppClick",
-          "duration": 0.35770000000002256,
+          "duration": 0.48900000000003274,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export trackCalendarBookingComplete",
-          "duration": 0.36999999999989086,
+          "duration": 0.4551000000001295,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should call trackFormStart without errors",
-          "duration": 2.115900000000238,
+          "duration": 2.8175999999998567,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should call trackPhoneClick without errors",
-          "duration": 0.5364999999997053,
+          "duration": 0.6773999999995794,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should call trackWhatsAppClick without errors",
-          "duration": 0.5210000000001855,
+          "duration": 0.6697999999996682,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 10.289899999999761
+      "totalDuration": 12.39390000000003
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/currency.test.js": {
       "passed": [
         {
           "name": "should export CURRENCIES",
-          "duration": 2.59479999999985,
+          "duration": 2.6950000000001637,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have USD currency",
-          "duration": 0.7914999999998145,
+          "duration": 0.8356999999996333,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export formatCurrency",
-          "duration": 0.38779999999997017,
+          "duration": 0.4272000000000844,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export convertCurrency",
-          "duration": 0.3188999999997577,
+          "duration": 0.3106999999999971,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should format currency correctly",
-          "duration": 32.55880000000025,
+          "duration": 34.09860000000026,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should convert currency with rates",
-          "duration": 0.4248999999999796,
+          "duration": 0.4640999999996893,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should return same amount for same currency",
-          "duration": 0.2932999999998174,
+          "duration": 0.29500000000007276,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 39.74940000000015
+      "totalDuration": 41.61969999999974
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/env.test.js": {
       "passed": [
         {
           "name": "should export isDevelopment",
-          "duration": 2.2053000000000793,
+          "duration": 2.4225000000001273,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export isProduction",
-          "duration": 0.38400000000001455,
+          "duration": 0.39259999999967476,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export getApiUrl",
-          "duration": 0.4088000000001557,
+          "duration": 0.44969999999966603,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export getCalendarEmail",
-          "duration": 0.4958000000001448,
+          "duration": 0.31959999999980937,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export getCalendarApiKey",
-          "duration": 0.35930000000007567,
+          "duration": 0.3162999999999556,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should return string for getApiUrl",
-          "duration": 0.36979999999994106,
+          "duration": 0.4078999999996995,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should return string for getCalendarEmail",
-          "duration": 0.4394000000002052,
+          "duration": 0.3328000000001339,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 6.978599999999915
+      "totalDuration": 7.0922999999997955
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/logger.test.js": {
       "passed": [
         {
           "name": "should export logger object",
-          "duration": 3.0614000000000487,
+          "duration": 3.114300000000185,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have info method",
-          "duration": 0.47100000000000364,
+          "duration": 0.5360000000000582,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have error method",
-          "duration": 0.3125999999997475,
+          "duration": 0.3566000000000713,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have warn method",
-          "duration": 0.21979999999985012,
+          "duration": 0.27080000000023574,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have info method",
-          "duration": 0.27910000000019863,
+          "duration": 0.40679999999974825,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should call logger methods without errors",
-          "duration": 7.117400000000089,
+          "duration": 7.712199999999939,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 14.04509999999982
+      "totalDuration": 14.989500000000135
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/reportWebVitals.test.js": {
       "passed": [
         {
           "name": "should export reportWebVitals function",
-          "duration": 5.891599999999926,
+          "duration": 2.800799999999981,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should accept callback function",
-          "duration": 2.763600000000224,
+          "duration": 2.512199999999666,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should work without callback",
-          "duration": 0.519800000000032,
+          "duration": 0.6132999999999811,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 11.422900000000027
+      "totalDuration": 8.339199999999892
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/scrollToAnchor.test.js": {
       "passed": [
         {
           "name": "should export scrollToElement function",
-          "duration": 3.0144000000000233,
+          "duration": 3.197599999999966,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should handle valid anchor id",
-          "duration": 17.456700000000183,
+          "duration": 18.383699999999862,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should handle missing anchor",
-          "duration": 2.0979999999999563,
+          "duration": 2.64870000000019,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export scrollToTop",
-          "duration": 0.44590000000016516,
+          "duration": 0.4796000000001186,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 25.79820000000018
+      "totalDuration": 27.08699999999999
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/seo.test.js": {
       "passed": [
         {
           "name": "should export defaultMetaTags",
-          "duration": 2.522100000000137,
+          "duration": 2.6015000000002146,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have required default meta tags",
-          "duration": 0.66800000000012,
+          "duration": 0.7395999999998821,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export generatePageMetaTags function",
-          "duration": 0.3391999999998916,
+          "duration": 0.370600000000195,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should generate meta tags for home page",
-          "duration": 0.4450000000001637,
+          "duration": 0.4837999999999738,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should generate meta tags for about page",
-          "duration": 0.5961999999999534,
+          "duration": 0.547099999999773,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should generate meta tags for courses page",
-          "duration": 0.3205000000002656,
+          "duration": 0.44519999999965876,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should handle unknown page",
-          "duration": 0.25489999999990687,
+          "duration": 0.30219999999962965,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 8.051099999999678
+      "totalDuration": 8.03500000000031
     },
     "C:/react_scuba_runner/react-scuba/tests/utils/UtilsIndex.test.js": {
       "passed": [
         {
           "name": "should export logger",
-          "duration": 2.1437000000000808,
+          "duration": 2.2835000000000036,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export currency utilities",
-          "duration": 0.6464999999998327,
+          "duration": 0.602100000000064,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export analytics functions",
-          "duration": 0.3587000000002263,
+          "duration": 0.4479999999998654,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should export SEO utilities",
-          "duration": 0.35039999999980864,
+          "duration": 0.322400000000016,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 5.477300000000014
+      "totalDuration": 6.005499999999756
     },
     "C:/react_scuba_runner/react-scuba/tests/components/about/AboutIndex.test.js": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/about/CredentialCard.test.jsx": {
       "passed": [
         {
-          "name": "should render without crashing",
-          "duration": 98.34590000000026,
+          "name": "should export AboutPage",
+          "duration": 1.9197000000003754,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should display credential title",
-          "duration": 11.22150000000056,
+          "name": "should export CredentialCard",
+          "duration": 0.3161000000000058,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should display credential description",
-          "duration": 10.177299999999377,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render icon component",
-          "duration": 15.817600000000311,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply animation delay based on index",
-          "duration": 9.665399999999863,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 9.160100000000057,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 157.8140000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/about/TeamMember.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 92.32060000000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member name",
-          "duration": 12.004199999999855,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member role",
-          "duration": 10.430000000000291,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member bio",
-          "duration": 8.02370000000019,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render member image with correct alt text",
-          "duration": 10.871399999999994,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all certifications",
-          "duration": 11.308799999999792,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 6.960699999999633,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 154.92629999999963
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/CommonIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CurrencySelector",
-          "duration": 1.1921000000002095,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export ErrorBoundary",
-          "duration": 0.17650000000003274,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export Loading",
-          "duration": 0.12290000000029977,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export PhoneLink",
-          "duration": 0.10359999999991487,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export SEO",
-          "duration": 0.09249999999974534,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export WhatsAppButton",
-          "duration": 0.11279999999987922,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2.89429999999993
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 159.60230000000047,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display current currency",
-          "duration": 29.867999999999483,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should open dropdown when clicked",
-          "duration": 438.89760000000024,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display currency dropdown with all options",
-          "duration": 204.2476999999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should change currency when option clicked",
-          "duration": 175.11679999999978,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display chevron icon",
-          "duration": 22.44920000000002,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1033.3075
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/ErrorBoundary.test.jsx": {
-      "passed": [
-        {
-          "name": "should render children when no error",
-          "duration": 48.67489999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should catch errors and display error UI",
-          "duration": 53.69210000000021,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display Try Again button on error",
-          "duration": 262.8577,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should reset error when Try Again clicked",
-          "duration": 119.19650000000047,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render custom fallback when provided",
-          "duration": 4.854199999999764,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 497.9553000000001
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/Loading.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 54.108600000000024,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display loading text",
-          "duration": 13.261700000000019,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render with default text",
-          "duration": 5.259300000000167,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not display text when text prop is empty",
-          "duration": 4.432000000000244,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render spinner element",
-          "duration": 13.928299999999581,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply small size class",
-          "duration": 4.384399999999914,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply medium size class by default",
-          "duration": 4.230000000000018,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply large size class",
-          "duration": 3.7139000000001943,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 5.501100000000406,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 112.05529999999999
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/PhoneLink.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 238.40470000000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display phone number by default",
-          "duration": 11.01720000000023,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display custom children when provided",
-          "duration": 5.969900000000052,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct tel href",
-          "duration": 40.88969999999972,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render phone icon",
-          "duration": 5.719199999999546,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have aria-label",
-          "duration": 115.89159999999993,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply custom className",
-          "duration": 33.968799999999646,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackPhoneClick on click",
-          "duration": 105.77230000000054,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 577.7591000000002
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/SEO.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 46.8107,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set custom title when provided",
-          "duration": 62.48869999999988,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set page-specific meta tags",
-          "duration": 89.7507999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set default meta tags for home page",
-          "duration": 55.2482,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set Open Graph meta tags",
-          "duration": 86.90729999999985,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set Twitter meta tags",
-          "duration": 61.59019999999964,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set canonical link",
-          "duration": 56.95750000000044,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set custom description when provided",
-          "duration": 57.02880000000005,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 519.7013999999999
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/WhatsAppButton.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 262.9975999999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render button variant by default",
-          "duration": 9.470699999999852,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render icon variant correctly",
-          "duration": 41.973299999999654,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render floating variant with fixed positioning",
-          "duration": 38.82220000000052,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct WhatsApp URL",
-          "duration": 52.649500000000444,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should encode custom message in URL",
-          "duration": 37.14170000000013,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should open in new tab",
-          "duration": 45.21810000000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render WhatsApp icon",
-          "duration": 4.919200000000274,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackWhatsAppClick on click",
-          "duration": 153.60620000000017,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply custom className",
-          "duration": 29.699500000000626,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 681.2751000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 224.46150000000034,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course name",
-          "duration": 30.943900000000212,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course tagline",
-          "duration": 33.094200000000455,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course description",
-          "duration": 41.07860000000073,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course duration",
-          "duration": 37.55590000000029,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display minimum age",
-          "duration": 23.543099999999868,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display included items",
-          "duration": 37.41750000000047,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should toggle curriculum visibility",
-          "duration": 368.6683000000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onBookClick when book button clicked",
-          "duration": 146.27469999999994,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 946.8872999999994
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseComparison.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 183.6156000000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display table headers",
-          "duration": 37.22870000000012,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course rows",
-          "duration": 29.953899999999976,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course data in table format",
-          "duration": 260.06619999999975,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper table structure",
-          "duration": 216.663,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 730.0228999999995
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/courses/CoursesIndex.test.js": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/FeaturedCarousel.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 71.8784999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display heading",
-          "duration": 17.809000000000196,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Swiper component",
-          "duration": 12.530399999999645,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 105.4123999999997
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryGrid.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 104.22710000000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render all images",
-          "duration": 15.450599999999213,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image descriptions",
-          "duration": 12.894800000000032,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image categories",
-          "duration": 11.574599999999919,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have grid layout classes",
-          "duration": 14.260600000000522,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 161.2488000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryIndex.test.js": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/Lightbox.test.jsx": {
-      "passed": [
-        {
-          "name": "should not render when not open",
-          "duration": 47.08190000000013,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render when open",
-          "duration": 53.063200000000506,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image details",
-          "duration": 16.471299999999246,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onClose when close button clicked",
-          "duration": 291.64550000000054,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onNavigate with prev when previous button clicked",
-          "duration": 226.29699999999957,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onNavigate with next when next button clicked",
-          "duration": 120.47580000000016,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render image element",
-          "duration": 11.434700000000703,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 769.5146999999997
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveMap.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 39.73889999999983,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render map container",
-          "duration": 16.260299999999916,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept selectedSite prop",
-          "duration": 10.176699999999983,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 69.29350000000022
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 94.55789999999979,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display site name",
-          "duration": 13.931100000000697,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display site description",
-          "duration": 11.246699999999691,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display depth information",
-          "duration": 11.560699999999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display visibility",
-          "duration": 9.906199999999444,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display best season",
-          "duration": 9.608499999999367,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all highlights",
-          "duration": 10.96519999999964,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all marine life",
-          "duration": 13.339199999999437,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render site image",
-          "duration": 13.263899999999921,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 192.08339999999953
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteIndex.test.js": {
-      "passed": [],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 0
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/CTASection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 102.16809999999987,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 8.686200000000099,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display description",
-          "duration": 8.893100000000231,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Contact Us button",
-          "duration": 271.92059999999947,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Call Us link",
-          "duration": 106.52210000000014,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 500.98149999999987
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/FeaturesSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 111.52469999999994,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 17.808100000000195,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display subtitle",
-          "duration": 13.641899999999623,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all features",
-          "duration": 18.330299999999625,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display feature stats",
-          "duration": 18.540400000000773,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 182.92360000000008
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/HeroSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 136.78200000000015,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 17.684799999999996,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display subtitle",
-          "duration": 17.976799999999457,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Book Your Dive button",
-          "duration": 302.5135,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render View Courses link",
-          "duration": 72.16870000000017,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display scroll indicator",
-          "duration": 52.86709999999948,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 602.9691000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/HomeIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CTASection",
-          "duration": 0.954899999999725,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export FeaturesSection",
-          "duration": 0.1445000000003347,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export HeroSection",
-          "duration": 0.2062999999998283,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export HomePage",
-          "duration": 0.10530000000017026,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export ServicesSection",
-          "duration": 0.21369999999978972,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export SpecialOffersSection",
-          "duration": 0.13160000000016225,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export TestimonialsSection",
-          "duration": 0.08870000000024447,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export VideoSection",
-          "duration": 0.06220000000030268,
+          "name": "should export TeamMember",
+          "duration": 0.20499999999992724,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have correct number of exports",
-          "duration": 0.8034999999999854,
+          "duration": 1.3101999999998952,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 3.8777000000000044
+      "totalDuration": 5.617899999999281
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/about/CredentialCard.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 86.94689999999991,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display credential title",
+          "duration": 9.899999999999636,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display credential description",
+          "duration": 8.767299999999523,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render icon component",
+          "duration": 13.722200000000157,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should apply animation delay based on index",
+          "duration": 6.224599999999555,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have proper styling classes",
+          "duration": 5.634799999999814,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 133.9929000000002
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/about/TeamMember.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 125.84950000000026,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display member name",
+          "duration": 15.64600000000064,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display member role",
+          "duration": 8.83560000000034,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display member bio",
+          "duration": 8.438599999999497,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render member image with correct alt text",
+          "duration": 12.251900000000205,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display all certifications",
+          "duration": 10.548800000000483,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have proper styling classes",
+          "duration": 9.32050000000072,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 196.59569999999985
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 265.3058000000001,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display course name",
+          "duration": 28.078599999999824,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display course tagline",
+          "duration": 25.595499999999447,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display course description",
+          "duration": 45.35390000000007,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display course duration",
+          "duration": 59.26919999999973,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display minimum age",
+          "duration": 34.26019999999971,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display included items",
+          "duration": 31.46610000000055,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should toggle curriculum visibility",
+          "duration": 346.21889999999985,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should call onBookClick when book button clicked",
+          "duration": 155.6925000000001,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 994.3937000000005
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseComparison.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 214.6493999999998,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display table headers",
+          "duration": 61.43830000000071,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display course rows",
+          "duration": 24.07429999999931,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display course data in table format",
+          "duration": 251.07589999999982,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have proper table structure",
+          "duration": 225.52520000000004,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 779.7528999999995
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/courses/CoursesIndex.test.js": {
+      "passed": [
+        {
+          "name": "should export CourseCard",
+          "duration": 2.332800000000134,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export CourseComparison",
+          "duration": 0.34790000000066357,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export CoursesPage",
+          "duration": 0.24539999999979045,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 6.266600000000835
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/common/CommonIndex.test.js": {
+      "passed": [
+        {
+          "name": "should export CurrencySelector",
+          "duration": 1.2538000000004104,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export ErrorBoundary",
+          "duration": 0.23230000000012296,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export Loading",
+          "duration": 0.1546000000003005,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export PhoneLink",
+          "duration": 0.15890000000035798,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export SEO",
+          "duration": 0.12489999999979773,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export WhatsAppButton",
+          "duration": 0.12829999999985375,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 3.9854999999997744
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 152.65320000000065,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display current currency",
+          "duration": 18.928400000000693,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should open dropdown when clicked",
+          "duration": 391.6258000000007,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display currency dropdown with all options",
+          "duration": 113.65369999999984,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should change currency when option clicked",
+          "duration": 152.0033000000003,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display chevron icon",
+          "duration": 14.507300000000214,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 846.5439000000006
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/common/ErrorBoundary.test.jsx": {
+      "passed": [
+        {
+          "name": "should render children when no error",
+          "duration": 56.9360999999999,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should catch errors and display error UI",
+          "duration": 32.89440000000013,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display Try Again button on error",
+          "duration": 226.4480999999996,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should reset error when Try Again clicked",
+          "duration": 136.1166000000003,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render custom fallback when provided",
+          "duration": 5.589600000000246,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 461.34349999999995
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/common/Loading.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 55.2183,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display loading text",
+          "duration": 6.51929999999993,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render with default text",
+          "duration": 6.922100000000228,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should not display text when text prop is empty",
+          "duration": 4.086099999999988,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render spinner element",
+          "duration": 20.870699999999943,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should apply small size class",
+          "duration": 5.327099999999973,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should apply medium size class by default",
+          "duration": 4.14409999999998,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should apply large size class",
+          "duration": 4.541200000000117,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have proper styling classes",
+          "duration": 9.213400000000092,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 120.33339999999998
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/common/PhoneLink.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 273.8836999999994,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display phone number by default",
+          "duration": 8.371699999999691,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display custom children when provided",
+          "duration": 5.343199999999342,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have correct tel href",
+          "duration": 41.97440000000006,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render phone icon",
+          "duration": 7.385699999999815,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have aria-label",
+          "duration": 48.04599999999937,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should apply custom className",
+          "duration": 46.02180000000044,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should call trackPhoneClick on click",
+          "duration": 152.40259999999944,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 586.6298999999999
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/common/SEO.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 50.21900000000005,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should set custom title when provided",
+          "duration": 47.45749999999998,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should set page-specific meta tags",
+          "duration": 45.75729999999976,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should set default meta tags for home page",
+          "duration": 48.16919999999982,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should set Open Graph meta tags",
+          "duration": 61.31890000000021,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should set Twitter meta tags",
+          "duration": 47.352100000000064,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should set canonical link",
+          "duration": 39.178100000000086,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should set custom description when provided",
+          "duration": 74.08640000000014,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 418.65570000000025
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/common/WhatsAppButton.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 292.28650000000016,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render button variant by default",
+          "duration": 29.479199999999764,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render icon variant correctly",
+          "duration": 59.05550000000039,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render floating variant with fixed positioning",
+          "duration": 50.46320000000014,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have correct WhatsApp URL",
+          "duration": 51.975900000000365,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should encode custom message in URL",
+          "duration": 39.693200000000616,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should open in new tab",
+          "duration": 35.50910000000022,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render WhatsApp icon",
+          "duration": 5.628000000000611,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should call trackWhatsAppClick on click",
+          "duration": 88.27400000000034,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should apply custom className",
+          "duration": 36.48660000000018,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 692.2145
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveMap.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 49.296100000000024,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render map container",
+          "duration": 30.871900000000096,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should accept selectedSite prop",
+          "duration": 6.894400000000132,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 89.86110000000008
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteCard.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 105.84430000000066,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display site name",
+          "duration": 15.8174999999992,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display site description",
+          "duration": 14.521299999999428,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display depth information",
+          "duration": 16.63289999999961,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display visibility",
+          "duration": 11.879399999999805,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display best season",
+          "duration": 9.334899999999834,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display all highlights",
+          "duration": 11.408799999999246,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display all marine life",
+          "duration": 12.451000000000022,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render site image",
+          "duration": 12.378200000000106,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 213.66089999999986
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteIndex.test.js": {
+      "passed": [
+        {
+          "name": "should export DiveMap",
+          "duration": 1.9447000000000116,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export DiveSiteCard",
+          "duration": 0.29320000000006985,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export DiveSitesPage",
+          "duration": 0.2055000000000291,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 4.406000000000859
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/gallery/FeaturedCarousel.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 97.43020000000024,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display heading",
+          "duration": 33.710999999999785,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render Swiper component",
+          "duration": 19.197599999999966,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 153.44810000000007
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryGrid.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 116.74589999999989,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render all images",
+          "duration": 13.927299999999377,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display image descriptions",
+          "duration": 13.054999999999382,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display image categories",
+          "duration": 11.089300000000549,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have grid layout classes",
+          "duration": 10.563099999999395,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 168.4349000000002
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryIndex.test.js": {
+      "passed": [
+        {
+          "name": "should export FeaturedCarousel",
+          "duration": 1.9166000000004715,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export GalleryGrid",
+          "duration": 0.32400000000052387,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export GalleryPage",
+          "duration": 0.22950000000128057,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export Lightbox",
+          "duration": 0.2055000000000291,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 4.533999999999651
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/gallery/Lightbox.test.jsx": {
+      "passed": [
+        {
+          "name": "should not render when not open",
+          "duration": 49.22699999999986,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render when open",
+          "duration": 57.19560000000001,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display image details",
+          "duration": 15.815100000000712,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should call onClose when close button clicked",
+          "duration": 252.02509999999984,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should call onNavigate with prev when previous button clicked",
+          "duration": 139.78049999999985,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should call onNavigate with next when next button clicked",
+          "duration": 158.42099999999937,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render image element",
+          "duration": 18.890400000000227,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 694.8022999999994
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/home/CTASection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 92.7505000000001,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display main heading",
+          "duration": 10.936999999999898,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display description",
+          "duration": 22.225999999999658,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render Contact Us button",
+          "duration": 321.33449999999993,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render Call Us link",
+          "duration": 101.9427999999998,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 556.5923000000003
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/home/FeaturesSection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 106.83640000000014,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display main heading",
+          "duration": 17.44760000000042,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display subtitle",
+          "duration": 54.00579999999991,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display all features",
+          "duration": 46.699100000000726,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display feature stats",
+          "duration": 31.014799999999923,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 260.2640000000001
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/home/HeroSection.test.jsx": {
+      "passed": [
+        {
+          "name": "should render without crashing",
+          "duration": 121.1873999999998,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display main heading",
+          "duration": 23.22819999999956,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display subtitle",
+          "duration": 16.75500000000011,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render Book Your Dive button",
+          "duration": 297.27689999999984,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should render View Courses link",
+          "duration": 109.09760000000006,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should display scroll indicator",
+          "duration": 10.91820000000007,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 581.6385
+    },
+    "C:/react_scuba_runner/react-scuba/tests/components/home/HomeIndex.test.js": {
+      "passed": [
+        {
+          "name": "should export CTASection",
+          "duration": 1.1579000000001543,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export FeaturesSection",
+          "duration": 0.19160000000010768,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export HeroSection",
+          "duration": 0.13119999999980791,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export HomePage",
+          "duration": 0.40720000000055734,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export ServicesSection",
+          "duration": 0.2261000000007698,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export SpecialOffersSection",
+          "duration": 0.3842000000004191,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export TestimonialsSection",
+          "duration": 0.19390000000021246,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should export VideoSection",
+          "duration": 0.09040000000004511,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should have correct number of exports",
+          "duration": 0.8733999999994921,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 4.925199999999677
     },
     "C:/react_scuba_runner/react-scuba/tests/components/home/ServicesSection.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 251.39760000000024,
+          "duration": 144.46000000000004,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display main heading",
-          "duration": 20.124899999999798,
+          "duration": 20.061399999999594,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display all service cards",
-          "duration": 30.53690000000006,
+          "duration": 52.768699999999626,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should render service links",
-          "duration": 513.6930999999995,
+          "duration": 404.0115999999998,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display service descriptions",
-          "duration": 27.039999999999964,
+          "duration": 36.494400000000496,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 845.7357000000002
+      "totalDuration": 661.4691000000003
     },
     "C:/react_scuba_runner/react-scuba/tests/components/home/TestimonialsSection.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 120.8110999999999,
+          "duration": 174.0672999999997,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display main heading",
-          "duration": 26.799699999999575,
+          "duration": 26.08260000000064,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display all testimonials",
-          "duration": 29.918099999999868,
+          "duration": 28.004500000000007,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display testimonial locations",
-          "duration": 27.936999999999898,
+          "duration": 24.796800000000076,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display testimonial text",
-          "duration": 26.85990000000038,
+          "duration": 28.144099999999526,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should render star ratings",
-          "duration": 24.33390000000054,
+          "duration": 26.12169999999969,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 259.7372999999998
+      "totalDuration": 310.5136000000002
     },
     "C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx": {
       "passed": [
         {
           "name": "should render when open",
-          "duration": 435.83910000000105,
+          "duration": 459.8144000000011,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should not render when closed",
-          "duration": 11.903599999999642,
+          "duration": 15.112300000000687,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display booking type options",
-          "duration": 128.60450000000128,
+          "duration": 169.3192999999992,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should accept preSelectedItem prop",
-          "duration": 125.08160000000134,
+          "duration": 188.90599999999904,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 704.1544999999987
+      "totalDuration": 836.0054999999993
     },
     "C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx": {
       "passed": [
         {
           "name": "should render when open",
-          "duration": 243.15380000000005,
+          "duration": 363.40940000000046,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should not render when closed",
-          "duration": 8.594199999999546,
+          "duration": 11.261899999999514,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should display form fields",
-          "duration": 91.23609999999917,
+          "duration": 295.09540000000015,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have submit button",
-          "duration": 583.1450999999997,
+          "duration": 970.0278999999991,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 929.5425999999998
+      "totalDuration": 1642.6713999999993
     },
     "C:/react_scuba_runner/react-scuba/tests/components/shared/BackToTop.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 43.19840000000022,
+          "duration": 51.172999999999774,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should not be visible initially",
-          "duration": 19.34979999999996,
+          "duration": 13.998900000000503,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should accept showAfter prop",
-          "duration": 3.15979999999945,
+          "duration": 15.484000000000378,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should accept position prop",
-          "duration": 9.769199999999728,
+          "duration": 5.994099999999889,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should call scrollTo when button clicked",
-          "duration": 8.838299999999435,
+          "duration": 17.414200000000164,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 87.49030000000039
+      "totalDuration": 107.5667999999996
     },
     "C:/react_scuba_runner/react-scuba/tests/components/shared/ScrollProgress.test.jsx": {
       "passed": [
         {
           "name": "should render without crashing",
-          "duration": 63.146200000000135,
+          "duration": 65.14090000000033,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should render progress bar element",
-          "duration": 17.034200000000055,
+          "duration": 19.03150000000005,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should have correct styling classes",
-          "duration": 8.034599999999955,
+          "duration": 8.78650000000016,
           "state": "pass",
           "errors": []
         },
         {
           "name": "should render inner progress indicator",
-          "duration": 7.054899999999634,
+          "duration": 9.915500000000065,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [],
       "skipped": [],
-      "totalDuration": 98.28909999999996
+      "totalDuration": 105.80009999999993
     }
   }
 }

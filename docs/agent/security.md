@@ -44,4 +44,4 @@ tags:
 - Use read-only mounts for sensitive configs
 - Regular security updates via base images
 
-See [AI workflow guide](agent-workflow.md) for development process.
+See [AI workflow guide](workflow.md) for development process.

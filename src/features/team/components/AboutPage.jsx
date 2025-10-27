@@ -1,3 +1,4 @@
+import BookingModal from '@components/modals/BookingModal';
 import { SEO } from '@components/ui';
 import { CREDENTIALS } from '@config/constants/CREDENTIALS';
 import { TEAM_MEMBERS } from '@config/constants/TEAM';
@@ -5,7 +6,6 @@ import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { trackConversion } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import BookingModal from '@components/modals/BookingModal';
 import CredentialCard from './CredentialCard';
 import TeamMember from './TeamMember';
 

@@ -44,4 +44,6 @@ git commit -m "feat: migrate configs to .config/ structure"
 git push origin main
 ```
 
-See [quick reference](agent-reference.md) for common commands and file paths.
+## Related Documentation
+
+See [quick reference](reference.md) for common commands and file paths.

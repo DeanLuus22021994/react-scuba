@@ -47,4 +47,6 @@ COPY --chown=nginx:nginx .config/nginx/main.conf /etc/nginx/nginx.conf
 - `.vscode/settings.local.json` - AI model preferences
 - Local only, added to `.gitignore`
 
-See [security guidelines](agent-security.md) for credential management.
+## Related Documentation
+
+See [security guidelines](security.md) for credential management.

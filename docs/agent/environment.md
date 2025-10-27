@@ -51,4 +51,4 @@ python scripts/validate_env.py
 - `DOCKER_JUPYTER_TOKEN`
 - `DOCKER_PGADMIN_PASSWORD`
 
-See [code quality guide](agent-code-quality.md) for validation procedures.
+See [code quality guide](code-quality.md) for validation procedures.

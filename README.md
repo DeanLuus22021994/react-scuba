@@ -120,7 +120,7 @@ A modern, production-ready website platform for dive centers and marine tourism 
 - **[Quick Start](https://deanluus22021994.github.io/react-scuba/guide/quick-start.html)** - Get up and running in 5 minutes
 - **[API Reference](https://deanluus22021994.github.io/react-scuba/api/)** - Component documentation
 - **[Deployment Guide](https://deanluus22021994.github.io/react-scuba/deployment/)** - Production deployment
-- **[Docker Compose Submodule Guide](./docs/docker-compose-submodule.md)** - Git submodule setup and usage
+- **[Docker Deployment Guide](./docs/deployment/docker.md)** - Docker and Docker Compose setup
 - **[.env.example](./.env.example)** - Environment variables reference
 
 ## 🐳 Docker Compose Examples (Optional)
@@ -136,7 +136,7 @@ git submodule update --init --recursive
 
 This setup keeps the main repository focused on React development while allowing optional Docker infrastructure inclusion.
 
-See [docs/docker-compose-submodule.md](./docs/docker-compose-submodule.md) for detailed setup and usage instructions.
+See [docs/deployment/docker.md](./docs/deployment/docker.md) for detailed Docker setup and deployment instructions.
 
 ## 📞 Support
 

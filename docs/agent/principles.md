@@ -39,4 +39,4 @@ All scripts organized by task domain:
 - `powershell/docker/` - Docker operations
 - `bash/docker/` - Docker operations
 
-See [python environment guide](agent-python-setup.md) for setup details.
+See [python environment guide](python-setup.md) for setup details.
