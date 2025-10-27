@@ -1,6 +1,6 @@
+import { SEO } from '@components/ui';
 import { useState } from 'react';
 import { trackConversion } from '../../utils/analytics';
-import { SEO } from '@components/ui';
 import BookingModal from '../modals/BookingModal';
 import ContactModal from '../modals/ContactModal';
 import CTASection from './CTASection';

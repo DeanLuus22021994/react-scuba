@@ -1,3 +1,4 @@
+import { Loading } from '@components/ui';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,7 +13,6 @@ import { useCurrency } from '../../hooks/useCurrency';
 import { checkCalendarAvailability, createCalendarBooking } from '../../services/api';
 import { trackCalendarBookingComplete, trackFormAbandon, trackFormStart } from '../../utils/analytics';
 import logger from '../../utils/logger';
-import { Loading } from '@components/ui';
 
 const bookingSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),

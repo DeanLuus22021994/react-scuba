@@ -1,8 +1,8 @@
+import { SEO } from '@components/ui';
 import { DIVE_SITES } from '@config/constants/DIVE_SITES';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { trackConversion } from '../../utils/analytics';
-import { SEO } from '@components/ui';
 import BookingModal from '../modals/BookingModal';
 import DiveMap from './DiveMap';
 import DiveSiteCard from './DiveSiteCard';
