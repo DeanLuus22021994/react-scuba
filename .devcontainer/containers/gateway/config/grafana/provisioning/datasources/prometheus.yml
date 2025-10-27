@@ -1,14 +1,15 @@
-# yaml-language-server: $schema=https://grafana.com/docs/grafana/latest/administration/provisioning/
+# yaml-language-server: $schema=
 # Grafana Datasource Provisioning Configuration
 # Format: https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources
 # This file configures Prometheus as the default datasource for Grafana
+# Note: apiVersion and datasources are valid Grafana provisioning properties
 
 apiVersion: 1
 
 datasources:
   - name: Prometheus
     type: prometheus
-    access: proxy  
+    access: proxy
     url: http://prometheus:9090
     isDefault: true
     editable: false
