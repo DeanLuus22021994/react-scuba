@@ -1,0 +1,109 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "filesystem-mcp",
+        "--network",
+        "mcp-cluster",
+        "-v",
+        "${workspaceFolder}:/workspace:ro",
+        "-v",
+        "filesystem-node-cache:/cache/node",
+        "mcp-filesystem:latest"
+      ]
+    },
+    "git": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "git-mcp",
+        "--network",
+        "mcp-cluster",
+        "-v",
+        "${workspaceFolder}:/repos",
+        "-v",
+        "git-cache:/cache/git",
+        "-v",
+        "git-pip-cache:/cache/pip",
+        "-v",
+        "git-python-cache:/cache/python",
+        "mcp-git:latest"
+      ]
+    },
+    "fetch": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "fetch-mcp",
+        "--network",
+        "mcp-cluster",
+        "-v",
+        "fetch-cache:/cache/fetch",
+        "-v",
+        "fetch-pip-cache:/cache/pip",
+        "-v",
+        "fetch-python-cache:/cache/python",
+        "-v",
+        "fetch-http-cache:/cache/http",
+        "mcp-fetch:latest"
+      ]
+    },
+    "github": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "github-mcp",
+        "--network",
+        "mcp-cluster",
+        "-e",
+        "GITHUB_TOKEN=${env:GITHUB_TOKEN}",
+        "-e",
+        "GITHUB_DYNAMIC_TOOLSETS=1",
+        "-v",
+        "github-mcp-cache:/cache/github",
+        "-v",
+        "github-mcp-data:/app/data",
+        "ghcr.io/github/github-mcp-server:latest",
+        "stdio"
+      ]
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "memory-mcp",
+        "--network",
+        "mcp-cluster",
+        "-v",
+        "memory-data:/memory",
+        "-v",
+        "memory-node-cache:/cache/node",
+        "-v",
+        "memory-cache:/cache/memory",
+        "mcp-memory:latest"
+      ]
+    }
+  }
+}

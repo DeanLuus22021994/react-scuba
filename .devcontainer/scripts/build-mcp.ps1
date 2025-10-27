@@ -39,7 +39,7 @@
 param(
   [string]$ServerName,
   [string]$ContainerName,
-  [switch]$All = $true,
+  [switch]$All,
   [switch]$Parallel,
   [switch]$NoCacheParam,
   [switch]$PullBase
@@ -59,13 +59,12 @@ $env:COMPOSE_DOCKER_CLI_BUILD = "1"
 # Script paths
 $ScriptRoot = Split-Path -Parent $PSCommandPath
 $DevContainerRoot = Split-Path -Parent $ScriptRoot
-$ProjectRoot = Split-Path -Parent $DevContainerRoot
 
 # MCP Servers (stdio-based)
 $MCPServers = @("filesystem", "git", "fetch", "memory")
 
 # Infrastructure Containers (docker-compose services)
-$Containers = @("k8s-plugin", "mariadb", "postgres", "buildx", "runner")
+$Containers = @("k8s-plugin", "mariadb", "postgres", "buildx", "runner", "gateway")
 
 # Colors for output
 $Colors = @{
@@ -272,7 +271,7 @@ function Start-BuildKit {
 }
 
 function Deploy-Monitoring {
-  Write-Info "Deploying TBC monitoring stack..."
+  Write-Info "Deploying Gateway monitoring stack..."
     
   try {
     $composeFile = Join-Path $DevContainerRoot "docker-compose.mcp.yml"
@@ -281,7 +280,7 @@ function Deploy-Monitoring {
     & docker-compose -f $composeFile up -d nginx prometheus grafana
         
     if ($LASTEXITCODE -eq 0) {
-      Write-Success "TBC monitoring stack deployed"
+      Write-Success "Gateway monitoring stack deployed"
             
       Write-Info "Monitoring endpoints:"
       Write-Info "  - nginx: http://localhost"
@@ -428,13 +427,16 @@ function Main {
   # Start BuildKit if needed
   Start-BuildKit | Out-Null
     
+  # Determine if building all (default behavior when no specific targets)
+  $BuildAll = $All -or (-not $ServerName -and -not $ContainerName)
+  
   $results = @{}
     
   # Build MCP servers
   if ($ServerName) {
     $results[$ServerName] = Build-MCPServer -ServerName $ServerName -NoCache:$NoCacheParam
   }
-  elseif ($All -or (-not $ContainerName)) {
+  elseif ($BuildAll -or (-not $ContainerName)) {
     foreach ($server in $MCPServers) {
       $results[$server] = Build-MCPServer -ServerName $server -NoCache:$NoCacheParam
     }
@@ -444,14 +446,14 @@ function Main {
   if ($ContainerName) {
     $results[$ContainerName] = Build-Container -ContainerName $ContainerName -NoCache:$NoCacheParam
   }
-  elseif ($All -or (-not $ServerName)) {
+  elseif ($BuildAll -or (-not $ServerName)) {
     foreach ($container in $Containers) {
       $results[$container] = Build-Container -ContainerName $container -NoCache:$NoCacheParam
     }
   }
     
   # Deploy monitoring stack
-  if ($All) {
+  if ($BuildAll) {
     Deploy-Monitoring | Out-Null
   }
     
@@ -459,7 +461,7 @@ function Main {
   Show-BuildSummary -Results $results
     
   # Test services if everything was built
-  if ($All) {
+  if ($BuildAll) {
     Test-Services
   }
     

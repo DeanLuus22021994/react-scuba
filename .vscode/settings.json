@@ -1,183 +1,448 @@
 {
-    // Auto-save to reduce batch processing
-    "files.autoSave": "onFocusChange",
-    // GPU acceleration for VS Code UI (not language servers)
-    "window.titleBarStyle": "custom",
-    // JavaScript/TypeScript language server optimization
-    "typescript.tsserver.maxTsServerMemory": 4096,
-    "typescript.tsserver.experimental.enableProjectDiagnostics": false,
-    "typescript.preferences.includePackageJsonAutoImports": "auto",  // Utilize Extension.packageJSON from #vscodeAPI
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "javascript.suggest.autoImports": true,
-    "typescript.suggest.autoImports": true,
-    // Editor performance optimizations
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": false,
+  "$schema": "./schemas/vscode-settings-schema.json",
+  // ============================================================================
+  // TEAM SETTINGS (tracked in git)
+  // For personal preferences, create .vscode/settings.local.json
+  // See .vscode/settings.local.example.json for template
+  // ============================================================================
+
+  // Auto-save to reduce batch processing
+  "files.autoSave": "onFocusChange",
+  
+  // GPU acceleration for VS Code UI (not language servers)
+  "window.titleBarStyle": "custom",
+  "editor.experimentalGpuAcceleration": "on",
+  
+  // JavaScript/TypeScript language server optimization
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  
+  // Editor performance optimizations
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.snippetSuggestions": "top",
+  
+  // Language-specific formatting
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false,
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[javascriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2,
-        "editor.formatOnSave": false
-    },
-    // Markdown linting configuration - disabled rules for documentation aesthetics
-    "markdownlint.config": {
-        "MD022": false,  // Allow headings without blank lines for anchor tags
-        "MD031": false,  // Allow fenced code blocks without surrounding blank lines (aesthetics)
-        "MD032": false,  // Allow lists without surrounding blank lines (aesthetics)
-        "MD033": false,  // Allow inline HTML for anchor tags
-        "MD040": false,  // Allow fenced code blocks without language specification
-        "MD051": false   // Disable link fragments validation for clickable headings
-    },
+    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit",
-        "source.fixAll": "explicit",
-        "source.fixAll.eslint": "explicit"
+      "source.fixAll.markdownlint": "explicit"
     },
-    // Reduce language server load
-    "files.watcherExclude": {
-        "**/node_modules/**": true,
-        "**/dist/**": true,
-        "**/.git/**": true,
-        "**/build/**": true,
-        "**/coverage/**": true
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
     },
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/dist": true,
-        "**/build": true,
-        "**/coverage": true,
-        "**/.git": true,
-        "**/package-lock.json": true
-    },
-    // CSS validation (Tailwind v4 compatible)
-    "css.lint.unknownAtRules": "ignore",
-    "css.validate": true,
-    // Copilot settings
-    "chat.tools.global.autoApprove": true,
-    "editor.experimentalGpuAcceleration": "on",
-    // ESLint settings for flat config consistency
-    "eslint.useFlatConfig": true,
-    "eslint.validate": ["javascript", "javascriptreact"],
-    "eslint.run": "onType",
-    // File associations
-    "files.associations": {
-        ".husky/*": "shellscript"
-    },
-    // Python settings - FIXED for Python 3.14 compatibility issues
-    // Use freethreaded Python 3.14 for linting tools to avoid GIL errors
-    // Note: docker-compose-examples paths work both as directory and as git submodule
-    "python.defaultInterpreterPath": "./.venv/Scripts/python.exe",
-    "python.terminal.activateEnvironment": true,
-    "python.terminal.activateEnvInCurrentTerminal": true,
-    "python.terminal.shellIntegration.enabled": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.autoImportCompletions": true,
-    "python.analysis.packageIndexDepths": [
-        {
-            "name": "",
-            "depth": 2,
-            "includeAllSymbols": true
-        }
-    ],
-    // UV integration - disable default venv creation
-    "python.createEnvironment.contentButton": "hide",
-    "python.createEnvironment.trigger": "off",
-    // Python linting - DISABLE native servers to prevent crashes
-    "python.linting.enabled": true,
-    "python.linting.ruffEnabled": true,
-    "python.linting.ruffArgs": ["--config", "docker-compose-examples/mcp/python_utils/pyproject.toml"],
-    "ruff.enable": true,
-    "ruff.organizeImports": true,
-    "ruff.fixAll": true,
-    "ruff.nativeServer": true,  // Enable native server as recommended
-    "ruff.interpreter": ["C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"],  // Use freethreaded Python
-    "ruff.path": ["./.venv/Scripts/ruff.exe"],
-    "isort.check": true,
-    "isort.importStrategy": "fromEnvironment",
-    "isort.args": ["--settings-path", "docker-compose-examples/mcp/python_utils/pyproject.toml"],
-    "isort.interpreter": ["C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"],  // Use freethreaded Python
-    "python.sortImports.args": [
-        "--profile",
-        "black",
-        "--settings-path",
-        "docker-compose-examples/mcp/python_utils/pyproject.toml"
-    ],
-    // Disable problematic language servers
-    "pylint.enabled": false,  // Disable Pylint native server
-    "mypy.enabled": false,    // Disable MyPy native server
-    "python.formatting.provider": "none",  // Disable Black formatter to prevent connection issues
-    "python.languageServer": "Pylance",
-    "pylance.enable": true,
-    // Pylance settings for Python 3.14 compatibility
-    "python.analysis.indexing": true,
-    "python.analysis.autoSearchPaths": true,
-    "python.analysis.useLibraryCodeForTypes": true,
-    "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.includeFileSpecs": [
-        "**/*.py"
-    ],
-    "python.analysis.exclude": [
-        "**/node_modules/**",
-        "**/__pycache__/**",
-        "**/.venv/**",
-        "**/dist/**",
-        "**/build/**"
-    ],
-    // Docker settings for containerized Python development
-    "docker.languageserver.diagnostics.deprecatedMaintainer": "ignore",
-    "docker.languageserver.diagnostics.emptyContinuationLine": "ignore",
-    "docker.languageserver.diagnostics.instructionCasing": "ignore",
-    // Remote development settings
-    "remote.SSH.configFile": "~/.ssh/config",
-    "remote.SSH.showLoginTerminal": true,
-    "chat.mcp.serverSampling": {
-      "react-scuba/.vscode/mcp.json: github": {
-        "allowedModels": [
-          "copilot/claude-sonnet-4",
-          "copilot/auto",
-          "copilot/claude-haiku-4.5",
-          "copilot/claude-opus-41",
-          "copilot/claude-3.5-sonnet",
-          "copilot/claude-sonnet-4.5",
-          "copilot/gemini-2.5-pro",
-          "copilot/gpt-4.1",
-          "copilot/gpt-4o",
-          "copilot/gpt-5",
-          "copilot/gpt-5-mini",
-          "copilot/gpt-5-codex",
-          "copilot/grok-code-fast-1"
-        ]
-      }
+    "editor.suggest.showSnippets": true
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  
+  // Markdown linting configuration - disabled rules for documentation aesthetics
+  "markdownlint.config": {
+    "MD022": false,
+    "MD031": false,
+    "MD032": false,
+    "MD033": false,
+    "MD040": false,
+    "MD051": false
+  },
+  
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  
+  // Reduce language server load
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.git/**": true,
+    "**/build/**": true,
+    "**/coverage/**": true
+  },
+  
+  // Files to exclude from validation and Copilot indexing
+  "files.exclude": {
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/htmlcov": true,
+    "**/.coverage": true,
+    "**/.coverage.*": true
+  },
+  
+  // Search exclusions (improves performance)
+  "search.exclude": {
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/htmlcov": true,
+    "**/.coverage": true,
+    "**/.coverage.*": true,
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/.venv": true,
+    "**/volumes": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/coverage": true,
+    "**/package-lock.json": true
+  },
+  
+  // CSS validation (Tailwind v4 compatible)
+  "css.lint.unknownAtRules": "ignore",
+  "css.validate": true,
+  
+  // ESLint settings for flat config consistency
+  "eslint.useFlatConfig": true,
+  "eslint.validate": ["javascript", "javascriptreact"],
+  "eslint.run": "onType",
+  
+  // File associations
+  "files.associations": {
+    ".husky/*": "shellscript",
+    "**/monitoring/grafana/provisioning/**/*.yml": "yaml",
+    "**/.config/monitoring/grafana/provisioning/**/*.yml": "yaml",
+    "**/.config/docker/compose.override*.yml": "yaml",
+    "**/.devcontainer/containers/gateway/config/grafana/provisioning/**/*.yml": "yaml",
+    "docker-compose*.yml": "yaml",
+    "*.Dockerfile": "dockerfile",
+    "**/dashboard/src/index.css": "tailwindcss"
+  },
+  
+  // ============================================================================
+  // Python Settings - FIXED for Python 3.14 compatibility
+  // ============================================================================
+  "python.defaultInterpreterPath": "C:\\Users\\deanl.MSI\\miniconda3\\envs\\py314\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.terminal.shellIntegration.enabled": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.indexing": true,
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.aiHoverSummaries": true,
+  "python.analysis.includeFileSpecs": ["**/*.py"],
+  "python.analysis.exclude": [
+    "**/node_modules/**",
+    "**/__pycache__/**",
+    "**/.venv/**",
+    "**/dist/**",
+    "**/build/**"
+  ],
+  "python.analysis.packageIndexDepths": [
+    {
+      "name": "",
+      "depth": 2,
+      "includeAllSymbols": true
     }
+  ],
+  
+  // UV integration - disable default venv creation
+  "python.createEnvironment.contentButton": "hide",
+  "python.createEnvironment.trigger": "off",
+  
+  // Python linting
+  "python.linting.enabled": true,
+  "python.linting.ruffEnabled": true,
+  "python.linting.ruffArgs": ["--config", "docker-compose-examples/mcp/python_utils/pyproject.toml"],
+  "ruff.enable": true,
+  "ruff.organizeImports": true,
+  "ruff.fixAll": true,
+  "ruff.nativeServer": true,
+  "ruff.interpreter": ["C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"],
+  "ruff.path": ["./.venv/Scripts/ruff.exe"],
+  "isort.check": true,
+  "isort.importStrategy": "fromEnvironment",
+  "isort.args": ["--settings-path", "docker-compose-examples/mcp/python_utils/pyproject.toml"],
+  "isort.interpreter": ["C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"],
+  "python.sortImports.args": [
+    "--profile",
+    "black",
+    "--settings-path",
+    "docker-compose-examples/mcp/python_utils/pyproject.toml"
+  ],
+  
+  // Disable problematic language servers
+  "pylint.enabled": false,
+  "mypy.enabled": false,
+  "python.formatting.provider": "none",
+  "python.languageServer": "Pylance",
+  "pylance.enable": true,
+  
+  // Python environment
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.defaultPackageManager": "ms-python.python:conda",
+  "python-envs.pythonProjects": [],
+  
+  // Python testing
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  
+  // ============================================================================
+  // Docker Settings
+  // ============================================================================
+  "docker.languageserver.diagnostics.deprecatedMaintainer": "ignore",
+  "docker.languageserver.diagnostics.emptyContinuationLine": "ignore",
+  "docker.languageserver.diagnostics.instructionCasing": "ignore",
+  
+  // ============================================================================
+  // Remote Development Settings
+  // ============================================================================
+  "remote.SSH.configFile": "~/.ssh/config",
+  "remote.SSH.showLoginTerminal": true,
+  
+  // ============================================================================
+  // GitHub Copilot Chat Agents (Stable - October 2025)
+  // ============================================================================
+  "github.copilot.chat.participants.enabled": true,
+  "github.copilot.chat.workspaceAgent.enabled": true,
+  "github.copilot.chat.terminalAgent.enabled": true,
+  "github.copilot.chat.vscodeAgent.enabled": true,
+  "github.copilot.chat.gitAgent.enabled": true,
+  
+  // ============================================================================
+  // GitHub Copilot Chat Settings (Stable - Team Defaults)
+  // ============================================================================
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.testGeneration.enabled": true,
+  "github.copilot.chat.agent.autoFix": true,
+  "github.copilot.chat.agent.currentEditorContext.enabled": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.search.enabled": true,
+  "github.copilot.chat.reviewAgent.enabled": true,
+  "github.copilot.chat.setupTests.enabled": true,
+  "github.copilot.chat.localeOverride": "auto",
+  "github.copilot.chat.terminalChatLocation": "chatView",
+  "github.copilot.chat.useResponsesApi": true,
+  "github.copilot.chat.responsesApiReasoningEffort": "default",
+  "github.copilot.chat.responsesApiReasoningSummary": "detailed",
+  "github.copilot.chat.newWorkspaceCreation.enabled": true,
+  "github.copilot.chat.useProjectTemplates": true,
+  "github.copilot.chat.copilotDebugCommand.enabled": true,
+  "github.copilot.chat.customInstructionsInSystemMessage": true,
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.chat.edits.temporalContext.enabled": true,
+  "github.copilot.chat.edits.suggestRelatedFilesForTests": true,
+  "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": true,
+  "github.copilot.chat.imageUpload.enabled": true,
+  "github.copilot.chat.reviewSelection.enabled": true,
+  "github.copilot.chat.summarizeAgentConversationHistory.enabled": true,
+  
+  // ============================================================================
+  // GitHub Copilot Context & Follow-ups (Stable)
+  // ============================================================================
+  "github.copilot.chat.followUps.enabled": true,
+  "github.copilot.chat.contextSelection.enabled": true,
+  "github.copilot.chat.verboseContext": false,
+  
+  // ============================================================================
+  // GitHub Copilot Advanced Settings (Experimental - Bleeding Edge)
+  // ============================================================================
+  "github.copilot.chat.anthropic.thinking.enabled": true,
+  "github.copilot.chat.anthropic.thinking.maxTokens": 16000,
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": true,
+  "github.copilot.nextEditSuggestions.fixes": true,
+  
+  // Experimental: Multi-file edits
+  "github.copilot.chat.edits.enableMultiFileEdits": true,
+  "github.copilot.chat.edits.confirmations": "ask",
+  
+  // Experimental: Workspace indexing
+  "github.copilot.chat.indexing.enabled": true,
+  "github.copilot.chat.documentationSearch.enabled": true,
+  
+  // Experimental: Model selection
+  "github.copilot.chat.modelSelection.enabled": true,
+  "github.copilot.chat.preferredModel": "claude-sonnet-4.5",
+  
+  // ============================================================================
+  // GitHub Copilot Editor Settings (Stable)
+  // ============================================================================
+  "github.copilot.editor.enableCodeActions": true,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.editor.iterativeFixing.enabled": true,
+  "github.copilot.renameSuggestions.triggerAutomatically": true,
+  "github.copilot.inlineSuggest.enable": true,
+  "github.copilot.editor.inlineSuggest.enabled": true,
+  
+  // ============================================================================
+  // GitHub Copilot - Language Model Tools & Chat Participants
+  // ============================================================================
+  "github.copilot.chat.languageModelTools.enabled": true,
+  
+  // Disable link validation in instruction files (AI semantic references)
+  "github.copilot.chat.promptsDiagnostics.enabled": false,
+  
+  // ============================================================================
+  // YAML Validation Settings
+  // ============================================================================
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml",
+    "https://json.schemastore.org/dependabot-2.0.json": ".github/dependabot.yml",
+    ".vscode/schemas/mkdocs-schema.json": [
+      ".config/mkdocs/mkdocs.yml",
+      ".config/mkdocs/base.yml",
+      ".config/mkdocs/theme.yml",
+      ".config/mkdocs/plugins.yml",
+      ".config/mkdocs/markdown.yml",
+      ".config/mkdocs/navigation.yml",
+      ".config/mkdocs/hooks.yml"
+    ],
+    ".vscode/schemas/markdown-doc.json": "docs/**/*.md"
+  },
+  "yaml.validate": true,
+  "yaml.customTags": [
+    "!encrypted/pkcs1-oaep scalar",
+    "!vault scalar",
+    "!ENV sequence",
+    "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji scalar",
+    "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg scalar",
+    "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format scalar",
+    "tag:yaml.org,2002:python/object/apply:pymdownx.slugs.slugify mapping"
+  ],
+  "yaml.schemaStore.enable": true,
+  "yaml.schemaStore.url": "https://www.schemastore.org/api/json/catalog.json",
+  "yaml.disableDefaultProperties": false,
+  "yaml.maxItemsComputed": 5000,
+  
+  // Disable YAML validation for files with custom schemas (Grafana, etc.)
+  "[.devcontainer/containers/gateway/config/grafana/provisioning/datasources/prometheus.yml]": {
+    "yaml.validate": false
+  },
+  "[.config/monitoring/grafana/provisioning/datasources/prometheus.yml]": {
+    "yaml.validate": false
+  },
+  "[.config/docker/compose.override.example.yml]": {
+    "yaml.validate": false
+  },
+  "[.config/mkdocs/mkdocs.yml]": {
+    "yaml.validate": true
+  },
+  "[.config/mkdocs/*.yml]": {
+    "yaml.validate": true
+  },
+  "[.config/mkdocs/*.conf]": {
+    "yaml.validate": false,
+    "files.associations": {
+      "*.conf": "yaml"
+    }
+  },
+  
+  // ============================================================================
+  // Terminal Settings (2025 API)
+  // ============================================================================
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.shellIntegration.showWelcome": false,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+  "terminal.integrated.automationProfile.windows": null,
+  "terminal.integrated.automationProfile.linux": null,
+  
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    }
+  },
+  
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      "icon": "terminal-bash"
+    },
+    "zsh": {
+      "path": "zsh"
+    },
+    "fish": {
+      "path": "fish"
+    }
+  },
+  
+  // ============================================================================
+  // Copilot Tools & Advanced Features
+  // ============================================================================
+  "chat.tools.global.autoApprove": true,
+  "pgsql.copilot.modelOptions": {},
+  
+  // ============================================================================
+  // MCP Server Sampling Configuration
+  // ============================================================================
+  "chat.mcp.serverSampling": {
+    "react-scuba/.vscode/mcp.json: github": {
+      "allowedModels": [
+        "copilot/claude-sonnet-4",
+        "copilot/auto",
+        "copilot/claude-haiku-4.5",
+        "copilot/claude-opus-41",
+        "copilot/claude-3.5-sonnet",
+        "copilot/claude-sonnet-4.5",
+        "copilot/gemini-2.5-pro",
+        "copilot/gpt-4.1",
+        "copilot/gpt-4o",
+        "copilot/gpt-5",
+        "copilot/gpt-5-mini",
+        "copilot/gpt-5-codex",
+        "copilot/grok-code-fast-1"
+      ]
+    }
+  }
 }

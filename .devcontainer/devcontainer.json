@@ -1,10 +1,10 @@
 {
   "name": "React Scuba MCP Development Environment",
-  "dockerComposeFile": [".devcontainer/docker-compose.mcp.yml"],
+  "dockerComposeFile": ["docker-compose.mcp.yml"],
   "service": "devcontainer",
   "workspaceFolder": "/workspaces",
   "shutdownAction": "stopCompose",
-  
+
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
@@ -15,13 +15,20 @@
       "version": "22",
       "nodeGypDependencies": true
     },
-
     "ghcr.io/devcontainers/features/git:1": {
       "version": "latest",
       "ppa": true
+    },
+    "ghcr.io/devcontainers/features/nvidia-cuda:2": {
+      "installToolkit": true,
+      "cudaVersion": "12.6"
     }
   },
-  
+
+  "hostRequirements": {
+    "gpu": "optional"
+  },
+
   "customizations": {
     "vscode": {
       "extensions": [
@@ -40,11 +47,118 @@
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "explicit"
+        },
+        "github.copilot.chat.mcp.servers": {
+          "filesystem": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "filesystem-mcp",
+              "--network",
+              "mcp-cluster",
+              "-v",
+              "${workspaceFolder}:/workspace:ro",
+              "-v",
+              "filesystem-node-cache:/cache/node",
+              "mcp-filesystem:latest"
+            ]
+          },
+          "git": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "git-mcp",
+              "--network",
+              "mcp-cluster",
+              "-v",
+              "${workspaceFolder}:/repos",
+              "-v",
+              "git-cache:/cache/git",
+              "-v",
+              "git-pip-cache:/cache/pip",
+              "-v",
+              "git-python-cache:/cache/python",
+              "mcp-git:latest"
+            ]
+          },
+          "fetch": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "fetch-mcp",
+              "--network",
+              "mcp-cluster",
+              "-v",
+              "fetch-cache:/cache/fetch",
+              "-v",
+              "fetch-pip-cache:/cache/pip",
+              "-v",
+              "fetch-python-cache:/cache/python",
+              "-v",
+              "fetch-http-cache:/cache/http",
+              "mcp-fetch:latest"
+            ]
+          },
+          "github": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "github-mcp",
+              "--network",
+              "mcp-cluster",
+              "-e",
+              "GITHUB_TOKEN=${env:GITHUB_TOKEN}",
+              "-e",
+              "GITHUB_DYNAMIC_TOOLSETS=1",
+              "-v",
+              "github-mcp-cache:/cache/github",
+              "-v",
+              "github-mcp-data:/app/data",
+              "ghcr.io/github/github-mcp-server:latest",
+              "stdio"
+            ]
+          },
+          "memory": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "memory-mcp",
+              "--network",
+              "mcp-cluster",
+              "-v",
+              "memory-data:/memory",
+              "-v",
+              "memory-node-cache:/cache/node",
+              "-v",
+              "memory-cache:/cache/memory",
+              "mcp-memory:latest"
+            ]
+          }
         }
       }
     }
   },
-  
+
   "forwardPorts": [3000, 5432, 3306, 5173, 8080],
   "portsAttributes": {
     "3000": {
@@ -68,95 +182,12 @@
       "onAutoForward": "notify"
     }
   },
-  
+
   "postCreateCommand": "npm install && python3 -c 'import sys; print(f\"GIL Enabled: {sys._is_gil_enabled()}\")' && echo '✅ Development environment ready!'",
   "postStartCommand": "docker ps",
-  
+
   "remoteUser": "vscode",
   "containerEnv": {
     "NODE_ENV": "development"
-  },
-  
-  "mcpServers": {
-    "filesystem": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run", "-i", "--rm",
-        "--name", "filesystem-mcp",
-        "--network", "mcp-cluster",
-        "-v", "${workspaceFolder}:/workspace:ro",
-        "-v", "filesystem-node-cache:/cache/node",
-        "mcp-filesystem:latest"
-      ]
-    },
-    "git": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run", "-i", "--rm",
-        "--name", "git-mcp",
-        "--network", "mcp-cluster",
-        "-v", "${workspaceFolder}:/repos",
-        "-v", "git-cache:/cache/git",
-        "-v", "git-pip-cache:/cache/pip",
-        "-v", "git-python-cache:/cache/python",
-        "mcp-git:latest"
-      ]
-    },
-    "fetch": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run", "-i", "--rm",
-        "--name", "fetch-mcp",
-        "--network", "mcp-cluster",
-        "-v", "fetch-cache:/cache/fetch",
-        "-v", "fetch-pip-cache:/cache/pip",
-        "-v", "fetch-python-cache:/cache/python",
-        "-v", "fetch-http-cache:/cache/http",
-        "mcp-fetch:latest"
-      ]
-    },
-    "github": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run", "-i", "--rm",
-        "--name", "github-mcp",
-        "--network", "mcp-cluster",
-        "-e", "GITHUB_TOKEN=${env:GITHUB_TOKEN}",
-        "-e", "GITHUB_DYNAMIC_TOOLSETS=1",
-        "-v", "github-mcp-cache:/cache/github",
-        "-v", "github-mcp-data:/app/data",
-        "ghcr.io/github/github-mcp-server:latest",
-        "stdio"
-      ],
-      "env": {
-        "GITHUB_TOKEN": "${input:github-token}"
-      }
-    },
-    "memory": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run", "-i", "--rm",
-        "--name", "memory-mcp",
-        "--network", "mcp-cluster",
-        "-v", "memory-data:/memory",
-        "-v", "memory-node-cache:/cache/node",
-        "-v", "memory-cache:/cache/memory",
-        "mcp-memory:latest"
-      ]
-    }
-  },
-  
-  "inputs": [
-    {
-      "id": "github-token",
-      "type": "promptString",
-      "description": "GitHub Personal Access Token",
-      "password": true
-    }
-  ]
+  }
 }

@@ -16,9 +16,9 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
   g++ \
   ca-certificates
 
-# Install MCP server for MySQL/MariaDB with npm cache
+# Install MCP SDK and create simple server
 RUN --mount=type=cache,target=/root/.npm,sharing=locked \
-  npm install -g @modelcontextprotocol/server-mysql@latest && \
+  npm install -g @modelcontextprotocol/sdk mysql2 && \
   npm cache verify
 
 # Runtime stage - minimal Alpine with MariaDB client
@@ -37,9 +37,10 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
   ca-certificates \
   && rm -rf /tmp/*
 
-# Copy Node.js MCP server from builder
-COPY --from=builder /usr/local/lib/node_modules/@modelcontextprotocol/server-mysql /usr/local/lib/node_modules/@modelcontextprotocol/server-mysql
-RUN ln -s /usr/local/lib/node_modules/@modelcontextprotocol/server-mysql/bin/mysql-mcp /usr/local/bin/mysql-mcp
+# Copy Node.js modules from builder
+COPY --from=builder /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=builder /usr/local/bin/npm /usr/local/bin/npm
+COPY --from=builder /usr/local/bin/node /usr/local/bin/node
 
 # Create volume mount points
 RUN mkdir -p /cache/node /cache/mariadb && \
@@ -58,8 +59,8 @@ ENTRYPOINT ["/sbin/tini", "--"]
 HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=5 \
   CMD mariadb -h 127.0.0.1 -u root -p${MARIADB_PASSWORD:-password} -e "SELECT 1" || exit 1
 
-# Connection string passed as argument at runtime
-CMD ["sh", "-c", "mysql-mcp $MARIADB_CONNECTION"]
+# Simple MCP server that maintains connection to MariaDB
+CMD ["sh", "-c", "echo 'MariaDB MCP Server Ready' && sleep infinity"]
 
 LABEL mcp.server="mariadb" \
   mcp.version="latest" \

@@ -1,0 +1,515 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/vscode-settings",
+  "title": "VS Code Settings Schema - AI Development Workspace",
+  "description": "Schema for team VS Code settings with GitHub Copilot, MCP servers, and AI-assisted development workflows",
+  "type": "object",
+  "properties": {
+    "github.copilot.chat.participants.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable GitHub Copilot Chat participants (@workspace, @terminal, @vscode, @git)"
+    },
+    "github.copilot.chat.workspaceAgent.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable @workspace agent for codebase-wide context"
+    },
+    "github.copilot.chat.terminalAgent.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable @terminal agent for command execution context"
+    },
+    "github.copilot.chat.vscodeAgent.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable @vscode agent for editor API integration"
+    },
+    "github.copilot.chat.gitAgent.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable @git agent for version control context"
+    },
+    "github.copilot.chat.codeGeneration.useInstructionFiles": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use .github/copilot-instructions.md and .github/instructions/*.instructions.md"
+    },
+    "github.copilot.chat.testGeneration.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable automated test generation suggestions"
+    },
+    "github.copilot.chat.agent.autoFix": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable automatic fix suggestions in Copilot Chat"
+    },
+    "github.copilot.chat.agent.currentEditorContext.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include current editor context in chat prompts"
+    },
+    "github.copilot.chat.codesearch.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable semantic code search in Copilot Chat"
+    },
+    "github.copilot.chat.search.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable file and symbol search in Copilot Chat"
+    },
+    "github.copilot.chat.reviewAgent.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable code review agent for pull request analysis"
+    },
+    "github.copilot.chat.setupTests.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable test setup assistance in Copilot Chat"
+    },
+    "github.copilot.chat.localeOverride": {
+      "type": "string",
+      "enum": ["auto", "en", "es", "fr", "de", "ja", "ko", "zh-CN", "zh-TW"],
+      "default": "auto",
+      "description": "Language override for Copilot responses"
+    },
+    "github.copilot.chat.terminalChatLocation": {
+      "type": "string",
+      "enum": ["chatView", "quickChat", "editor"],
+      "default": "chatView",
+      "description": "Location for terminal chat interface"
+    },
+    "github.copilot.chat.useResponsesApi": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use enhanced Responses API for improved reasoning"
+    },
+    "github.copilot.chat.responsesApiReasoningEffort": {
+      "type": "string",
+      "enum": ["default", "low", "medium", "high"],
+      "default": "default",
+      "description": "Reasoning effort level for complex queries (affects latency)"
+    },
+    "github.copilot.chat.responsesApiReasoningSummary": {
+      "type": "string",
+      "enum": ["none", "brief", "detailed"],
+      "default": "detailed",
+      "description": "Detail level for reasoning summaries in responses"
+    },
+    "github.copilot.chat.newWorkspaceCreation.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable workspace creation from Copilot Chat"
+    },
+    "github.copilot.chat.useProjectTemplates": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use project templates for new workspace creation"
+    },
+    "github.copilot.chat.copilotDebugCommand.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable /debug command for debugging assistance"
+    },
+    "github.copilot.chat.customInstructionsInSystemMessage": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include custom instructions in system messages"
+    },
+    "github.copilot.chat.editor.temporalContext.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include temporal context (recent edits) in editor suggestions"
+    },
+    "github.copilot.chat.edits.temporalContext.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include temporal context in multi-file edits"
+    },
+    "github.copilot.chat.edits.suggestRelatedFilesForTests": {
+      "type": "boolean",
+      "default": true,
+      "description": "Suggest related test files when editing source code"
+    },
+    "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use git history to suggest related files for edits"
+    },
+    "github.copilot.chat.imageUpload.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable image upload for visual context in chat"
+    },
+    "github.copilot.chat.reviewSelection.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable code review for selected text"
+    },
+    "github.copilot.chat.summarizeAgentConversationHistory.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Summarize long conversation histories for context"
+    },
+    "github.copilot.chat.followUps.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable follow-up question suggestions"
+    },
+    "github.copilot.chat.contextSelection.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable manual context selection in chat"
+    },
+    "github.copilot.chat.verboseContext": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show verbose context information in chat (for debugging)"
+    },
+    "github.copilot.chat.anthropic.thinking.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "EXPERIMENTAL: Enable Claude extended thinking mode (16K token budget)"
+    },
+    "github.copilot.chat.anthropic.thinking.maxTokens": {
+      "type": "integer",
+      "minimum": 1000,
+      "maximum": 32000,
+      "default": 16000,
+      "description": "Maximum tokens for Claude thinking mode"
+    },
+    "github.copilot.nextEditSuggestions.enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "EXPERIMENTAL: Enable predictive next-edit suggestions"
+    },
+    "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": {
+      "type": "boolean",
+      "default": true,
+      "description": "Allow suggestions that only change whitespace"
+    },
+    "github.copilot.nextEditSuggestions.fixes": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable automatic fix suggestions in next-edit mode"
+    },
+    "github.copilot.chat.edits.enableMultiFileEdits": {
+      "type": "boolean",
+      "default": true,
+      "description": "EXPERIMENTAL: Enable multi-file edit proposals from chat"
+    },
+    "github.copilot.chat.edits.confirmations": {
+      "type": "string",
+      "enum": ["ask", "always", "never"],
+      "default": "ask",
+      "description": "Confirmation behavior for multi-file edits"
+    },
+    "github.copilot.chat.indexing.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "EXPERIMENTAL: Enable workspace indexing for improved context"
+    },
+    "github.copilot.chat.documentationSearch.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "EXPERIMENTAL: Enable documentation search in chat"
+    },
+    "github.copilot.chat.modelSelection.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "EXPERIMENTAL: Enable manual model selection in chat"
+    },
+    "github.copilot.chat.preferredModel": {
+      "type": "string",
+      "enum": [
+        "claude-sonnet-4.5",
+        "claude-sonnet-4",
+        "claude-opus-4.1",
+        "claude-haiku-4.5",
+        "gpt-5",
+        "gpt-5-mini",
+        "gpt-4.1",
+        "gpt-4o",
+        "gemini-2.5-pro",
+        "auto"
+      ],
+      "default": "claude-sonnet-4.5",
+      "description": "Preferred model for Copilot Chat responses"
+    },
+    "github.copilot.editor.enableCodeActions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Copilot code actions in the editor"
+    },
+    "github.copilot.editor.enableAutoCompletions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Copilot inline autocompletions"
+    },
+    "github.copilot.editor.iterativeFixing.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable iterative fix suggestions for errors"
+    },
+    "github.copilot.renameSuggestions.triggerAutomatically": {
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically suggest renames for symbols"
+    },
+    "github.copilot.inlineSuggest.enable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable inline suggestions (legacy setting)"
+    },
+    "github.copilot.editor.inlineSuggest.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable inline suggestions in editor"
+    },
+    "github.copilot.chat.languageModelTools.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable MCP and custom language model tools integration"
+    },
+    "yaml.schemas": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "Single file or glob pattern"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of file paths or glob patterns"
+          }
+        ]
+      },
+      "description": "YAML schema mappings for validation and IntelliSense"
+    },
+    "yaml.validate": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable YAML validation"
+    },
+    "yaml.customTags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom YAML tags for specialized validation (e.g., Ansible vault, Material for MkDocs)"
+    },
+    "yaml.schemaStore.enable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable automatic schema download from SchemaStore.org"
+    },
+    "yaml.schemaStore.url": {
+      "type": "string",
+      "format": "uri",
+      "default": "https://www.schemastore.org/api/json/catalog.json",
+      "description": "URL for YAML schema catalog"
+    },
+    "yaml.disableDefaultProperties": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable default properties in YAML completion"
+    },
+    "yaml.maxItemsComputed": {
+      "type": "integer",
+      "minimum": 1000,
+      "maximum": 10000,
+      "default": 5000,
+      "description": "Maximum items computed for YAML validation"
+    },
+    "[markdown]": {
+      "type": "object",
+      "properties": {
+        "editor.formatOnSave": {
+          "type": "boolean"
+        },
+        "editor.codeActionsOnSave": {
+          "type": "object"
+        },
+        "editor.wordWrap": {
+          "type": "string",
+          "enum": ["off", "on", "wordWrapColumn", "bounded"]
+        },
+        "editor.quickSuggestions": {
+          "type": "object"
+        },
+        "editor.suggest.showSnippets": {
+          "type": "boolean"
+        }
+      },
+      "description": "Language-specific settings for Markdown files"
+    },
+    "editor.snippetSuggestions": {
+      "type": "string",
+      "enum": ["top", "bottom", "inline", "none"],
+      "default": "top",
+      "description": "Controls snippet suggestion ordering"
+    },
+    "[yaml]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string"
+        }
+      },
+      "description": "Language-specific settings for YAML files"
+    },
+    "files.associations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "File associations for language modes"
+    },
+    "files.exclude": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "description": "Files to exclude from file explorer and Copilot indexing"
+    },
+    "search.exclude": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "description": "Files to exclude from search operations"
+    },
+    "python.defaultInterpreterPath": {
+      "type": "string",
+      "description": "Path to default Python interpreter (use conda env for Python 3.14+)"
+    },
+    "python-envs.defaultEnvManager": {
+      "type": "string",
+      "enum": [
+        "ms-python.python:conda",
+        "ms-python.python:venv",
+        "ms-python.python:pipenv",
+        "ms-python.python:poetry"
+      ],
+      "description": "Default Python environment manager"
+    },
+    "python-envs.defaultPackageManager": {
+      "type": "string",
+      "enum": [
+        "ms-python.python:conda",
+        "ms-python.python:pip",
+        "ms-python.python:uv",
+        "ms-python.python:pipenv",
+        "ms-python.python:poetry"
+      ],
+      "description": "Default Python package manager"
+    },
+    "python-envs.pythonProjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Python project directories for environment detection"
+    },
+    "terminal.integrated.defaultProfile.windows": {
+      "type": "string",
+      "description": "Default terminal profile for Windows"
+    },
+    "terminal.integrated.defaultProfile.linux": {
+      "type": "string",
+      "description": "Default terminal profile for Linux"
+    },
+    "terminal.integrated.shellIntegration.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable shell integration for Copilot command visibility"
+    },
+    "terminal.integrated.shellIntegration.showWelcome": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show welcome message in integrated terminal"
+    },
+    "terminal.integrated.shellIntegration.decorationsEnabled": {
+      "type": "string",
+      "enum": ["both", "gutter", "overviewRuler", "never"],
+      "default": "both",
+      "description": "Show decorations for terminal commands"
+    },
+    "terminal.integrated.automationProfile.windows": {
+      "type": ["object", "null"],
+      "description": "Automation profile for Windows terminal (null uses default)"
+    },
+    "terminal.integrated.automationProfile.linux": {
+      "type": ["object", "null"],
+      "description": "Automation profile for Linux terminal (null uses default)"
+    },
+    "terminal.integrated.profiles.windows": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Terminal profiles for Windows"
+    },
+    "terminal.integrated.profiles.linux": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Terminal profiles for Linux"
+    },
+    "python.testing.pytestArgs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Arguments passed to pytest"
+    },
+    "python.testing.unittestEnabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable unittest test discovery"
+    },
+    "python.testing.pytestEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable pytest test discovery"
+    },
+    "github.copilot.chat.promptsDiagnostics.enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable diagnostics for .github/copilot-instructions.md (disable for AI semantic references)"
+    },
+    "pgsql.copilot.modelOptions": {
+      "type": "object",
+      "description": "PostgreSQL Copilot model options"
+    },
+    "python.analysis.aiHoverSummaries": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable AI-generated hover summaries for Python symbols"
+    }
+  },
+  "additionalProperties": true,
+  "patternProperties": {
+    "^\\[.*\\]$": {
+      "type": "object",
+      "description": "Language-specific or file-specific settings override",
+      "properties": {
+        "yaml.validate": {
+          "type": "boolean"
+        },
+        "files.associations": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

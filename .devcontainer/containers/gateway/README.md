@@ -1,4 +1,4 @@
-# TBC Monitoring Stack - Multi-Container Architecture
+# Gateway Monitoring Stack - Multi-Container Architecture
 
 **Purpose**: Unified monitoring and web server for the MCP cluster using sidecar pattern.
 

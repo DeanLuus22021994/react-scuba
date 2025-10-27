@@ -15,7 +15,7 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     environment:
       - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
       - POSTGRES_USER=postgres
@@ -31,7 +31,7 @@ services:
       start_period: 10s
 
   mariadb:
-    image: mariadb:11.4-jammy
+    image: mariadb:11-jammy
     container_name: mariadb
     hostname: mariadb
     networks:
@@ -40,7 +40,7 @@ services:
     ports:
       - "3306:3306"
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     environment:
       - MARIADB_ROOT_PASSWORD=${MARIADB_PASSWORD:-password}
       - MARIADB_DATABASE=mcp_db
@@ -67,7 +67,7 @@ services:
       mcp-cluster:
         ipv4_address: 172.20.0.31
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     environment:
       - POSTGRES_CONNECTION=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres
     volumes:
@@ -96,7 +96,7 @@ services:
       mcp-cluster:
         ipv4_address: 172.20.0.32
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     environment:
       - MARIADB_CONNECTION=mysql://root:${MARIADB_PASSWORD:-password}@mariadb:3306/mcp_db
       - MARIADB_PASSWORD=${MARIADB_PASSWORD:-password}
@@ -127,7 +127,7 @@ services:
       mcp-cluster:
         ipv4_address: 172.20.0.40
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     volumes:
       - python-exp-cache:/cache/python
       - ../:/workspace
@@ -136,7 +136,7 @@ services:
     tty: true
     restart: unless-stopped
     healthcheck:
-      test: ["/opt/python3.15t/bin/python3.15t", "/app/health.py"]
+      test: ["CMD", "/opt/python3.15t/bin/python3.15t", "/app/health.py"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -166,7 +166,7 @@ services:
       - k8s-config:/root/.kube
       - k8s-cache:/cache/k8s
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "nvidia-smi"]
@@ -215,7 +215,7 @@ services:
       - runner-cache:/.cache
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     environment:
       - ACCESS_TOKEN=${GITHUB_TOKEN}
       - REPO_URL=https://github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}
@@ -232,7 +232,7 @@ services:
       retries: 3
       start_period: 60s
 
-  # ==== TBC Monitoring Stack ====
+  # ==== Gateway Monitoring Stack ====
   nginx:
     image: nginx:alpine
     container_name: tbc-nginx
@@ -244,10 +244,10 @@ services:
       mcp-cluster:
         ipv4_address: 172.20.0.70
     volumes:
-      - ./containers/TBC/config/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./containers/TBC/config/ssl:/etc/nginx/ssl:ro
+      - ./containers/gateway/config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./containers/gateway/config/ssl:/etc/nginx/ssl:ro
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
@@ -265,10 +265,10 @@ services:
       mcp-cluster:
         ipv4_address: 172.20.0.71
     volumes:
-      - ./containers/TBC/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./containers/gateway/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus-data:/prometheus
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -291,9 +291,9 @@ services:
         ipv4_address: 172.20.0.72
     volumes:
       - grafana-data:/var/lib/grafana
-      - ./containers/TBC/config/grafana:/etc/grafana/provisioning:ro
+      - ./containers/gateway/config/grafana:/etc/grafana/provisioning:ro
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
       - GF_INSTALL_PLUGINS=grafana-clock-panel
@@ -318,8 +318,18 @@ services:
     ports:
       - "5173:5173"
       - "8080:8080"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     env_file:
-      - .devcontainer/devcontainer.env
+      - devcontainer.env
     volumes:
       - ../:/workspaces
       - devcontainer-cache:/cache
