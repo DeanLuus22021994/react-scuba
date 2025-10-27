@@ -1,6 +1,6 @@
 {
   "name": "React Scuba MCP Development Environment",
-  "dockerComposeFile": ["docker-compose.mcp.yml"],
+  "dockerComposeFile": ["../docker-compose.yml"],
   "service": "devcontainer",
   "workspaceFolder": "/workspaces",
   "shutdownAction": "stopCompose",
@@ -183,7 +183,7 @@
     }
   },
 
-  "postCreateCommand": "npm install && python3 -c 'import sys; print(f\"GIL Enabled: {sys._is_gil_enabled()}\")' && echo '✅ Development environment ready!'",
+  "postCreateCommand": "npm install && npm install -g turbo && python3 -c 'import sys; print(f\"GIL Enabled: {sys._is_gil_enabled()}\")' && echo '✅ Development environment ready!'",
   "postStartCommand": "docker ps",
 
   "remoteUser": "vscode",
