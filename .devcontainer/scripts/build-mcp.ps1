@@ -41,17 +41,19 @@ Set-Location $PSScriptRoot
 $servers = @(
   @{ Name = "filesystem"; Dockerfile = "filesystem.dockerfile"; Tag = "mcp-filesystem:latest" },
   @{ Name = "postgres"; Dockerfile = "postgres.dockerfile"; Tag = "mcp-postgres:latest" },
-  @{ Name = "sqlite"; Dockerfile = "sqlite.dockerfile"; Tag = "mcp-sqlite:latest" },
+  @{ Name = "mariadb"; Dockerfile = "mariadb.dockerfile"; Tag = "mcp-mariadb:latest" },
   @{ Name = "memory"; Dockerfile = "memory.dockerfile"; Tag = "mcp-memory:latest" },
   @{ Name = "git"; Dockerfile = "git.dockerfile"; Tag = "mcp-git:latest" },
-  @{ Name = "fetch"; Dockerfile = "fetch.dockerfile"; Tag = "mcp-fetch:latest" }
+  @{ Name = "fetch"; Dockerfile = "fetch.dockerfile"; Tag = "mcp-fetch:latest" },
+  @{ Name = "python-experimental"; Dockerfile = "python-experimental.dockerfile"; Tag = "python-experimental:3.15.0a1" },
+  @{ Name = "k8s-plugin"; Dockerfile = "k8s-plugin.dockerfile"; Tag = "k8s-plugin:latest" }
 )
 
 # Filter servers if specific one requested
 if ($ServerName -ne "all") {
   $servers = $servers | Where-Object { $_.Name -eq $ServerName }
   if ($servers.Count -eq 0) {
-    Write-Error "Server '$ServerName' not found. Available: filesystem, postgres, sqlite, memory, git, fetch"
+    Write-Error "Server '$ServerName' not found. Available: filesystem, postgres, mariadb, memory, git, fetch, python-experimental, k8s-plugin"
     exit 1
   }
 }
@@ -101,8 +103,11 @@ if ($PullBase) {
   Write-Info "Pulling base images for optimal caching..."
   $baseImages = @(
     "node:22-alpine",
+    "node:22-bookworm",
     "python:3.12-alpine",
     "postgres:16-alpine",
+    "mariadb:11.4-jammy",
+    "debian:trixie-slim",
     "alpine:3.21"
   )
   

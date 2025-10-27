@@ -1,0 +1,21 @@
+service:
+  name: python-experimental
+  type: experimental
+  version: 3.15.0a1
+
+network:
+  ip: 172.20.0.40
+
+resources:
+  cpu: 4
+  memory: 8g
+
+volumes:
+  - python-exp-cache:/cache/python
+  - workspace:/workspace
+
+optimization:
+  gil_disabled: true
+  lto: full
+  pgo: enabled
+  arch: x86-64-v3

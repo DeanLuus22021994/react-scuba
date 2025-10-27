@@ -1,109 +1,82 @@
 {
-  "build": {
-    "dockerfile": "devcontainer.dockerfile"
-  },
+  "name": "React Scuba MCP Development Environment",
+  "dockerComposeFile": ["../.github/docker-compose.mcp.yml"],
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  
   "features": {
-    "ghcr.io/devcontainers/features/nvidia-cuda:2": {
-      "installCudnn": false,
-      "installNvtx": false
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "upgradePackages": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22",
+      "nodeGypDependencies": true
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12",
+      "installTools": true
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": true
     }
   },
-  "mounts": [
-    {
-      "type": "volume",
-      "source": "react-scuba-python-cache",
-      "target": "/home/vscode/.cache/pip"
-    },
-    {
-      "type": "volume",
-      "source": "react-scuba-node-cache",
-      "target": "/home/vscode/.npm"
-    },
-    {
-      "type": "volume",
-      "source": "react-scuba-mariadb-data",
-      "target": "/var/lib/mysql"
-    }
-  ],
-  "hostRequirements": {
-    "cpus": 4,
-    "memory": "4gb",
-    "storage": "8gb",
-    "gpu": "optional"
-  },
-  "waitFor": "onCreateCommand",
-  "updateContentCommand": "npm install --legacy-peer-deps",
-  "postStartCommand": "chown -R mysql:mysql /var/lib/mysql && service mariadb start && sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}/node_modules 2>/dev/null || true",
-  "postAttachCommand": "",
+  
   "customizations": {
-    "codespaces": {
-      "openFiles": ["src/App.jsx"]
-    },
     "vscode": {
-      "settings": {
-        // Python settings for container environment
-        "python.defaultInterpreterPath": "/usr/bin/python3.13",
-        "python.terminal.activateEnvironment": true,
-        "python.terminal.activateEnvInCurrentTerminal": true,
-        "python.terminal.shellIntegration.enabled": true,
-        "python.analysis.typeCheckingMode": "basic",
-        "python.analysis.autoImportCompletions": true,
-        "python.analysis.packageIndexDepths": [
-          {
-            "name": "",
-            "depth": 2,
-            "includeAllSymbols": true
-          }
-        ],
-        // UV integration
-        "python.createEnvironment.contentButton": "hide",
-        "python.createEnvironment.trigger": "off"
-      },
       "extensions": [
-        "GitHub.copilot-chat",
         "GitHub.copilot",
-        "esbenp.prettier-vscode",
-        "redhat.vscode-yaml",
-        "ms-vscode.copilot-mermaid-diagram",
-        "ms-vscode.vscode-copilot-vision",
-        "ms-vscode.vscode-websearchforcopilot",
-        "vscjava.migrate-java-to-azure",
-        "vscjava.vscode-java-upgrade",
-        "dbaeumer.vscode-eslint",
-        "github.vscode-github-actions",
-        "GitHub.vscode-pull-request-github",
-        "christian-kohler.npm-intellisense",
-        "Orta.vscode-jest",
-        "VisualStudioExptTeam.intellicode-api-usage-examples",
-        "ms-azuretools.vscode-containers",
+        "GitHub.copilot-chat",
         "ms-python.python",
-        "ms-python.black-formatter",
-        "ms-python.isort",
-        "ms-python.pylint"
+        "ms-python.vscode-pylance",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml"
       ],
-      "mcp": {
-        "servers": {
-          "github-official": {
-            "command": "docker",
-            "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"],
-            "env": {
-              "GITHUB_PERSONAL_ACCESS_TOKEN": "${localEnv:GH_PAT}"
-            }
-          },
-          "MCP_DOCKER": {
-            "command": "docker",
-            "args": ["mcp", "gateway", "run"],
-            "type": "stdio"
-          }
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
         }
       }
     }
   },
+  
+  "forwardPorts": [3000, 5432, 3306, 5173, 8080],
   "portsAttributes": {
-    "3001": {
+    "3000": {
+      "label": "GitHub MCP",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    },
+    "3306": {
+      "label": "MariaDB",
+      "onAutoForward": "silent"
+    },
+    "5173": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "notify"
+    },
+    "8080": {
       "label": "Application",
-      "onAutoForward": "openPreview"
+      "onAutoForward": "notify"
     }
   },
-  "forwardPorts": [3001]
+  
+  "postCreateCommand": "npm install && echo '✅ Development environment ready!'",
+  "postStartCommand": "docker ps",
+  
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "NODE_ENV": "development"
+  }
 }

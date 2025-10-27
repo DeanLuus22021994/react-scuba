@@ -1,0 +1,400 @@
+# Docker Compose MCP Cluster - Orchestrated startup with health checks
+# Single command: docker-compose -f .github/docker-compose.mcp.yml up --build
+# Tier 1: GitHub → Tier 2: Databases → Tier 3: MCP Services → Tier 4: K8s/DevContainer
+#
+# REFACTORED: Service-based folder structure, centralized configuration
+# - Dockerfiles: .github/services/{service}/Dockerfile
+# - Configs: .github/services/{service}/config/*.yml
+# - Docs: .github/services/{service}/README.md
+# - Environment: .devcontainer/devcontainer.env (single source of truth)
+
+services:
+  # ==== TIER 1: GitHub (starts first) ====
+  github:
+    image: ghcr.io/github/github-mcp-server:latest
+    container_name: github-mcp
+    hostname: github-mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.10
+    ports:
+      - "3000:3000"
+    volumes:
+      - github-mcp-cache:/cache/github
+      - github-mcp-data:/app/data
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    environment:
+      - GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_DYNAMIC_TOOLSETS=1
+      - GITHUB_HOST=https://github.com
+    stdin_open: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["/app/github-mcp-server", "--version"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # ==== TIER 2: Databases (after GitHub) ====
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres-db
+    hostname: postgres-db
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.20
+    ports:
+      - "5432:5432"
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    environment:
+      - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  mariadb:
+    image: mariadb:11.4-jammy
+    container_name: mariadb
+    hostname: mariadb
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.21
+    ports:
+      - "3306:3306"
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_PASSWORD:-password}
+      - MARIADB_DATABASE=mcp_db
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    command: --innodb-buffer-pool-size=256M --max-connections=200
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 20s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  # ==== TIER 3: MCP Services (after databases) ====
+  filesystem:
+    build:
+      context: services/filesystem
+      dockerfile: Dockerfile
+    image: mcp-filesystem:latest
+    container_name: filesystem-mcp
+    hostname: filesystem-mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.30
+    volumes:
+      - ../:/workspace:ro
+      - filesystem-node-cache:/cache/node
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    stdin_open: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('healthy')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  postgres-mcp:
+    build:
+      context: services/postgres
+      dockerfile: Dockerfile
+    image: mcp-postgres:latest
+    container_name: postgres-mcp
+    hostname: postgres-mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.31
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    environment:
+      - POSTGRES_CONNECTION=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres
+    volumes:
+      - postgres-node-cache:/cache/node
+      - postgres-cache:/cache/pg
+    stdin_open: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('healthy')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+  mariadb-mcp:
+    build:
+      context: services/mariadb
+      dockerfile: Dockerfile
+    image: mcp-mariadb:latest
+    container_name: mariadb-mcp
+    hostname: mariadb-mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.32
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    environment:
+      - MARIADB_CONNECTION=mysql://root:${MARIADB_PASSWORD:-password}@mariadb:3306/mcp_db
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD:-password}
+    volumes:
+      - mariadb-node-cache:/cache/node
+      - mariadb-cache:/cache/mariadb
+    stdin_open: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mariadb", "-h", "mariadb", "-u", "root", "-p${MARIADB_PASSWORD:-password}", "-e", "SELECT 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  memory:
+    build:
+      context: services/memory
+      dockerfile: Dockerfile
+    image: mcp-memory:latest
+    container_name: memory-mcp
+    hostname: memory-mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.33
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    volumes:
+      - memory-data:/memory
+      - memory-node-cache:/cache/node
+      - memory-cache:/cache/memory
+    stdin_open: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('healthy')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  git:
+    build:
+      context: services/git
+      dockerfile: Dockerfile
+    image: mcp-git:latest
+    container_name: git-mcp
+    hostname: git-mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.34
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    volumes:
+      - ../:/repos
+      - git-cache:/cache/git
+      - git-pip-cache:/cache/pip
+      - git-python-cache:/cache/python
+    stdin_open: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "print('healthy')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  fetch:
+    build:
+      context: services/fetch
+      dockerfile: Dockerfile
+    image: mcp-fetch:latest
+    container_name: fetch-mcp
+    hostname: fetch-mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.35
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    volumes:
+      - fetch-cache:/cache/fetch
+      - fetch-pip-cache:/cache/pip
+      - fetch-python-cache:/cache/python
+      - fetch-http-cache:/cache/http
+    stdin_open: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "print('healthy')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  # ==== TIER 4: Experimental & Tools (after MCP services) ====
+  python-experimental:
+    build:
+      context: services/python-experimental
+      dockerfile: Dockerfile
+    image: python-experimental:3.15.0a1
+    container_name: python-experimental
+    hostname: python-experimental
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.40
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    volumes:
+      - python-exp-cache:/cache/python
+      - ../:/workspace
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["/opt/python3.15t/bin/python3.15t", "/app/health.py"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  k8s-plugin:
+    build:
+      context: services/k8s-plugin
+      dockerfile: Dockerfile
+    image: k8s-plugin:latest
+    container_name: k8s-plugin
+    hostname: k8s-plugin
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.50
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    volumes:
+      - k8s-config:/root/.kube
+      - k8s-cache:/cache/k8s
+      - /var/run/docker.sock:/var/run/docker.sock
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["/app/health.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      github:
+        condition: service_healthy
+
+  devcontainer:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    image: mcp-devcontainer:latest
+    container_name: devcontainer
+    hostname: devcontainer
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.60
+    ports:
+      - "5173:5173"
+      - "8080:8080"
+    env_file:
+      - ../.devcontainer/devcontainer.env
+    volumes:
+      - ../:/workspace
+      - devcontainer-cache:/cache
+    working_dir: /workspace
+    command: sleep infinity
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "--version"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      github:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      mariadb:
+        condition: service_healthy
+
+# Named volumes for persistence
+volumes:
+  github-mcp-cache:
+  github-mcp-data:
+  postgres-data:
+  postgres-node-cache:
+  postgres-cache:
+  mariadb-data:
+  mariadb-config:
+  mariadb-node-cache:
+  mariadb-cache:
+  filesystem-node-cache:
+  memory-data:
+  memory-node-cache:
+  memory-cache:
+  git-cache:
+  git-pip-cache:
+  git-python-cache:
+  fetch-cache:
+  fetch-pip-cache:
+  fetch-python-cache:
+  fetch-http-cache:
+  python-exp-cache:
+  k8s-config:
+  k8s-cache:
+  devcontainer-cache:
+
+# Custom network with static IPs
+networks:
+  mcp-cluster:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1

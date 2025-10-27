@@ -1,0 +1,14 @@
+service:
+  name: filesystem-mcp
+  type: mcp-server
+
+network:
+  ip: 172.20.0.30
+
+resources:
+  cpu: 1
+  memory: 2g
+
+volumes:
+  - filesystem-node-cache:/cache/node
+  - workspace:/workspace:ro

@@ -1,0 +1,15 @@
+service:
+  name: github-mcp
+  type: mcp-server
+
+network:
+  ip: 172.20.0.10
+  port: 3000
+
+resources:
+  cpu: 2
+  memory: 1g
+
+volumes:
+  - github-mcp-cache:/cache/github
+  - github-mcp-data:/app/data

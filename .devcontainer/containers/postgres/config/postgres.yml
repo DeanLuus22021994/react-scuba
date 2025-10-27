@@ -1,0 +1,17 @@
+service:
+  name: postgres-mcp
+  type: mcp-server
+
+network:
+  ip: 172.20.0.31
+
+resources:
+  cpu: 1
+  memory: 2g
+
+volumes:
+  - postgres-node-cache:/cache/node
+  - postgres-cache:/cache/pg
+
+dependencies:
+  - postgres-db
