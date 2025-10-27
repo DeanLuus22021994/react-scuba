@@ -522,6 +522,53 @@ services:
       retries: 3
 
   # ==== TIER 4: DevContainer (after all services) ====
+  react-app-dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile.dev
+    image: react-app-dev:latest
+    container_name: react-app-dev
+    hostname: react-app-dev
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.59
+    ports:
+      - "3001:5173"
+      - "4173:4173"
+    environment:
+      - NODE_ENV=development
+      - VITE_PORT=5173
+      - VITE_HOST=0.0.0.0
+    env_file:
+      - devcontainer.env
+    volumes:
+      - ../:/app:rw
+      - react_node_modules:/app/node_modules
+      - react-vite-cache:/app/.vite
+      - react-npm-cache:/root/.npm
+    working_dir: /app
+    command: ["npm", "start"]
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1024M
+        reservations:
+          memory: 512M
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --quiet --tries=1 --spider http://localhost:5173 || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
   devcontainer:
     build:
       context: ..
@@ -601,6 +648,12 @@ volumes:
     name: grafana-data
   devcontainer-cache:
     name: devcontainer-cache
+  react_node_modules:
+    name: react_node_modules
+  react-vite-cache:
+    name: react-vite-cache
+  react-npm-cache:
+    name: react-npm-cache
 
 # Custom network with static IPs
 networks:

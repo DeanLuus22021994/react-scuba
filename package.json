@@ -64,7 +64,14 @@
     "python:setup": "powershell -ExecutionPolicy Bypass -File setup-python.ps1",
     "python:check-links": "uv run python python_utils/doc_utils.py check-links",
     "python:inventory": "uv run python python_utils/doc_utils.py inventory",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev:docker": "docker-compose -f .devcontainer/docker-compose.mcp.yml up react-app-dev",
+    "dev:docker:build": "docker-compose -f .devcontainer/docker-compose.mcp.yml build react-app-dev",
+    "dev:docker:clean": "docker-compose -f .devcontainer/docker-compose.mcp.yml down -v && docker volume rm react_node_modules react-vite-cache react-npm-cache 2>/dev/null || true",
+    "dev:docker:logs": "docker-compose -f .devcontainer/docker-compose.mcp.yml logs -f react-app-dev",
+    "dev:docker:shell": "docker-compose -f .devcontainer/docker-compose.mcp.yml exec react-app-dev sh",
+    "dev:docker:restart": "docker-compose -f .devcontainer/docker-compose.mcp.yml restart react-app-dev",
+    "modules:check": "bash scripts/check-node-modules.sh"
   },
   "eslintConfig": {
     "extends": [
