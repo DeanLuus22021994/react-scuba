@@ -4,7 +4,7 @@ import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { trackConversion } from '../../utils/analytics';
-import SEO from '../common/SEO';
+import { SEO } from '@components/ui';
 import BookingModal from '../modals/BookingModal';
 import CredentialCard from './CredentialCard';
 import TeamMember from './TeamMember';

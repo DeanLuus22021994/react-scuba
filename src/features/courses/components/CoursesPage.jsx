@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useCurrency } from '../../hooks/useCurrency';
 import { trackCourseInquiry } from '../../utils/analytics';
-import SEO from '../common/SEO';
+import { SEO } from '@components/ui';
 import BookingModal from '../modals/BookingModal';
 import ContactModal from '../modals/ContactModal';
 import CourseCard from './CourseCard';
