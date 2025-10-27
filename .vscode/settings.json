@@ -90,8 +90,8 @@
   
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
-    "source.fixAll": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
   },
   
   // Reduce language server load
@@ -292,7 +292,7 @@
   
   // Experimental: Multi-file edits
   "github.copilot.chat.edits.enableMultiFileEdits": true,
-  "github.copilot.chat.edits.confirmations": "ask",
+  "github.copilot.chat.edits.confirmations": "always",
   
   // Experimental: Workspace indexing
   "github.copilot.chat.indexing.enabled": true,
