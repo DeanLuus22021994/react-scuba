@@ -2,8 +2,6 @@
 # Build all images: docker-compose -f .github/docker-compose.mcp.yml build
 # Individual build: docker-compose -f .github/docker-compose.mcp.yml build <service-name>
 
-version: '3.8'
-
 services:
   # GitHub MCP Server (uses official image)
   github:
