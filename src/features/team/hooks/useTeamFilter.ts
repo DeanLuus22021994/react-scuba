@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
 import { TEAM_MEMBERS, type TeamMember } from '@config/constants/TEAM';
+import { useMemo, useState } from 'react';
 
 export type InstructorSpecialty = 'beginner' | 'advanced' | 'technical' | 'photography' | 'all';
 
@@ -18,14 +18,12 @@ export interface UseTeamFilterReturn {
 
 /**
  * useTeamFilter Hook
- * 
+ *
  * Custom hook for filtering team members by specialty.
  * Useful for displaying specific instructor types.
  */
 export const useTeamFilter = (options?: UseTeamFilterOptions): UseTeamFilterReturn => {
-  const [specialty, setSpecialty] = useState<InstructorSpecialty>(
-    options?.initialSpecialty || 'all'
-  );
+  const [specialty, setSpecialty] = useState<InstructorSpecialty>(options?.initialSpecialty || 'all');
 
   const members = useMemo(() => {
     if (specialty === 'all') {
@@ -36,12 +34,12 @@ export const useTeamFilter = (options?: UseTeamFilterOptions): UseTeamFilterRetu
     // For now, filter by role keywords
     return TEAM_MEMBERS.filter((member) => {
       const roleLower = member.role.toLowerCase();
-      
+
       if (specialty === 'beginner' && roleLower.includes('open water')) return true;
       if (specialty === 'advanced' && roleLower.includes('advanced')) return true;
       if (specialty === 'technical' && roleLower.includes('technical')) return true;
       if (specialty === 'photography' && roleLower.includes('photo')) return true;
-      
+
       return false;
     });
   }, [specialty]);

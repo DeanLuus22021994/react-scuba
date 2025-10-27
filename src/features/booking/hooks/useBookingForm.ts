@@ -15,7 +15,7 @@ export interface UseBookingFormReturn {
 
 /**
  * useBookingForm Hook
- * 
+ *
  * Custom hook for managing booking form state and submission.
  * Handles validation, API calls, and error states.
  */
@@ -31,16 +31,16 @@ export const useBookingForm = (options?: UseBookingFormOptions): UseBookingFormR
       // TODO: Implement API call to submit booking
       // TODO: Add analytics tracking
       // TODO: Add email notification trigger
-      
+
       console.log('Booking data:', data);
-      
+
       if (options?.onSuccess) {
         options.onSuccess(data);
       }
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Booking submission failed');
       setError(error);
-      
+
       if (options?.onError) {
         options.onError(error);
       }

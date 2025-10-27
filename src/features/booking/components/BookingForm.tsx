@@ -17,7 +17,7 @@ export interface BookingFormData {
 
 /**
  * BookingForm Component
- * 
+ *
  * Reusable booking form component for dive and course bookings.
  * Includes validation, date picker, and participant selection.
  */
@@ -27,7 +27,7 @@ const BookingForm: FC<BookingFormProps> = ({ onSubmit, isLoading = false }) => {
   // TODO: Add participant count selector
   // TODO: Add booking type selector
   // TODO: Add special requests textarea
-  
+
   const handleSubmit = () => {
     // Placeholder implementation
     onSubmit({
@@ -39,7 +39,7 @@ const BookingForm: FC<BookingFormProps> = ({ onSubmit, isLoading = false }) => {
       bookingType: 'dive',
     });
   };
-  
+
   return (
     <div className="booking-form">
       <p className="text-gray-500">BookingForm component - Coming soon</p>

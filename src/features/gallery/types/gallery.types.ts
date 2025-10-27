@@ -1,6 +1,6 @@
 /**
  * Gallery Domain Types
- * 
+ *
  * Extended type definitions for gallery and media management.
  */
 

@@ -1,6 +1,6 @@
 /**
  * Course Domain Types
- * 
+ *
  * Extended type definitions for course-related entities.
  * Supplements the core COURSES constant types.
  */

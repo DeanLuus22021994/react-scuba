@@ -276,6 +276,41 @@ function Start-BuildKit {
   }
 }
 
+function Deploy-Exporters {
+  Write-Info "Deploying metric exporters..."
+    
+  try {
+    $composeFile = Join-Path $DevContainerRoot "docker-compose.mcp.yml"
+    Push-Location $DevContainerRoot
+        
+    # Deploy all exporters
+    & docker-compose -f $composeFile up -d $Exporters
+        
+    if ($LASTEXITCODE -eq 0) {
+      Write-Success "Metric exporters deployed"
+            
+      Write-Info "Exporter endpoints:"
+      Write-Info "  - cAdvisor: http://localhost:8080 (Container metrics)"
+      Write-Info "  - Node Exporter: http://localhost:9100 (System metrics)"
+      Write-Info "  - Postgres Exporter: http://localhost:9187 (Database metrics)"
+      Write-Info "  - MySQL Exporter: http://localhost:9104 (Database metrics)"
+            
+      return $true
+    }
+    else {
+      Write-Error "Failed to deploy exporters"
+      return $false
+    }
+  }
+  catch {
+    Write-Error "Exception deploying exporters: $($_.Exception.Message)"
+    return $false
+  }
+  finally {
+    Pop-Location
+  }
+}
+
 function Deploy-Monitoring {
   Write-Info "Deploying Gateway monitoring stack..."
     
@@ -283,15 +318,16 @@ function Deploy-Monitoring {
     $composeFile = Join-Path $DevContainerRoot "docker-compose.mcp.yml"
     Push-Location $DevContainerRoot
         
-    & docker-compose -f $composeFile up -d nginx prometheus grafana
+    # Deploy gateway services
+    & docker-compose -f $composeFile up -d $GatewayServices
         
     if ($LASTEXITCODE -eq 0) {
       Write-Success "Gateway monitoring stack deployed"
             
       Write-Info "Monitoring endpoints:"
-      Write-Info "  - nginx: http://localhost"
-      Write-Info "  - prometheus: http://localhost:9090"
-      Write-Info "  - grafana: http://localhost:3000 (admin/admin)"
+      Write-Info "  - Nginx: http://localhost (Reverse proxy + SSL termination)"
+      Write-Info "  - Prometheus: http://localhost:9090 (Metrics collection)"
+      Write-Info "  - Grafana: http://localhost:3000 (admin/admin - Dashboards)"
             
       return $true
     }
@@ -366,24 +402,106 @@ function Test-Services {
     & docker-compose -f $composeFile ps
         
     Write-Info "`nRunning health checks..."
-    $services = @("postgres-db", "mariadb", "buildkit", "nginx", "prometheus", "grafana")
         
-    foreach ($service in $services) {
+    # Core infrastructure services
+    $coreServices = @("postgres-db", "mariadb", "buildkit")
+        
+    # Gateway services
+    $gatewayServices = $GatewayServices
+        
+    # Exporter services
+    $exporterServices = $Exporters
+        
+    Write-Info "`n🔧 Core Infrastructure:"
+    foreach ($service in $coreServices) {
       try {
         $health = docker inspect $service --format "{{.State.Health.Status}}" 2>$null
         if ($health -eq "healthy") {
-          Write-Success "Service $service is healthy"
+          Write-Success "  $service is healthy"
         }
         elseif ($health -eq "unhealthy") {
-          Write-Error "Service $service is unhealthy"
+          Write-Error "  $service is unhealthy"
         }
         else {
-          Write-Warning "Service $service health status: $health"
+          Write-Warning "  $service health status: $health"
         }
       }
       catch {
-        Write-Warning "Could not check health for service: $service"
+        Write-Warning "  Could not check health for: $service"
       }
+    }
+        
+    Write-Info "`n📊 Metric Exporters:"
+    foreach ($service in $exporterServices) {
+      try {
+        $running = docker inspect $service --format "{{.State.Running}}" 2>$null
+        if ($running -eq "true") {
+          Write-Success "  $service is running"
+        }
+        else {
+          Write-Error "  $service is not running"
+        }
+      }
+      catch {
+        Write-Warning "  Could not check status for: $service"
+      }
+    }
+        
+    Write-Info "`n🔍 Gateway Monitoring:"
+    foreach ($service in $gatewayServices) {
+      try {
+        $health = docker inspect $service --format "{{.State.Health.Status}}" 2>$null
+        $running = docker inspect $service --format "{{.State.Running}}" 2>$null
+            
+        if ($health -eq "healthy") {
+          Write-Success "  $service is healthy"
+        }
+        elseif ($running -eq "true") {
+          Write-Success "  $service is running (no health check)"
+        }
+        else {
+          Write-Error "  $service is not running"
+        }
+      }
+      catch {
+        Write-Warning "  Could not check health for: $service"
+      }
+    }
+        
+    # Test Prometheus targets
+    Write-Info "`n🎯 Testing Prometheus scrape targets..."
+    try {
+      Start-Sleep -Seconds 5
+      $prometheusTargets = Invoke-RestMethod -Uri "http://localhost:9090/api/v1/targets" -ErrorAction SilentlyContinue
+      $activeTargets = $prometheusTargets.data.activeTargets | Where-Object { $_.health -eq "up" }
+            
+      if ($activeTargets) {
+        Write-Success "  Prometheus has $($activeTargets.Count) active targets:"
+        foreach ($target in $activeTargets) {
+          Write-ColorOutput "    ✅ $($target.labels.job) - $($target.scrapeUrl)" -Color Success
+        }
+      }
+      else {
+        Write-Warning "  No active Prometheus targets found (may still be initializing)"
+      }
+    }
+    catch {
+      Write-Warning "  Could not query Prometheus targets (service may still be starting)"
+    }
+        
+    # Test Grafana API
+    Write-Info "`n📈 Testing Grafana API..."
+    try {
+      $grafanaHealth = Invoke-RestMethod -Uri "http://localhost:3000/api/health" -ErrorAction SilentlyContinue
+      if ($grafanaHealth.database -eq "ok") {
+        Write-Success "  Grafana database is healthy"
+      }
+      if ($grafanaHealth.version) {
+        Write-Info "  Grafana version: $($grafanaHealth.version)"
+      }
+    }
+    catch {
+      Write-Warning "  Could not query Grafana API (service may still be starting)"
     }
   }
   finally {
@@ -458,9 +576,24 @@ function Main {
     }
   }
     
-  # Deploy monitoring stack
+  # Deploy exporters first (metrics providers)
   if ($BuildAll) {
+    Write-Info "`n📊 Deploying metric exporters..."
+    Deploy-Exporters | Out-Null
+        
+    # Wait for exporters to initialize
+    Write-Info "Waiting for exporters to initialize (10s)..."
+    Start-Sleep -Seconds 10
+  }
+    
+  # Deploy monitoring stack (metrics consumers)
+  if ($BuildAll) {
+    Write-Info "`n🔍 Deploying monitoring gateway stack..."
     Deploy-Monitoring | Out-Null
+        
+    # Wait for monitoring stack to scrape first metrics
+    Write-Info "Waiting for Prometheus to scrape metrics (15s)..."
+    Start-Sleep -Seconds 15
   }
     
   # Show results
@@ -472,10 +605,33 @@ function Main {
   }
     
   Write-Header "Build Complete!"
-  Write-Info "Next steps:"
+    
+  if ($BuildAll) {
+    Write-Info "`n📋 Access Points:"
+    Write-ColorOutput "  🌐 Nginx Gateway:      http://localhost" -Color Info
+    Write-ColorOutput "  📊 Grafana Dashboards: http://localhost:3000 (admin/admin)" -Color Info
+    Write-ColorOutput "  🔍 Prometheus UI:      http://localhost:9090" -Color Info
+    Write-ColorOutput "  📈 cAdvisor:           http://localhost:8080" -Color Info
+    Write-ColorOutput "  💾 Node Exporter:      http://localhost:9100/metrics" -Color Info
+    Write-ColorOutput "  🗄️  Postgres Exporter:  http://localhost:9187/metrics" -Color Info
+    Write-ColorOutput "  🗄️  MySQL Exporter:     http://localhost:9104/metrics" -Color Info
+        
+    Write-Info "`n🎯 Prometheus Targets:"
+    Write-Info "  All exporters are automatically scraped by Prometheus"
+    Write-Info "  View targets at: http://localhost:9090/targets"
+        
+    Write-Info "`n📈 Grafana Dashboards:"
+    Write-Info "  Pre-configured datasources: Prometheus"
+    Write-Info "  Import dashboards from: https://grafana.com/grafana/dashboards/"
+    Write-Info "  Recommended IDs: 893 (Docker), 1860 (Node), 9628 (PostgreSQL)"
+  }
+    
+  Write-Info "`n🚀 Next steps:"
   Write-Info "  1. Open VS Code in devcontainer"
   Write-Info "  2. Test MCP servers in Copilot Chat"
   Write-Info "  3. Access monitoring at http://localhost"
+  Write-Info "  4. View Prometheus metrics at http://localhost:9090"
+  Write-Info "  5. Create Grafana dashboards at http://localhost:3000"
   Write-Info ""
   Write-Info "Build script location: $PSCommandPath"
 }
