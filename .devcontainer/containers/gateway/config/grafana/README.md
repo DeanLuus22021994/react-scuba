@@ -64,7 +64,7 @@ All dashboards refresh every 10 seconds with configurable intervals:
 
 ### Adding Data Sources
 
-1. Edit `provisioning/datasources/prometheus.yml`
+1. Edit `provisioning/datasources/prometheus.conf`
 2. Restart Grafana container
 
 ### Metrics Available

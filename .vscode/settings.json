@@ -353,13 +353,7 @@
   "yaml.maxItemsComputed": 5000,
   
   // Disable YAML validation for files with custom schemas (Grafana, etc.)
-  "[.devcontainer/containers/gateway/config/grafana/provisioning/datasources/prometheus.yml]": {
-    "yaml.validate": false
-  },
   "[**/gateway/config/grafana/provisioning/**/*.yml]": {
-    "yaml.validate": false
-  },
-  "[.config/monitoring/grafana/provisioning/datasources/prometheus.yml]": {
     "yaml.validate": false
   },
   "[.config/docker/compose.override.example.yml]": {

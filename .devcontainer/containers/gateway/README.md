@@ -19,18 +19,21 @@
 ## Services Overview
 
 ### nginx (Reverse Proxy)
+
 - Routes traffic to prometheus and grafana
 - SSL termination (if configured)
 - Health endpoint at `/health`
 - Configuration: `config/nginx.conf`
 
 ### prometheus (Metrics)
+
 - Scrapes all MCP cluster services
 - 15-day retention policy
 - Configuration: `config/prometheus.yml`
 - Web UI: http://localhost:9090
 
 ### grafana (Visualization)
+
 - Pre-configured with Prometheus datasource
 - Docker monitoring dashboard
 - Admin credentials: admin / ${GRAFANA_ADMIN_PASSWORD}
@@ -44,5 +47,5 @@ All three containers are deployed via the main docker-compose.mcp.yml file as pa
 
 - `config/nginx.conf` - Nginx reverse proxy configuration
 - `config/prometheus.yml` - Prometheus scrape targets
-- `config/grafana/provisioning/datasources/prometheus.yml` - Grafana datasource
+- `config/grafana/provisioning/datasources/prometheus.conf` - Grafana datasource
 - `config/grafana/provisioning/dashboards/docker.json` - Docker dashboard
