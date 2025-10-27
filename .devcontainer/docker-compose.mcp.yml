@@ -79,8 +79,8 @@ services:
   # ==== TIER 2: MCP Database Services (after databases) ====
   postgres-mcp:
     build:
-      context: ./containers/postgres
-      dockerfile: Dockerfile
+      context: ./containers
+      dockerfile: dockerfile.postgre
     image: mcp-postgres:latest
     container_name: postgres-mcp
     hostname: postgres-mcp
@@ -108,8 +108,8 @@ services:
 
   mariadb-mcp:
     build:
-      context: ./containers/mariadb
-      dockerfile: Dockerfile
+      context: ./containers
+      dockerfile: Dockerfile.mariadb
     image: mcp-mariadb:latest
     container_name: mariadb-mcp
     hostname: mariadb-mcp
@@ -174,37 +174,37 @@ services:
       retries: 3
       start_period: 15s
 
-  k8s-plugin:
-    build:
-      context: ./containers/k8s-plugin
-      dockerfile: Dockerfile
-    image: k8s-plugin:latest
-    container_name: k8s-plugin
-    hostname: k8s-plugin
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.50
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
-    volumes:
-      - k8s-config:/root/.kube
-      - k8s-cache:/cache/k8s
-    env_file:
-      - devcontainer.env
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "nvidia-smi"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+  # k8s-plugin:
+  #   build:
+  #     context: ./containers/k8s-plugin
+  #     dockerfile: Dockerfile
+  #   image: k8s-plugin:latest
+  #   container_name: k8s-plugin
+  #   hostname: k8s-plugin
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.50
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [gpu]
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #     - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+  #   volumes:
+  #     - k8s-config:/root/.kube
+  #     - k8s-cache:/cache/k8s
+  #   env_file:
+  #     - devcontainer.env
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD", "nvidia-smi"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
 
   buildkit:
     image: moby/buildkit:latest
@@ -268,8 +268,8 @@ services:
   # cAdvisor - Container metrics exporter
   cadvisor:
     build:
-      context: ./containers/exporters/cadvisor
-      dockerfile: Dockerfile
+      context: ./exporters
+      dockerfile: dockerfile.cadvisor
     image: mcp-cadvisor:latest
     container_name: mcp-cadvisor
     hostname: cadvisor
@@ -305,8 +305,8 @@ services:
   # Node Exporter - Host metrics
   node-exporter:
     build:
-      context: ./containers/exporters/node-exporter
-      dockerfile: Dockerfile
+      context: ./exporters
+      dockerfile: dockerfile.node
     image: mcp-node-exporter:latest
     container_name: mcp-node-exporter
     hostname: node-exporter
@@ -342,8 +342,8 @@ services:
   # PostgreSQL Exporter
   postgres-exporter:
     build:
-      context: ./containers/exporters/postgres-exporter
-      dockerfile: Dockerfile
+      context: ./exporters
+      dockerfile: dockerfile.postgres
     image: mcp-postgres-exporter:latest
     container_name: mcp-postgres-exporter
     hostname: postgres-exporter
@@ -375,8 +375,8 @@ services:
   # MySQL/MariaDB Exporter
   mysql-exporter:
     build:
-      context: ./containers/exporters/mysql-exporter
-      dockerfile: Dockerfile
+      context: ./exporters
+      dockerfile: dockerfile.mysql
     image: mcp-mysql-exporter:latest
     container_name: mcp-mysql-exporter
     hostname: mysql-exporter
@@ -524,8 +524,8 @@ services:
   # ==== TIER 4: DevContainer (after all services) ====
   react-app-dev:
     build:
-      context: ..
-      dockerfile: .devcontainer/Dockerfile.dev
+      context: ../server
+      dockerfile: ../.devcontainer/Dockerfile.dev
     image: react-app-dev:latest
     container_name: react-app-dev
     hostname: react-app-dev
@@ -542,7 +542,7 @@ services:
     env_file:
       - devcontainer.env
     volumes:
-      - ../:/app:rw
+      - ../server:/app:rw
       - react_node_modules:/app/node_modules
       - react-vite-cache:/app/.vite
       - react-npm-cache:/root/.npm
@@ -613,50 +613,50 @@ services:
       - "purpose=node-development"
       - "tier=development"
 
-  devcontainer:
-    build:
-      context: ..
-      dockerfile: .devcontainer/Dockerfile
-    image: mcp-devcontainer:latest
-    container_name: devcontainer
-    hostname: devcontainer
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.20.0.60
-    ports:
-      - "5173:5173"
-      - "8080:8080"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu, compute, utility]
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
-    env_file:
-      - devcontainer.env
-    volumes:
-      - ../:/workspaces
-      - devcontainer-cache:/cache
-    working_dir: /workspaces
-    command: sleep infinity
-    stdin_open: true
-    tty: true
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "node", "--version"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
-    depends_on:
-      postgres-db:
-        condition: service_healthy
-      mariadb:
-        condition: service_healthy
+  # devcontainer:
+  #   build:
+  #     context: ..
+  #     dockerfile: .devcontainer/Dockerfile.dev
+  #   image: mcp-devcontainer:latest
+  #   container_name: devcontainer
+  #   hostname: devcontainer
+  #   networks:
+  #     mcp-cluster:
+  #       ipv4_address: 172.20.0.60
+  #   ports:
+  #     - "5173:5173"
+  #     - "8080:8080"
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu, compute, utility]
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #     - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+  #   env_file:
+  #     - devcontainer.env
+  #   volumes:
+  #     - ../:/workspaces
+  #     - devcontainer-cache:/cache
+  #   working_dir: /workspaces
+  #   command: sleep infinity
+  #   stdin_open: true
+  #   tty: true
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD", "node", "--version"]
+  #     interval: 30s
+  #     timeout: 5s
+  #     retries: 3
+  #     start_period: 20s
+  #   depends_on:
+  #     postgres-db:
+  #       condition: service_healthy
+  #     mariadb:
+  #       condition: service_healthy
 
 # Named volumes for persistence
 volumes:

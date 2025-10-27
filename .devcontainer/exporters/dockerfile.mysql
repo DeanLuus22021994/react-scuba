@@ -7,12 +7,6 @@ LABEL maintainer="Dean Luus" \
   description="MySQL/MariaDB metrics exporter for Prometheus" \
   version="0.15.1"
 
-USER root
-
-# Copy default config and set permissions
-COPY .my.cnf /.my.cnf
-RUN chmod 644 /.my.cnf && chown nobody:nobody /.my.cnf
-
 USER nobody
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
