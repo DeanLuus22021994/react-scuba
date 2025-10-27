@@ -1,6 +1,6 @@
+import Loading from '@components/ui/Loading';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import Loading from '@/components/common/Loading';
 
 describe('Loading', () => {
   it('should render without crashing', () => {

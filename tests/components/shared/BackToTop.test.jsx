@@ -1,6 +1,6 @@
+import BackToTop from '@components/ui/BackToTop';
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import BackToTop from '@/components/shared/BackToTop';
 
 describe('BackToTop', () => {
   it('should render without crashing', () => {

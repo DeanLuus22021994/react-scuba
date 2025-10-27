@@ -1,4 +1,4 @@
-import WhatsAppButton from '@/components/common/WhatsAppButton';
+import WhatsAppButton from '@components/ui/WhatsAppButton';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
@@ -42,10 +42,7 @@ describe('WhatsAppButton', () => {
     const customMessage = 'Test message';
     render(<WhatsAppButton message={customMessage} />);
     const link = screen.getByRole('link');
-    expect(link).toHaveAttribute(
-      'href',
-      expect.stringContaining(encodeURIComponent(customMessage)),
-    );
+    expect(link).toHaveAttribute('href', expect.stringContaining(encodeURIComponent(customMessage)));
   });
 
   it('should open in new tab', () => {

@@ -1,6 +1,6 @@
+import DiveMap from '@features/dive-sites/components/DiveMap';
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import DiveMap from '@/components/dive-sites/DiveMap';
 
 // Mock react-leaflet
 vi.mock('react-leaflet', () => ({
@@ -29,9 +29,7 @@ describe('DiveMap', () => {
       id: 'test-site',
       coordinates: [-20.2833, 57.5833],
     };
-    const { container } = render(
-      <DiveMap selectedSite={selectedSite} onMarkerClick={mockOnMarkerClick} />,
-    );
+    const { container } = render(<DiveMap selectedSite={selectedSite} onMarkerClick={mockOnMarkerClick} />);
     expect(container).toBeInTheDocument();
   });
 });

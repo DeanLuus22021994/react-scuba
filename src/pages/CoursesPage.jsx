@@ -1,1 +1,1 @@
-export { CoursesPage as default } from '../components/courses';
+export { CoursesPage as default } from '@features/courses';

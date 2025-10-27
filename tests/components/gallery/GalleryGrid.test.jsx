@@ -1,4 +1,4 @@
-import GalleryGrid from '@/components/gallery/GalleryGrid';
+import GalleryGrid from '@features/gallery/components/GalleryGrid';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 

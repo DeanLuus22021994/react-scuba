@@ -1,7 +1,7 @@
+import SEO from '@components/ui/SEO';
 import { render, waitFor } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { describe, expect, it } from 'vitest';
-import SEO from '@/components/common/SEO';
 
 describe('SEO', () => {
   const renderWithHelmet = (component) => {

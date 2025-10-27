@@ -1,5 +1,5 @@
+import { DIFFICULTY_COLORS, DIVE_SITES, getDiveSiteById, MAURITIUS_CENTER } from '@config/constants/DIVE_SITES';
 import { describe, expect, it } from 'vitest';
-import { DIFFICULTY_COLORS, DIVE_SITES, getDiveSiteById, MAURITIUS_CENTER } from '@/data/diveSites';
 
 describe('diveSites', () => {
   it('should export DIVE_SITES array', () => {

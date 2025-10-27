@@ -1,1 +1,1 @@
-export { AboutPage as default } from '../components/about';
+export { AboutPage as default } from '@features/team';

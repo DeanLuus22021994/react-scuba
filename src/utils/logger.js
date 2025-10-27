@@ -15,7 +15,7 @@ const generateUUID = () => {
       // Fall through to polyfill
     }
   }
-  
+
   // Fallback: RFC4122 version 4 compliant UUID
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;

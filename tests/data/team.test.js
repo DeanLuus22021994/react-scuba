@@ -1,4 +1,4 @@
-import { getTeamMemberByName, TEAM_MEMBERS } from '@/data/team';
+import { getTeamMemberByName, TEAM_MEMBERS } from '@config/constants/TEAM';
 import { describe, expect, it } from 'vitest';
 
 describe('team', () => {

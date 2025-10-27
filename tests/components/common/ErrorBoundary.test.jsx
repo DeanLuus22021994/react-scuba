@@ -1,4 +1,4 @@
-import ErrorBoundary from '@/components/common/ErrorBoundary';
+import ErrorBoundary from '@components/ui/ErrorBoundary';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ describe('ErrorBoundary', () => {
     render(
       <ErrorBoundary>
         <div>Test content</div>
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
     expect(screen.getByText('Test content')).toBeInTheDocument();
   });
@@ -31,7 +31,7 @@ describe('ErrorBoundary', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('ErrorBoundary', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
@@ -58,7 +58,7 @@ describe('ErrorBoundary', () => {
     const { rerender } = render(
       <ErrorBoundary>
         <ThrowError shouldThrow />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe('ErrorBoundary', () => {
     rerender(
       <ErrorBoundary>
         <ThrowError shouldThrow={false} />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     consoleError.mockRestore();
@@ -82,7 +82,7 @@ describe('ErrorBoundary', () => {
     render(
       <ErrorBoundary fallback={customFallback}>
         <ThrowError shouldThrow />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText('Custom error message')).toBeInTheDocument();
