@@ -1,8 +1,8 @@
 import { AcademicCapIcon, CheckCircleIcon, ClockIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { useCurrency } from '@hooks/useCurrency';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useCurrency } from '../../hooks/useCurrency';
 
 const CourseCard = ({ course, onBookClick, index = 0 }) => {
   const [showCurriculum, setShowCurriculum] = useState(false);

@@ -1,9 +1,9 @@
 import { SEO } from '@components/ui';
 import { COURSES } from '@config/constants/COURSES';
+import { useCurrency } from '@hooks/useCurrency';
+import { trackCourseInquiry } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { useCurrency } from '../../hooks/useCurrency';
-import { trackCourseInquiry } from '../../utils/analytics';
 import BookingModal from '../modals/BookingModal';
 import ContactModal from '../modals/ContactModal';
 import CourseCard from './CourseCard';
