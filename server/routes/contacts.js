@@ -26,13 +26,10 @@ router.post('/', validateContact, handleValidationErrors, async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
 
-    const [result] = await pool.query('INSERT INTO contacts (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)', [
-      name,
-      email,
-      phone || null,
-      subject || null,
-      message,
-    ]);
+    const [result] = await pool.query(
+      'INSERT INTO contacts (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)',
+      [name, email, phone || null, subject || null, message]
+    );
 
     res.status(201).json({
       message: 'Contact submission received successfully',
@@ -57,7 +54,7 @@ router.get('/', async (req, res) => {
     }
 
     queryStr += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-    params.push(parseInt(limit, 10), parseInt(offset, 10));
+    params.push(Number.parseInt(limit, 10), Number.parseInt(offset, 10));
 
     const [contacts] = await pool.query(queryStr, params);
     res.json({ contacts, count: contacts.length });

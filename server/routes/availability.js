@@ -5,21 +5,26 @@ import pool from '../db/connection.js';
 const router = express.Router();
 
 // GET availability for a date range
-router.get('/', query('startDate').isISO8601().toDate(), query('endDate').isISO8601().toDate(), async (req, res) => {
-  try {
-    const { startDate, endDate } = req.query;
+router.get(
+  '/',
+  query('startDate').isISO8601().toDate(),
+  query('endDate').isISO8601().toDate(),
+  async (req, res) => {
+    try {
+      const { startDate, endDate } = req.query;
 
-    const [availability] = await pool.query(
-      'SELECT date, total_slots, booked_slots, available_slots FROM availability WHERE date BETWEEN ? AND ? ORDER BY date',
-      [startDate, endDate],
-    );
+      const [availability] = await pool.query(
+        'SELECT date, total_slots, booked_slots, available_slots FROM availability WHERE date BETWEEN ? AND ? ORDER BY date',
+        [startDate, endDate]
+      );
 
-    res.json({ availability });
-  } catch (error) {
-    console.error('Error fetching availability:', error);
-    res.status(500).json({ error: 'Failed to fetch availability' });
+      res.json({ availability });
+    } catch (error) {
+      console.error('Error fetching availability:', error);
+      res.status(500).json({ error: 'Failed to fetch availability' });
+    }
   }
-});
+);
 
 // GET availability for a specific date
 router.get('/date/:date', async (req, res) => {

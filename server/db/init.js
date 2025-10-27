@@ -101,7 +101,7 @@ const initializeDatabase = async () => {
     const connection = await tempPool.getConnection();
     await connection.query(
       `CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || 'scuba_booking_db'} 
-       CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`,
+       CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`
     );
     connection.release();
     await tempPool.end();
@@ -129,7 +129,9 @@ const initializeDatabase = async () => {
         const [dateStr] = date.toISOString().split('T');
         values.push(`('${dateStr}', 20, 0)`);
       }
-      await dbPool.query(`INSERT INTO availability (date, total_slots, booked_slots) VALUES ${values.join(',')}`);
+      await dbPool.query(
+        `INSERT INTO availability (date, total_slots, booked_slots) VALUES ${values.join(',')}`
+      );
       console.error('✓ Initialized availability calendar for 90 days');
     }
 

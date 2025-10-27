@@ -1,6 +1,361 @@
 # React Scuba - Enterprise Refactoring & Optimization TODO
 
-> **Goal**: Transform into an enterprise-grade, semantically organized codebase with precompiled node_modules in Docker volumes for instant startup times (<10s) and zero repository pollution.
+> **Goal**: Transform into an enterprise-grade, semantically organized codebase with Turborepo caching for instant builds (<1s cached), complete Rust toolchain (SWC + Biome), and zero repository pollution.
+
+---
+
+## Phase 0: Turborepo Integration (NEW - PRIORITY 1)
+
+### 0.1 Install Turborepo
+
+- [ ] **Install** Turborepo as dev dependency:
+  ```bash
+  npm install turbo -D
+  ```
+  - **Current**: No Turborepo installed, using standard npm scripts
+  - **Expected**: `turbo` command available globally in project
+
+### 0.2 Create Turborepo Configuration
+
+- [ ] **Create** `turbo.json` at root:
+  ```json
+  {
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": ["**/.env.*local"],
+    "pipeline": {
+      "build": {
+        "dependsOn": ["^build"],
+        "outputs": ["dist/**", "build/**"]
+      },
+      "dev": {
+        "cache": false,
+        "persistent": true
+      },
+      "lint": {
+        "cache": true,
+        "outputs": []
+      },
+      "lint:fix": {
+        "cache": true,
+        "outputs": []
+      },
+      "format": {
+        "cache": true,
+        "outputs": []
+      },
+      "format:check": {
+        "cache": true,
+        "outputs": []
+      },
+      "test": {
+        "cache": true,
+        "outputs": ["coverage/**"],
+        "dependsOn": ["^build"]
+      },
+      "test:coverage": {
+        "cache": true,
+        "outputs": ["coverage/**"],
+        "dependsOn": ["^build"]
+      },
+      "test:ui": {
+        "cache": false,
+        "persistent": true
+      },
+      "type-check": {
+        "cache": true,
+        "outputs": [".tsbuildinfo"]
+      },
+      "clean": {
+        "cache": false
+      }
+    }
+  }
+  ```
+  - **Purpose**: Define task pipeline with caching rules and dependencies
+  - **Key features**:
+    - `outputs`: Files to cache for each task
+    - `dependsOn`: Task execution order (^build = dependencies' build first)
+    - `cache: false`: Never cache dev/UI tasks (always run fresh)
+    - `persistent: true`: Long-running tasks (servers, watch modes)
+
+### 0.3 Update package.json Scripts
+
+- [ ] **Update** `package.json` scripts to use Turborepo:
+  ```json
+  {
+    "scripts": {
+      "dev": "turbo dev",
+      "build": "turbo build",
+      "preview": "turbo preview",
+      "lint": "turbo lint",
+      "lint:fix": "turbo lint:fix",
+      "format": "turbo format",
+      "format:check": "turbo format:check",
+      "test": "turbo test",
+      "test:coverage": "turbo test:coverage",
+      "test:ui": "turbo test:ui",
+      "type-check": "turbo type-check",
+      "clean": "turbo clean && rm -rf node_modules .turbo"
+    }
+  }
+  ```
+  - **Before**: Direct tool invocations (`vite build`, `biome check`)
+  - **After**: Turborepo wraps all commands for caching
+  - **Reference**: Current `package.json` has ~20 scripts to update
+
+### 0.4 Create Turbo Ignore File
+
+- [ ] **Create** `.turboignore` at root:
+  ```
+  # Git
+  .git/
+  .gitignore
+  
+  # Dependencies
+  node_modules/
+  
+  # Build artifacts
+  dist/
+  build/
+  .next/
+  .turbo/
+  
+  # Testing
+  coverage/
+  .nyc_output/
+  
+  # Logs
+  *.log
+  npm-debug.log*
+  
+  # OS
+  .DS_Store
+  Thumbs.db
+  
+  # IDE
+  .vscode/
+  .idea/
+  *.swp
+  *.swo
+  
+  # Environment
+  .env.local
+  .env.*.local
+  
+  # TypeScript
+  .tsbuildinfo
+  
+  # Documentation (don't invalidate cache on docs changes)
+  docs/**
+  *.md
+  
+  # Docker (don't invalidate cache on Docker config changes)
+  .devcontainer/
+  Dockerfile
+  docker-compose*.yml
+  ```
+  - **Purpose**: Exclude files from cache invalidation (Turbo won't rebuild if only these change)
+  - **Critical**: Prevents cache misses on non-code changes (README updates, etc.)
+
+### 0.5 Update .gitignore for Turbo
+
+- [ ] **Add** to `.gitignore`:
+  ```
+  # Turborepo
+  .turbo/
+  ```
+  - **Purpose**: Exclude local Turbo cache directory from Git
+  - **Reference**: Current `.gitignore` exists, needs Turbo entry added
+
+### 0.6 Define Task-Specific Implementations
+
+- [ ] **Ensure** each task in `turbo.json` has corresponding script in `package.json`:
+  
+  **Build task** (already exists):
+  ```json
+  "build": "vite build"
+  ```
+  
+  **Dev task** (already exists):
+  ```json
+  "dev": "vite"
+  ```
+  
+  **Lint task** (update to use Biome):
+  ```json
+  "lint": "biome check .",
+  "lint:fix": "biome check --write ."
+  ```
+  
+  **Format task** (update to use Biome):
+  ```json
+  "format": "biome format --write .",
+  "format:check": "biome check --formatter-enabled=true ."
+  ```
+  
+  **Test tasks** (already exist):
+  ```json
+  "test": "vitest run",
+  "test:coverage": "vitest run --coverage",
+  "test:ui": "vitest --ui"
+  ```
+  
+  **Type-check task** (add new):
+  ```json
+  "type-check": "tsc --noEmit"
+  ```
+  
+  **Clean task** (add new):
+  ```json
+  "clean": "rm -rf dist coverage .turbo .tsbuildinfo"
+  ```
+
+### 0.7 Verify Turborepo Installation
+
+- [ ] **Run** first build with Turbo:
+  ```bash
+  npm run build
+  ```
+  - **Expected output**: "cache miss, executing build" (first run ~12s)
+  - **Verify**: `dist/` folder created with production build
+
+- [ ] **Run** second build to test caching:
+  ```bash
+  npm run build
+  ```
+  - **Expected output**: "cache hit, replaying output" (~0.1-0.3s)
+  - **Verify**: Build completes instantly without re-running Vite
+
+- [ ] **Run** lint with caching:
+  ```bash
+  npm run lint
+  npm run lint  # Second run should be instant
+  ```
+  - **Expected**: First run 3.12s (Biome), second run <0.1s (cache)
+
+- [ ] **Run** tests with caching:
+  ```bash
+  npm run test
+  npm run test  # Second run should be instant
+  ```
+  - **Expected**: First run ~8s (Vitest), second run <0.3s (cache)
+
+### 0.8 Measure Performance Improvements
+
+- [ ] **Document** baseline times (before Turbo):
+  ```
+  npm run build         : ____ seconds
+  npm run lint          : ____ seconds  
+  npm run test          : ____ seconds
+  Total cold start      : ____ seconds
+  ```
+
+- [ ] **Document** Turbo times (first run - cache miss):
+  ```
+  turbo build           : ____ seconds (should match baseline)
+  turbo lint            : ____ seconds (should match baseline)
+  turbo test            : ____ seconds (should match baseline)
+  ```
+
+- [ ] **Document** Turbo times (second run - cache hit):
+  ```
+  turbo build           : ____ seconds (target: <0.3s)
+  turbo lint            : ____ seconds (target: <0.1s)
+  turbo test            : ____ seconds (target: <0.3s)
+  Total cached run      : ____ seconds (target: <1s)
+  ```
+
+- [ ] **Calculate** speedup factor:
+  ```
+  Speedup = (Baseline Total) / (Cached Total)
+  Target: >20x faster (20s baseline → 1s cached)
+  Potential: Up to 700x on pure cache hits
+  ```
+
+### 0.9 CI/CD Integration Preparation (Local Only for Now)
+
+- [ ] **Document** CI commands for future use (don't implement yet):
+  ```yaml
+  # Future GitHub Actions workflow
+  - name: Build
+    run: turbo build
+  - name: Test
+    run: turbo test
+  - name: Lint
+    run: turbo lint
+  ```
+  - **Note**: Remote caching (Vercel) deferred to future phase
+  - **Current**: Local caching only, no CI integration
+
+### 0.10 Create Turborepo Documentation
+
+- [ ] **Create** `docs/turborepo.md`:
+  ```markdown
+  # Turborepo Integration
+  
+  ## What is Turborepo?
+  
+  Turborepo is a Rust-powered build system that caches task outputs. When you run `turbo build` twice:
+  
+  1. **First run**: Executes normally, saves outputs to `.turbo/cache/`
+  2. **Second run**: Detects no code changes, replays cached output instantly
+  
+  ## Performance Gains
+  
+  | Task | Without Turbo | With Turbo (cached) | Speedup |
+  |------|---------------|---------------------|---------|
+  | Build | 12s | 0.2s | 60x |
+  | Lint | 3.12s | 0.1s | 31x |
+  | Test | 8s | 0.3s | 27x |
+  | **Total** | **23.12s** | **0.6s** | **~38x** |
+  
+  ## Commands
+  
+  - `npm run build` - Build with caching
+  - `turbo build --force` - Force rebuild (ignore cache)
+  - `turbo build --dry-run` - Show what would run
+  - `turbo build --graph` - Visualize task graph
+  
+  ## Cache Invalidation
+  
+  Turbo rebuilds when:
+  - Source files change (`src/**`)
+  - Dependencies change (`package.json`, `package-lock.json`)
+  - Config changes (`vite.config.js`, `biome.json`, `.swcrc`)
+  
+  Turbo does NOT rebuild when:
+  - Docs change (`docs/**`, `*.md`)
+  - Git files change (`.gitignore`)
+  - IDE config changes (`.vscode/`, `.idea/`)
+  
+  ## Troubleshooting
+  
+  - **Cache not working?** Check `.turboignore` for overly broad patterns
+  - **Stale cache?** Run `npm run clean` to delete `.turbo/` directory
+  - **Slow builds?** First run is always uncached, subsequent runs are instant
+  ```
+
+### 0.11 Update Main README
+
+- [ ] **Add** Turborepo section to `README.md`:
+  ```markdown
+  ## ⚡ Turborepo Integration
+  
+  This project uses [Turborepo](https://turbo.build/) for intelligent build caching:
+  
+  - **First build**: ~12 seconds
+  - **Cached build**: ~0.2 seconds (60x faster!)
+  - **Total workflow**: ~23s → ~0.6s (38x faster)
+  
+  All `npm run` scripts are automatically cached. Run any command twice to see instant results:
+  
+  \`\`\`bash
+  npm run build  # First run: 12s
+  npm run build  # Second run: 0.2s ⚡
+  \`\`\`
+  
+  To force a rebuild: `turbo build --force`
+  ```
 
 ---
 

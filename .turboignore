@@ -1,0 +1,54 @@
+# Git
+.git/
+.gitignore
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+.next/
+.turbo/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env.local
+.env.*.local
+
+# TypeScript
+.tsbuildinfo
+
+# Documentation (don't invalidate cache on docs changes)
+docs/**
+*.md
+README.md
+CHANGELOG.md
+TODO.md
+REFACTORING_SUMMARY.md
+
+# Docker (don't invalidate cache on Docker config changes)
+.devcontainer/
+Dockerfile
+docker-compose*.yml
+
+# Scripts (don't invalidate cache on script changes)
+scripts/**
+setup-python.sh
