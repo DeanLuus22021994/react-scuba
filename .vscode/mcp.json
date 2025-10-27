@@ -22,6 +22,90 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}",
         "GITHUB_DYNAMIC_TOOLSETS": "1"
       }
+    },
+    "filesystem": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "filesystem-mcp-server",
+        "-v",
+        "${workspaceFolder}:/workspace:ro",
+        "mcp-filesystem:latest"
+      ]
+    },
+    "postgres": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "postgres-mcp-server",
+        "--add-host=host.docker.internal:host-gateway",
+        "-e",
+        "POSTGRES_CONNECTION",
+        "mcp-postgres:latest"
+      ],
+      "env": {
+        "POSTGRES_CONNECTION": "postgresql://postgres:${env:DOCKER_POSTGRES_PASSWORD}@host.docker.internal:5432/postgres"
+      }
+    },
+    "sqlite": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "sqlite-mcp-server",
+        "-v",
+        "${workspaceFolder}:/data",
+        "mcp-sqlite:latest",
+        "mcp-server-sqlite-npx",
+        "/data/db.sqlite"
+      ]
+    },
+    "memory": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "memory-mcp-server",
+        "-v",
+        "memory-data:/memory",
+        "mcp-memory:latest"
+      ]
+    },
+    "git": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "git-mcp-server",
+        "-v",
+        "${workspaceFolder}:/repos",
+        "mcp-git:latest"
+      ]
+    },
+    "fetch": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "fetch-mcp-server",
+        "-v",
+        "fetch-cache:/cache",
+        "mcp-fetch:latest"
+      ]
     }
   },
   "inputs": [

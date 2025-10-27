@@ -1,0 +1,138 @@
+# Docker Compose configuration for all MCP servers
+# Build all images: docker-compose -f .github/docker-compose.mcp.yml build
+# Individual build: docker-compose -f .github/docker-compose.mcp.yml build <service-name>
+
+version: '3.8'
+
+services:
+  # GitHub MCP Server (uses official image)
+  github:
+    image: ghcr.io/github/github-mcp-server:latest
+    container_name: github-mcp-server
+    volumes:
+      - github-mcp-cache:/cache/github
+      - github-mcp-data:/app/data
+    environment:
+      - GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_DYNAMIC_TOOLSETS=1
+      - GITHUB_HOST=https://github.com
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+
+  # Filesystem MCP Server
+  filesystem:
+    build:
+      context: .
+      dockerfile: filesystem.dockerfile
+    image: mcp-filesystem:latest
+    container_name: filesystem-mcp-server
+    volumes:
+      - ../:/workspace:ro
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+
+  # PostgreSQL MCP Server
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres.dockerfile
+    image: mcp-postgres:latest
+    container_name: postgres-mcp-server
+    environment:
+      - POSTGRES_CONNECTION=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@host.docker.internal:5432/postgres
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+    depends_on:
+      - postgres-db
+
+  # PostgreSQL Database (for testing)
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres-db
+    environment:
+      - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # SQLite MCP Server
+  sqlite:
+    build:
+      context: .
+      dockerfile: sqlite.dockerfile
+    image: mcp-sqlite:latest
+    container_name: sqlite-mcp-server
+    volumes:
+      - ../:/data
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+
+  # Memory MCP Server
+  memory:
+    build:
+      context: .
+      dockerfile: memory.dockerfile
+    image: mcp-memory:latest
+    container_name: memory-mcp-server
+    volumes:
+      - memory-data:/memory
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+
+  # Git MCP Server
+  git:
+    build:
+      context: .
+      dockerfile: git.dockerfile
+    image: mcp-git:latest
+    container_name: git-mcp-server
+    volumes:
+      - ../:/repos
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+
+  # Fetch MCP Server
+  fetch:
+    build:
+      context: .
+      dockerfile: fetch.dockerfile
+    image: mcp-fetch:latest
+    container_name: fetch-mcp-server
+    volumes:
+      - fetch-cache:/cache
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+
+volumes:
+  github-mcp-cache:
+    name: github-mcp-cache
+  github-mcp-data:
+    name: github-mcp-data
+  memory-data:
+    name: memory-data
+  fetch-cache:
+    name: fetch-cache
+  postgres-data:
+    name: postgres-data
+
+networks:
+  default:
+    name: mcp-network
+    driver: bridge
