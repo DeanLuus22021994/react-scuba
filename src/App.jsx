@@ -7,10 +7,10 @@ import Footer from './layouts/Footer';
 import Header from './layouts/Header';
 
 // Shared Components (loaded immediately - used across app)
-import Loading from './components/common/Loading';
-import WhatsAppWidget from './components/common/WhatsAppWidget';
-import BackToTop from './components/shared/BackToTop';
-import ScrollProgress from './components/shared/ScrollProgress';
+import Loading from './components/ui/Loading';
+import WhatsAppWidget from './components/ui/WhatsAppWidget';
+import BackToTop from './components/ui/BackToTop';
+import ScrollProgress from './components/ui/ScrollProgress';
 
 // Context Providers
 import { CurrencyProvider } from './hooks/useCurrency';
