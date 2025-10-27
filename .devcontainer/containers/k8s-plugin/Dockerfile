@@ -82,6 +82,28 @@ RUN chmod +x /app/health.sh
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
+# Install NVIDIA GPU support
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+  apk add --no-cache nvidia-container-toolkit || true
+
+# Update health check to include GPU
+COPY <<'EOF' /app/health.sh
+#!/bin/bash
+set -e
+kubectl version --client --output=json > /dev/null 2>&1 || exit 1
+helm version --short > /dev/null 2>&1 || exit 1
+kompose version > /dev/null 2>&1 || exit 1
+# GPU health check (only if NVIDIA_VISIBLE_DEVICES is set)
+if [ ! -z "$NVIDIA_VISIBLE_DEVICES" ]; then
+  nvidia-smi > /dev/null 2>&1 || (echo "❌ GPU not available" && exit 1)
+  echo "✅ GPU available: $(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)"
+fi
+echo "✅ Kubernetes tooling healthy"
+exit 0
+EOF
+
+RUN chmod +x /app/health.sh
+
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
   CMD /app/health.sh || exit 1
 
