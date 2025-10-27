@@ -65,7 +65,7 @@ services:
       - mariadb
     
     environment:
-      MARIADB_CONNECTION: "mysql://root:\@mariadb:3306"
+      MARIADB_CONNECTION: "mysql://root:@mariadb:3306"
 
   # ===========================================================================
   # TIER 3: GitHub Actions Runner
@@ -258,7 +258,7 @@ commands:
   docker:
     build:
       description: Build Docker image with BuildKit
-      command: "docker build --build-arg BUILDKIT_INLINE_CACHE=1 -t \:\ ."
+      command: "docker build --build-arg BUILDKIT_INLINE_CACHE=1 -t IMAGE:TAG ."
       environment:
         DOCKER_BUILDKIT: "1"
         BUILDKIT_PROGRESS: plain
@@ -266,7 +266,7 @@ commands:
     compose_up:
       description: Start Docker Compose stack with build
       command: docker-compose up --build -d
-      working_directory: "\"
+      working_directory: ".devcontainer"
     
     prune:
       description: Clean up unused Docker resources
@@ -373,7 +373,7 @@ command_settings:
       - name: Cleanup temp files
         command: rm -rf /tmp/runner-*
       - name: Report metrics
-        command: "echo 'Duration: \s'"
+        command: "echo 'Duration: completed'"
     
     on_failure:
       - name: Collect logs

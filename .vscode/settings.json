@@ -52,7 +52,7 @@
     "editor.tabSize": 2
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
   "[css]": {
@@ -349,10 +349,10 @@
   "yaml.maxItemsComputed": 5000,
   
   // Disable YAML validation for files with custom schemas (Grafana, etc.)
-  "[**/gateway/config/grafana/provisioning/**/*.yml]": {
+  "[**/gateway/grafana-*.yml]": {
     "yaml.validate": false
   },
-  "[**/.devcontainer/containers/gateway/config/grafana/provisioning/**/*.yml]": {
+  "[**/.devcontainer/containers/gateway/grafana-*.yml]": {
     "yaml.validate": false
   },
   "[.config/docker/compose.override.example.yml]": {

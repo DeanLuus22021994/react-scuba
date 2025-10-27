@@ -45,7 +45,11 @@ All three containers are deployed via the main docker-compose.mcp.yml file as pa
 
 ## Configuration Files
 
-- `config/nginx.conf` - Nginx reverse proxy configuration
-- `config/prometheus.yml` - Prometheus scrape targets
-- `config/grafana/provisioning/datasources/prometheus.conf` - Grafana datasource
-- `config/grafana/provisioning/dashboards/docker.json` - Docker dashboard
+- `nginx.conf` - Nginx reverse proxy configuration
+- `nginx-health.conf` - Nginx health endpoint module
+- `prometheus.yml` - Prometheus scrape targets
+- `grafana-datasources.yml` - Grafana datasource provisioning
+- `grafana-dashboards.yml` - Grafana dashboard provisioning
+- `dashboard-cluster.json` - MCP cluster overview dashboard
+- `dashboard-database.json` - Database monitoring dashboard
+- `dashboard-system.json` - System resources dashboard

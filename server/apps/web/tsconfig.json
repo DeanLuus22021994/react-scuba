@@ -1,6 +1,7 @@
 {
-  "extends": "@react-scuba/config/tsconfig.react.json",
+  "extends": "../../packages/config/tsconfig.react.json",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],

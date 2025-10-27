@@ -1,0 +1,161 @@
+# Node.js Development Container - Pre-commit & Turborepo Build Environment
+# Purpose: Unified container for git hooks, linting, formatting, and Turborepo builds
+# Strategy: Clone workspace at runtime, leverage named volumes for instant rebuilds
+#
+# FEATURES:
+# - Pre-commit hooks (husky) with persistent cache
+# - Turborepo builds with shared .turbo cache
+# - Named volumes for zero repository pollution
+# - Fast rebuilds with layered caching
+
+FROM node:22-alpine AS base
+
+# Install system dependencies with cache
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+  apk add --no-cache \
+  git \
+  python3 \
+  make \
+  g++ \
+  tini \
+  ca-certificates
+
+WORKDIR /workspace
+
+# ==============================================================================
+# Stage: System Tools & Git Configuration
+# ==============================================================================
+FROM base AS git-setup
+
+# Configure git for container environment
+RUN git config --global user.name \"Docker Build\" && \
+  git config --global user.email \"build@docker.local\" && \
+  git config --global init.defaultBranch main && \
+  git config --global safe.directory '*'
+
+# ==============================================================================
+# Stage: Node.js Dependencies
+# ==============================================================================
+FROM git-setup AS dependencies
+
+# Create cache directories with proper permissions
+RUN mkdir -p \
+  /cache/node_modules \
+  /cache/npm \
+  /cache/turbo \
+  /cache/git-hooks \
+  /cache/husky \
+  /workspace && \
+  chmod 777 /cache/* /workspace
+
+# Set cache environment variables
+ENV NPM_CONFIG_CACHE=/cache/npm \
+  TURBO_CACHE_DIR=/cache/turbo \
+  NODE_OPTIONS="--max-old-space-size=4096" \
+  HUSKY=1
+
+# Volume mount points (will be mounted at runtime)
+VOLUME [\"/cache/node_modules\", \"/cache/npm\", \"/cache/turbo\", \"/cache/git-hooks\", \"/cache/husky\"]
+
+# ==============================================================================
+# Stage: Workspace Clone & Setup
+# ==============================================================================
+FROM dependencies AS workspace-clone
+
+# This stage will clone/copy the workspace at RUNTIME via docker-compose volume mounts
+# We prepare the symlinks for cached directories (create parent dirs first)
+
+RUN mkdir -p /workspace/.git /workspace/.husky && \
+  ln -sf /cache/node_modules /workspace/node_modules && \
+  ln -sf /cache/turbo /workspace/.turbo
+
+# ==============================================================================
+# Stage: Git Hooks Setup (Husky)
+# ==============================================================================
+FROM workspace-clone AS git-hooks
+
+# Install dependencies and setup husky
+# This will run when workspace is mounted
+COPY <<EOF /usr/local/bin/setup-hooks.sh
+#!/bin/sh
+set -e
+
+echo \"🔧 Setting up workspace...\"
+
+# Check if workspace is mounted
+if [ ! -f \"/workspace/package.json\" ]; then
+  echo \"❌ Workspace not mounted at /workspace\"
+  exit 1
+fi
+
+cd /workspace
+
+# Install dependencies if node_modules is empty
+if [ ! -d \"node_modules/@turbo\" ]; then
+  echo \"📦 Installing dependencies...\"
+  npm ci --prefer-offline --no-audit --no-fund
+fi
+
+# Setup husky git hooks
+if [ -d \".git\" ] && [ -f \"package.json\" ]; then
+  echo \"🪝 Setting up git hooks (husky)...\"
+  npx husky install || echo \"⚠️  Husky setup skipped (may not be configured)\"
+fi
+
+echo \"✅ Workspace setup complete\"
+EOF
+
+RUN chmod +x /usr/local/bin/setup-hooks.sh
+
+# ==============================================================================
+# Stage: Turborepo Build Runner
+# ==============================================================================
+FROM git-hooks AS turbo-build
+
+# Build script that leverages Turbo cache
+COPY <<EOF /usr/local/bin/turbo-build.sh
+#!/bin/sh
+set -e
+
+cd /workspace
+
+echo \"🏗️  Building with Turborepo...\"
+
+# Run Turborepo build with cache
+npm run build
+
+echo \"✅ Turborepo build complete\"
+echo \"📊 Cache stats:\"
+ls -lh .turbo/cache 2>/dev/null || echo \"No cache yet\"
+EOF
+
+RUN chmod +x /usr/local/bin/turbo-build.sh
+
+# ==============================================================================
+# Stage: Development Runtime
+# ==============================================================================
+FROM turbo-build AS runtime
+
+# Expose common ports
+EXPOSE 3000 3001 5173 5174
+
+# Entrypoint: Setup hooks, then execute command
+ENTRYPOINT [\"/sbin/tini\", \"--\", \"sh\", \"-c\", \"setup-hooks.sh && exec \\\"\$@\\\"\", \"--\"]
+
+# Default: Interactive shell (override in docker-compose)
+CMD [\"sh\"]
+
+# Health check: Verify Node.js runtime
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD node --eval \"console.log('healthy')\" || exit 1
+
+# Labels for container metadata
+LABEL purpose="node-development" \
+  features="pre-commit,turborepo,git-hooks" \
+  caching="named-volumes" \
+  node.version="22" \
+  package.manager="npm" \
+  workspace="/workspace" \
+  volumes="node_modules,npm,turbo,git-hooks,husky" \
+  maintainer="Dean Luus" \
+  description="Node.js development container with pre-commit hooks and Turborepo support"
