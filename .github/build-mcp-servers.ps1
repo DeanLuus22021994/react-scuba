@@ -1,15 +1,22 @@
 #!/usr/bin/env pwsh
-# Build script for all MCP Docker servers
+# Build script for all MCP Docker servers with advanced caching
 # Usage: ./.github/build-mcp-servers.ps1 [server-name]
 # If no server name provided, builds all servers
+# 
+# OPTIMIZATION: Uses Docker BuildKit cache mounts for instant rebuilds
 
 param(
   [string]$ServerName = "all",
   [switch]$NoCacheParam,
-  [switch]$Parallel
+  [switch]$Parallel,
+  [switch]$PullBase
 )
 
 $ErrorActionPreference = "Stop"
+
+# Enable Docker BuildKit for advanced caching
+$env:DOCKER_BUILDKIT = "1"
+$env:BUILDKIT_PROGRESS = "plain"
 
 # Color output functions
 function Write-Success { param($Message) Write-Host "✓ $Message" -ForegroundColor Green }
@@ -53,7 +60,7 @@ if ($ServerName -ne "all") {
 function Build-MCPServer {
   param($Server)
     
-  Write-Info "Building $($Server.Name) MCP server..."
+  Write-Info "Building $($Server.Name) MCP server with BuildKit caching..."
     
   $buildArgs = @(
     "build",
@@ -64,6 +71,10 @@ function Build-MCPServer {
     
   if ($NoCacheParam) {
     $buildArgs += "--no-cache"
+  }
+  else {
+    # Enable inline cache for faster subsequent builds
+    $buildArgs += "--build-arg", "BUILDKIT_INLINE_CACHE=1"
   }
     
   $buildArgs += "--progress=plain"
@@ -82,6 +93,28 @@ function Build-MCPServer {
   catch {
     Write-Error "Failed to build $($Server.Name): $_"
     return $false
+  }
+}
+
+# Pull base images for caching
+if ($PullBase) {
+  Write-Info "Pulling base images for optimal caching..."
+  $baseImages = @(
+    "node:22-alpine",
+    "python:3.12-alpine",
+    "postgres:16-alpine",
+    "alpine:3.21"
+  )
+  
+  foreach ($image in $baseImages) {
+    try {
+      Write-Info "Pulling $image..."
+      docker pull $image
+      Write-Success "Pulled $image"
+    }
+    catch {
+      Write-Warning "Failed to pull $image, will use cached version"
+    }
   }
 }
 
@@ -154,7 +187,11 @@ docker images --filter "reference=mcp-*" --format "table {{.Repository}}:{{.Tag}
 
 if ($successCount -eq $totalCount) {
   Write-Success "`nAll MCP servers built successfully!"
+  Write-Info "BuildKit cache is persisted - subsequent builds will be instant!"
   Write-Info "To use these servers, ensure your .vscode/mcp.json references the correct image tags."
+  Write-Host "`nCache Management:" -ForegroundColor Cyan
+  Write-Host "  View cache: docker buildx du" -ForegroundColor Gray
+  Write-Host "  Clear cache: docker buildx prune" -ForegroundColor Gray
   exit 0
 }
 else {

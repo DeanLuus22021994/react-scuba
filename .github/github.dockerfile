@@ -3,10 +3,11 @@
 # Reference: https://github.com/github/github-mcp-server
 # Binary location: /server/github-mcp-server
 #
-# OPTIMIZATION: This image is designed for instant rebuilds with named volumes
-# - Named volume 'github-mcp-cache' persists data across builds
+# OPTIMIZATION: BuildKit cache mounts + named volumes for instant rebuilds
+# - BuildKit cache mount for apk packages
+# - Named volume 'github-mcp-cache' persists API response data
 # - Minimal layer changes ensure maximum cache utilization
-# - No unnecessary file operations that would invalidate cache
+# - Multi-stage build separates binary extraction from runtime
 
 FROM ghcr.io/github/github-mcp-server:latest AS github-server
 
@@ -15,13 +16,14 @@ FROM alpine:3.21
 
 WORKDIR /app
 
-# Install runtime dependencies in a single layer (cached after first build)
-RUN apk add --no-cache \
+# Install runtime dependencies with BuildKit cache mount
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+  apk add --no-cache \
   ca-certificates \
   curl \
   git \
   tini \
-  && rm -rf /var/cache/apk/*
+  && rm -rf /tmp/*
 
 # Copy the github-mcp-server binary from official image
 # This layer is cached unless the base image changes
@@ -61,4 +63,6 @@ LABEL mcp.server="github" \
   mcp.source="https://github.com/github/github-mcp-server" \
   mcp.cache.volume="github-mcp-cache" \
   mcp.data.volume="github-mcp-data" \
+  optimization.cache="enabled" \
+  optimization.multistage="true" \
   description="Official GitHub MCP Server - manages repositories, issues, PRs, actions, security"

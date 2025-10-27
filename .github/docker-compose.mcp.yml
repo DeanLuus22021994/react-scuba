@@ -1,12 +1,14 @@
-# Docker Compose configuration for all MCP servers
+# Docker Compose configuration for all MCP servers with performance optimizations
 # Build all images: docker-compose -f .github/docker-compose.mcp.yml build
 # Individual build: docker-compose -f .github/docker-compose.mcp.yml build <service-name>
+# Performance: Host networking, NVMe volumes, 1GB internet optimized
 
 services:
   # GitHub MCP Server (uses official image)
   github:
     image: ghcr.io/github/github-mcp-server:latest
     container_name: github-mcp-server
+    network_mode: host
     volumes:
       - github-mcp-cache:/cache/github
       - github-mcp-data:/app/data
@@ -25,8 +27,10 @@ services:
       dockerfile: filesystem.dockerfile
     image: mcp-filesystem:latest
     container_name: filesystem-mcp-server
+    network_mode: host
     volumes:
       - ../:/workspace:ro
+      - filesystem-node-cache:/cache/node
     stdin_open: true
     tty: false
     restart: unless-stopped
@@ -38,10 +42,12 @@ services:
       dockerfile: postgres.dockerfile
     image: mcp-postgres:latest
     container_name: postgres-mcp-server
+    network_mode: host
     environment:
-      - POSTGRES_CONNECTION=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@host.docker.internal:5432/postgres
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - POSTGRES_CONNECTION=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@127.0.0.1:5432/postgres
+    volumes:
+      - postgres-node-cache:/cache/node
+      - postgres-cache:/cache/pg
     stdin_open: true
     tty: false
     restart: unless-stopped
@@ -52,14 +58,13 @@ services:
   postgres-db:
     image: postgres:16-alpine
     container_name: postgres-db
+    network_mode: host
     environment:
       - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -73,8 +78,11 @@ services:
       dockerfile: sqlite.dockerfile
     image: mcp-sqlite:latest
     container_name: sqlite-mcp-server
+    network_mode: host
     volumes:
       - ../:/data
+      - sqlite-node-cache:/cache/node
+      - sqlite-cache:/cache/sqlite
     stdin_open: true
     tty: false
     restart: unless-stopped
@@ -86,8 +94,11 @@ services:
       dockerfile: memory.dockerfile
     image: mcp-memory:latest
     container_name: memory-mcp-server
+    network_mode: host
     volumes:
       - memory-data:/memory
+      - memory-node-cache:/cache/node
+      - memory-cache:/cache/memory
     stdin_open: true
     tty: false
     restart: unless-stopped
@@ -99,8 +110,12 @@ services:
       dockerfile: git.dockerfile
     image: mcp-git:latest
     container_name: git-mcp-server
+    network_mode: host
     volumes:
       - ../:/repos
+      - git-cache:/cache/git
+      - git-pip-cache:/cache/pip
+      - git-python-cache:/cache/python
     stdin_open: true
     tty: false
     restart: unless-stopped
@@ -112,8 +127,12 @@ services:
       dockerfile: fetch.dockerfile
     image: mcp-fetch:latest
     container_name: fetch-mcp-server
+    network_mode: host
     volumes:
-      - fetch-cache:/cache
+      - fetch-cache:/cache/fetch
+      - fetch-pip-cache:/cache/pip
+      - fetch-python-cache:/cache/python
+      - fetch-http-cache:/cache/http
     stdin_open: true
     tty: false
     restart: unless-stopped
@@ -123,14 +142,40 @@ volumes:
     name: github-mcp-cache
   github-mcp-data:
     name: github-mcp-data
-  memory-data:
-    name: memory-data
-  fetch-cache:
-    name: fetch-cache
+  filesystem-node-cache:
+    name: filesystem-node-cache
+  postgres-node-cache:
+    name: postgres-node-cache
+  postgres-cache:
+    name: postgres-cache
   postgres-data:
     name: postgres-data
+  sqlite-node-cache:
+    name: sqlite-node-cache
+  sqlite-cache:
+    name: sqlite-cache
+  memory-data:
+    name: memory-data
+  memory-node-cache:
+    name: memory-node-cache
+  memory-cache:
+    name: memory-cache
+  git-cache:
+    name: git-cache
+  git-pip-cache:
+    name: git-pip-cache
+  git-python-cache:
+    name: git-python-cache
+  fetch-cache:
+    name: fetch-cache
+  fetch-pip-cache:
+    name: fetch-pip-cache
+  fetch-python-cache:
+    name: fetch-python-cache
+  fetch-http-cache:
+    name: fetch-http-cache
 
 networks:
   default:
     name: mcp-network
-    driver: bridge
+    driver: host

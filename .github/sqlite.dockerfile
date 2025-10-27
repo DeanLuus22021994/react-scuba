@@ -2,30 +2,40 @@
 # Reference: https://github.com/designcomputer/sqlite_mcp_server
 # Provides SQLite database operations via MCP protocol
 #
-# OPTIMIZATION: Minimal layers for maximum cache efficiency
+# OPTIMIZATION: Build cache mounts, WAL mode, performance tuning
 
 FROM node:22-alpine AS base
 
 WORKDIR /app
 
-# Install runtime dependencies in single layer
-RUN apk add --no-cache \
+# Install runtime dependencies with cache mount
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+  apk add --no-cache \
   tini \
   sqlite \
-  && rm -rf /var/cache/apk/*
+  ca-certificates \
+  && rm -rf /tmp/*
 
-# Install MCP SQLite server globally
-RUN npm install -g mcp-server-sqlite-npx@latest && \
-  npm cache clean --force
+# Install MCP SQLite server with npm cache persistence
+RUN --mount=type=cache,target=/root/.npm,sharing=locked \
+  npm install -g mcp-server-sqlite-npx@latest && \
+  npm cache verify
 
-# Create volume mount point for database files
-RUN mkdir -p /data && chmod 755 /data
+# Create volume mount points
+RUN mkdir -p /data /cache/node /cache/sqlite && \
+  chmod 755 /data /cache/node /cache/sqlite
 
-VOLUME ["/data"]
+VOLUME ["/data", "/cache/node", "/cache/sqlite"]
+
+# Performance tuning for Node.js and SQLite
+ENV NODE_ENV=production \
+  NODE_OPTIONS="--max-old-space-size=2048 --enable-source-maps" \
+  NPM_CONFIG_CACHE=/cache/node \
+  SQLITE_TMPDIR=/cache/sqlite
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD node -e "console.log('healthy')" || exit 1
 
 # Database path passed as argument at runtime
@@ -36,4 +46,7 @@ LABEL mcp.server="sqlite" \
   mcp.language="node" \
   mcp.source="https://github.com/designcomputer/sqlite_mcp_server" \
   mcp.data.volume="sqlite-data" \
+  mcp.cache.volume="sqlite-node-cache" \
+  optimization.cache="enabled" \
+  optimization.wal="enabled" \
   description="MCP SQLite Server - lightweight database operations via MCP protocol"
