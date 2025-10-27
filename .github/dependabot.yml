@@ -1,0 +1,106 @@
+# Dependabot configuration for automated dependency updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
+
+version: 2
+updates:
+  # npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    assignees:
+      - "DeanLuus22021994"
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    versioning-strategy: increase
+    groups:
+      # Group React ecosystem updates together
+      react:
+        patterns:
+          - "react*"
+          - "@types/react*"
+      # Group testing dependencies
+      testing:
+        patterns:
+          - "*test*"
+          - "*vitest*"
+          - "@testing-library/*"
+      # Group build tools
+      build-tools:
+        patterns:
+          - "vite*"
+          - "@vitejs/*"
+          - "postcss*"
+          - "tailwindcss*"
+      # Group linting/formatting
+      code-quality:
+        patterns:
+          - "eslint*"
+          - "prettier*"
+          - "@typescript-eslint/*"
+    ignore:
+      # Ignore major version updates for stable dependencies (manual review)
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "DeanLuus22021994"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(ci)"
+
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/.devcontainer"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "DeanLuus22021994"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker)"
+
+  # Python dependencies (MCP servers)
+  - package-ecosystem: "pip"
+    directory: "/docker-compose-examples/mcp/python_utils"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "DeanLuus22021994"
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      # Group MCP SDK updates
+      mcp-sdk:
+        patterns:
+          - "mcp*"
