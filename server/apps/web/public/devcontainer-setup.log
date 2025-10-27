@@ -1,0 +1,992 @@
+[2025-10-27T20:41:47.324Z] Dev Containers 0.429.0 in VS Code 1.106.0-insider (facd8c599d37687ac5a9864bbea93d39d67ed963).
+[2025-10-27T20:41:47.324Z] Start: Resolving Remote
+[2025-10-27T20:41:47.348Z] Setting up container for folder or workspace: c:\react_scuba_runner\react-scuba
+[2025-10-27T20:41:47.348Z] Host: tcp://localhost:2375
+[2025-10-27T20:41:47.392Z] Start: Run: wsl -l -v
+[2025-10-27T20:41:47.447Z] Stop (55 ms): Run: wsl -l -v
+[2025-10-27T20:41:47.448Z] Start: Run: wsl -d docker-desktop -e /bin/sh -c echo ~
+[2025-10-27T20:41:47.607Z] Stop (159 ms): Run: wsl -d docker-desktop -e /bin/sh -c echo ~
+[2025-10-27T20:41:47.608Z] Start: Run: wsl -d docker-desktop -e /bin/sh -c cd '/root' && /bin/sh
+[2025-10-27T20:41:47.617Z] Start: Run in host: id -un
+[2025-10-27T20:41:47.722Z] root
+[2025-10-27T20:41:47.723Z] 
+[2025-10-27T20:41:47.723Z] Stop (106 ms): Run in host: id -un
+[2025-10-27T20:41:47.723Z] Start: Run in host:  (command -v getent >/dev/null 2>&1 && getent passwd 'root' || grep -E '^root|^[^:]*:[^:]*:root:' /etc/passwd || true)
+[2025-10-27T20:41:47.725Z] Stop (2 ms): Run in host:  (command -v getent >/dev/null 2>&1 && getent passwd 'root' || grep -E '^root|^[^:]*:[^:]*:root:' /etc/passwd || true)
+[2025-10-27T20:41:47.725Z] Start: Run in host: echo ~
+[2025-10-27T20:41:47.726Z] /root
+[2025-10-27T20:41:47.726Z] 
+[2025-10-27T20:41:47.726Z] Stop (1 ms): Run in host: echo ~
+[2025-10-27T20:41:47.726Z] Start: Run in host: test -f '/root/.vscode-server-insiders/cli/servers/Insiders-facd8c599d37687ac5a9864bbea93d39d67ed963/server/node'
+[2025-10-27T20:41:47.727Z] 
+[2025-10-27T20:41:47.727Z] 
+[2025-10-27T20:41:47.727Z] Exit code 1
+[2025-10-27T20:41:47.727Z] Stop (1 ms): Run in host: test -f '/root/.vscode-server-insiders/cli/servers/Insiders-facd8c599d37687ac5a9864bbea93d39d67ed963/server/node'
+[2025-10-27T20:41:47.727Z] Start: Run in host: test -f '/root/.vscode-insiders/cli/servers/Insiders-facd8c599d37687ac5a9864bbea93d39d67ed963/server/node'
+[2025-10-27T20:41:47.728Z] 
+[2025-10-27T20:41:47.728Z] 
+[2025-10-27T20:41:47.728Z] Exit code 1
+[2025-10-27T20:41:47.728Z] Stop (1 ms): Run in host: test -f '/root/.vscode-insiders/cli/servers/Insiders-facd8c599d37687ac5a9864bbea93d39d67ed963/server/node'
+[2025-10-27T20:41:47.728Z] Start: Run in host: test -f '/root/.vscode-server-insiders/bin/facd8c599d37687ac5a9864bbea93d39d67ed963/node'
+[2025-10-27T20:41:47.729Z] 
+[2025-10-27T20:41:47.729Z] 
+[2025-10-27T20:41:47.729Z] Exit code 1
+[2025-10-27T20:41:47.729Z] Stop (1 ms): Run in host: test -f '/root/.vscode-server-insiders/bin/facd8c599d37687ac5a9864bbea93d39d67ed963/node'
+[2025-10-27T20:41:47.729Z] Start: Run in host: test -f '/root/.vscode-remote-containers/bin/facd8c599d37687ac5a9864bbea93d39d67ed963/node'
+[2025-10-27T20:41:47.730Z] 
+[2025-10-27T20:41:47.730Z] 
+[2025-10-27T20:41:47.730Z] Exit code 1
+[2025-10-27T20:41:47.730Z] Stop (1 ms): Run in host: test -f '/root/.vscode-remote-containers/bin/facd8c599d37687ac5a9864bbea93d39d67ed963/node'
+[2025-10-27T20:41:47.730Z] Start: Run in host: uname -s
+[2025-10-27T20:41:47.731Z] Linux
+[2025-10-27T20:41:47.731Z] 
+[2025-10-27T20:41:47.731Z] Stop (1 ms): Run in host: uname -s
+[2025-10-27T20:41:47.731Z] Start: Run in host: uname -m
+[2025-10-27T20:41:47.732Z] x86_64
+[2025-10-27T20:41:47.732Z] 
+[2025-10-27T20:41:47.732Z] Stop (1 ms): Run in host: uname -m
+[2025-10-27T20:41:47.732Z] Start: Run in host: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null
+[2025-10-27T20:41:47.733Z] PRETTY_NAME="Docker Desktop"
+[2025-10-27T20:41:47.733Z] 
+[2025-10-27T20:41:47.733Z] Stop (1 ms): Run in host: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null
+[2025-10-27T20:41:48.479Z] Start: Installing VS Code Server
+[2025-10-27T20:41:48.480Z] Start: Run in host: mkdir -p /root/.vscode-remote-containers/bin/facd8c599d37687ac5a9864bbea93d39d67ed963_1761597708480
+[2025-10-27T20:41:48.482Z] 
+[2025-10-27T20:41:48.482Z] 
+[2025-10-27T20:41:48.483Z] Stop (3 ms): Run in host: mkdir -p /root/.vscode-remote-containers/bin/facd8c599d37687ac5a9864bbea93d39d67ed963_1761597708480
+[2025-10-27T20:41:48.483Z] Start: Run in host: (dd iflag=fullblock bs=8192 count=15058; dd iflag=fullblock bs=5120 count=1) | tar --no-same-owner -x -C /root/.vscode-remote-containers/bin/facd8c599d37687ac5a9864bbea93d39d67ed963_1761597708480
+[2025-10-27T20:41:48.527Z] Stop (919 ms): Run: wsl -d docker-desktop -e /bin/sh -c cd '/root' && /bin/sh
+[2025-10-27T20:41:48.529Z] Start: Run in host: rm -rf /root/.vscode-remote-containers/bin/facd8c599d37687ac5a9864bbea93d39d67ed963_1761597708480
+[2025-10-27T20:41:48.529Z] Stdin closed!
+[2025-10-27T20:41:48.529Z] Stop (50 ms): Installing VS Code Server
+[2025-10-27T20:41:48.529Z] Could not connect to WSL.
+[2025-10-27T20:41:48.529Z] Shell server terminated (code: 1, signal: null)
+
+[2025-10-27T20:41:48.531Z] Start: Check Docker is running
+[2025-10-27T20:41:48.531Z] Start: Run: docker version
+[2025-10-27T20:41:48.661Z] Client:
+ Version:           28.5.1
+ API version:       1.51
+ Go version:        go1.24.8
+ Git commit:        e180ab8
+ Built:             Wed Oct  8 12:19:16 2025
+ OS/Arch:           windows/amd64
+ Context:           default
+[2025-10-27T20:41:48.662Z] 
+
+Server: Docker Desktop 4.49.0 (208700)
+ Engine:
+  Version:          28.5.1
+  API version:      1.51 (minimum version 1.24)
+  Go version:       go1.24.8
+  Git commit:       f8215cc
+  Built:            Wed Oct  8 12:17:24 2025
+  OS/Arch:          linux/amd64
+  Experimental:     true
+ containerd:
+  Version:          1.7.27
+  GitCommit:        05044ec0a9a75232cad458027ca83437aae3f4da
+ runc:
+  Version:          1.2.5
+  GitCommit:        v1.2.5-0-g59923ef
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+[2025-10-27T20:41:48.665Z] Stop (134 ms): Run: docker version
+[2025-10-27T20:41:48.665Z] Stop (134 ms): Check Docker is running
+[2025-10-27T20:41:48.666Z] Start: Run: docker volume ls -q
+[2025-10-27T20:41:48.856Z] Stop (190 ms): Run: docker volume ls -q
+[2025-10-27T20:41:48.857Z] Start: Run: docker ps -q -a --filter label=vsch.local.folder=c:\react_scuba_runner\react-scuba --filter label=vsch.quality=insider
+[2025-10-27T20:41:48.967Z] Stop (110 ms): Run: docker ps -q -a --filter label=vsch.local.folder=c:\react_scuba_runner\react-scuba --filter label=vsch.quality=insider
+[2025-10-27T20:41:48.968Z] Start: Run: docker ps -q -a --filter label=devcontainer.local_folder=c:\react_scuba_runner\react-scuba --filter label=devcontainer.config_file=c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json
+[2025-10-27T20:41:49.094Z] Stop (126 ms): Run: docker ps -q -a --filter label=devcontainer.local_folder=c:\react_scuba_runner\react-scuba --filter label=devcontainer.config_file=c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json
+[2025-10-27T20:41:49.094Z] Start: Run: docker ps -q -a --filter label=devcontainer.local_folder=c:\react_scuba_runner\react-scuba
+[2025-10-27T20:41:49.233Z] Stop (139 ms): Run: docker ps -q -a --filter label=devcontainer.local_folder=c:\react_scuba_runner\react-scuba
+[2025-10-27T20:41:49.234Z] Start: Run: docker ps -q -a --filter label=devcontainer.local_folder=c:\react_scuba_runner\react-scuba
+[2025-10-27T20:41:49.336Z] Stop (102 ms): Run: docker ps -q -a --filter label=devcontainer.local_folder=c:\react_scuba_runner\react-scuba
+[2025-10-27T20:41:49.336Z] Running Dev Containers CLI:   up --user-data-folder c:\Users\deanl.MSI\AppData\Roaming\Code - Insiders\User\globalStorage\ms-vscode-remote.remote-containers\data --container-session-data-folder /tmp/devcontainers-e0c89f27-aa4d-49a7-9e40-4dabece3489c1761597705994 --workspace-folder c:\react_scuba_runner\react-scuba --workspace-mount-consistency cached --gpu-availability detect --id-label devcontainer.local_folder=c:\react_scuba_runner\react-scuba --id-label devcontainer.config_file=c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --log-level debug --log-format json --config c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --default-user-env-probe loginInteractiveShell --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root --terminal-columns 152 --terminal-rows 19 --include-configuration --include-merged-configuration
+[2025-10-27T20:41:49.357Z] ProxyResolver#loadSystemCertificates count
+[2025-10-27T20:41:49.372Z] ProxyResolver#loadSystemCertificates count filtered
+[2025-10-27T20:41:49.375Z] Start: Run: C:\Users\deanl.MSI\AppData\Local\Programs\Microsoft VS Code Insiders\Code - Insiders.exe c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js up --user-data-folder c:\Users\deanl.MSI\AppData\Roaming\Code - Insiders\User\globalStorage\ms-vscode-remote.remote-containers\data --container-session-data-folder /tmp/devcontainers-e0c89f27-aa4d-49a7-9e40-4dabece3489c1761597705994 --workspace-folder c:\react_scuba_runner\react-scuba --workspace-mount-consistency cached --gpu-availability detect --id-label devcontainer.local_folder=c:\react_scuba_runner\react-scuba --id-label devcontainer.config_file=c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --log-level debug --log-format json --config c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --default-user-env-probe loginInteractiveShell --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root --terminal-columns 152 --terminal-rows 19 --include-configuration --include-merged-configuration
+[2025-10-27T20:41:49.604Z] @devcontainers/cli 0.80.1. Node.js v22.20.0. win32 10.0.26220 x64.
+[2025-10-27T20:41:49.604Z] Start: Run: docker buildx version
+[2025-10-27T20:41:49.774Z] Stop (170 ms): Run: docker buildx version
+[2025-10-27T20:41:49.775Z] github.com/docker/buildx v0.29.1-desktop.1 28f6246ff24e2c05095e8741e48c48dcb2d3b4bc
+[2025-10-27T20:41:49.775Z] 
+[2025-10-27T20:41:49.775Z] Start: Run: docker -v
+[2025-10-27T20:41:49.844Z] Stop (69 ms): Run: docker -v
+[2025-10-27T20:41:49.844Z] Start: Resolving Remote
+[2025-10-27T20:41:49.851Z] Start: Run: docker compose version --short
+[2025-10-27T20:41:50.034Z] Stop (183 ms): Run: docker compose version --short
+[2025-10-27T20:41:50.034Z] Docker Compose version: 2.40.2-desktop.1
+[2025-10-27T20:41:50.034Z] Start: Run: docker compose -f c:\react_scuba_runner\react-scuba\.devcontainer\docker-compose.mcp.yml --profile * config
+[2025-10-27T20:41:50.220Z] Stop (186 ms): Run: docker compose -f c:\react_scuba_runner\react-scuba\.devcontainer\docker-compose.mcp.yml --profile * config
+[2025-10-27T20:41:50.220Z] name: devcontainer
+services:
+  buildkit:
+    command:
+      - --addr
+      - tcp://0.0.0.0:1234
+      - --oci-worker-gc=true
+      - --oci-worker-gc-keepstorage=5000
+    container_name: buildkit-daemon
+    environment:
+      BUILDKIT_STEP_LOG_MAX_SIZE: "10485760"
+    hostname: buildkit
+    healthcheck:
+      test:
+        - CMD
+        - buildctl
+        - debug
+        - info
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: moby/buildkit:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.55
+    ports:
+      - mode: ingress
+        target: 1234
+        published: "1234"
+        protocol: tcp
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          create_host_path: true
+      - type: volume
+        source: buildkit-cache
+        target: /var/lib/buildkit
+        volume: {}
+      - type: volume
+        source: buildkit-tmp
+        target: /tmp
+        volume: {}
+  cadvisor:
+    build:
+      context: c:\react_scuba_runner\react-scuba\.devcontainer\exporters
+      dockerfile: dockerfile.cadvisor
+    container_name: mcp-cadvisor
+    devices:
+      - source: /dev/kmsg
+        target: /dev/kmsg
+        permissions: rwm
+    hostname: cadvisor
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:8080/healthz
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: mcp-cadvisor:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.75
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8081"
+        protocol: tcp
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /
+        target: /rootfs
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /var/run
+        target: /var/run
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /sys
+        target: /sys
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /var/lib/docker/
+        target: /var/lib/docker
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /dev/disk/
+        target: /dev/disk
+        read_only: true
+        bind:
+          create_host_path: true
+  grafana:
+    container_name: tbc-grafana
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /etc/grafana/provisioning/dashboards/json/mcp-cluster-overview.json
+      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-piechart-panel
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+    hostname: grafana
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:3000/api/health
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: grafana/grafana:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.72
+    ports:
+      - mode: ingress
+        target: 3000
+        published: "3000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: grafana-data
+        target: /var/lib/grafana
+        volume: {}
+      - type: bind
+        source: c:\react_scuba_runner\react-scuba\.devcontainer\containers\gateway\config\grafana\provisioning
+        target: /etc/grafana/provisioning
+        read_only: true
+        bind:
+          create_host_path: true
+  mariadb:
+    command:
+      - --innodb-buffer-pool-size=256M
+      - --max-connections=200
+    container_name: mariadb
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_DATABASE: mcp_db
+      MARIADB_PASSWORD: password
+      MARIADB_ROOT_PASSWORD: password
+    hostname: mariadb
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      timeout: 3s
+      interval: 5s
+      retries: 5
+      start_period: 20s
+    image: mariadb:11-jammy
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.21
+    ports:
+      - mode: ingress
+        target: 3306
+        published: "3306"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: mariadb-data
+        target: /var/lib/mysql
+        volume: {}
+  mariadb-mcp:
+    build:
+      context: c:\react_scuba_runner\react-scuba\.devcontainer\containers
+      dockerfile: Dockerfile.mariadb
+    container_name: mariadb-mcp
+    depends_on:
+      mariadb:
+        condition: service_healthy
+        required: true
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_CONNECTION: mysql://root:password@mariadb:3306/mcp_db
+      MARIADB_PASSWORD: password
+    hostname: mariadb-mcp
+    healthcheck:
+      test:
+        - CMD
+        - mariadb
+        - -h
+        - mariadb
+        - -u
+        - root
+        - -ppassword
+        - -e
+        - SELECT 1
+      timeout: 5s
+      interval: 15s
+      retries: 3
+      start_period: 25s
+    image: mcp-mariadb:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.32
+    restart: unless-stopped
+    stdin_open: true
+    volumes:
+      - type: volume
+        source: mariadb-node-cache
+        target: /cache/node
+        volume: {}
+      - type: volume
+        source: mariadb-cache
+        target: /cache/mariadb
+        volume: {}
+  mysql-exporter:
+    build:
+      context: c:\react_scuba_runner\react-scuba\.devcontainer\exporters
+      dockerfile: dockerfile.mysql
+    command:
+      - --collect.global_status
+      - --collect.info_schema.innodb_metrics
+      - --collect.auto_increment.columns
+      - --collect.info_schema.processlist
+      - --collect.binlog_size
+      - --collect.info_schema.tablestats
+      - --collect.global_variables
+      - --collect.info_schema.query_response_time
+      - --collect.info_schema.userstats
+      - --collect.info_schema.tables
+      - --collect.perf_schema.tablelocks
+      - --collect.perf_schema.file_events
+      - --collect.perf_schema.eventswaits
+      - --collect.perf_schema.indexiowaits
+      - --collect.perf_schema.tableiowaits
+      - --collect.slave_status
+      - --web.listen-address=:9104
+    container_name: mcp-mysql-exporter
+    depends_on:
+      mariadb:
+        condition: service_healthy
+        required: true
+    environment:
+      DATA_SOURCE_NAME: root:password@tcp(mariadb:3306)/
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+    hostname: mysql-exporter
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:9104/metrics
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: mcp-mysql-exporter:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.78
+    ports:
+      - mode: ingress
+        target: 9104
+        published: "9104"
+        protocol: tcp
+    restart: unless-stopped
+  nginx:
+    container_name: tbc-nginx
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+    hostname: nginx
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost/health
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: nginx:alpine
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.70
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+      - mode: ingress
+        target: 443
+        published: "443"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: c:\react_scuba_runner\react-scuba\.devcontainer\containers\gateway\config\nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: c:\react_scuba_runner\react-scuba\.devcontainer\containers\gateway\config\ssl
+        target: /etc/nginx/ssl
+        read_only: true
+        bind:
+          create_host_path: true
+  node-builder:
+    build:
+      context: c:\react_scuba_runner\react-scuba
+      dockerfile: .devcontainer/containers/Dockerfile.node
+    command:
+      - sleep
+      - infinity
+    container_name: node-builder
+    deploy:
+      resources:
+        limits:
+          cpus: 2
+          memory: "2147483648"
+        reservations:
+          memory: "536870912"
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+      NODE_ENV: development
+      TURBO_TELEMETRY_DISABLED: "1"
+    hostname: node-builder
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - --version
+      timeout: 5s
+      interval: 30s
+      retries: 3
+      start_period: 10s
+    image: react-scuba-node:latest
+    labels:
+      purpose: node-development
+      tier: development
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.61
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - type: bind
+        source: c:\react_scuba_runner\react-scuba\server
+        target: /workspace
+        bind:
+          create_host_path: true
+      - type: volume
+        source: node-builder-node-modules
+        target: /cache/node_modules
+        volume: {}
+      - type: volume
+        source: node-builder-npm
+        target: /cache/npm
+        volume: {}
+      - type: volume
+        source: node-builder-turbo
+        target: /cache/turbo
+        volume: {}
+      - type: volume
+        source: node-builder-git-hooks
+        target: /cache/git-hooks
+        volume: {}
+      - type: volume
+        source: node-builder-husky
+        target: /cache/husky
+        volume: {}
+    working_dir: /workspace
+  node-exporter:
+    build:
+      context: c:\react_scuba_runner\react-scuba\.devcontainer\exporters
+      dockerfile: dockerfile.node
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --path.rootfs=/rootfs
+      - --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
+    container_name: mcp-node-exporter
+    hostname: node-exporter
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:9100/metrics
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: mcp-node-exporter:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.76
+    ports:
+      - mode: ingress
+        target: 9100
+        published: "9100"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /proc
+        target: /host/proc
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /sys
+        target: /host/sys
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /
+        target: /rootfs
+        read_only: true
+        bind:
+          create_host_path: true
+  postgres-db:
+    command:
+      - postgres
+      - -c
+      - shared_buffers=64MB
+      - -c
+      - max_connections=50
+      - -c
+      - work_mem=4MB
+      - -c
+      - maintenance_work_mem=32MB
+      - -c
+      - effective_cache_size=128MB
+    container_name: postgres-db
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: "134217728"
+        reservations:
+          memory: "67108864"
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+      POSTGRES_DB: postgres
+      POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    hostname: postgres-db
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
+      timeout: 3s
+      interval: 10s
+      retries: 3
+      start_period: 15s
+    image: postgres:16-alpine
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.20
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5432"
+        protocol: tcp
+    restart: unless-stopped
+    stop_grace_period: 10s
+    volumes:
+      - type: volume
+        source: postgres-data
+        target: /var/lib/postgresql/data
+        volume: {}
+  postgres-exporter:
+    build:
+      context: c:\react_scuba_runner\react-scuba\.devcontainer\exporters
+      dockerfile: dockerfile.postgres
+    container_name: mcp-postgres-exporter
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+        required: true
+    environment:
+      DATA_SOURCE_NAME: postgresql://postgres:password@postgres-db:5432/postgres?sslmode=disable
+    hostname: postgres-exporter
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:9187/
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: mcp-postgres-exporter:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.77
+    ports:
+      - mode: ingress
+        target: 9187
+        published: "9187"
+        protocol: tcp
+    restart: unless-stopped
+  postgres-mcp:
+    build:
+      context: c:\react_scuba_runner\react-scuba\.devcontainer\containers
+      dockerfile: dockerfile.postgre
+    container_name: postgres-mcp
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+        required: true
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+      POSTGRES_CONNECTION: postgresql://postgres:password@postgres-db:5432/postgres
+    hostname: postgres-mcp
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - console.log('healthy')
+      timeout: 5s
+      interval: 15s
+      retries: 3
+      start_period: 20s
+    image: mcp-postgres:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.31
+    restart: unless-stopped
+    stdin_open: true
+    volumes:
+      - type: volume
+        source: postgres-node-cache
+        target: /cache/node
+        volume: {}
+      - type: volume
+        source: postgres-cache
+        target: /cache/pg
+        volume: {}
+  prometheus:
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+    container_name: tbc-prometheus
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+    hostname: prometheus
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:9090/-/healthy
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: prom/prometheus:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.71
+    ports:
+      - mode: ingress
+        target: 9090
+        published: "9090"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: c:\react_scuba_runner\react-scuba\.devcontainer\containers\gateway\config\prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: volume
+        source: prometheus-data
+        target: /prometheus
+        volume: {}
+  python-experimental:
+    build:
+      context: c:\react_scuba_runner\react-scuba\.devcontainer\mcp
+      dockerfile: Dockerfile.python.exp
+    container_name: python-experimental
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+    hostname: python-experimental
+    healthcheck:
+      test:
+        - CMD
+        - python3
+        - /app/health.py
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 15s
+    image: python-experimental:3.15.0a1
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.40
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - type: volume
+        source: python-exp-cache
+        target: /cache/python
+        volume: {}
+      - type: bind
+        source: c:\react_scuba_runner\react-scuba
+        target: /workspace
+        bind:
+          create_host_path: true
+    working_dir: /workspace
+  react-app-dev:
+    build:
+      context: c:\react_scuba_runner\react-scuba\server
+      dockerfile: ../.devcontainer/Dockerfile.dev
+    command:
+      - npm
+      - start
+    container_name: react-app-dev
+    deploy:
+      resources:
+        limits:
+          cpus: 2
+          memory: "1073741824"
+        reservations:
+          memory: "536870912"
+    environment:
+      DOCKER_POSTGRES_PASSWORD: password
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      MARIADB_PASSWORD: password
+      NODE_ENV: development
+      VITE_HOST: 0.0.0.0
+      VITE_PORT: "5173"
+    hostname: react-app-dev
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget --quiet --tries=1 --spider http://localhost:5173 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: react-app-dev:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.59
+    ports:
+      - mode: ingress
+        target: 5173
+        published: "3001"
+        protocol: tcp
+      - mode: ingress
+        target: 4173
+        published: "4173"
+        protocol: tcp
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - type: bind
+        source: c:\react_scuba_runner\react-scuba\server
+        target: /app
+        bind:
+          create_host_path: true
+      - type: volume
+        source: react_node_modules
+        target: /app/node_modules
+        volume: {}
+      - type: volume
+        source: react-vite-cache
+        target: /app/.vite
+        volume: {}
+      - type: volume
+        source: react-npm-cache
+        target: /root/.npm
+        volume: {}
+    working_dir: /app
+  runner:
+    container_name: github-actions-runner
+    environment:
+      ACCESS_TOKEN: [REDACTED]
+      DOCKER_POSTGRES_PASSWORD: password
+      EPHEMERAL: "true"
+      GITHUB_REPO_NAME: react-scuba
+      GITHUB_REPO_OWNER: DeanLuus22021994
+      GITHUB_TOKEN: your_github_token_here
+      GRAFANA_ADMIN_PASSWORD: admin
+      LABELS: docker,linux,x64,self-hosted
+      MARIADB_PASSWORD: password
+      REPO_URL: https://github.com//
+      RUNNER_NAME: docker-runner-01
+      RUNNER_WORKDIR: /work
+      START_DOCKER_SERVICE: "true"
+    hostname: gh-runner-01
+    healthcheck:
+      test:
+        - CMD
+        - pgrep
+        - Runner.Listener
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 1m0s
+    image: myoung34/github-runner:latest
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.56
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: runner-work
+        target: /work
+        volume: {}
+      - type: volume
+        source: runner-cache
+        target: /.cache
+        volume: {}
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          create_host_path: true
+networks:
+  mcp-cluster:
+    name: devcontainer_mcp-cluster
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+volumes:
+  buildkit-cache:
+    name: buildkit-cache
+  buildkit-tmp:
+    name: buildkit-tmp
+  grafana-data:
+    name: grafana-data
+  mariadb-cache:
+    name: mariadb-cache
+  mariadb-data:
+    name: mariadb-data
+  mariadb-node-cache:
+    name: mariadb-node-cache
+  node-builder-git-hooks:
+    name: node-builder-git-hooks
+  node-builder-husky:
+    name: node-builder-husky
+  node-builder-node-modules:
+    name: node-builder-node-modules
+  node-builder-npm:
+    name: node-builder-npm
+  node-builder-turbo:
+    name: node-builder-turbo
+  postgres-cache:
+    name: postgres-cache
+  postgres-data:
+    name: postgres-data
+  postgres-node-cache:
+    name: postgres-node-cache
+  prometheus-data:
+    name: prometheus-data
+  python-exp-cache:
+    name: python-exp-cache
+  react-npm-cache:
+    name: react-npm-cache
+  react-vite-cache:
+    name: react-vite-cache
+  react_node_modules:
+    name: react_node_modules
+  runner-cache:
+    name: runner-cache
+  runner-work:
+    name: runner-work
+[2025-10-27T20:41:50.229Z] Start: Run: docker ps -q -a --filter label=com.docker.compose.project=react-scuba_devcontainer --filter label=com.docker.compose.service=devcontainer
+[2025-10-27T20:41:50.337Z] Stop (108 ms): Run: docker ps -q -a --filter label=com.docker.compose.project=react-scuba_devcontainer --filter label=com.docker.compose.service=devcontainer
+[2025-10-27T20:41:50.340Z] Error: Service 'devcontainer' configured in devcontainer.json not found in Docker Compose configuration.
+[2025-10-27T20:41:50.340Z]     at l6 (c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js:432:1541)
+[2025-10-27T20:41:50.341Z]     at c6 (c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js:412:3866)
+[2025-10-27T20:41:50.341Z]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-10-27T20:41:50.341Z]     at async Y6 (c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js:484:4015)
+[2025-10-27T20:41:50.341Z]     at async BC (c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js:484:4957)
+[2025-10-27T20:41:50.341Z]     at async p7 (c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js:665:202)
+[2025-10-27T20:41:50.341Z]     at async d7 (c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js:664:14804)
+[2025-10-27T20:41:50.342Z]     at async c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js:484:1188
+[2025-10-27T20:41:50.351Z] Stop (976 ms): Run: C:\Users\deanl.MSI\AppData\Local\Programs\Microsoft VS Code Insiders\Code - Insiders.exe c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js up --user-data-folder c:\Users\deanl.MSI\AppData\Roaming\Code - Insiders\User\globalStorage\ms-vscode-remote.remote-containers\data --container-session-data-folder /tmp/devcontainers-e0c89f27-aa4d-49a7-9e40-4dabece3489c1761597705994 --workspace-folder c:\react_scuba_runner\react-scuba --workspace-mount-consistency cached --gpu-availability detect --id-label devcontainer.local_folder=c:\react_scuba_runner\react-scuba --id-label devcontainer.config_file=c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --log-level debug --log-format json --config c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --default-user-env-probe loginInteractiveShell --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root --terminal-columns 152 --terminal-rows 19 --include-configuration --include-merged-configuration
+[2025-10-27T20:41:50.352Z] Exit code 1
+[2025-10-27T20:41:50.356Z] Command failed: C:\Users\deanl.MSI\AppData\Local\Programs\Microsoft VS Code Insiders\Code - Insiders.exe c:\Users\deanl.MSI\.vscode-insiders\extensions\ms-vscode-remote.remote-containers-0.429.0\dist\spec-node\devContainersSpecCLI.js up --user-data-folder c:\Users\deanl.MSI\AppData\Roaming\Code - Insiders\User\globalStorage\ms-vscode-remote.remote-containers\data --container-session-data-folder /tmp/devcontainers-e0c89f27-aa4d-49a7-9e40-4dabece3489c1761597705994 --workspace-folder c:\react_scuba_runner\react-scuba --workspace-mount-consistency cached --gpu-availability detect --id-label devcontainer.local_folder=c:\react_scuba_runner\react-scuba --id-label devcontainer.config_file=c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --log-level debug --log-format json --config c:\react_scuba_runner\react-scuba\.devcontainer\devcontainer.json --default-user-env-probe loginInteractiveShell --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root --terminal-columns 152 --terminal-rows 19 --include-configuration --include-merged-configuration
+[2025-10-27T20:41:50.356Z] Exit code 1
