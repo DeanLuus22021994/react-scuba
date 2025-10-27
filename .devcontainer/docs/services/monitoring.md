@@ -268,10 +268,12 @@ Placeholder for Prometheus Alertmanager integration:
 
 ## Configuration Files
 
-- **Prometheus**: `.devcontainer/containers/gateway/config/prometheus.yml`
-- **Grafana Datasources**: `.devcontainer/containers/gateway/config/grafana/provisioning/datasources/`
-- **Grafana Dashboards**: `.devcontainer/containers/gateway/config/grafana/provisioning/dashboards/`
-- **nginx**: `.devcontainer/containers/gateway/config/nginx/`
+- **Prometheus**: `.devcontainer/containers/gateway/prometheus.yml`
+- **Grafana Datasources**: `.devcontainer/containers/gateway/grafana-datasources.yml`
+- **Grafana Dashboards**: `.devcontainer/containers/gateway/grafana-dashboards.yml`
+- **Dashboard JSONs**: `.devcontainer/containers/gateway/dashboard-*.json`
+- **nginx**: `.devcontainer/containers/gateway/nginx.conf`
+- **nginx Health**: `.devcontainer/containers/gateway/nginx-health.conf`
 
 ## Security Notes
 

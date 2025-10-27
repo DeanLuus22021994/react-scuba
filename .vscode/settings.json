@@ -140,7 +140,8 @@
     "**/monitoring/grafana/provisioning/**/*.yml": "yaml",
     "**/.config/monitoring/grafana/provisioning/**/*.yml": "yaml",
     "**/.config/docker/compose.override*.yml": "yaml",
-    "**/.devcontainer/containers/gateway/config/grafana/provisioning/**/*.yml": "yaml",
+    "**/.devcontainer/containers/gateway/grafana-*.yml": "yaml",
+    "**/.devcontainer/containers/gateway/dashboard-*.json": "json",
     "docker-compose*.yml": "yaml",
     "*.Dockerfile": "dockerfile",
     "**/dashboard/src/index.css": "tailwindcss"
