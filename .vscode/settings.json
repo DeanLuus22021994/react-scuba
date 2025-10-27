@@ -32,27 +32,27 @@
   
   // Language-specific formatting
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[css]": {
@@ -89,9 +89,8 @@
   },
   
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.organizeImports.biome": "explicit",
+    "quickfix.biome": "explicit"
   },
   
   // Reduce language server load
@@ -134,11 +133,6 @@
   // CSS validation (Tailwind v4 compatible)
   "css.lint.unknownAtRules": "ignore",
   "css.validate": true,
-  
-  // ESLint settings for flat config consistency
-  "eslint.useFlatConfig": true,
-  "eslint.validate": ["javascript", "javascriptreact"],
-  "eslint.run": "onType",
   
   // File associations
   "files.associations": {

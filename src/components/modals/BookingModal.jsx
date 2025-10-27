@@ -10,7 +10,11 @@ import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { useCurrency } from '../../hooks/useCurrency';
 import { checkCalendarAvailability, createCalendarBooking } from '../../services/api';
-import { trackCalendarBookingComplete, trackFormAbandon, trackFormStart } from '../../utils/analytics';
+import {
+  trackCalendarBookingComplete,
+  trackFormAbandon,
+  trackFormStart,
+} from '../../utils/analytics';
 import logger from '../../utils/logger';
 import { Loading } from '../ui';
 
@@ -18,7 +22,10 @@ const bookingSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   phone: z.string().min(8, 'Please enter a valid phone number'),
-  participants: z.number().min(1, 'At least 1 participant required').max(12, 'Maximum 12 participants'),
+  participants: z
+    .number()
+    .min(1, 'At least 1 participant required')
+    .max(12, 'Maximum 12 participants'),
   experienceLevel: z.string().min(1, 'Please select experience level'),
   specialRequests: z.string().optional(),
 });
@@ -102,7 +109,9 @@ const BookingModal = ({
     if (formStartTime && !isSubmitting) {
       const timeSpent = (Date.now() - formStartTime) / 1000;
       const formData = watch();
-      const filledFields = Object.values(formData).filter((val) => val && String(val).length > 0).length;
+      const filledFields = Object.values(formData).filter(
+        (val) => val && String(val).length > 0
+      ).length;
       const totalFields = Object.keys(formData).length;
       const completionPercentage = (filledFields / totalFields) * 100;
 
@@ -120,7 +129,7 @@ const BookingModal = ({
   };
 
   const checkAvailability = async (date, time) => {
-    if (!selectedItem || !date) return true;
+    if (!(selectedItem && date)) return true;
 
     setIsCheckingAvailability(true);
     try {
@@ -238,7 +247,11 @@ const BookingModal = ({
                   <Dialog.Title className="text-2xl font-bold text-gray-900">
                     Book {bookingType === 'course' ? 'a Course' : 'a Dive'}
                   </Dialog.Title>
-                  <button onClick={handleClose} className="text-gray-400 hover:text-gray-500 transition-colors" aria-label="Close">
+                  <button
+                    onClick={handleClose}
+                    className="text-gray-400 hover:text-gray-500 transition-colors"
+                    aria-label="Close"
+                  >
                     <XMarkIcon className="w-6 h-6" />
                   </button>
                 </div>
@@ -256,12 +269,16 @@ const BookingModal = ({
                           type="button"
                           onClick={() => setSelectedItem(item.id)}
                           className={`p-4 border-2 rounded-lg text-left transition-all ${
-                            selectedItem === item.id ? 'border-ocean-500 bg-ocean-50' : 'border-gray-200 hover:border-ocean-300'
+                            selectedItem === item.id
+                              ? 'border-ocean-500 bg-ocean-50'
+                              : 'border-gray-200 hover:border-ocean-300'
                           }`}
                         >
                           <div className="font-semibold text-gray-900">{item.name}</div>
                           <div className="text-sm text-gray-600 mt-1">{item.duration}</div>
-                          <div className="text-ocean-600 font-semibold mt-2">{format(convert(item.price, 'MUR', currency), currency)}</div>
+                          <div className="text-ocean-600 font-semibold mt-2">
+                            {format(convert(item.price, 'MUR', currency), currency)}
+                          </div>
                         </button>
                       ))}
                     </div>
@@ -270,7 +287,10 @@ const BookingModal = ({
                   {/* Date and Time Selection */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="preferred-date" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="preferred-date"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Preferred Date *
                       </label>
                       <DatePicker
@@ -288,7 +308,10 @@ const BookingModal = ({
                     </div>
 
                     <div>
-                      <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="time"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Preferred Time *
                       </label>
                       <select
@@ -315,7 +338,10 @@ const BookingModal = ({
                   {/* Personal Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Full Name *
                       </label>
                       <input
@@ -324,11 +350,16 @@ const BookingModal = ({
                         id="name"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                       />
-                      {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
+                      {errors.name && (
+                        <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                      )}
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Email *
                       </label>
                       <input
@@ -337,13 +368,18 @@ const BookingModal = ({
                         id="email"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                       />
-                      {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+                      {errors.email && (
+                        <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                      )}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Phone *
                       </label>
                       <input
@@ -353,11 +389,16 @@ const BookingModal = ({
                         placeholder="+230 XXXX XXXX"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                       />
-                      {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
+                      {errors.phone && (
+                        <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                      )}
                     </div>
 
                     <div>
-                      <label htmlFor="participants" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label
+                        htmlFor="participants"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
                         Number of Participants *
                       </label>
                       <input
@@ -368,12 +409,17 @@ const BookingModal = ({
                         max="12"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"
                       />
-                      {errors.participants && <p className="mt-1 text-sm text-red-600">{errors.participants.message}</p>}
+                      {errors.participants && (
+                        <p className="mt-1 text-sm text-red-600">{errors.participants.message}</p>
+                      )}
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="experienceLevel" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="experienceLevel"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Experience Level *
                     </label>
                     <select
@@ -388,11 +434,16 @@ const BookingModal = ({
                         </option>
                       ))}
                     </select>
-                    {errors.experienceLevel && <p className="mt-1 text-sm text-red-600">{errors.experienceLevel.message}</p>}
+                    {errors.experienceLevel && (
+                      <p className="mt-1 text-sm text-red-600">{errors.experienceLevel.message}</p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="specialRequests"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Special Requests (Optional)
                     </label>
                     <textarea
@@ -411,11 +462,20 @@ const BookingModal = ({
                         <span className="text-gray-700 font-medium">Estimated Total:</span>
                         <span className="text-2xl font-bold text-ocean-600">
                           {selectedItem && items.find((i) => i.id === selectedItem)
-                            ? format(convert(items.find((i) => i.id === selectedItem).price * participants, 'MUR', currency), currency)
+                            ? format(
+                                convert(
+                                  items.find((i) => i.id === selectedItem).price * participants,
+                                  'MUR',
+                                  currency
+                                ),
+                                currency
+                              )
                             : format(0, currency)}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600 mt-2">Final price may vary based on equipment rental and additional services.</p>
+                      <p className="text-sm text-gray-600 mt-2">
+                        Final price may vary based on equipment rental and additional services.
+                      </p>
                     </div>
                   )}
 
@@ -429,7 +489,9 @@ const BookingModal = ({
                     </button>
                     <button
                       type="submit"
-                      disabled={isSubmitting || isCheckingAvailability || !selectedItem || !selectedDate}
+                      disabled={
+                        isSubmitting || isCheckingAvailability || !selectedItem || !selectedDate
+                      }
                       className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Processing...' : 'Request Booking'}

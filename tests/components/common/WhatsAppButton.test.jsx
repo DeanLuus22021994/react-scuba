@@ -42,7 +42,10 @@ describe('WhatsAppButton', () => {
     const customMessage = 'Test message';
     render(<WhatsAppButton message={customMessage} />);
     const link = screen.getByRole('link');
-    expect(link).toHaveAttribute('href', expect.stringContaining(encodeURIComponent(customMessage)));
+    expect(link).toHaveAttribute(
+      'href',
+      expect.stringContaining(encodeURIComponent(customMessage))
+    );
   });
 
   it('should open in new tab', () => {

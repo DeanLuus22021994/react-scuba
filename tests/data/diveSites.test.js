@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { DIFFICULTY_COLORS, DIVE_SITES, getDiveSiteById, MAURITIUS_CENTER } from '../../src/config/constants/index.ts';
+import {
+  DIFFICULTY_COLORS,
+  DIVE_SITES,
+  getDiveSiteById,
+  MAURITIUS_CENTER,
+} from '../../src/config/constants/index.ts';
 
 describe('diveSites', () => {
   it('should export DIVE_SITES array', () => {

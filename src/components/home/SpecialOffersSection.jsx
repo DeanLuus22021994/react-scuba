@@ -20,7 +20,9 @@ const SpecialOffersSection = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-ocean-500 to-ocean-700 rounded-full mb-4">
             <SparklesIcon className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4 tracking-tight">Scuba Diving Special Offers</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4 tracking-tight">
+            Scuba Diving Special Offers
+          </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Exclusive packages designed to give you the best diving experience in Mauritius
           </p>
@@ -44,10 +46,16 @@ const SpecialOffersSection = () => {
               <p className="text-ocean-100">Step one of your PADI Open Water Certification</p>
             </div>
             <div className="p-6">
-              <p className="text-gray-700 mb-4 leading-relaxed">{oceanSpiritContent.offers[0].description}</p>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                {oceanSpiritContent.offers[0].description}
+              </p>
               <div className="bg-ocean-50 p-4 rounded-lg mb-4">
-                <p className="text-sm font-semibold text-ocean-800 mb-2">✨ Couples DSD Special Available</p>
-                <p className="text-sm text-gray-600">Perfect for beginners - no experience required!</p>
+                <p className="text-sm font-semibold text-ocean-800 mb-2">
+                  ✨ Couples DSD Special Available
+                </p>
+                <p className="text-sm text-gray-600">
+                  Perfect for beginners - no experience required!
+                </p>
               </div>
               <button
                 onClick={() => handleEmailOffer(oceanSpiritContent.offers[0].emailSubject)}
@@ -80,13 +88,19 @@ const SpecialOffersSection = () => {
               <p className="text-ocean-100">10 Dive Package</p>
             </div>
             <div className="p-6">
-              <p className="text-gray-700 mb-4 leading-relaxed">{oceanSpiritContent.offers[1].description}</p>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                {oceanSpiritContent.offers[1].description}
+              </p>
               <div className="bg-ocean-50 p-4 rounded-lg mb-4">
                 <p className="text-sm font-semibold text-ocean-800 mb-2">Package Includes:</p>
                 <ul className="text-sm text-gray-700 space-y-1">
                   {oceanSpiritContent.offers[1].includes.map((item, index) => (
                     <li key={index} className="flex items-start">
-                      <svg className="w-4 h-4 text-ocean-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <svg
+                        className="w-4 h-4 text-ocean-600 mr-2 mt-0.5 flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
                         <path
                           fillRule="evenodd"
                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -117,7 +131,9 @@ const SpecialOffersSection = () => {
           className="mt-12 max-w-4xl mx-auto"
         >
           <div className="bg-white rounded-xl shadow-soft p-6 border border-gray-100">
-            <h3 className="text-xl font-bold text-ocean-800 mb-4 text-center">Temperature in Mauritius °C</h3>
+            <h3 className="text-xl font-bold text-ocean-800 mb-4 text-center">
+              Temperature in Mauritius °C
+            </h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gradient-to-br from-orange-50 to-yellow-50 p-5 rounded-lg">
                 <h4 className="font-semibold text-orange-800 mb-3 flex items-center">
@@ -132,10 +148,12 @@ const SpecialOffersSection = () => {
                 </h4>
                 <div className="space-y-2 text-sm">
                   <p className="text-gray-700">
-                    <span className="font-medium">Air Temperature:</span> {oceanSpiritContent.temperature.summer.air.range}
+                    <span className="font-medium">Air Temperature:</span>{' '}
+                    {oceanSpiritContent.temperature.summer.air.range}
                   </p>
                   <p className="text-gray-700">
-                    <span className="font-medium">Water Temperature:</span> {oceanSpiritContent.temperature.summer.water.range}
+                    <span className="font-medium">Water Temperature:</span>{' '}
+                    {oceanSpiritContent.temperature.summer.water.range}
                   </p>
                 </div>
               </div>
@@ -152,10 +170,12 @@ const SpecialOffersSection = () => {
                 </h4>
                 <div className="space-y-2 text-sm">
                   <p className="text-gray-700">
-                    <span className="font-medium">Air Temperature:</span> {oceanSpiritContent.temperature.winter.air.range}
+                    <span className="font-medium">Air Temperature:</span>{' '}
+                    {oceanSpiritContent.temperature.winter.air.range}
                   </p>
                   <p className="text-gray-700">
-                    <span className="font-medium">Water Temperature:</span> {oceanSpiritContent.temperature.winter.water.range}
+                    <span className="font-medium">Water Temperature:</span>{' '}
+                    {oceanSpiritContent.temperature.winter.water.range}
                   </p>
                 </div>
               </div>

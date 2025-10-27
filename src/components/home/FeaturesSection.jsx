@@ -34,7 +34,9 @@ const FeatureItem = ({ feature, index }) => {
       className="text-center p-6 rounded-xl bg-white shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-1"
     >
       <div className="text-5xl md:text-6xl font-bold text-ocean-600 mb-3">{feature.stat}</div>
-      <div className="text-xl font-display font-semibold text-gray-900 mb-2 tracking-tight">{feature.title}</div>
+      <div className="text-xl font-display font-semibold text-gray-900 mb-2 tracking-tight">
+        {feature.title}
+      </div>
       <div className="text-sm text-gray-600 leading-relaxed">{feature.description}</div>
     </motion.div>
   );
@@ -60,9 +62,12 @@ const FeaturesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4 tracking-tight">Why Choose Us</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4 tracking-tight">
+            Why Choose Us
+          </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            We&apos;re committed to providing the best diving experience with safety, professionalism, and passion
+            We&apos;re committed to providing the best diving experience with safety,
+            professionalism, and passion
           </p>
         </motion.div>
 

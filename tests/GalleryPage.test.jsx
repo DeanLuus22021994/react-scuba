@@ -11,7 +11,7 @@ const renderWithProviders = (component) => {
       <CurrencyProvider>
         <MemoryRouter>{component}</MemoryRouter>
       </CurrencyProvider>
-    </HelmetProvider>,
+    </HelmetProvider>
   );
 };
 

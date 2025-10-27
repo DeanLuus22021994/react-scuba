@@ -12,11 +12,11 @@ const GalleryGrid = ({ images, onImageClick }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const { imageId } = entry.target.dataset;
-            setLoadedImages((prev) => new Set([...prev, parseInt(imageId)]));
+            setLoadedImages((prev) => new Set([...prev, Number.parseInt(imageId)]));
           }
         });
       },
-      { rootMargin: '50px' },
+      { rootMargin: '50px' }
     );
 
     return () => {
@@ -54,7 +54,10 @@ const GalleryGrid = ({ images, onImageClick }) => {
           className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow cursor-pointer"
           onClick={() => onImageClick(image)}
         >
-          <div className="lazy-image relative aspect-square overflow-hidden bg-gray-200" data-image-id={image.id}>
+          <div
+            className="lazy-image relative aspect-square overflow-hidden bg-gray-200"
+            data-image-id={image.id}
+          >
             {loadedImages.has(image.id) ? (
               <img
                 src={image.thumbnail}
@@ -71,7 +74,9 @@ const GalleryGrid = ({ images, onImageClick }) => {
             <div className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
               <p className="text-white/90 text-sm">{image.description}</p>
-              <div className="mt-2 inline-block bg-ocean-600 text-white px-2 py-1 rounded-full text-xs w-fit">{image.category}</div>
+              <div className="mt-2 inline-block bg-ocean-600 text-white px-2 py-1 rounded-full text-xs w-fit">
+                {image.category}
+              </div>
             </div>
           </div>
         </motion.div>
@@ -89,7 +94,7 @@ GalleryGrid.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       category: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   onImageClick: PropTypes.func.isRequired,
 };

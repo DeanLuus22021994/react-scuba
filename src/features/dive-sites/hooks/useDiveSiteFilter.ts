@@ -26,20 +26,26 @@ export interface UseDiveSiteFilterReturn {
  * Provides memoized results for performance.
  */
 export const useDiveSiteFilter = (options?: UseDiveSiteFilterOptions): UseDiveSiteFilterReturn => {
-  const [difficulty, setDifficulty] = useState<DiveDifficulty | 'All'>(options?.initialDifficulty || 'All');
-  const [depthRange, setDepthRange] = useState<[number, number]>(options?.initialDepthRange || [0, 50]);
+  const [difficulty, setDifficulty] = useState<DiveDifficulty | 'All'>(
+    options?.initialDifficulty || 'All'
+  );
+  const [depthRange, setDepthRange] = useState<[number, number]>(
+    options?.initialDepthRange || [0, 50]
+  );
 
   const sites = useMemo(() => {
     let filtered = [...DIVE_SITES];
 
     // Filter by difficulty
     if (difficulty !== 'All') {
-      filtered = filtered.filter((site) => site.difficulty.toLowerCase().includes(difficulty.toLowerCase()));
+      filtered = filtered.filter((site) =>
+        site.difficulty.toLowerCase().includes(difficulty.toLowerCase())
+      );
     }
 
     // Filter by depth range
     filtered = filtered.filter((site) => {
-      const maxDepth = parseInt(site.depth);
+      const maxDepth = Number.parseInt(site.depth);
       return maxDepth >= depthRange[0] && maxDepth <= depthRange[1];
     });
 

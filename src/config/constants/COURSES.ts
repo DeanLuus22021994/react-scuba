@@ -71,7 +71,8 @@ export const COURSES: Course[] = [
     maxDepth: '18m',
     certification: 'PADI Open Water Diver',
     image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
-    description: "The world's most popular scuba certification. Learn to dive independently with a buddy to a maximum depth of 18 meters.",
+    description:
+      "The world's most popular scuba certification. Learn to dive independently with a buddy to a maximum depth of 18 meters.",
     included: [
       'PADI eLearning or classroom sessions',
       '5 confined water training dives',
@@ -181,13 +182,22 @@ export const COURSES: Course[] = [
   },
 ] as const;
 
-export const COURSE_COMPARISON_HEADERS = ['Course', 'Duration', 'Min Age', 'Prerequisites', 'Max Depth', 'Price'] as const;
+export const COURSE_COMPARISON_HEADERS = [
+  'Course',
+  'Duration',
+  'Min Age',
+  'Prerequisites',
+  'Max Depth',
+  'Price',
+] as const;
 
 export const getCourseById = (id: string): Course | undefined => {
   return COURSES.find((course) => course.id === id);
 };
 
-export const getCoursesByLevel = (level: 'beginner' | 'intermediate' | 'professional'): Course[] => {
+export const getCoursesByLevel = (
+  level: 'beginner' | 'intermediate' | 'professional'
+): Course[] => {
   const levels = {
     beginner: ['discover-scuba', 'open-water'],
     intermediate: ['advanced', 'rescue'],
@@ -203,7 +213,8 @@ export const DIVE_PACKAGES: DivePackage[] = [
     id: 'best-of-north-10',
     name: 'Best of the North - 10 Dive Package',
     price: 20000,
-    description: '10 dive package including a 2 dive Safari to Coin de Mire island and Trou Aux Biches',
+    description:
+      '10 dive package including a 2 dive Safari to Coin de Mire island and Trou Aux Biches',
     included: [
       '10 dives total',
       '2 dive Safari to Coin de Mire island',

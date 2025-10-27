@@ -58,7 +58,9 @@ describe('GalleryGrid', () => {
   });
 
   it('should have grid layout classes', () => {
-    const { container } = render(<GalleryGrid images={mockImages} onImageClick={mockOnImageClick} />);
+    const { container } = render(
+      <GalleryGrid images={mockImages} onImageClick={mockOnImageClick} />
+    );
     const grid = container.firstChild;
     expect(grid).toHaveClass('grid');
   });

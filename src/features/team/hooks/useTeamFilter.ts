@@ -23,7 +23,9 @@ export interface UseTeamFilterReturn {
  * Useful for displaying specific instructor types.
  */
 export const useTeamFilter = (options?: UseTeamFilterOptions): UseTeamFilterReturn => {
-  const [specialty, setSpecialty] = useState<InstructorSpecialty>(options?.initialSpecialty || 'all');
+  const [specialty, setSpecialty] = useState<InstructorSpecialty>(
+    options?.initialSpecialty || 'all'
+  );
 
   const members = useMemo(() => {
     if (specialty === 'all') {

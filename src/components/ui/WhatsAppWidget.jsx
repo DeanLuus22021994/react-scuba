@@ -1,6 +1,6 @@
+import { ChatBubbleLeftRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { XMarkIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
 export default function WhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,11 @@ export default function WhatsAppWidget() {
                   <p className="text-white/90 text-sm">Typically replies instantly</p>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="text-white/90 hover:text-white transition-colors" aria-label="Close chat">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-white/90 hover:text-white transition-colors"
+                aria-label="Close chat"
+              >
                 <XMarkIcon className="w-6 h-6" />
               </button>
             </div>
@@ -37,17 +41,27 @@ export default function WhatsAppWidget() {
                 <p className="text-gray-800 text-sm mb-2">
                   <strong>Hi there! 👋</strong>
                 </p>
-                <p className="text-gray-700 text-sm">Have questions about diving in Mauritius? We&apos;re here to help!</p>
+                <p className="text-gray-700 text-sm">
+                  Have questions about diving in Mauritius? We&apos;re here to help!
+                </p>
               </div>
               <div className="space-y-2 mb-4">
                 <div className="flex items-center text-sm text-gray-600">
-                  <svg className="w-4 h-4 mr-2 text-[#25D366]" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    className="w-4 h-4 mr-2 text-[#25D366]"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
                   <span>{whatsappNumber}</span>
                 </div>
                 <div className="flex items-center text-sm text-gray-600">
-                  <svg className="w-4 h-4 mr-2 text-[#25D366]" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    className="w-4 h-4 mr-2 text-[#25D366]"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       fillRule="evenodd"
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"

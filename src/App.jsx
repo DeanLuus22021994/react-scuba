@@ -1,19 +1,16 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-
-// Layout Components (loaded immediately - needed for all routes)
-import Footer from './layouts/Footer';
-import Header from './layouts/Header';
-
 // Shared Components (loaded immediately - used across app)
 import BackToTop from './components/ui/BackToTop';
 import Loading from './components/ui/Loading';
 import ScrollProgress from './components/ui/ScrollProgress';
 import WhatsAppWidget from './components/ui/WhatsAppWidget';
-
 // Context Providers
 import { CurrencyProvider } from './hooks/useCurrency';
+// Layout Components (loaded immediately - needed for all routes)
+import Footer from './layouts/Footer';
+import Header from './layouts/Header';
 import { QueryProvider } from './providers/QueryProvider';
 
 // Utilities

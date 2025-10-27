@@ -4,12 +4,13 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  esbuild: false, // Disable esbuild in favor of SWC
   build: {
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
-    // Target modern browsers for better optimization
-    target: 'esnext',
+    // Target ES2022 for better optimization
+    target: 'es2022',
     // Increase chunk size limit since we're code-splitting properly
     chunkSizeWarningLimit: 500,
     rollupOptions: {

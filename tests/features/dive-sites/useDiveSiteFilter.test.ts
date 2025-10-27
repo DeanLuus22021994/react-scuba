@@ -20,7 +20,9 @@ describe('useDiveSiteFilter', () => {
     });
 
     expect(result.current.difficulty).toBe('Beginner');
-    expect(result.current.sites.every((site) => site.difficulty.toLowerCase().includes('beginner'))).toBe(true);
+    expect(
+      result.current.sites.every((site) => site.difficulty.toLowerCase().includes('beginner'))
+    ).toBe(true);
   });
 
   it('should filter by intermediate difficulty', () => {
@@ -30,7 +32,9 @@ describe('useDiveSiteFilter', () => {
       result.current.setDifficulty('Intermediate');
     });
 
-    expect(result.current.sites.every((site) => site.difficulty.toLowerCase().includes('intermediate'))).toBe(true);
+    expect(
+      result.current.sites.every((site) => site.difficulty.toLowerCase().includes('intermediate'))
+    ).toBe(true);
   });
 
   it('should filter by depth range', () => {
@@ -43,9 +47,9 @@ describe('useDiveSiteFilter', () => {
     expect(result.current.depthRange).toEqual([10, 30]);
     expect(
       result.current.sites.every((site) => {
-        const depth = parseInt(site.depth);
+        const depth = Number.parseInt(site.depth);
         return depth >= 10 && depth <= 30;
-      }),
+      })
     ).toBe(true);
   });
 
@@ -59,9 +63,9 @@ describe('useDiveSiteFilter', () => {
 
     expect(
       result.current.sites.every((site) => {
-        const depth = parseInt(site.depth);
+        const depth = Number.parseInt(site.depth);
         return site.difficulty.toLowerCase().includes('beginner') && depth >= 0 && depth <= 20;
-      }),
+      })
     ).toBe(true);
   });
 
@@ -113,7 +117,7 @@ describe('useDiveSiteFilter', () => {
       result.current.setDepthRange([30, 50]);
     });
 
-    expect(result.current.sites.every((site) => parseInt(site.depth) >= 30)).toBe(true);
+    expect(result.current.sites.every((site) => Number.parseInt(site.depth) >= 30)).toBe(true);
   });
 
   it('should memoize filtered results', () => {

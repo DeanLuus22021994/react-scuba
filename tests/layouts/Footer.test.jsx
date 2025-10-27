@@ -9,7 +9,7 @@ describe('Footer', () => {
     return render(
       <CurrencyProvider>
         <BrowserRouter>{component}</BrowserRouter>
-      </CurrencyProvider>,
+      </CurrencyProvider>
     );
   };
 

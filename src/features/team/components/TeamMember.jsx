@@ -22,7 +22,10 @@ const TeamMember = ({ member, index = 0 }) => {
         <p className="text-gray-700 mb-4">{member.bio}</p>
         <div className="space-y-2">
           {member.certifications.map((cert, idx) => (
-            <div key={idx} className="inline-block bg-ocean-50 text-ocean-700 px-3 py-1 rounded-full text-sm mr-2 mb-2">
+            <div
+              key={idx}
+              className="inline-block bg-ocean-50 text-ocean-700 px-3 py-1 rounded-full text-sm mr-2 mb-2"
+            >
               {cert}
             </div>
           ))}

@@ -68,7 +68,7 @@ export class PerformanceAnalyzer {
       { label: '10-50ms', min: 10, max: 50, count: 0 },
       { label: '50-100ms', min: 50, max: 100, count: 0 },
       { label: '100-500ms', min: 100, max: 500, count: 0 },
-      { label: '> 500ms', min: 500, max: Infinity, count: 0 },
+      { label: '> 500ms', min: 500, max: Number.POSITIVE_INFINITY, count: 0 },
     ];
 
     for (const test of allTests) {

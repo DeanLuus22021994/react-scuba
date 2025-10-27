@@ -6,10 +6,9 @@
         "ms-vscode.copilot-mermaid-diagram",
         "ms-vscode.vscode-copilot-vision",
         "ms-vscode.vscode-websearchforcopilot",
-        // JavaScript/TypeScript and React (for extension development, per #vscodeAPI)
+        // JavaScript/TypeScript and React (Rust-based tooling)
         "ms-vscode.vscode-typescript-next",  // TypeScript support
-        "dbaeumer.vscode-eslint",            // ESLint (from devcontainer.json)
-        "esbenp.prettier-vscode",            // Prettier (from devcontainer.json)
+        "biomejs.biome",                     // Biome (Rust linter + formatter)
         "christian-kohler.npm-intellisense", // NPM IntelliSense (from devcontainer.json)
         "Orta.vscode-jest",                  // Jest testing (from devcontainer.json)
         "VisualStudioExptTeam.intellicode-api-usage-examples",  // IntelliCode (from devcontainer.json)
@@ -17,7 +16,6 @@
         "ms-python.python",                  // Python support (from devcontainer.json)
         "ms-python.black-formatter",         // Black formatter (from devcontainer.json)
         "ms-python.isort",                   // isort (from devcontainer.json)
-        "ms-python.pylint",                  // Pylint (from devcontainer.json)
         "ms-python.ruff",                    // Ruff (additional, for consistency with settings.json)
         // GitHub and CI/CD (from devcontainer.json)
         "github.vscode-github-actions",      // GitHub Actions
@@ -33,6 +31,8 @@
     ],
     "unwantedRecommendations": [
         "ms-vscode.vscode-typescript",  // Avoid older TypeScript if using next
+        "dbaeumer.vscode-eslint",       // Replaced by Biome
+        "esbenp.prettier-vscode",       // Replaced by Biome
         "ms-python.pylint"             // Avoid if preferring Ruff (optional, based on settings.json)
     ]
 }

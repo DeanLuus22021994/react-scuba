@@ -140,7 +140,8 @@ export const OCEAN_SPIRIT_CONTENT: OceanSpiritContent = {
   about: {
     description:
       'Scuba diving in Mauritius means that from the day you arrive, you are among friends. Ocean Spirit Scuba Diving Mauritius is a friendly sociable PADI 5 Star ECO Green Fins Scuba Diving centre with a Green Star, and comfortable club like facilities.',
-    instructors: 'Our patient skilled PADI Instructors focus on safety, they know their fish and love their world.',
+    instructors:
+      'Our patient skilled PADI Instructors focus on safety, they know their fish and love their world.',
     diving:
       'Diving Mauritius is in warm water, with good visibility and 65 great dive sites around the Northern Mauritius Islands. Wreck diving, Turtle diving, Shark diving, macro photography, deep diving, and exquisite healthy coral reefs.',
     values:
@@ -154,7 +155,13 @@ export const OCEAN_SPIRIT_CONTENT: OceanSpiritContent = {
     ],
   },
 
-  certifications: ['PADI 5 Star ECO Centre', 'PADI ECO Center', 'Green Fins Member', 'Green Star Rating', 'Reef-World Federation Partner'],
+  certifications: [
+    'PADI 5 Star ECO Centre',
+    'PADI ECO Center',
+    'Green Fins Member',
+    'Green Star Rating',
+    'Reef-World Federation Partner',
+  ],
 
   specialties: [
     'Wreck Diving',
@@ -198,8 +205,13 @@ export const OCEAN_SPIRIT_CONTENT: OceanSpiritContent = {
     {
       name: 'Best of the North - 10 Dive Package',
       price: 'MUR 20,000',
-      description: '10 dive package, including a 2 dive Safari to Coin de Mire island and Trou Aux Biches',
-      includes: ['10 dives total', '2 dive Safari to Coin de Mire island', 'Trou Aux Biches diving'],
+      description:
+        '10 dive package, including a 2 dive Safari to Coin de Mire island and Trou Aux Biches',
+      includes: [
+        '10 dives total',
+        '2 dive Safari to Coin de Mire island',
+        'Trou Aux Biches diving',
+      ],
       emailSubject: 'Best of the North 10 dive package',
     },
   ],
@@ -218,7 +230,8 @@ export const OCEAN_SPIRIT_CONTENT: OceanSpiritContent = {
     instagram: 'https://www.instagram.com/divingmauritius/',
     twitter: 'https://twitter.com/OceanSpirit13',
     youtube: 'https://www.youtube.com/user/oceandivermu',
-    tripAdvisor: 'https://www.tripadvisor.com.my/Attraction_Review-g1905319-d1717410-Reviews-Ocean_Spirit_Dive_Center-Pereybere.html',
+    tripAdvisor:
+      'https://www.tripadvisor.com.my/Attraction_Review-g1905319-d1717410-Reviews-Ocean_Spirit_Dive_Center-Pereybere.html',
   },
 
   images: {
@@ -232,7 +245,8 @@ export const OCEAN_SPIRIT_CONTENT: OceanSpiritContent = {
       id: 'ocean-spirit-starts-to-shine',
       title: 'Ocean Spirit in Mauritius starts to shine',
       date: '2024',
-      excerpt: 'Ocean Spirit Scuba Diving Mauritius continues to grow and shine in the diving community.',
+      excerpt:
+        'Ocean Spirit Scuba Diving Mauritius continues to grow and shine in the diving community.',
       image: 'https://static.wixstatic.com/media/5667b6_23bbd83db2ff4903a78483a0fcc6a033~mv2.jpg',
       isPinned: true,
     },
@@ -240,7 +254,8 @@ export const OCEAN_SPIRIT_CONTENT: OceanSpiritContent = {
       id: 'reef-world-federation',
       title: 'Ocean Spirit and Reef-World Federation',
       date: '2024',
-      excerpt: 'Partnership with Reef-World Federation strengthens our commitment to marine conservation.',
+      excerpt:
+        'Partnership with Reef-World Federation strengthens our commitment to marine conservation.',
       image: 'https://static.wixstatic.com/media/5667b6_57f3f9277369407bb5bad9e3a5371848~mv2.png',
       isPinned: true,
     },

@@ -11,9 +11,12 @@ const CTASection = ({ onContactClick }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Book the Diving Holiday of Your Life?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Book the Diving Holiday of Your Life?
+          </h2>
           <p className="text-xl md:text-2xl text-ocean-100 mb-8">
-            Ready to explore the underwater world? Book your dive or course today and let&apos;s make memories!
+            Ready to explore the underwater world? Book your dive or course today and let&apos;s
+            make memories!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button

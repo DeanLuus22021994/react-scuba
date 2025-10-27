@@ -30,7 +30,8 @@ const AboutPage = () => {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920)',
+              backgroundImage:
+                'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-ocean-900/80 to-ocean-600/80" />
@@ -58,28 +59,38 @@ const AboutPage = () => {
         {/* Our Story */}
         <section className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6 text-center">The Ocean Spirit New Dive Centre</h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6 text-center">
+                The Ocean Spirit New Dive Centre
+              </h2>
               <div className="prose prose-lg max-w-none text-gray-700 space-y-4">
                 <p>
-                  Ocean Spirit Scuba Diving, together with Ocean Spirit Training and the Ocean Spirit Coffee Shop and Breakfast Bar are
-                  proudly housed in our own building with a gorgeous view of the ocean we love. Opened on 2 March 2020, this is the perfect
+                  Ocean Spirit Scuba Diving, together with Ocean Spirit Training and the Ocean
+                  Spirit Coffee Shop and Breakfast Bar are proudly housed in our own building with a
+                  gorgeous view of the ocean we love. Opened on 2 March 2020, this is the perfect
                   solution to a scuba diving holiday in the North in Mauritius.
                 </p>
                 <p>
-                  The Diving centre offers hospitality, comprehensive gear selection, personal mouthpieces, and careful disinfectant gear
-                  rinsing. For the duration of your visit your gear is reserved for your exclusive use. The Coffee shop offers everything a
-                  diver could wish for in the line of food, beverages, snacks, beach barbecues, catered functions and of course superb
-                  Coffee.
+                  The Diving centre offers hospitality, comprehensive gear selection, personal
+                  mouthpieces, and careful disinfectant gear rinsing. For the duration of your visit
+                  your gear is reserved for your exclusive use. The Coffee shop offers everything a
+                  diver could wish for in the line of food, beverages, snacks, beach barbecues,
+                  catered functions and of course superb Coffee.
                 </p>
                 <p>
-                  Our patient skilled PADI Instructors focus on safety, they know their fish and love their world. Diving Mauritius is in
-                  warm water, with good visibility and 65 great dive sites around the Northern Mauritius Islands. Wreck diving, Turtle
-                  diving, Shark diving, macro photography, deep diving, and exquisite healthy coral reefs.
+                  Our patient skilled PADI Instructors focus on safety, they know their fish and
+                  love their world. Diving Mauritius is in warm water, with good visibility and 65
+                  great dive sites around the Northern Mauritius Islands. Wreck diving, Turtle
+                  diving, Shark diving, macro photography, deep diving, and exquisite healthy coral
+                  reefs.
                 </p>
                 <p>
-                  Because that&apos;s what diving is all about. Going places, making friends and sharing experiences. Why not join us? And
-                  book the diving holiday of your life.
+                  Because that&apos;s what diving is all about. Going places, making friends and
+                  sharing experiences. Why not join us? And book the diving holiday of your life.
                 </p>
               </div>
             </motion.div>
@@ -89,7 +100,9 @@ const AboutPage = () => {
         {/* Mission & Values */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-12 text-center">Our Mission & Values</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-12 text-center">
+              Our Mission & Values
+            </h2>
             <div className="grid md:grid-cols-3 gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -110,8 +123,8 @@ const AboutPage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Safety First</h3>
                 <p className="text-gray-700">
-                  Your safety is our top priority. We maintain the highest equipment standards and follow strict safety protocols on every
-                  dive.
+                  Your safety is our top priority. We maintain the highest equipment standards and
+                  follow strict safety protocols on every dive.
                 </p>
               </motion.div>
 
@@ -127,8 +140,8 @@ const AboutPage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Education Excellence</h3>
                 <p className="text-gray-700">
-                  We believe in quality education. Our instructors use proven teaching methods to help you become a confident, skilled
-                  diver.
+                  We believe in quality education. Our instructors use proven teaching methods to
+                  help you become a confident, skilled diver.
                 </p>
               </motion.div>
 
@@ -141,7 +154,12 @@ const AboutPage = () => {
               >
                 <div className="text-ocean-600 mb-4">
                   <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -150,10 +168,12 @@ const AboutPage = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Conservation & Family Values</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  Conservation & Family Values
+                </h3>
                 <p className="text-gray-700">
-                  Ocean Spirit has grown in its commitment to promote conservation, humility, respect, family values and career development
-                  for our team and community.
+                  Ocean Spirit has grown in its commitment to promote conservation, humility,
+                  respect, family values and career development for our team and community.
                 </p>
               </motion.div>
             </div>
@@ -165,7 +185,9 @@ const AboutPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Credentials</h2>
-              <p className="text-lg text-gray-700">Trusted, certified, and recognized for excellence</p>
+              <p className="text-lg text-gray-700">
+                Trusted, certified, and recognized for excellence
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -181,7 +203,9 @@ const AboutPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
-              <p className="text-lg text-gray-700">Experienced, passionate, and dedicated to your diving success</p>
+              <p className="text-lg text-gray-700">
+                Experienced, passionate, and dedicated to your diving success
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -195,10 +219,12 @@ const AboutPage = () => {
         {/* Equipment & Safety */}
         <section className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">Modern Equipment & Safety Record</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">
+              Modern Equipment & Safety Record
+            </h2>
             <p className="text-lg text-gray-700 mb-8">
-              We invest in the best equipment to ensure your comfort and safety. All our gear is professionally maintained and regularly
-              serviced to manufacturer specifications.
+              We invest in the best equipment to ensure your comfort and safety. All our gear is
+              professionally maintained and regularly serviced to manufacturer specifications.
             </p>
             <div className="grid md:grid-cols-3 gap-6 mb-12">
               <div className="bg-ocean-50 p-6 rounded-lg">
@@ -220,7 +246,9 @@ const AboutPage = () => {
         {/* Water Conditions & Climate */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-12 text-center">Perfect Diving Conditions Year-Round</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-12 text-center">
+              Perfect Diving Conditions Year-Round
+            </h2>
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -230,7 +258,11 @@ const AboutPage = () => {
                 className="bg-white p-8 rounded-xl shadow-lg"
               >
                 <div className="flex items-center mb-4">
-                  <svg className="w-12 h-12 text-orange-500 mr-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    className="w-12 h-12 text-orange-500 mr-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       fillRule="evenodd"
                       d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
@@ -249,8 +281,8 @@ const AboutPage = () => {
                     <span className="text-ocean-600 font-bold text-lg">26°C - 29°C</span>
                   </div>
                   <p className="text-gray-600 mt-4">
-                    Warm tropical conditions with excellent visibility. Perfect for extended dive sessions and minimal exposure protection
-                    needed.
+                    Warm tropical conditions with excellent visibility. Perfect for extended dive
+                    sessions and minimal exposure protection needed.
                   </p>
                 </div>
               </motion.div>
@@ -263,7 +295,11 @@ const AboutPage = () => {
                 className="bg-white p-8 rounded-xl shadow-lg"
               >
                 <div className="flex items-center mb-4">
-                  <svg className="w-12 h-12 text-cyan-500 mr-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    className="w-12 h-12 text-cyan-500 mr-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
                   </svg>
                   <h3 className="text-2xl font-bold text-gray-900">Winter (May - September)</h3>
@@ -278,8 +314,8 @@ const AboutPage = () => {
                     <span className="text-ocean-600 font-bold text-lg">23°C - 25°C</span>
                   </div>
                   <p className="text-gray-600 mt-4">
-                    Mild comfortable weather with great diving conditions. A 3mm wetsuit recommended. Excellent time for marine life
-                    encounters.
+                    Mild comfortable weather with great diving conditions. A 3mm wetsuit
+                    recommended. Excellent time for marine life encounters.
                   </p>
                 </div>
               </motion.div>
@@ -287,8 +323,9 @@ const AboutPage = () => {
 
             <div className="text-center">
               <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-                Mauritius offers fantastic diving conditions throughout the year. With warm waters, abundant marine life, and excellent
-                visibility averaging 20-30 meters, Northern Mauritius is a diver&apos;s paradise no matter when you visit.
+                Mauritius offers fantastic diving conditions throughout the year. With warm waters,
+                abundant marine life, and excellent visibility averaging 20-30 meters, Northern
+                Mauritius is a diver&apos;s paradise no matter when you visit.
               </p>
             </div>
           </div>
@@ -312,15 +349,22 @@ const AboutPage = () => {
               >
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-bold text-ocean-800">Couples DSD Special</h3>
-                  <div className="bg-ocean-600 text-white px-4 py-2 rounded-full font-bold">2 for 1</div>
+                  <div className="bg-ocean-600 text-white px-4 py-2 rounded-full font-bold">
+                    2 for 1
+                  </div>
                 </div>
                 <p className="text-gray-700 mb-6">
-                  Perfect for couples wanting to discover scuba diving together! Experience your first breath underwater as a team with
-                  personalized instruction and full equipment included.
+                  Perfect for couples wanting to discover scuba diving together! Experience your
+                  first breath underwater as a team with personalized instruction and full equipment
+                  included.
                 </p>
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -330,7 +374,11 @@ const AboutPage = () => {
                     <span>Professional PADI instructor</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -340,7 +388,11 @@ const AboutPage = () => {
                     <span>All equipment provided</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -350,7 +402,11 @@ const AboutPage = () => {
                     <span>Dive to 12 meters depth</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -377,15 +433,21 @@ const AboutPage = () => {
               >
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-bold text-ocean-800">Best of North Package</h3>
-                  <div className="bg-ocean-600 text-white px-4 py-2 rounded-full font-bold">MUR 20,000</div>
+                  <div className="bg-ocean-600 text-white px-4 py-2 rounded-full font-bold">
+                    MUR 20,000
+                  </div>
                 </div>
                 <p className="text-gray-700 mb-6">
-                  Explore 10 of the best dive sites in Northern Mauritius! Perfect for certified divers wanting to experience the incredible
-                  diversity of our underwater world.
+                  Explore 10 of the best dive sites in Northern Mauritius! Perfect for certified
+                  divers wanting to experience the incredible diversity of our underwater world.
                 </p>
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -395,7 +457,11 @@ const AboutPage = () => {
                     <span>10 guided dives at premium sites</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -405,7 +471,11 @@ const AboutPage = () => {
                     <span>Coin de Mire, Trou Aux Biches & more</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -415,7 +485,11 @@ const AboutPage = () => {
                     <span>Wreck diving & turtle encounters</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-5 h-5 text-ocean-600 mr-2 mt-1 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"

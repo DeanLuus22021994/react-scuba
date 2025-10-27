@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { convertCurrency, CURRENCIES, formatCurrency } from '../../src/utils/currency.js';
+import { CURRENCIES, convertCurrency, formatCurrency } from '../../src/utils/currency.js';
 
 describe('currency', () => {
   it('should export CURRENCIES', () => {

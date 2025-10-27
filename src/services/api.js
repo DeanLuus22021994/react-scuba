@@ -130,7 +130,12 @@ export const getExchangeRates = async () => {
 export const createBooking = async (bookingData) => {
   try {
     const response = await api.post('/bookings', bookingData);
-    return { success: true, ...response, bookingType: bookingData.bookingType, participants: bookingData.participants };
+    return {
+      success: true,
+      ...response,
+      bookingType: bookingData.bookingType,
+      participants: bookingData.participants,
+    };
   } catch (error) {
     throw new Error(error.response?.data?.error || 'Failed to create booking');
   }

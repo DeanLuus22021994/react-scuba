@@ -3,7 +3,7 @@
  */
 
 import type { ReactNode } from 'react';
-import type { Course, DiveSite, TeamMember, GalleryImage } from './common';
+import type { Course, DiveSite, GalleryImage, TeamMember } from './common';
 
 export interface BaseComponentProps {
   className?: string;

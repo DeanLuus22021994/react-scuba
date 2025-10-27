@@ -48,6 +48,11 @@ typings/
 
 # TypeScript cache
 *.tsbuildinfo
+.tsbuildinfo
+
+# Rust toolchain caches
+.swc/
+.biome/
 
 # Python cache
 __pycache__/

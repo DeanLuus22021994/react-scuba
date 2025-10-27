@@ -7,7 +7,8 @@ const SERVICES = [
   {
     icon: AcademicCapIcon,
     title: 'PADI Courses',
-    description: 'Get certified with our comprehensive PADI courses from beginner to professional level',
+    description:
+      'Get certified with our comprehensive PADI courses from beginner to professional level',
     link: '/courses',
     linkText: 'View Courses',
     color: 'ocean',
@@ -15,7 +16,8 @@ const SERVICES = [
   {
     icon: MapIcon,
     title: 'Guided Dives',
-    description: "Explore Mauritius' best dive sites with our experienced instructors and dive guides",
+    description:
+      "Explore Mauritius' best dive sites with our experienced instructors and dive guides",
     link: '/dive-sites',
     linkText: 'Explore Sites',
     color: 'ocean',
@@ -23,7 +25,8 @@ const SERVICES = [
   {
     icon: CameraIcon,
     title: 'Photo Dives',
-    description: 'Capture stunning underwater moments with our specialized photography dive packages',
+    description:
+      'Capture stunning underwater moments with our specialized photography dive packages',
     link: '/gallery',
     linkText: 'View Gallery',
     color: 'ocean',
@@ -44,7 +47,9 @@ const ServiceCard = ({ service, index }) => {
       <div className="w-14 h-14 bg-gradient-to-br from-ocean-500 to-ocean-700 rounded-xl flex items-center justify-center mb-6 shadow-md">
         <Icon className="w-7 h-7 text-white" />
       </div>
-      <h3 className="text-xl font-display font-bold text-gray-900 mb-3 tracking-tight">{service.title}</h3>
+      <h3 className="text-xl font-display font-bold text-gray-900 mb-3 tracking-tight">
+        {service.title}
+      </h3>
       <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
       <Link
         to={service.link}
@@ -87,9 +92,12 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4 tracking-tight">Our Services</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4 tracking-tight">
+            Our Services
+          </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            From beginner courses to advanced certifications, we offer comprehensive scuba diving services
+            From beginner courses to advanced certifications, we offer comprehensive scuba diving
+            services
           </p>
         </motion.div>
 

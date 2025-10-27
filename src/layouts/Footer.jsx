@@ -14,8 +14,8 @@ const Footer = () => {
           <div>
             <h3 className="text-white text-lg font-bold mb-4">Ocean Spirit Scuba Diving</h3>
             <p className="text-sm mb-4">
-              PADI 5 Star ECO Green Fins Scuba Diving Centre with a Green Star. Friendly, sociable dive center with comfortable club-like
-              facilities in Pereybere, Mauritius.
+              PADI 5 Star ECO Green Fins Scuba Diving Centre with a Green Star. Friendly, sociable
+              dive center with comfortable club-like facilities in Pereybere, Mauritius.
             </p>
             <div className="flex space-x-4">
               {/* Social Media Icons */}
@@ -152,7 +152,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <WhatsAppButton source="footer" variant="icon" className="text-gray-300 hover:text-green-400" />
+                <WhatsAppButton
+                  source="footer"
+                  variant="icon"
+                  className="text-gray-300 hover:text-green-400"
+                />
               </li>
             </ul>
           </div>

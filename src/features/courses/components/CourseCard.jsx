@@ -1,4 +1,9 @@
-import { AcademicCapIcon, CheckCircleIcon, ClockIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import {
+  AcademicCapIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  UserGroupIcon,
+} from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -29,7 +34,9 @@ const CourseCard = ({ course, onBookClick, index = 0 }) => {
       </div>
 
       <div className="p-6 flex-1 flex flex-col">
-        <h3 className="text-2xl font-display font-bold text-ocean-800 mb-2 tracking-tight">{course.name}</h3>
+        <h3 className="text-2xl font-display font-bold text-ocean-800 mb-2 tracking-tight">
+          {course.name}
+        </h3>
         <p className="text-gray-600 mb-4 italic">{course.tagline}</p>
         <p className="text-gray-700 mb-6">{course.description}</p>
 
@@ -74,7 +81,11 @@ const CourseCard = ({ course, onBookClick, index = 0 }) => {
             {showCurriculum ? 'Hide' : 'Show'} Curriculum
           </button>
           {showCurriculum && (
-            <motion.ul initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="mt-3 space-y-2">
+            <motion.ul
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="mt-3 space-y-2"
+            >
               {course.curriculum.map((item, idx) => (
                 <li key={idx} className="flex items-start text-gray-700 text-sm">
                   <span className="text-ocean-600 mr-2">→</span>

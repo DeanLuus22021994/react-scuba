@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getExchangeRates } from '../services/api';
 import { trackCurrencyChange } from '../utils/analytics';
-import { CURRENCIES, DEFAULT_EXCHANGE_RATES, convertCurrency, formatCurrency } from '../utils/currency';
+import {
+  CURRENCIES,
+  convertCurrency,
+  DEFAULT_EXCHANGE_RATES,
+  formatCurrency,
+} from '../utils/currency';
 
 const CurrencyContext = createContext();
 
@@ -10,7 +15,9 @@ export const CurrencyProvider = ({ children }) => {
   const [currency, setCurrency] = useState(() => {
     // Get from localStorage or default to MUR (check if localStorage is available)
     try {
-      return (typeof localStorage !== 'undefined' && localStorage.getItem('selectedCurrency')) || 'MUR';
+      return (
+        (typeof localStorage !== 'undefined' && localStorage.getItem('selectedCurrency')) || 'MUR'
+      );
     } catch {
       return 'MUR';
     }

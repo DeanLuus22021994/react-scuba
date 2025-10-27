@@ -63,7 +63,8 @@ const GalleryPage = () => {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920)',
+              backgroundImage:
+                'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-ocean-900/80 to-ocean-600/80" />
@@ -99,8 +100,12 @@ const GalleryPage = () => {
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Explore Our Gallery</h2>
-              <p className="text-lg text-gray-700 mb-8">Browse through our collection of underwater moments</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Explore Our Gallery
+              </h2>
+              <p className="text-lg text-gray-700 mb-8">
+                Browse through our collection of underwater moments
+              </p>
 
               {/* Category Filter */}
               <div className="flex flex-wrap justify-center gap-3">
@@ -133,10 +138,13 @@ const GalleryPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">Want to Capture Your Own Underwater Memories?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">
+                Want to Capture Your Own Underwater Memories?
+              </h2>
               <p className="text-lg text-gray-700 mb-8">
-                Join us for a photo dive and create your own stunning underwater images. We provide guidance on underwater photography
-                techniques and help you capture the magic of Mauritius&apos;s reefs.
+                Join us for a photo dive and create your own stunning underwater images. We provide
+                guidance on underwater photography techniques and help you capture the magic of
+                Mauritius&apos;s reefs.
               </p>
               <button
                 onClick={handleBookPhotoDive}
@@ -150,10 +158,20 @@ const GalleryPage = () => {
       </div>
 
       {/* Lightbox */}
-      <Lightbox image={selectedImage} isOpen={lightboxOpen} onClose={closeLightbox} onNavigate={navigateImage} />
+      <Lightbox
+        image={selectedImage}
+        isOpen={lightboxOpen}
+        onClose={closeLightbox}
+        onNavigate={navigateImage}
+      />
 
       {/* Booking Modal */}
-      <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} bookingType="dive" source="gallery_page" />
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        bookingType="dive"
+        source="gallery_page"
+      />
     </>
   );
 };

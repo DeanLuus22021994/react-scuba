@@ -26,7 +26,9 @@ describe('useTeamFilter', () => {
 
     expect(result.current.specialty).toBe('beginner');
     if (result.current.members.length > 0) {
-      expect(result.current.members.every((member) => member.role.toLowerCase().includes('open water'))).toBe(true);
+      expect(
+        result.current.members.every((member) => member.role.toLowerCase().includes('open water'))
+      ).toBe(true);
     }
   });
 
@@ -38,7 +40,9 @@ describe('useTeamFilter', () => {
     });
 
     if (result.current.members.length > 0) {
-      expect(result.current.members.every((member) => member.role.toLowerCase().includes('advanced'))).toBe(true);
+      expect(
+        result.current.members.every((member) => member.role.toLowerCase().includes('advanced'))
+      ).toBe(true);
     }
   });
 
@@ -50,7 +54,9 @@ describe('useTeamFilter', () => {
     });
 
     if (result.current.members.length > 0) {
-      expect(result.current.members.every((member) => member.role.toLowerCase().includes('technical'))).toBe(true);
+      expect(
+        result.current.members.every((member) => member.role.toLowerCase().includes('technical'))
+      ).toBe(true);
     }
   });
 
@@ -62,7 +68,9 @@ describe('useTeamFilter', () => {
     });
 
     if (result.current.members.length > 0) {
-      expect(result.current.members.every((member) => member.role.toLowerCase().includes('photo'))).toBe(true);
+      expect(
+        result.current.members.every((member) => member.role.toLowerCase().includes('photo'))
+      ).toBe(true);
     }
   });
 

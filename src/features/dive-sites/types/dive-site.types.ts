@@ -6,7 +6,16 @@
 
 export type DiveSiteType = 'reef' | 'wreck' | 'wall' | 'drift' | 'cavern' | 'shore' | 'boat';
 
-export type MarineLifeCategory = 'fish' | 'coral' | 'macro' | 'pelagic' | 'turtle' | 'ray' | 'shark' | 'octopus' | 'moray';
+export type MarineLifeCategory =
+  | 'fish'
+  | 'coral'
+  | 'macro'
+  | 'pelagic'
+  | 'turtle'
+  | 'ray'
+  | 'shark'
+  | 'octopus'
+  | 'moray';
 
 export interface DiveSiteConditions {
   siteId: string;

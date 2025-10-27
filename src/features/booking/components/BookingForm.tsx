@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -27,7 +27,13 @@ export interface BookingFormData {
  *
  * Complete booking form with validation, date picker, and participant selection.
  */
-const BookingForm: FC<BookingFormProps> = ({ onSubmit, isLoading = false, bookingType = 'dive', courseId, diveSiteId }) => {
+const BookingForm: FC<BookingFormProps> = ({
+  onSubmit,
+  isLoading = false,
+  bookingType = 'dive',
+  courseId,
+  diveSiteId,
+}) => {
   const [formData, setFormData] = useState<BookingFormData>({
     name: '',
     email: '',
@@ -49,7 +55,7 @@ const BookingForm: FC<BookingFormProps> = ({ onSubmit, isLoading = false, bookin
       newErrors.name = 'Name must be at least 2 characters';
     }
 
-    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    if (!(formData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))) {
       newErrors.email = 'Valid email is required';
     }
 
@@ -159,7 +165,9 @@ const BookingForm: FC<BookingFormProps> = ({ onSubmit, isLoading = false, bookin
           disabled={isLoading}
           required
         />
-        {errors.preferredDate && <p className="mt-1 text-sm text-red-600">{errors.preferredDate}</p>}
+        {errors.preferredDate && (
+          <p className="mt-1 text-sm text-red-600">{errors.preferredDate}</p>
+        )}
       </div>
 
       <div>
@@ -170,7 +178,7 @@ const BookingForm: FC<BookingFormProps> = ({ onSubmit, isLoading = false, bookin
           type="number"
           id="participants"
           value={formData.participants}
-          onChange={(e) => handleChange('participants', parseInt(e.target.value, 10))}
+          onChange={(e) => handleChange('participants', Number.parseInt(e.target.value, 10))}
           min="1"
           max="20"
           className={`mt-1 block w-full px-4 py-2 border ${

@@ -31,7 +31,9 @@ describe('useCourseFilter', () => {
     });
 
     expect(result.current.difficulty).toBe('intermediate');
-    expect(result.current.courses.every((course) => course.price > 5000 && course.price <= 15000)).toBe(true);
+    expect(
+      result.current.courses.every((course) => course.price > 5000 && course.price <= 15000)
+    ).toBe(true);
   });
 
   it('should filter by difficulty advanced', () => {
@@ -41,7 +43,9 @@ describe('useCourseFilter', () => {
       result.current.setDifficulty('advanced');
     });
 
-    expect(result.current.courses.every((course) => course.price > 15000 && course.price <= 30000)).toBe(true);
+    expect(
+      result.current.courses.every((course) => course.price > 15000 && course.price <= 30000)
+    ).toBe(true);
   });
 
   it('should filter by price range', () => {
@@ -52,7 +56,9 @@ describe('useCourseFilter', () => {
     });
 
     expect(result.current.priceRange).toEqual([10000, 20000]);
-    expect(result.current.courses.every((course) => course.price >= 10000 && course.price <= 20000)).toBe(true);
+    expect(
+      result.current.courses.every((course) => course.price >= 10000 && course.price <= 20000)
+    ).toBe(true);
   });
 
   it('should combine difficulty and price filters', () => {
@@ -63,7 +69,9 @@ describe('useCourseFilter', () => {
       result.current.setPriceRange([5000, 10000]);
     });
 
-    expect(result.current.courses.every((course) => course.price > 5000 && course.price <= 10000)).toBe(true);
+    expect(
+      result.current.courses.every((course) => course.price > 5000 && course.price <= 10000)
+    ).toBe(true);
   });
 
   it('should reset filters to defaults', () => {

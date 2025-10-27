@@ -15,7 +15,9 @@ const DiveSitesPage = () => {
   const filteredSites =
     selectedDifficulty === 'All'
       ? DIVE_SITES
-      : DIVE_SITES.filter((site) => site.difficulty.toLowerCase().includes(selectedDifficulty.toLowerCase()));
+      : DIVE_SITES.filter((site) =>
+          site.difficulty.toLowerCase().includes(selectedDifficulty.toLowerCase())
+        );
 
   const handleBookDive = (site) => {
     trackConversion('dive_site_booking_click', {
@@ -48,7 +50,8 @@ const DiveSitesPage = () => {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920)',
+              backgroundImage:
+                'url(https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-ocean-900/80 to-ocean-600/80" />
@@ -82,9 +85,12 @@ const DiveSitesPage = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-4">Explore Our Dive Locations</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-4">
+                Explore Our Dive Locations
+              </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-                Click on markers to learn more about each dive site. We dive at the best locations around Mauritius.
+                Click on markers to learn more about each dive site. We dive at the best locations
+                around Mauritius.
               </p>
             </motion.div>
 
@@ -96,7 +102,9 @@ const DiveSitesPage = () => {
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-4">Featured Dive Sites</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-4">
+                Featured Dive Sites
+              </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
                 Filter by difficulty level to find the perfect dive for your experience
               </p>
@@ -121,7 +129,12 @@ const DiveSitesPage = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredSites.map((site, index) => (
-                <DiveSiteCard key={site.id} site={site} onBookClick={handleBookDive} index={index} />
+                <DiveSiteCard
+                  key={site.id}
+                  site={site}
+                  onBookClick={handleBookDive}
+                  index={index}
+                />
               ))}
             </div>
           </div>
@@ -136,10 +149,13 @@ const DiveSitesPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">Ready to Explore These Amazing Sites?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-ocean-800 mb-6">
+                Ready to Explore These Amazing Sites?
+              </h2>
               <p className="text-lg text-gray-700 mb-8">
-                Join us for an unforgettable diving experience at any of these spectacular locations. Our experienced guides know each site
-                intimately and will ensure you have a safe, memorable dive.
+                Join us for an unforgettable diving experience at any of these spectacular
+                locations. Our experienced guides know each site intimately and will ensure you have
+                a safe, memorable dive.
               </p>
               <button
                 onClick={() => setIsBookingModalOpen(true)}
@@ -152,7 +168,12 @@ const DiveSitesPage = () => {
         </section>
       </div>
 
-      <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} bookingType="dive" source="dive_sites_page" />
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        bookingType="dive"
+        source="dive_sites_page"
+      />
     </>
   );
 };

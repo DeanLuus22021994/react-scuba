@@ -1,5 +1,9 @@
 import { useMemo, useState } from 'react';
-import { GALLERY_IMAGES, getImagesByCategory, type GalleryCategory } from '../../../config/constants/GALLERY';
+import {
+  GALLERY_IMAGES,
+  type GalleryCategory,
+  getImagesByCategory,
+} from '../../../config/constants/GALLERY';
 
 export interface UseGalleryFilterOptions {
   initialCategory?: GalleryCategory | 'All';
@@ -24,7 +28,9 @@ export interface UseGalleryFilterReturn {
  * Supports category filtering and date/title sorting.
  */
 export const useGalleryFilter = (options?: UseGalleryFilterOptions): UseGalleryFilterReturn => {
-  const [category, setCategory] = useState<GalleryCategory | 'All'>(options?.initialCategory || 'All');
+  const [category, setCategory] = useState<GalleryCategory | 'All'>(
+    options?.initialCategory || 'All'
+  );
   const [sortBy, setSortBy] = useState<'date' | 'title'>(options?.initialSortBy || 'date');
 
   const images = useMemo(() => {

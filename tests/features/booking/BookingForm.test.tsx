@@ -101,7 +101,7 @@ describe('BookingForm', () => {
           email: 'john@example.com',
           phone: '+1234567890',
           participants: 1,
-        }),
+        })
       );
     });
   });
@@ -161,7 +161,7 @@ describe('BookingForm', () => {
         expect.objectContaining({
           courseId: 'open-water',
           bookingType: 'course',
-        }),
+        })
       );
     });
   });
@@ -182,7 +182,7 @@ describe('BookingForm', () => {
         expect.objectContaining({
           diveSiteId: 'cathedral',
           bookingType: 'dive',
-        }),
+        })
       );
     });
   });

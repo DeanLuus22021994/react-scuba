@@ -63,7 +63,9 @@ describe('CurrencySelector', () => {
       return eurOption;
     });
 
-    const eurButtons = screen.getAllByRole('button').filter((btn) => btn.textContent.includes('EUR'));
+    const eurButtons = screen
+      .getAllByRole('button')
+      .filter((btn) => btn.textContent.includes('EUR'));
     if (eurButtons.length > 1) {
       await user.click(eurButtons[1]);
     }

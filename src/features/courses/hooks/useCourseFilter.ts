@@ -26,8 +26,12 @@ export interface UseCourseFilterReturn {
  * Supports difficulty level and price range filtering.
  */
 export const useCourseFilter = (options?: UseCourseFilterOptions): UseCourseFilterReturn => {
-  const [difficulty, setDifficulty] = useState<CourseDifficulty | 'all'>(options?.initialDifficulty || 'all');
-  const [priceRange, setPriceRange] = useState<[number, number]>(options?.initialPriceRange || [0, 50000]);
+  const [difficulty, setDifficulty] = useState<CourseDifficulty | 'all'>(
+    options?.initialDifficulty || 'all'
+  );
+  const [priceRange, setPriceRange] = useState<[number, number]>(
+    options?.initialPriceRange || [0, 50000]
+  );
 
   const courses = useMemo(() => {
     let filtered = [...COURSES];
@@ -46,7 +50,9 @@ export const useCourseFilter = (options?: UseCourseFilterOptions): UseCourseFilt
     }
 
     // Filter by price range
-    filtered = filtered.filter((course) => course.price >= priceRange[0] && course.price <= priceRange[1]);
+    filtered = filtered.filter(
+      (course) => course.price >= priceRange[0] && course.price <= priceRange[1]
+    );
 
     return filtered;
   }, [difficulty, priceRange]);

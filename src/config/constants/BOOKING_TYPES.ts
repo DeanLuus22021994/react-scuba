@@ -82,7 +82,10 @@ export const BOOKING_TYPES: BookingTypes = {
   ],
 } as const;
 
-export const getBookingItemById = (type: keyof BookingTypes, id: string): BookingItem | undefined => {
+export const getBookingItemById = (
+  type: keyof BookingTypes,
+  id: string
+): BookingItem | undefined => {
   const items = BOOKING_TYPES[type] || [];
   return items.find((item) => item.id === id);
 };

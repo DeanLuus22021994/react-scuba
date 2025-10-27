@@ -3,4 +3,9 @@
  * Centralized exports for all API and external service integrations
  */
 
-export { default as api, checkCalendarAvailability, createCalendarBooking, submitContactForm as sendContactMessage } from './api';
+export {
+  checkCalendarAvailability,
+  createCalendarBooking,
+  default as api,
+  submitContactForm as sendContactMessage,
+} from './api';

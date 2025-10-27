@@ -17,7 +17,7 @@ const renderWithProviders = (component) => {
       <CurrencyProvider>
         <BrowserRouter>{component}</BrowserRouter>
       </CurrencyProvider>
-    </HelmetProvider>,
+    </HelmetProvider>
   );
 };
 
@@ -43,7 +43,7 @@ describe('pages/DiveSitesPage', () => {
           <CurrencyProvider>
             <MemoryRouter>{component}</MemoryRouter>
           </CurrencyProvider>
-        </HelmetProvider>,
+        </HelmetProvider>
       );
     };
     renderWithMemory(<DiveSitesPageComponent />);

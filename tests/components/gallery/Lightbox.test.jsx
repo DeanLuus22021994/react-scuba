@@ -20,7 +20,14 @@ describe('Lightbox', () => {
   });
 
   it('should not render when not open', () => {
-    render(<Lightbox image={mockImage} isOpen={false} onClose={mockOnClose} onNavigate={mockOnNavigate} />);
+    render(
+      <Lightbox
+        image={mockImage}
+        isOpen={false}
+        onClose={mockOnClose}
+        onNavigate={mockOnNavigate}
+      />
+    );
     expect(screen.queryByText(mockImage.title)).not.toBeInTheDocument();
   });
 

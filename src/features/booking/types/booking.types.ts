@@ -8,7 +8,13 @@ export type BookingStatus = 'pending' | 'confirmed' | 'cancelled' | 'completed';
 
 export type BookingType = 'dive' | 'course' | 'package';
 
-export type ExperienceLevel = 'beginner' | 'discover-scuba' | 'open-water' | 'advanced-open-water' | 'rescue-diver' | 'divemaster';
+export type ExperienceLevel =
+  | 'beginner'
+  | 'discover-scuba'
+  | 'open-water'
+  | 'advanced-open-water'
+  | 'rescue-diver'
+  | 'divemaster';
 
 export interface Booking {
   id: string;

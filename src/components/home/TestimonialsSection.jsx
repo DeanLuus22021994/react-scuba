@@ -36,7 +36,11 @@ const TestimonialCard = ({ testimonial, index }) => {
       className="bg-white p-8 rounded-xl shadow-soft hover:shadow-medium transition-all duration-300"
     >
       <div className="flex items-center mb-4">
-        <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover mr-4" />
+        <img
+          src={testimonial.image}
+          alt={testimonial.name}
+          className="w-12 h-12 rounded-full object-cover mr-4"
+        />
         <div>
           <div className="font-bold text-gray-900">{testimonial.name}</div>
           <div className="text-sm text-gray-600">{testimonial.location}</div>
@@ -78,7 +82,8 @@ const TestimonialsSection = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Divers Say</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Join hundreds of satisfied divers who have experienced the magic of underwater Mauritius with us
+            Join hundreds of satisfied divers who have experienced the magic of underwater Mauritius
+            with us
           </p>
         </motion.div>
 

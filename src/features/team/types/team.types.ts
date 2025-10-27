@@ -4,7 +4,11 @@
  * Extended type definitions for team members and instructor profiles.
  */
 
-export type InstructorLevel = 'open-water-instructor' | 'advanced-instructor' | 'master-instructor' | 'course-director';
+export type InstructorLevel =
+  | 'open-water-instructor'
+  | 'advanced-instructor'
+  | 'master-instructor'
+  | 'course-director';
 
 export type CertificationBody = 'PADI' | 'SSI' | 'NAUI' | 'BSAC' | 'CMAS';
 
