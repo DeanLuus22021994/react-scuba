@@ -1,1 +1,196 @@
-TODO
+# GitHub Actions Self-Hosted Runner Configuration
+# Production-grade settings for containerized CI/CD runner
+
+runner:
+  name: "${RUNNER_NAME:-docker-runner-01}"
+  labels:
+    - docker
+    - linux
+    - x64
+    - self-hosted
+    - mcp-cluster
+    - buildkit
+
+  # Runner Mode
+  ephemeral: true # Auto-unregister after each job (recommended)
+  replace_existing: true # Replace existing runner with same name
+
+  # Work Directory
+  work_directory: "/work"
+  cleanup_work_directory: true # Clean after each job
+
+  # Resource Limits (enforced via docker-compose)
+  resources:
+    cpu_limit: "4.0" # Maximum CPU cores
+    memory_limit: "8G" # Maximum memory
+    disk_space_threshold: "10G" # Minimum free space required
+
+# Docker-in-Docker Configuration
+docker:
+  enabled: true
+  socket: "/var/run/docker.sock"
+  privileged: true # Required for Docker-in-Docker
+
+  # BuildKit Integration
+  buildkit:
+    enabled: true
+    host: "tcp://buildkit:1234"
+    inline_cache: true
+    progress: "plain"
+
+  # Registry Configuration
+  registries:
+    - name: "Docker Hub"
+      url: "https://registry-1.docker.io"
+      username: "${DOCKERHUB_USERNAME}"
+      password_env: "DOCKERHUB_TOKEN"
+
+    - name: "GitHub Container Registry"
+      url: "https://ghcr.io"
+      username: "${GITHUB_ACTOR}"
+      password_env: "GITHUB_TOKEN"
+
+  # Cleanup Policy
+  cleanup:
+    enabled: true
+    schedule: "0 2 * * *" # Daily at 2 AM
+    prune_images: true
+    prune_containers: true
+    prune_volumes: false # Preserve volumes
+    keep_images:
+      - "node:*"
+      - "postgres:*"
+      - "alpine:*"
+
+# GitHub Integration
+github:
+  url: "https://github.com"
+  repo_owner: "${GITHUB_REPO_OWNER}"
+  repo_name: "${GITHUB_REPO_NAME}"
+  token_env: "GITHUB_TOKEN" # Environment variable name
+
+  # API Settings
+  api:
+    timeout: 30 # seconds
+    retry_attempts: 3
+    rate_limit_threshold: 100 # requests remaining before throttling
+
+# Logging & Monitoring
+logging:
+  level: "info" # debug, info, warn, error
+  format: "json" # json or text
+  output:
+    - type: "console"
+      level: "info"
+    - type: "file"
+      path: "/work/_diag/runner.log"
+      level: "debug"
+      max_size: "100M"
+      max_backups: 5
+
+  # Prometheus Metrics
+  metrics:
+    enabled: true
+    port: 9090
+    path: "/metrics"
+    labels:
+      environment: "development"
+      cluster: "mcp-cluster"
+
+# Security
+security:
+  # Allowed Actions
+  allowed_actions:
+    - "actions/*"
+    - "docker/*"
+    - "github/*"
+
+  # Blocked Actions (security risk)
+  blocked_actions:
+    - "*/dangerous-action@*"
+
+  # Secret Masking
+  mask_secrets: true
+
+  # Network Restrictions
+  network:
+    allow_external: true
+    allowed_hosts:
+      - "github.com"
+      - "api.github.com"
+      - "ghcr.io"
+      - "registry-1.docker.io"
+    blocked_hosts: []
+
+# Performance Tuning
+performance:
+  # Parallel Job Execution
+  max_parallel_jobs: 2
+
+  # Caching
+  cache:
+    enabled: true
+    directory: "/.cache"
+    max_size: "5G"
+    strategies:
+      - "buildkit"
+      - "npm"
+      - "docker-layer"
+
+  # Network Optimization
+  network:
+    dns_servers:
+      - "8.8.8.8"
+      - "1.1.1.1"
+    mtu: 1500
+
+  # Startup Optimization
+  startup:
+    pre_pull_images:
+      - "node:22-alpine"
+      - "postgres:16-alpine"
+      - "alpine:3.21"
+    warm_up_docker: true
+
+# Health Checks
+health:
+  # Liveness Check
+  liveness:
+    command: "pgrep Runner.Listener"
+    interval: 30 # seconds
+    timeout: 10
+    retries: 3
+    start_period: 60
+
+  # Readiness Check
+  readiness:
+    command: "curl -f http://localhost:9090/metrics || exit 1"
+    interval: 10
+    timeout: 5
+    retries: 3
+
+# Maintenance
+maintenance:
+  # Automatic Updates
+  auto_update:
+    enabled: true
+    schedule: "0 3 * * 0" # Weekly on Sunday at 3 AM
+    strategy: "rolling" # rolling or immediate
+
+  # Rotation
+  rotation:
+    enabled: false # Set true for production
+    max_job_count: 100 # Recreate after N jobs
+    max_uptime: "168h" # 7 days
+
+# Notifications (optional)
+notifications:
+  on_failure:
+    - type: "webhook"
+      url: "${SLACK_WEBHOOK_URL}"
+      payload:
+        text: "Runner ${RUNNER_NAME} job failed"
+
+  on_startup:
+    - type: "log"
+      message: "Runner ${RUNNER_NAME} started successfully"

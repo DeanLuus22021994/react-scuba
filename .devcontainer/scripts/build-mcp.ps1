@@ -61,10 +61,16 @@ $ScriptRoot = Split-Path -Parent $PSCommandPath
 $DevContainerRoot = Split-Path -Parent $ScriptRoot
 
 # MCP Servers (stdio-based)
-$MCPServers = @("filesystem", "git", "fetch", "memory")
+$MCPServers = @("filesystem", "git", "fetch", "github", "memory", "python-experimental")
 
 # Infrastructure Containers (docker-compose services)
-$Containers = @("k8s-plugin", "mariadb", "postgres", "buildx", "runner", "gateway")
+$Containers = @("k8s-plugin", "mariadb", "postgres", "buildx", "runner")
+
+# Exporter Containers
+$Exporters = @("cadvisor", "node-exporter", "postgres-exporter", "mysql-exporter")
+
+# Gateway Services
+$GatewayServices = @("nginx", "prometheus", "grafana")
 
 # Colors for output
 $Colors = @{

@@ -1,146 +1,225 @@
-# MCP Servers - Quick Start Guide
+# MCP DevContainer Quick Start Guide
 
-## 🚀 One-Command Setup
+## Prerequisites
 
-```powershell
-# Build all MCP servers with advanced caching (from project root)
-./.github/build-mcp-servers.ps1
-```
+- **Docker**: 20.10+ with Compose V2
+- **VS Code**: Latest version
+- **DevContainers Extension**: `ms-vscode-remote.remote-containers`
+- **RAM**: 8GB minimum, 16GB recommended
+- **Disk Space**: 20GB free
+- **OS**: Windows 10/11 (WSL2), macOS, or Linux
 
-**⚡ Performance Features:**
-- BuildKit cache mounts for instant rebuilds
-- Host networking for low-latency 1GB internet
-- NVMe-optimized named volumes
-- Persistent build caches across rebuilds
+## 1-Minute Setup
 
-That's it! First build takes ~5 minutes, subsequent builds **~10 seconds**!
-
-## 📋 What Gets Built
-
-| Server | Purpose | Image Name | Cache Optimizations |
-|--------|---------|------------|---------------------|
-| GitHub | Repo/issue/PR management | `ghcr.io/github/github-mcp-server` | API cache, data persistence |
-| Filesystem | File operations | `mcp-filesystem:latest` | Node cache, workspace access |
-| PostgreSQL | Database queries | `mcp-postgres:latest` | Connection pool, query cache |
-| SQLite | Lightweight DB | `mcp-sqlite:latest` | WAL mode, temp storage |
-| Memory | Knowledge graph | `mcp-memory:latest` | 4GB heap, NVMe storage |
-| Git | Git operations | `mcp-git:latest` | Git LFS, Python bytecode |
-| Fetch | Web content | `mcp-fetch:latest` | HTTP/2, pip cache, 1GB tuned |
-
-## ✅ Prerequisites
-
-1. **Docker Desktop** running
-2. **PowerShell** 5.1+ (Windows) or PowerShell Core 7+ (cross-platform)
-3. **GitHub Token** (only for GitHub server)
-
-## 🔑 Setup GitHub Token
-
-1. Go to: https://github.com/settings/tokens/new
-2. Create token with scopes: `repo`, `read:org`, `read:user`
-3. VS Code will prompt for token when using GitHub server
-
-## 🎯 Quick Commands
-
-```powershell
-# Build specific server
-./.github/build-mcp-servers.ps1 -ServerName filesystem
-
-# Force rebuild (no cache)
-./.github/build-mcp-servers.ps1 -NoCacheParam
-
-# Parallel build (faster, uses all cores)
-./.github/build-mcp-servers.ps1 -Parallel
-
-# Pull base images first (for optimal caching)
-./.github/build-mcp-servers.ps1 -PullBase
-
-# View built images
-docker images | grep mcp
-
-# View BuildKit cache usage
-docker buildx du
-
-# Clear BuildKit cache if needed
-docker buildx prune
-
-# Test a server
-docker run -i --rm mcp-filesystem:latest
-```
-
-## 🐳 Using Docker Compose
+### Step 1: Clone and Navigate
 
 ```bash
-# Build with compose
-docker-compose -f .github/docker-compose.mcp.yml build
-
-# Start PostgreSQL for testing
-docker-compose -f .github/docker-compose.mcp.yml up postgres-db -d
-
-# Stop all services
-docker-compose -f .github/docker-compose.mcp.yml down
+git clone https://github.com/DeanLuus22021994/react-scuba.git
+cd react-scuba
 ```
 
-## 💡 VS Code Integration
+### Step 2: Configure Environment
 
-MCP servers automatically start when GitHub Copilot needs them. Configuration in `.vscode/mcp.json`.
+```bash
+cd .devcontainer
+cp devcontainer.env .env  # Required for docker-compose variable substitution
 
-**Test in Copilot Chat:**
+# Optional: Set GitHub token for Actions runner
+echo "GITHUB_TOKEN=your_github_token_here" >> .env
 ```
-@workspace What files are in the src/ directory?
-```
-Uses filesystem server automatically!
 
-## 🔧 Troubleshooting
+### Step 3: Start Cluster
 
-### Build fails?
 ```powershell
-# Check Docker
-docker info
+# Full cluster deployment (automatic tier ordering)
+docker-compose -f docker-compose.mcp.yml up -d --build
 
-# Rebuild from scratch
-./.github/build-mcp-servers.ps1 -NoCacheParam
+# Wait for services to become healthy (~2 minutes)
+Start-Sleep -Seconds 120
+
+# Verify status
+docker-compose -f docker-compose.mcp.yml ps
 ```
 
-### Server not connecting?
+### Step 4: Open DevContainer
+
+1. Open VS Code
+2. Press `F1` → "Dev Containers: Open Folder in Container..."
+3. Select `react-scuba/` directory
+4. Wait for DevContainer build and initialization (~3 minutes first time)
+
+## Verify Installation
+
+### Check Service Health
+
 ```powershell
-# Check if image exists
-docker images | grep mcp-filesystem
+# All services should show 'healthy' status
+docker-compose -f .devcontainer/docker-compose.mcp.yml ps --filter 'health=healthy'
 
-# Test server directly
-docker run -i --rm -v ${PWD}:/workspace:ro mcp-filesystem:latest
+# Count healthy services (should be 11+)
+(docker-compose -f .devcontainer/docker-compose.mcp.yml ps --filter 'health=healthy' --format json | ConvertFrom-Json).Count
 ```
 
-### PostgreSQL connection issues?
+### Access Monitoring Dashboards
+
+- **Grafana**: http://localhost:3000 (admin/admin)
+- **Prometheus**: http://localhost:9090
+- **nginx Gateway**: http://localhost
+- **cAdvisor**: http://localhost:8081
+
+### Test MCP Servers
+
+1. Open Copilot Chat in VS Code (`Ctrl+Shift+I`)
+2. Test commands:
+   - `@workspace list all files in src/`
+   - `@workspace show git status`
+   - `@workspace fetch https://api.github.com/users/octocat`
+
+Expected: Copilot responds with file listings, git status, and fetched JSON data
+
+### Test Database Connections
+
 ```powershell
-# Set password
-$env:DOCKER_POSTGRES_PASSWORD = "your_password"
+# PostgreSQL
+docker exec -it postgres-db psql -U postgres -c "SELECT version();"
 
-# Start database
-docker-compose -f .github/docker-compose.mcp.yml up postgres-db -d
-
-# Test connection
-docker-compose -f .github/docker-compose.mcp.yml exec postgres-db psql -U postgres
+# MariaDB
+docker exec -it mariadb mysql -u root -ppassword -e "SELECT VERSION();"
 ```
 
-## 📚 Learn More
+## Common First-Time Issues
 
-- Full documentation: [MCP-SERVERS.md](./MCP-SERVERS.md)
-- Official MCP docs: https://modelcontextprotocol.io/
-- GitHub MCP server: https://github.com/github/github-mcp-server
+### Issue: "Cannot connect to Docker daemon"
 
-## ⚡ Pro Tips
+**Solution**: Ensure Docker Desktop is running
 
-1. **First build takes ~5 minutes**, subsequent builds **~10 seconds** with BuildKit cache!
-2. **Use `-Parallel`** flag to utilize all CPU cores (3x faster)
-3. **Named volumes persist data** and build caches across container restarts
-4. **Host networking** provides native network performance for 1GB internet
-5. **Read-only mounts** (`:ro`) prevent accidental file modifications
-6. **BuildKit cache mounts** eliminate redundant downloads (npm, pip, apk)
-7. **Check logs** with `docker logs <container-name>`
-8. **Monitor cache usage** with `docker buildx du`
-9. **Python bytecode caching** for instant Python server startups
-10. **HTTP/2 enabled** on fetch server for parallel downloads
+```powershell
+# Windows: Start Docker Desktop from Start menu
+# Verify: docker ps
+```
 
----
+### Issue: "Port already in use"
 
-**Need help?** See [MCP-SERVERS.md](./MCP-SERVERS.md) for detailed documentation.
+**Solution**: Stop conflicting services
+
+```powershell
+# Check what's using the port
+netstat -ano | findstr ":3000"  # Example for port 3000
+
+# Stop and restart cluster
+docker-compose -f .devcontainer/docker-compose.mcp.yml down
+docker-compose -f .devcontainer/docker-compose.mcp.yml up -d
+```
+
+### Issue: "Service unhealthy" after startup
+
+**Solution**: Check logs and wait longer
+
+```powershell
+# View logs for unhealthy service
+docker logs <service_name>
+
+# Some services take 60s+ to become healthy (e.g., BuildKit, runner)
+Start-Sleep -Seconds 60
+docker-compose -f .devcontainer/docker-compose.mcp.yml ps
+```
+
+### Issue: "Out of memory" during build
+
+**Solution**: Increase Docker memory limit
+
+1. Docker Desktop → Settings → Resources
+2. Set Memory to 8GB minimum
+3. Restart Docker Desktop
+
+### Issue: "GitHub Actions runner keeps restarting"
+
+**Solution**: Set GitHub credentials
+
+```powershell
+# Add to .devcontainer/.env
+echo "GITHUB_TOKEN=ghp_your_token_here" >> .env
+
+# Restart runner
+docker-compose -f .devcontainer/docker-compose.mcp.yml restart runner
+```
+
+## Performance Tips
+
+### Speed Up Builds
+
+```powershell
+# Use BuildKit cache
+$env:DOCKER_BUILDKIT=1
+$env:COMPOSE_DOCKER_CLI_BUILD=1
+
+# Parallel builds
+docker-compose -f .devcontainer/docker-compose.mcp.yml build --parallel
+
+# Selective rebuild (only changed services)
+docker-compose -f .devcontainer/docker-compose.mcp.yml up -d --no-deps --build <service_name>
+```
+
+### Reduce Resource Usage
+
+- **Disable unused services**: Comment out in `docker-compose.mcp.yml`
+- **Stop when not in use**: `docker-compose down` (preserves volumes)
+- **Prune periodically**: `docker system prune -af` (warning: removes unused images)
+
+## Daily Workflow
+
+### Start Work Session
+
+```powershell
+# 1. Start cluster
+cd .devcontainer
+docker-compose -f docker-compose.mcp.yml up -d
+
+# 2. Wait for health checks (~30s for warm start)
+Start-Sleep -Seconds 30
+
+# 3. Open DevContainer in VS Code
+code ..
+# F1 → "Dev Containers: Reopen in Container"
+```
+
+### End Work Session
+
+```powershell
+# Stop cluster (preserves volumes)
+docker-compose -f .devcontainer/docker-compose.mcp.yml stop
+
+# Or completely shut down
+docker-compose -f .devcontainer/docker-compose.mcp.yml down
+```
+
+## Next Steps
+
+1. **Customize Configuration**: Edit `.devcontainer/devcontainer.json` for VS Code settings
+2. **Explore Dashboards**: Open Grafana and explore pre-configured dashboards
+3. **Test MCP Servers**: Use Copilot Chat to interact with filesystem, git, and GitHub
+4. **Read Architecture Docs**: See `.devcontainer/docs/architecture/` for deep dives
+5. **Contribute**: Follow `.devcontainer/docs/setup/build-process.md` for development
+
+## Troubleshooting Resources
+
+- **Logs**: `docker-compose -f .devcontainer/docker-compose.mcp.yml logs -f <service>`
+- **Health**: `docker inspect <container> --format='{{json .State.Health}}'`
+- **Network**: `docker network inspect mcp-cluster`
+- **Volumes**: `docker volume ls --filter label=com.docker.compose.project=mcp-cluster`
+
+## Support
+
+- **GitHub Issues**: https://github.com/DeanLuus22021994/react-scuba/issues
+- **Documentation**: `.devcontainer/docs/`
+- **Architecture**: `.devcontainer/docs/architecture/orchestration.md`
+
+## Estimated Timings
+
+- **First-time setup**: 10-15 minutes (image downloads, builds)
+- **Subsequent starts**: 30-60 seconds (services already built)
+- **DevContainer open**: 1-2 minutes (VS Code initialization)
+- **Cold cache build**: <5 minutes (parallel builds)
+- **Warm cache build**: <10 seconds (layer cache)
+
+Success! You now have a fully functional MCP DevContainer cluster with comprehensive monitoring.

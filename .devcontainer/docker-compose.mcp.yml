@@ -20,15 +20,36 @@ services:
       - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
+      - POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=C
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    command:
+      - postgres
+      - -c
+      - shared_buffers=64MB
+      - -c
+      - max_connections=50
+      - -c
+      - work_mem=4MB
+      - -c
+      - maintenance_work_mem=32MB
+      - -c
+      - effective_cache_size=128MB
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+        reservations:
+          memory: 64M
     restart: unless-stopped
+    stop_grace_period: 10s
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
+      interval: 10s
       timeout: 3s
-      retries: 5
-      start_period: 10s
+      retries: 3
+      start_period: 15s
 
   mariadb:
     image: mariadb:11-jammy
@@ -106,7 +127,18 @@ services:
     stdin_open: true
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "mariadb", "-h", "mariadb", "-u", "root", "-p${MARIADB_PASSWORD:-password}", "-e", "SELECT 1"]
+      test:
+        [
+          "CMD",
+          "mariadb",
+          "-h",
+          "mariadb",
+          "-u",
+          "root",
+          "-p${MARIADB_PASSWORD:-password}",
+          "-e",
+          "SELECT 1",
+        ]
       interval: 15s
       timeout: 5s
       retries: 3
@@ -136,7 +168,7 @@ services:
     tty: true
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "/opt/python3.15t/bin/python3.15t", "/app/health.py"]
+      test: ["CMD", "python3", "/app/health.py"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -233,6 +265,166 @@ services:
       start_period: 60s
 
   # ==== Gateway Monitoring Stack ====
+  # cAdvisor - Container metrics exporter
+  cadvisor:
+    build:
+      context: ./containers/exporters/cadvisor
+      dockerfile: Dockerfile
+    image: mcp-cadvisor:latest
+    container_name: mcp-cadvisor
+    hostname: cadvisor
+    privileged: true
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.75
+    ports:
+      - "8081:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/healthz",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Node Exporter - Host metrics
+  node-exporter:
+    build:
+      context: ./containers/exporters/node-exporter
+      dockerfile: Dockerfile
+    image: mcp-node-exporter:latest
+    container_name: mcp-node-exporter
+    hostname: node-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.76
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--path.rootfs=/rootfs"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9100/metrics",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL Exporter
+  postgres-exporter:
+    build:
+      context: ./containers/exporters/postgres-exporter
+      dockerfile: Dockerfile
+    image: mcp-postgres-exporter:latest
+    container_name: mcp-postgres-exporter
+    hostname: postgres-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.77
+    ports:
+      - "9187:9187"
+    environment:
+      - DATA_SOURCE_NAME=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres?sslmode=disable
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9187/",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+  # MySQL/MariaDB Exporter
+  mysql-exporter:
+    build:
+      context: ./containers/exporters/mysql-exporter
+      dockerfile: Dockerfile
+    image: mcp-mysql-exporter:latest
+    container_name: mcp-mysql-exporter
+    hostname: mysql-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.20.0.78
+    ports:
+      - "9104:9104"
+    env_file:
+      - devcontainer.env
+    environment:
+      - DATA_SOURCE_NAME=root:${MARIADB_PASSWORD:-password}@tcp(mariadb:3306)/
+    command:
+      - --collect.global_status
+      - --collect.info_schema.innodb_metrics
+      - --collect.auto_increment.columns
+      - --collect.info_schema.processlist
+      - --collect.binlog_size
+      - --collect.info_schema.tablestats
+      - --collect.global_variables
+      - --collect.info_schema.query_response_time
+      - --collect.info_schema.userstats
+      - --collect.info_schema.tables
+      - --collect.perf_schema.tablelocks
+      - --collect.perf_schema.file_events
+      - --collect.perf_schema.eventswaits
+      - --collect.perf_schema.indexiowaits
+      - --collect.perf_schema.tableiowaits
+      - --collect.slave_status
+      - --web.listen-address=:9104
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9104/metrics",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
   nginx:
     image: nginx:alpine
     container_name: tbc-nginx
@@ -250,7 +442,15 @@ services:
       - devcontainer.env
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost/health",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -270,12 +470,20 @@ services:
     env_file:
       - devcontainer.env
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention.time=15d'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=15d"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9090/-/healthy",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -291,15 +499,24 @@ services:
         ipv4_address: 172.20.0.72
     volumes:
       - grafana-data:/var/lib/grafana
-      - ./containers/gateway/config/grafana:/etc/grafana/provisioning:ro
+      - ./containers/gateway/config/grafana/provisioning:/etc/grafana/provisioning:ro
     env_file:
       - devcontainer.env
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
-      - GF_INSTALL_PLUGINS=grafana-clock-panel
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-piechart-panel
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/json/mcp-cluster-overview.json
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/api/health",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3

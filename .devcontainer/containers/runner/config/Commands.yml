@@ -1,1 +1,134 @@
-TODO
+# GitHub Actions Runner - Custom Commands Configuration
+# Defines pre-configured commands available to the self-hosted runner
+
+commands:
+  # Docker Operations
+  docker:
+    build:
+      description: "Build Docker image with BuildKit"
+      command: "docker build --build-arg BUILDKIT_INLINE_CACHE=1 -t ${IMAGE_NAME}:${TAG} ."
+      environment:
+        DOCKER_BUILDKIT: "1"
+        BUILDKIT_PROGRESS: "plain"
+
+    compose_up:
+      description: "Start Docker Compose stack with build"
+      command: "docker-compose up --build -d"
+      working_directory: "${GITHUB_WORKSPACE}"
+
+    prune:
+      description: "Clean up unused Docker resources"
+      command: "docker system prune -af --volumes"
+      requires_approval: true
+
+  # Testing
+  test:
+    unit:
+      description: "Run unit tests with coverage"
+      command: "npm run test:coverage"
+      artifacts:
+        - "coverage/"
+
+    integration:
+      description: "Run integration tests"
+      command: "docker-compose -f docker-compose.test.yml up --abort-on-container-exit"
+      cleanup: "docker-compose -f docker-compose.test.yml down -v"
+
+    e2e:
+      description: "Run end-to-end tests"
+      command: "npm run test:e2e"
+      requires_services:
+        - postgres-db
+        - mariadb
+
+  # Linting & Formatting
+  lint:
+    check:
+      description: "Run all linters"
+      command: "npm run lint && npm run format:check"
+      fail_fast: true
+
+    fix:
+      description: "Auto-fix linting issues"
+      command: "npm run lint:fix && npm run format"
+      commit_changes: true
+
+  # Build & Deployment
+  build:
+    production:
+      description: "Build production bundle"
+      command: "npm run build"
+      environment:
+        NODE_ENV: "production"
+      artifacts:
+        - "dist/"
+
+    analyze:
+      description: "Analyze bundle size"
+      command: "npm run build -- --analyze"
+      artifacts:
+        - "dist/stats.html"
+
+  # Database Operations
+  database:
+    migrate:
+      description: "Run database migrations"
+      command: "npm run migrate:up"
+      requires_services:
+        - postgres-db
+
+    seed:
+      description: "Seed database with test data"
+      command: "npm run db:seed"
+      environment:
+        NODE_ENV: "development"
+
+    backup:
+      description: "Backup PostgreSQL database"
+      command: "docker exec postgres-db pg_dump -U postgres postgres > backup.sql"
+      artifacts:
+        - "backup.sql"
+
+# Global Settings
+settings:
+  timeout: 3600 # Maximum command execution time (seconds)
+  log_level: "info"
+  retry:
+    max_attempts: 3
+    backoff: "exponential" # linear, exponential, or fixed
+
+  # Environment variable passthrough
+  environment_passthrough:
+    - GITHUB_TOKEN
+    - NODE_ENV
+    - CI
+    - DOCKER_BUILDKIT
+
+  # Artifact retention
+  artifacts:
+    retention_days: 7
+    compression: true
+    exclude:
+      - "node_modules/"
+      - ".git/"
+      - "*.log"
+
+# Hooks (executed before/after commands)
+hooks:
+  pre_command:
+    - name: "Check disk space"
+      command: "df -h"
+    - name: "Docker version"
+      command: "docker --version"
+
+  post_command:
+    - name: "Cleanup temp files"
+      command: "rm -rf /tmp/runner-*"
+    - name: "Report metrics"
+      command: "echo 'Duration: ${ELAPSED_TIME}s'"
+
+  on_failure:
+    - name: "Collect logs"
+      command: "docker-compose logs > failure-logs.txt"
+    - name: "System diagnostics"
+      command: "docker ps -a && df -h && free -h"

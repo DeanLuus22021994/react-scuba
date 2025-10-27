@@ -59,7 +59,7 @@ RUN --mount=type=cache,target=/tmp/k9s-downloads,sharing=locked \
 RUN mkdir -p /root/.kube /cache/k8s && \
   chmod 755 /root/.kube /cache/k8s
 
-VOLUME [\"/root/.kube\", \"/cache/k8s\"]
+VOLUME ["/root/.kube", "/cache/k8s"]
 
 # Environment variables for Kubernetes
 ENV KUBECONFIG=/root/.kube/config \
@@ -67,52 +67,66 @@ ENV KUBECONFIG=/root/.kube/config \
   HELM_CONFIG_HOME=/root/.config/helm \
   HELM_DATA_HOME=/root/.local/share/helm
 
-# Health check script
+# Health check script with GPU validation
 COPY <<'EOF' /app/health.sh
 #!/bin/bash
+# Kubernetes Plugin Health Check
+# Validates kubectl, helm, kompose, k9s, and optional GPU availability
+
 set -e
-kubectl version --client --output=json > /dev/null 2>&1 || exit 1
-helm version --short > /dev/null 2>&1 || exit 1
-kompose version > /dev/null 2>&1 || exit 1
-echo "✓ Kubernetes tooling healthy"
+
+# Core tooling health checks
+echo "Checking Kubernetes tooling..."
+kubectl version --client --output=json > /dev/null 2>&1 || (echo "❌ kubectl not available" && exit 1)
+helm version --short > /dev/null 2>&1 || (echo "❌ helm not available" && exit 1)
+kompose version > /dev/null 2>&1 || (echo "❌ kompose not available" && exit 1)
+k9s version > /dev/null 2>&1 || (echo "❌ k9s not available" && exit 1)
+echo "✅ All Kubernetes tools available"
+
+# Optional GPU health check
+if [ ! -z "$NVIDIA_VISIBLE_DEVICES" ] && [ "$NVIDIA_VISIBLE_DEVICES" != "void" ]; then
+  if command -v nvidia-smi &> /dev/null; then
+    if nvidia-smi > /dev/null 2>&1; then
+      GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits | head -n1)
+      GPU_COUNT=$(nvidia-smi --query-gpu=count --format=csv,noheader,nounits | head -n1)
+      echo "✅ GPU available: $GPU_NAME (Count: $GPU_COUNT)"
+    else
+      echo "⚠️  nvidia-smi present but GPU not accessible (driver/device issue)"
+    fi
+  else
+    echo "⚠️  NVIDIA_VISIBLE_DEVICES set but nvidia-smi not found (toolkit not installed)"
+  fi
+else
+  echo "ℹ️  GPU passthrough not enabled (NVIDIA_VISIBLE_DEVICES not set)"
+fi
+
+echo "✅ Kubernetes plugin healthy"
 exit 0
 EOF
 
 RUN chmod +x /app/health.sh
+
+# Install NVIDIA GPU support (optional, depends on host GPU availability)
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+  apk add --no-cache nvidia-container-toolkit 2>/dev/null || echo "⚠️  NVIDIA toolkit not available on this architecture"
 
 ENTRYPOINT ["/sbin/tini", "--"]
-
-# Install NVIDIA GPU support
-RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
-  apk add --no-cache nvidia-container-toolkit || true
-
-# Update health check to include GPU
-COPY <<'EOF' /app/health.sh
-#!/bin/bash
-set -e
-kubectl version --client --output=json > /dev/null 2>&1 || exit 1
-helm version --short > /dev/null 2>&1 || exit 1
-kompose version > /dev/null 2>&1 || exit 1
-# GPU health check (only if NVIDIA_VISIBLE_DEVICES is set)
-if [ ! -z "$NVIDIA_VISIBLE_DEVICES" ]; then
-  nvidia-smi > /dev/null 2>&1 || (echo "❌ GPU not available" && exit 1)
-  echo "✅ GPU available: $(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)"
-fi
-echo "✅ Kubernetes tooling healthy"
-exit 0
-EOF
-
-RUN chmod +x /app/health.sh
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
   CMD /app/health.sh || exit 1
 
-CMD ["kubectl", "cluster-info"]
+CMD ["sleep", "infinity"]
 
-LABEL k8s.plugin="official" \
+LABEL org.opencontainers.image.title="Kubernetes Plugin for Docker Compose" \
+  org.opencontainers.image.description="Lightweight Alpine-based K8s tooling with GPU passthrough support" \
+  org.opencontainers.image.vendor="MCP DevContainer Cluster" \
+  org.opencontainers.image.authors="Dean Luus" \
   k8s.kubectl.version="${KUBECTL_VERSION}" \
   k8s.helm.version="${HELM_VERSION}" \
   k8s.kompose.version="${KOMPOSE_VERSION}" \
   k8s.k9s.version="${K9S_VERSION}" \
+  features="kubectl,helm,kompose,k9s,gpu-passthrough" \
   optimization.cache="enabled" \
-  description="Kubernetes plugin for Docker Compose - cluster management and deployment"
+  optimization.base="alpine" \
+  gpu.support="nvidia" \
+  gpu.optional="true"
