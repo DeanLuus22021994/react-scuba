@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
-import { ErrorBoundary } from './components/common';
+import { ErrorBoundary } from './components/ui';
 import './index.css';
 import { initializeGA4, initializeGTM } from './utils/analytics';
 import { validateEnvVars } from './utils/env';

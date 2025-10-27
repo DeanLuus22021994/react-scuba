@@ -20,13 +20,15 @@ Dependabot automatically creates pull requests for dependency updates across mul
 **Configuration**: `.github/dependabot.yml`
 
 **Grouping Strategy**:
-- React ecosystem updates (react, react-dom, @types/react*)
-- Testing dependencies (*test*, *vitest*, @testing-library/*)
-- Build tools (vite, @vitejs/*, postcss, tailwindcss)
-- Code quality (eslint*, prettier*, @typescript-eslint/*)
-- MCP SDK (mcp*)
+
+- React ecosystem updates (react, react-dom, @types/react\*)
+- Testing dependencies (_test_, _vitest_, @testing-library/\*)
+- Build tools (vite, @vitejs/\*, postcss, tailwindcss)
+- Code quality (eslint*, prettier*, @typescript-eslint/\*)
+- MCP SDK (mcp\*)
 
 **Ignored Updates**:
+
 - React major versions (require manual review for breaking changes)
 
 ### 📊 Bundle Size Tracking (size-limit)
@@ -34,12 +36,14 @@ Dependabot automatically creates pull requests for dependency updates across mul
 Automated bundle size analysis prevents performance regressions:
 
 **Limits**:
+
 - Main JS Bundle: **150 KB** (gzip)
 - Main CSS Bundle: **50 KB** (gzip)
 - Total Bundle: **250 KB** (gzip)
 - Vendor Chunks: **200 KB** (gzip)
 
 **Commands**:
+
 ```bash
 # Check bundle size against limits
 npm run size
@@ -57,12 +61,14 @@ npm run size:why
 Continuous performance monitoring with automated Lighthouse CI:
 
 **Baselines** (all pages):
+
 - 📊 Performance: **>90**
 - ♿ Accessibility: **>90**
 - 🎯 Best Practices: **>90**
 - 🔍 SEO: **>90**
 
 **Audited Pages**:
+
 - Home (`/`)
 - Courses (`/courses`)
 - Dive Sites (`/dive-sites`)
@@ -78,40 +84,47 @@ Continuous performance monitoring with automated Lighthouse CI:
 ### Jobs
 
 #### 1. **Lint & Format Check** (~10 min)
+
 - ESLint validation
 - Prettier format verification
 - Uploads lint results as artifacts
 
 #### 2. **Test Suite** (~15 min)
+
 - Runs full test suite with coverage
 - Uploads coverage to Codecov
 - Comments PR with coverage reports
 - Generates test result artifacts
 
 #### 3. **Build & Bundle Analysis** (~10 min)
+
 - Production build
 - Bundle size analysis
 - Size limit warnings (>2MB threshold)
 - Uploads build artifacts for downstream jobs
 
 #### 4. **Lighthouse Performance Audit** (~10 min)
+
 - Requires build job completion
 - Starts local preview server
 - Runs Lighthouse CI (3 iterations/page)
 - Uploads performance reports
 
 #### 5. **Docker Build Test** (~20 min)
+
 - Tests Docker container build
 - Uses BuildKit caching
 - Validates container startup
 - GitHub Actions cache optimization
 
 #### 6. **Security Audit** (~10 min)
+
 - npm audit (moderate+ severity)
 - Snyk security scan (high+ severity)
 - Continues on errors (informational)
 
 #### 7. **All Checks Passed** (final gate)
+
 - Validates all required jobs succeeded
 - Blocks merge if any job fails
 
@@ -167,6 +180,7 @@ npm run build
 ## Artifact Retention
 
 All CI artifacts retained for **7 days**:
+
 - Lint results
 - Test coverage
 - Build output
@@ -175,35 +189,39 @@ All CI artifacts retained for **7 days**:
 ## Monitoring Dashboard
 
 Track CI/CD health:
+
 - **Actions**: https://github.com/OWNER/REPO/actions
 - **Dependabot**: https://github.com/OWNER/REPO/network/updates
 - **Security**: https://github.com/OWNER/REPO/security
 
 ## Maintenance Schedule
 
-| Task | Frequency | Automation |
-|------|-----------|------------|
-| Dependency Updates | Weekly (Monday 09:00) | Dependabot |
-| Security Audits | Every push/PR | GitHub Actions |
-| Performance Tests | Every push/PR | Lighthouse CI |
-| Bundle Size Checks | Every push/PR | size-limit |
-| Coverage Tracking | Every push/PR | Codecov |
+| Task               | Frequency             | Automation     |
+| ------------------ | --------------------- | -------------- |
+| Dependency Updates | Weekly (Monday 09:00) | Dependabot     |
+| Security Audits    | Every push/PR         | GitHub Actions |
+| Performance Tests  | Every push/PR         | Lighthouse CI  |
+| Bundle Size Checks | Every push/PR         | size-limit     |
+| Coverage Tracking  | Every push/PR         | Codecov        |
 
 ## Best Practices
 
 ### Dependency Management
+
 - ✅ Review grouped dependency updates together
 - ✅ Test thoroughly after major React updates
 - ✅ Monitor security advisories
 - ✅ Keep build tools updated
 
 ### Performance
+
 - ✅ Keep main bundle under 150 KB
 - ✅ Maintain Lighthouse score >90
 - ✅ Optimize images before committing
 - ✅ Use lazy loading for routes
 
 ### Security
+
 - ✅ Address high+ severity vulnerabilities immediately
 - ✅ Review Snyk/npm audit reports
 - ✅ Update Docker base images regularly
@@ -212,24 +230,28 @@ Track CI/CD health:
 ## Troubleshooting
 
 ### Dependabot PR Failures
+
 1. Check merge conflicts
 2. Verify peer dependencies
 3. Run tests locally: `npm test`
 4. Check breaking changes in CHANGELOG
 
 ### Size Limit Failures
+
 1. Run `npm run size:why` to analyze
 2. Check for accidentally imported large dependencies
 3. Use dynamic imports for heavy components
 4. Consider code splitting
 
 ### Lighthouse Failures
+
 1. Test locally: `npm run build && npm run preview`
 2. Check for performance regressions
 3. Optimize images/fonts
 4. Review third-party scripts
 
 ### Docker Build Failures
+
 1. Clear build cache: `docker builder prune -a`
 2. Update base images
 3. Check Dockerfile syntax
@@ -238,6 +260,7 @@ Track CI/CD health:
 ## Future Enhancements
 
 Planned improvements:
+
 - [ ] Visual regression testing (Percy/Chromatic)
 - [ ] End-to-end tests (Playwright)
 - [ ] Automated changelog generation

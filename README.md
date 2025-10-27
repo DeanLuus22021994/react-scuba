@@ -98,6 +98,8 @@ A modern, production-ready website platform for dive centers and marine tourism 
 - `npm run lint:fix` - Auto-fix lint errors
 - `npm run format` - Format code with Prettier
 - `npm run format:check` - Check code formatting
+- `npm run size` - Check bundle size against limits
+- `npm run size:why` - Analyze bundle composition
 
 ### Documentation
 
