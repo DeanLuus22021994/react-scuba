@@ -4,8 +4,8 @@ import { useCurrency } from '@hooks/useCurrency';
 import { trackCourseInquiry } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import BookingModal from '../modals/BookingModal';
-import ContactModal from '../modals/ContactModal';
+import BookingModal from '@components/modals/BookingModal';
+import ContactModal from '@components/modals/ContactModal';
 import CourseCard from './CourseCard';
 import CourseComparison from './CourseComparison';
 

@@ -3,7 +3,7 @@ import { CATEGORIES, getImagesByCategory } from '@config/constants/GALLERY';
 import { trackConversion } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import BookingModal from '../modals/BookingModal';
+import BookingModal from '@components/modals/BookingModal';
 import FeaturedCarousel from './FeaturedCarousel';
 import GalleryGrid from './GalleryGrid';
 import Lightbox from './Lightbox';

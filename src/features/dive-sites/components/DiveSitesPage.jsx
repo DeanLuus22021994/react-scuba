@@ -3,7 +3,7 @@ import { DIVE_SITES } from '@config/constants/DIVE_SITES';
 import { trackConversion } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import BookingModal from '../modals/BookingModal';
+import BookingModal from '@components/modals/BookingModal';
 import DiveMap from './DiveMap';
 import DiveSiteCard from './DiveSiteCard';
 

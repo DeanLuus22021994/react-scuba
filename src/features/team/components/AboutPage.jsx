@@ -5,7 +5,7 @@ import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { trackConversion } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import BookingModal from '../modals/BookingModal';
+import BookingModal from '@components/modals/BookingModal';
 import CredentialCard from './CredentialCard';
 import TeamMember from './TeamMember';
 
