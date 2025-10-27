@@ -1,6 +1,6 @@
-import { DIFFICULTY_COLORS } from '@config/constants/DIVE_SITES';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { DIFFICULTY_COLORS } from '../../../config/constants/DIVE_SITES';
 
 const DiveSiteCard = ({ site, onBookClick, index = 0 }) => {
   return (

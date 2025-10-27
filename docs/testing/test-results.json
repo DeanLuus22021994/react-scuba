@@ -1,140 +1,139 @@
 {
-  "runTime": "2025-10-27T12:08:50.705Z",
+  "runTime": "2025-10-27T15:14:16.520Z",
   "summary": {
-    "totalFiles": 62,
-    "passedFiles": 61,
+    "totalFiles": 1,
+    "passedFiles": 0,
     "failedFiles": 1,
-    "totalTests": 317,
-    "passedTests": 315,
+    "totalTests": 13,
+    "passedTests": 11,
     "failedTests": 2,
-    "passRate": 99.36908517350159
+    "passRate": 84.61538461538461
   },
   "performance": {
-    "totalDuration": 30372.903199999997,
-    "avgDuration": 95.81357476340693,
-    "testCount": 317,
+    "totalDuration": 8980.215999999999,
+    "avgDuration": 690.785846153846,
+    "testCount": 13,
     "slowestTests": [
       {
-        "name": "should render page heading",
-        "duration": 1399.1082999999999,
-        "state": "pass",
-        "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx"
+        "name": "should validate minimum participants",
+        "duration": 1912.5985999999994,
+        "state": "fail",
+        "errors": [
+          {
+            "stack": "Error: Unable to find an element with the text: Participants must be between 1 and 20. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"test@example.com\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"0\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n    at waitFor (C:\\react_scuba_runner\\react-scuba\\node_modules\\@testing-library\\dom\\dist\\wait-for.js:163:27)\n    at C:\\react_scuba_runner\\react-scuba\\tests\\features\\booking\\BookingForm.test.tsx:135:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20",
+            "message": "Unable to find an element with the text: Participants must be between 1 and 20. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"test@example.com\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"0\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n\nIgnored nodes: comments, script, style\n\u001b[36m<html>\u001b[39m\n  \u001b[36m<head />\u001b[39m\n  \u001b[36m<body>\u001b[39m\n    \u001b[36m<div>\u001b[39m\n      \u001b[36m<form\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mFull Name *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mEmail *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"test@example.com\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPhone *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPreferred Date *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<div\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<input\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n                \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n                \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n                \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n              \u001b[36m/>\u001b[39m\n            \u001b[36m</div>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mNumber of Participants *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n            \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n            \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"0\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSpecial Requests\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<textarea\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n            \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<button\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSubmit Booking\u001b[0m\n          \u001b[36m</button>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</form>\u001b[39m\n    \u001b[36m</div>\u001b[39m\n  \u001b[36m</body>\u001b[39m\n\u001b[36m</html>\u001b[39m...",
+            "name": "TestingLibraryElementError",
+            "constructor": "Function<Error>",
+            "toString": "Function<toString>",
+            "stacks": [
+              {
+                "method": "waitFor",
+                "file": "C:/react_scuba_runner/react-scuba/node_modules/@testing-library/dom/dist/wait-for.js",
+                "line": 163,
+                "column": 27
+              },
+              {
+                "method": "",
+                "file": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx",
+                "line": 135,
+                "column": 11
+              }
+            ]
+          }
+        ],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render page heading",
-        "duration": 1232.5733,
-        "state": "pass",
-        "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx"
+        "name": "should validate email format",
+        "duration": 1734.2316000000005,
+        "state": "fail",
+        "errors": [
+          {
+            "stack": "Error: Unable to find an element with the text: Valid email is required. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"invalid-email\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"1\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n    at waitFor (C:\\react_scuba_runner\\react-scuba\\node_modules\\@testing-library\\dom\\dist\\wait-for.js:163:27)\n    at C:\\react_scuba_runner\\react-scuba\\tests\\features\\booking\\BookingForm.test.tsx:61:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20",
+            "message": "Unable to find an element with the text: Valid email is required. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"invalid-email\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"1\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n\nIgnored nodes: comments, script, style\n\u001b[36m<html>\u001b[39m\n  \u001b[36m<head />\u001b[39m\n  \u001b[36m<body>\u001b[39m\n    \u001b[36m<div>\u001b[39m\n      \u001b[36m<form\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mFull Name *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mEmail *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"invalid-email\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPhone *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPreferred Date *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<div\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<input\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n                \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n                \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n                \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n              \u001b[36m/>\u001b[39m\n            \u001b[36m</div>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mNumber of Participants *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n            \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n            \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSpecial Requests\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<textarea\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n            \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<button\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSubmit Booking\u001b[0m\n          \u001b[36m</button>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</form>\u001b[39m\n    \u001b[36m</div>\u001b[39m\n  \u001b[36m</body>\u001b[39m\n\u001b[36m</html>\u001b[39m...",
+            "name": "TestingLibraryElementError",
+            "constructor": "Function<Error>",
+            "toString": "Function<toString>",
+            "stacks": [
+              {
+                "method": "waitFor",
+                "file": "C:/react_scuba_runner/react-scuba/node_modules/@testing-library/dom/dist/wait-for.js",
+                "line": 163,
+                "column": 27
+              },
+              {
+                "method": "",
+                "file": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx",
+                "line": 61,
+                "column": 11
+              }
+            ]
+          }
+        ],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render header component",
-        "duration": 1167.0472,
+        "name": "should clear errors on valid input",
+        "duration": 903.7472999999991,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/App.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render without crashing",
-        "duration": 1141.851700000001,
+        "name": "should submit valid form data",
+        "duration": 822.4594999999999,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render page heading",
-        "duration": 1135.9817999999996,
+        "name": "should include diveSiteId when provided",
+        "duration": 807.7093999999997,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render page heading",
-        "duration": 1112.2165000000005,
+        "name": "should include courseId when provided",
+        "duration": 774.4174000000003,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render main content area",
-        "duration": 1106.4144000000006,
+        "name": "should validate required name field",
+        "duration": 712.5036999999998,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/App.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render hero section with heading",
-        "duration": 1074.1218000000008,
+        "name": "should validate phone number",
+        "duration": 630.1603999999998,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should render without crashing",
-        "duration": 1010.5360000000001,
+        "name": "should handle special requests",
+        "duration": 359.1787000000004,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       },
       {
-        "name": "should have submit button",
-        "duration": 970.0278999999991,
+        "name": "should initialize with provided booking type",
+        "duration": 149.49109999999973,
         "state": "pass",
         "errors": [],
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx"
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx"
       }
     ],
     "slowestFiles": [
       {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/App.test.jsx",
-        "duration": 2982.7366999999995,
-        "testCount": 5
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx",
-        "duration": 2859.6728000000003,
-        "testCount": 4
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx",
-        "duration": 2462.9069999999992,
-        "testCount": 4
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx",
-        "duration": 2028.8011999999999,
-        "testCount": 4
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx",
-        "duration": 1844.0529000000006,
-        "testCount": 4
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx",
-        "duration": 1807.8438000000006,
-        "testCount": 5
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx",
-        "duration": 1718.4812999999995,
-        "testCount": 4
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx",
-        "duration": 1642.6713999999993,
-        "testCount": 4
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/layouts/Footer.test.jsx",
-        "duration": 1035.2205999999996,
-        "testCount": 4
-      },
-      {
-        "fileName": "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx",
-        "duration": 994.3937000000005,
-        "testCount": 9
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx",
+        "duration": 8982.1902,
+        "testCount": 13
       }
     ],
     "distribution": [
@@ -142,430 +141,167 @@
         "label": "< 10ms",
         "min": 0,
         "max": 10,
-        "count": 144
+        "count": 0
       },
       {
         "label": "10-50ms",
         "min": 10,
         "max": 50,
-        "count": 77
+        "count": 1
       },
       {
         "label": "50-100ms",
         "min": 50,
         "max": 100,
-        "count": 24
+        "count": 2
       },
       {
         "label": "100-500ms",
         "min": 100,
         "max": 500,
-        "count": 60
+        "count": 2
       },
       {
         "label": "> 500ms",
         "min": 500,
         "max": null,
-        "count": 12
+        "count": 8
       }
     ]
   },
   "categories": [
     {
-      "category": "about",
-      "fileCount": 3,
-      "totalTests": 17,
-      "passedTests": 17,
-      "failedTests": 0,
-      "totalDuration": 336.2064999999993,
-      "passRate": 100
-    },
-    {
-      "category": "common",
-      "fileCount": 7,
-      "totalTests": 52,
-      "passedTests": 52,
-      "failedTests": 0,
-      "totalDuration": 3129.7064000000005,
-      "passRate": 100
-    },
-    {
-      "category": "courses",
-      "fileCount": 3,
-      "totalTests": 17,
-      "passedTests": 17,
-      "failedTests": 0,
-      "totalDuration": 1780.4132000000009,
-      "passRate": 100
-    },
-    {
-      "category": "data",
-      "fileCount": 6,
-      "totalTests": 27,
-      "passedTests": 27,
-      "failedTests": 0,
-      "totalDuration": 50.47999999999956,
-      "passRate": 100
-    },
-    {
-      "category": "dive-sites",
-      "fileCount": 3,
-      "totalTests": 15,
-      "passedTests": 15,
-      "failedTests": 0,
-      "totalDuration": 307.9280000000008,
-      "passRate": 100
-    },
-    {
-      "category": "gallery",
-      "fileCount": 4,
-      "totalTests": 19,
-      "passedTests": 19,
-      "failedTests": 0,
-      "totalDuration": 1021.2192999999993,
-      "passRate": 100
-    },
-    {
-      "category": "home",
-      "fileCount": 6,
-      "totalTests": 36,
-      "passedTests": 36,
-      "failedTests": 0,
-      "totalDuration": 2375.4027000000006,
-      "passRate": 100
-    },
-    {
-      "category": "hooks",
-      "fileCount": 2,
-      "totalTests": 8,
-      "passedTests": 8,
-      "failedTests": 0,
-      "totalDuration": 229.43420000000015,
-      "passRate": 100
-    },
-    {
-      "category": "layouts",
-      "fileCount": 4,
-      "totalTests": 14,
-      "passedTests": 14,
-      "failedTests": 0,
-      "totalDuration": 2597.1649,
-      "passRate": 100
-    },
-    {
-      "category": "modals",
-      "fileCount": 2,
-      "totalTests": 8,
-      "passedTests": 8,
-      "failedTests": 0,
-      "totalDuration": 2478.6768999999986,
-      "passRate": 100
-    },
-    {
-      "category": "pages",
+      "category": "booking",
       "fileCount": 1,
-      "totalTests": 5,
-      "passedTests": 5,
-      "failedTests": 0,
-      "totalDuration": 1807.8438000000006,
-      "passRate": 100
-    },
-    {
-      "category": "services",
-      "fileCount": 2,
-      "totalTests": 9,
-      "passedTests": 9,
-      "failedTests": 0,
-      "totalDuration": 157.07230000000027,
-      "passRate": 100
-    },
-    {
-      "category": "shared",
-      "fileCount": 2,
-      "totalTests": 9,
-      "passedTests": 9,
-      "failedTests": 0,
-      "totalDuration": 213.36689999999953,
-      "passRate": 100
-    },
-    {
-      "category": "src",
-      "fileCount": 2,
-      "totalTests": 5,
-      "passedTests": 5,
-      "failedTests": 0,
-      "totalDuration": 15.363100000000031,
-      "passRate": 100
-    },
-    {
-      "category": "tests",
-      "fileCount": 7,
-      "totalTests": 29,
-      "passedTests": 27,
+      "totalTests": 13,
+      "passedTests": 11,
       "failedTests": 2,
-      "totalDuration": 13945.096399999999,
-      "passRate": 93.10344827586206
-    },
-    {
-      "category": "utils",
-      "fileCount": 8,
-      "totalTests": 47,
-      "passedTests": 47,
-      "failedTests": 0,
-      "totalDuration": 125.56209999999965,
-      "passRate": 100
+      "totalDuration": 8982.1902,
+      "passRate": 84.61538461538461
     }
   ],
   "files": {
-    "C:/react_scuba_runner/react-scuba/tests/AboutPage.test.jsx": {
+    "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx": {
       "passed": [
         {
-          "name": "should render without crashing",
-          "duration": 447.0679,
+          "name": "should render booking form",
+          "duration": 52.627500000000055,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render page heading",
-          "duration": 1399.1082999999999,
+          "name": "should initialize with provided booking type",
+          "duration": 149.49109999999973,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render about content",
-          "duration": 78.95860000000175,
+          "name": "should validate required name field",
+          "duration": 712.5036999999998,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should have page content loaded",
-          "duration": 94.48689999999988,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2028.8011999999999
-    },
-    "C:/react_scuba_runner/react-scuba/tests/App.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 329.7512999999999,
+          "name": "should validate phone number",
+          "duration": 630.1603999999998,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render header component",
-          "duration": 1167.0472,
+          "name": "should submit valid form data",
+          "duration": 822.4594999999999,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render main content area",
-          "duration": 1106.4144000000006,
+          "name": "should update participants count",
+          "duration": 95.30019999999968,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should wrap app with CurrencyProvider",
-          "duration": 124.90439999999944,
+          "name": "should disable submit button when loading",
+          "duration": 25.790600000000268,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should have scroll progress component",
-          "duration": 242.86169999999947,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2982.7366999999995
-    },
-    "C:/react_scuba_runner/react-scuba/tests/CoursesPage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 466.59250000000065,
+          "name": "should include courseId when provided",
+          "duration": 774.4174000000003,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render page heading",
-          "duration": 1112.2165000000005,
+          "name": "should include diveSiteId when provided",
+          "duration": 807.7093999999997,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should render courses content with currency provider",
-          "duration": 144.1324999999997,
+          "name": "should handle special requests",
+          "duration": 359.1787000000004,
           "state": "pass",
           "errors": []
         },
         {
-          "name": "should have page content loaded",
-          "duration": 118.08160000000134,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1844.0529000000006
-    },
-    "C:/react_scuba_runner/react-scuba/tests/DiveSitesPage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 1010.5360000000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render page heading",
-          "duration": 1135.9817999999996,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render dive sites content",
-          "duration": 146.95000000000073,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have page content loaded",
-          "duration": 165.08629999999903,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2462.9069999999992
-    },
-    "C:/react_scuba_runner/react-scuba/tests/GalleryPage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 1141.851700000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render page heading",
-          "duration": 1232.5733,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render gallery content",
-          "duration": 229.2584999999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have page content loaded",
-          "duration": 253.03189999999995,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2859.6728000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/HomePage.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 408.3738000000012,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render hero section with heading",
-          "duration": 1074.1218000000008,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render all main sections",
-          "duration": 108.70319999999992,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have page content loaded",
-          "duration": 124.60510000000068,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1718.4812999999995
-    },
-    "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js": {
-      "passed": [
-        {
-          "name": "should find all markdown files",
-          "duration": 9.373999999999796,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should detect common link issues",
-          "duration": 3.2379000000000815,
+          "name": "should clear errors on valid input",
+          "duration": 903.7472999999991,
           "state": "pass",
           "errors": []
         }
       ],
       "failed": [
         {
-          "name": "should validate all links in documentation",
-          "duration": 31.602499999999964,
+          "name": "should validate email format",
+          "duration": 1734.2316000000005,
           "state": "fail",
           "errors": [
             {
-              "message": "Found 6 broken link(s) in documentation:\n  File: docs\\agent\\environment.md\n  Line: 54\n  Link: [code quality guide](agent-code-quality.md)\n  Error: Target file not found: agent-code-quality.md\n\n  File: docs\\agent\\file-organization.md\n  Line: 50\n  Link: [security guidelines](agent-security.md)\n  Error: Target file not found: agent-security.md\n\n  File: docs\\agent\\principles.md\n  Line: 42\n  Link: [python environment guide](agent-python-setup.md)\n  Error: Target file not found: agent-python-setup.md\n\n  File: docs\\agent\\python-setup.md\n  Line: 51\n  Link: [configuration management guide](agent-configuration.md)\n  Error: Target file not found: agent-configuration.md\n\n  File: docs\\agent\\security.md\n  Line: 47\n  Link: [AI workflow guide](agent-workflow.md)\n  Error: Target file not found: agent-workflow.md\n\n  File: docs\\agent\\workflow.md\n  Line: 47\n  Link: [quick reference](agent-reference.md)\n  Error: Target file not found: agent-reference.md",
-              "actual": "undefined",
-              "expected": "undefined",
-              "name": "AssertionError",
-              "ok": false,
-              "stack": "AssertionError: Found 6 broken link(s) in documentation:\n  File: docs\\agent\\environment.md\n  Line: 54\n  Link: [code quality guide](agent-code-quality.md)\n  Error: Target file not found: agent-code-quality.md\n\n  File: docs\\agent\\file-organization.md\n  Line: 50\n  Link: [security guidelines](agent-security.md)\n  Error: Target file not found: agent-security.md\n\n  File: docs\\agent\\principles.md\n  Line: 42\n  Link: [python environment guide](agent-python-setup.md)\n  Error: Target file not found: agent-python-setup.md\n\n  File: docs\\agent\\python-setup.md\n  Line: 51\n  Link: [configuration management guide](agent-configuration.md)\n  Error: Target file not found: agent-configuration.md\n\n  File: docs\\agent\\security.md\n  Line: 47\n  Link: [AI workflow guide](agent-workflow.md)\n  Error: Target file not found: agent-workflow.md\n\n  File: docs\\agent\\workflow.md\n  Line: 47\n  Link: [quick reference](agent-reference.md)\n  Error: Target file not found: agent-reference.md\n    at C:\\react_scuba_runner\\react-scuba\\tests\\link-checker.test.js:222:14\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+              "stack": "Error: Unable to find an element with the text: Valid email is required. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"invalid-email\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"1\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n    at waitFor (C:\\react_scuba_runner\\react-scuba\\node_modules\\@testing-library\\dom\\dist\\wait-for.js:163:27)\n    at C:\\react_scuba_runner\\react-scuba\\tests\\features\\booking\\BookingForm.test.tsx:61:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20",
+              "message": "Unable to find an element with the text: Valid email is required. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"invalid-email\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"1\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n\nIgnored nodes: comments, script, style\n\u001b[36m<html>\u001b[39m\n  \u001b[36m<head />\u001b[39m\n  \u001b[36m<body>\u001b[39m\n    \u001b[36m<div>\u001b[39m\n      \u001b[36m<form\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mFull Name *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mEmail *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"invalid-email\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPhone *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPreferred Date *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<div\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<input\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n                \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n                \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n                \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n              \u001b[36m/>\u001b[39m\n            \u001b[36m</div>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mNumber of Participants *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n            \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n            \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSpecial Requests\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<textarea\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n            \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<button\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSubmit Booking\u001b[0m\n          \u001b[36m</button>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</form>\u001b[39m\n    \u001b[36m</div>\u001b[39m\n  \u001b[36m</body>\u001b[39m\n\u001b[36m</html>\u001b[39m...",
+              "name": "TestingLibraryElementError",
+              "constructor": "Function<Error>",
+              "toString": "Function<toString>",
               "stacks": [
                 {
+                  "method": "waitFor",
+                  "file": "C:/react_scuba_runner/react-scuba/node_modules/@testing-library/dom/dist/wait-for.js",
+                  "line": 163,
+                  "column": 27
+                },
+                {
                   "method": "",
-                  "file": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js",
-                  "line": 222,
-                  "column": 14
+                  "file": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx",
+                  "line": 61,
+                  "column": 11
                 }
               ]
             }
           ]
         },
         {
-          "name": "should validate all links in README.md",
-          "duration": 2.012200000000121,
+          "name": "should validate minimum participants",
+          "duration": 1912.5985999999994,
           "state": "fail",
           "errors": [
             {
-              "message": "Found 2 broken link(s) in README.md:\n  Line: 123\n  Link: [Docker Compose Submodule Guide](./docs/docker-compose-submodule.md)\n  Error: Target file not found: ./docs/docker-compose-submodule.md\n\n  Line: 139\n  Link: [docs/docker-compose-submodule.md](./docs/docker-compose-submodule.md)\n  Error: Target file not found: ./docs/docker-compose-submodule.md",
-              "actual": "undefined",
-              "expected": "undefined",
-              "name": "AssertionError",
-              "ok": false,
-              "stack": "AssertionError: Found 2 broken link(s) in README.md:\n  Line: 123\n  Link: [Docker Compose Submodule Guide](./docs/docker-compose-submodule.md)\n  Error: Target file not found: ./docs/docker-compose-submodule.md\n\n  Line: 139\n  Link: [docs/docker-compose-submodule.md](./docs/docker-compose-submodule.md)\n  Error: Target file not found: ./docs/docker-compose-submodule.md\n    at C:\\react_scuba_runner\\react-scuba\\tests\\link-checker.test.js:244:14\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)",
+              "stack": "Error: Unable to find an element with the text: Participants must be between 1 and 20. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"test@example.com\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"0\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n    at waitFor (C:\\react_scuba_runner\\react-scuba\\node_modules\\@testing-library\\dom\\dist\\wait-for.js:163:27)\n    at C:\\react_scuba_runner\\react-scuba\\tests\\features\\booking\\BookingForm.test.tsx:135:11\n    at file:///C:/react_scuba_runner/react-scuba/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20",
+              "message": "Unable to find an element with the text: Participants must be between 1 and 20. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<form\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mFull Name *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mEmail *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"test@example.com\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPhone *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPreferred Date *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<input\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n              \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n              \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n            \u001b[36m/>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mNumber of Participants *\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<input\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n          \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n          \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n          \u001b[33mvalue\u001b[39m=\u001b[32m\"0\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div>\u001b[39m\n        \u001b[36m<label\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n          \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSpecial Requests\u001b[0m\n        \u001b[36m</label>\u001b[39m\n        \u001b[36m<textarea\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n          \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n          \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n        \u001b[36m/>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n      \u001b[36m<div\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<button\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n          \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mSubmit Booking\u001b[0m\n        \u001b[36m</button>\u001b[39m\n      \u001b[36m</div>\u001b[39m\n    \u001b[36m</form>\u001b[39m\n  \u001b[36m</div>\u001b[39m\n\u001b[36m</body>\u001b[39m\n\nIgnored nodes: comments, script, style\n\u001b[36m<html>\u001b[39m\n  \u001b[36m<head />\u001b[39m\n  \u001b[36m<body>\u001b[39m\n    \u001b[36m<div>\u001b[39m\n      \u001b[36m<form\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"space-y-4\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"name\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mFull Name *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"name\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"John Doe\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"email\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mEmail *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"email\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"test@example.com\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPhone *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"phone\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"+230 XXXX XXXX\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"tel\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"12345678\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"preferredDate\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mPreferred Date *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker-wrapper\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<div\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"react-datepicker__input-container\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<input\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n                \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n                \u001b[33mtype\u001b[39m=\u001b[32m\"text\"\u001b[39m\n                \u001b[33mvalue\u001b[39m=\u001b[32m\"October 28, 2025\"\u001b[39m\n              \u001b[36m/>\u001b[39m\n            \u001b[36m</div>\u001b[39m\n          \u001b[36m</div>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mNumber of Participants *\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<input\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"participants\"\u001b[39m\n            \u001b[33mmax\u001b[39m=\u001b[32m\"20\"\u001b[39m\n            \u001b[33mmin\u001b[39m=\u001b[32m\"1\"\u001b[39m\n            \u001b[33mrequired\u001b[39m=\u001b[32m\"\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"number\"\u001b[39m\n            \u001b[33mvalue\u001b[39m=\u001b[32m\"0\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div>\u001b[39m\n          \u001b[36m<label\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"block text-sm font-medium text-gray-700\"\u001b[39m\n            \u001b[33mfor\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSpecial Requests\u001b[0m\n          \u001b[36m</label>\u001b[39m\n          \u001b[36m<textarea\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 resize-none\"\u001b[39m\n            \u001b[33mid\u001b[39m=\u001b[32m\"specialRequests\"\u001b[39m\n            \u001b[33mplaceholder\u001b[39m=\u001b[32m\"Medical conditions, equipment rental, dietary restrictions, etc.\"\u001b[39m\n            \u001b[33mrows\u001b[39m=\u001b[32m\"3\"\u001b[39m\n          \u001b[36m/>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n        \u001b[36m<div\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"flex gap-4 pt-4\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<button\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"flex-1 bg-ocean-600 text-white px-6 py-3 rounded-lg hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium\"\u001b[39m\n            \u001b[33mtype\u001b[39m=\u001b[32m\"submit\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSubmit Booking\u001b[0m\n          \u001b[36m</button>\u001b[39m\n        \u001b[36m</div>\u001b[39m\n      \u001b[36m</form>\u001b[39m\n    \u001b[36m</div>\u001b[39m\n  \u001b[36m</body>\u001b[39m\n\u001b[36m</html>\u001b[39m...",
+              "name": "TestingLibraryElementError",
+              "constructor": "Function<Error>",
+              "toString": "Function<toString>",
               "stacks": [
                 {
+                  "method": "waitFor",
+                  "file": "C:/react_scuba_runner/react-scuba/node_modules/@testing-library/dom/dist/wait-for.js",
+                  "line": 163,
+                  "column": 27
+                },
+                {
                   "method": "",
-                  "file": "C:/react_scuba_runner/react-scuba/tests/link-checker.test.js",
-                  "line": 244,
-                  "column": 14
+                  "file": "C:/react_scuba_runner/react-scuba/tests/features/booking/BookingForm.test.tsx",
+                  "line": 135,
+                  "column": 11
                 }
               ]
             }
@@ -573,2120 +309,7 @@
         }
       ],
       "skipped": [],
-      "totalDuration": 48.44450000000006
-    },
-    "C:/react_scuba_runner/react-scuba/tests/data/bookingTypes.test.js": {
-      "passed": [
-        {
-          "name": "should export BOOKING_TYPES",
-          "duration": 2.3384000000000924,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have course array",
-          "duration": 0.6087000000002263,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have dive array",
-          "duration": 0.3767000000002554,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid course structure",
-          "duration": 1.3416000000001986,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid dive structure",
-          "duration": 0.7796000000003005,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 7.951599999999871
-    },
-    "C:/react_scuba_runner/react-scuba/tests/data/courses.test.js": {
-      "passed": [
-        {
-          "name": "should export COURSES array",
-          "duration": 3.0679000000000087,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid course structure",
-          "duration": 2.9339999999997417,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getCourseById function",
-          "duration": 0.4902999999999338,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should find course by id",
-          "duration": 0.38540000000011787,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return undefined for invalid id",
-          "duration": 0.3251000000000204,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 9.916799999999967
-    },
-    "C:/react_scuba_runner/react-scuba/tests/data/credentials.test.js": {
-      "passed": [
-        {
-          "name": "should export CREDENTIALS array",
-          "duration": 2.6400000000003274,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid credential structure",
-          "duration": 0.8555999999998676,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have PADI 5 Star credential",
-          "duration": 0.2035000000000764,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 5.655799999999999
-    },
-    "C:/react_scuba_runner/react-scuba/tests/data/diveSites.test.js": {
-      "passed": [
-        {
-          "name": "should export DIVE_SITES array",
-          "duration": 2.8814000000002125,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export MAURITIUS_CENTER",
-          "duration": 2.0585000000000946,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export DIFFICULTY_COLORS",
-          "duration": 0.931999999999789,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid dive site structure",
-          "duration": 1.886000000000422,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getDiveSiteById function",
-          "duration": 0.3261000000002241,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 10.58349999999973
-    },
-    "C:/react_scuba_runner/react-scuba/tests/data/gallery.test.js": {
-      "passed": [
-        {
-          "name": "should export GALLERY_IMAGES array",
-          "duration": 2.62480000000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export FEATURED_IMAGES array",
-          "duration": 0.3912000000000262,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CATEGORIES array",
-          "duration": 0.31890000000021246,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid gallery image structure",
-          "duration": 3.0471000000002277,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getImagesByCategory function",
-          "duration": 0.33359999999993306,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 9.375699999999597
-    },
-    "C:/react_scuba_runner/react-scuba/tests/data/team.test.js": {
-      "passed": [
-        {
-          "name": "should export TEAM_MEMBERS array",
-          "duration": 2.602899999999863,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have valid team member structure",
-          "duration": 1.4402000000000044,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getTeamMemberByName function",
-          "duration": 0.4030000000002474,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should find team member by name",
-          "duration": 0.2883999999999105,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 6.996600000000399
-    },
-    "C:/react_scuba_runner/react-scuba/tests/layouts/Footer.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 211.2528000000002,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display copyright text",
-          "duration": 69.86590000000069,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render footer links",
-          "duration": 716.1252999999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper structure",
-          "duration": 35.26050000000032,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1035.2205999999996
-    },
-    "C:/react_scuba_runner/react-scuba/tests/layouts/Header.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 451.8895999999995,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should contain navigation",
-          "duration": 38.55749999999989,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper structure",
-          "duration": 25.774099999999635,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 519.8989000000001
-    },
-    "C:/react_scuba_runner/react-scuba/tests/layouts/MainLayout.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 244.58839999999964,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render children",
-          "duration": 75.41850000000068,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should contain header",
-          "duration": 76.8753999999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should contain footer",
-          "duration": 45.0635999999995,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 444.9343000000008
-    },
-    "C:/react_scuba_runner/react-scuba/tests/layouts/Navigation.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 330.94569999999976,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render navigation links",
-          "duration": 251.40859999999975,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper navigation structure",
-          "duration": 11.72400000000016,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 597.1110999999996
-    },
-    "C:/react_scuba_runner/react-scuba/tests/hooks/HooksIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export useCurrency",
-          "duration": 1.46120000000019,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CurrencyProvider",
-          "duration": 0.21000000000003638,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 2.8732999999997446
-    },
-    "C:/react_scuba_runner/react-scuba/tests/hooks/useCurrency.test.jsx": {
-      "passed": [
-        {
-          "name": "should provide currency context",
-          "duration": 152.087,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have default currency",
-          "duration": 11.23849999999993,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide format function",
-          "duration": 8.941299999999956,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide convert function",
-          "duration": 30.90059999999994,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide setCurrency function",
-          "duration": 10.588700000000244,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should provide availableCurrencies",
-          "duration": 9.803899999999885,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 226.5609000000004
-    },
-    "C:/react_scuba_runner/react-scuba/tests/pages/all-pages.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 410.9349999999995,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 223.58100000000013,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 682.5321999999996,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 376.41389999999956,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render without crashing",
-          "duration": 110.90370000000075,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1807.8438000000006
-    },
-    "C:/react_scuba_runner/react-scuba/tests/services/api.test.js": {
-      "passed": [
-        {
-          "name": "should export sendContactMessage",
-          "duration": 2.7216000000003078,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export createCalendarBooking",
-          "duration": 0.5202999999996791,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export checkCalendarAvailability",
-          "duration": 0.39330000000018117,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "sendContactMessage should handle successful response",
-          "duration": 134.32479999999987,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "checkCalendarAvailability should return object",
-          "duration": 13.085100000000239,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 153.94259999999986
-    },
-    "C:/react_scuba_runner/react-scuba/tests/services/ServicesIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export api functions",
-          "duration": 1.297399999999925,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have sendContactMessage",
-          "duration": 0.20409999999992579,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have createCalendarBooking",
-          "duration": 0.14390000000003056,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have checkCalendarAvailability",
-          "duration": 0.14249999999992724,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 3.129700000000412
-    },
-    "C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.css.test.js": {
-      "passed": [
-        {
-          "name": "should have valid CSS structure",
-          "duration": 2.6123999999999796,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should be importable",
-          "duration": 1.8250000000002728,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 6.906099999999697
-    },
-    "C:/react_scuba_runner/react-scuba/tests/src/SrcIndex.test.jsx": {
-      "passed": [
-        {
-          "name": "should have entry point",
-          "duration": 2.3489999999997053,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should import required modules",
-          "duration": 0.3692000000000917,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not throw on import",
-          "duration": 3.395799999999781,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 8.457000000000335
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/analytics.test.js": {
-      "passed": [
-        {
-          "name": "should export trackFormStart",
-          "duration": 3.0482999999999265,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackFormComplete",
-          "duration": 0.779399999999896,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackFormAbandon",
-          "duration": 0.5300000000002001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackPhoneClick",
-          "duration": 0.380500000000211,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackWhatsAppClick",
-          "duration": 0.48900000000003274,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export trackCalendarBookingComplete",
-          "duration": 0.4551000000001295,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackFormStart without errors",
-          "duration": 2.8175999999998567,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackPhoneClick without errors",
-          "duration": 0.6773999999995794,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackWhatsAppClick without errors",
-          "duration": 0.6697999999996682,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 12.39390000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/currency.test.js": {
-      "passed": [
-        {
-          "name": "should export CURRENCIES",
-          "duration": 2.6950000000001637,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have USD currency",
-          "duration": 0.8356999999996333,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export formatCurrency",
-          "duration": 0.4272000000000844,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export convertCurrency",
-          "duration": 0.3106999999999971,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should format currency correctly",
-          "duration": 34.09860000000026,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should convert currency with rates",
-          "duration": 0.4640999999996893,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return same amount for same currency",
-          "duration": 0.29500000000007276,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 41.61969999999974
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/env.test.js": {
-      "passed": [
-        {
-          "name": "should export isDevelopment",
-          "duration": 2.4225000000001273,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export isProduction",
-          "duration": 0.39259999999967476,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getApiUrl",
-          "duration": 0.44969999999966603,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getCalendarEmail",
-          "duration": 0.31959999999980937,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export getCalendarApiKey",
-          "duration": 0.3162999999999556,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return string for getApiUrl",
-          "duration": 0.4078999999996995,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should return string for getCalendarEmail",
-          "duration": 0.3328000000001339,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 7.0922999999997955
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/logger.test.js": {
-      "passed": [
-        {
-          "name": "should export logger object",
-          "duration": 3.114300000000185,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have info method",
-          "duration": 0.5360000000000582,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have error method",
-          "duration": 0.3566000000000713,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have warn method",
-          "duration": 0.27080000000023574,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have info method",
-          "duration": 0.40679999999974825,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call logger methods without errors",
-          "duration": 7.712199999999939,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 14.989500000000135
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/reportWebVitals.test.js": {
-      "passed": [
-        {
-          "name": "should export reportWebVitals function",
-          "duration": 2.800799999999981,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept callback function",
-          "duration": 2.512199999999666,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should work without callback",
-          "duration": 0.6132999999999811,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 8.339199999999892
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/scrollToAnchor.test.js": {
-      "passed": [
-        {
-          "name": "should export scrollToElement function",
-          "duration": 3.197599999999966,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should handle valid anchor id",
-          "duration": 18.383699999999862,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should handle missing anchor",
-          "duration": 2.64870000000019,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export scrollToTop",
-          "duration": 0.4796000000001186,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 27.08699999999999
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/seo.test.js": {
-      "passed": [
-        {
-          "name": "should export defaultMetaTags",
-          "duration": 2.6015000000002146,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have required default meta tags",
-          "duration": 0.7395999999998821,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export generatePageMetaTags function",
-          "duration": 0.370600000000195,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should generate meta tags for home page",
-          "duration": 0.4837999999999738,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should generate meta tags for about page",
-          "duration": 0.547099999999773,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should generate meta tags for courses page",
-          "duration": 0.44519999999965876,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should handle unknown page",
-          "duration": 0.30219999999962965,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 8.03500000000031
-    },
-    "C:/react_scuba_runner/react-scuba/tests/utils/UtilsIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export logger",
-          "duration": 2.2835000000000036,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export currency utilities",
-          "duration": 0.602100000000064,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export analytics functions",
-          "duration": 0.4479999999998654,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export SEO utilities",
-          "duration": 0.322400000000016,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 6.005499999999756
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/about/AboutIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export AboutPage",
-          "duration": 1.9197000000003754,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CredentialCard",
-          "duration": 0.3161000000000058,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export TeamMember",
-          "duration": 0.20499999999992724,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct number of exports",
-          "duration": 1.3101999999998952,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 5.617899999999281
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/about/CredentialCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 86.94689999999991,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display credential title",
-          "duration": 9.899999999999636,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display credential description",
-          "duration": 8.767299999999523,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render icon component",
-          "duration": 13.722200000000157,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply animation delay based on index",
-          "duration": 6.224599999999555,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 5.634799999999814,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 133.9929000000002
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/about/TeamMember.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 125.84950000000026,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member name",
-          "duration": 15.64600000000064,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member role",
-          "duration": 8.83560000000034,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display member bio",
-          "duration": 8.438599999999497,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render member image with correct alt text",
-          "duration": 12.251900000000205,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all certifications",
-          "duration": 10.548800000000483,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 9.32050000000072,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 196.59569999999985
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 265.3058000000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course name",
-          "duration": 28.078599999999824,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course tagline",
-          "duration": 25.595499999999447,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course description",
-          "duration": 45.35390000000007,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course duration",
-          "duration": 59.26919999999973,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display minimum age",
-          "duration": 34.26019999999971,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display included items",
-          "duration": 31.46610000000055,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should toggle curriculum visibility",
-          "duration": 346.21889999999985,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onBookClick when book button clicked",
-          "duration": 155.6925000000001,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 994.3937000000005
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/courses/CourseComparison.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 214.6493999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display table headers",
-          "duration": 61.43830000000071,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course rows",
-          "duration": 24.07429999999931,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display course data in table format",
-          "duration": 251.07589999999982,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper table structure",
-          "duration": 225.52520000000004,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 779.7528999999995
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/courses/CoursesIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CourseCard",
-          "duration": 2.332800000000134,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CourseComparison",
-          "duration": 0.34790000000066357,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export CoursesPage",
-          "duration": 0.24539999999979045,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 6.266600000000835
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/CommonIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CurrencySelector",
-          "duration": 1.2538000000004104,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export ErrorBoundary",
-          "duration": 0.23230000000012296,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export Loading",
-          "duration": 0.1546000000003005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export PhoneLink",
-          "duration": 0.15890000000035798,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export SEO",
-          "duration": 0.12489999999979773,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export WhatsAppButton",
-          "duration": 0.12829999999985375,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 3.9854999999997744
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/CurrencySelector.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 152.65320000000065,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display current currency",
-          "duration": 18.928400000000693,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should open dropdown when clicked",
-          "duration": 391.6258000000007,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display currency dropdown with all options",
-          "duration": 113.65369999999984,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should change currency when option clicked",
-          "duration": 152.0033000000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display chevron icon",
-          "duration": 14.507300000000214,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 846.5439000000006
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/ErrorBoundary.test.jsx": {
-      "passed": [
-        {
-          "name": "should render children when no error",
-          "duration": 56.9360999999999,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should catch errors and display error UI",
-          "duration": 32.89440000000013,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display Try Again button on error",
-          "duration": 226.4480999999996,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should reset error when Try Again clicked",
-          "duration": 136.1166000000003,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render custom fallback when provided",
-          "duration": 5.589600000000246,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 461.34349999999995
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/Loading.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 55.2183,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display loading text",
-          "duration": 6.51929999999993,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render with default text",
-          "duration": 6.922100000000228,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not display text when text prop is empty",
-          "duration": 4.086099999999988,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render spinner element",
-          "duration": 20.870699999999943,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply small size class",
-          "duration": 5.327099999999973,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply medium size class by default",
-          "duration": 4.14409999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply large size class",
-          "duration": 4.541200000000117,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have proper styling classes",
-          "duration": 9.213400000000092,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 120.33339999999998
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/PhoneLink.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 273.8836999999994,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display phone number by default",
-          "duration": 8.371699999999691,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display custom children when provided",
-          "duration": 5.343199999999342,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct tel href",
-          "duration": 41.97440000000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render phone icon",
-          "duration": 7.385699999999815,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have aria-label",
-          "duration": 48.04599999999937,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply custom className",
-          "duration": 46.02180000000044,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackPhoneClick on click",
-          "duration": 152.40259999999944,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 586.6298999999999
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/SEO.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 50.21900000000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set custom title when provided",
-          "duration": 47.45749999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set page-specific meta tags",
-          "duration": 45.75729999999976,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set default meta tags for home page",
-          "duration": 48.16919999999982,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set Open Graph meta tags",
-          "duration": 61.31890000000021,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set Twitter meta tags",
-          "duration": 47.352100000000064,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set canonical link",
-          "duration": 39.178100000000086,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should set custom description when provided",
-          "duration": 74.08640000000014,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 418.65570000000025
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/common/WhatsAppButton.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 292.28650000000016,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render button variant by default",
-          "duration": 29.479199999999764,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render icon variant correctly",
-          "duration": 59.05550000000039,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render floating variant with fixed positioning",
-          "duration": 50.46320000000014,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct WhatsApp URL",
-          "duration": 51.975900000000365,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should encode custom message in URL",
-          "duration": 39.693200000000616,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should open in new tab",
-          "duration": 35.50910000000022,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render WhatsApp icon",
-          "duration": 5.628000000000611,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call trackWhatsAppClick on click",
-          "duration": 88.27400000000034,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should apply custom className",
-          "duration": 36.48660000000018,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 692.2145
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveMap.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 49.296100000000024,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render map container",
-          "duration": 30.871900000000096,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept selectedSite prop",
-          "duration": 6.894400000000132,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 89.86110000000008
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteCard.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 105.84430000000066,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display site name",
-          "duration": 15.8174999999992,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display site description",
-          "duration": 14.521299999999428,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display depth information",
-          "duration": 16.63289999999961,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display visibility",
-          "duration": 11.879399999999805,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display best season",
-          "duration": 9.334899999999834,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all highlights",
-          "duration": 11.408799999999246,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all marine life",
-          "duration": 12.451000000000022,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render site image",
-          "duration": 12.378200000000106,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 213.66089999999986
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/dive-sites/DiveSiteIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export DiveMap",
-          "duration": 1.9447000000000116,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export DiveSiteCard",
-          "duration": 0.29320000000006985,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export DiveSitesPage",
-          "duration": 0.2055000000000291,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 4.406000000000859
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/FeaturedCarousel.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 97.43020000000024,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display heading",
-          "duration": 33.710999999999785,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Swiper component",
-          "duration": 19.197599999999966,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 153.44810000000007
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryGrid.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 116.74589999999989,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render all images",
-          "duration": 13.927299999999377,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image descriptions",
-          "duration": 13.054999999999382,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image categories",
-          "duration": 11.089300000000549,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have grid layout classes",
-          "duration": 10.563099999999395,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 168.4349000000002
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/GalleryIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export FeaturedCarousel",
-          "duration": 1.9166000000004715,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export GalleryGrid",
-          "duration": 0.32400000000052387,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export GalleryPage",
-          "duration": 0.22950000000128057,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export Lightbox",
-          "duration": 0.2055000000000291,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 4.533999999999651
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/gallery/Lightbox.test.jsx": {
-      "passed": [
-        {
-          "name": "should not render when not open",
-          "duration": 49.22699999999986,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render when open",
-          "duration": 57.19560000000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display image details",
-          "duration": 15.815100000000712,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onClose when close button clicked",
-          "duration": 252.02509999999984,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onNavigate with prev when previous button clicked",
-          "duration": 139.78049999999985,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call onNavigate with next when next button clicked",
-          "duration": 158.42099999999937,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render image element",
-          "duration": 18.890400000000227,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 694.8022999999994
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/CTASection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 92.7505000000001,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 10.936999999999898,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display description",
-          "duration": 22.225999999999658,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Contact Us button",
-          "duration": 321.33449999999993,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Call Us link",
-          "duration": 101.9427999999998,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 556.5923000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/FeaturesSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 106.83640000000014,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 17.44760000000042,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display subtitle",
-          "duration": 54.00579999999991,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all features",
-          "duration": 46.699100000000726,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display feature stats",
-          "duration": 31.014799999999923,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 260.2640000000001
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/HeroSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 121.1873999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 23.22819999999956,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display subtitle",
-          "duration": 16.75500000000011,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render Book Your Dive button",
-          "duration": 297.27689999999984,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render View Courses link",
-          "duration": 109.09760000000006,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display scroll indicator",
-          "duration": 10.91820000000007,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 581.6385
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/HomeIndex.test.js": {
-      "passed": [
-        {
-          "name": "should export CTASection",
-          "duration": 1.1579000000001543,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export FeaturesSection",
-          "duration": 0.19160000000010768,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export HeroSection",
-          "duration": 0.13119999999980791,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export HomePage",
-          "duration": 0.40720000000055734,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export ServicesSection",
-          "duration": 0.2261000000007698,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export SpecialOffersSection",
-          "duration": 0.3842000000004191,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export TestimonialsSection",
-          "duration": 0.19390000000021246,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should export VideoSection",
-          "duration": 0.09040000000004511,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct number of exports",
-          "duration": 0.8733999999994921,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 4.925199999999677
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/ServicesSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 144.46000000000004,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 20.061399999999594,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all service cards",
-          "duration": 52.768699999999626,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render service links",
-          "duration": 404.0115999999998,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display service descriptions",
-          "duration": 36.494400000000496,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 661.4691000000003
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/home/TestimonialsSection.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 174.0672999999997,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display main heading",
-          "duration": 26.08260000000064,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display all testimonials",
-          "duration": 28.004500000000007,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display testimonial locations",
-          "duration": 24.796800000000076,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display testimonial text",
-          "duration": 28.144099999999526,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render star ratings",
-          "duration": 26.12169999999969,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 310.5136000000002
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/modals/BookingModal.test.jsx": {
-      "passed": [
-        {
-          "name": "should render when open",
-          "duration": 459.8144000000011,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not render when closed",
-          "duration": 15.112300000000687,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display booking type options",
-          "duration": 169.3192999999992,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept preSelectedItem prop",
-          "duration": 188.90599999999904,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 836.0054999999993
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/modals/ContactModal.test.jsx": {
-      "passed": [
-        {
-          "name": "should render when open",
-          "duration": 363.40940000000046,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not render when closed",
-          "duration": 11.261899999999514,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should display form fields",
-          "duration": 295.09540000000015,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have submit button",
-          "duration": 970.0278999999991,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 1642.6713999999993
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/shared/BackToTop.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 51.172999999999774,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should not be visible initially",
-          "duration": 13.998900000000503,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept showAfter prop",
-          "duration": 15.484000000000378,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should accept position prop",
-          "duration": 5.994099999999889,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should call scrollTo when button clicked",
-          "duration": 17.414200000000164,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 107.5667999999996
-    },
-    "C:/react_scuba_runner/react-scuba/tests/components/shared/ScrollProgress.test.jsx": {
-      "passed": [
-        {
-          "name": "should render without crashing",
-          "duration": 65.14090000000033,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render progress bar element",
-          "duration": 19.03150000000005,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should have correct styling classes",
-          "duration": 8.78650000000016,
-          "state": "pass",
-          "errors": []
-        },
-        {
-          "name": "should render inner progress indicator",
-          "duration": 9.915500000000065,
-          "state": "pass",
-          "errors": []
-        }
-      ],
-      "failed": [],
-      "skipped": [],
-      "totalDuration": 105.80009999999993
+      "totalDuration": 8982.1902
     }
   }
 }

@@ -1,8 +1,8 @@
-import { DIVE_SITES, MAURITIUS_CENTER } from '@config/constants/DIVE_SITES';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import PropTypes from 'prop-types';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+import { DIVE_SITES, MAURITIUS_CENTER } from '../../../config/constants/DIVE_SITES';
 
 // Fix for default marker icons in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;

@@ -1,8 +1,8 @@
-import { CurrencyProvider } from '@/hooks';
-import Footer from '@/layouts/Footer';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
+import { CurrencyProvider } from '../../src/hooks/index.js';
+import Footer from '../../src/layouts/Footer.jsx';
 
 describe('Footer', () => {
   const renderWithProviders = (component) => {

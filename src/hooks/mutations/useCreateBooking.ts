@@ -3,8 +3,8 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createBooking } from '@/services/api';
-import type { BookingRequest, ApiResponse, BookingResponse } from '@/types';
+import { createBooking } from '../../services/api';
+import type { ApiResponse, BookingRequest, BookingResponse } from '../../types';
 
 export function useCreateBooking() {
   const queryClient = useQueryClient();

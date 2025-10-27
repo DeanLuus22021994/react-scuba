@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider } from '@/hooks';
-import MainLayout from '@/layouts/MainLayout';
+import { CurrencyProvider } from '../../src/hooks/index.js';
+import MainLayout from '../../src/layouts/MainLayout.jsx';
 
 describe('MainLayout', () => {
   const renderWithProviders = (content) => {

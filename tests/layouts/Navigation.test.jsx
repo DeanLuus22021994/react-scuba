@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider } from '@/hooks/useCurrency';
-import Navigation from '@/layouts/Navigation';
+import { CurrencyProvider } from '../../src/hooks/useCurrency.jsx';
+import Navigation from '../../src/layouts/Navigation.jsx';
 
 describe('Navigation', () => {
   const renderWithProviders = (component) => {

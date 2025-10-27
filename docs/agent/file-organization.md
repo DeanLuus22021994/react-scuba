@@ -1,8 +1,8 @@
 ---
-date_created: "2025-10-26T18:32:25.938943+00:00"
-last_updated: "2025-10-26T18:32:25.938943+00:00"
-tags: ["documentation", "agent", "development"]
-description: "Documentation for file organization"
+date_created: '2025-10-26T18:32:25.938943+00:00'
+last_updated: '2025-10-26T18:32:25.938943+00:00'
+tags: ['documentation', 'agent', 'development']
+description: 'Documentation for file organization'
 ---
 
 ---\ndate_created: '2025-10-26T00:00:00Z'

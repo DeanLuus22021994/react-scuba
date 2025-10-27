@@ -1,0 +1,543 @@
+npm warn Unknown cli config "--run". This will stop working in the next major version of npm.
+npm warn Unknown cli config "--reporter". This will stop working in the next major version of npm.
+npm warn Unknown env config "msvs-version". This will stop working in the next major version of npm.
+npm warn Unknown env config "target-arch". This will stop working in the next major version of npm.
+
+> codespaces-react@0.1.0 test:coverage
+> vitest --coverage
+
+
+[1m[44m DEV [49m[22m [34mv3.2.4 [39m[90mC:/react_scuba_runner/react-scuba[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+Docker Compose services should be running externally for tests
+Skipping Docker startup in global setup - services assumed to be running
+stderr | tests/GalleryPage.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/GalleryPage.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/GalleryPage.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should display course description
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.077Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should display course duration
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.119Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should display minimum age
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.141Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should display included items
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.165Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should toggle curriculum visibility
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.195Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should toggle curriculum visibility
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.200Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should toggle curriculum visibility
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.367Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should toggle curriculum visibility
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.396Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should toggle curriculum visibility
+Not implemented: Window's scrollTo() method
+
+stderr | tests/components/courses/CourseCard.test.jsx > CourseCard > should call onBookClick when book button clicked
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:01.684Z","level":"ERROR","correlation_id":"af1c6731-b8f9-42dd-aadc-9f3312f1ace4","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/components/courses/CourseCard.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[33m 978[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m CourseCard[2m > [22mshould toggle curriculum visibility [33m 394[2mms[22m[39m
+stderr | tests/App.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:03.351Z","level":"ERROR","correlation_id":"604bf031-a9b1-43e2-8d74-271e7c8e7d56","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/App.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:03.367Z","level":"ERROR","correlation_id":"604bf031-a9b1-43e2-8d74-271e7c8e7d56","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/App.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:03.371Z","level":"ERROR","correlation_id":"604bf031-a9b1-43e2-8d74-271e7c8e7d56","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/App.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:03.375Z","level":"ERROR","correlation_id":"604bf031-a9b1-43e2-8d74-271e7c8e7d56","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/App.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:03.378Z","level":"ERROR","correlation_id":"604bf031-a9b1-43e2-8d74-271e7c8e7d56","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/App.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 1526[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m App[2m > [22mshould render without crashing [33m 310[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m App[2m > [22mshould render header component [33m 581[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m App[2m > [22mshould render main content area [33m 504[2mms[22m[39m
+stderr | tests/pages/all-pages.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/pages/all-pages.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/pages/all-pages.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/CoursesPage.test.jsx > CoursesPage > should have page content loaded
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.492Z","level":"ERROR","correlation_id":"1bf423a5-8d82-470f-95d9-8c6722bbd661","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/CoursesPage.test.jsx > CoursesPage > should have page content loaded
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.502Z","level":"ERROR","correlation_id":"1bf423a5-8d82-470f-95d9-8c6722bbd661","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/CoursesPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.523Z","level":"ERROR","correlation_id":"1bf423a5-8d82-470f-95d9-8c6722bbd661","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/CoursesPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.526Z","level":"ERROR","correlation_id":"1bf423a5-8d82-470f-95d9-8c6722bbd661","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/CoursesPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 1751[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m CoursesPage[2m > [22mshould render without crashing [33m 378[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m CoursesPage[2m > [22mshould render page heading [33m 1099[2mms[22m[39m
+stderr | tests/components/common/CurrencySelector.test.jsx > CurrencySelector > should open dropdown when clicked
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.717Z","level":"ERROR","correlation_id":"e5b4f7da-6272-46a1-8e5d-daaebb7db79f","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/pages/all-pages.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.734Z","level":"ERROR","correlation_id":"f52e11de-f028-477d-a4fc-c72172c64d01","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/pages/all-pages.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.747Z","level":"ERROR","correlation_id":"f52e11de-f028-477d-a4fc-c72172c64d01","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/pages/all-pages.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.749Z","level":"ERROR","correlation_id":"f52e11de-f028-477d-a4fc-c72172c64d01","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/pages/all-pages.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.750Z","level":"ERROR","correlation_id":"f52e11de-f028-477d-a4fc-c72172c64d01","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/pages/all-pages.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.752Z","level":"ERROR","correlation_id":"f52e11de-f028-477d-a4fc-c72172c64d01","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/common/CurrencySelector.test.jsx > CurrencySelector > should open dropdown when clicked
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.797Z","level":"ERROR","correlation_id":"e5b4f7da-6272-46a1-8e5d-daaebb7db79f","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/common/CurrencySelector.test.jsx > CurrencySelector > should open dropdown when clicked
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.802Z","level":"ERROR","correlation_id":"e5b4f7da-6272-46a1-8e5d-daaebb7db79f","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/HomePage.test.jsx > HomePage > should have page content loaded
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.810Z","level":"ERROR","correlation_id":"be2aaa68-e5d5-4fa7-b9b3-377c84999c6c","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/HomePage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.840Z","level":"ERROR","correlation_id":"be2aaa68-e5d5-4fa7-b9b3-377c84999c6c","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/HomePage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.843Z","level":"ERROR","correlation_id":"be2aaa68-e5d5-4fa7-b9b3-377c84999c6c","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/HomePage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.845Z","level":"ERROR","correlation_id":"be2aaa68-e5d5-4fa7-b9b3-377c84999c6c","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/AboutPage.test.jsx > AboutPage > should have page content loaded
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.891Z","level":"ERROR","correlation_id":"4834f894-a443-4f8d-aabb-0776f6119fb5","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/AboutPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.919Z","level":"ERROR","correlation_id":"4834f894-a443-4f8d-aabb-0776f6119fb5","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/AboutPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.922Z","level":"ERROR","correlation_id":"4834f894-a443-4f8d-aabb-0776f6119fb5","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/AboutPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.924Z","level":"ERROR","correlation_id":"4834f894-a443-4f8d-aabb-0776f6119fb5","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/pages/all-pages.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 1681[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m pages/AboutPage[2m > [22mshould render without crashing [33m 321[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m pages/DiveSitesPage[2m > [22mshould render without crashing [33m 511[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m pages/GalleryPage[2m > [22mshould render without crashing [33m 536[2mms[22m[39m
+stderr | tests/components/common/CurrencySelector.test.jsx > CurrencySelector > should display currency dropdown with all options
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:05.962Z","level":"ERROR","correlation_id":"e5b4f7da-6272-46a1-8e5d-daaebb7db79f","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/HomePage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 1888[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m HomePage[2m > [22mshould render without crashing [33m 397[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m HomePage[2m > [22mshould render hero section with heading [33m 1232[2mms[22m[39m
+ [32mΓ£ô[39m tests/AboutPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 2160[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m AboutPage[2m > [22mshould render without crashing [33m 321[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m AboutPage[2m > [22mshould render page heading [33m 1646[2mms[22m[39m
+stderr | tests/components/common/CurrencySelector.test.jsx > CurrencySelector > should change currency when option clicked
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:06.134Z","level":"ERROR","correlation_id":"e5b4f7da-6272-46a1-8e5d-daaebb7db79f","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/common/CurrencySelector.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:06.252Z","level":"ERROR","correlation_id":"e5b4f7da-6272-46a1-8e5d-daaebb7db79f","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/components/common/CurrencySelector.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[33m 975[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m CurrencySelector[2m > [22mshould open dropdown when clicked [33m 369[2mms[22m[39m
+stderr | tests/DiveSitesPage.test.jsx > DiveSitesPage > should have page content loaded
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:06.520Z","level":"ERROR","correlation_id":"505d49f4-9445-41aa-a068-6ed07bd313eb","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/DiveSitesPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:06.547Z","level":"ERROR","correlation_id":"505d49f4-9445-41aa-a068-6ed07bd313eb","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/DiveSitesPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:06.550Z","level":"ERROR","correlation_id":"505d49f4-9445-41aa-a068-6ed07bd313eb","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/DiveSitesPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:06.554Z","level":"ERROR","correlation_id":"505d49f4-9445-41aa-a068-6ed07bd313eb","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/DiveSitesPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 2661[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m DiveSitesPage[2m > [22mshould render without crashing [33m 779[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m DiveSitesPage[2m > [22mshould render page heading [33m 1419[2mms[22m[39m
+stderr | tests/GalleryPage.test.jsx > GalleryPage > should have page content loaded
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:07.349Z","level":"ERROR","correlation_id":"16c69b3d-6e0a-4625-8549-a8939f4ecf02","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/GalleryPage.test.jsx > GalleryPage > should have page content loaded
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:07.361Z","level":"ERROR","correlation_id":"16c69b3d-6e0a-4625-8549-a8939f4ecf02","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/GalleryPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:07.382Z","level":"ERROR","correlation_id":"16c69b3d-6e0a-4625-8549-a8939f4ecf02","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/GalleryPage.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:07.384Z","level":"ERROR","correlation_id":"16c69b3d-6e0a-4625-8549-a8939f4ecf02","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/GalleryPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 3541[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m GalleryPage[2m > [22mshould render without crashing [33m 941[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m GalleryPage[2m > [22mshould render page heading [33m 1957[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m GalleryPage[2m > [22mshould render gallery content [33m 314[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m GalleryPage[2m > [22mshould have page content loaded [33m 325[2mms[22m[39m
+stderr | tests/components/courses/CourseComparison.test.jsx > CourseComparison > should display course data in table format
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:08.883Z","level":"ERROR","correlation_id":"e27790f4-ad76-4ca9-b84b-ccc9dfccaeb5","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseComparison.test.jsx > CourseComparison > should display course data in table format
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:08.895Z","level":"ERROR","correlation_id":"e27790f4-ad76-4ca9-b84b-ccc9dfccaeb5","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseComparison.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:09.149Z","level":"ERROR","correlation_id":"e27790f4-ad76-4ca9-b84b-ccc9dfccaeb5","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseComparison.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:09.152Z","level":"ERROR","correlation_id":"e27790f4-ad76-4ca9-b84b-ccc9dfccaeb5","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/components/courses/CourseComparison.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:09.155Z","level":"ERROR","correlation_id":"e27790f4-ad76-4ca9-b84b-ccc9dfccaeb5","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/components/courses/CourseComparison.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 721[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/common/WhatsAppButton.test.jsx [2m([22m[2m10 tests[22m[2m)[22m[33m 703[2mms[22m[39m
+stderr | tests/layouts/Navigation.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:09.735Z","level":"ERROR","correlation_id":"1d9fb46c-fc28-4ce0-8ca2-35c9c806dd84","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/Navigation.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:09.759Z","level":"ERROR","correlation_id":"1d9fb46c-fc28-4ce0-8ca2-35c9c806dd84","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/Navigation.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:09.761Z","level":"ERROR","correlation_id":"1d9fb46c-fc28-4ce0-8ca2-35c9c806dd84","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/layouts/Navigation.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 525[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m Navigation[2m > [22mshould render without crashing [33m 308[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/home/ServicesSection.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 781[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m ServicesSection[2m > [22mshould render service links [33m 592[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/modals/BookingModal.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 772[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m BookingModal[2m > [22mshould render when open [33m 415[2mms[22m[39m
+stderr | tests/layouts/Footer.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:10.539Z","level":"ERROR","correlation_id":"26858daf-dea7-4445-be4e-64a51eac426d","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/Footer.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:10.553Z","level":"ERROR","correlation_id":"26858daf-dea7-4445-be4e-64a51eac426d","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/Footer.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:10.556Z","level":"ERROR","correlation_id":"26858daf-dea7-4445-be4e-64a51eac426d","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/Footer.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:10.558Z","level":"ERROR","correlation_id":"26858daf-dea7-4445-be4e-64a51eac426d","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/layouts/Footer.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 886[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m Footer[2m > [22mshould render footer links [33m 663[2mms[22m[39m
+stderr | tests/components/modals/ContactModal.test.jsx > ContactModal > should render when open
+An update to Ie inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32mΓ£ô[39m tests/components/gallery/Lightbox.test.jsx [2m([22m[2m7 tests[22m[2m)[22m[33m 587[2mms[22m[39m
+stderr | tests/components/modals/ContactModal.test.jsx > ContactModal > should display form fields
+An update to Ie inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | tests/components/modals/ContactModal.test.jsx > ContactModal > should have submit button
+An update to Ie inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32mΓ£ô[39m tests/components/modals/ContactModal.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 875[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m ContactModal[2m > [22mshould have submit button [33m 529[2mms[22m[39m
+stderr | tests/components/common/PhoneLink.test.jsx > PhoneLink > should call trackPhoneClick on click
+Not implemented: navigation to another Document
+
+ [32mΓ£ô[39m tests/components/common/PhoneLink.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[33m 585[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/common/ErrorBoundary.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 483[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/home/HeroSection.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[33m 490[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/common/SEO.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[33m 382[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/home/CTASection.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 477[2mms[22m[39m
+stderr | tests/layouts/Header.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:14.880Z","level":"ERROR","correlation_id":"9caaf2b1-6f5f-4e8e-b250-eb5ebf530498","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/Header.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:14.895Z","level":"ERROR","correlation_id":"9caaf2b1-6f5f-4e8e-b250-eb5ebf530498","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/Header.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:14.897Z","level":"ERROR","correlation_id":"9caaf2b1-6f5f-4e8e-b250-eb5ebf530498","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/layouts/Header.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 393[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m Header[2m > [22mshould render without crashing [33m 332[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/home/TestimonialsSection.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[33m 335[2mms[22m[39m
+stderr | tests/hooks/useCurrency.test.jsx > useCurrency > should provide convert function
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.426Z","level":"ERROR","correlation_id":"ecd8630c-9661-48e8-b64d-3c89d524c6a0","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/hooks/useCurrency.test.jsx > useCurrency > should provide convert function
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.445Z","level":"ERROR","correlation_id":"ecd8630c-9661-48e8-b64d-3c89d524c6a0","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/hooks/useCurrency.test.jsx > useCurrency > should provide availableCurrencies
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.464Z","level":"ERROR","correlation_id":"ecd8630c-9661-48e8-b64d-3c89d524c6a0","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/hooks/useCurrency.test.jsx > useCurrency > should provide availableCurrencies
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.466Z","level":"ERROR","correlation_id":"ecd8630c-9661-48e8-b64d-3c89d524c6a0","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/hooks/useCurrency.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.472Z","level":"ERROR","correlation_id":"ecd8630c-9661-48e8-b64d-3c89d524c6a0","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/hooks/useCurrency.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.474Z","level":"ERROR","correlation_id":"ecd8630c-9661-48e8-b64d-3c89d524c6a0","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/MainLayout.test.jsx > MainLayout > should render without crashing
+Not implemented: Window's scrollTo() method
+
+ [32mΓ£ô[39m tests/hooks/useCurrency.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 198[2mms[22m[39m
+stderr | tests/layouts/MainLayout.test.jsx > MainLayout > should render children
+Not implemented: Window's scrollTo() method
+
+stderr | tests/layouts/MainLayout.test.jsx > MainLayout > should contain header
+Not implemented: Window's scrollTo() method
+
+stderr | tests/layouts/MainLayout.test.jsx > MainLayout > should contain footer
+Not implemented: Window's scrollTo() method
+
+ [32mΓ£ô[39m tests/components/dive-sites/DiveSiteCard.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 237[2mms[22m[39m
+stderr | tests/layouts/MainLayout.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.831Z","level":"ERROR","correlation_id":"af00ff5b-7c9a-493e-b1e3-9b5671fb0038","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/MainLayout.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.848Z","level":"ERROR","correlation_id":"af00ff5b-7c9a-493e-b1e3-9b5671fb0038","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/layouts/MainLayout.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 430[2mms[22m[39m
+stderr | tests/layouts/MainLayout.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.852Z","level":"ERROR","correlation_id":"af00ff5b-7c9a-493e-b1e3-9b5671fb0038","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/layouts/MainLayout.test.jsx
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:15.854Z","level":"ERROR","correlation_id":"af00ff5b-7c9a-493e-b1e3-9b5671fb0038","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/components/home/FeaturesSection.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[32m 172[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/gallery/GalleryGrid.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[32m 154[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/about/CredentialCard.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 172[2mms[22m[39m
+stderr | tests/components/gallery/FeaturedCarousel.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/components/gallery/FeaturedCarousel.test.jsx
+Could not parse CSS stylesheet
+
+stderr | tests/components/gallery/FeaturedCarousel.test.jsx
+Could not parse CSS stylesheet
+
+ [32mΓ£ô[39m tests/components/gallery/FeaturedCarousel.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 110[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/about/TeamMember.test.jsx [2m([22m[2m7 tests[22m[2m)[22m[32m 172[2mms[22m[39m
+stderr | tests/services/api.test.js > api > sendContactMessage should handle successful response
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:18.140Z","level":"ERROR","correlation_id":"c1b76c57-5f27-4115-b00d-fa383551a4bf","message":"API Error:","module":"react-app","error":true}
+
+stderr | tests/services/api.test.js > api > checkCalendarAvailability should return object
+{"0":"N","1":"e","2":"t","3":"w","4":"o","5":"r","6":"k","7":" ","8":"E","9":"r","10":"r","11":"o","12":"r","timestamp":"2025-10-27T14:56:18.168Z","level":"ERROR","correlation_id":"c1b76c57-5f27-4115-b00d-fa383551a4bf","message":"API Error:","module":"react-app","error":true}
+
+ [32mΓ£ô[39m tests/services/api.test.js [2m([22m[2m5 tests[22m[2m)[22m[32m 101[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/shared/ScrollProgress.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[32m 108[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/common/Loading.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 110[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/dive-sites/DiveMap.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+ [32mΓ£ô[39m tests/stores/useModalStore.test.js [2m([22m[2m9 tests[22m[2m)[22m[32m 64[2mms[22m[39m
+stderr | tests/components/shared/BackToTop.test.jsx > BackToTop > should call scrollTo when button clicked
+An update to BackToTop inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32mΓ£ô[39m tests/components/shared/BackToTop.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+ [32mΓ£ô[39m tests/utils/currency.test.js [2m([22m[2m7 tests[22m[2m)[22m[32m 39[2mms[22m[39m
+stderr | tests/utils/scrollToAnchor.test.js > scrollToAnchor > should handle valid anchor id
+Not implemented: Window's scrollTo() method
+
+ [32mΓ£ô[39m tests/utils/scrollToAnchor.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32mΓ£ô[39m tests/link-checker.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32mΓ£ô[39m tests/utils/analytics.test.js [2m([22m[2m9 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32mΓ£ô[39m tests/stores/usePreferencesStore.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 47[2mms[22m[39m
+stderr | tests/utils/logger.test.js > logger > should call logger methods without errors
+{"timestamp":"2025-10-27T14:56:20.606Z","level":"INFO","correlation_id":"9c59290d-6229-4e52-ae1f-492a1c457034","message":"test","module":"react-app"}
+{"timestamp":"2025-10-27T14:56:20.608Z","level":"ERROR","correlation_id":"9c59290d-6229-4e52-ae1f-492a1c457034","message":"test","module":"react-app","error":true}
+{"timestamp":"2025-10-27T14:56:20.609Z","level":"WARN","correlation_id":"9c59290d-6229-4e52-ae1f-492a1c457034","message":"test","module":"react-app"}
+
+ [32mΓ£ô[39m tests/utils/logger.test.js [2m([22m[2m6 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32mΓ£ô[39m tests/src/SrcIndex.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32mΓ£ô[39m tests/data/courses.test.js [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32mΓ£ô[39m tests/utils/seo.test.js [2m([22m[2m7 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32mΓ£ô[39m tests/src/SrcIndex.css.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32mΓ£ô[39m tests/utils/UtilsIndex.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32mΓ£ô[39m tests/data/bookingTypes.test.js [2m([22m[2m5 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32mΓ£ô[39m tests/data/gallery.test.js [2m([22m[2m5 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32mΓ£ô[39m tests/data/diveSites.test.js [2m([22m[2m5 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32mΓ£ô[39m tests/data/team.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32mΓ£ô[39m tests/utils/env.test.js [2m([22m[2m7 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+stderr | tests/components/gallery/GalleryIndex.test.js
+Could not parse CSS stylesheet
+
+stderr | tests/components/gallery/GalleryIndex.test.js
+Could not parse CSS stylesheet
+
+stderr | tests/components/gallery/GalleryIndex.test.js
+Could not parse CSS stylesheet
+
+ [32mΓ£ô[39m tests/utils/reportWebVitals.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32mΓ£ô[39m tests/data/credentials.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32mΓ£ô[39m tests/services/ServicesIndex.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32mΓ£ô[39m tests/hooks/HooksIndex.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/common/CommonIndex.test.js [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/gallery/GalleryIndex.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/home/HomeIndex.test.js [2m([22m[2m9 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/about/AboutIndex.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/courses/CoursesIndex.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/dive-sites/DiveSiteIndex.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m64 passed[39m[22m[90m (64)[39m
+[2m      Tests [22m [1m[32m330 passed[39m[22m[90m (330)[39m
+[2m   Start at [22m 16:55:56
+[2m   Duration [22m 32.85s[2m (transform 2.49s, setup 10.40s, collect 77.77s, tests 28.62s, environment 88.46s, prepare 12.39s)[22m
+
+
+Γ£à Test reports generated in C:\react_scuba_runner\react-scuba\docs\testing/
+   ≡ƒôè HTML Dashboard: index.html
+   ≡ƒô¥ Markdown Summary: testing.md
+   ≡ƒôï JSON Data: test-results.json
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   79.36 |    80.25 |      48 |   79.36 |                   
+ src               |     100 |      100 |     100 |     100 |                   
+  App.jsx          |     100 |      100 |     100 |     100 |                   
+ ...omponents/home |    98.3 |      100 |   61.11 |    98.3 |                   
+  CTASection.jsx   |     100 |      100 |     100 |     100 |                   
+  ...esSection.jsx |     100 |      100 |     100 |     100 |                   
+  HeroSection.jsx  |     100 |      100 |     100 |     100 |                   
+  HomePage.jsx     |   83.78 |      100 |      20 |   83.78 | 19-21,24-26       
+  ...esSection.jsx |     100 |      100 |     100 |     100 |                   
+  ...rsSection.jsx |   98.23 |      100 |      25 |   98.23 | 7-8               
+  ...lsSection.jsx |     100 |      100 |     100 |     100 |                   
+  VideoSection.jsx |     100 |      100 |     100 |     100 |                   
+ ...ponents/modals |   77.93 |     87.5 |   26.66 |   77.93 |                   
+  BookingModal.jsx |   75.95 |    91.66 |   33.33 |   75.95 | ...23-141,144-197 
+  ContactModal.jsx |   80.86 |       75 |   16.66 |   80.86 | 71-88,91-122      
+ src/components/ui |   95.59 |    83.72 |      75 |   95.59 |                   
+  BackToTop.jsx    |   88.09 |      100 |   66.66 |   88.09 | 27-31             
+  ...ySelector.jsx |     100 |       75 |      50 |     100 | 37                
+  ...rBoundary.jsx |     100 |    81.81 |     100 |     100 | 48                
+  Loading.jsx      |     100 |      100 |     100 |     100 |                   
+  PhoneLink.jsx    |     100 |      100 |     100 |     100 |                   
+  SEO.jsx          |     100 |      100 |     100 |     100 |                   
+  ...lProgress.jsx |      84 |       75 |      50 |      84 | 15-18             
+  ...AppButton.jsx |     100 |      100 |     100 |     100 |                   
+  ...AppWidget.jsx |   90.41 |       25 |   33.33 |   90.41 | 81-88             
+ ...nfig/constants |   96.76 |    83.33 |   33.33 |   96.76 |                   
+  BOOKING_TYPES.ts |   92.95 |      100 |       0 |   92.95 | 86-88,91-92       
+  COURSES.ts       |   95.53 |      100 |      50 |   95.53 | 191-199           
+  CREDENTIALS.ts   |     100 |      100 |     100 |     100 |                   
+  DIVE_SITES.ts    |   95.55 |      100 |       0 |   95.55 | 109-110,113-114   
+  GALLERY.ts       |   96.33 |       50 |      50 |   96.33 | 122-123,126-127   
+  OCEAN_SPIRIT.ts  |     100 |      100 |     100 |     100 |                   
+  TEAM.ts          |     100 |      100 |     100 |     100 |                   
+ ...ing/components |       0 |        0 |       0 |       0 |                   
+  BookingForm.tsx  |       0 |        0 |       0 |       0 | 1-213             
+ .../booking/hooks |       0 |        0 |       0 |       0 |                   
+  ...ookingForm.ts |       0 |        0 |       0 |       0 | 1-74              
+ ...ses/components |   98.01 |       90 |   55.55 |   98.01 |                   
+  CourseCard.jsx   |     100 |      100 |     100 |     100 |                   
+  ...omparison.jsx |     100 |      100 |     100 |     100 |                   
+  CoursesPage.jsx  |   95.29 |       50 |      20 |   95.29 | 19-22             
+ .../courses/hooks |       0 |        0 |       0 |       0 |                   
+  ...urseFilter.ts |       0 |        0 |       0 |       0 | 1-69              
+ ...tes/components |   93.27 |    88.88 |   36.36 |   93.27 |                   
+  DiveMap.jsx      |     100 |      100 |   66.66 |     100 |                   
+  DiveSiteCard.jsx |     100 |      100 |      50 |     100 |                   
+  ...SitesPage.jsx |   85.43 |       75 |   16.66 |   85.43 | 18,21-28,31-36    
+ ...ve-sites/hooks |       0 |        0 |       0 |       0 |                   
+  ...SiteFilter.ts |       0 |        0 |       0 |       0 | 1-64              
+ ...ery/components |   86.34 |    94.73 |   35.29 |   86.34 |                   
+  ...dCarousel.jsx |     100 |      100 |     100 |     100 |                   
+  GalleryGrid.jsx  |   84.41 |     87.5 |   33.33 |   84.41 | 12-18,59-63       
+  GalleryPage.jsx  |   77.57 |      100 |    12.5 |   77.57 | ...41,44-46,49-51 
+  Lightbox.jsx     |    94.8 |      100 |      60 |    94.8 | 9-12              
+ .../gallery/hooks |       0 |        0 |       0 |       0 |                   
+  ...leryFilter.ts |       0 |        0 |       0 |       0 | 1-59              
+ ...eam/components |    99.1 |      100 |      60 |    99.1 |                   
+  AboutPage.jsx    |   98.91 |      100 |   33.33 |   98.91 | 16-18             
+  ...ntialCard.jsx |     100 |      100 |     100 |     100 |                   
+  TeamMember.jsx   |     100 |      100 |     100 |     100 |                   
+ ...res/team/hooks |       0 |        0 |       0 |       0 |                   
+  useTeamFilter.ts |       0 |        0 |       0 |       0 | 1-59              
+ src/hooks         |   78.16 |    70.58 |   83.33 |   78.16 |                   
+  useCurrency.jsx  |   78.16 |    70.58 |   83.33 |   78.16 | ...5,57-71,99-100 
+ ...ooks/mutations |       0 |        0 |       0 |       0 |                   
+  ...ateBooking.ts |       0 |        0 |       0 |       0 | 1-22              
+ src/hooks/queries |       0 |        0 |       0 |       0 |                   
+  ...hangeRates.ts |       0 |        0 |       0 |       0 | 1-38              
+ src/layouts       |   98.07 |       80 |   55.55 |   98.07 |                   
+  Footer.jsx       |     100 |      100 |     100 |     100 |                   
+  Header.jsx       |     100 |      100 |      25 |     100 |                   
+  MainLayout.jsx   |     100 |      100 |     100 |     100 |                   
+  Navigation.jsx   |    87.5 |    66.66 |   66.66 |    87.5 | 23-26             
+ src/pages         |     100 |      100 |     100 |     100 |                   
+  AboutPage.jsx    |     100 |      100 |     100 |     100 |                   
+  CoursesPage.jsx  |     100 |      100 |     100 |     100 |                   
+  ...SitesPage.jsx |     100 |      100 |     100 |     100 |                   
+  GalleryPage.jsx  |     100 |      100 |     100 |     100 |                   
+  HomePage.jsx     |     100 |      100 |     100 |     100 |                   
+ src/providers     |     100 |      100 |      50 |     100 |                   
+  ...yProvider.tsx |     100 |      100 |      50 |     100 |                   
+ src/services      |   66.27 |    38.46 |   27.27 |   66.27 |                   
+  api.js           |   66.27 |    38.46 |   27.27 |   66.27 | ...60-168,176-182 
+ src/stores        |     100 |      100 |     100 |     100 |                   
+  useModalStore.ts |     100 |      100 |     100 |     100 |                   
+  ...encesStore.ts |     100 |      100 |     100 |     100 |                   
+ src/utils         |   57.42 |    78.94 |   44.23 |   57.42 |                   
+  analytics.js     |   44.44 |    71.42 |   31.25 |   44.44 | ...40-144,148-155 
+  currency.js      |   57.35 |       80 |      40 |   57.35 | ...50,53-54,58-84 
+  env.js           |   69.38 |      100 |   42.85 |   69.38 | ...,91-92,115-116 
+  logger.js        |   83.87 |    66.66 |    87.5 |   83.87 | ...27,58,88-89,96 
+  ...tWebVitals.js |    61.9 |      100 |      50 |    61.9 | 7-11,14,21-22     
+  ...llToAnchor.js |   61.29 |    83.33 |      40 |   61.29 | ...36-141,164-182 
+  seo.js           |   37.69 |      100 |      25 |   37.69 | 4-56,59-69,72-89  
+-------------------|---------|----------|---------|---------|-------------------
+[1m[42m PASS [49m[22m [32mWaiting for file changes...[39m
+       [2mpress [22m[1mh[22m[2m to show help[22m[2m, [22m[2mpress [22m[1mq[22m[2m to quit[22m

@@ -1,5 +1,5 @@
-import { getTeamMemberByName, TEAM_MEMBERS } from '@config/constants/TEAM';
 import { describe, expect, it } from 'vitest';
+import { getTeamMemberByName, TEAM_MEMBERS } from '../../src/config/constants/index.ts';
 
 describe('team', () => {
   it('should export TEAM_MEMBERS array', () => {

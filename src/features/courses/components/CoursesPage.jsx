@@ -1,11 +1,11 @@
-import BookingModal from '@components/modals/BookingModal';
-import ContactModal from '@components/modals/ContactModal';
-import { SEO } from '@components/ui';
-import { COURSES } from '@config/constants/COURSES';
-import { useCurrency } from '@hooks/useCurrency';
-import { trackCourseInquiry } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import BookingModal from '../../../components/modals/BookingModal';
+import ContactModal from '../../../components/modals/ContactModal';
+import { SEO } from '../../../components/ui';
+import { COURSES } from '../../../config/constants/COURSES';
+import { useCurrency } from '../../../hooks/useCurrency';
+import { trackCourseInquiry } from '../../../utils/analytics';
 import CourseCard from './CourseCard';
 import CourseComparison from './CourseComparison';
 

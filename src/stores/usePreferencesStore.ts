@@ -4,7 +4,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Currency } from '@/types';
+import type { Currency } from '../types';
 
 interface PreferencesState {
   currency: Currency;

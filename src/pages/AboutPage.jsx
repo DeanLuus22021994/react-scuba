@@ -1,1 +1,1 @@
-export { AboutPage as default } from '@features/team';
+export { AboutPage as default } from '../features/team';

@@ -1,25 +1,9 @@
 import react from '@vitejs/plugin-react-swc';
-import path from 'path';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@features': path.resolve(__dirname, './src/features'),
-      '@config': path.resolve(__dirname, './src/config'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@services': path.resolve(__dirname, './src/services'),
-      '@stores': path.resolve(__dirname, './src/stores'),
-      '@layouts': path.resolve(__dirname, './src/layouts'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@types': path.resolve(__dirname, './src/types'),
-    },
-  },
   build: {
     outDir: 'dist',
     sourcemap: false,
@@ -108,6 +92,35 @@ export default defineConfig({
     globalSetup: './tests/global-setup.js',
     css: true,
     reporters: ['default', './tests/report/vitest.reporter.js'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html', 'lcov'],
+      reportsDirectory: './coverage',
+      exclude: [
+        'node_modules/**',
+        'dist/**',
+        'tests/**',
+        'src/setupTests.js',
+        '**/*.config.js',
+        '**/*.config.ts',
+        '**/types/**',
+        '**/*.d.ts',
+        '**/index.js',
+        '**/index.ts',
+        '**/index.tsx',
+        'src/index.jsx',
+        'docker-compose-examples/**',
+        '.vitepress/**',
+        'docs/**',
+        'scripts/**',
+      ],
+      include: ['src/**/*.{js,jsx,ts,tsx}'],
+      all: true,
+      lines: 80,
+      functions: 80,
+      branches: 80,
+      statements: 80,
+    },
   },
   // Server configuration
   server: {

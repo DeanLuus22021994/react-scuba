@@ -1,5 +1,5 @@
-import { BOOKING_TYPES } from '@config/constants/BOOKING_TYPES';
 import { describe, expect, it } from 'vitest';
+import { BOOKING_TYPES } from '../../src/config/constants/index.ts';
 
 describe('bookingTypes', () => {
   it('should export BOOKING_TYPES', () => {

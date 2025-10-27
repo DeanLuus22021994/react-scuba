@@ -1,5 +1,5 @@
-import { CREDENTIALS } from '@config/constants/CREDENTIALS';
 import { describe, expect, it } from 'vitest';
+import { CREDENTIALS } from '../../src/config/constants/index.ts';
 
 describe('credentials', () => {
   it('should export CREDENTIALS array', () => {

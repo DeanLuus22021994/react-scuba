@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  getApiUrl,
-  getCalendarApiKey,
-  getCalendarEmail,
-  isDevelopment,
-  isProduction,
-} from '@/utils/env';
+import { getApiUrl, getCalendarApiKey, getCalendarEmail, isDevelopment, isProduction } from '../../src/utils/env';
 
 describe('env', () => {
   it('should export isDevelopment', () => {

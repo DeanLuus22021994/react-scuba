@@ -1,8 +1,11 @@
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import { createBooking } from '../../../services/api';
+import { trackConversion } from '../../../utils/analytics';
 import type { BookingFormData } from '../components/BookingForm';
 
 export interface UseBookingFormOptions {
-  onSuccess?: (data: BookingFormData) => void;
+  onSuccess?: (bookingId: number) => void;
   onError?: (error: Error) => void;
 }
 
@@ -11,6 +14,7 @@ export interface UseBookingFormReturn {
   error: Error | null;
   submitBooking: (data: BookingFormData) => Promise<void>;
   resetForm: () => void;
+  isSuccess: boolean;
 }
 
 /**
@@ -20,44 +24,51 @@ export interface UseBookingFormReturn {
  * Handles validation, API calls, and error states.
  */
 export const useBookingForm = (options?: UseBookingFormOptions): UseBookingFormReturn => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const submitBooking = async (data: BookingFormData): Promise<void> => {
-    setIsSubmitting(true);
-    setError(null);
+  const mutation = useMutation({
+    mutationFn: async (data: BookingFormData) => {
+      const response = await createBooking(data);
+      return response;
+    },
+    onSuccess: (data) => {
+      // Track conversion in analytics
+      trackConversion('booking_submitted', {
+        bookingType: data.bookingType || 'unknown',
+        participants: data.participants || 1,
+        value: data.participants * 100, // Estimated value
+      });
 
-    try {
-      // TODO: Implement API call to submit booking
-      // TODO: Add analytics tracking
-      // TODO: Add email notification trigger
-
-      console.log('Booking data:', data);
-
-      if (options?.onSuccess) {
-        options.onSuccess(data);
+      // Call user-provided success handler
+      if (options?.onSuccess && data.bookingId) {
+        options.onSuccess(data.bookingId);
       }
-    } catch (err) {
-      const error = err instanceof Error ? err : new Error('Booking submission failed');
-      setError(error);
+    },
+    onError: (err: Error) => {
+      setError(err);
 
+      // Call user-provided error handler
       if (options?.onError) {
-        options.onError(error);
+        options.onError(err);
       }
-    } finally {
-      setIsSubmitting(false);
-    }
+    },
+  });
+
+  const submitBooking = async (data: BookingFormData) => {
+    setError(null);
+    await mutation.mutateAsync(data);
   };
 
   const resetForm = () => {
     setError(null);
-    setIsSubmitting(false);
+    mutation.reset();
   };
 
   return {
-    isSubmitting,
-    error,
+    isSubmitting: mutation.isPending,
+    error: error || (mutation.error as Error | null),
     submitBooking,
     resetForm,
+    isSuccess: mutation.isSuccess,
   };
 };

@@ -1,5 +1,5 @@
-import { COURSES, type Course } from '@config/constants/COURSES';
 import { useMemo, useState } from 'react';
+import { COURSES, type Course } from '../../../config/constants/COURSES';
 
 export type CourseDifficulty = 'beginner' | 'intermediate' | 'advanced' | 'professional';
 

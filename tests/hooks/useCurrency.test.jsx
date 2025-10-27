@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider, useCurrency } from '@/hooks/useCurrency';
+import { CurrencyProvider, useCurrency } from '../../src/hooks/useCurrency.jsx';
 
 describe('useCurrency', () => {
   const wrapper = ({ children }) => <CurrencyProvider>{children}</CurrencyProvider>;

@@ -1,1 +1,1 @@
-export { DiveSitesPage as default } from '@features/dive-sites';
+export { DiveSitesPage as default } from '../features/dive-sites';

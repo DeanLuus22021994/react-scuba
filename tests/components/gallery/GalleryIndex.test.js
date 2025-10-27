@@ -1,5 +1,5 @@
-import * as galleryExports from '@features/gallery/index';
 import { describe, expect, it } from 'vitest';
+import * as galleryExports from '../../../src/features/gallery/index';
 
 describe('components/gallery/index', () => {
   it('should export FeaturedCarousel', () => {

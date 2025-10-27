@@ -3,7 +3,7 @@ import logger from '../utils/logger';
 
 // Create axios instance with default config
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_ENDPOINT || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_ENDPOINT || 'http://localhost:3001/api',
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 // Response interceptor
@@ -31,7 +31,7 @@ api.interceptors.response.use(
     const errorMessage = error.response?.data?.message || error.message || 'An error occurred';
     logger.error('API Error:', errorMessage);
     return Promise.reject(error);
-  },
+  }
 );
 
 // API methods
@@ -119,6 +119,65 @@ export const getExchangeRates = async () => {
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.response?.data || error.message };
+  }
+};
+
+/**
+ * Create a new booking
+ * @param {Object} bookingData - Booking details
+ * @returns {Promise}
+ */
+export const createBooking = async (bookingData) => {
+  try {
+    const response = await api.post('/bookings', bookingData);
+    return { success: true, ...response, bookingType: bookingData.bookingType, participants: bookingData.participants };
+  } catch (error) {
+    throw new Error(error.response?.data?.error || 'Failed to create booking');
+  }
+};
+
+/**
+ * Get booking by ID
+ * @param {string|number} bookingId - Booking ID
+ * @returns {Promise}
+ */
+export const getBooking = async (bookingId) => {
+  try {
+    const response = await api.get(`/bookings/${bookingId}`);
+    return { success: true, data: response };
+  } catch (error) {
+    throw new Error(error.response?.data?.error || 'Failed to get booking');
+  }
+};
+
+/**
+ * Get availability for date range
+ * @param {string} startDate - Start date (ISO format)
+ * @param {string} endDate - End date (ISO format)
+ * @returns {Promise}
+ */
+export const getAvailability = async (startDate, endDate) => {
+  try {
+    const response = await api.get('/availability', {
+      params: { startDate, endDate },
+    });
+    return { success: true, data: response };
+  } catch (error) {
+    throw new Error(error.response?.data?.error || 'Failed to get availability');
+  }
+};
+
+/**
+ * Get availability for specific date
+ * @param {string} date - Date (ISO format)
+ * @returns {Promise}
+ */
+export const getDateAvailability = async (date) => {
+  try {
+    const response = await api.get(`/availability/date/${date}`);
+    return { success: true, data: response };
+  } catch (error) {
+    throw new Error(error.response?.data?.error || 'Failed to get date availability');
   }
 };
 

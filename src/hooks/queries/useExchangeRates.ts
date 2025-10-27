@@ -3,8 +3,8 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
-import { getExchangeRates } from '@/services/api';
-import type { ExchangeRates } from '@/types';
+import { getExchangeRates } from '../../services/api';
+import type { ExchangeRates } from '../../types';
 
 const EXCHANGE_RATES_KEY = ['exchangeRates'] as const;
 
@@ -21,11 +21,11 @@ export function useExchangeRates() {
     queryKey: EXCHANGE_RATES_KEY,
     queryFn: async (): Promise<ExchangeRates> => {
       const result = await getExchangeRates();
-      
+
       if (result.success && result.data?.rates) {
         return result.data.rates as ExchangeRates;
       }
-      
+
       // Fallback to default rates if API fails
       return DEFAULT_RATES;
     },

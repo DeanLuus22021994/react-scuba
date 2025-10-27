@@ -1,5 +1,5 @@
-import { GALLERY_IMAGES, getImagesByCategory, type GalleryCategory } from '@config/constants/GALLERY';
 import { useMemo, useState } from 'react';
+import { GALLERY_IMAGES, getImagesByCategory, type GalleryCategory } from '../../../config/constants/GALLERY';
 
 export interface UseGalleryFilterOptions {
   initialCategory?: GalleryCategory | 'All';

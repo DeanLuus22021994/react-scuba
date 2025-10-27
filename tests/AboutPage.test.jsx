@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CurrencyProvider } from '../src/hooks/useCurrency';
+import { CurrencyProvider } from '../src/hooks/useCurrency.jsx';
 import AboutPage from '../src/pages/AboutPage';
 
 const renderWithProviders = (component) => {

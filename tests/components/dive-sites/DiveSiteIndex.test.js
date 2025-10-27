@@ -1,5 +1,5 @@
-import * as diveSitesExports from '@features/dive-sites/index';
 import { describe, expect, it } from 'vitest';
+import * as diveSitesExports from '../../../src/features/dive-sites/index';
 
 describe('components/dive-sites/index', () => {
   it('should export DiveMap', () => {

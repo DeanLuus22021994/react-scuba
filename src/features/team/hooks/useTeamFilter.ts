@@ -1,5 +1,5 @@
-import { TEAM_MEMBERS, type TeamMember } from '@config/constants/TEAM';
 import { useMemo, useState } from 'react';
+import { TEAM_MEMBERS, type TeamMember } from '../../../config/constants/TEAM';
 
 export type InstructorSpecialty = 'beginner' | 'advanced' | 'technical' | 'photography' | 'all';
 

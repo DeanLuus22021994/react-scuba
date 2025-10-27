@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import ServicesSection from '@/components/home/ServicesSection';
+import ServicesSection from '../../../src/components/home/ServicesSection';
 
 describe('ServicesSection', () => {
   const renderWithRouter = (component) => {

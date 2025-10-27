@@ -1,5 +1,5 @@
-import { COURSES, getCourseById } from '@config/constants/COURSES';
 import { describe, expect, it } from 'vitest';
+import { COURSES, getCourseById } from '../../src/config/constants/index.ts';
 
 describe('courses', () => {
   it('should export COURSES array', () => {

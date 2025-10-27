@@ -1,6 +1,6 @@
-import DiveMap from '@features/dive-sites/components/DiveMap';
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import DiveMap from '../../../src/features/dive-sites/components/DiveMap';
 
 // Mock react-leaflet
 vi.mock('react-leaflet', () => ({

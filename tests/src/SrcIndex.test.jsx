@@ -11,7 +11,7 @@ vi.mock('react-dom/client', () => ({
 }));
 
 // Mock App
-vi.mock('@/App', () => ({
+vi.mock('../../src/App', () => ({
   default: () => 'App',
 }));
 

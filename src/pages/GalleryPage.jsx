@@ -1,1 +1,1 @@
-export { GalleryPage as default } from '@features/gallery';
+export { GalleryPage as default } from '../features/gallery';

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import BookingModal from '@/components/modals/BookingModal';
-import { CurrencyProvider } from '@/hooks/useCurrency';
+import BookingModal from '../../../src/components/modals/BookingModal';
+import { CurrencyProvider } from '../../../src/hooks/useCurrency';
 
 // Mock dependencies
 vi.mock('../../../src/services/api', () => ({
@@ -43,9 +43,7 @@ describe('BookingModal', () => {
 
   it('should accept preSelectedItem prop', async () => {
     const preSelected = 'single-dive';
-    renderWithProvider(
-      <BookingModal isOpen onClose={mockOnClose} preSelectedItem={preSelected} />,
-    );
+    renderWithProvider(<BookingModal isOpen onClose={mockOnClose} preSelectedItem={preSelected} />);
     await waitFor(() => {
       expect(screen.getByText(/Book a Dive/i)).toBeInTheDocument();
       expect(screen.getByText(/Single Dive/i)).toBeInTheDocument();

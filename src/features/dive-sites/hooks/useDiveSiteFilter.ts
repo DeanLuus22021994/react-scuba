@@ -1,5 +1,5 @@
-import { DIVE_SITES, type DiveSite } from '@config/constants/DIVE_SITES';
 import { useMemo, useState } from 'react';
+import { DIVE_SITES, type DiveSite } from '../../../config/constants/DIVE_SITES';
 
 export type DiveDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 

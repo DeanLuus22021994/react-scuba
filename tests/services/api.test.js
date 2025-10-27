@@ -1,9 +1,5 @@
-import {
-  checkCalendarAvailability,
-  createCalendarBooking,
-  submitContactForm as sendContactMessage,
-} from '@/services/api';
 import { describe, expect, it } from 'vitest';
+import { checkCalendarAvailability, createCalendarBooking, submitContactForm as sendContactMessage } from '../../src/services/api';
 
 describe('api', () => {
   beforeEach(() => {

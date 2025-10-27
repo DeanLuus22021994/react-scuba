@@ -7,7 +7,7 @@
   // ============================================================================
 
   // Auto-save to reduce batch processing
-  "files.autoSave": "onFocusChange",
+  "files.autoSave": "afterDelay",
   
   // GPU acceleration for VS Code UI (not language servers)
   "window.titleBarStyle": "custom",
@@ -258,7 +258,7 @@
   "github.copilot.chat.reviewAgent.enabled": true,
   "github.copilot.chat.setupTests.enabled": true,
   "github.copilot.chat.localeOverride": "auto",
-  "github.copilot.chat.terminalChatLocation": "chatView",
+  "github.copilot.chat.terminalChatLocation": "terminal",
   "github.copilot.chat.useResponsesApi": true,
   "github.copilot.chat.responsesApiReasoningEffort": "default",
   "github.copilot.chat.responsesApiReasoningSummary": "detailed",

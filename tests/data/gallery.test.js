@@ -1,5 +1,5 @@
-import { CATEGORIES, FEATURED_IMAGES, GALLERY_IMAGES, getImagesByCategory } from '@config/constants/GALLERY';
 import { describe, expect, it } from 'vitest';
+import { CATEGORIES, FEATURED_IMAGES, GALLERY_IMAGES, getImagesByCategory } from '../../src/config/constants/index.ts';
 
 describe('gallery', () => {
   it('should export GALLERY_IMAGES array', () => {

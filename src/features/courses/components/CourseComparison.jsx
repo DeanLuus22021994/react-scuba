@@ -1,5 +1,5 @@
-import { COURSES } from '@config/constants/COURSES';
-import { useCurrency } from '@hooks/useCurrency';
+import { COURSES } from '../../../config/constants/COURSES';
+import { useCurrency } from '../../../hooks/useCurrency';
 
 const CourseComparison = () => {
   const { format } = useCurrency();

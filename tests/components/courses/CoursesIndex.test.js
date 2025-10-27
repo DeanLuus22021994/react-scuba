@@ -1,5 +1,5 @@
-import * as coursesExports from '@features/courses/index';
 import { describe, expect, it } from 'vitest';
+import * as coursesExports from '../../../src/features/courses/index';
 
 describe('components/courses/index', () => {
   it('should export CourseCard', () => {

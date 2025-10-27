@@ -1,7 +1,7 @@
-import Lightbox from '@features/gallery/components/Lightbox';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
+import Lightbox from '../../../src/features/gallery/components/Lightbox';
 
 describe('Lightbox', () => {
   const mockImage = {

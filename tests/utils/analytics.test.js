@@ -6,7 +6,7 @@ import {
   trackFormStart,
   trackPhoneClick,
   trackWhatsAppClick,
-} from '@/utils/analytics';
+} from '../../src/utils/analytics';
 
 describe('analytics', () => {
   beforeEach(() => {

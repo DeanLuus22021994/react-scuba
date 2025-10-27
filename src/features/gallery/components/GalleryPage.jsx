@@ -1,9 +1,9 @@
-import BookingModal from '@components/modals/BookingModal';
-import { SEO } from '@components/ui';
-import { CATEGORIES, getImagesByCategory } from '@config/constants/GALLERY';
-import { trackConversion } from '@utils/analytics';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import BookingModal from '../../../components/modals/BookingModal';
+import { SEO } from '../../../components/ui';
+import { CATEGORIES, getImagesByCategory } from '../../../config/constants/GALLERY';
+import { trackConversion } from '../../../utils/analytics';
 import FeaturedCarousel from './FeaturedCarousel';
 import GalleryGrid from './GalleryGrid';
 import Lightbox from './Lightbox';
