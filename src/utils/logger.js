@@ -5,12 +5,31 @@
 
 const isDevelopment = import.meta.env.MODE === 'development';
 
+// Polyfill for UUID generation (works in all environments)
+const generateUUID = () => {
+  // Try native crypto.randomUUID first (modern browsers with secure context)
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    try {
+      return crypto.randomUUID();
+    } catch (e) {
+      // Fall through to polyfill
+    }
+  }
+  
+  // Fallback: RFC4122 version 4 compliant UUID
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
 // Generate or retrieve correlation ID
 const getCorrelationId = () => {
   // Try to get from session storage, or generate new one
   let correlationId = sessionStorage.getItem('correlationId');
   if (!correlationId) {
-    correlationId = crypto.randomUUID();
+    correlationId = generateUUID();
     sessionStorage.setItem('correlationId', correlationId);
   }
   return correlationId;
