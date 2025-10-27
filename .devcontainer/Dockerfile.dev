@@ -8,7 +8,7 @@
 # ====================================================================================
 
 # ==== STAGE 1: BUILDER ====
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 
 # Install build dependencies
 RUN apk add --no-cache \
@@ -30,7 +30,7 @@ RUN --mount=type=cache,target=/root/.npm \
   npm ci --prefer-offline --no-audit
 
 # ==== STAGE 2: RUNTIME ====
-FROM node:20-alpine AS runtime
+FROM node:25-alpine AS runtime
 
 # Install runtime dependencies only
 RUN apk add --no-cache \

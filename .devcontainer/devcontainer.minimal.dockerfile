@@ -1,5 +1,5 @@
 # DevContainer - Orchestrated development environment
-FROM node:22-bookworm-slim
+FROM node:25-bookworm-slim
 RUN apt-get update && apt-get install -y curl wget ca-certificates git python3 python3-pip zsh vim nano && rm -rf /var/lib/apt/lists/*
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 RUN npm install -g typescript ts-node eslint prettier vite vitest
