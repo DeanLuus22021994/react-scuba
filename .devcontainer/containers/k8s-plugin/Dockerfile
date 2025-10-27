@@ -23,7 +23,7 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
 ARG KUBECTL_VERSION=v1.31.2
 RUN --mount=type=cache,target=/tmp/k8s-downloads,sharing=locked \
   [ -f /tmp/k8s-downloads/kubectl ] || \
-  (curl -LO \"https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl\" && \
+  (curl -LO "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
   mv kubectl /tmp/k8s-downloads/kubectl) && \
   cp /tmp/k8s-downloads/kubectl /usr/local/bin/kubectl && \
   chmod +x /usr/local/bin/kubectl
