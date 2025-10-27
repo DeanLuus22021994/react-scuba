@@ -252,7 +252,7 @@
   "github.copilot.chat.reviewAgent.enabled": true,
   "github.copilot.chat.setupTests.enabled": true,
   "github.copilot.chat.localeOverride": "auto",
-  "github.copilot.chat.terminalChatLocation": "terminal",
+  "github.copilot.chat.terminalChatLocation": "quickChat",
   "github.copilot.chat.useResponsesApi": true,
   "github.copilot.chat.responsesApiReasoningEffort": "default",
   "github.copilot.chat.responsesApiReasoningSummary": "detailed",
@@ -329,7 +329,8 @@
       ".config/mkdocs/navigation.yml",
       ".config/mkdocs/hooks.yml"
     ],
-    ".vscode/schemas/markdown-doc.json": "docs/**/*.md"
+    ".vscode/schemas/markdown-doc.json": "docs/**/*.md",
+    ".vscode/schemas/monorepo-structure-schema.json": "monorepo.yml"
   },
   "yaml.validate": true,
   "yaml.customTags": [
@@ -348,6 +349,9 @@
   
   // Disable YAML validation for files with custom schemas (Grafana, etc.)
   "[**/gateway/config/grafana/provisioning/**/*.yml]": {
+    "yaml.validate": false
+  },
+  "[**/.devcontainer/containers/gateway/config/grafana/provisioning/**/*.yml]": {
     "yaml.validate": false
   },
   "[.config/docker/compose.override.example.yml]": {

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0e7490;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Water background -->
+  <rect width="200" height="200" fill="url(#waterGradient)" rx="20"/>
+  
+  <!-- Diving mask -->
+  <ellipse cx="100" cy="80" rx="60" ry="45" fill="#1e293b" opacity="0.9"/>
+  <ellipse cx="70" cy="75" rx="25" ry="28" fill="#38bdf8" opacity="0.6"/>
+  <ellipse cx="130" cy="75" rx="25" ry="28" fill="#38bdf8" opacity="0.6"/>
+  
+  <!-- Air bubbles -->
+  <circle cx="50" cy="140" r="8" fill="#ffffff" opacity="0.7"/>
+  <circle cx="70" cy="160" r="6" fill="#ffffff" opacity="0.6"/>
+  <circle cx="150" cy="145" r="7" fill="#ffffff" opacity="0.7"/>
+  <circle cx="130" cy="165" r="5" fill="#ffffff" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="100" y="190" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">SCUBA</text>
+</svg>

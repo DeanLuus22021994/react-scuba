@@ -1,0 +1,17 @@
+# Grafana Dashboard Provisioning Configuration
+# Format: https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards
+# This file configures automatic dashboard loading for the MCP Cluster
+
+apiVersion: 1
+
+providers:
+  - name: "MCP Cluster Dashboards"
+    orgId: 1
+    folder: "MCP Monitoring"
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/json
+      foldersFromFilesStructure: true

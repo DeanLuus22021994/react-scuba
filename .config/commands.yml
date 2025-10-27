@@ -1,0 +1,234 @@
+# MCP Cluster Management Commands
+# Unified command definitions for build, deploy, and maintenance operations
+
+commands:
+  # === Build Operations ===
+  build:
+    all:
+      description: "Build all MCP cluster services"
+      command: "docker-compose -f docker-compose.mcp.yml build --parallel"
+      flags:
+        - "--no-cache"
+        - "--pull"
+      environment:
+        DOCKER_BUILDKIT: "1"
+        COMPOSE_DOCKER_CLI_BUILD: "1"
+
+    databases:
+      description: "Build database services only"
+      command: "docker-compose -f docker-compose.mcp.yml build postgres-db mariadb"
+      fast: true
+
+    mcps:
+      description: "Build MCP server services"
+      command: "docker-compose -f docker-compose.mcp.yml build postgres-mcp mariadb-mcp python-experimental"
+      depends_on:
+        - databases
+
+    tools:
+      description: "Build tool services (BuildKit, runner, k8s-plugin)"
+      command: "docker-compose -f docker-compose.mcp.yml build buildkit runner k8s-plugin"
+
+    monitoring:
+      description: "Build monitoring stack"
+      command: "docker-compose -f docker-compose.mcp.yml build cadvisor node-exporter postgres-exporter mysql-exporter nginx prometheus grafana"
+      parallel: true
+
+    single:
+      description: "Build single service"
+      command: "docker-compose -f docker-compose.mcp.yml build ${SERVICE_NAME}"
+      parameters:
+        - name: "SERVICE_NAME"
+          required: true
+          description: "Name of service to build"
+
+  # === Deployment Operations ===
+  deploy:
+    full:
+      description: "Deploy full MCP cluster"
+      command: "docker-compose -f docker-compose.mcp.yml up -d --build"
+      wait_healthy: true
+      timeout: 300
+
+    staged:
+      description: "Deploy with tier-based ordering"
+      steps:
+        - name: "Tier 1: Databases"
+          command: "docker-compose -f docker-compose.mcp.yml up -d postgres-db mariadb"
+          wait: 30
+        - name: "Tier 2: MCP Services"
+          command: "docker-compose -f docker-compose.mcp.yml up -d postgres-mcp mariadb-mcp python-experimental"
+          wait: 15
+        - name: "Tier 3: Tools"
+          command: "docker-compose -f docker-compose.mcp.yml up -d buildkit runner k8s-plugin"
+          wait: 15
+        - name: "Tier 4: Monitoring"
+          command: "docker-compose -f docker-compose.mcp.yml up -d cadvisor node-exporter postgres-exporter mysql-exporter nginx prometheus grafana"
+        - name: "Tier 5: DevContainer"
+          command: "docker-compose -f docker-compose.mcp.yml up -d devcontainer"
+
+    update:
+      description: "Update single service without downtime"
+      command: "docker-compose -f docker-compose.mcp.yml up -d --no-deps --build ${SERVICE_NAME}"
+      parameters:
+        - name: "SERVICE_NAME"
+          required: true
+
+  # === Maintenance Operations ===
+  maintenance:
+    restart:
+      description: "Restart specific service"
+      command: "docker-compose -f docker-compose.mcp.yml restart ${SERVICE_NAME}"
+      parameters:
+        - name: "SERVICE_NAME"
+          required: true
+
+    stop:
+      description: "Stop all services gracefully"
+      command: "docker-compose -f docker-compose.mcp.yml stop"
+      timeout: 30
+
+    down:
+      description: "Stop and remove containers (preserve volumes)"
+      command: "docker-compose -f docker-compose.mcp.yml down"
+      confirm: true
+
+    purge:
+      description: "Stop, remove containers AND volumes (data loss!)"
+      command: "docker-compose -f docker-compose.mcp.yml down -v"
+      confirm: true
+      warning: "This will DELETE ALL DATA!"
+
+    prune:
+      description: "Clean up unused Docker resources"
+      command: "docker system prune -af --volumes"
+      confirm: true
+      space_saved: true
+
+  # === Monitoring Operations ===
+  monitor:
+    logs:
+      description: "View logs for service"
+      command: "docker-compose -f docker-compose.mcp.yml logs -f --tail=100 ${SERVICE_NAME}"
+      parameters:
+        - name: "SERVICE_NAME"
+          required: false
+          default: "" # All services if not specified
+
+    status:
+      description: "Show cluster status"
+      command: "docker-compose -f docker-compose.mcp.yml ps --format json | ConvertFrom-Json | Select-Object Name,State,Status,Health | Format-Table -AutoSize"
+      format: "table"
+
+    health:
+      description: "Check health of all services"
+      command: "docker-compose -f docker-compose.mcp.yml ps --filter 'health=unhealthy' --format json"
+      alert_on_unhealthy: true
+
+    metrics:
+      description: "Display monitoring endpoints"
+      output: |
+        Grafana:      http://localhost:3000 (admin/admin)
+        Prometheus:   http://localhost:9090
+        cAdvisor:     http://localhost:8081
+        Node:         http://localhost:9100/metrics
+        Postgres:     http://localhost:9187/metrics
+        MySQL:        http://localhost:9104/metrics
+
+    exec:
+      description: "Execute command in service container"
+      command: "docker-compose -f docker-compose.mcp.yml exec ${SERVICE_NAME} ${COMMAND}"
+      parameters:
+        - name: "SERVICE_NAME"
+          required: true
+        - name: "COMMAND"
+          required: true
+          example: "sh"
+
+  # === Database Operations ===
+  database:
+    psql:
+      description: "Connect to PostgreSQL"
+      command: "docker exec -it postgres-db psql -U postgres"
+      interactive: true
+
+    mysql:
+      description: "Connect to MariaDB"
+      command: "docker exec -it mariadb mysql -u root -ppassword"
+      interactive: true
+
+    backup_postgres:
+      description: "Backup PostgreSQL database"
+      command: "docker exec postgres-db pg_dump -U postgres postgres > backup_$(date +%Y%m%d_%H%M%S).sql"
+      output_directory: "./backups"
+
+    backup_mariadb:
+      description: "Backup MariaDB database"
+      command: "docker exec mariadb mysqldump -u root -ppassword mcp_db > backup_$(date +%Y%m%d_%H%M%S).sql"
+      output_directory: "./backups"
+
+    restore_postgres:
+      description: "Restore PostgreSQL database"
+      command: "docker exec -i postgres-db psql -U postgres postgres < ${BACKUP_FILE}"
+      parameters:
+        - name: "BACKUP_FILE"
+          required: true
+          type: "file"
+
+  # === Validation Operations ===
+  validate:
+    syntax:
+      description: "Validate docker-compose syntax"
+      command: "docker-compose -f docker-compose.mcp.yml config"
+      silent_on_success: true
+
+    images:
+      description: "Verify all images exist"
+      command: "docker-compose -f docker-compose.mcp.yml images"
+      format: "table"
+
+    network:
+      description: "Verify network connectivity"
+      steps:
+        - name: "Ping Postgres"
+          command: "docker exec devcontainer ping -c 1 postgres-db"
+        - name: "Ping MariaDB"
+          command: "docker exec devcontainer ping -c 1 mariadb"
+        - name: "Check Grafana"
+          command: "curl -f http://localhost:3000/api/health"
+
+    volumes:
+      description: "List all cluster volumes"
+      command: "docker volume ls --filter label=com.docker.compose.project=mcp-cluster"
+      format: "table"
+
+# Global Settings
+settings:
+  compose_file: "docker-compose.mcp.yml"
+  working_directory: ".devcontainer"
+  default_timeout: 60
+  parallel_operations: true
+
+  # Color output (PowerShell)
+  colors:
+    success: "Green"
+    warning: "Yellow"
+    error: "Red"
+    info: "Cyan"
+
+  # Logging
+  log:
+    enabled: true
+    directory: ".copilot-tracking/logs"
+    format: "json"
+    retention_days: 7
+
+# Aliases (shortcuts)
+aliases:
+  up: "deploy.full"
+  down: "maintenance.down"
+  ps: "monitor.status"
+  logs: "monitor.logs"
+  exec: "monitor.exec"
+  build: "build.all"
+  restart: "maintenance.restart"

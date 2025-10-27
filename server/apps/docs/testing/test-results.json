@@ -1,0 +1,274 @@
+{
+  "runTime": "2025-10-27T15:58:46.348Z",
+  "summary": {
+    "totalFiles": 1,
+    "passedFiles": 1,
+    "failedFiles": 0,
+    "totalTests": 21,
+    "passedTests": 21,
+    "failedTests": 0,
+    "passRate": 100
+  },
+  "performance": {
+    "totalDuration": 12.954299999999648,
+    "avgDuration": 0.6168714285714119,
+    "testCount": 21,
+    "slowestTests": [
+      {
+        "name": "should generate unique correlation IDs",
+        "duration": 3.830299999999852,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should create properly structured INFO logs",
+        "duration": 2.20679999999993,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should work without extra data",
+        "duration": 0.7690999999999804,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should call debug without throwing errors",
+        "duration": 0.7250000000001364,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should handle rapid logging without performance degradation",
+        "duration": 0.64449999999988,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should handle nested objects in extra data",
+        "duration": 0.4632000000001426,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should support request tracing workflow",
+        "duration": 0.4522999999999229,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should efficiently serialize large objects",
+        "duration": 0.42889999999988504,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should create properly structured ERROR logs with error flag",
+        "duration": 0.41440000000011423,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      },
+      {
+        "name": "should create properly structured WARN logs",
+        "duration": 0.3915999999999258,
+        "state": "pass",
+        "errors": [],
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js"
+      }
+    ],
+    "slowestFiles": [
+      {
+        "fileName": "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js",
+        "duration": 14.861700000000155,
+        "testCount": 21
+      }
+    ],
+    "distribution": [
+      {
+        "label": "< 10ms",
+        "min": 0,
+        "max": 10,
+        "count": 21
+      },
+      {
+        "label": "10-50ms",
+        "min": 10,
+        "max": 50,
+        "count": 0
+      },
+      {
+        "label": "50-100ms",
+        "min": 50,
+        "max": 100,
+        "count": 0
+      },
+      {
+        "label": "100-500ms",
+        "min": 100,
+        "max": 500,
+        "count": 0
+      },
+      {
+        "label": "> 500ms",
+        "min": 500,
+        "max": null,
+        "count": 0
+      }
+    ]
+  },
+  "categories": [
+    {
+      "category": "utils",
+      "fileCount": 1,
+      "totalTests": 21,
+      "passedTests": 21,
+      "failedTests": 0,
+      "totalDuration": 14.861700000000155,
+      "passRate": 100
+    }
+  ],
+  "files": {
+    "C:/react_scuba_runner/react-scuba/tests/utils/logger.advanced.test.js": {
+      "passed": [
+        {
+          "name": "should generate unique correlation IDs",
+          "duration": 3.830299999999852,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should persist correlation ID in session storage",
+          "duration": 0.38439999999991414,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should reuse existing correlation ID from session",
+          "duration": 0.2563999999999851,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should allow manual correlation ID setting",
+          "duration": 0.21839999999997417,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should create properly structured INFO logs",
+          "duration": 2.20679999999993,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should create properly structured WARN logs",
+          "duration": 0.3915999999999258,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should create properly structured ERROR logs with error flag",
+          "duration": 0.41440000000011423,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should include correlation ID in all log types",
+          "duration": 0.34560000000010405,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should merge extra data into log entries",
+          "duration": 0.292699999999968,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should handle nested objects in extra data",
+          "duration": 0.4632000000001426,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should work without extra data",
+          "duration": 0.7690999999999804,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should handle rapid logging without performance degradation",
+          "duration": 0.64449999999988,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should efficiently serialize large objects",
+          "duration": 0.42889999999988504,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should handle empty messages",
+          "duration": 0.2176999999999225,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should handle null/undefined extra data",
+          "duration": 0.1434999999999036,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should handle special characters in messages",
+          "duration": 0.13940000000002328,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should maintain correlation ID across multiple log calls",
+          "duration": 0.2399000000000342,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should expose debug method",
+          "duration": 0.13820000000009713,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should call debug without throwing errors",
+          "duration": 0.7250000000001364,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should support request tracing workflow",
+          "duration": 0.4522999999999229,
+          "state": "pass",
+          "errors": []
+        },
+        {
+          "name": "should support error tracking workflow",
+          "duration": 0.2519999999999527,
+          "state": "pass",
+          "errors": []
+        }
+      ],
+      "failed": [],
+      "skipped": [],
+      "totalDuration": 14.861700000000155
+    }
+  }
+}
