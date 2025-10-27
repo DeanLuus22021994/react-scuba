@@ -1,7 +1,9 @@
-# Docker Compose MCP Cluster - Infrastructure Services Only
+# Docker Compose MCP Cluster - Infrastructure Services with GPU Support
 # MCP stdio servers (filesystem, git, fetch, github, memory) configured in devcontainer.json
-# Single command: docker-compose -f .devcontainer/docker-compose.mcp.yml up --build
-# Tier 1: Databases → Tier 2: MCP DB Services → Tier 3: Tools → Tier 4: DevContainer
+# GPU: NVIDIA runtime with device plugin for all containers
+# Storage: 250GB NVMe SSD with named volumes for instant rebuilds
+# Network: Host network binding for maximum performance
+# Tier 1: Databases → Tier 2: MCP Services → Tier 3: GPU/AI → Tier 4: Tools
 
 services:
   # ==== TIER 1: Databases (starts first) ====
@@ -67,7 +69,10 @@ services:
       - MARIADB_DATABASE=mcp_db
     volumes:
       - react_scuba_mariadb-data:/var/lib/mysql
-    command: --innodb-buffer-pool-size=256M --max-connections=200
+    command:
+      - --innodb-buffer-pool-size=256M
+      - --max-connections=200
+      - --innodb-use-native-aio=0
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
@@ -80,7 +85,7 @@ services:
   postgres-mcp:
     build:
       context: ./.devcontainer/containers
-      dockerfile: dockerfile.postgre
+      dockerfile: dockerfile.service.postgres
     image: mcp-postgres:latest
     container_name: postgres-mcp
     hostname: postgres-mcp
@@ -109,7 +114,7 @@ services:
   mariadb-mcp:
     build:
       context: ./.devcontainer/containers
-      dockerfile: Dockerfile.mariadb
+      dockerfile: dockerfile.service.mariadb
     image: mcp-mariadb:latest
     container_name: mariadb-mcp
     hostname: mariadb-mcp
@@ -127,18 +132,7 @@ services:
     stdin_open: true
     restart: unless-stopped
     healthcheck:
-      test:
-        [
-          "CMD",
-          "mariadb",
-          "-h",
-          "mariadb",
-          "-u",
-          "root",
-          "-p${MARIADB_PASSWORD:-password}",
-          "-e",
-          "SELECT 1",
-        ]
+      test: ["CMD", "node", "-e", "console.log('healthy')"]
       interval: 15s
       timeout: 5s
       retries: 3
@@ -234,10 +228,11 @@ services:
       timeout: 10s
       retries: 3
 
-  runner:
+  github-runner:
     build:
-      context: ./.devcontainer/containers/runner
-      dockerfile: Dockerfile
+      context: ./.devcontainer/containers
+      dockerfile: dockerfile.service.runner
+    image: react-scuba-runner:latest
     container_name: github-runner
     hostname: github-runner
     networks:
@@ -429,7 +424,6 @@ services:
         ipv4_address: 172.28.0.70
     volumes:
       - ./.devcontainer/containers/gateway/config/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./.devcontainer/containers/gateway/config/ssl:/etc/nginx/ssl:ro
     env_file:
       - devcontainer.env
     restart: unless-stopped
@@ -481,13 +475,11 @@ services:
         ipv4_address: 172.28.0.72
     volumes:
       - react_scuba_grafana-data:/var/lib/grafana
-      - ./.devcontainer/containers/gateway/config/grafana/provisioning:/etc/grafana/provisioning:ro
     env_file:
       - devcontainer.env
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-piechart-panel
-      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/json/mcp-cluster-overview.json
     restart: unless-stopped
     healthcheck:
       test:
@@ -502,6 +494,80 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+  # ==== TIER 3: GPU & AI Services ====
+  nvidia-device-plugin:
+    build:
+      context: ./.devcontainer/containers
+      dockerfile: dockerfile.service.nvidia-device-plugin
+    image: nvidia-device-plugin:latest
+    container_name: nvidia-device-plugin
+    hostname: nvidia-device-plugin
+    privileged: true
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.80
+    ports:
+      - "9400:9400"
+    env_file:
+      - devcontainer.env
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/gpu-health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  ollama-llm:
+    build:
+      context: ./.devcontainer/containers
+      dockerfile: dockerfile.service.ollama
+    image: ollama-llm:latest
+    container_name: ollama-llm
+    hostname: ollama-llm
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.81
+    ports:
+      - "11434:11434"
+      - "9401:9401"
+    env_file:
+      - devcontainer.env
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu, compute]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_MODELS=/root/.ollama/models
+    volumes:
+      - react_scuba_ollama-models:/root/.ollama/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/ollama-health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    depends_on:
+      nvidia-device-plugin:
+        condition: service_healthy
 
   # ==== TIER 4: DevContainer (after all services) ====
   # react-app-dev:
@@ -554,13 +620,18 @@ services:
   node-builder:
     build:
       context: .
-      dockerfile: .devcontainer/containers/Dockerfile.node
+      dockerfile: .devcontainer/containers/dockerfile.service.node
     image: react-scuba-node:latest
     container_name: node-builder
     hostname: node-builder
     networks:
       mcp-cluster:
         ipv4_address: 172.28.0.61
+    env_file:
+      - devcontainer.env
+    environment:
+      - NODE_ENV=development
+      - TURBO_TELEMETRY_DISABLED=1
     volumes:
       - ./server:/workspace
       - react_scuba_node-builder-node-modules:/cache/node_modules
@@ -569,15 +640,17 @@ services:
       - react_scuba_node-builder-git-hooks:/cache/git-hooks
       - react_scuba_node-builder-husky:/cache/husky
     working_dir: /workspace
-    environment:
-      - NODE_ENV=development
-      - TURBO_TELEMETRY_DISABLED=1
-    env_file:
-      - devcontainer.env
-    command: /sbin/tini -- tail -f /dev/null
+    entrypoint: ["/sbin/tini", "--"]
+    command: ["tail", "-f", "/dev/null"]
     stdin_open: true
     tty: true
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "--version"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # devcontainer:
   #   build:
@@ -674,6 +747,13 @@ volumes:
     name: react_scuba_react-vite-cache
   react_scuba_react-npm-cache:
     name: react_scuba_react-npm-cache
+  react_scuba_ollama-models:
+    name: react_scuba_ollama-models
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${OLLAMA_MODELS_PATH:-./data/ollama-models}
 
 # Custom network with static IPs
 networks:

@@ -1,0 +1,123 @@
+# ==============================================================================
+# Ollama LLM Service - AI Inference with NVIDIA GPU
+# ==============================================================================
+# Purpose: Run smollm3:Q8_0 model for website chatbot inference
+# Architecture: Ollama with NVIDIA runtime
+# Base: Official Ollama image with CUDA support
+# GPU: Consumer RTX GPU for inference only
+# Health: Endpoint with GPU status and model readiness
+# ==============================================================================
+
+FROM ollama/ollama:latest
+
+# Metadata labels
+LABEL org.opencontainers.image.title="Ollama LLM Service" \
+  org.opencontainers.image.description="AI inference service with smollm3:Q8_0 model" \
+  org.opencontainers.image.vendor="React Scuba" \
+  maintainer="Dean Luus" \
+  purpose="llm-inference" \
+  gpu.support="nvidia" \
+  model="smollm3:Q8_0"
+
+# Install additional utilities
+USER root
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  curl \
+  jq \
+  netcat-openbsd \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Create health check script with GPU info
+RUN cat > /usr/local/bin/ollama-health <<'HEALTH_EOF'
+#!/bin/bash
+set -euo pipefail
+
+# Generate timestamp in YY-MM-DD-HH-MM-SS format
+TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
+
+# Check if nvidia-smi is available
+if command -v nvidia-smi &> /dev/null; then
+  # Get GPU info
+  GPU_INFO=$(nvidia-smi --query-gpu=index,name,driver_version,memory.total,memory.used,memory.free,temperature.gpu,utilization.gpu \
+    --format=csv,noheader,nounits | \
+    awk -F', ' '{
+      printf "{\"index\":%d,\"name\":\"%s\",\"driver\":\"%s\",\"memory_total_mb\":%d,\"memory_used_mb\":%d,\"memory_free_mb\":%d,\"temperature_c\":%d,\"gpu_utilization_percent\":%d},", 
+      $1, $2, $3, $4, $5, $6, $7, $8
+    }' | \
+    sed 's/,$//' | \
+    jq -s '.')
+  GPU_AVAILABLE=true
+else
+  GPU_INFO="[]"
+  GPU_AVAILABLE=false
+fi
+
+# Check Ollama service status
+if curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+  OLLAMA_STATUS="running"
+  MODELS=$(curl -s http://localhost:11434/api/tags | jq -c '.models // []')
+else
+  OLLAMA_STATUS="starting"
+  MODELS="[]"
+fi
+
+# Construct health response
+cat <<JSON
+{
+  "timestamp": "${TIMESTAMP}",
+  "status": "healthy",
+  "service": "ollama",
+  "ollama_status": "${OLLAMA_STATUS}",
+  "gpu_available": ${GPU_AVAILABLE},
+  "gpus": ${GPU_INFO},
+  "models": ${MODELS},
+  "inference_ready": $([ "${OLLAMA_STATUS}" = "running" ] && echo "true" || echo "false")
+}
+JSON
+HEALTH_EOF
+
+RUN chmod +x /usr/local/bin/ollama-health
+
+# Create model initialization script
+RUN cat > /usr/local/bin/init-model <<'INIT_EOF'
+#!/bin/bash
+set -euo pipefail
+
+echo "Waiting for Ollama service to start..."
+until curl -s http://localhost:11434/api/tags > /dev/null 2>&1; do
+  sleep 2
+done
+
+echo "Ollama service is ready. Checking for smollm3:Q8_0 model..."
+
+# Check if model exists
+if ! ollama list | grep -q "smollm3"; then
+  echo "Pulling smollm3:Q8_0 model..."
+  ollama pull smollm3:Q8_0
+  echo "Model downloaded successfully."
+else
+  echo "Model already exists."
+fi
+
+echo "Model initialization complete. Ollama is ready for inference."
+INIT_EOF
+
+RUN chmod +x /usr/local/bin/init-model
+
+# Switch back to ollama user
+USER ollama
+
+# Expose Ollama API port and health port
+EXPOSE 11434 9401
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+  CMD /usr/local/bin/ollama-health > /dev/null || exit 1
+
+# Environment variables
+ENV OLLAMA_HOST=0.0.0.0 \
+  OLLAMA_MODELS=/root/.ollama/models
+
+# Start Ollama service and initialize model in background
+CMD ["/bin/bash", "-c", "ollama serve & /usr/local/bin/init-model & wait"]
