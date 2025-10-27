@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import type { TeamMember } from '../../../src/config/constants/TEAM';
 import { useTeamFilter } from '../../../src/features/team/hooks/useTeamFilter';
 
 describe('useTeamFilter', () => {
@@ -27,7 +28,9 @@ describe('useTeamFilter', () => {
     expect(result.current.specialty).toBe('beginner');
     if (result.current.members.length > 0) {
       expect(
-        result.current.members.every((member) => member.role.toLowerCase().includes('open water'))
+        result.current.members.every((member: TeamMember) =>
+          member.role.toLowerCase().includes('open water')
+        )
       ).toBe(true);
     }
   });
@@ -41,7 +44,9 @@ describe('useTeamFilter', () => {
 
     if (result.current.members.length > 0) {
       expect(
-        result.current.members.every((member) => member.role.toLowerCase().includes('advanced'))
+        result.current.members.every((member: TeamMember) =>
+          member.role.toLowerCase().includes('advanced')
+        )
       ).toBe(true);
     }
   });
@@ -55,7 +60,9 @@ describe('useTeamFilter', () => {
 
     if (result.current.members.length > 0) {
       expect(
-        result.current.members.every((member) => member.role.toLowerCase().includes('technical'))
+        result.current.members.every((member: TeamMember) =>
+          member.role.toLowerCase().includes('technical')
+        )
       ).toBe(true);
     }
   });
@@ -69,7 +76,9 @@ describe('useTeamFilter', () => {
 
     if (result.current.members.length > 0) {
       expect(
-        result.current.members.every((member) => member.role.toLowerCase().includes('photo'))
+        result.current.members.every((member: TeamMember) =>
+          member.role.toLowerCase().includes('photo')
+        )
       ).toBe(true);
     }
   });

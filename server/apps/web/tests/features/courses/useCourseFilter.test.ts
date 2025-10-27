@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import type { Course } from '../../../src/config/constants/COURSES';
 import { useCourseFilter } from '../../../src/features/courses/hooks/useCourseFilter';
 
 describe('useCourseFilter', () => {
@@ -20,7 +21,7 @@ describe('useCourseFilter', () => {
     });
 
     expect(result.current.difficulty).toBe('beginner');
-    expect(result.current.courses.every((course) => course.price <= 5000)).toBe(true);
+    expect(result.current.courses.every((course: Course) => course.price <= 5000)).toBe(true);
   });
 
   it('should filter by difficulty intermediate', () => {
@@ -32,7 +33,9 @@ describe('useCourseFilter', () => {
 
     expect(result.current.difficulty).toBe('intermediate');
     expect(
-      result.current.courses.every((course) => course.price > 5000 && course.price <= 15000)
+      result.current.courses.every(
+        (course: Course) => course.price > 5000 && course.price <= 15000
+      )
     ).toBe(true);
   });
 
@@ -44,7 +47,9 @@ describe('useCourseFilter', () => {
     });
 
     expect(
-      result.current.courses.every((course) => course.price > 15000 && course.price <= 30000)
+      result.current.courses.every(
+        (course: Course) => course.price > 15000 && course.price <= 30000
+      )
     ).toBe(true);
   });
 
@@ -57,7 +62,9 @@ describe('useCourseFilter', () => {
 
     expect(result.current.priceRange).toEqual([10000, 20000]);
     expect(
-      result.current.courses.every((course) => course.price >= 10000 && course.price <= 20000)
+      result.current.courses.every(
+        (course: Course) => course.price >= 10000 && course.price <= 20000
+      )
     ).toBe(true);
   });
 
@@ -70,7 +77,9 @@ describe('useCourseFilter', () => {
     });
 
     expect(
-      result.current.courses.every((course) => course.price > 5000 && course.price <= 10000)
+      result.current.courses.every(
+        (course: Course) => course.price > 5000 && course.price <= 10000
+      )
     ).toBe(true);
   });
 

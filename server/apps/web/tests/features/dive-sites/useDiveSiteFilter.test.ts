@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import type { DiveSite } from '../../../src/config/constants/DIVE_SITES';
 import { useDiveSiteFilter } from '../../../src/features/dive-sites/hooks/useDiveSiteFilter';
 
 describe('useDiveSiteFilter', () => {
@@ -21,7 +22,9 @@ describe('useDiveSiteFilter', () => {
 
     expect(result.current.difficulty).toBe('Beginner');
     expect(
-      result.current.sites.every((site) => site.difficulty.toLowerCase().includes('beginner'))
+      result.current.sites.every((site: DiveSite) =>
+        site.difficulty.toLowerCase().includes('beginner')
+      )
     ).toBe(true);
   });
 
@@ -33,7 +36,9 @@ describe('useDiveSiteFilter', () => {
     });
 
     expect(
-      result.current.sites.every((site) => site.difficulty.toLowerCase().includes('intermediate'))
+      result.current.sites.every((site: DiveSite) =>
+        site.difficulty.toLowerCase().includes('intermediate')
+      )
     ).toBe(true);
   });
 
@@ -46,7 +51,7 @@ describe('useDiveSiteFilter', () => {
 
     expect(result.current.depthRange).toEqual([10, 30]);
     expect(
-      result.current.sites.every((site) => {
+      result.current.sites.every((site: DiveSite) => {
         const depth = Number.parseInt(site.depth);
         return depth >= 10 && depth <= 30;
       })
@@ -62,7 +67,7 @@ describe('useDiveSiteFilter', () => {
     });
 
     expect(
-      result.current.sites.every((site) => {
+      result.current.sites.every((site: DiveSite) => {
         const depth = Number.parseInt(site.depth);
         return site.difficulty.toLowerCase().includes('beginner') && depth >= 0 && depth <= 20;
       })
@@ -117,7 +122,9 @@ describe('useDiveSiteFilter', () => {
       result.current.setDepthRange([30, 50]);
     });
 
-    expect(result.current.sites.every((site) => Number.parseInt(site.depth) >= 30)).toBe(true);
+    expect(
+      result.current.sites.every((site: DiveSite) => Number.parseInt(site.depth) >= 30)
+    ).toBe(true);
   });
 
   it('should memoize filtered results', () => {

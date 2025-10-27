@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import type { GalleryImage } from '../../../src/config/constants/GALLERY';
 import { useGalleryFilter } from '../../../src/features/gallery/hooks/useGalleryFilter';
 
 describe('useGalleryFilter', () => {
@@ -20,7 +21,9 @@ describe('useGalleryFilter', () => {
     });
 
     expect(result.current.category).toBe('Marine Life');
-    expect(result.current.images.every((img) => img.category === 'Marine Life')).toBe(true);
+    expect(
+      result.current.images.every((img: GalleryImage) => img.category === 'Marine Life')
+    ).toBe(true);
   });
 
   it('should filter by Boats category', () => {
@@ -30,7 +33,7 @@ describe('useGalleryFilter', () => {
       result.current.setCategory('Boats');
     });
 
-    expect(result.current.images.every((img) => img.category === 'Boats')).toBe(true);
+    expect(result.current.images.every((img: GalleryImage) => img.category === 'Boats')).toBe(true);
   });
 
   it('should sort by title', () => {
@@ -42,7 +45,7 @@ describe('useGalleryFilter', () => {
 
     expect(result.current.sortBy).toBe('title');
 
-    const titles = result.current.images.map((img) => img.title);
+    const titles = result.current.images.map((img: GalleryImage) => img.title);
     const sortedTitles = [...titles].sort((a, b) => a.localeCompare(b));
     expect(titles).toEqual(sortedTitles);
   });
@@ -66,7 +69,7 @@ describe('useGalleryFilter', () => {
     });
 
     expect(result.current.category).toBe('Marine Life');
-    const titles = result.current.images.map((img) => img.title);
+    const titles = result.current.images.map((img: GalleryImage) => img.title);
     const sortedTitles = [...titles].sort((a, b) => a.localeCompare(b));
     expect(titles).toEqual(sortedTitles);
   });
