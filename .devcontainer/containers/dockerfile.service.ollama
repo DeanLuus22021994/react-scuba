@@ -1,23 +1,26 @@
 # ==============================================================================
-# Ollama LLM Service - AI Inference with NVIDIA GPU
+# Ollama LLM Service - AI Inference with NVIDIA GPU (GPU-Only Mode)
 # ==============================================================================
 # Purpose: Run smollm2:latest model for website chatbot inference
-# Architecture: Ollama with NVIDIA runtime
+# Architecture: Ollama with NVIDIA runtime, GPU-only inference
 # Base: Official Ollama image with CUDA support
-# GPU: Consumer RTX GPU for inference only
+# GPU: Consumer RTX GPU for inference only (no CPU fallback)
+# Storage: Named volume mount for model persistence
 # Health: Endpoint with GPU status and model readiness
 # ==============================================================================
 
 FROM ollama/ollama:latest
 
 # Metadata labels
-LABEL org.opencontainers.image.title="Ollama LLM Service" \
-  org.opencontainers.image.description="AI inference service with smollm2:latest model" \
+LABEL org.opencontainers.image.title="Ollama LLM Service (GPU-Only)" \
+  org.opencontainers.image.description="AI inference service with smollm2:latest model - GPU-only mode" \
   org.opencontainers.image.vendor="React Scuba" \
   maintainer="Dean Luus" \
   purpose="llm-inference" \
   gpu.support="nvidia" \
-  model="smollm2:latest"
+  gpu.mode="required" \
+  model="smollm2:latest" \
+  storage.type="named-volume"
 
 # Install additional utilities
 USER root
@@ -28,6 +31,10 @@ RUN apt-get update && \
   netcat-openbsd \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Create model storage directory with proper permissions
+RUN mkdir -p /root/.ollama/models && \
+  chmod -R 755 /root/.ollama
+
 # Create health check script with GPU info
 RUN cat > /usr/local/bin/ollama-health <<'HEALTH_EOF'
 #!/bin/bash
@@ -36,7 +43,7 @@ set -euo pipefail
 # Generate timestamp in YY-MM-DD-HH-MM-SS format
 TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
 
-# Check if nvidia-smi is available
+# Check if nvidia-smi is available (REQUIRED for GPU-only mode)
 if command -v nvidia-smi &> /dev/null; then
   # Get GPU info
   GPU_INFO=$(nvidia-smi --query-gpu=index,name,driver_version,memory.total,memory.used,memory.free,temperature.gpu,utilization.gpu \
@@ -49,8 +56,9 @@ if command -v nvidia-smi &> /dev/null; then
     jq -s '.')
   GPU_AVAILABLE=true
 else
-  GPU_INFO="[]"
-  GPU_AVAILABLE=false
+  # GPU is REQUIRED - fail health check if not available
+  echo "{\"error\":\"GPU not available - GPU-only mode requires NVIDIA GPU\"}" >&2
+  exit 1
 fi
 
 # Check Ollama service status
@@ -68,10 +76,12 @@ cat <<JSON
   "timestamp": "${TIMESTAMP}",
   "status": "healthy",
   "service": "ollama",
+  "mode": "gpu-only",
   "ollama_status": "${OLLAMA_STATUS}",
   "gpu_available": ${GPU_AVAILABLE},
   "gpus": ${GPU_INFO},
   "models": ${MODELS},
+  "model_storage": "/root/.ollama/models",
   "inference_ready": $([ "${OLLAMA_STATUS}" = "running" ] && echo "true" || echo "false")
 }
 JSON
@@ -80,28 +90,42 @@ HEALTH_EOF
 # Convert CRLF to LF if present (Windows compatibility)
 RUN sed -i 's/\r$//' /usr/local/bin/ollama-health && chmod +x /usr/local/bin/ollama-health
 
-# Create model initialization script
+# Create model initialization script with GPU-only flags
 RUN cat > /usr/local/bin/init-model <<'INIT_EOF'
 #!/bin/bash
 set -euo pipefail
 
-echo "Waiting for Ollama service to start..."
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Waiting for Ollama service to start..."
 until curl -s http://localhost:11434/api/tags > /dev/null 2>&1; do
   sleep 2
 done
 
-echo "Ollama service is ready. Checking for smollm2:latest model..."
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Ollama service is ready."
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model storage: $OLLAMA_MODELS"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] GPU mode: Required (no CPU fallback)"
+
+# Verify GPU is available
+if ! nvidia-smi > /dev/null 2>&1; then
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] ERROR: GPU not available! GPU-only mode requires NVIDIA GPU."
+  exit 1
+fi
+
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] GPU detected: $(nvidia-smi --query-gpu=name --format=csv,noheader)"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Checking for smollm2:latest model..."
 
 # Check if model exists
 if ! ollama list | grep -q "smollm2"; then
-  echo "Pulling smollm2:latest model..."
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Pulling smollm2:latest model to volume mount: $OLLAMA_MODELS"
   ollama pull smollm2:latest
-  echo "Model downloaded successfully."
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model downloaded successfully to named volume."
 else
-  echo "Model already exists."
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model already exists in volume mount."
 fi
 
-echo "Model initialization complete. Ollama is ready for inference."
+# Verify model files are in volume mount
+MODEL_SIZE=$(du -sh $OLLAMA_MODELS 2>/dev/null | cut -f1 || echo "0")
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model storage size: $MODEL_SIZE"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model initialization complete. Ollama is ready for GPU inference."
 INIT_EOF
 
 # Convert CRLF to LF if present (Windows compatibility)
@@ -114,10 +138,15 @@ EXPOSE 11434 9401
 HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
   CMD /usr/local/bin/ollama-health > /dev/null || exit 1
 
-# Environment variables
+# Environment variables for GPU-only inference
 ENV OLLAMA_HOST=0.0.0.0 \
-  OLLAMA_MODELS=/root/.ollama/models
+  OLLAMA_MODELS=/root/.ollama/models \
+  OLLAMA_NUM_GPU=999 \
+  OLLAMA_GPU_LAYERS=999 \
+  CUDA_VISIBLE_DEVICES=0 \
+  OLLAMA_MAX_LOADED_MODELS=1 \
+  OLLAMA_FLASH_ATTENTION=1
 
-# Start Ollama service, initialize model, and serve health endpoint
+# Start Ollama service with GPU-only mode, initialize model from volume, and serve health endpoint
 ENTRYPOINT []
 CMD ["/bin/bash", "-c", "ollama serve & /usr/local/bin/init-model & (while true; do HEALTH_DATA=$(/usr/local/bin/ollama-health 2>&1 || echo '{\"error\":\"health check failed\"}'); printf \"HTTP/1.1 200 OK\\r\\nContent-Type: application/json\\r\\nContent-Length: %d\\r\\n\\r\\n%s\" \"${#HEALTH_DATA}\" \"$HEALTH_DATA\" | nc -l -p 9401 -q 1; done) & wait"]

@@ -942,11 +942,9 @@ volumes:
     name: react_scuba_react-npm-cache
   react_scuba_ollama-models:
     name: react_scuba_ollama-models
+    # True Docker volume - no bind mount to prevent host filesystem pollution
+    # Models stay isolated in Docker's volume storage: /var/lib/docker/volumes/
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${OLLAMA_MODELS_PATH:-./data/ollama-models}
   react_scuba_nginx-logs:
     name: react_scuba_nginx-logs
   react_scuba_nginx-slave1-logs:
