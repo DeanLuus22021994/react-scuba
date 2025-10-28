@@ -8,7 +8,7 @@ The React Scuba VS Code workspace has been restructured to provide better organi
 
 ## 📁 Directory Structure
 
-```
+```text
 .vscode/
 ├── settings.json                    # Main settings (comprehensive + enhanced)
 ├── extensions.json                  # Recommended extensions

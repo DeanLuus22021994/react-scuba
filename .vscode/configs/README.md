@@ -4,7 +4,7 @@ This directory contains organized VS Code workspace configurations for the React
 
 ## Directory Structure
 
-```
+```text
 .vscode/
 ├── settings.json                    # Main settings (orchestration)
 ├── extensions.json                  # Recommended extensions

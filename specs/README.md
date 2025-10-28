@@ -4,7 +4,7 @@ This directory contains compilable documentation specifications that ensure cons
 
 ## Structure
 
-```
+```text
 specs/
 ├── schemas/          # JSON schemas for documentation validation
 ├── validators/       # Automated validation scripts

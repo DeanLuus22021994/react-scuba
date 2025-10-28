@@ -52,7 +52,7 @@ This archive contains all documentation from the React Scuba bleeding-edge moder
 
 ## 📚 **Documentation Hierarchy**
 
-```
+```text
 docs/
 ├── archive/
 │   └── modernization/           # This archive

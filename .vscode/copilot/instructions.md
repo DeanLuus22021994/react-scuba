@@ -25,7 +25,7 @@
 
 Each client has isolated configuration, theming, and content while sharing the core platform:
 
-```
+```text
 server/clients/
 ├── _template/              # Template for new clients
 ├── di-authority-johannesburg/
@@ -125,7 +125,7 @@ Use `@workspace` for project-wide understanding:
 
 ### Frontend (apps/web)
 
-```
+```text
 src/
 ├── components/     # Reusable React components
 ├── pages/         # Route components
@@ -137,7 +137,7 @@ src/
 
 ### Backend (apps/api)
 
-```
+```text
 src/
 ├── routes/        # Express.js route handlers
 ├── middleware/    # Custom middleware
