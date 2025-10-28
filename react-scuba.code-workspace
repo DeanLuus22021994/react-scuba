@@ -1,0 +1,61 @@
+{
+  "folders": [
+    {
+      "name": "🏠 React Scuba (Root)",
+      "path": "."
+    },
+    {
+      "name": "🌐 Frontend (React + Vite)",
+      "path": "./server/apps/web"
+    },
+    {
+      "name": "🔧 Backend API (Express)",
+      "path": "./server/apps/api"
+    },
+    {
+      "name": "📝 Content Provider",
+      "path": "./server/apps/content"
+    },
+    {
+      "name": "📚 Documentation",
+      "path": "./server/apps/docs"
+    },
+    {
+      "name": "🔧 Shared Packages",
+      "path": "./server/packages"
+    },
+    {
+      "name": "🏢 Client Configurations",
+      "path": "./server/clients"
+    },
+    {
+      "name": "🐍 Python MCP Utils",
+      "path": "./docker-compose-examples/mcp/python_utils"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": false,
+      "**/.turbo": true,
+      "**/dist": false,
+      "**/build": false
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.turbo": true
+    },
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true
+  },
+  "extensions": {
+    "recommendations": [
+      "biomejs.biome",
+      "ms-vscode.vscode-typescript-next",
+      "bradlc.vscode-tailwindcss",
+      "github.copilot",
+      "github.copilot-chat",
+      "ms-azuretools.vscode-azureresourcegroups",
+      "ms-python.python",
+      "ms-toolsai.vscode-ai-toolkit"
+    ]
+  }
+}

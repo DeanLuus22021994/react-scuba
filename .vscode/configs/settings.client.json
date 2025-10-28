@@ -1,0 +1,40 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "server/clients/*/config.json",
+        "server/clients/_template/config.json"
+      ],
+      "url": "./.vscode/schemas/client-config.schema.json"
+    }
+  ],
+  "files.associations": {
+    "**/clients/*/config.json": "json",
+    "**/clients/_template/**": "json"
+  },
+  "files.exclude": {
+    "**/clients/*/images/*.{jpg,jpeg,png,gif,webp,svg}": false,
+    "**/clients/_template/images/": true
+  },
+  "search.exclude": {
+    "**/clients/*/node_modules": true,
+    "**/clients/*/dist": true,
+    "**/clients/*/build": true,
+    "**/clients/*/images/*.{jpg,jpeg,png,gif,webp}": true
+  },
+  "explorer.fileNesting.patterns": {
+    "config.json": "README.md, .env*, images/"
+  },
+  "tailwindCSS.experimental.configFile": {
+    "server/apps/web/tailwind.config.js": "server/apps/web/**/*.{js,ts,jsx,tsx,vue,html}",
+    "server/clients/*/tailwind.config.js": "server/clients/*/**/*.{js,ts,jsx,tsx,vue,html}"
+  },
+  "css.lint.unknownProperties": "ignore",
+  "css.lint.validProperties": [],
+  "css.customData": [
+    ".vscode/schemas/tailwind-client-theme.json"
+  ],
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.suggest.paths": true,
+  "typescript.preferences.resolveJsonModule": true
+}

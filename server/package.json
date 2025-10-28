@@ -63,7 +63,12 @@
     "clean:deps": "powershell -Command \"Get-ChildItem -Path . -Include node_modules -Recurse -Directory | Remove-Item -Recurse -Force\"",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "copilot:phase1": "node ../.vscode/scripts/copilot-context-manager.js phase1",
+    "copilot:phase2": "node ../.vscode/scripts/copilot-context-manager.js phase2",
+    "copilot:phase3": "node ../.vscode/scripts/copilot-context-manager.js phase3",
+    "copilot:all": "node ../.vscode/scripts/copilot-context-manager.js all",
+    "copilot:validate": "node ../.vscode/scripts/copilot-context-manager.js validate"
   },
   "eslintConfig": {
     "extends": [

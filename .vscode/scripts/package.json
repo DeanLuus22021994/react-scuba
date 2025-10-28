@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.9.1"
+  },
+  "scripts": {
+    "workspace:setup": "node .vscode/scripts/merge-configs.js",
+    "workspace:init": "bash .vscode/scripts/setup-workspace.sh",
+    "workspace:validate": "node .vscode/scripts/validate-structure.js"
+  }
+}
