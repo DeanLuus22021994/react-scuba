@@ -1,0 +1,5 @@
+{
+  "model": "smollm2:latest",
+  "prompt": "refactor code",
+  "stream": false
+}

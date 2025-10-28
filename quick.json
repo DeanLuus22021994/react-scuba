@@ -1,0 +1,8 @@
+{
+  "stream": false,
+  "options": {
+    "num_predict": 500
+  },
+  "model": "codegeex4:9b-all-q4_K_M",
+  "prompt": "Refactor Python code"
+}
