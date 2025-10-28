@@ -142,8 +142,8 @@ RUNNER_PID=$!
 wait $RUNNER_PID
 ENTRYPOINT_EOF
 
-# Ensure script is executable
-RUN chmod +x /home/runner/bin/entrypoint.sh
+# Convert CRLF to LF and make script executable (Windows compatibility)
+RUN sed -i 's/\r$//' /home/runner/bin/entrypoint.sh && chmod +x /home/runner/bin/entrypoint.sh
 
 # Embed GPU health check script
 RUN cat > /home/runner/bin/gpu-health.sh <<'GPU_HEALTH_EOF'
@@ -167,7 +167,8 @@ else
 fi
 GPU_HEALTH_EOF
 
-RUN chmod +x /home/runner/bin/gpu-health.sh
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /home/runner/bin/gpu-health.sh && chmod +x /home/runner/bin/gpu-health.sh
 
 # Switch to non-root user
 USER runner

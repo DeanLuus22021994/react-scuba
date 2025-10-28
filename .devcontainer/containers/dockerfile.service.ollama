@@ -1,7 +1,7 @@
 # ==============================================================================
 # Ollama LLM Service - AI Inference with NVIDIA GPU
 # ==============================================================================
-# Purpose: Run smollm3:Q8_0 model for website chatbot inference
+# Purpose: Run smollm2:latest model for website chatbot inference
 # Architecture: Ollama with NVIDIA runtime
 # Base: Official Ollama image with CUDA support
 # GPU: Consumer RTX GPU for inference only
@@ -12,12 +12,12 @@ FROM ollama/ollama:latest
 
 # Metadata labels
 LABEL org.opencontainers.image.title="Ollama LLM Service" \
-  org.opencontainers.image.description="AI inference service with smollm3:Q8_0 model" \
+  org.opencontainers.image.description="AI inference service with smollm2:latest model" \
   org.opencontainers.image.vendor="React Scuba" \
   maintainer="Dean Luus" \
   purpose="llm-inference" \
   gpu.support="nvidia" \
-  model="smollm3:Q8_0"
+  model="smollm2:latest"
 
 # Install additional utilities
 USER root
@@ -77,7 +77,8 @@ cat <<JSON
 JSON
 HEALTH_EOF
 
-RUN chmod +x /usr/local/bin/ollama-health
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/ollama-health && chmod +x /usr/local/bin/ollama-health
 
 # Create model initialization script
 RUN cat > /usr/local/bin/init-model <<'INIT_EOF'
@@ -89,12 +90,12 @@ until curl -s http://localhost:11434/api/tags > /dev/null 2>&1; do
   sleep 2
 done
 
-echo "Ollama service is ready. Checking for smollm3:Q8_0 model..."
+echo "Ollama service is ready. Checking for smollm2:latest model..."
 
 # Check if model exists
-if ! ollama list | grep -q "smollm3"; then
-  echo "Pulling smollm3:Q8_0 model..."
-  ollama pull smollm3:Q8_0
+if ! ollama list | grep -q "smollm2"; then
+  echo "Pulling smollm2:latest model..."
+  ollama pull smollm2:latest
   echo "Model downloaded successfully."
 else
   echo "Model already exists."
@@ -103,10 +104,8 @@ fi
 echo "Model initialization complete. Ollama is ready for inference."
 INIT_EOF
 
-RUN chmod +x /usr/local/bin/init-model
-
-# Switch back to ollama user
-USER ollama
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/init-model && chmod +x /usr/local/bin/init-model
 
 # Expose Ollama API port and health port
 EXPOSE 11434 9401
@@ -119,5 +118,6 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
 ENV OLLAMA_HOST=0.0.0.0 \
   OLLAMA_MODELS=/root/.ollama/models
 
-# Start Ollama service and initialize model in background
-CMD ["/bin/bash", "-c", "ollama serve & /usr/local/bin/init-model & wait"]
+# Start Ollama service, initialize model, and serve health endpoint
+ENTRYPOINT []
+CMD ["/bin/bash", "-c", "ollama serve & /usr/local/bin/init-model & (while true; do HEALTH_DATA=$(/usr/local/bin/ollama-health 2>&1 || echo '{\"error\":\"health check failed\"}'); printf \"HTTP/1.1 200 OK\\r\\nContent-Type: application/json\\r\\nContent-Length: %d\\r\\n\\r\\n%s\" \"${#HEALTH_DATA}\" \"$HEALTH_DATA\" | nc -l -p 9401 -q 1; done) & wait"]

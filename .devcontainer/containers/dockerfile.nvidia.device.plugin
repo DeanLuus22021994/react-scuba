@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   ca-certificates \
   && rm -rf /tmp/* /var/tmp/*
 
-# Create health check script
+# Create health check script with explicit LF endings (no CRLF)
 RUN cat > /usr/local/bin/gpu-health <<'GPU_HEALTH_EOF'
 #!/bin/bash
 set -euo pipefail
@@ -49,7 +49,8 @@ GPU_INFO=$(nvidia-smi --query-gpu=index,name,driver_version,memory.total,memory.
 echo "{\"timestamp\":\"${TIMESTAMP}\",\"status\":\"healthy\",\"gpu_available\":true,\"device_plugin\":\"nvidia\",\"gpus\":${GPU_INFO}}"
 GPU_HEALTH_EOF
 
-RUN chmod +x /usr/local/bin/gpu-health
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/gpu-health && chmod +x /usr/local/bin/gpu-health
 
 # Expose health endpoint port
 EXPOSE 9400
@@ -60,5 +61,6 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
 
 # Keep container running and serve health endpoint
 CMD while true; do \
-  echo -e "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n$(cat /usr/local/bin/gpu-health)" | nc -l -p 9400 -q 1; \
+  HEALTH_DATA=$(/usr/local/bin/gpu-health); \
+  printf "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: %d\r\n\r\n%s" "${#HEALTH_DATA}" "$HEALTH_DATA" | nc -l -p 9400 -q 1; \
   done

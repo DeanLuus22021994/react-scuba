@@ -7,7 +7,22 @@ LABEL maintainer="Dean Luus" \
   description="MySQL/MariaDB metrics exporter for Prometheus" \
   version="0.15.1"
 
+USER root
+
+# Create startup script that generates .my.cnf with password from env
+RUN echo '#!/bin/sh' > /docker-entrypoint.sh && \
+  echo 'echo "[client]" > /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'echo "user=root" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'echo "password=${MARIADB_PASSWORD:-password}" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'echo "host=mariadb" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'echo "port=3306" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'chmod 600 /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'exec /bin/mysqld_exporter --config.my-cnf=/tmp/.my.cnf "$@"' >> /docker-entrypoint.sh && \
+  chmod +x /docker-entrypoint.sh
+
 USER nobody
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
   CMD wget --quiet --tries=1 --spider http://localhost:9104/metrics || exit 1

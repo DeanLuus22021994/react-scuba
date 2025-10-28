@@ -1,0 +1,296 @@
+# ==============================================================================
+# Prometheus Gateway - Metrics Collection & Monitoring
+# ==============================================================================
+# Purpose: Time-series metrics collection and alerting gateway
+# Architecture: Standalone Prometheus with service discovery
+# Base: Official Prometheus image
+# Integration: Auto-discovery of Docker containers and exporters
+# ==============================================================================
+
+FROM prom/prometheus:latest
+
+# Metadata labels
+LABEL org.opencontainers.image.title="Prometheus Gateway" \
+  org.opencontainers.image.description="Metrics collection and monitoring gateway" \
+  org.opencontainers.image.vendor="React Scuba" \
+  maintainer="Dean Luus" \
+  purpose="gateway-metrics" \
+  monitoring.type="collection"
+
+# Install additional utilities
+USER root
+RUN apk add --no-cache \
+  curl \
+  jq \
+  bash \
+  ca-certificates
+
+# Create configuration directory
+RUN mkdir -p /etc/prometheus/rules /prometheus && \
+  chown -R prometheus:prometheus /etc/prometheus /prometheus
+
+# Create Prometheus configuration
+RUN cat > /etc/prometheus/prometheus.yml <<'PROMETHEUS_EOF'
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'react-scuba'
+    environment: 'development'
+
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Rule files
+rule_files:
+  - "/etc/prometheus/rules/*.yml"
+
+# Scrape configurations grouped by layer
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+          layer: 'gateway'
+
+  # === DATABASE LAYER ===
+  - job_name: 'database-postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+        labels:
+          service: 'postgres'
+          layer: 'database'
+          type: 'sql'
+
+  - job_name: 'database-mariadb'
+    static_configs:
+      - targets: ['mariadb-exporter:9104']
+        labels:
+          service: 'mariadb'
+          layer: 'database'
+          type: 'sql'
+
+  # === OBJECT LAYER ===
+  - job_name: 'object-minio'
+    static_configs:
+      - targets: ['minio:9000']
+        labels:
+          service: 'minio'
+          layer: 'object'
+          type: 'storage'
+        metrics_path: '/minio/v2/metrics/cluster'
+
+  - job_name: 'object-memcached'
+    static_configs:
+      - targets: ['memcached-exporter:9150']
+        labels:
+          service: 'memcached'
+          layer: 'object'
+          type: 'cache'
+
+  # === SERVICE LAYER ===
+  - job_name: 'service-node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'node'
+          layer: 'service'
+          type: 'system'
+
+  - job_name: 'service-cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'cadvisor'
+          layer: 'service'
+          type: 'container'
+
+  - job_name: 'service-ollama'
+    static_configs:
+      - targets: ['ollama-llm:9401']
+        labels:
+          service: 'ollama'
+          layer: 'service'
+          type: 'llm'
+
+  # === NETWORK LAYER ===
+  - job_name: 'network-nginx-master'
+    static_configs:
+      - targets: ['nginx-master:8080']
+        labels:
+          service: 'nginx'
+          layer: 'network'
+          type: 'loadbalancer'
+          role: 'master'
+
+  - job_name: 'network-nginx-slaves'
+    static_configs:
+      - targets: ['nginx-slave-1:8080', 'nginx-slave-2:8080']
+        labels:
+          service: 'nginx'
+          layer: 'network'
+          type: 'loadbalancer'
+          role: 'slave'
+
+  # === GPU LAYER ===
+  - job_name: 'gpu-nvidia-device-plugin'
+    static_configs:
+      - targets: ['nvidia-device-plugin:9400']
+        labels:
+          service: 'nvidia'
+          layer: 'gpu'
+          type: 'runtime'
+PROMETHEUS_EOF
+
+# Create layered recording rules
+RUN cat > /etc/prometheus/rules/recording.yml <<'RULES_EOF'
+groups:
+  - name: service_layer_metrics
+    interval: 30s
+    rules:
+      - record: service:container_cpu_usage_percent
+        expr: rate(container_cpu_usage_seconds_total{layer="service"}[5m]) * 100
+
+      - record: service:container_memory_usage_percent
+        expr: (container_memory_usage_bytes{layer="service"} / container_spec_memory_limit_bytes{layer="service"}) * 100
+
+  - name: database_layer_metrics
+    interval: 30s
+    rules:
+      - record: database:postgres_active_connections
+        expr: pg_stat_database_numbackends{layer="database"}
+
+      - record: database:mysql_active_connections
+        expr: mysql_global_status_threads_connected{layer="database"}
+
+      - record: database:total_connections
+        expr: sum(pg_stat_database_numbackends{layer="database"}) + sum(mysql_global_status_threads_connected{layer="database"})
+
+  - name: object_layer_metrics
+    interval: 30s
+    rules:
+      - record: object:minio_storage_used_bytes
+        expr: minio_cluster_capacity_usable_total_bytes{layer="object"} - minio_cluster_capacity_usable_free_bytes{layer="object"}
+
+      - record: object:memcached_hit_rate_percent
+        expr: rate(memcached_cache_hits_total{layer="object"}[5m]) / (rate(memcached_cache_hits_total{layer="object"}[5m]) + rate(memcached_cache_misses_total{layer="object"}[5m])) * 100
+
+  - name: network_layer_metrics
+    interval: 30s
+    rules:
+      - record: network:nginx_requests_per_second
+        expr: rate(nginx_http_requests_total{layer="network"}[5m])
+
+      - record: network:nginx_active_connections
+        expr: sum(nginx_connections_active{layer="network"})
+
+  - name: gpu_layer_metrics
+    interval: 30s
+    rules:
+      - record: gpu:utilization_percent
+        expr: avg(nvidia_gpu_utilization{layer="gpu"})
+
+      - record: gpu:memory_used_percent
+        expr: (nvidia_gpu_memory_used_bytes{layer="gpu"} / nvidia_gpu_memory_total_bytes{layer="gpu"}) * 100
+
+  - name: cluster_health
+    interval: 30s
+    rules:
+      - record: cluster:services_up_by_layer
+        expr: count(up{job!=""} == 1) by (layer)
+
+      - record: cluster:services_down_by_layer
+        expr: count(up{job!=""} == 0) by (layer)
+
+      - record: cluster:health_score_percent
+        expr: (sum(up{job!=""} == 1) / count(up{job!=""})) * 100
+RULES_EOF
+
+# Create health check script
+RUN cat > /usr/local/bin/prometheus-health <<'HEALTH_EOF'
+#!/bin/bash
+set -euo pipefail
+
+# Generate timestamp in YY-MM-DD-HH-MM-SS format
+TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
+
+# Check Prometheus API health
+if HEALTH_RESPONSE=$(curl -sf http://localhost:9090/-/healthy 2>&1); then
+  STATUS="healthy"
+  PROMETHEUS_AVAILABLE=true
+else
+  STATUS="unhealthy"
+  PROMETHEUS_AVAILABLE=false
+fi
+
+# Check if Prometheus is ready
+if curl -sf http://localhost:9090/-/ready > /dev/null 2>&1; then
+  PROMETHEUS_READY=true
+else
+  PROMETHEUS_READY=false
+fi
+
+# Get target stats
+if TARGETS=$(curl -sf http://localhost:9090/api/v1/targets 2>&1); then
+  if echo "$TARGETS" | jq -e . >/dev/null 2>&1; then
+    ACTIVE_TARGETS=$(echo "$TARGETS" | jq -r '.data.activeTargets | length')
+    UP_TARGETS=$(echo "$TARGETS" | jq -r '[.data.activeTargets[] | select(.health=="up")] | length')
+  else
+    ACTIVE_TARGETS=0
+    UP_TARGETS=0
+  fi
+else
+  ACTIVE_TARGETS=0
+  UP_TARGETS=0
+fi
+
+cat <<JSON
+{
+  "timestamp": "${TIMESTAMP}",
+  "status": "${STATUS}",
+  "service": "prometheus",
+  "prometheus_available": ${PROMETHEUS_AVAILABLE},
+  "prometheus_ready": ${PROMETHEUS_READY},
+  "active_targets": ${ACTIVE_TARGETS},
+  "up_targets": ${UP_TARGETS},
+  "endpoint": "http://localhost:9090",
+  "gateway_type": "metrics"
+}
+JSON
+HEALTH_EOF
+
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/prometheus-health && chmod +x /usr/local/bin/prometheus-health
+
+# Set ownership
+RUN chown -R prometheus:prometheus /etc/prometheus /prometheus /usr/local/bin/prometheus-health
+
+# Switch back to prometheus user
+USER prometheus
+
+# Expose Prometheus port
+EXPOSE 9090
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+  CMD /usr/local/bin/prometheus-health > /dev/null || exit 1
+
+# Storage retention
+ENV PROMETHEUS_RETENTION_TIME=15d \
+  PROMETHEUS_RETENTION_SIZE=10GB
+
+# Start Prometheus
+CMD ["prometheus", \
+  "--config.file=/etc/prometheus/prometheus.yml", \
+  "--storage.tsdb.path=/prometheus", \
+  "--web.console.libraries=/usr/share/prometheus/console_libraries", \
+  "--web.console.templates=/usr/share/prometheus/consoles", \
+  "--web.enable-lifecycle", \
+  "--storage.tsdb.retention.time=${PROMETHEUS_RETENTION_TIME}", \
+  "--storage.tsdb.retention.size=${PROMETHEUS_RETENTION_SIZE}"]

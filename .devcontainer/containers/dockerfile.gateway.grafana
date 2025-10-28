@@ -1,0 +1,227 @@
+# ==============================================================================
+# Grafana Gateway - Visualization Dashboard
+# ==============================================================================
+# Purpose: Metrics visualization and monitoring dashboard gateway
+# Architecture: Standalone Grafana with provisioning support
+# Base: Official Grafana image
+# Integration: Prometheus datasource with pre-configured dashboards
+# ==============================================================================
+
+FROM grafana/grafana:latest
+
+# Metadata labels
+LABEL org.opencontainers.image.title="Grafana Gateway" \
+  org.opencontainers.image.description="Metrics visualization and monitoring dashboard" \
+  org.opencontainers.image.vendor="React Scuba" \
+  maintainer="Dean Luus" \
+  purpose="gateway-visualization" \
+  monitoring.type="dashboard"
+
+# Install additional utilities
+USER root
+RUN apk add --no-cache \
+  curl \
+  jq \
+  bash \
+  ca-certificates
+
+# Create provisioning directories
+RUN mkdir -p /etc/grafana/provisioning/datasources \
+  /etc/grafana/provisioning/dashboards \
+  /etc/grafana/provisioning/notifiers \
+  /var/lib/grafana/dashboards && \
+  chown -R grafana:grafana /etc/grafana/provisioning /var/lib/grafana/dashboards
+
+# Create Prometheus datasource configuration
+RUN cat > /etc/grafana/provisioning/datasources/prometheus.yml <<'DATASOURCE_EOF'
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
+    jsonData:
+      timeInterval: "5s"
+      queryTimeout: "60s"
+      httpMethod: "POST"
+DATASOURCE_EOF
+
+# Create dashboard folders structure
+RUN mkdir -p /var/lib/grafana/dashboards/service-layer \
+  /var/lib/grafana/dashboards/object-layer \
+  /var/lib/grafana/dashboards/database-layer \
+  /var/lib/grafana/dashboards/network-layer \
+  /var/lib/grafana/dashboards/gpu-layer \
+  /var/lib/grafana/dashboards/overview && \
+  chown -R grafana:grafana /var/lib/grafana/dashboards
+
+# Create dashboard provider configuration with folder structure
+RUN cat > /etc/grafana/provisioning/dashboards/default.yml <<'DASHBOARD_EOF'
+apiVersion: 1
+
+providers:
+  - name: 'Overview'
+    orgId: 1
+    folder: 'Overview'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/overview
+
+  - name: 'Service Layer'
+    orgId: 1
+    folder: 'Service Layer'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/service-layer
+
+  - name: 'Object Layer'
+    orgId: 1
+    folder: 'Object Layer'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/object-layer
+
+  - name: 'Database Layer'
+    orgId: 1
+    folder: 'Database Layer'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/database-layer
+
+  - name: 'Network Layer'
+    orgId: 1
+    folder: 'Network Layer'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/network-layer
+
+  - name: 'GPU Layer'
+    orgId: 1
+    folder: 'GPU Layer'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/gpu-layer
+DASHBOARD_EOF
+
+# Create cluster overview dashboard JSON
+RUN cat > /var/lib/grafana/dashboards/overview/cluster-overview.json <<'OVERVIEW_EOF'
+{
+  "dashboard": {
+    "title": "React Scuba Cluster Overview",
+    "tags": ["overview", "cluster"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Service Health Status",
+        "type": "stat",
+        "targets": [{"expr": "up", "legendFormat": "{{job}}"}],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Total Requests Rate",
+        "type": "graph",
+        "targets": [{"expr": "rate(http_requests_total[5m])"}],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      }
+    ],
+    "schemaVersion": 36,
+    "version": 1
+  }
+}
+OVERVIEW_EOF
+
+# Set ownership
+RUN chown -R grafana:grafana /var/lib/grafana/dashboards
+
+# Create health check script
+RUN cat > /usr/local/bin/grafana-health <<'HEALTH_EOF'
+#!/bin/bash
+set -euo pipefail
+
+# Generate timestamp in YY-MM-DD-HH-MM-SS format
+TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
+
+# Check Grafana API health
+if HEALTH_RESPONSE=$(curl -sf http://localhost:3000/api/health 2>&1); then
+  STATUS="healthy"
+  GRAFANA_AVAILABLE=true
+  
+  # Parse response if it's JSON
+  if echo "$HEALTH_RESPONSE" | jq -e . >/dev/null 2>&1; then
+    GRAFANA_STATUS=$(echo "$HEALTH_RESPONSE" | jq -r '.database // "unknown"')
+  else
+    GRAFANA_STATUS="running"
+  fi
+else
+  STATUS="unhealthy"
+  GRAFANA_AVAILABLE=false
+  GRAFANA_STATUS="unavailable"
+fi
+
+# Check if datasources are configured
+if curl -sf http://localhost:3000/api/datasources > /dev/null 2>&1; then
+  DATASOURCES_CONFIGURED=true
+else
+  DATASOURCES_CONFIGURED=false
+fi
+
+cat <<JSON
+{
+  "timestamp": "${TIMESTAMP}",
+  "status": "${STATUS}",
+  "service": "grafana",
+  "grafana_available": ${GRAFANA_AVAILABLE},
+  "grafana_status": "${GRAFANA_STATUS}",
+  "datasources_configured": ${DATASOURCES_CONFIGURED},
+  "endpoint": "http://localhost:3000",
+  "gateway_type": "visualization"
+}
+JSON
+HEALTH_EOF
+
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/grafana-health && chmod +x /usr/local/bin/grafana-health
+
+# Switch back to grafana user
+USER grafana
+
+# Expose Grafana port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+  CMD /usr/local/bin/grafana-health > /dev/null || exit 1
+
+# Environment variables (override in docker-compose)
+ENV GF_SECURITY_ADMIN_USER=admin \
+  GF_SECURITY_ADMIN_PASSWORD=admin \
+  GF_USERS_ALLOW_SIGN_UP=false \
+  GF_SERVER_ROOT_URL=http://localhost:3000 \
+  GF_PATHS_PROVISIONING=/etc/grafana/provisioning \
+  GF_INSTALL_PLUGINS=""
+
+# Start Grafana
+CMD ["grafana-server", "--homepath=/usr/share/grafana", "--config=/etc/grafana/grafana.ini"]

@@ -32,6 +32,8 @@
         "--name",
         "filesystem-mcp-server",
         "-v",
+        "filesystem-cache:/cache",
+        "-v",
         "${workspaceFolder}:/workspace:ro",
         "mcp-filesystem:latest"
       ]
@@ -53,6 +55,23 @@
         "POSTGRES_CONNECTION": "postgresql://postgres:${env:DOCKER_POSTGRES_PASSWORD}@host.docker.internal:5432/postgres"
       }
     },
+    "mariadb": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "mariadb-mcp-server",
+        "--add-host=host.docker.internal:host-gateway",
+        "-e",
+        "MARIADB_CONNECTION",
+        "mcp-mariadb:latest"
+      ],
+      "env": {
+        "MARIADB_CONNECTION": "mysql://root:${env:MARIADB_PASSWORD}@host.docker.internal:3306/mcp_db"
+      }
+    },
     "sqlite": {
       "command": "docker",
       "args": [
@@ -61,6 +80,8 @@
         "--rm",
         "--name",
         "sqlite-mcp-server",
+        "-v",
+        "sqlite-cache:/cache",
         "-v",
         "${workspaceFolder}:/data",
         "mcp-sqlite:latest",
@@ -78,6 +99,10 @@
         "memory-mcp-server",
         "-v",
         "memory-data:/memory",
+        "-v",
+        "memory-cache:/cache/memory",
+        "-v",
+        "memory-node-cache:/cache/node",
         "mcp-memory:latest"
       ]
     },
@@ -89,6 +114,8 @@
         "--rm",
         "--name",
         "git-mcp-server",
+        "-v",
+        "git-cache:/cache",
         "-v",
         "${workspaceFolder}:/repos",
         "mcp-git:latest"
@@ -105,6 +132,21 @@
         "-v",
         "fetch-cache:/cache",
         "mcp-fetch:latest"
+      ]
+    },
+    "markitdown": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "markitdown-mcp-server",
+        "-v",
+        "markitdown-cache:/cache",
+        "-v",
+        "${workspaceFolder}:/workspace:ro",
+        "markitdown-mcp:latest"
       ]
     }
   },
