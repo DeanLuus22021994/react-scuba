@@ -3,7 +3,7 @@
  * @packageDocumentation
  */
 
-import { type HTMLAttributes, type ReactNode, forwardRef } from "react";
+import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "./utils/classnames";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {

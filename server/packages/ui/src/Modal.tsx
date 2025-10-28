@@ -3,7 +3,7 @@
  * @packageDocumentation
  */
 
-import { type ReactNode, type HTMLAttributes, useEffect } from "react";
+import { type HTMLAttributes, type ReactNode, useEffect } from "react";
 import { cn } from "./utils/classnames";
 
 export interface ModalProps {
@@ -127,6 +127,7 @@ export function ModalHeader({
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
+						aria-hidden="true"
 					>
 						<path
 							strokeLinecap="round"

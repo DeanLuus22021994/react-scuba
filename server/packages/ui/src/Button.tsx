@@ -3,7 +3,7 @@
  * @packageDocumentation
  */
 
-import { type ButtonHTMLAttributes, type ReactNode, forwardRef } from "react";
+import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from "react";
 import { cn } from "./utils/classnames";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -67,6 +67,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 						fill="none"
 						viewBox="0 0 24 24"
 						xmlns="http://www.w3.org/2000/svg"
+						role="img"
+						aria-label="Loading"
 					>
 						<circle
 							className="opacity-25"

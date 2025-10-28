@@ -4,12 +4,12 @@
  */
 
 import {
-	type ReactNode,
+	forwardRef,
 	type HTMLAttributes,
 	type InputHTMLAttributes,
-	type TextareaHTMLAttributes,
+	type ReactNode,
 	type SelectHTMLAttributes,
-	forwardRef,
+	type TextareaHTMLAttributes,
 } from "react";
 import { cn } from "./utils/classnames";
 
@@ -44,6 +44,7 @@ export interface FormLabelProps extends HTMLAttributes<HTMLLabelElement> {
 export const FormLabel = forwardRef<HTMLLabelElement, FormLabelProps>(
 	({ children, required, className, ...props }, ref) => {
 		return (
+			// biome-ignore lint/a11y/noLabelWithoutControl: FormLabel is designed to be used with separate inputs via htmlFor prop
 			<label
 				ref={ref}
 				className={cn(
@@ -147,12 +148,16 @@ export interface FormCheckboxProps
 }
 
 export const FormCheckbox = forwardRef<HTMLInputElement, FormCheckboxProps>(
-	({ label, error, className, ...props }, ref) => {
+	({ label, error, className, id, ...props }, ref) => {
+		const inputId =
+			id || `checkbox-${Math.random().toString(36).substring(2, 9)}`;
+
 		return (
 			<div className="flex items-center">
 				<input
 					ref={ref}
 					type="checkbox"
+					id={inputId}
 					className={cn(
 						"h-4 w-4 text-blue-600 border-gray-300 rounded",
 						"focus:ring-2 focus:ring-blue-500",
@@ -161,7 +166,9 @@ export const FormCheckbox = forwardRef<HTMLInputElement, FormCheckboxProps>(
 					)}
 					{...props}
 				/>
-				<label className="ml-2 text-sm text-gray-700">{label}</label>
+				<label htmlFor={inputId} className="ml-2 text-sm text-gray-700">
+					{label}
+				</label>
 			</div>
 		);
 	},
@@ -175,12 +182,15 @@ export interface FormRadioProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const FormRadio = forwardRef<HTMLInputElement, FormRadioProps>(
-	({ label, error, className, ...props }, ref) => {
+	({ label, error, className, id, ...props }, ref) => {
+		const inputId = id || `radio-${Math.random().toString(36).substring(2, 9)}`;
+
 		return (
 			<div className="flex items-center">
 				<input
 					ref={ref}
 					type="radio"
+					id={inputId}
 					className={cn(
 						"h-4 w-4 text-blue-600 border-gray-300",
 						"focus:ring-2 focus:ring-blue-500",
@@ -189,7 +199,9 @@ export const FormRadio = forwardRef<HTMLInputElement, FormRadioProps>(
 					)}
 					{...props}
 				/>
-				<label className="ml-2 text-sm text-gray-700">{label}</label>
+				<label htmlFor={inputId} className="ml-2 text-sm text-gray-700">
+					{label}
+				</label>
 			</div>
 		);
 	},
