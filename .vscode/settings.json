@@ -191,40 +191,48 @@
   "window.titleBarStyle": "custom",
   "python-envs.pythonProjects": ["docker-compose-examples/mcp/python_utils"],
 
-  // === PYTHON 3.14T FREE-THREADING CONFIGURATION ===
+  // === PYTHON 3.14T FREE-THREADING CONFIGURATION (PERFORMANCE OPTIMIZED) ===
   "python.defaultInterpreterPath": "C:\\Users\\deanl.MSI\\.local\\bin\\python3.14t.exe",
-  "python.interpreter.infoVisibility": "always",
-  "python.terminal.activateEnvironment": true,
-  "python.terminal.activateEnvInCurrentTerminal": true,
-  "python.analysis.typeCheckingMode": "basic",
-  "python.analysis.autoImportCompletions": true,
-  "python.analysis.include": ["docker-compose-examples/mcp/python_utils"],
-  "python.analysis.extraPaths": ["docker-compose-examples/mcp/python_utils/src"],
+  "python.interpreter.infoVisibility": "onFailure",
+  "python.terminal.activateEnvironment": false,
+  "python.terminal.activateEnvInCurrentTerminal": false,
+  
+  // DISABLE CONTINUOUS ANALYSIS - MAJOR PERFORMANCE KILLER
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.autoImportCompletions": false,
+  "python.analysis.include": [],
+  "python.analysis.exclude": [
+    "**",
+    "docker-compose-examples/**",
+    "**/node_modules/**",
+    "**/.turbo/**",
+    "**/dist/**",
+    "**/build/**"
+  ],
+  "python.analysis.extraPaths": [],
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.indexing": false,
+  "python.analysis.packageIndexDepths": [],
+  "python.analysis.completeFunctionParens": false,
+  "python.analysis.autoSearchPaths": false,
+  "python.analysis.stubPath": "",
+  "python.analysis.typeshedPaths": [],
+  "python.analysis.useLibraryCodeForTypes": false,
+  
+  // DISABLE PYLANCE INTENSIVE FEATURES
+  "pylance.insidersChannel": "off",
+  "python.languageServer": "None",
+  "python.jediEnabled": false,
+  
+  // DISABLE LINTING AND FORMATTING (USE RUFF ONLY WHEN NEEDED)
   "python.linting.enabled": false,
   "python.formatting.provider": "none",
-  "ruff.enable": true,
-  "ruff.organizeImports": true,
-  "ruff.fixAll": true,
-  "ruff.interpreter": ["C:\\Users\\deanl.MSI\\.local\\bin\\python3.14t.exe"],
-  "python.testing.pytestEnabled": true,
+  "ruff.enable": false,
+  "ruff.organizeImports": false,
+  "ruff.fixAll": false,
+  
+  // DISABLE TESTING AUTO-DISCOVERY
+  "python.testing.pytestEnabled": false,
   "python.testing.unittestEnabled": false,
-  "python.testing.pytestArgs": [
-    "docker-compose-examples/mcp/python_utils/tests",
-    "-v",
-    "--tb=short"
-  ],
-
-  // === PERFORMANCE OPTIMIZATION ===
-  "python.jediEnabled": false,
-  "python.languageServer": "Pylance",
-  "pylance.insidersChannel": "daily",
-  "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.completeFunctionParens": true,
-  "python.analysis.indexing": true,
-  "python.analysis.packageIndexDepths": [
-    {
-      "name": "react_scuba_utils",
-      "depth": 10
-    }
-  ]
+  "python.testing.autoTestDiscoverOnSaveEnabled": false
 }

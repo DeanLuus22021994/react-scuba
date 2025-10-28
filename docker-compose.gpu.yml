@@ -1,0 +1,110 @@
+# GPU-Accelerated Development Stack
+# React Scuba Multi-tenant Platform with RTX Optimization
+version: '3.8'
+
+services:
+  react-scuba-gpu:
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+      target: dev
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - CUDA_VISIBLE_DEVICES=0
+      - NODE_ENV=development
+      - TURBO_TELEMETRY_DISABLED=1
+      - FORCE_COLOR=1
+      - VITE_GPU_ACCELERATION=true
+    volumes:
+      - ./server:/app/server
+      - gpu-node-modules:/app/server/node_modules
+      - gpu-turbo-cache:/app/server/.turbo
+      - ./.npm-cache:/app/.npm-cache
+    ports:
+      - "3000:3000"   # Web app
+      - "3001:3001"   # API server
+      - "5173:5173"   # Vite dev server
+      - "4173:4173"   # Vite preview
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu, compute]
+        limits:
+          memory: 8G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - react-scuba-gpu
+
+  # Snapshot manager for instant rollback
+  snapshot-manager:
+    image: alpine:latest
+    volumes:
+      - gpu-snapshots:/snapshots
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: |
+      sh -c '
+        echo "=== GPU Build Snapshots Available ==="
+        echo "- system-snapshot: Base GPU system with CUDA"
+        echo "- deps-snapshot: Exact bleeding-edge dependencies"
+        echo "- shared-snapshot: GPU-built shared packages"
+        echo "- complete-snapshot: Full GPU-accelerated build"
+        echo ""
+        echo "Usage:"
+        echo "  docker run --rm react-scuba:deps-snapshot"
+        echo "  docker run --rm react-scuba:shared-snapshot"
+        echo "  docker run --rm react-scuba:complete-snapshot"
+        echo ""
+        echo "Monitoring GPU performance..."
+        tail -f /dev/null
+      '
+    networks:
+      - react-scuba-gpu
+
+  # GPU monitoring service
+  gpu-monitor:
+    image: nvidia/cuda:12.4-runtime-ubuntu22.04
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    command: |
+      sh -c '
+        while true; do
+          echo "=== GPU Status ==="
+          nvidia-smi --query-gpu=timestamp,name,temperature.gpu,utilization.gpu,utilization.memory,memory.used,memory.total --format=csv
+          echo ""
+          sleep 5
+        done
+      '
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - react-scuba-gpu
+
+volumes:
+  gpu-node-modules:
+    driver: local
+  gpu-turbo-cache:
+    driver: local
+  gpu-snapshots:
+    driver: local
+
+networks:
+  react-scuba-gpu:
+    driver: bridge
+    name: react-scuba-gpu
