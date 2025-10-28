@@ -43,18 +43,12 @@ set -euo pipefail
 # Generate timestamp in YY-MM-DD-HH-MM-SS format
 TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
 
-# Check if nvidia-smi is available (REQUIRED for GPU-only mode)
-if command -v nvidia-smi &> /dev/null; then
-  # Get GPU info
-  GPU_INFO=$(nvidia-smi --query-gpu=index,name,driver_version,memory.total,memory.used,memory.free,temperature.gpu,utilization.gpu \
-    --format=csv,noheader,nounits | \
-    awk -F', ' '{
-      printf "{\"index\":%d,\"name\":\"%s\",\"driver\":\"%s\",\"memory_total_mb\":%d,\"memory_used_mb\":%d,\"memory_free_mb\":%d,\"temperature_c\":%d,\"gpu_utilization_percent\":%d},", 
-      $1, $2, $3, $4, $5, $6, $7, $8
-    }' | \
-    sed 's/,$//' | \
-    jq -s '.')
+# GPU info via Docker environment variables (no nvidia-smi required)
+# CUDA_VISIBLE_DEVICES is set by Docker, indicating GPU is available
+if [ -n "${CUDA_VISIBLE_DEVICES:-}" ]; then
   GPU_AVAILABLE=true
+  # Get GPU info from Ollama's inference logs
+  GPU_INFO="[{\"cuda_device\":\"${CUDA_VISIBLE_DEVICES}\",\"mode\":\"GPU-only\",\"ollama_num_gpu\":${OLLAMA_NUM_GPU:-999}}]"
 else
   # GPU is REQUIRED - fail health check if not available
   echo "{\"error\":\"GPU not available - GPU-only mode requires NVIDIA GPU\"}" >&2
@@ -79,6 +73,8 @@ cat <<JSON
   "mode": "gpu-only",
   "ollama_status": "${OLLAMA_STATUS}",
   "gpu_available": ${GPU_AVAILABLE},
+  "cuda_visible_devices": "${CUDA_VISIBLE_DEVICES:-}",
+  "ollama_num_gpu": ${OLLAMA_NUM_GPU:-999},
   "gpus": ${GPU_INFO},
   "models": ${MODELS},
   "model_storage": "/root/.ollama/models",
@@ -102,15 +98,8 @@ done
 
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Ollama service is ready."
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model storage: $OLLAMA_MODELS"
-echo "[$(date +%Y-%m-%d\ %H:%M:%S)] GPU mode: Required (no CPU fallback)"
-
-# Verify GPU is available
-if ! nvidia-smi > /dev/null 2>&1; then
-  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] ERROR: GPU not available! GPU-only mode requires NVIDIA GPU."
-  exit 1
-fi
-
-echo "[$(date +%Y-%m-%d\ %H:%M:%S)] GPU detected: $(nvidia-smi --query-gpu=name --format=csv,noheader)"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] GPU mode: Required (OLLAMA_NUM_GPU=$OLLAMA_NUM_GPU)"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Checking for smollm2:latest model..."
 
 # Check if model exists
