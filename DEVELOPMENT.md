@@ -145,10 +145,11 @@ npm run dev
 
 **Server Details:**
 
-- **Local URL:** http://localhost:3002/
+- **Local URL:** <http://localhost:3002/>
 - **Network URLs:**
-  - http://192.168.0.117:3002/
-  - http://172.18.0.1:3002/
+
+  - <http://192.168.0.117:3002/>
+  - <http://172.18.0.1:3002/>
 - **Vite Version:** 7.1.11
 - **Startup Time:** 206ms
 
@@ -162,7 +163,7 @@ npm run dev
 **Time:** ~2 minutes
 **Details:**
 
-- Opened Simple Browser to http://localhost:3002
+- Opened Simple Browser to <http://localhost:3002>
 - Verified website loads with full styling
 - Confirmed Tailwind CSS is properly applied
 - Ocean/coral color scheme visible
@@ -237,17 +238,17 @@ npm run dev
 
 ### Frontend (React + Vite)
 
-- **URL:** http://localhost:3002
+- **URL:** <http://localhost:3002>
 - **Port:** 3002 (auto-assigned, 3001 was in use)
 - **Status:** ✅ Running
 - **Hot Reload:** Enabled
 
 ### Backend API (Express)
 
-- **URL:** http://localhost:3002/api (configured)
+- **URL:** <http://localhost:3002/api> (configured)
 - **Port:** 3002 (not started yet)
 - **Status:** ⚠️ Not running (optional for frontend demo)
-- **Health Check:** http://localhost:3002/health
+- **Health Check:** <http://localhost:3002/health>
 
 ### Database (MariaDB)
 
@@ -408,7 +409,7 @@ npm run dev
 
 1. ✅ **Demo is Ready!**
 
-   - Website fully functional on http://localhost:3002
+   - Website fully functional on <http://localhost:3002>
    - All pages render with proper styling
    - Navigation and routing working
    - Responsive design verified
@@ -526,7 +527,7 @@ docker-compose up -d mariadb
 
 ### Stop Development Server
 
-```
+```text
 Press Ctrl+C in terminal
 ```
 
@@ -632,7 +633,7 @@ npm install
 
 ## 🏆 Achievement Unlocked
 
-**✅ ALL CRITICAL TASKS COMPLETED**
+## ALL CRITICAL TASKS COMPLETED
 
 - Dependencies installed
 - Configuration files created

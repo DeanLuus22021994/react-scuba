@@ -6,7 +6,7 @@ This directory contains team member images for the multi-tenant dive center plat
 
 Images are organized by client tenant:
 
-```
+```text
 team/
 ├── client-slug-1/
 │   ├── instructor-1.jpg
