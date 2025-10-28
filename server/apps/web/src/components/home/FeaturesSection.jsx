@@ -31,7 +31,7 @@ const FeatureItem = ({ feature, index }) => {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="text-center p-6 rounded-xl bg-white shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-1"
+      className="h-full flex flex-col justify-center text-center p-6 rounded-xl bg-white shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-1"
     >
       <div className="text-5xl md:text-6xl font-bold text-ocean-600 mb-3">{feature.stat}</div>
       <div className="text-xl font-display font-semibold text-gray-900 mb-2 tracking-tight">

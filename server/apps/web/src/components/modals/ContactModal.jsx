@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { zodResolver } from '@hookform/resolvers/zod';
 import PropTypes from 'prop-types';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -46,6 +46,7 @@ const ContactModal = ({
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStartTime, setFormStartTime] = useState(null);
+  const firstInputRef = useRef(null);
 
   const {
     register,
@@ -71,6 +72,8 @@ const ContactModal = ({
     if (isOpen && !formStartTime) {
       setFormStartTime(Date.now());
       trackFormStart('contact_form', source);
+      // Focus first input when modal opens
+      setTimeout(() => firstInputRef.current?.focus(), 100);
     }
   }, [isOpen, formStartTime, source]);
 
@@ -179,6 +182,7 @@ const ContactModal = ({
                       </label>
                       <input
                         {...register('name')}
+                        ref={firstInputRef}
                         type="text"
                         id="name"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500"

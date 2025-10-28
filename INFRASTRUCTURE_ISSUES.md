@@ -1,0 +1,328 @@
+# Infrastructure Issues - Testing & Linting Framework
+
+**Date:** October 28, 2025  
+**Context:** Discovered during React Performance Modernization implementation  
+**Priority:** Medium - Blocks CI/CD pipeline but does not affect production builds  
+
+---
+
+## 🚨 Critical Issues
+
+### 1. Missing Test Files in Monorepo Packages
+
+**Status:** ❌ Blocking  
+**Affected Packages:**
+- `@react-scuba/api` (server/apps/api)
+- `@react-scuba/utils` (server/packages/utils)
+
+**Problem:**
+```
+@react-scuba/api:test: No test files found, exiting with code 1
+@react-scuba/utils:test: No test files found, exiting with code 1
+
+include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+```
+
+**Impact:**
+- `npm test` command fails with exit code 1
+- Turbo monorepo test orchestration fails entire pipeline when any workspace fails
+- Prevents running tests for packages that DO have test files (@react-scuba/web has 30+ test files)
+- Blocks pre-commit hooks and CI/CD pipelines
+
+**Root Cause:**
+- Packages have `"test": "vitest run"` script configured in package.json
+- Vitest is configured to run but no `*.test.jsx` or `*.spec.js` files exist
+- Vitest v3.2.4 exits with code 1 when no test files match patterns
+
+**Recommended Solutions:**
+
+**Option A - Short-term (Immediate):**
+```json
+// In packages without tests, change package.json:
+{
+  "scripts": {
+    "test": "echo 'No tests yet' && exit 0"
+  }
+}
+```
+
+**Option B - Medium-term (Recommended):**
+```json
+// In turbo.json, make test failures non-blocking:
+{
+  "tasks": {
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "tests/**/*.ts", "**/*.test.ts"],
+      "cache": false,
+      "errorHandling": "continue"  // Add this
+    }
+  }
+}
+```
+
+**Option C - Long-term (Best Practice):**
+Create placeholder test files for each package:
+```typescript
+// server/apps/api/src/__tests__/placeholder.test.ts
+import { describe, it, expect } from 'vitest';
+
+describe('API Package', () => {
+  it('should have tests', () => {
+    expect(true).toBe(true);
+  });
+});
+```
+
+---
+
+### 2. NPM Environment Configuration Warnings
+
+**Status:** ⚠️ Warning (will break in future npm version)  
+**Severity:** Low (currently just warnings)
+
+**Problem:**
+```
+npm warn Unknown env config "msvs-version". This will stop working in the next major version of npm.
+npm warn Unknown env config "target-arch". This will stop working in the next major version of npm.
+```
+
+**Impact:**
+- Currently non-blocking
+- Will break when npm upgrades to next major version (likely npm 11)
+- Indicates outdated configuration for native module compilation
+
+**Root Cause:**
+- Legacy npm config from .npmrc or environment variables
+- Used for node-gyp native module compilation (likely for older dependencies)
+
+**Recommended Solution:**
+```bash
+# Check current npm config
+npm config list
+
+# Remove deprecated configs
+npm config delete msvs-version
+npm config delete target-arch
+
+# Modern alternative for native modules:
+npm config set python /path/to/python3
+npm config set msvs_version 2022
+```
+
+**Action Required:**
+1. Audit `.npmrc` files in project root and `server/` directory
+2. Remove or update deprecated config keys
+3. Verify native dependencies still compile (if any)
+
+---
+
+### 3. Web-Vitals Library API Breaking Change
+
+**Status:** ✅ Fixed (documented for future reference)  
+**Affected Code:** `server/apps/web/src/utils/webVitals.js`
+
+**Problem:**
+```
+error during build:
+src/utils/webVitals.js (1:16): "onFID" is not exported by "web-vitals"
+```
+
+**Root Cause:**
+- Web-vitals v3.0+ replaced `onFID` (First Input Delay) with `onINP` (Interaction to Next Paint)
+- FID deprecated by Chrome team in favor of INP as Core Web Vital
+
+**Solution Applied:**
+```javascript
+// OLD (web-vitals v2):
+import { onCLS, onFID, onFCP, onLCP, onTTFB } from 'web-vitals';
+
+// NEW (web-vitals v3+):
+import { onCLS, onINP, onFCP, onLCP, onTTFB } from 'web-vitals';
+```
+
+**Documentation:**
+- [Web Vitals Changelog](https://github.com/GoogleChrome/web-vitals/releases)
+- [INP Migration Guide](https://web.dev/inp/)
+
+---
+
+## 📋 Infrastructure Recommendations
+
+### Testing Framework Strategy
+
+**Current State:**
+- Vitest 3.2.4 configured across all packages
+- React Testing Library available in @react-scuba/web
+- No test files in api/utils packages
+- Turbo orchestrates tests but fails fast
+
+**Recommended Architecture:**
+
+1. **Workspace-Level Test Configuration**
+```javascript
+// turbo.json
+{
+  "tasks": {
+    "test": {
+      "dependsOn": ["^build"],
+      "cache": true,
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts", 
+        "tests/**/*",
+        "**/*.test.ts",
+        "vitest.config.ts"
+      ],
+      "outputs": ["coverage/**"],
+      "errorHandling": "continue"  // Don't fail entire pipeline
+    }
+  }
+}
+```
+
+2. **Per-Package Test Scripts**
+```json
+// For packages WITH tests:
+{
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  }
+}
+
+// For packages WITHOUT tests (temporary):
+{
+  "scripts": {
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "echo 'No tests to watch'",
+    "test:coverage": "echo 'No coverage to generate'"
+  }
+}
+```
+
+3. **CI/CD Pipeline Configuration**
+```yaml
+# .github/workflows/test.yml
+- name: Run Tests
+  run: npm test -- --reporter=verbose --reporter=json
+  continue-on-error: true  # Don't fail build on test failures during migration
+
+- name: Upload Test Results
+  uses: actions/upload-artifact@v3
+  with:
+    name: test-results
+    path: test-results.json
+```
+
+### Linting Framework Strategy
+
+**Current State:**
+- No ESLint/Prettier configuration found in modified files
+- VSCode tasks.json exists but no lint task
+- PowerShell linting warnings about `cd` alias usage
+
+**Recommended Tools:**
+
+1. **ESLint Configuration (React + TypeScript)**
+```bash
+npm install -D @typescript-eslint/parser @typescript-eslint/eslint-plugin
+npm install -D eslint-plugin-react eslint-plugin-react-hooks
+npm install -D eslint-plugin-jsx-a11y  # For accessibility linting
+```
+
+2. **Biome Configuration (Modern Alternative)**
+```json
+// biome.json (already exists in packages/config)
+{
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "recommended": true
+      }
+    }
+  }
+}
+```
+
+3. **Pre-commit Hooks**
+```bash
+npm install -D husky lint-staged
+
+# .husky/pre-commit
+#!/bin/sh
+npx lint-staged
+
+# package.json
+{
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}
+```
+
+---
+
+## 🎯 Action Items for Architecture Team
+
+### Priority 1 (Immediate - Unblock Development)
+- [ ] Add `--passWithNoTests` flag to vitest commands in packages without tests
+- [ ] OR create placeholder test files for @react-scuba/api and @react-scuba/utils
+- [ ] Update turbo.json to use `"errorHandling": "continue"` for test task
+
+### Priority 2 (This Sprint)
+- [ ] Audit and remove deprecated npm config (msvs-version, target-arch)
+- [ ] Add lint task to VS Code tasks.json and Turbo configuration
+- [ ] Document testing strategy for new packages in CONTRIBUTING.md
+
+### Priority 3 (Next Sprint)
+- [ ] Implement pre-commit hooks with lint-staged
+- [ ] Add test coverage requirements (recommend 70% for new code)
+- [ ] Set up GitHub Actions workflow for automated testing
+- [ ] Create test templates for common patterns (API routes, React components, utils)
+
+### Priority 4 (Future)
+- [ ] Migrate to Biome if ESLint performance becomes bottleneck
+- [ ] Implement visual regression testing with Playwright
+- [ ] Add E2E test coverage for critical user journeys
+- [ ] Set up Lighthouse CI for performance regression detection
+
+---
+
+## �� Test Coverage Baseline
+
+**Current Coverage (estimated based on files found):**
+- `@react-scuba/web`: ~30 test files exist (needs audit for actual coverage %)
+- `@react-scuba/api`: 0 test files
+- `@react-scuba/utils`: 0 test files
+- `@react-scuba/ui`: Unknown (needs investigation)
+- `@react-scuba/types`: 0 test files (types-only package)
+- `@react-scuba/config`: 0 test files (config-only package)
+
+**Recommended Targets:**
+- Critical paths (booking, payment): 90%+ coverage
+- UI components: 80%+ coverage  
+- Utilities: 85%+ coverage
+- API routes: 75%+ coverage
+
+---
+
+## 🔗 Related Documentation
+
+- [Vitest Configuration Guide](https://vitest.dev/config/)
+- [Turbo Monorepo Testing](https://turbo.build/repo/docs/handbook/testing)
+- [Web Vitals Migration](https://github.com/GoogleChrome/web-vitals#migration)
+- [NPM Config Deprecations](https://docs.npmjs.com/cli/v10/using-npm/config)
+
+---
+
+**Generated by:** GitHub Copilot (Expert React Frontend Engineer Mode)  
+**Review Status:** Pending Architecture Team Review  
+**Next Review:** Before next sprint planning

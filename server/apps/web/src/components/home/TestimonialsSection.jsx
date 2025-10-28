@@ -33,7 +33,7 @@ const TestimonialCard = ({ testimonial, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white p-8 rounded-xl shadow-soft hover:shadow-medium transition-all duration-300"
+      className="h-full flex flex-col bg-white p-8 rounded-xl shadow-soft hover:shadow-medium transition-all duration-300"
     >
       <div className="flex items-center mb-4">
         <img
@@ -53,7 +53,7 @@ const TestimonialCard = ({ testimonial, index }) => {
         ))}
       </div>
 
-      <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
+      <p className="text-gray-700 italic flex-grow">&quot;{testimonial.text}&quot;</p>
     </motion.div>
   );
 };

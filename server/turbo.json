@@ -1,43 +1,57 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV", "CI"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "build/**"],
-      "cache": true
+      "outputs": ["dist/**", "build/**", ".next/**", ".vite/**"],
+      "cache": true,
+      "env": ["VITE_*", "REACT_APP_*"],
+      "outputLogs": "new-only"
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["VITE_*", "REACT_APP_*"]
     },
     "preview": {
+      "dependsOn": ["build"],
       "cache": false,
       "persistent": true
     },
     "lint": {
       "cache": true,
-      "outputs": []
+      "outputs": [],
+      "dependsOn": ["^build"],
+      "outputLogs": "errors-only"
     },
     "lint:fix": {
-      "cache": false
+      "cache": false,
+      "outputLogs": "new-only"
     },
     "format": {
-      "cache": false
+      "cache": false,
+      "outputLogs": "new-only"
     },
     "format:check": {
       "cache": true,
-      "outputs": []
+      "outputs": [],
+      "outputLogs": "errors-only"
     },
     "test": {
       "dependsOn": ["^build"],
       "cache": true,
-      "outputs": ["coverage/**"]
+      "outputs": ["coverage/**"],
+      "inputs": ["src/**/*.{js,jsx,ts,tsx}", "tests/**/*.{js,jsx,ts,tsx}", "**/*.test.{js,jsx,ts,tsx}"],
+      "outputLogs": "new-only"
     },
     "test:coverage": {
       "dependsOn": ["^build"],
       "cache": true,
-      "outputs": ["coverage/**"]
+      "outputs": ["coverage/**"],
+      "inputs": ["src/**/*.{js,jsx,ts,tsx}", "tests/**/*.{js,jsx,ts,tsx}", "**/*.test.{js,jsx,ts,tsx}"],
+      "outputLogs": "full"
     },
     "test:ui": {
       "cache": false,
@@ -46,10 +60,12 @@
     "type-check": {
       "dependsOn": ["^build"],
       "cache": true,
-      "outputs": [".tsbuildinfo"]
+      "outputs": [".tsbuildinfo", "*.tsbuildinfo"],
+      "outputLogs": "errors-only"
     },
     "clean": {
       "cache": false
     }
-  }
+  },
+  "ui": "tui"
 }

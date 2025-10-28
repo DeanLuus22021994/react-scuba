@@ -1,7 +1,9 @@
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import BookingModal from '../../../components/modals/BookingModal';
+import { useState, lazy, Suspense, useCallback } from 'react';
+import { Helmet } from 'react-helmet-async';
+
+const BookingModal = lazy(() => import('../../../components/modals/BookingModal'));
 import { SEO } from '../../../components/ui';
 import { CREDENTIALS } from '../../../config/constants/CREDENTIALS';
 import { TEAM_MEMBERS } from '../../../config/constants/TEAM';
@@ -12,10 +14,10 @@ import TeamMember from './TeamMember';
 const AboutPage = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
-  const handleBookingClick = () => {
+  const handleBookingClick = useCallback(() => {
     trackConversion('about_page_cta', { action: 'book_discovery_dive' });
     setIsBookingModalOpen(true);
-  };
+  }, []);
 
   return (
     <>
@@ -23,6 +25,50 @@ const AboutPage = () => {
         title="About Us - Expert Scuba Diving Team in Mauritius"
         description="Meet our team of certified PADI instructors with 50+ years combined experience. PADI 5 Star Dive Center offering professional diving courses and guided dives in Mauritius."
       />
+      <Helmet>
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Ocean Spirit Diving Team - PADI 5 Star ECO Centre" />
+        <meta property="og:description" content="Meet our team of certified PADI instructors with 50+ years combined experience in Mauritius." />
+        <meta property="og:image" content="https://www.osdiving.com/images/team/team-photo.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.osdiving.com/about" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ocean Spirit Diving Team" />
+        <meta name="twitter:description" content="Meet our team of certified PADI instructors with 50+ years combined experience." />
+        <meta name="twitter:image" content="https://www.osdiving.com/images/team/team-photo.jpg" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Ocean Spirit Scuba Diving',
+            url: 'https://www.osdiving.com',
+            logo: 'https://www.osdiving.com/logo.png',
+            description: 'PADI 5 Star ECO Centre in Mauritius offering professional scuba diving courses and guided dives',
+            address: {
+              '@type': 'PostalAddress',
+              addressCountry: 'MU',
+              addressRegion: 'Mauritius',
+            },
+            sameAs: [
+              'https://www.facebook.com/oceanspirit',
+              'https://www.instagram.com/oceanspirit',
+            ],
+            employee: TEAM_MEMBERS.map(member => ({
+              '@type': 'Person',
+              name: member.name,
+              jobTitle: member.role,
+              image: `https://www.osdiving.com${member.image}`,
+              description: member.bio,
+            })),
+          })}
+        </script>
+      </Helmet>
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -199,20 +245,85 @@ const AboutPage = () => {
         </section>
 
         {/* Team Section */}
-        <section className="py-16 px-4 bg-ocean-50">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
-              <p className="text-lg text-gray-700">
-                Experienced, passionate, and dedicated to your diving success
+        <section className="py-20 px-4 bg-gradient-to-b from-ocean-50 via-white to-ocean-50/50 relative overflow-hidden">
+          {/* Underwater bubbles decoration */}
+          <div className="absolute inset-0 pointer-events-none opacity-10">
+            <div className="absolute top-20 left-10 w-16 h-16 bg-ocean-300 rounded-full blur-xl animate-pulse" />
+            <div className="absolute top-40 right-20 w-24 h-24 bg-cyan-300 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-32 left-1/4 w-20 h-20 bg-ocean-400 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }} />
+            <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-blue-300 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '0.5s' }} />
+          </div>
+          
+          <div className="max-w-7xl mx-auto relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center justify-center gap-3 mb-6">
+                <div className="h-1 w-12 bg-gradient-to-r from-transparent to-ocean-500 rounded-full" />
+                <svg className="w-10 h-10 text-ocean-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <div className="h-1 w-12 bg-gradient-to-l from-transparent to-ocean-500 rounded-full" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-ocean-800 via-ocean-600 to-cyan-600 bg-clip-text text-transparent mb-4">
+                Meet the Ocean Spirit Team
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                Your expert dive professionals with <span className="font-semibold text-ocean-700">decades of combined experience</span> guiding unforgettable underwater adventures in Mauritius
               </p>
-            </div>
+              <div className="flex flex-wrap items-center justify-center gap-4 mt-6 text-ocean-600">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span className="font-semibold">PADI 5 Star ECO Centre</span>
+                </div>
+                <div className="h-1 w-1 bg-ocean-400 rounded-full" />
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold">8 Professional Dive Staff</span>
+                </div>
+                <div className="h-1 w-1 bg-ocean-400 rounded-full" />
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold">Green Fins Certified</span>
+                </div>
+              </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
               {TEAM_MEMBERS.map((member, index) => (
                 <TeamMember key={index} member={member} index={index} />
               ))}
             </div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-16 text-center"
+            >
+              <div className="bg-gradient-to-r from-ocean-600 to-cyan-600 rounded-2xl p-8 shadow-2xl">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  Ready to Dive with the Best?
+                </h3>
+                <p className="text-ocean-50 text-lg mb-6 max-w-2xl mx-auto">
+                  Our team is ready to guide you through Mauritius's most spectacular underwater adventures. From your first breath underwater to advanced wreck explorations.
+                </p>
+                <button
+                  onClick={handleBookingClick}
+                  className="inline-flex items-center gap-2 bg-white text-ocean-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-ocean-50 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Book Your Dive Experience
+                </button>
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -523,13 +634,17 @@ const AboutPage = () => {
         </section>
       </div>
 
-      <BookingModal
-        isOpen={isBookingModalOpen}
-        onClose={() => setIsBookingModalOpen(false)}
-        bookingType="course"
-        preSelectedItem={{ id: 'discover-scuba', name: 'Discover Scuba Diving' }}
-        source="about_page"
-      />
+      {isBookingModalOpen && (
+        <Suspense fallback={null}>
+          <BookingModal
+            isOpen={isBookingModalOpen}
+            onClose={() => setIsBookingModalOpen(false)}
+            bookingType="course"
+            preSelectedItem={{ id: 'discover-scuba', name: 'Discover Scuba Diving' }}
+            source="about_page"
+          />
+        </Suspense>
+      )}
     </>
   );
 };

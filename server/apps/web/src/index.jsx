@@ -7,6 +7,7 @@ import './index.css';
 import { initializeGA4, initializeGTM } from './utils/analytics';
 import { validateEnvVars } from './utils/env';
 import { reportWebVitalsToGA4 } from './utils/reportWebVitals';
+import { reportWebVitals } from './utils/webVitals';
 
 // Validate environment variables
 validateEnvVars();
@@ -26,5 +27,8 @@ root.render(
   </React.StrictMode>
 );
 
-// Send web vitals to GA4
+// Send web vitals to GA4 (existing)
 reportWebVitalsToGA4();
+
+// Report Core Web Vitals (new - comprehensive tracking)
+reportWebVitals();

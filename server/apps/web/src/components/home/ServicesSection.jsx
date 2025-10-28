@@ -42,7 +42,7 @@ const ServiceCard = ({ service, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="p-8 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
+      className="h-full flex flex-col p-8 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
     >
       <div className="w-14 h-14 bg-gradient-to-br from-ocean-500 to-ocean-700 rounded-xl flex items-center justify-center mb-6 shadow-md">
         <Icon className="w-7 h-7 text-white" />
@@ -50,10 +50,10 @@ const ServiceCard = ({ service, index }) => {
       <h3 className="text-xl font-display font-bold text-gray-900 mb-3 tracking-tight">
         {service.title}
       </h3>
-      <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+      <p className="text-gray-600 mb-6 leading-relaxed flex-grow">{service.description}</p>
       <Link
         to={service.link}
-        className="text-ocean-600 font-semibold hover:text-ocean-700 inline-flex items-center transition-all duration-200 group"
+        className="mt-auto text-ocean-600 font-semibold hover:text-ocean-700 inline-flex items-center transition-all duration-200 group"
       >
         {service.linkText}
         <svg

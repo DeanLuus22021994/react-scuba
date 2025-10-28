@@ -35,7 +35,7 @@ const SpecialOffersSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-white rounded-xl shadow-medium hover:shadow-strong transition-all duration-300 overflow-hidden border border-ocean-100"
+            className="h-full flex flex-col bg-white rounded-xl shadow-medium hover:shadow-strong transition-all duration-300 overflow-hidden border border-ocean-100"
           >
             <div className="bg-gradient-to-r from-ocean-600 to-ocean-700 p-6 text-white">
               <div className="flex items-center mb-2">
@@ -45,11 +45,11 @@ const SpecialOffersSection = () => {
               <h3 className="text-2xl font-bold mb-2">PADI Discover Scuba Diving</h3>
               <p className="text-ocean-100">Step one of your PADI Open Water Certification</p>
             </div>
-            <div className="p-6">
+            <div className="p-6 flex-grow flex flex-col min-h-[320px]">
               <p className="text-gray-700 mb-4 leading-relaxed">
                 {oceanSpiritContent.offers[0].description}
               </p>
-              <div className="bg-ocean-50 p-4 rounded-lg mb-4">
+              <div className="bg-ocean-50 p-4 rounded-lg mb-4 flex-grow">
                 <p className="text-sm font-semibold text-ocean-800 mb-2">
                   ✨ Couples DSD Special Available
                 </p>
@@ -59,7 +59,7 @@ const SpecialOffersSection = () => {
               </div>
               <button
                 onClick={() => handleEmailOffer(oceanSpiritContent.offers[0].emailSubject)}
-                className="w-full bg-ocean-600 hover:bg-ocean-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
+                className="w-full mt-auto bg-ocean-600 hover:bg-ocean-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
               >
                 Click here to Discover Scuba Diving
               </button>
@@ -72,7 +72,7 @@ const SpecialOffersSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white rounded-xl shadow-medium hover:shadow-strong transition-all duration-300 overflow-hidden border border-ocean-100"
+            className="h-full flex flex-col bg-white rounded-xl shadow-medium hover:shadow-strong transition-all duration-300 overflow-hidden border border-ocean-100"
           >
             <div className="bg-gradient-to-r from-ocean-700 to-ocean-800 p-6 text-white">
               <div className="flex items-center justify-between mb-2">
@@ -87,11 +87,11 @@ const SpecialOffersSection = () => {
               <h3 className="text-2xl font-bold mb-2">Best of the North</h3>
               <p className="text-ocean-100">10 Dive Package</p>
             </div>
-            <div className="p-6">
+            <div className="p-6 flex-grow flex flex-col min-h-[320px]">
               <p className="text-gray-700 mb-4 leading-relaxed">
                 {oceanSpiritContent.offers[1].description}
               </p>
-              <div className="bg-ocean-50 p-4 rounded-lg mb-4">
+              <div className="bg-ocean-50 p-4 rounded-lg mb-4 flex-grow">
                 <p className="text-sm font-semibold text-ocean-800 mb-2">Package Includes:</p>
                 <ul className="text-sm text-gray-700 space-y-1">
                   {oceanSpiritContent.offers[1].includes.map((item, index) => (
@@ -114,7 +114,7 @@ const SpecialOffersSection = () => {
               </div>
               <button
                 onClick={() => handleEmailOffer(oceanSpiritContent.offers[1].emailSubject)}
-                className="w-full bg-ocean-600 hover:bg-ocean-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
+                className="w-full mt-auto bg-ocean-600 hover:bg-ocean-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
               >
                 Click here for information on how to book
               </button>
