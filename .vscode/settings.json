@@ -123,7 +123,7 @@
 
   // === BIOME BLEEDING EDGE CONFIGURATION (FIXED) ===
   "biome.enabled": true,
-  "biome.lspBin": "./server/node_modules/@biomejs/biome/bin/biome",
+  "biome.lspBin": "${workspaceFolder}/server/node_modules/@biomejs/biome/bin/biome",
   "biome.rename": true,
 
   // === GITHUB COPILOT BLEEDING EDGE FEATURES ===
