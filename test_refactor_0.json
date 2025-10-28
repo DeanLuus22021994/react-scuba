@@ -1,1 +1,0 @@
-{"stream":false,"options":{"num_predict":1000,"temperature":0.2},"model":"codegeex4:9b-all-q4_K_M","prompt":"Refactor this Python code to use type hints, dataclasses, and proper error handling: def process_user(name, age, email): if age < 0: return None user = {'name': name, 'age': age, 'email': email} return user"}

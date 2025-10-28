@@ -23,6 +23,7 @@ The **@react-scuba/content** package has been successfully extended to support *
 ## Architecture Evolution
 
 ### Phase 1: Diving-Specific (Original)
+
 ```typescript
 interface ClientConfig {
   courses: Course[];        // REQUIRED
@@ -34,6 +35,7 @@ interface ClientConfig {
 **Limitation:** Only supports diving centers
 
 ### Phase 2: Multi-Industry (Current)
+
 ```typescript
 interface ClientConfig {
   // Universal fields (all industries)
@@ -55,9 +57,11 @@ interface ClientConfig {
 ## Supported Business Types
 
 ### 1. Diving Centers
+
 **Example:** Ocean Spirit Mauritius
 
 **Configuration:**
+
 ```json
 {
   "courses": [...],          // PADI certifications
@@ -69,9 +73,11 @@ interface ClientConfig {
 ```
 
 ### 2. Software/Technology Companies
+
 **Example:** Digital Identity Authority
 
 **Configuration:**
+
 ```json
 {
   "services": [...],         // Software services
@@ -85,7 +91,9 @@ interface ClientConfig {
 ```
 
 ### 3. Consulting Firms (Future)
+
 **Configuration:**
+
 ```json
 {
   "services": [...],         // Consulting offerings
@@ -98,7 +106,9 @@ interface ClientConfig {
 ```
 
 ### 4. E-commerce (Future)
+
 **Configuration:**
+
 ```json
 {
   "products": [...],         // Product catalog
@@ -114,6 +124,7 @@ interface ClientConfig {
 ## New Interface Types
 
 ### Service Interface
+
 **Use Case:** Professional services companies (software, consulting, agencies)
 
 ```typescript
@@ -137,6 +148,7 @@ interface Service {
 ```
 
 **Example:**
+
 ```json
 {
   "id": "service-biometric",
@@ -154,6 +166,7 @@ interface Service {
 ```
 
 ### Product Interface
+
 **Use Case:** Software products, SaaS platforms, physical products
 
 ```typescript
@@ -175,6 +188,7 @@ interface Product {
 ```
 
 ### CaseStudy Interface
+
 **Use Case:** Portfolio projects, client success stories
 
 ```typescript
@@ -200,12 +214,14 @@ interface CaseStudy {
 
 ### Software Company (DI Authority Example)
 
-**Step 1: Copy Template**
+#### Step 1: Copy Template
+
 ```bash
 cp -r server/clients/_template server/clients/di-authority-johannesburg
 ```
 
 **Step 2: Configure Tenant Metadata**
+
 ```json
 {
   "tenant": {
@@ -216,7 +232,8 @@ cp -r server/clients/_template server/clients/di-authority-johannesburg
 }
 ```
 
-**Step 3: Define Services (NOT courses)**
+#### Step 3: Define Services (NOT courses)
+
 ```json
 {
   "services": [
@@ -230,6 +247,7 @@ cp -r server/clients/_template server/clients/di-authority-johannesburg
 ```
 
 **Step 4: Set Feature Flags**
+
 ```json
 {
   "features": {
@@ -241,7 +259,8 @@ cp -r server/clients/_template server/clients/di-authority-johannesburg
 }
 ```
 
-**Step 5: Validate**
+#### Step 5: Validate
+
 ```javascript
 import { safeValidateClientConfig } from ''@react-scuba/content'';
 const result = safeValidateClientConfig(config);
@@ -266,6 +285,7 @@ const result = safeValidateClientConfig(config);
 ## Validation Rules
 
 ### Universal Fields (All Industries)
+
 - `tenant.*` - REQUIRED
 - `company.*` - REQUIRED
 - `contact.*` - REQUIRED
@@ -274,6 +294,7 @@ const result = safeValidateClientConfig(config);
 - `seo.*` - REQUIRED
 
 ### Optional Industry-Specific Fields
+
 - `courses` - Diving centers, training companies
 - `diveSites` - Diving centers only
 - `services` - Professional services
@@ -282,6 +303,7 @@ const result = safeValidateClientConfig(config);
 - `gallery` - Visual-heavy industries
 
 ### TeamMember Flexibility
+
 ```typescript
 // Diving instructor
 {
@@ -302,6 +324,7 @@ const result = safeValidateClientConfig(config);
 ## Migration Guide for Existing Clients
 
 ### Diving Center → Multi-Industry Support
+
 **No changes required!** Existing configurations are 100% backward compatible.
 
 ```json
@@ -316,6 +339,7 @@ const result = safeValidateClientConfig(config);
 ```
 
 ### New Software Company
+
 **Only define relevant fields:**
 
 ```json
@@ -332,15 +356,18 @@ const result = safeValidateClientConfig(config);
 ## Implementation Metrics
 
 ### Code Changes
+
 - `ClientConfig.ts`: +80 lines (Service, Product, CaseStudy interfaces)
 - `configValidator.ts`: +65 lines (new Zod schemas)
 - **Total:** +145 lines of code
 
 ### Clients Onboarded
+
 1. **Ocean Spirit Mauritius** (Diving Center) - Active
 2. **Digital Identity Authority** (Software Company) - Active
 
 ### Schema Coverage
+
 - **5 industry-specific content types** (courses, diveSites, services, products, caseStudies)
 - **100% backward compatible** with diving-only configurations
 - **Zero breaking changes** for existing clients
@@ -350,6 +377,7 @@ const result = safeValidateClientConfig(config);
 ## Testing Strategy
 
 ### Unit Tests
+
 ```javascript
 describe(''Multi-Industry Support'', () => {
   it(''validates diving center config'', () => {
@@ -370,6 +398,7 @@ describe(''Multi-Industry Support'', () => {
 ```
 
 ### Integration Tests
+
 ```javascript
 describe(''Tenant Resolution'', () => {
   it(''loads DI Authority config'', async () => {
@@ -391,11 +420,13 @@ describe(''Tenant Resolution'', () => {
 ## Performance Impact
 
 ### Bundle Size
+
 - **Before:** 48KB (diving-only interfaces)
 - **After:** 52KB (+4KB for new interfaces)
 - **Impact:** +8.3% (acceptable for flexibility gained)
 
 ### Validation Speed
+
 - **Diving config:** ~8ms (unchanged)
 - **Software config:** ~7ms (fewer fields to validate)
 - **Impact:** Negligible
@@ -405,6 +436,7 @@ describe(''Tenant Resolution'', () => {
 ## Future Enhancements
 
 ### Phase 3: Industry Templates
+
 ```javascript
 // Pre-configured templates for each industry
 import { templates } from ''@react-scuba/content'';
@@ -416,6 +448,7 @@ const softwareTemplate = templates.software({
 ```
 
 ### Phase 4: Dynamic Schema
+
 ```javascript
 // Define custom fields per industry
 {
@@ -428,6 +461,7 @@ const softwareTemplate = templates.software({
 ```
 
 ### Phase 5: Industry-Specific Validators
+
 ```javascript
 // Industry-aware validation rules
 validateClientConfig(config, { industry: ''software'' });
@@ -439,7 +473,9 @@ validateClientConfig(config, { industry: ''software'' });
 ## Best Practices
 
 ### 1. Minimize Configuration
-**Only define fields relevant to your industry**
+
+Only define fields relevant to your industry:
+
 ```json
 // Bad (software company defining diving fields)
 {
@@ -455,7 +491,9 @@ validateClientConfig(config, { industry: ''software'' });
 ```
 
 ### 2. Use Feature Flags
-**Control which UI components render**
+
+#### Control which UI components render
+
 ```json
 {
   "features": {
@@ -467,7 +505,9 @@ validateClientConfig(config, { industry: ''software'' });
 ```
 
 ### 3. Leverage Shared Fields
-**Maximize reuse of universal fields**
+
+Maximize reuse of universal fields:
+
 ```json
 {
   "team": [...],          // All industries have teams
@@ -482,14 +522,17 @@ validateClientConfig(config, { industry: ''software'' });
 ## Troubleshooting
 
 ### Issue: "courses is required"
+
 **Cause:** Using old validator version  
 **Solution:** Update to latest `@react-scuba/content` with optional courses
 
 ### Issue: "services schema invalid"
+
 **Cause:** Missing required fields (id, name, description)  
 **Solution:** Ensure all services have id, name, description fields
 
 ### Issue: Config loads but services undefined
+
 **Cause:** Typo in services array or empty array  
 **Solution:** Check JSON syntax, ensure services array exists
 
@@ -500,6 +543,7 @@ validateClientConfig(config, { industry: ''software'' });
 The **multi-industry architecture** successfully extends the content management system to support **any business vertical** while maintaining **100% backward compatibility** with existing diving center configurations.
 
 **Key Metrics:**
+
 - ✅ **2 active clients** from different industries
 - ✅ **5 content types** (courses, diveSites, services, products, caseStudies)
 - ✅ **100% backward compatible**
@@ -508,6 +552,7 @@ The **multi-industry architecture** successfully extends the content management 
 ---
 
 **For Review:**
+
 - Updated ClientConfig interfaces in `server/apps/content/src/types/ClientConfig.ts`
 - Updated Zod validators in `server/apps/content/src/validators/configValidator.ts`
 - New DI Authority config at `server/clients/di-authority-johannesburg/config.json`

@@ -68,7 +68,7 @@ Successfully completed **comprehensive React performance modernization** impleme
 
 ### Production Build Performance
 
-```
+```text
 Vite 7.1.11 building for production...
 ✓ 1979 modules transformed
 ✓ built in 17.93s
@@ -114,7 +114,7 @@ Vite 7.1.11 building for production...
 
 ### Turbo Monorepo Orchestration
 
-```
+```text
 Packages in scope: 6 (@react-scuba/api, config, types, ui, utils, web)
 Tasks: 1 successful, 1 total
 Cached: 1 cached, 1 total
@@ -531,7 +531,7 @@ The solution is now **production-ready** with clear roadmap for continuous impro
 
 #### Monorepo Structure
 
-```
+```text
 server/
 ├── apps/
 │   ├── content/         # 🆕 Multi-tenant content CMS
@@ -546,19 +546,19 @@ server/
 
 #### Migration Strategy (3 Phases)
 
-**Phase 1: Legacy Compatibility (Current)**
+#### Phase 1: Legacy Compatibility (Current)
 
 - Maintain existing constants files
 - Introduce `@react-scuba/content` package
 - Document migration path
 
-**Phase 2: Gradual Adoption (Q1 2026)**
+#### Phase 2: Gradual Adoption (Q1 2026)
 
 - Refactor components to consume dynamic configuration
 - Update API routes with tenant middleware
 - Add tenant_id to database schema
 
-**Phase 3: Remove Legacy (Q2 2026)**
+#### Phase 3: Remove Legacy (Q2 2026)
 
 - Delete hardcoded constants
 - Complete frontend/backend integration

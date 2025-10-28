@@ -18,7 +18,7 @@
 
 **Problem:**
 
-```
+```text
 @react-scuba/api:test: No test files found, exiting with code 1
 @react-scuba/utils:test: No test files found, exiting with code 1
 
@@ -96,7 +96,7 @@ describe("API Package", () => {
 
 **Problem:**
 
-```
+```text
 npm warn Unknown env config "msvs-version". This will stop working in the next major version of npm.
 npm warn Unknown env config "target-arch". This will stop working in the next major version of npm.
 ```
@@ -142,7 +142,7 @@ npm config set msvs_version 2022
 
 **Problem:**
 
-```
+```text
 error during build:
 src/utils/webVitals.js (1:16): "onFID" is not exported by "web-vitals"
 ```
@@ -391,7 +391,7 @@ npx lint-staged
 
 **Recommended Solutions:**
 
-**Option A - Use Root Dependencies (Immediate)**
+#### Option A - Use Root Dependencies (Immediate)
 
 ```json
 // Remove workspace dependencies
