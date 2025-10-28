@@ -140,7 +140,7 @@ Access via `Ctrl+Shift+P` → "Tasks: Run Task":
 6. **Prettier Fix** - Format with Prettier
 7. **Full Quality Check** - Lint + Test + Build
 
-See `.vscode/TASKS.md` for details.
+See VS Code task configuration for details.
 
 ### Editor Settings
 

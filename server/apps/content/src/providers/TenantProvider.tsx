@@ -47,7 +47,7 @@ export function TenantProvider({
 			setError(null);
 
 			// Dynamic import to avoid bundling server code in client
-			const { getClientConfig } = await import("../index.js");
+			const { getClientConfig } = await import("../index");
 			const clientConfig = await getClientConfig(tenantSlug);
 
 			setConfig(clientConfig);

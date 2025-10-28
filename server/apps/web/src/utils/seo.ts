@@ -1,8 +1,26 @@
 // SEO utilities and structured data
 
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface CourseData {
+  name: string;
+  description: string;
+  price: string;
+  currency: string;
+}
+
+export interface PageMetaTags {
+  title: string;
+  description: string;
+  canonical: string;
+}
+
 export const generateLocalBusinessSchema = () => {
-  const phoneNumber = import.meta.env.VITE_PHONE_NUMBER || '+2302634468';
-  const email = import.meta.env.VITE_EMAIL || 'info@osdiving.com';
+  const phoneNumber = import.meta.env['VITE_PHONE_NUMBER'] || '+2302634468';
+  const email = import.meta.env['VITE_EMAIL'] || 'info@osdiving.com';
 
   return {
     '@context': 'https://schema.org',
@@ -55,7 +73,7 @@ export const generateLocalBusinessSchema = () => {
   };
 };
 
-export const generateBreadcrumbSchema = (items) => {
+export const generateBreadcrumbSchema = (items: BreadcrumbItem[]) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -68,7 +86,7 @@ export const generateBreadcrumbSchema = (items) => {
   };
 };
 
-export const generateCourseSchema = (course) => {
+export const generateCourseSchema = (course: CourseData) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'Course',
@@ -98,10 +116,10 @@ export const defaultMetaTags = {
   twitterCard: 'summary_large_image',
 };
 
-export const generatePageMetaTags = (page) => {
+export const generatePageMetaTags = (page: string): PageMetaTags => {
   const baseUrl = 'https://www.osdiving.com';
 
-  const pages = {
+  const pages: Record<string, PageMetaTags> = {
     home: {
       title: 'Ocean Spirit Scuba Diving Mauritius | PADI 5 Star ECO Centre',
       description:
@@ -134,5 +152,5 @@ export const generatePageMetaTags = (page) => {
     },
   };
 
-  return pages[page] || pages.home;
+  return pages[page] ?? pages['home']!;
 };

@@ -11,7 +11,7 @@ export function useCreateBooking() {
 
   return useMutation({
     mutationFn: async (data: BookingRequest): Promise<ApiResponse<BookingResponse>> => {
-      return await createBooking(data);
+      return await createBooking(data as any) as ApiResponse<BookingResponse>;
     },
     onSuccess: () => {
       // Invalidate relevant queries on success

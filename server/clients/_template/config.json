@@ -1,42 +1,43 @@
 {
-  "_comment": "Template configuration for new React Scuba diving center client",
-  "_instructions": "1. Replace all placeholder values with actual client data. 2. Update tenant.id with new UUID. 3. Update tenant.slug to URL-safe identifier. 4. Fill in all required fields marked with TODO. 5. Remove this _comment and _instructions before deployment.",
+  "_template": "React Scuba Client Configuration Template",
+  "_version": "2.0.0",
+  "_updated": "2025-10-28"
   
   "tenant": {
-    "id": "TODO: Generate new UUID (use https://www.uuidgenerator.net/)",
-    "slug": "TODO: url-safe-slug (lowercase, hyphens only, e.g., 'blue-ocean-bali')",
-    "name": "TODO: Full Business Name",
+    "id": "REPLACE_WITH_NEW_UUID",
+    "slug": "your-business-name",
+    "name": "Your Business Name",
     "status": "active",
-    "createdAt": "TODO: ISO 8601 date (e.g., '2025-01-01T00:00:00Z')",
-    "updatedAt": "TODO: ISO 8601 date (same as createdAt initially)"
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
   },
   
   "company": {
-    "name": "TODO: Company Name",
-    "tagline": "TODO: Company Tagline or Slogan",
-    "description": "TODO: Short description (1-2 sentences) for metadata",
-    "about": "TODO: Detailed about section (2-3 paragraphs)",
+    "name": "Your Dive Center",
+    "tagline": "Explore the Ocean with Us",
+    "description": "Professional dive center offering world-class underwater experiences.",
+    "about": "We are a certified dive center dedicated to providing safe, exciting, and educational diving experiences. Our experienced instructors and modern equipment ensure the highest standards of safety and enjoyment.",
     "coreValues": [
-      "TODO: Core Value 1",
-      "TODO: Core Value 2",
-      "TODO: Core Value 3"
+      "Safety First",
+      "Environmental Conservation",
+      "Professional Excellence"
     ],
     "certifications": [
-      "TODO: Certification 1 (e.g., 'PADI 5 Star')",
-      "TODO: Certification 2"
+      "PADI 5 Star IDC Center",
+      "SSI Authorized Training Center"
     ],
     "established": 2025
   },
   
   "contact": {
-    "phone": "TODO: +CountryCode PhoneNumber",
-    "whatsapp": "TODO: +CountryCode PhoneNumber",
-    "email": "TODO: contact@example.com",
+    "phone": "+1-555-0123",
+    "whatsapp": "+1-555-0123",
+    "email": "contact@yourdivecenter.com",
     "address": {
-      "street": "TODO: Street Address",
-      "city": "TODO: City",
-      "postalCode": "TODO: Postal Code",
-      "country": "TODO: Country",
+      "street": "123 Ocean Drive",
+      "city": "Coastal City",
+      "postalCode": "12345",
+      "country": "Your Country",
       "coordinates": {
         "latitude": 0.0,
         "longitude": 0.0
@@ -114,10 +115,10 @@
   },
   
   "seo": {
-    "title": "TODO: SEO Title (50-60 characters)",
-    "description": "TODO: Meta description (120-160 characters)",
+    "title": "Your Dive Center - Professional Scuba Diving Services",
+    "description": "Discover the underwater world with our certified dive center. Professional instruction, modern equipment, and unforgettable diving experiences.",
     "keywords": ["keyword1", "keyword2", "keyword3"],
-    "baseUrl": "https://www.example.com"
+    "baseUrl": "https://www.yourdivecenter.com"
   },
   
   "features": {

@@ -23,7 +23,13 @@ export function useExchangeRates() {
       const result = await getExchangeRates();
 
       if (result.success && result.data?.rates) {
-        return result.data.rates as ExchangeRates;
+        return {
+          USD: result.data.rates['USD'] || 1,
+          EUR: result.data.rates['EUR'] || 0.85,
+          GBP: result.data.rates['GBP'] || 0.73,
+          AUD: result.data.rates['AUD'] || 1.35,
+          ...result.data.rates
+        } as ExchangeRates;
       }
 
       // Fallback to default rates if API fails

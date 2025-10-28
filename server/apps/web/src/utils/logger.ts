@@ -3,7 +3,25 @@
  * Outputs JSON format logs with correlation IDs for better debugging
  */
 
-const isDevelopment = import.meta.env.MODE === 'development';
+interface LogEntry {
+  timestamp: string;
+  level: string;
+  correlation_id: string;
+  message: string;
+  module: string;
+  [key: string]: unknown;
+}
+
+interface Logger {
+  info: (message: string, extra?: Record<string, unknown>) => void;
+  warn: (message: string, extra?: Record<string, unknown>) => void;
+  error: (message: string, extra?: Record<string, unknown>) => void;
+  debug: (message: string, extra?: Record<string, unknown>) => void;
+  setCorrelationId: (id: string) => void;
+  getCorrelationId: () => string;
+}
+
+const isDevelopment = import.meta.env['MODE'] === 'development';
 
 // Polyfill for UUID generation (works in all environments)
 const generateUUID = () => {
@@ -37,7 +55,7 @@ const getCorrelationId = () => {
   return correlationId;
 };
 
-const createLogEntry = (level, message, extra = {}) => {
+const createLogEntry = (level: string, message: string, extra: Record<string, unknown> = {}): LogEntry => {
   return {
     timestamp: new Date().toISOString(),
     level,
@@ -48,11 +66,11 @@ const createLogEntry = (level, message, extra = {}) => {
   };
 };
 
-const logger = {
+const logger: Logger = {
   /**
    * Log informational messages
    */
-  info: (message, extra = {}) => {
+  info: (message: string, extra: Record<string, unknown> = {}) => {
     const logEntry = createLogEntry('INFO', message, extra);
     if (isDevelopment) {
       console.warn(JSON.stringify(logEntry));
@@ -65,7 +83,7 @@ const logger = {
   /**
    * Log warning messages
    */
-  warn: (message, extra = {}) => {
+  warn: (message: string, extra: Record<string, unknown> = {}) => {
     const logEntry = createLogEntry('WARN', message, extra);
     console.warn(JSON.stringify(logEntry));
   },
@@ -73,7 +91,7 @@ const logger = {
   /**
    * Log error messages (always logged)
    */
-  error: (message, extra = {}) => {
+  error: (message: string, extra: Record<string, unknown> = {}) => {
     const logEntry = createLogEntry('ERROR', message, { ...extra, error: true });
     console.error(JSON.stringify(logEntry));
     // In production, this could send to error tracking service (e.g., Sentry)
@@ -82,7 +100,7 @@ const logger = {
   /**
    * Log debug messages (only in development)
    */
-  debug: (message, extra = {}) => {
+  debug: (message: string, extra: Record<string, unknown> = {}) => {
     const logEntry = createLogEntry('DEBUG', message, extra);
     if (isDevelopment) {
       console.warn(JSON.stringify(logEntry));
@@ -92,7 +110,7 @@ const logger = {
   /**
    * Set correlation ID for current session
    */
-  setCorrelationId: (id) => {
+  setCorrelationId: (id: string) => {
     sessionStorage.setItem('correlationId', id);
   },
 

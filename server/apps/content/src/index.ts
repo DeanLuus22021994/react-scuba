@@ -28,7 +28,7 @@ export {
 	useTeamMembers,
 	useTenantConfig,
 	useTestimonials,
-} from "./providers/TenantProvider.tsx";
+} from "./providers/TenantProvider.js";
 // Resolver Exports
 export {
 	createTenantResolver,
@@ -62,7 +62,7 @@ export {
 } from "./validators/configValidator.js";
 
 // Convenience: Load and validate in one call
-export async function getClientConfig(tenantSlug, options = {}) {
+export async function getClientConfig(tenantSlug: string, options: { configPath?: string; useCache?: boolean } = {}) {
 	const { loadClientConfig } = await import("./loaders/configLoader.js");
 	return loadClientConfig(
 		tenantSlug,

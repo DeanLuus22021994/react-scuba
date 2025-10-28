@@ -3,6 +3,8 @@
  * Determines tenant slug from request context (subdomain, domain, env, path)
  */
 
+/// <reference types="node" />
+
 type TenantResolutionStrategy = "subdomain" | "domain" | "env" | "path";
 
 interface TenantResolverOptions {

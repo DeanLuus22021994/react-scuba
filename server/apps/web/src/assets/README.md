@@ -1,6 +1,6 @@
 # Assets Directory
 
-This directory contains static assets for the SCUBA Bali application.
+This directory contains shared static assets for the multi-tenant diving platform.
 
 ## Structure
 
@@ -20,7 +20,7 @@ The logo can be imported in React components:
 ```jsx
 import logo from '../assets/logo.svg';
 
-<img src={logo} alt="SCUBA Bali" />;
+<img src={logo} alt="React Scuba Platform" />;
 ```
 
 ### Placeholder
@@ -70,7 +70,7 @@ Always provide meaningful alt text when using these assets:
 
 ```jsx
 // Good
-<img src={logo} alt="SCUBA Bali - Professional Dive Center" />
+<img src={logo} alt="Professional Dive Center - React Scuba Platform" />
 
 // Bad
 <img src={logo} alt="logo" />

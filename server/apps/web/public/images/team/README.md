@@ -1,47 +1,37 @@
-# Ocean Spirit Team Images
+# Multi-Tenant Team Images
 
-This folder contains images for the Ocean Spirit Scuba Diving team members.
+This directory contains team member images for the multi-tenant dive center platform.
 
-## Team Members
+## Structure
 
-1. **Jill Holloway** - Director & PADI Diver
+Images are organized by client tenant:
 
-   - Image: jill-holloway.jpg ✓ Downloaded
-   - Role: Director, DEPTH Magazine Editor, Videographer
+```
+team/
+├── client-slug-1/
+│   ├── instructor-1.jpg
+│   └── instructor-2.jpg
+└── client-slug-2/
+    ├── team-member-1.jpg
+    └── team-member-2.jpg
+```
 
-2. **Bobby** - PADI IDC Staff Instructor
+## Multi-Tenant Configuration
 
-   - Image: bobby-instructor.jpg ✓ Downloaded
-   - Role: Enriched Air Instructor, EFR Instructor, Master Diver Trainer
+Team members are defined in each client's `config.json` file:
 
-3. **Roger Grenouillet** - PADI MSDT Instructor
-
-   - Image: roger-grenouillet.jpg ✓ Downloaded
-   - Role: 12+ PADI Specialities, CMAS \*\* Instructor
-
-4. **Bernard** - PADI Divemaster & Skipper
-
-   - Image: bernard-skipper.jpg ✓ Downloaded
-   - Role: Divemaster #432774, Licensed Skipper
-
-5. **Yogesh** - PADI Instructor
-
-   - Image: yogesh-instructor.jpg ✓ Downloaded
-   - Role: PADI EFR Instructor
-
-6. **Nando Nagain** - Technical Officer
-
-   - Image: nando-nagain.jpg ✓ Downloaded
-   - Role: Rec Tec Gas Blender, Videographer
-
-7. **Jovani** - Professional Skipper
-
-   - Image: jovani-skipper.jpg ✓ Downloaded
-   - Role: Multilingual, Navigation Expert
-
-8. **Ian Haggerty** - Conservationist
-   - Image: ian-haggerty.jpg ✓ Downloaded
-   - Role: PADI Rescue Diver, Social Media Marketing
+```json
+{
+  "team": [
+    {
+      "id": "team-member-id",
+      "name": "Team Member Name", 
+      "role": "Instructor/Role",
+      "image": "/clients/[client-slug]/images/team/member.jpg"
+    }
+  ]
+}
+```
 
 ## Image Guidelines
 
@@ -52,6 +42,14 @@ This folder contains images for the Ocean Spirit Scuba Diving team members.
 
 ## Usage
 
-Images are referenced in /src/config/constants/TEAM.ts and displayed in the About page Team section.
+Images are dynamically loaded based on tenant configuration:
 
-✓ All team member images have been downloaded from the Ocean Spirit website and are actively used in the site.
+```typescript
+// Team images are resolved via @react-scuba/content
+import { useTenantConfig } from '@react-scuba/content/react';
+
+const { config } = useTenantConfig();
+const teamImages = config.team.map(member => member.image);
+```
+
+Displayed in the About page Team section with automatic tenant resolution.

@@ -18,7 +18,7 @@ const configCache = new Map();
  * @returns Validated ClientConfig
  */
 export async function loadClientConfig(
-	tenantSlug,
+	tenantSlug: string,
 	configPath = "../../clients",
 	useCache = true,
 ) {
@@ -44,11 +44,11 @@ export async function loadClientConfig(
 		}
 
 		return validatedConfig;
-	} catch (error) {
-		if (error.code === "ENOENT") {
+	} catch (error: any) {
+		if (error && typeof error === 'object' && error.code === "ENOENT") {
 			throw new Error(`Configuration not found for tenant: ${tenantSlug}`);
 		}
-		if (error.name === "ZodError") {
+		if (error && typeof error === 'object' && error.name === "ZodError") {
 			throw new Error(
 				`Invalid configuration for tenant ${tenantSlug}: ${error.message}`,
 			);
@@ -61,7 +61,7 @@ export async function loadClientConfig(
  * Clear configuration cache for a tenant or all tenants
  * @param tenantSlug - Specific tenant to clear, or undefined for all
  */
-export function clearConfigCache(tenantSlug) {
+export function clearConfigCache(tenantSlug?: string) {
 	if (tenantSlug) {
 		configCache.delete(tenantSlug);
 	} else {
@@ -74,8 +74,8 @@ export function clearConfigCache(tenantSlug) {
  * @param tenantSlugs - Array of tenant slugs to preload
  * @param configPath - Base path to client configs
  */
-export async function preloadConfigs(tenantSlugs, configPath) {
-	const promises = tenantSlugs.map((slug) =>
+export async function preloadConfigs(tenantSlugs: string[], configPath?: string) {
+	const promises = tenantSlugs.map((slug: string) =>
 		loadClientConfig(slug, configPath, true).catch((err) => ({
 			slug,
 			error: err.message,

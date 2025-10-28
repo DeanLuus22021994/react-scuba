@@ -41,8 +41,8 @@ const BookingForm: FC<BookingFormProps> = ({
     preferredDate: new Date(Date.now() + 86400000), // Tomorrow
     participants: 1,
     bookingType,
-    courseId,
-    diveSiteId,
+    ...(courseId && { courseId }),
+    ...(diveSiteId && { diveSiteId }),
     specialRequests: '',
   });
 
@@ -52,23 +52,23 @@ const BookingForm: FC<BookingFormProps> = ({
     const newErrors: Record<string, string> = {};
 
     if (!formData.name || formData.name.length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
+      newErrors['name'] = 'Name must be at least 2 characters';
     }
 
     if (!(formData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))) {
-      newErrors.email = 'Valid email is required';
+      newErrors['email'] = 'Valid email is required';
     }
 
     if (!formData.phone || formData.phone.length < 8) {
-      newErrors.phone = 'Valid phone number is required';
+      newErrors['phone'] = 'Valid phone number is required';
     }
 
     if (!formData.preferredDate || formData.preferredDate < new Date()) {
-      newErrors.preferredDate = 'Please select a future date';
+      newErrors['preferredDate'] = 'Please select a future date';
     }
 
     if (!formData.participants || formData.participants < 1 || formData.participants > 20) {
-      newErrors.participants = 'Participants must be between 1 and 20';
+      newErrors['participants'] = 'Participants must be between 1 and 20';
     }
 
     setErrors(newErrors);
@@ -105,12 +105,12 @@ const BookingForm: FC<BookingFormProps> = ({
           value={formData.name}
           onChange={(e) => handleChange('name', e.target.value)}
           className={`mt-1 block w-full px-4 py-2 border ${
-            errors.name ? 'border-red-500' : 'border-gray-300'
+            errors['name'] ? 'border-red-500' : 'border-gray-300'
           } rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500`}
           disabled={isLoading}
           required
         />
-        {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+        {errors['name'] && <p className="mt-1 text-sm text-red-600">{errors['name']}</p>}
       </div>
 
       <div>
@@ -123,12 +123,12 @@ const BookingForm: FC<BookingFormProps> = ({
           value={formData.email}
           onChange={(e) => handleChange('email', e.target.value)}
           className={`mt-1 block w-full px-4 py-2 border ${
-            errors.email ? 'border-red-500' : 'border-gray-300'
+            errors['email'] ? 'border-red-500' : 'border-gray-300'
           } rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500`}
           disabled={isLoading}
           required
         />
-        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+        {errors['email'] && <p className="mt-1 text-sm text-red-600">{errors['email']}</p>}
       </div>
 
       <div>
@@ -142,12 +142,12 @@ const BookingForm: FC<BookingFormProps> = ({
           onChange={(e) => handleChange('phone', e.target.value)}
           placeholder="+230 XXXX XXXX"
           className={`mt-1 block w-full px-4 py-2 border ${
-            errors.phone ? 'border-red-500' : 'border-gray-300'
+            errors['phone'] ? 'border-red-500' : 'border-gray-300'
           } rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500`}
           disabled={isLoading}
           required
         />
-        {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
+        {errors['phone'] && <p className="mt-1 text-sm text-red-600">{errors['phone']}</p>}
       </div>
 
       <div>
@@ -156,23 +156,19 @@ const BookingForm: FC<BookingFormProps> = ({
         </label>
         <DatePicker
           selected={formData.preferredDate}
-          onChange={(date) => {
-            if (Array.isArray(date)) {
-              handleChange('preferredDate', date[0] || new Date());
-            } else {
-              handleChange('preferredDate', date || new Date());
-            }
+          onChange={(date: Date | null) => {
+            handleChange('preferredDate', date || new Date());
           }}
           minDate={new Date()}
           dateFormat="MMMM d, yyyy"
           className={`mt-1 block w-full px-4 py-2 border ${
-            errors.preferredDate ? 'border-red-500' : 'border-gray-300'
+            errors['preferredDate'] ? 'border-red-500' : 'border-gray-300'
           } rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500`}
           disabled={isLoading}
           required
         />
-        {errors.preferredDate && (
-          <p className="mt-1 text-sm text-red-600">{errors.preferredDate}</p>
+        {errors['preferredDate'] && (
+          <p className="mt-1 text-sm text-red-600">{errors['preferredDate']}</p>
         )}
       </div>
 
@@ -188,12 +184,12 @@ const BookingForm: FC<BookingFormProps> = ({
           min="1"
           max="20"
           className={`mt-1 block w-full px-4 py-2 border ${
-            errors.participants ? 'border-red-500' : 'border-gray-300'
+            errors['participants'] ? 'border-red-500' : 'border-gray-300'
           } rounded-lg focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500`}
           disabled={isLoading}
           required
         />
-        {errors.participants && <p className="mt-1 text-sm text-red-600">{errors.participants}</p>}
+        {errors['participants'] && <p className="mt-1 text-sm text-red-600">{errors['participants']}</p>}
       </div>
 
       <div>

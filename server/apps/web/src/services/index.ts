@@ -5,7 +5,9 @@
 
 export {
   checkCalendarAvailability,
+  createBooking,
   createCalendarBooking,
-  default as api,
+  getExchangeRates,
+  submitBookingInquiry,
   submitContactForm as sendContactMessage,
 } from './api';

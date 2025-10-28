@@ -1,29 +1,37 @@
 import react from '@vitejs/plugin-react-swc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import { resolve } from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const isProduction = mode === 'production';
-  
+
   return {
     plugins: [
-      react(),
+      react({
+        // Use latest JSX transform with bleeding-edge optimizations
+        jsxRuntime: 'automatic',
+        jsxImportSource: 'react',
+        // Enable fast refresh with bleeding-edge features
+        fastRefresh: true,
+      }),
       // Bundle analyzer - only in build mode
       isProduction && visualizer({
         filename: './dist/stats.html',
         open: false,
         gzipSize: true,
         brotliSize: true,
+        template: 'treemap', // Use modern treemap visualization
       }),
     ].filter(Boolean),
     esbuild: false, // Disable esbuild in favor of SWC
     build: {
       outDir: 'dist',
       sourcemap: isProduction ? false : true,
-      minify: 'terser',
-      // Target ES2022 for better optimization
-      target: 'es2022',
+      minify: 'esbuild', // Use esbuild for faster builds (bleeding-edge)
+      // Target ES2024 for bleeding-edge optimization
+      target: 'es2024',
       // Increase chunk size limit since we're code-splitting properly
       chunkSizeWarningLimit: 600,
       rollupOptions: {
@@ -108,6 +116,23 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: true,
       // Optimize dependencies
       assetsInlineLimit: 4096,
+    },
+    // Modern path resolution (replaces deprecated TypeScript baseUrl)
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, './src'),
+        '@/components': resolve(__dirname, './src/components'),
+        '@/utils': resolve(__dirname, './src/utils'),
+        '@/services': resolve(__dirname, './src/services'),
+        '@/types': resolve(__dirname, './src/types'),
+        '@/pages': resolve(__dirname, './src/pages'),
+        '@/hooks': resolve(__dirname, './src/hooks'),
+        '@/styles': resolve(__dirname, './src/styles'),
+        '@react-scuba/types': resolve(__dirname, '../../packages/types/src'),
+        '@react-scuba/ui': resolve(__dirname, '../../packages/ui/src'),
+        '@react-scuba/utils': resolve(__dirname, '../../packages/utils/src'),
+        '@react-scuba/content': resolve(__dirname, '../content/src'),
+      },
     },
     // Optimize dependencies
     optimizeDeps: {

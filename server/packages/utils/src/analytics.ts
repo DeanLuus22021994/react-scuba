@@ -137,7 +137,7 @@ export function trackEngagement(metrics: {
 function sendAnalyticsEvent(event: AnalyticsEvent): void {
   // Development: Log to console
 	// Development: Log to console
-	if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
+	if (typeof process !== 'undefined' && process.env?.['NODE_ENV'] === 'development') {
 		console.log('Analytics Event:', event);
 		return;
 	}  try {
@@ -145,13 +145,13 @@ function sendAnalyticsEvent(event: AnalyticsEvent): void {
     if (typeof window !== 'undefined' && 'gtag' in window) {
       (window as any).gtag('event', event.name, {
         ...event.properties,
-        timestamp_micros: event.timestamp?.getTime() * 1000,
+        timestamp_micros: event.timestamp ? event.timestamp.getTime() * 1000 : Date.now() * 1000,
       });
     }
 
     // Send to your analytics API
-    if (process.env.VITE_ANALYTICS_API_ENDPOINT) {
-      fetch(`${process.env.VITE_ANALYTICS_API_ENDPOINT}/events`, {
+    if (process.env['VITE_ANALYTICS_API_ENDPOINT']) {
+      fetch(`${process.env['VITE_ANALYTICS_API_ENDPOINT']}/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,10 +1,13 @@
 {
-  "extends": "../../packages/config/tsconfig.node.json",
+  "extends": "../../packages/config/tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "./src",
     "allowJs": true,
-    "types": ["node"]
+    "checkJs": false,
+    "lib": ["ES2020"],
+    "types": ["node"],
+    "noEmit": true
   },
-  "include": ["src/**/*", "*.js"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "**/*.js"],
+  "exclude": ["node_modules", "dist"]
 }

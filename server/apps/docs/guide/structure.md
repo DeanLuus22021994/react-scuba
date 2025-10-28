@@ -172,7 +172,6 @@ react-scuba/
 ├── vite.config.js        # Vite configuration
 ├── tailwind.config.js    # Tailwind settings
 ├── postcss.config.js     # PostCSS plugins
-├── jsconfig.json         # JavaScript config
 ├── .gitignore            # Git exclusions
 └── .env                  # Environment variables
 ```
@@ -210,7 +209,7 @@ export default {
 ### Absolute Imports
 
 ```javascript
-// Configured in jsconfig.json
+// Configured in TypeScript and Vite
 import { HomePage } from '@/pages/HomePage';
 import { courses } from '@/data/courses';
 ```

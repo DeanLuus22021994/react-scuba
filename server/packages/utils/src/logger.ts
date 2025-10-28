@@ -82,10 +82,10 @@ export class Logger {
       message: `[${this.name}] ${message}`,
       timestamp: new Date().toISOString(),
       context: { ...this.context, ...context },
-      error,
+      ...(error && { error }),
     };
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env['NODE_ENV'] === 'development') {
       this.consoleLog(entry);
     } else {
       this.structuredLog(entry);

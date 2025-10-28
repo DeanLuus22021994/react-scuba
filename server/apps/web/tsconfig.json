@@ -1,8 +1,16 @@
 {
   "extends": "../../packages/config/tsconfig.react.json",
   "compilerOptions": {
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vite/client"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "bundler"
   },
-  "include": ["src/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "dist", "build"]
+  "include": ["src/**/*", "tests/**/*", "vite.config.js", "postcss.config.js", "tailwind.config.js"],
+  "exclude": ["node_modules", "dist", "build", "**/*.js"]
 }

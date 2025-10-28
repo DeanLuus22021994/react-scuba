@@ -4,10 +4,10 @@
 
 /**
  * Smoothly scroll to an element with optional offset
- * @param {string} elementId - The ID of the element to scroll to
- * @param {number} offset - Optional offset in pixels (default: 80 for fixed header)
+ * @param elementId - The ID of the element to scroll to
+ * @param offset - Optional offset in pixels (default: 80 for fixed header)
  */
-export const scrollToElement = (elementId, offset = 80) => {
+export const scrollToElement = (elementId: string, offset = 80): void => {
   const element = document.getElementById(elementId);
   if (!element) return;
 
@@ -21,7 +21,7 @@ export const scrollToElement = (elementId, offset = 80) => {
 
   // Update URL without triggering navigation
   if (window.history.pushState) {
-    window.history.pushState(null, null, `#${elementId}`);
+    window.history.pushState({}, '', `#${elementId}`);
   }
 
   // Focus the element for accessibility
@@ -31,10 +31,10 @@ export const scrollToElement = (elementId, offset = 80) => {
 
 /**
  * Handle anchor clicks with smooth scrolling
- * @param {Event} event - Click event
- * @param {string} targetId - ID of target element
+ * @param event - Click event
+ * @param targetId - ID of target element
  */
-export const handleAnchorClick = (event, targetId) => {
+export const handleAnchorClick = (event: Event, targetId: string): void => {
   event.preventDefault();
   scrollToElement(targetId);
 };
@@ -42,7 +42,7 @@ export const handleAnchorClick = (event, targetId) => {
 /**
  * Scroll to top of page
  */
-export const scrollToTop = () => {
+export const scrollToTop = (): void => {
   window.scrollTo({
     top: 0,
     behavior: 'smooth',
@@ -51,11 +51,11 @@ export const scrollToTop = () => {
 
 /**
  * Check if element is in viewport
- * @param {HTMLElement} element - Element to check
- * @param {number} threshold - Percentage of element that should be visible (0-1)
- * @returns {boolean}
+ * @param element - Element to check
+ * @param threshold - Percentage of element that should be visible (0-1)
+ * @returns True if element is in viewport
  */
-export const isInViewport = (element, threshold = 0.5) => {
+export const isInViewport = (element: HTMLElement | null, threshold = 0.5): boolean => {
   if (!element) return false;
 
   const rect = element.getBoundingClientRect();
@@ -70,16 +70,16 @@ export const isInViewport = (element, threshold = 0.5) => {
 
 /**
  * Intersection Observer for scroll reveal animations
- * @param {string} selector - CSS selector for elements to observe
- * @param {Function} callback - Optional callback function
- * @param {Object} options - IntersectionObserver options
+ * @param selector - CSS selector for elements to observe
+ * @param callback - Optional callback function
+ * @param options - IntersectionObserver options
  */
 export const observeScrollReveal = (
   selector = '.reveal-on-scroll',
-  callback = null,
-  options = {}
-) => {
-  const defaultOptions = {
+  callback: ((element: Element) => void) | null = null,
+  options: IntersectionObserverInit = {}
+): IntersectionObserver => {
+  const defaultOptions: IntersectionObserverInit = {
     threshold: 0.15,
     rootMargin: '0px 0px -100px 0px',
     ...options,
@@ -104,10 +104,10 @@ export const observeScrollReveal = (
 
 /**
  * Get all section anchors on the page
- * @returns {Array} Array of anchor IDs
+ * @returns Array of anchor IDs
  */
-export const getSectionAnchors = () => {
-  const sections = document.querySelectorAll('[id]');
+export const getSectionAnchors = (): string[] => {
+  const sections = document.querySelectorAll<HTMLElement>('[id]');
   return Array.from(sections)
     .filter((section) => section.id && !section.id.startsWith('headlessui'))
     .map((section) => section.id);
@@ -115,16 +115,16 @@ export const getSectionAnchors = () => {
 
 /**
  * Get the currently active section based on scroll position
- * @param {Array} sectionIds - Array of section IDs to check
- * @returns {string|null} ID of active section
+ * @param sectionIds - Array of section IDs to check
+ * @returns ID of active section
  */
-export const getActiveSection = (sectionIds) => {
+export const getActiveSection = (sectionIds: string[]): string | null => {
   const scrollPosition = window.scrollY + 100; // Offset for fixed header
 
   for (let i = sectionIds.length - 1; i >= 0; i--) {
-    const section = document.getElementById(sectionIds[i]);
+    const section = document.getElementById(sectionIds[i]!);
     if (section && section.offsetTop <= scrollPosition) {
-      return sectionIds[i];
+      return sectionIds[i]!;
     }
   }
 
@@ -134,7 +134,7 @@ export const getActiveSection = (sectionIds) => {
 /**
  * Handle hash change and scroll to anchor on page load
  */
-export const handleHashNavigation = () => {
+export const handleHashNavigation = (): void => {
   const { hash } = window.location;
   if (hash) {
     const elementId = hash.substring(1);
@@ -148,7 +148,7 @@ export const handleHashNavigation = () => {
 /**
  * Initialize scroll reveal animations on page
  */
-export const initScrollReveal = () => {
+export const initScrollReveal = (): void => {
   // Observe elements with reveal class
   observeScrollReveal('.reveal-on-scroll');
 
@@ -161,14 +161,15 @@ export const initScrollReveal = () => {
 
 /**
  * Create a "back to top" button
- * @param {string} buttonId - ID for the back to top button
- * @param {number} showAfter - Scroll distance in pixels before showing button
+ * @param buttonId - ID for the back to top button
+ * @param showAfter - Scroll distance in pixels before showing button
+ * @returns Cleanup function
  */
-export const initBackToTop = (buttonId = 'back-to-top', showAfter = 300) => {
+export const initBackToTop = (buttonId = 'back-to-top', showAfter = 300): (() => void) | void => {
   const button = document.getElementById(buttonId);
   if (!button) return;
 
-  const handleScroll = () => {
+  const handleScroll = (): void => {
     if (window.pageYOffset > showAfter) {
       button.classList.add('visible');
     } else {

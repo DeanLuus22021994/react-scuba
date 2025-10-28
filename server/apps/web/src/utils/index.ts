@@ -17,3 +17,5 @@ export {
 export { default as logger } from './logger';
 export * from './scrollToAnchor';
 export * from './seo';
+export * from './webVitals';
+export * from './reportWebVitals';

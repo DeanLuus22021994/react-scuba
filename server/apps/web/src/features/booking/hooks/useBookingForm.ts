@@ -34,14 +34,13 @@ export const useBookingForm = (options?: UseBookingFormOptions): UseBookingFormR
     onSuccess: (data) => {
       // Track conversion in analytics
       trackConversion('booking_submitted', {
-        bookingType: data.bookingType || 'unknown',
-        participants: data.participants || 1,
-        value: data.participants * 100, // Estimated value
+        booking_type: (data.data as any)?.bookingType || 'unknown',
+        value: ((data.data as any)?.participants || 1) * 100, // Estimated value
       });
 
       // Call user-provided success handler
-      if (options?.onSuccess && data.bookingId) {
-        options.onSuccess(data.bookingId);
+      if (options?.onSuccess && (data.data as any)?.bookingId) {
+        options.onSuccess((data.data as any).bookingId);
       }
     },
     onError: (err: Error) => {

@@ -27,17 +27,21 @@ const envSchema = z.object({
   VITE_GOOGLE_CALENDAR_ID: z.string().optional(),
 });
 
+export type EnvVars = z.infer<typeof envSchema>;
+
 /**
  * Validates environment variables against the schema
  * Logs warnings for missing optional variables
- * @returns {boolean} True if validation passes
+ * @returns True if validation passes
  */
-export const validateEnvVars = () => {
+export const validateEnvVars = (): boolean => {
   try {
     const result = envSchema.safeParse(import.meta.env);
 
     if (!result.success) {
-      logger.error('Environment variable validation failed:', result.error.format());
+      logger.error('Environment variable validation failed:', {
+        error: result.error.format()
+      });
       return false;
     }
 
@@ -59,58 +63,60 @@ export const validateEnvVars = () => {
     logger.info('Environment variables validated successfully');
     return true;
   } catch (error) {
-    logger.error('Environment variable validation error:', error);
+    logger.error('Environment variable validation error:', {
+      error: error instanceof Error ? error.message : String(error)
+    });
     return false;
   }
 };
 
 /**
  * Gets a validated environment variable
- * @param {string} key - The environment variable key
- * @param {string} defaultValue - Optional default value
- * @returns {string} The environment variable value
+ * @param key - The environment variable key
+ * @param defaultValue - Optional default value
+ * @returns The environment variable value
  */
-export const getEnvVar = (key, defaultValue) => {
-  const value = import.meta.env[key];
-  return value || defaultValue;
+export const getEnvVar = (key: string, defaultValue?: string): string => {
+  const value = import.meta.env[key] as string | undefined;
+  return value || defaultValue || '';
 };
 
 /**
  * Checks if running in production mode
- * @returns {boolean}
+ * @returns True if production mode
  */
-export const isProduction = () => {
-  return import.meta.env.MODE === 'production';
+export const isProduction = (): boolean => {
+  return import.meta.env['MODE'] === 'production';
 };
 
 /**
  * Checks if running in development mode
- * @returns {boolean}
+ * @returns True if development mode
  */
-export const isDevelopment = () => {
-  return import.meta.env.MODE === 'development';
+export const isDevelopment = (): boolean => {
+  return import.meta.env['MODE'] === 'development';
 };
 
 /**
  * Gets the API URL from environment variables
- * @returns {string}
+ * @returns API URL string
  */
-export const getApiUrl = () => {
+export const getApiUrl = (): string => {
   return getEnvVar('VITE_API_ENDPOINT', 'http://localhost:5000/api');
 };
 
 /**
  * Gets the calendar email from environment variables
- * @returns {string}
+ * @returns Calendar email string
  */
-export const getCalendarEmail = () => {
+export const getCalendarEmail = (): string => {
   return getEnvVar('VITE_GOOGLE_CALENDAR_ID', '');
 };
 
 /**
  * Gets the calendar API key from environment variables
- * @returns {string}
+ * @returns Calendar API key string
  */
-export const getCalendarApiKey = () => {
+export const getCalendarApiKey = (): string => {
   return getEnvVar('VITE_GOOGLE_CALENDAR_API_KEY', '');
 };
