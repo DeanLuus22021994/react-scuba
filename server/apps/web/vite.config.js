@@ -131,7 +131,7 @@ export default defineConfig({
     open: false,
     cors: true,
     hmr: {
-      clientPort: 3001,
+      overlay: true,
     },
   },
   preview: {
