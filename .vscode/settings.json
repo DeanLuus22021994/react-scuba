@@ -121,12 +121,10 @@
   "javascript.preferences.allowIncompleteCompletions": true,
   "javascript.preferences.allowRenameOfImportPath": true,
 
-  // === BIOME BLEEDING EDGE CONFIGURATION ===
+  // === BIOME BLEEDING EDGE CONFIGURATION (FIXED) ===
   "biome.enabled": true,
-  "biome.searchInPath": true,
-  "biome.lsp.bin": "server/node_modules/@biomejs/biome/bin/biome",
-  "biome.experimental.enableCodeActions": true,
-  "biome.experimental.enableRefactoring": true,
+  "biome.lspBin": "./server/node_modules/@biomejs/biome/bin/biome",
+  "biome.rename": true,
 
   // === GITHUB COPILOT BLEEDING EDGE FEATURES ===
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
