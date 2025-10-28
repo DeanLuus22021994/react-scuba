@@ -6,65 +6,60 @@
  * Supports multi-tenant architecture with subdomain/domain/env resolution
  */
 
-// Type Exports
-export * from "./types/ClientConfig.js";
-
-// Validator Exports
-export {
-	ClientConfigSchema,
-	validateClientConfig,
-	safeValidateClientConfig,
-} from "./validators/configValidator.js";
-
 // Loader Exports
 export {
-	loadClientConfig,
 	clearConfigCache,
+	loadClientConfig,
 	preloadConfigs,
 } from "./loaders/configLoader.js";
-
-// Resolver Exports
-export {
-	TenantResolver,
-	createTenantResolver,
-	resolveFromSubdomain,
-	resolveFromDomain,
-	resolveFromEnv,
-	resolveFromPath,
-	resolveTenantInBrowser,
-} from "./resolvers/tenantResolver.js";
-
 // Provider Exports (React Components)
 export {
 	TenantProvider,
-	useTenantConfig,
-	useConfigSelector,
-	useCompanyInfo,
-	useContactInfo,
-	useTeamMembers,
+	useBlogPosts,
 	useBranding,
-	useSocialLinks,
-	useFeatures,
+	useCompanyInfo,
+	useConfigSelector,
+	useContactInfo,
 	useCourses,
 	useDiveSites,
+	useFeatures,
 	useGallery,
+	useSocialLinks,
+	useTeamMembers,
+	useTenantConfig,
 	useTestimonials,
-	useBlogPosts,
 } from "./providers/TenantProvider.tsx";
-
+// Resolver Exports
+export {
+	createTenantResolver,
+	resolveFromDomain,
+	resolveFromEnv,
+	resolveFromPath,
+	resolveFromSubdomain,
+	resolveTenantInBrowser,
+	TenantResolver,
+} from "./resolvers/tenantResolver.js";
+// Type Exports
+export * from "./types/ClientConfig.js";
 // Utility Exports
 export {
+	formatBusinessHours,
+	formatPrice,
 	formatTeamMemberExperience,
+	generateOrganizationSchema,
+	getAvailableContactMethods,
 	getCoursesByLevel,
 	getDiveSitesByDifficulty,
-	formatBusinessHours,
-	generateOrganizationSchema,
 	getPrimaryColorCSSVar,
-	isFeatureEnabled,
 	getSupportedCurrencies,
-	formatPrice,
-	getAvailableContactMethods,
+	isFeatureEnabled,
 } from "./utils/configUtils.js";
+// Validator Exports
+export {
+	ClientConfigSchema,
+	safeValidateClientConfig,
+	validateClientConfig,
+} from "./validators/configValidator.js";
 
 // Convenience: Load and validate in one call
 export async function getClientConfig(tenantSlug, options = {}) {

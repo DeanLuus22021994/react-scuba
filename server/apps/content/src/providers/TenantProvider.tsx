@@ -5,10 +5,10 @@
 
 import {
 	createContext,
+	type ReactNode,
 	useContext,
 	useEffect,
 	useState,
-	type ReactNode,
 } from "react";
 import type { ClientConfig, TenantContext } from "../types/ClientConfig.js";
 
@@ -68,7 +68,7 @@ export function TenantProvider({
 	}, [tenantSlug, initialConfig]);
 
 	const contextValue: TenantContext = {
-		config: config!,
+		config: config as ClientConfig,
 		isLoading,
 		error,
 		reload,

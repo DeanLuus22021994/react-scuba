@@ -3,8 +3,8 @@
  * Loads and caches client configurations from JSON files
  */
 
-import { readFile } from "fs/promises";
-import { join, resolve } from "path";
+import { readFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
 import { validateClientConfig } from "../validators/configValidator.js";
 
 // Configuration cache
@@ -83,7 +83,7 @@ export async function preloadConfigs(tenantSlugs, configPath) {
 	);
 
 	const results = await Promise.all(promises);
-	const errors = results.filter((r) => r && r.error);
+	const errors = results.filter((r) => r?.error);
 
 	if (errors.length > 0) {
 		console.warn("Some configurations failed to preload:", errors);

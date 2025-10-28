@@ -5,9 +5,9 @@
 
 import type {
 	ClientConfig,
-	TeamMember,
 	Course,
 	DiveSite,
+	TeamMember,
 } from "../types/ClientConfig.js";
 
 /**

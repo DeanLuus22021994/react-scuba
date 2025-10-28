@@ -283,7 +283,7 @@ export function safeValidateClientConfig(config: unknown) {
 	if (!result.success) {
 		return {
 			success: false,
-			errors: result.error.issues.map((err: any) => ({
+			errors: result.error.issues.map((err) => ({
 				path: err.path.join("."),
 				message: err.message,
 				code: err.code,

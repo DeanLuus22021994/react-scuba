@@ -136,7 +136,7 @@ export interface ClientConfig {
 		recaptchaSiteKey?: string;
 		mapboxToken?: string;
 		stripePublicKey?: string;
-		[key: string]: any;
+		[key: string]: unknown;
 	};
 }
 
