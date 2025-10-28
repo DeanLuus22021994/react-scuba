@@ -75,7 +75,7 @@ export function isValidCourseId(courseId: string): boolean {
 export function isValidBookingType(
   bookingType: string
 ): bookingType is 'dive' | 'course' | 'discover' | 'advanced' {
-  return ['dive', 'course', 'discover', 'advanced'].includes(bookingType);
+  return ['dive', 'course', 'discover', 'advanced'].indexOf(bookingType) !== -1;
 }
 
 /**

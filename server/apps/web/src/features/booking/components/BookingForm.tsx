@@ -156,7 +156,13 @@ const BookingForm: FC<BookingFormProps> = ({
         </label>
         <DatePicker
           selected={formData.preferredDate}
-          onChange={(date) => handleChange('preferredDate', date || new Date())}
+          onChange={(date) => {
+            if (Array.isArray(date)) {
+              handleChange('preferredDate', date[0] || new Date());
+            } else {
+              handleChange('preferredDate', date || new Date());
+            }
+          }}
           minDate={new Date()}
           dateFormat="MMMM d, yyyy"
           className={`mt-1 block w-full px-4 py-2 border ${

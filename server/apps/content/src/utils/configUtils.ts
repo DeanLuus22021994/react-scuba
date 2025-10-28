@@ -105,7 +105,9 @@ export function generateOrganizationSchema(config: ClientConfig): object {
 			latitude: config.contact.address.coordinates.latitude,
 			longitude: config.contact.address.coordinates.longitude,
 		},
-		sameAs: Object.values(config.social).filter(Boolean),
+		sameAs: Object.keys(config.social)
+		.map(key => config.social[key as keyof typeof config.social])
+		.filter(Boolean),
 	};
 }
 

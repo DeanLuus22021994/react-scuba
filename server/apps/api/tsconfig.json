@@ -1,8 +1,10 @@
 {
   "extends": "../../packages/config/tsconfig.node.json",
   "compilerOptions": {
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "allowJs": true,
+    "types": ["node"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "*.js"],
   "exclude": ["node_modules"]
 }

@@ -136,12 +136,11 @@ export function trackEngagement(metrics: {
  */
 function sendAnalyticsEvent(event: AnalyticsEvent): void {
   // Development: Log to console
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Analytics Event:', event);
-    return;
-  }
-
-  try {
+	// Development: Log to console
+	if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
+		console.log('Analytics Event:', event);
+		return;
+	}  try {
     // Google Analytics 4 (if available)
     if (typeof window !== 'undefined' && 'gtag' in window) {
       (window as any).gtag('event', event.name, {
