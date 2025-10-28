@@ -1,0 +1,23 @@
+{
+  "name": "@react-scuba/content",
+  "version": "1.0.0",
+  "description": "Multi-tenant content management system",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "test": "vitest run --passWithNoTests",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@react-scuba/config": "workspace:*",
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3",
+    "vitest": "^3.2.4"
+  }
+}

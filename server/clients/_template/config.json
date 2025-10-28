@@ -1,0 +1,136 @@
+{
+  "_comment": "Template configuration for new React Scuba diving center client",
+  "_instructions": "1. Replace all placeholder values with actual client data. 2. Update tenant.id with new UUID. 3. Update tenant.slug to URL-safe identifier. 4. Fill in all required fields marked with TODO. 5. Remove this _comment and _instructions before deployment.",
+  
+  "tenant": {
+    "id": "TODO: Generate new UUID (use https://www.uuidgenerator.net/)",
+    "slug": "TODO: url-safe-slug (lowercase, hyphens only, e.g., 'blue-ocean-bali')",
+    "name": "TODO: Full Business Name",
+    "status": "active",
+    "createdAt": "TODO: ISO 8601 date (e.g., '2025-01-01T00:00:00Z')",
+    "updatedAt": "TODO: ISO 8601 date (same as createdAt initially)"
+  },
+  
+  "company": {
+    "name": "TODO: Company Name",
+    "tagline": "TODO: Company Tagline or Slogan",
+    "description": "TODO: Short description (1-2 sentences) for metadata",
+    "about": "TODO: Detailed about section (2-3 paragraphs)",
+    "coreValues": [
+      "TODO: Core Value 1",
+      "TODO: Core Value 2",
+      "TODO: Core Value 3"
+    ],
+    "certifications": [
+      "TODO: Certification 1 (e.g., 'PADI 5 Star')",
+      "TODO: Certification 2"
+    ],
+    "established": 2025
+  },
+  
+  "contact": {
+    "phone": "TODO: +CountryCode PhoneNumber",
+    "whatsapp": "TODO: +CountryCode PhoneNumber",
+    "email": "TODO: contact@example.com",
+    "address": {
+      "street": "TODO: Street Address",
+      "city": "TODO: City",
+      "postalCode": "TODO: Postal Code",
+      "country": "TODO: Country",
+      "coordinates": {
+        "latitude": 0.0,
+        "longitude": 0.0
+      }
+    },
+    "businessHours": {
+      "monday": { "open": "09:00", "close": "17:00" },
+      "tuesday": { "open": "09:00", "close": "17:00" },
+      "wednesday": { "open": "09:00", "close": "17:00" },
+      "thursday": { "open": "09:00", "close": "17:00" },
+      "friday": { "open": "09:00", "close": "17:00" },
+      "saturday": { "open": "09:00", "close": "17:00" },
+      "sunday": { "open": "09:00", "close": "13:00", "closed": false }
+    }
+  },
+  
+  "team": [
+    {
+      "id": "unique-team-member-id",
+      "name": "Team Member Name",
+      "role": "Role Title",
+      "bio": "Team member biography (2-3 sentences)",
+      "certifications": ["Certification 1", "Certification 2"],
+      "image": "/clients/YOUR-SLUG/images/team/member-name.jpg"
+    }
+  ],
+  
+  "courses": [
+    {
+      "id": "course-id",
+      "name": "Course Name",
+      "level": "beginner",
+      "price": 0,
+      "currency": "USD",
+      "duration": "X days",
+      "description": "Course description",
+      "image": "/clients/YOUR-SLUG/images/courses/course-name.jpg"
+    }
+  ],
+  
+  "diveSites": [
+    {
+      "id": "dive-site-id",
+      "name": "Dive Site Name",
+      "description": "Site description",
+      "difficulty": "beginner",
+      "depth": { "min": 0, "max": 30, "unit": "meters" },
+      "coordinates": { "latitude": 0.0, "longitude": 0.0 },
+      "marineLife": ["Species 1", "Species 2"]
+    }
+  ],
+  
+  "gallery": [
+    {
+      "id": "gallery-1",
+      "src": "https://example.com/image.jpg",
+      "alt": "Image description",
+      "category": "Underwater"
+    }
+  ],
+  
+  "branding": {
+    "logo": "/clients/YOUR-SLUG/images/branding/logo.png",
+    "favicon": "/clients/YOUR-SLUG/images/branding/favicon.ico",
+    "heroImage": "/clients/YOUR-SLUG/images/branding/hero.jpg",
+    "colors": {
+      "primary": "#0000FF",
+      "secondary": "#FF0000"
+    }
+  },
+  
+  "social": {
+    "facebook": "https://facebook.com/your-page",
+    "instagram": "https://instagram.com/your-account"
+  },
+  
+  "seo": {
+    "title": "TODO: SEO Title (50-60 characters)",
+    "description": "TODO: Meta description (120-160 characters)",
+    "keywords": ["keyword1", "keyword2", "keyword3"],
+    "baseUrl": "https://www.example.com"
+  },
+  
+  "features": {
+    "booking": true,
+    "gallery": true,
+    "blog": true,
+    "testimonials": true,
+    "multiCurrency": true,
+    "whatsappWidget": true
+  },
+  
+  "pricing": {
+    "defaultCurrency": "USD",
+    "currencies": ["USD", "EUR"]
+  }
+}

@@ -1,15 +1,8 @@
 {
   "extends": "../../packages/config/tsconfig.react.json",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@utils/*": ["./src/utils/*"]
-    }
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "types": ["vitest", "vitest/globals", "@testing-library/jest-dom/vitest"],
-  "include": ["src", "tests"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist", "build"]
 }

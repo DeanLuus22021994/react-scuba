@@ -1,0 +1,192 @@
+{
+  "tenant": {
+    "id": "e7f8a9b0-c1d2-4e5f-a6b7-c8d9e0f1a2b3",
+    "slug": "di-authority-johannesburg",
+    "name": "Digital Identity Authority",
+    "status": "active",
+    "createdAt": "2025-10-28T10:00:00.000Z",
+    "updatedAt": "2025-10-28T10:00:00.000Z"
+  },
+  "company": {
+    "name": "Digital Identity Authority",
+    "tagline": "Your Biometric Partner",
+    "description": "Digital Identity Authority provides End-to-End business and enterprise solutions that are tailored to your business specific needs.",
+    "about": "DIA (Digital Identity Authority) strives to provide comprehensive enterprise identification solutions that are tailored to your needs. Collectively our team has over 65 Years of extensive biometric & software development experience. We offer tailored solutions for your business requirements with seamless integration and support.",
+    "coreValues": [
+      "If its not Perfect, Its not Complete",
+      "Pay On Project Sign Off",
+      "Software Development Life Cycle Methodology",
+      "Agile Development Approach",
+      "Comprehensive Business Solutions"
+    ],
+    "established": 2018
+  },
+  "contact": {
+    "phone": "(011) 645 9100",
+    "whatsapp": "(011) 645 9100",
+    "email": "Info@diauthority.co.za",
+    "address": {
+      "street": "7, St David's Office Park, St David's Place",
+      "city": "Johannesburg",
+      "state": "Gauteng",
+      "postalCode": "2196",
+      "country": "South Africa",
+      "coordinates": {
+        "latitude": -26.1478,
+        "longitude": 28.0617
+      }
+    },
+    "businessHours": {
+      "monday": { "open": "08:00", "close": "17:00" },
+      "tuesday": { "open": "08:00", "close": "17:00" },
+      "wednesday": { "open": "08:00", "close": "17:00" },
+      "thursday": { "open": "08:00", "close": "17:00" },
+      "friday": { "open": "08:00", "close": "17:00" },
+      "saturday": { "closed": true, "open": "00:00", "close": "00:00" },
+      "sunday": { "closed": true, "open": "00:00", "close": "00:00" }
+    }
+  },
+  "team": [],
+  "services": [
+    {
+      "id": "service-software-dev",
+      "name": "Agile Software Development",
+      "description": "Our approach to software development under which requirements and solutions evolve throughout the project.",
+      "icon": "code",
+      "features": [
+        "Iterative development process",
+        "Continuous feedback loops",
+        "Adaptive planning",
+        "Early and continuous delivery",
+        "Collaboration between teams"
+      ],
+      "benefits": [
+        "Faster time to market",
+        "Higher quality software",
+        "Better stakeholder engagement",
+        "Flexibility to change requirements"
+      ],
+      "pricing": {
+        "model": "custom"
+      },
+      "deliverables": [
+        "Weekly progress reports",
+        "Sprint demonstrations",
+        "Comprehensive documentation",
+        "Tested and deployed software"
+      ]
+    },
+    {
+      "id": "service-custom-solutions",
+      "name": "Custom Business Solutions",
+      "description": "We work with companies to build & deliver innovative solutions to improve workflows and productivity for your business.",
+      "icon": "lightbulb",
+      "features": [
+        "Tailored to business needs",
+        "End-to-end development",
+        "Enterprise integration",
+        "Scalable architecture"
+      ],
+      "benefits": [
+        "Increased productivity",
+        "Improved workflows",
+        "Cost-effective solutions",
+        "Competitive advantage"
+      ],
+      "pricing": {
+        "model": "custom"
+      }
+    },
+    {
+      "id": "service-biometric",
+      "name": "Comprehensive Biometric Solutions",
+      "description": "Collectively our team has over 65 Years of extensive biometric & software development experience. We offer tailored solutions for your business requirements with seamless integration and support.",
+      "icon": "fingerprint",
+      "features": [
+        "Biometric webservice solutions",
+        "Cloud-based identity management",
+        "Mobile biometric applications",
+        "Multi-modal biometric capture",
+        "ABIS (Automated Biometric Identification System)"
+      ],
+      "benefits": [
+        "Enhanced security",
+        "Fraud prevention",
+        "Regulatory compliance",
+        "Seamless user experience"
+      ],
+      "pricing": {
+        "model": "subscription"
+      },
+      "deliverables": [
+        "Biometric SDK integration",
+        "Cloud infrastructure setup",
+        "Mobile application development",
+        "Technical documentation",
+        "Training and support"
+      ]
+    },
+    {
+      "id": "service-progress-reports",
+      "name": "Weekly Progress Reports",
+      "description": "We provide weekly progress reports keeping clients up to date and allowing them to give valuable input and feedback.",
+      "icon": "chart",
+      "features": [
+        "Detailed progress tracking",
+        "Visual dashboards",
+        "Milestone tracking",
+        "Risk identification",
+        "Feedback incorporation"
+      ],
+      "benefits": [
+        "Complete transparency",
+        "Early issue detection",
+        "Stakeholder alignment",
+        "Informed decision making"
+      ]
+    }
+  ],
+  "gallery": [],
+  "branding": {
+    "logo": "/clients/di-authority-johannesburg/images/branding/logo.png",
+    "favicon": "/clients/di-authority-johannesburg/images/branding/favicon.ico",
+    "heroImage": "/clients/di-authority-johannesburg/images/branding/hero.jpg",
+    "colors": {
+      "primary": "#1a73e8",
+      "secondary": "#34a853",
+      "accent": "#fbbc04"
+    }
+  },
+  "social": {
+    "linkedin": "https://www.linkedin.com/company/digital-identity-authority"
+  },
+  "seo": {
+    "title": "Digital Identity Authority - Biometric & Software Solutions",
+    "description": "DIA provides End-to-End business and enterprise solutions including biometric identification, custom software development, and cloud solutions tailored to your needs.",
+    "keywords": [
+      "biometric solutions",
+      "software development",
+      "enterprise solutions",
+      "identity management",
+      "ABIS",
+      "biometric webservices",
+      "cloud solutions",
+      "mobile applications",
+      "johannesburg",
+      "south africa"
+    ],
+    "baseUrl": "https://diauthority.co.za"
+  },
+  "features": {
+    "booking": false,
+    "gallery": false,
+    "blog": false,
+    "testimonials": false,
+    "multiCurrency": false,
+    "whatsappWidget": true
+  },
+  "pricing": {
+    "defaultCurrency": "ZAR",
+    "currencies": ["ZAR", "USD", "EUR"]
+  }
+}
