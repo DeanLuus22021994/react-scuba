@@ -372,9 +372,17 @@
         "fileLocation": "relative",
         "pattern": [
           {
-            "regexp": "^(FAILED|ERROR)\\s+(.+?)::(.+?)\\s+-\\s+(.*)$",
-            "file": 2,
+            "regexp": "^(.+?):(\\d+):\\s+(FAILED|ERROR|AssertionError)(.*)$",
+            "file": 1,
+            "line": 2,
+            "severity": 3,
             "message": 4
+          },
+          {
+            "regexp": "^(FAILED|ERROR)\\s+(.+?)::(.+?)(?:\\s+-\\s+(.*))?$",
+            "file": 2,
+            "message": 4,
+            "kind": "file"
           }
         ]
       },

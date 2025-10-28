@@ -35,7 +35,7 @@
   "turbo.telemetry.enabled": false,
 
   // === TYPESCRIPT BLEEDING EDGE CONFIGURATION ===
-  "typescript.tsserver.maxTsServerMemory": 32768,
+  "typescript.tsserver.maxTsServerMemory": 16384,
   "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "typescript.tsserver.experimental.enableWorkspaceDiagnostics": true,
   "typescript.tsserver.experimental.useVsCodeWatcher": true,
@@ -73,9 +73,6 @@
   "npm.enableRunFromFolder": true,
   "npm.scriptExplorerAction": "run",
 
-  "biome.enabled": true,
-  "biome.searchInPath": true,
-  "biome.lsp.bin": "server/node_modules/@biomejs/biome/bin/biome",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "config.json": "README.md, .env*, images/"
@@ -170,11 +167,11 @@
   "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": false,
   "github.copilot.nextEditSuggestions.fixes": true,
   "github.copilot.chat.edits.enableMultiFileEdits": true,
-  "github.copilot.chat.edits.confirmations": "off",
+  "github.copilot.chat.edits.confirmations": "never",
   "github.copilot.chat.indexing.enabled": true,
   "github.copilot.chat.documentationSearch.enabled": true,
   "github.copilot.chat.modelSelection.enabled": true,
-  "github.copilot.chat.preferredModel": "claude-3.5-sonnet",
+  "github.copilot.chat.preferredModel": "claude-sonnet-4.5",
   "github.copilot.editor.enableCodeActions": true,
   "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.editor.iterativeFixing.enabled": true,
@@ -193,5 +190,6 @@
   "diffEditor.experimental.showMoves": true,
   "diffEditor.experimental.useBetterFolding": true,
   "editor.experimentalGpuAcceleration": "on",
-  "window.titleBarStyle": "custom"
+  "window.titleBarStyle": "custom",
+  "python-envs.pythonProjects": ["docker-compose-examples/mcp/python_utils"]
 }
