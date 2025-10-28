@@ -65,6 +65,23 @@
     },
     "clean": {
       "cache": false
+    },
+    "specs:validate": {
+      "cache": true,
+      "outputs": [],
+      "inputs": ["../specs/**/*.json", "../specs/**/*.js"],
+      "outputLogs": "errors-only"
+    },
+    "specs:generate": {
+      "dependsOn": ["specs:validate"],
+      "cache": true,
+      "outputs": ["../specs/generated/**"],
+      "outputLogs": "new-only"
+    },
+    "specs:deploy-test": {
+      "dependsOn": ["build", "specs:validate"],
+      "cache": false,
+      "outputLogs": "full"
     }
   },
   "ui": "tui"

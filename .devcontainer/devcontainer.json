@@ -22,6 +22,15 @@
     "ghcr.io/devcontainers/features/nvidia-cuda:2": {
       "installToolkit": true,
       "cudaVersion": "12.6"
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": "true"
     }
   },
 
@@ -39,7 +48,12 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "biomejs.biome",
+        "ms-playwright.playwright",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "zsh",
@@ -183,7 +197,7 @@
     }
   },
 
-  "postCreateCommand": "npm install && npm install -g turbo && python3 -c 'import sys; print(f\"GIL Enabled: {sys._is_gil_enabled()}\")' && echo '✅ Development environment ready!'",
+  "postCreateCommand": "npm install && npm install -g turbo && npm run specs:validate && python3 -c 'import sys; print(f\"GIL Enabled: {sys._is_gil_enabled()}\")' && echo '✅ Spec-driven development environment ready!'",
   "postStartCommand": "docker ps",
 
   "remoteUser": "vscode",

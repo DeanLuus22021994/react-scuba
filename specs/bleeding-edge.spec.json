@@ -1,0 +1,37 @@
+{
+  "$schema": "./schemas/bleeding-edge.schema.json",
+  "version": "1.0.0",
+  "technology_stack": {
+    "frontend": {
+      "react": "19.2.0",
+      "vite": "7.1.12",
+      "typescript": "5.9.4",
+      "routing": "react-router-v7",
+      "state_management": ["zustand"],
+      "styling": "tailwind-v4"
+    },
+    "backend": {
+      "runtime": "node",
+      "framework": "express-v5",
+      "database": ["postgresql-17", "mariadb-11"]
+    },
+    "tooling": {
+      "monorepo": "turbo-2.5.9",
+      "linting": "biome",
+      "testing": {
+        "unit": "vitest",
+        "e2e": "playwright"
+      }
+    }
+  },
+  "performance": {
+    "build_time": {
+      "fresh_build_target": "16.8s",
+      "cached_build_target": "427ms"
+    },
+    "bundle_size": {
+      "target_gzip": "150kb",
+      "code_splitting": true
+    }
+  }
+}

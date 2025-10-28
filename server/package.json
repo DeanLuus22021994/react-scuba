@@ -71,7 +71,10 @@
     "copilot:validate": "node ../.vscode/scripts/copilot-context-manager.js validate",
     "ts:restart": "node ../.vscode/restart-ts.js",
     "ts:clear": "npx tsc --build --clean && npm run ts:restart",
-    "validate:env": "node -e \"console.log('✅ Environment validation passed')\""
+    "validate:env": "node -e \"console.log('✅ Environment validation passed')\"",
+    "specs:validate": "node ../specs/validators/validate.js",
+    "specs:generate": "npm run specs:validate && echo '📋 Generating documentation from specifications...'",
+    "specs:deploy-test": "npm run build && echo '🚀 Deploying to devcontainer cluster for validation...'"
   },
   "eslintConfig": {
     "extends": [
