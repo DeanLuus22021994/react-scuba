@@ -1,0 +1,221 @@
+{
+  "version": "1.0.0",
+  "description": "MCP Server Cluster Configuration - 10 servers with security hardening",
+  "updated": "2025-10-28",
+  "servers": {
+    "github": {
+      "file": "./github.json",
+      "tier": 1,
+      "language": "go",
+      "version": "0.19.1",
+      "port": 9090,
+      "capabilities": ["repos", "issues", "pull_requests", "actions", "users", "code_security", "discussions", "projects"],
+      "security": {
+        "user": "nobody:nogroup",
+        "readonly": false,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "2.0",
+        "memory": "1g",
+        "pids": 100
+      }
+    },
+    "filesystem": {
+      "file": "./filesystem.json",
+      "tier": 2,
+      "language": "node",
+      "version": "latest",
+      "port": 9091,
+      "capabilities": ["read_file", "write_file", "list_directory", "search_files"],
+      "security": {
+        "user": "node:node",
+        "readonly": true,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "1.0",
+        "memory": "2g",
+        "pids": 50
+      }
+    },
+    "postgres": {
+      "file": "./postgres.json",
+      "tier": 2,
+      "language": "node",
+      "version": "latest",
+      "port": 9092,
+      "capabilities": ["query", "schema", "migrations"],
+      "security": {
+        "user": "node:node",
+        "readonly": false,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "1.0",
+        "memory": "2g",
+        "pids": 50
+      },
+      "dependencies": ["postgres-db"]
+    },
+    "mariadb": {
+      "file": "./mariadb.json",
+      "tier": 2,
+      "language": "node",
+      "version": "latest",
+      "port": 9093,
+      "capabilities": ["query", "schema", "migrations"],
+      "security": {
+        "user": "node:node",
+        "readonly": false,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "1.0",
+        "memory": "2g",
+        "pids": 50
+      },
+      "dependencies": ["mariadb"]
+    },
+    "sqlite": {
+      "file": "./sqlite.json",
+      "tier": 2,
+      "language": "node",
+      "version": "latest",
+      "port": 9094,
+      "capabilities": ["query", "schema"],
+      "security": {
+        "user": "node:node",
+        "readonly": true,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "0.5",
+        "memory": "512m",
+        "pids": 30
+      }
+    },
+    "memory": {
+      "file": "./memory.json",
+      "tier": 2,
+      "language": "node",
+      "version": "latest",
+      "port": 9095,
+      "capabilities": ["knowledge_graph", "entity_storage", "relationship_mapping"],
+      "security": {
+        "user": "node:node",
+        "readonly": false,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "1.0",
+        "memory": "4g",
+        "pids": 100,
+        "io_read_bps": "100mb",
+        "io_write_bps": "50mb"
+      },
+      "optimization": {
+        "nvme": true,
+        "gc_interval": 30000
+      }
+    },
+    "git": {
+      "file": "./git.json",
+      "tier": 3,
+      "language": "python",
+      "version": "latest",
+      "port": 9096,
+      "capabilities": ["git_log", "git_diff", "git_commit", "git_status"],
+      "security": {
+        "user": "root",
+        "readonly": false,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "1.0",
+        "memory": "1g",
+        "pids": 50
+      }
+    },
+    "fetch": {
+      "file": "./fetch.json",
+      "tier": 3,
+      "language": "python",
+      "version": "latest",
+      "port": 9097,
+      "capabilities": ["http_get", "http_post", "web_scraping"],
+      "security": {
+        "user": "root",
+        "readonly": false,
+        "capabilities_dropped": false,
+        "capabilities_added": ["NET_BIND_SERVICE"],
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "1.0",
+        "memory": "1g",
+        "pids": 50
+      },
+      "network": {
+        "dns_search": "mcp-cluster.local",
+        "http2_enabled": true
+      }
+    },
+    "markitdown": {
+      "file": "./markitdown.json",
+      "tier": 3,
+      "language": "python",
+      "version": "latest",
+      "port": 9098,
+      "capabilities": ["pdf_to_markdown", "docx_to_markdown", "html_to_markdown"],
+      "security": {
+        "user": "root",
+        "readonly": true,
+        "capabilities_dropped": true,
+        "no_new_privileges": true
+      },
+      "resources": {
+        "cpus": "0.5",
+        "memory": "512m",
+        "pids": 30
+      }
+    }
+  },
+  "network": {
+    "name": "mcp-cluster",
+    "subnet": "172.28.0.0/16",
+    "gateway": "172.28.0.1",
+    "dns": "172.28.0.1"
+  },
+  "observability": {
+    "tracing": {
+      "enabled": true,
+      "endpoint": "http://tempo:4317",
+      "protocol": "otlp"
+    },
+    "logging": {
+      "level": "info",
+      "format": "json"
+    },
+    "metrics": {
+      "enabled": true,
+      "port_range": "9090-9098"
+    }
+  },
+  "security": {
+    "defaults": {
+      "no_new_privileges": true,
+      "cap_drop": ["ALL"],
+      "read_only_root": "where_applicable",
+      "tmpfs_mounts": true,
+      "selinux_labels": true
+    }
+  }
+}

@@ -1,10 +1,715 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/vscode-settings",
-  "title": "VS Code Settings Schema - AI Development Workspace",
-  "description": "Schema for team VS Code settings with GitHub Copilot, MCP servers, and AI-assisted development workflows",
+  "title": "VS Code Settings Schema - React Scuba Workspace (October 2025)",
+  "description": "Comprehensive schema for team VS Code settings aligned with tasks.json, launch.json, keybindings.json, and extensions.json configurations. Supports Turbo monorepo, Biome linting, Python 3.14t, UV package manager, Docker Compose, MCP servers, GitHub Copilot, and full-stack debugging workflows.",
   "type": "object",
   "properties": {
+    "files.autoSave": {
+      "type": "string",
+      "enum": ["off", "afterDelay", "onFocusChange", "onWindowChange"],
+      "default": "afterDelay",
+      "description": "Auto-save strategy to reduce batch processing and improve workflow"
+    },
+    "files.autoSaveDelay": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 10000,
+      "default": 1000,
+      "description": "Delay in milliseconds for auto-save after typing stops"
+    },
+    "window.titleBarStyle": {
+      "type": "string",
+      "enum": ["native", "custom"],
+      "default": "custom",
+      "description": "Window title bar style"
+    },
+    "editor.experimentalGpuAcceleration": {
+      "type": "string",
+      "enum": ["auto", "on", "off"],
+      "default": "on",
+      "description": "GPU acceleration for VS Code UI rendering (does not affect language servers)"
+    },
+    "editor.formatOnSave": {
+      "type": "boolean",
+      "default": true,
+      "description": "Format files on save using configured formatter (Biome for JS/TS, Black for Python)"
+    },
+    "editor.formatOnPaste": {
+      "type": "boolean",
+      "default": false,
+      "description": "Format pasted content automatically"
+    },
+    "editor.tabSize": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8,
+      "default": 2,
+      "description": "Default tab size in spaces (2 for JS/TS/JSON, 4 for Python)"
+    },
+    "editor.insertSpaces": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use spaces instead of tabs"
+    },
+    "editor.detectIndentation": {
+      "type": "boolean",
+      "default": false,
+      "description": "Detect indentation from file content (disabled for consistency)"
+    },
+    "editor.snippetSuggestions": {
+      "type": "string",
+      "enum": ["top", "bottom", "inline", "none"],
+      "default": "top",
+      "description": "Controls snippet suggestion ordering"
+    },
+    "editor.codeActionsOnSave": {
+      "type": "object",
+      "properties": {
+        "source.organizeImports": {
+          "type": "string",
+          "enum": ["explicit", "always", "never"]
+        },
+        "source.organizeImports.biome": {
+          "type": "string",
+          "enum": ["explicit", "always", "never"]
+        },
+        "quickfix.biome": {
+          "type": "string",
+          "enum": ["explicit", "always", "never"]
+        }
+      },
+      "description": "Code actions to run on save (organize imports, quick fixes)"
+    },
+    "typescript.tsserver.maxTsServerMemory": {
+      "type": "integer",
+      "minimum": 2048,
+      "maximum": 16384,
+      "default": 8192,
+      "description": "Maximum memory allocation for TypeScript language server (MB) - increased for Turbo monorepo"
+    },
+    "typescript.tsserver.experimental.enableProjectDiagnostics": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable project-wide diagnostics for all files in workspace"
+    },
+    "typescript.tsserver.useSyntaxServer": {
+      "type": "string",
+      "enum": ["always", "auto", "never"],
+      "default": "auto",
+      "description": "Use lightweight syntax server for syntax-only operations"
+    },
+    "typescript.preferences.includePackageJsonAutoImports": {
+      "type": "string",
+      "enum": ["auto", "on", "off"],
+      "default": "auto",
+      "description": "Include package.json dependencies in auto-import suggestions"
+    },
+    "typescript.preferences.importModuleSpecifier": {
+      "type": "string",
+      "enum": ["shortest", "relative", "non-relative", "project-relative"],
+      "default": "relative",
+      "description": "Preferred style for auto-import paths in Turbo monorepo"
+    },
+    "typescript.preferences.jsxAttributeCompletionStyle": {
+      "type": "string",
+      "enum": ["auto", "braces", "none"],
+      "default": "auto",
+      "description": "JSX attribute completion style for React components"
+    },
+    "javascript.updateImportsOnFileMove.enabled": {
+      "type": "string",
+      "enum": ["prompt", "always", "never"],
+      "default": "always",
+      "description": "Update import paths when moving JavaScript files"
+    },
+    "typescript.updateImportsOnFileMove.enabled": {
+      "type": "string",
+      "enum": ["prompt", "always", "never"],
+      "default": "always",
+      "description": "Update import paths when moving TypeScript files"
+    },
+    "javascript.suggest.autoImports": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable auto-import suggestions for JavaScript"
+    },
+    "typescript.suggest.autoImports": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable auto-import suggestions for TypeScript"
+    },
+    "typescript.suggest.paths": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable path IntelliSense in import statements"
+    },
+    "typescript.workspaceSymbols.scope": {
+      "type": "string",
+      "enum": ["allOpenProjects", "currentProject"],
+      "default": "allOpenProjects",
+      "description": "Scope for TypeScript workspace symbol search (Turbo monorepo aware)"
+    },
+    "biome.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Biome linter and formatter (replaces ESLint and Prettier)"
+    },
+    "biome.lspBin": {
+      "type": "string",
+      "default": "node_modules/@biomejs/biome/bin/biome",
+      "description": "Path to Biome LSP binary (relative to workspace)"
+    },
+    "biome.searchInPath": {
+      "type": "boolean",
+      "default": true,
+      "description": "Search for Biome in PATH if not found in node_modules"
+    },
+    "[javascript]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "biomejs.biome"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2},
+        "editor.codeActionsOnSave": {"type": "object"}
+      },
+      "description": "JavaScript-specific editor settings (Biome-first)"
+    },
+    "[javascriptreact]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "biomejs.biome"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2},
+        "editor.codeActionsOnSave": {"type": "object"}
+      },
+      "description": "React JSX-specific editor settings (Biome-first)"
+    },
+    "[typescript]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "biomejs.biome"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2},
+        "editor.codeActionsOnSave": {"type": "object"}
+      },
+      "description": "TypeScript-specific editor settings (Biome-first)"
+    },
+    "[typescriptreact]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "biomejs.biome"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2},
+        "editor.codeActionsOnSave": {"type": "object"}
+      },
+      "description": "React TSX-specific editor settings (Biome-first)"
+    },
+    "[json]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["biomejs.biome", "vscode.json-language-features", "esbenp.prettier-vscode"],
+          "default": "biomejs.biome"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2}
+      },
+      "description": "JSON-specific editor settings (Biome-first)"
+    },
+    "[jsonc]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["biomejs.biome", "vscode.json-language-features", "esbenp.prettier-vscode"],
+          "default": "biomejs.biome"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2}
+      },
+      "description": "JSON with Comments-specific editor settings (Biome-first)"
+    },
+    "[css]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["biomejs.biome", "vscode.css-language-features", "stylelint.vscode-stylelint"],
+          "default": "biomejs.biome"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2}
+      },
+      "description": "CSS-specific editor settings (Biome-first with Tailwind support)"
+    },
+    "[markdown]": {
+      "type": "object",
+      "properties": {
+        "editor.formatOnSave": {"type": "boolean", "default": true},
+        "editor.wordWrap": {"type": "string", "enum": ["off", "on", "wordWrapColumn", "bounded"], "default": "on"},
+        "editor.quickSuggestions": {
+          "type": ["object", "boolean"],
+          "properties": {
+            "comments": {"type": "boolean"},
+            "strings": {"type": "boolean"},
+            "other": {"type": "boolean"}
+          }
+        },
+        "editor.suggest.showSnippets": {"type": "boolean", "default": true}
+      },
+      "description": "Markdown-specific editor settings with enhanced suggestions"
+    },
+    "[yaml]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["redhat.vscode-yaml", "esbenp.prettier-vscode"],
+          "default": "redhat.vscode-yaml"
+        },
+        "editor.tabSize": {"type": "integer", "default": 2}
+      },
+      "description": "YAML-specific editor settings (Docker Compose, GitHub Actions)"
+    },
+    "[python]": {
+      "type": "object",
+      "properties": {
+        "editor.defaultFormatter": {
+          "type": "string",
+          "enum": ["ms-python.black-formatter", "charliermarsh.ruff", "ms-python.autopep8"],
+          "default": "ms-python.black-formatter"
+        },
+        "editor.formatOnSave": {"type": "boolean", "default": true},
+        "editor.codeActionsOnSave": {"type": "object"},
+        "editor.tabSize": {"type": "integer", "default": 4}
+      },
+      "description": "Python-specific editor settings (Black formatter, Ruff linter)"
+    },
+    "files.watcherExclude": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"},
+      "description": "Files excluded from file system watcher (performance optimization for Turbo monorepo)",
+      "default": {
+        "**/node_modules/**": true,
+        "**/dist/**": true,
+        "**/.git/**": true,
+        "**/build/**": true,
+        "**/coverage/**": true,
+        "**/.turbo/**": true,
+        "**/out/**": true,
+        "**/.next/**": true,
+        "**/.vite/**": true
+      }
+    },
+    "files.exclude": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"},
+      "description": "Files excluded from file explorer and Copilot indexing",
+      "default": {
+        "**/.pytest_cache": true,
+        "**/.ruff_cache": true,
+        "**/htmlcov": true,
+        "**/.coverage": true,
+        "**/.turbo": true,
+        "**/.vite": true,
+        "**/.next": true
+      }
+    },
+    "search.exclude": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"},
+      "description": "Files excluded from search operations (Turbo monorepo performance)",
+      "default": {
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true,
+        "**/.ruff_cache": true,
+        "**/__pycache__": true,
+        "**/node_modules": true,
+        "**/.git": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/coverage": true,
+        "**/package-lock.json": true,
+        "**/.turbo": true,
+        "**/.next": true,
+        "**/.vite": true,
+        "**/out": true
+      }
+    },
+    "files.associations": {
+      "type": "object",
+      "additionalProperties": {"type": "string"},
+      "description": "File associations for language modes (Turbo, Biome, Docker, MkDocs)",
+      "default": {
+        ".husky/*": "shellscript",
+        "docker-compose*.yml": "yaml",
+        "*.Dockerfile": "dockerfile",
+        "turbo.json": "jsonc",
+        "**/turbo.json": "jsonc",
+        "biome.json": "jsonc",
+        "**/biome.json": "jsonc",
+        "**/tsconfig*.json": "jsonc"
+      }
+    },
+    "css.lint.unknownAtRules": {
+      "type": "string",
+      "enum": ["ignore", "warning", "error"],
+      "default": "ignore",
+      "description": "Ignore unknown at-rules (required for Tailwind v4 custom directives)"
+    },
+    "css.validate": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable CSS validation with Tailwind v4 compatibility"
+    },
+    "tailwindCSS.experimental.classRegex": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Custom regex patterns for Tailwind class detection in TSX/JSX"
+    },
+    "npm.packageManager": {
+      "type": "string",
+      "enum": ["auto", "npm", "yarn", "pnpm", "bun"],
+      "default": "npm",
+      "description": "Package manager for the workspace (npm with Turbo orchestration)"
+    },
+    "npm.autoDetect": {
+      "type": "string",
+      "enum": ["on", "off"],
+      "default": "on",
+      "description": "Auto-detect npm scripts for task runner"
+    },
+    "npm.enableScriptExplorer": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable NPM Scripts explorer view"
+    },
+    "npm.scriptExplorerAction": {
+      "type": "string",
+      "enum": ["open", "run"],
+      "default": "run",
+      "description": "Default action when clicking script in explorer"
+    },
+    "npm.exclude": {
+      "type": "string",
+      "default": "**/node_modules/**",
+      "description": "Glob pattern for npm scripts to exclude"
+    },
+    "markdownlint.config": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"},
+      "description": "Markdown linting rules (MkDocs optimized)",
+      "default": {
+        "MD013": false,
+        "MD033": false,
+        "MD041": false,
+        "MD051": false
+      }
+    },
+    "yaml.schemas": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {"type": "string"},
+          {"type": "array", "items": {"type": "string"}}
+        ]
+      },
+      "description": "YAML schema mappings for Docker Compose, GitHub Actions, and custom configs"
+    },
+    "yaml.validate": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable YAML validation with schema support"
+    },
+    "yaml.customTags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Custom YAML tags for specialized syntax (Material for MkDocs)"
+    },
+    "yaml.schemaStore.enable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable automatic schema download from SchemaStore.org"
+    },
+    "python.defaultInterpreterPath": {
+      "type": "string",
+      "description": "Path to default Python interpreter (conda env for Python 3.14t free-threaded)"
+    },
+    "python.terminal.activateEnvironment": {
+      "type": "boolean",
+      "default": true,
+      "description": "Activate Python environment in integrated terminal"
+    },
+    "python.terminal.activateEnvInCurrentTerminal": {
+      "type": "boolean",
+      "default": true,
+      "description": "Activate environment in currently active terminal"
+    },
+    "python.terminal.shellIntegration.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable shell integration for Python REPL and command tracking"
+    },
+    "python.analysis.typeCheckingMode": {
+      "type": "string",
+      "enum": ["off", "basic", "standard", "strict"],
+      "default": "basic",
+      "description": "Pylance type checking mode (basic recommended for Python 3.14t)"
+    },
+    "python.analysis.autoImportCompletions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable auto-import completions from Pylance"
+    },
+    "python.analysis.indexing": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable workspace indexing for improved IntelliSense"
+    },
+    "python.analysis.autoSearchPaths": {
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically add search paths for imports"
+    },
+    "python.analysis.useLibraryCodeForTypes": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use library source code for type inference"
+    },
+    "python.analysis.diagnosticMode": {
+      "type": "string",
+      "enum": ["openFilesOnly", "workspace"],
+      "default": "workspace",
+      "description": "Scope for Python diagnostics (workspace-wide for MCP project)"
+    },
+    "python.analysis.aiHoverSummaries": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable AI-generated hover summaries for Python symbols (Pylance + Copilot)"
+    },
+    "python.createEnvironment.contentButton": {
+      "type": "string",
+      "enum": ["show", "hide"],
+      "default": "hide",
+      "description": "Hide create environment button (using UV package manager)"
+    },
+    "python.createEnvironment.trigger": {
+      "type": "string",
+      "enum": ["off", "on", "prompt"],
+      "default": "off",
+      "description": "Disable environment creation prompts (UV managed)"
+    },
+    "python.linting.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Python linting (using Ruff)"
+    },
+    "python.linting.ruffEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Ruff linter (Rust-based, replaces Pylint/Flake8)"
+    },
+    "python.linting.ruffArgs": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Arguments passed to Ruff linter (pyproject.toml config)",
+      "default": ["--config", "docker-compose-examples/mcp/python_utils/pyproject.toml"]
+    },
+    "ruff.enable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Ruff extension features"
+    },
+    "ruff.organizeImports": {
+      "type": "boolean",
+      "default": true,
+      "description": "Organize imports using Ruff on save"
+    },
+    "ruff.fixAll": {
+      "type": "boolean",
+      "default": true,
+      "description": "Apply all Ruff fixes on save"
+    },
+    "ruff.nativeServer": {
+      "type": "string",
+      "enum": ["on", "off", "auto"],
+      "default": "on",
+      "description": "Use native Ruff language server (Rust-based for performance)"
+    },
+    "ruff.showNotifications": {
+      "type": "string",
+      "enum": ["always", "onError", "onWarning", "off"],
+      "default": "onWarning",
+      "description": "Show Ruff notifications for errors/warnings"
+    },
+    "ruff.path": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Path to Ruff executable (UV runner integration)",
+      "default": ["uv", "run", "--python", "3.14t", "ruff"]
+    },
+    "ruff.interpreter": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Python interpreter for Ruff (Python 3.14t free-threaded)"
+    },
+    "isort.check": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable isort import checking"
+    },
+    "isort.importStrategy": {
+      "type": "string",
+      "enum": ["fromEnvironment", "useBundled"],
+      "default": "useBundled",
+      "description": "isort import strategy (bundled with UV)"
+    },
+    "isort.args": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Arguments passed to isort (pyproject.toml config)",
+      "default": ["--settings-path", "docker-compose-examples/mcp/python_utils/pyproject.toml"]
+    },
+    "isort.path": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Path to isort executable (UV runner integration)",
+      "default": ["uv", "run", "--python", "3.14t", "isort"]
+    },
+    "isort.interpreter": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Python interpreter for isort (Python 3.14t)"
+    },
+    "python.sortImports.args": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Arguments for Python sort imports command"
+    },
+    "pylint.enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable Pylint (replaced by Ruff)"
+    },
+    "mypy.enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable mypy type checking (using Pylance instead)"
+    },
+    "python.formatting.provider": {
+      "type": "string",
+      "enum": ["none", "autopep8", "black", "yapf"],
+      "default": "none",
+      "description": "Python formatting provider (using Black via extension)"
+    },
+    "python.languageServer": {
+      "type": "string",
+      "enum": ["Pylance", "Jedi", "None"],
+      "default": "Pylance",
+      "description": "Python language server (Pylance for best performance)"
+    },
+    "pylance.enable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Pylance language server"
+    },
+    "python-envs.defaultEnvManager": {
+      "type": "string",
+      "enum": ["ms-python.python:conda", "ms-python.python:venv", "ms-python.python:pipenv", "ms-python.python:poetry"],
+      "default": "ms-python.python:conda",
+      "description": "Default Python environment manager (conda for Python 3.14t)"
+    },
+    "python-envs.defaultPackageManager": {
+      "type": "string",
+      "enum": ["ms-python.python:conda", "ms-python.python:pip", "ms-python.python:uv", "ms-python.python:pipenv", "ms-python.python:poetry"],
+      "default": "ms-python.python:conda",
+      "description": "Default Python package manager (conda with UV for packages)"
+    },
+    "python-envs.pythonProjects": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Python project directories for environment detection"
+    },
+    "python.testing.pytestArgs": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Arguments passed to pytest (aligned with tasks.json)",
+      "default": ["docker-compose-examples/mcp/python_utils/tests/", "-v", "--tb=short"]
+    },
+    "python.testing.unittestEnabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable unittest (using pytest)"
+    },
+    "python.testing.pytestEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable pytest test discovery and execution"
+    },
+    "python.testing.autoTestDiscoverOnSaveEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Auto-discover tests when files are saved"
+    },
+    "docker.languageserver.diagnostics.deprecatedMaintainer": {
+      "type": "string",
+      "enum": ["ignore", "warning", "error"],
+      "default": "ignore",
+      "description": "Ignore deprecated MAINTAINER instruction warnings"
+    },
+    "docker.languageserver.diagnostics.emptyContinuationLine": {
+      "type": "string",
+      "enum": ["ignore", "warning", "error"],
+      "default": "ignore",
+      "description": "Ignore empty continuation line warnings"
+    },
+    "docker.languageserver.diagnostics.instructionCasing": {
+      "type": "string",
+      "enum": ["ignore", "warning", "error"],
+      "default": "ignore",
+      "description": "Ignore instruction casing warnings (allow lowercase)"
+    },
+    "remote.SSH.configFile": {
+      "type": "string",
+      "default": "~/.ssh/config",
+      "description": "SSH config file path for remote development"
+    },
+    "remote.SSH.showLoginTerminal": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show terminal during SSH connection"
+    },
+    "terminal.integrated.defaultProfile.windows": {
+      "type": "string",
+      "description": "Default terminal profile for Windows (pwsh.exe recommended)"
+    },
+    "terminal.integrated.shellIntegration.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable shell integration for Copilot command visibility and command tracking"
+    },
+    "terminal.integrated.shellIntegration.showWelcome": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hide welcome message in integrated terminal"
+    },
+    "terminal.integrated.shellIntegration.decorationsEnabled": {
+      "type": "string",
+      "enum": ["both", "gutter", "overviewRuler", "never"],
+      "default": "both",
+      "description": "Show decorations for terminal commands (success/failure indicators)"
+    },
     "github.copilot.chat.participants.enabled": {
       "type": "boolean",
       "default": true,
@@ -274,173 +979,9 @@
       "default": true,
       "description": "Enable MCP and custom language model tools integration"
     },
-    "yaml.schemas": {
-      "type": "object",
-      "additionalProperties": {
-        "oneOf": [
-          {
-            "type": "string",
-            "description": "Single file or glob pattern"
-          },
-          {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Array of file paths or glob patterns"
-          }
-        ]
-      },
-      "description": "YAML schema mappings for validation and IntelliSense"
-    },
-    "yaml.validate": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable YAML validation"
-    },
-    "yaml.customTags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Custom YAML tags for specialized validation (e.g., Ansible vault, Material for MkDocs)"
-    },
-    "yaml.schemaStore.enable": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable automatic schema download from SchemaStore.org"
-    },
-    "yaml.schemaStore.url": {
-      "type": "string",
-      "format": "uri",
-      "default": "https://www.schemastore.org/api/json/catalog.json",
-      "description": "URL for YAML schema catalog"
-    },
-    "yaml.disableDefaultProperties": {
-      "type": "boolean",
-      "default": false,
-      "description": "Disable default properties in YAML completion"
-    },
-    "yaml.maxItemsComputed": {
-      "type": "integer",
-      "minimum": 1000,
-      "maximum": 10000,
-      "default": 5000,
-      "description": "Maximum items computed for YAML validation"
-    },
-    "[markdown]": {
-      "type": "object",
-      "properties": {
-        "editor.formatOnSave": {
-          "type": "boolean"
-        },
-        "editor.codeActionsOnSave": {
-          "type": "object"
-        },
-        "editor.wordWrap": {
-          "type": "string",
-          "enum": ["off", "on", "wordWrapColumn", "bounded"]
-        },
-        "editor.quickSuggestions": {
-          "type": "object"
-        },
-        "editor.suggest.showSnippets": {
-          "type": "boolean"
-        }
-      },
-      "description": "Language-specific settings for Markdown files"
-    },
-    "editor.snippetSuggestions": {
-      "type": "string",
-      "enum": ["top", "bottom", "inline", "none"],
-      "default": "top",
-      "description": "Controls snippet suggestion ordering"
-    },
-    "[yaml]": {
-      "type": "object",
-      "properties": {
-        "editor.defaultFormatter": {
-          "type": "string"
-        }
-      },
-      "description": "Language-specific settings for YAML files"
-    },
-    "files.associations": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "File associations for language modes"
-    },
-    "files.exclude": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "boolean"
-      },
-      "description": "Files to exclude from file explorer and Copilot indexing"
-    },
-    "search.exclude": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "boolean"
-      },
-      "description": "Files to exclude from search operations"
-    },
-    "python.defaultInterpreterPath": {
-      "type": "string",
-      "description": "Path to default Python interpreter (use conda env for Python 3.14+)"
-    },
-    "python-envs.defaultEnvManager": {
-      "type": "string",
-      "enum": [
-        "ms-python.python:conda",
-        "ms-python.python:venv",
-        "ms-python.python:pipenv",
-        "ms-python.python:poetry"
-      ],
-      "description": "Default Python environment manager"
-    },
-    "python-envs.defaultPackageManager": {
-      "type": "string",
-      "enum": [
-        "ms-python.python:conda",
-        "ms-python.python:pip",
-        "ms-python.python:uv",
-        "ms-python.python:pipenv",
-        "ms-python.python:poetry"
-      ],
-      "description": "Default Python package manager"
-    },
-    "python-envs.pythonProjects": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Python project directories for environment detection"
-    },
-    "terminal.integrated.defaultProfile.windows": {
-      "type": "string",
-      "description": "Default terminal profile for Windows"
-    },
     "terminal.integrated.defaultProfile.linux": {
       "type": "string",
       "description": "Default terminal profile for Linux"
-    },
-    "terminal.integrated.shellIntegration.enabled": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable shell integration for Copilot command visibility"
-    },
-    "terminal.integrated.shellIntegration.showWelcome": {
-      "type": "boolean",
-      "default": false,
-      "description": "Show welcome message in integrated terminal"
-    },
-    "terminal.integrated.shellIntegration.decorationsEnabled": {
-      "type": "string",
-      "enum": ["both", "gutter", "overviewRuler", "never"],
-      "default": "both",
-      "description": "Show decorations for terminal commands"
     },
     "terminal.integrated.automationProfile.windows": {
       "type": ["object", "null"],
@@ -464,23 +1005,6 @@
       },
       "description": "Terminal profiles for Linux"
     },
-    "python.testing.pytestArgs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Arguments passed to pytest"
-    },
-    "python.testing.unittestEnabled": {
-      "type": "boolean",
-      "default": false,
-      "description": "Enable unittest test discovery"
-    },
-    "python.testing.pytestEnabled": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable pytest test discovery"
-    },
     "github.copilot.chat.promptsDiagnostics.enabled": {
       "type": "boolean",
       "default": false,
@@ -489,11 +1013,6 @@
     "pgsql.copilot.modelOptions": {
       "type": "object",
       "description": "PostgreSQL Copilot model options"
-    },
-    "python.analysis.aiHoverSummaries": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable AI-generated hover summaries for Python symbols"
     }
   },
   "additionalProperties": true,

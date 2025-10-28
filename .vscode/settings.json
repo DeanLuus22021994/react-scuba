@@ -13,14 +13,19 @@
   "window.titleBarStyle": "custom",
   "editor.experimentalGpuAcceleration": "on",
 
-  // JavaScript/TypeScript language server optimization
-  "typescript.tsserver.maxTsServerMemory": 4096,
-  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  // JavaScript/TypeScript language server optimization (Turbo monorepo)
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.tsserver.useSyntaxServer": "auto",
   "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.jsxAttributeCompletionStyle": "auto",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.suggest.autoImports": true,
   "typescript.suggest.autoImports": true,
+  "typescript.suggest.paths": true,
+  "typescript.workspaceSymbols.scope": "allOpenProjects",
 
   // Editor performance optimizations
   "editor.formatOnSave": true,
@@ -30,33 +35,49 @@
   "editor.detectIndentation": false,
   "editor.snippetSuggestions": "top",
 
-  // Language-specific formatting
+  // Language-specific formatting (Biome-first strategy)
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features",
-    "editor.tabSize": 2
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
+    }
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features",
-    "editor.tabSize": 2
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
+    }
   },
   "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features",
-    "editor.tabSize": 2
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
+    }
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome",
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
+    }
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2
   },
   "[markdown]": {
@@ -68,9 +89,9 @@
     },
     "editor.wordWrap": "on",
     "editor.quickSuggestions": {
-      "comments": "on",
-      "strings": "on",
-      "other": "on"
+      "comments": true,
+      "strings": true,
+      "other": true
     },
     "editor.suggest.showSnippets": true
   },
@@ -88,18 +109,22 @@
     "MD051": false
   },
 
-  "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit",
-    "quickfix.biome": "explicit"
-  },
+  // Biome configuration
+  "biome.enabled": true,
+  "biome.lspBin": "node_modules/@biomejs/biome/bin/biome",
+  "biome.searchInPath": true,
 
-  // Reduce language server load
+  // Reduce language server load (Turbo monorepo optimized)
   "files.watcherExclude": {
     "**/node_modules/**": true,
     "**/dist/**": true,
     "**/.git/**": true,
     "**/build/**": true,
-    "**/coverage/**": true
+    "**/coverage/**": true,
+    "**/.turbo/**": true,
+    "**/out/**": true,
+    "**/.next/**": true,
+    "**/.vite/**": true
   },
 
   // Files to exclude from validation and Copilot indexing
@@ -109,10 +134,15 @@
     "**/.ruff_cache": true,
     "**/htmlcov": true,
     "**/.coverage": true,
-    "**/.coverage.*": true
+    "**/.coverage.*": true,
+    "**/.turbo": true,
+    "**/.vite": true,
+    "**/.next": true,
+    "**/dist": false,
+    "**/build": false
   },
 
-  // Search exclusions (improves performance)
+  // Search exclusions (improves performance - Turbo monorepo)
   "search.exclude": {
     "**/.pytest_cache": true,
     "**/.mypy_cache": true,
@@ -127,14 +157,25 @@
     "**/dist": true,
     "**/build": true,
     "**/coverage": true,
-    "**/package-lock.json": true
+    "**/package-lock.json": true,
+    "**/.turbo": true,
+    "**/.next": true,
+    "**/.vite": true,
+    "**/out": true
   },
 
   // CSS validation (Tailwind v4 compatible)
   "css.lint.unknownAtRules": "ignore",
   "css.validate": true,
 
-  // File associations
+  // NPM and package manager settings (Turbo monorepo)
+  "npm.packageManager": "npm",
+  "npm.autoDetect": "on",
+  "npm.enableScriptExplorer": true,
+  "npm.scriptExplorerAction": "run",
+  "npm.exclude": "**/node_modules/**",
+
+  // File associations (Turbo monorepo aware)
   "files.associations": {
     ".husky/*": "shellscript",
     "**/monitoring/grafana/provisioning/**/*.yml": "yaml",
@@ -144,7 +185,12 @@
     "**/.devcontainer/containers/gateway/dashboard-*.json": "json",
     "docker-compose*.yml": "yaml",
     "*.Dockerfile": "dockerfile",
-    "**/dashboard/src/index.css": "tailwindcss"
+    "**/dashboard/src/index.css": "tailwindcss",
+    "turbo.json": "jsonc",
+    "**/turbo.json": "jsonc",
+    "biome.json": "jsonc",
+    "**/biome.json": "jsonc",
+    "**/tsconfig*.json": "jsonc"
   },
 
   // ============================================================================
@@ -181,7 +227,7 @@
   "python.createEnvironment.contentButton": "hide",
   "python.createEnvironment.trigger": "off",
 
-  // Python linting
+  // Python linting (aligned with tasks.json)
   "python.linting.enabled": true,
   "python.linting.ruffEnabled": true,
   "python.linting.ruffArgs": [
@@ -191,13 +237,14 @@
   "ruff.enable": true,
   "ruff.organizeImports": true,
   "ruff.fixAll": true,
-  "ruff.nativeServer": true,
+  "ruff.nativeServer": "on",
+  "ruff.showNotifications": "onWarning",
   "ruff.interpreter": [
     "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"
   ],
-  "ruff.path": ["./.venv/Scripts/ruff.exe"],
+  "ruff.path": ["uv", "run", "--python", "3.14t", "ruff"],
   "isort.check": true,
-  "isort.importStrategy": "fromEnvironment",
+  "isort.importStrategy": "useBundled",
   "isort.args": [
     "--settings-path",
     "docker-compose-examples/mcp/python_utils/pyproject.toml"
@@ -205,6 +252,7 @@
   "isort.interpreter": [
     "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe"
   ],
+  "isort.path": ["uv", "run", "--python", "3.14t", "isort"],
   "python.sortImports.args": [
     "--profile",
     "black",
@@ -224,10 +272,25 @@
   "python-envs.defaultPackageManager": "ms-python.python:conda",
   "python-envs.pythonProjects": [],
 
-  // Python testing
-  "python.testing.pytestArgs": ["tests"],
+  // Python code actions
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.tabSize": 4
+  },
+
+  // Python testing (aligned with tasks.json)
+  "python.testing.pytestArgs": [
+    "docker-compose-examples/mcp/python_utils/tests/",
+    "-v",
+    "--tb=short"
+  ],
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
+  "python.testing.autoTestDiscoverOnSaveEnabled": true,
 
   // ============================================================================
   // Docker Settings

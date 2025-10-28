@@ -1,37 +1,183 @@
 {
   "version": "0.2.0",
   "configurations": [
+    // ============================================================================
+    // Node.js / TypeScript Debugging (Turbo Monorepo)
+    // ============================================================================
     {
-      "name": "Run React App",
+      "name": "🚀 Dev: Web + API (Full Stack)",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/server",
       "console": "integratedTerminal",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "start"
-      ],
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "runtimeArgs": ["run", "dev"],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       "env": {
-        "BROWSER": "none",
-        "WDS_SOCKET_PORT": "0"
+        "NODE_ENV": "development",
+        "DEBUG": "react-scuba:*"
+      },
+      "preLaunchTask": "Build Project",
+      "serverReadyAction": {
+        "pattern": "Local:\\s+https?://[^:]+:(\\d+)",
+        "uriFormat": "http://localhost:%s",
+        "action": "debugWithChrome"
+      },
+      "presentation": {
+        "hidden": false,
+        "group": "fullstack",
+        "order": 1
       }
     },
     {
-      "name": "Debug React App",
+      "name": "🌐 Dev: Web App (Vite)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/server/apps/web",
+      "console": "integratedTerminal",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "BROWSER": "none"
+      },
+      "serverReadyAction": {
+        "pattern": "Local:\\s+https?://[^:]+:(\\d+)",
+        "uriFormat": "http://localhost:%s",
+        "action": "openExternally"
+      },
+      "presentation": {
+        "hidden": false,
+        "group": "frontend",
+        "order": 1
+      }
+    },
+    {
+      "name": "🔧 Dev: API Server (Express)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/server/apps/api",
+      "console": "integratedTerminal",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--inspect", "src/index.js"],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "5000",
+        "DEBUG": "express:*"
+      },
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/server/apps/api/**",
+        "!**/node_modules/**"
+      ],
+      "presentation": {
+        "hidden": false,
+        "group": "backend",
+        "order": 1
+      }
+    },
+    {
+      "name": "🔍 Attach: Node Process",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "restart": true,
+      "presentation": {
+        "hidden": false,
+        "group": "attach",
+        "order": 1
+      }
+    },
+
+    // ============================================================================
+    // Browser Debugging (Chrome DevTools Protocol)
+    // ============================================================================
+    {
+      "name": "🌐 Chrome: Web App",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/src",
+      "url": "http://localhost:3001",
+      "webRoot": "${workspaceFolder}/server/apps/web/src",
+      "userDataDir": "${workspaceFolder}/.vscode/chrome-profile",
+      "sourceMaps": true,
       "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "/./*": "${webRoot}/*"
+      },
+      "trace": false,
+      "presentation": {
+        "hidden": false,
+        "group": "browser",
+        "order": 1
       }
     },
     {
-      "name": "Debug FastAPI Server",
+      "name": "🌐 Edge: Web App",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:3001",
+      "webRoot": "${workspaceFolder}/server/apps/web/src",
+      "userDataDir": "${workspaceFolder}/.vscode/edge-profile",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "/./*": "${webRoot}/*"
+      },
+      "presentation": {
+        "hidden": false,
+        "group": "browser",
+        "order": 2
+      }
+    },
+    {
+      "name": "🔗 Attach: Chrome",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/server/apps/web/src",
+      "sourceMaps": true,
+      "trace": false,
+      "presentation": {
+        "hidden": false,
+        "group": "attach",
+        "order": 2
+      }
+    },
+
+    // ============================================================================
+    // Python Debugging (Python 3.14t with UV)
+    // ============================================================================
+    {
+      "name": "🐍 MCP Server (Python)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "react_scuba_utils.cli",
+      "args": ["serve"],
+      "cwd": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+      "python": "${config:python.defaultInterpreterPath}",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "stopOnEntry": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1"
+      },
+      "preLaunchTask": "Python Quality Check",
+      "presentation": {
+        "hidden": false,
+        "group": "python",
+        "order": 1
+      }
+    },
+    {
+      "name": "🐍 FastAPI Server (Uvicorn)",
       "type": "debugpy",
       "request": "launch",
       "module": "uvicorn",
@@ -41,52 +187,105 @@
         "0.0.0.0",
         "--port",
         "8000",
-        "--reload"
+        "--reload",
+        "--log-level",
+        "debug"
       ],
       "cwd": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
-      "python": "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe",
+      "python": "${config:python.defaultInterpreterPath}",
       "console": "integratedTerminal",
+      "justMyCode": false,
       "env": {
-        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1"
+      },
+      "serverReadyAction": {
+        "pattern": "Uvicorn running on (https?://[^:]+:(\\d+))",
+        "uriFormat": "http://localhost:%s/docs",
+        "action": "openExternally"
+      },
+      "presentation": {
+        "hidden": false,
+        "group": "python",
+        "order": 2
       }
     },
     {
-      "name": "Debug MCP Server",
-      "type": "debugpy",
-      "request": "launch",
-      "module": "react_scuba_utils.cli",
-      "args": [
-        "serve"
-      ],
-      "cwd": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
-      "python": "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe",
-      "console": "integratedTerminal",
-      "env": {
-        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
-      }
-    },
-    {
-      "name": "Debug Python Tests",
+      "name": "🧪 Pytest: All Tests",
       "type": "debugpy",
       "request": "launch",
       "module": "pytest",
       "args": [
-        "tests/",
+        "docker-compose-examples/mcp/python_utils/tests/",
         "-v",
-        "--tb=short"
+        "--tb=short",
+        "--color=yes"
       ],
-      "cwd": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
-      "python": "C:\\Users\\deanl.MSI\\AppData\\Local\\Programs\\Python\\Python314\\python3.14t.exe",
+      "cwd": "${workspaceFolder}",
+      "python": "${config:python.defaultInterpreterPath}",
       "console": "integratedTerminal",
+      "justMyCode": false,
       "env": {
-        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+        "PYTEST_CURRENT_TEST": ""
+      },
+      "presentation": {
+        "hidden": false,
+        "group": "testing",
+        "order": 1
       }
     },
     {
-      "name": "Attach to Python Process",
+      "name": "🧪 Pytest: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["${file}", "-v", "--tb=short", "--color=yes"],
+      "cwd": "${workspaceFolder}",
+      "python": "${config:python.defaultInterpreterPath}",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
+      },
+      "presentation": {
+        "hidden": false,
+        "group": "testing",
+        "order": 2
+      }
+    },
+    {
+      "name": "🧪 Pytest: Coverage",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "docker-compose-examples/mcp/python_utils/tests/",
+        "--cov=react_scuba_utils",
+        "--cov-report=html",
+        "--cov-report=term-missing",
+        "-v"
+      ],
+      "cwd": "${workspaceFolder}",
+      "python": "${config:python.defaultInterpreterPath}",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/docker-compose-examples/mcp/python_utils"
+      },
+      "postDebugTask": "open_coverage_report",
+      "presentation": {
+        "hidden": false,
+        "group": "testing",
+        "order": 3
+      }
+    },
+    {
+      "name": "🔗 Attach: Python (Port 5678)",
       "type": "debugpy",
       "request": "attach",
-      "listen": {
+      "connect": {
         "host": "localhost",
         "port": 5678
       },
@@ -95,52 +294,114 @@
           "localRoot": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
           "remoteRoot": "/app"
         }
-      ]
+      ],
+      "justMyCode": false,
+      "presentation": {
+        "hidden": false,
+        "group": "attach",
+        "order": 3
+      }
     },
+
+    // ============================================================================
+    // Docker Container Debugging
+    // ============================================================================
     {
-      "name": "Debug Docker Container",
-      "type": "docker",
+      "name": "🐳 Docker: MCP Container",
+      "type": "debugpy",
       "request": "attach",
-      "platform": "netCore",
-      "containerName": "react-scuba-mcp",
-      "netCore": {
-        "debuggerPath": "/remote_debugger/debugpy",
-        "pathMappings": [
-          {
-            "localRoot": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
-            "remoteRoot": "/app"
-          }
-        ]
+      "connect": {
+        "host": "localhost",
+        "port": 5679
+      },
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/docker-compose-examples/mcp/python_utils",
+          "remoteRoot": "/app"
+        }
+      ],
+      "justMyCode": false,
+      "presentation": {
+        "hidden": false,
+        "group": "docker",
+        "order": 1
+      }
+    },
+
+    // ============================================================================
+    // Vitest Debugging (TypeScript/React)
+    // ============================================================================
+    {
+      "name": "🧪 Vitest: Web Tests",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/server/apps/web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "test", "--", "--run"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/server/apps/web/**",
+        "!**/node_modules/**"
+      ],
+      "presentation": {
+        "hidden": false,
+        "group": "testing",
+        "order": 4
       }
     },
     {
-      "name": "Run Web Extension in VS Code",
-      "type": "extensionHost",
-      "debugWebWorkerHost": true,
+      "name": "🧪 Vitest: Current File",
+      "type": "node",
       "request": "launch",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionDevelopmentKind=web"
-      ],
-      "outFiles": [
-        "${workspaceFolder}/dist/web/**/*.js"
-      ],
-      "preLaunchTask": "npm: watch-web"
+      "cwd": "${workspaceFolder}/server/apps/web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "test", "--", "--run", "${fileBasename}"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "sourceMaps": true,
+      "presentation": {
+        "hidden": false,
+        "group": "testing",
+        "order": 5
+      }
+    }
+  ],
+  
+  // ============================================================================
+  // Compound Launch Configurations
+  // ============================================================================
+  "compounds": [
+    {
+      "name": "🚀 Full Stack Debug",
+      "configurations": ["🔧 Dev: API Server (Express)", "🌐 Chrome: Web App"],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "compounds",
+        "order": 1
+      }
     },
     {
-      "name": "Extension Tests in VS Code",
-      "type": "extensionHost",
-      "debugWebWorkerHost": true,
-      "request": "launch",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionDevelopmentKind=web",
-        "--extensionTestsPath=${workspaceFolder}/dist/web/test/suite/index"
-      ],
-      "outFiles": [
-        "${workspaceFolder}/dist/web/**/*.js"
-      ],
-      "preLaunchTask": "npm: watch-web"
+      "name": "🐍 Python Full Stack",
+      "configurations": ["🐍 FastAPI Server (Uvicorn)", "🐍 MCP Server (Python)"],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "compounds",
+        "order": 2
+      }
+    },
+    {
+      "name": "🧪 All Tests",
+      "configurations": ["🧪 Vitest: Web Tests", "🧪 Pytest: All Tests"],
+      "stopAll": false,
+      "presentation": {
+        "hidden": false,
+        "group": "compounds",
+        "order": 3
+      }
     }
   ]
 }

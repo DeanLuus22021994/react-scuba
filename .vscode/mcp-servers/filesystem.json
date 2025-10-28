@@ -1,0 +1,52 @@
+{
+  "servers": {
+    "filesystem": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "filesystem-mcp-server",
+        "--security-opt=no-new-privileges:true",
+        "--cap-drop=ALL",
+        "--user",
+        "node:node",
+        "--read-only",
+        "--cpus=1.0",
+        "--memory=2g",
+        "--memory-reservation=1g",
+        "--pids-limit=50",
+        "--network",
+        "mcp-cluster",
+        "--network-alias",
+        "filesystem-mcp",
+        "--dns=172.28.0.1",
+        "--stop-timeout=20",
+        "--restart=unless-stopped",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=100m",
+        "-p",
+        "9091:9090",
+        "-v",
+        "react_scuba_filesystem-node-cache:/cache/node:rw,Z",
+        "-v",
+        "react_scuba_filesystem-cache:/cache/fs:rw,Z",
+        "-v",
+        "${workspaceFolder}:/workspace:ro",
+        "-e",
+        "NODE_ENV=production",
+        "-e",
+        "NODE_OPTIONS=--max-old-space-size=2048 --enable-source-maps",
+        "-e",
+        "OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317",
+        "-e",
+        "OTEL_SERVICE_NAME=filesystem-mcp-server",
+        "-e",
+        "LOG_LEVEL=info",
+        "-e",
+        "LOG_FORMAT=json",
+        "mcp-filesystem:latest"
+      ]
+    }
+  }
+}

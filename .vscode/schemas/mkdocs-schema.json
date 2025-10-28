@@ -1,143 +1,1000 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://squidfunk.github.io/mkdocs-material/schema.json",
-  "title": "MkDocs Configuration with Material Theme",
-  "description": "Schema for mkdocs.yml configuration files with Material theme extensions",
+  "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/vitepress-docs",
+  "title": "React Scuba Documentation Schema - VitePress (October 2025)",
+  "description": "Comprehensive schema for VitePress documentation configuration aligned with Turbo monorepo, multi-tenant architecture, tasks.json, settings.json, launch.json, keybindings.json, and extensions.json. Validates documentation structure, navigation, plugins, and content organization for the React Scuba platform.",
   "type": "object",
+  "required": ["site", "docs", "structure", "metadata"],
   "properties": {
-    "site_name": { "type": "string" },
-    "site_description": { "type": "string" },
-    "site_author": { "type": "string" },
-    "site_url": { "type": "string", "format": "uri" },
-    "repo_name": { "type": "string" },
-    "repo_url": { "type": "string", "format": "uri" },
-    "edit_uri": { "type": "string" },
-    "copyright": { "type": "string" },
-    "theme": {
+    "site": {
       "type": "object",
+      "description": "VitePress site configuration",
+      "required": ["title", "description", "base", "lang"],
       "properties": {
-        "name": {
+        "title": {
           "type": "string",
-          "enum": ["material", "readthedocs", "mkdocs"]
+          "description": "Documentation site title",
+          "minLength": 3,
+          "maxLength": 100,
+          "examples": ["React Scuba Documentation", "React Scuba Platform Docs"]
         },
-        "language": { "type": "string" },
-        "palette": {
-          "oneOf": [
-            { "$ref": "#/definitions/palette" },
-            { "type": "array", "items": { "$ref": "#/definitions/palette" } }
+        "description": {
+          "type": "string",
+          "description": "Site meta description for SEO",
+          "minLength": 50,
+          "maxLength": 160,
+          "examples": ["Comprehensive documentation for React Scuba multi-tenant diving center platform with Turbo monorepo and Biome tooling"]
+        },
+        "base": {
+          "type": "string",
+          "description": "Base URL path for deployment",
+          "pattern": "^\\/([a-z0-9-]+\\/)*$",
+          "default": "/",
+          "examples": ["/", "/docs/", "/react-scuba/"]
+        },
+        "lang": {
+          "type": "string",
+          "description": "Primary language (ISO 639-1)",
+          "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+          "default": "en-US",
+          "examples": ["en-US", "fr-FR", "es-ES"]
+        },
+        "head": {
+          "type": "array",
+          "description": "Additional HTML head tags",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 3
+          },
+          "examples": [
+            [
+              ["link", { "rel": "icon", "href": "/favicon.ico" }],
+              ["meta", { "name": "theme-color", "content": "#0EA5E9" }]
+            ]
           ]
         },
-        "font": {
+        "theme_config": {
           "type": "object",
+          "description": "VitePress theme configuration",
           "properties": {
-            "text": { "type": "string" },
-            "code": { "type": "string" }
-          }
-        },
-        "features": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "icon": {
-          "type": "object",
-          "properties": {
-            "repo": { "type": "string" },
-            "logo": { "type": "string" }
+            "logo": {
+              "type": "string",
+              "description": "Path to logo image",
+              "examples": ["/logo.svg", "/assets/logo.png"]
+            },
+            "nav": {
+              "type": "array",
+              "description": "Top navigation items",
+              "items": {
+                "$ref": "#/definitions/nav_item"
+              },
+              "minItems": 1
+            },
+            "sidebar": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Single sidebar for all pages",
+                  "items": {
+                    "$ref": "#/definitions/sidebar_item"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Multiple sidebars for different sections",
+                  "patternProperties": {
+                    "^\\/.*": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/sidebar_item"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "social_links": {
+              "type": "array",
+              "description": "Social media links in header",
+              "items": {
+                "type": "object",
+                "required": ["icon", "link"],
+                "properties": {
+                  "icon": {
+                    "type": "string",
+                    "enum": ["github", "twitter", "linkedin", "facebook", "instagram", "youtube", "discord", "slack"],
+                    "description": "Social icon type"
+                  },
+                  "link": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL to social profile"
+                  }
+                }
+              }
+            },
+            "footer": {
+              "type": "object",
+              "description": "Footer configuration",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Footer message (supports HTML)"
+                },
+                "copyright": {
+                  "type": "string",
+                  "description": "Copyright notice"
+                }
+              }
+            },
+            "search": {
+              "type": "object",
+              "description": "Search configuration",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "enum": ["local", "algolia"],
+                  "default": "local"
+                },
+                "options": {
+                  "type": "object",
+                  "description": "Search provider-specific options"
+                }
+              }
+            },
+            "outline": {
+              "type": "object",
+              "description": "Table of contents configuration",
+              "properties": {
+                "level": {
+                  "type": "array",
+                  "description": "Heading levels to include",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 2,
+                    "maximum": 6
+                  },
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "default": [2, 3]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Outline section label",
+                  "default": "On this page"
+                }
+              }
+            }
           }
         }
       }
     },
-    "plugins": {
-      "type": "array",
-      "items": {
-        "oneOf": [
-          { "type": "string" },
-          {
-            "type": "object",
-            "patternProperties": {
-              ".*": {
-                "type": "object"
-              }
-            }
-          }
-        ]
-      }
-    },
-    "markdown_extensions": {
-      "type": "array",
-      "items": {
-        "oneOf": [
-          { "type": "string" },
-          {
-            "type": "object",
-            "patternProperties": {
-              ".*": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        ]
-      }
-    },
-    "extra_css": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "extra_javascript": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "extra": {
+    "docs": {
       "type": "object",
-      "additionalProperties": true
-    },
-    "nav": {
-      "type": "array",
-      "items": {
-        "oneOf": [
-          { "type": "string" },
-          {
-            "type": "object",
-            "additionalProperties": true
-          }
-        ]
-      }
-    },
-    "validation": {
-      "type": "object",
+      "description": "Documentation content configuration aligned with server/apps/docs structure",
+      "required": ["root", "sections", "extensions"],
       "properties": {
-        "omitted_files": {
+        "root": {
           "type": "string",
-          "enum": ["warn", "ignore", "error"]
+          "description": "Documentation root directory relative to monorepo root",
+          "pattern": "^server\\/apps\\/docs$",
+          "const": "server/apps/docs",
+          "examples": ["server/apps/docs"]
         },
-        "absolute_links": {
-          "type": "string",
-          "enum": ["warn", "ignore", "error"]
+        "sections": {
+          "type": "array",
+          "description": "Documentation sections matching directory structure",
+          "items": {
+            "type": "object",
+            "required": ["path", "title", "description"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Section path relative to docs root",
+                "pattern": "^[a-z0-9-]+$",
+                "examples": ["guide", "reference", "testing", "contributing", "deployment", "archive", "agent"]
+              },
+              "title": {
+                "type": "string",
+                "description": "Section display title",
+                "examples": ["Getting Started", "API Reference", "Testing Guide"]
+              },
+              "description": {
+                "type": "string",
+                "description": "Section description for metadata"
+              },
+              "index": {
+                "type": "string",
+                "description": "Index/landing page for section",
+                "pattern": "^index\\.md$",
+                "default": "index.md"
+              },
+              "files": {
+                "type": "array",
+                "description": "Markdown files in this section",
+                "items": {
+                  "type": "object",
+                  "required": ["path", "title"],
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9-]+\\.md$",
+                      "description": "File path relative to section"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Page title"
+                    },
+                    "frontmatter": {
+                      "type": "object",
+                      "description": "Page frontmatter metadata",
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "layout": {
+                          "type": "string",
+                          "enum": ["doc", "page", "home"],
+                          "default": "doc"
+                        },
+                        "outline": {
+                          "type": ["boolean", "array", "string"],
+                          "description": "Table of contents configuration"
+                        },
+                        "sidebar": {
+                          "type": "boolean",
+                          "description": "Show/hide sidebar",
+                          "default": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "subsections": {
+                "type": "array",
+                "description": "Nested subsections",
+                "items": {
+                  "$ref": "#/properties/docs/properties/sections/items"
+                }
+              }
+            }
+          },
+          "minItems": 1
         },
-        "unrecognized_links": {
+        "extensions": {
+          "type": "object",
+          "description": "Markdown extensions and plugins (VitePress + Vite ecosystem)",
+          "properties": {
+            "markdown": {
+              "type": "object",
+              "description": "Markdown-it configuration",
+              "properties": {
+                "lineNumbers": {
+                  "type": "boolean",
+                  "description": "Show line numbers in code blocks",
+                  "default": true
+                },
+                "theme": {
+                  "type": "string",
+                  "description": "Syntax highlighting theme",
+                  "enum": ["material-theme-darker", "github-dark", "github-light", "nord", "one-dark-pro"],
+                  "default": "material-theme-darker"
+                },
+                "languages": {
+                  "type": "array",
+                  "description": "Additional language grammars for syntax highlighting",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["typescript", "python", "docker", "yaml", "bash", "json", "markdown"]]
+                },
+                "container": {
+                  "type": "boolean",
+                  "description": "Enable custom containers (tip, warning, danger)",
+                  "default": true
+                },
+                "emoji": {
+                  "type": "boolean",
+                  "description": "Enable emoji support",
+                  "default": true
+                },
+                "anchor": {
+                  "type": "object",
+                  "description": "Heading anchor configuration",
+                  "properties": {
+                    "permalink": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "level": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 6
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "vite": {
+              "type": "object",
+              "description": "Vite configuration for VitePress (aligned with vite.config.js)",
+              "properties": {
+                "plugins": {
+                  "type": "array",
+                  "description": "Vite plugins",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["vitepress", "vue", "markdown"]]
+                },
+                "build": {
+                  "type": "object",
+                  "properties": {
+                    "outDir": {
+                      "type": "string",
+                      "default": ".vitepress/dist"
+                    },
+                    "minify": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                }
+              }
+            },
+            "mermaid": {
+              "type": "boolean",
+              "description": "Enable Mermaid diagram support",
+              "default": true
+            }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "description": "Documentation validation rules",
+          "properties": {
+            "broken_links": {
+              "type": "string",
+              "enum": ["error", "warn", "ignore"],
+              "default": "error",
+              "description": "Action for broken internal links"
+            },
+            "missing_frontmatter": {
+              "type": "string",
+              "enum": ["error", "warn", "ignore"],
+              "default": "warn",
+              "description": "Action for pages without frontmatter"
+            },
+            "empty_sections": {
+              "type": "string",
+              "enum": ["error", "warn", "ignore"],
+              "default": "warn",
+              "description": "Action for sections without content"
+            }
+          }
+        }
+      }
+    },
+    "structure": {
+      "type": "object",
+      "description": "Documentation structure mapping to actual codebase documentation",
+      "required": ["root_docs", "section_mapping", "cross_references"],
+      "properties": {
+        "root_docs": {
+          "type": "array",
+          "description": "Root-level documentation files (workspace root)",
+          "items": {
+            "type": "object",
+            "required": ["file", "purpose", "audience"],
+            "properties": {
+              "file": {
+                "type": "string",
+                "pattern": "^[A-Z_]+\\.md$",
+                "description": "Root documentation filename",
+                "examples": [
+                  "README.md",
+                  "DEVELOPMENT.md",
+                  "MULTI_TENANT_ARCHITECTURE.md",
+                  "ISSUES.md",
+                  "TASKS.md",
+                  "TODO.md",
+                  "IMPLEMENTATION_SUMMARY.md",
+                  "INFRASTRUCTURE_ISSUES.md",
+                  "INFRASTRUCTURE_METRICS.md",
+                  "MULTI_INDUSTRY_SUPPORT.md"
+                ]
+              },
+              "purpose": {
+                "type": "string",
+                "description": "Documentation purpose",
+                "examples": [
+                  "Project overview",
+                  "Development guide",
+                  "Architecture documentation",
+                  "Issue tracking",
+                  "Task management"
+                ]
+              },
+              "audience": {
+                "type": "string",
+                "enum": ["developers", "architects", "operators", "contributors", "management"],
+                "description": "Target audience"
+              },
+              "referenced_in": {
+                "type": "array",
+                "description": "VS Code files that reference this doc",
+                "items": {
+                  "type": "string",
+                  "enum": ["tasks.json", "launch.json", "settings.json", "keybindings.json"]
+                }
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "section_mapping": {
+          "type": "object",
+          "description": "Mapping of documentation sections to monorepo structure",
+          "properties": {
+            "guide": {
+              "type": "object",
+              "description": "Getting started and user guides",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "const": "server/apps/docs/guide"
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["installation", "structure", "configuration", "development"]]
+                }
+              }
+            },
+            "reference": {
+              "type": "object",
+              "description": "API and technical reference",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "const": "server/apps/docs/reference"
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["api", "components", "utilities", "types"]]
+                }
+              }
+            },
+            "testing": {
+              "type": "object",
+              "description": "Testing guides and strategies",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "const": "server/apps/docs/testing"
+                },
+                "aligned_with": {
+                  "type": "array",
+                  "description": "VS Code configurations this aligns with",
+                  "items": {
+                    "type": "string",
+                    "enum": ["tasks.json", "launch.json", "keybindings.json", "settings.json"]
+                  }
+                }
+              }
+            },
+            "contributing": {
+              "type": "object",
+              "description": "Contribution guidelines",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "const": "server/apps/docs/contributing"
+                },
+                "includes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["index.md", "linting.md", "testing.md", "changelog.md"]]
+                }
+              }
+            },
+            "deployment": {
+              "type": "object",
+              "description": "Deployment and operations",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "const": "server/apps/docs/deployment"
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["docker", "kubernetes", "analytics", "monitoring"]]
+                }
+              }
+            },
+            "agent": {
+              "type": "object",
+              "description": "Agent/automation documentation",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "const": "server/apps/docs/agent"
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["configuration", "workflow", "principles", "security"]]
+                }
+              }
+            },
+            "archive": {
+              "type": "object",
+              "description": "Archived documentation",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "const": "server/apps/docs/archive"
+                },
+                "purpose": {
+                  "type": "string",
+                  "const": "Historical reference for deprecated features"
+                }
+              }
+            }
+          }
+        },
+        "cross_references": {
+          "type": "object",
+          "description": "Cross-references between documentation and VS Code configs",
+          "properties": {
+            "tasks_to_docs": {
+              "type": "array",
+              "description": "Tasks.json tasks that reference documentation",
+              "items": {
+                "type": "object",
+                "required": ["task_label", "doc_file", "section"],
+                "properties": {
+                  "task_label": {
+                    "type": "string",
+                    "description": "Task label from tasks.json",
+                    "examples": ["npm: lint", "Python: Test", "Docker: Build Basic Stack"]
+                  },
+                  "doc_file": {
+                    "type": "string",
+                    "description": "Documentation file that describes this task"
+                  },
+                  "section": {
+                    "type": "string",
+                    "description": "Section within the doc file"
+                  }
+                }
+              }
+            },
+            "launch_to_docs": {
+              "type": "array",
+              "description": "Launch.json configurations that reference documentation",
+              "items": {
+                "type": "object",
+                "required": ["config_name", "doc_file"],
+                "properties": {
+                  "config_name": {
+                    "type": "string",
+                    "description": "Launch config name",
+                    "examples": ["🚀 Dev: Web + API (Full Stack)", "🐍 Python: MCP Server"]
+                  },
+                  "doc_file": {
+                    "type": "string",
+                    "description": "Documentation for this debug configuration"
+                  }
+                }
+              }
+            },
+            "settings_to_docs": {
+              "type": "array",
+              "description": "Settings that reference documentation",
+              "items": {
+                "type": "object",
+                "required": ["setting_key", "doc_file"],
+                "properties": {
+                  "setting_key": {
+                    "type": "string",
+                    "description": "Settings.json key path",
+                    "examples": ["biome.enabled", "python.testing.pytestArgs", "npm.packageManager"]
+                  },
+                  "doc_file": {
+                    "type": "string",
+                    "description": "Documentation explaining this setting"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Documentation metadata for tracking and automation",
+      "required": ["version", "last_updated", "maintainers", "tooling"],
+      "properties": {
+        "version": {
           "type": "string",
-          "enum": ["warn", "ignore", "error"]
+          "description": "Documentation version (semantic)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "examples": ["1.0.0", "2.1.3"]
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last significant update (ISO 8601)",
+          "examples": ["2025-10-28T12:00:00Z"]
+        },
+        "maintainers": {
+          "type": "array",
+          "description": "Documentation maintainers",
+          "items": {
+            "type": "object",
+            "required": ["name", "role"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Maintainer name"
+              },
+              "role": {
+                "type": "string",
+                "enum": ["lead", "contributor", "reviewer"],
+                "description": "Maintainer role"
+              },
+              "contact": {
+                "type": "string",
+                "format": "email",
+                "description": "Contact email"
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "tooling": {
+          "type": "object",
+          "description": "Documentation tooling stack",
+          "required": ["framework", "builder", "deployment"],
+          "properties": {
+            "framework": {
+              "type": "object",
+              "description": "Documentation framework",
+              "required": ["name", "version"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "const": "vitepress",
+                  "description": "VitePress documentation framework"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "^\\d+\\.\\d+\\.\\d+$",
+                  "description": "VitePress version",
+                  "examples": ["1.0.0"]
+                }
+              }
+            },
+            "builder": {
+              "type": "object",
+              "description": "Build tool",
+              "required": ["name", "version"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "const": "vite",
+                  "description": "Vite bundler"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "^\\d+\\.\\d+\\.\\d+$",
+                  "examples": ["7.1.11"]
+                }
+              }
+            },
+            "deployment": {
+              "type": "object",
+              "description": "Deployment configuration",
+              "properties": {
+                "target": {
+                  "type": "string",
+                  "enum": ["github-pages", "netlify", "vercel", "cloudflare-pages", "azure-static-web-apps"],
+                  "description": "Deployment target"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Production documentation URL"
+                },
+                "branch": {
+                  "type": "string",
+                  "description": "Git branch for deployment",
+                  "default": "gh-pages"
+                }
+              }
+            },
+            "extensions": {
+              "type": "array",
+              "description": "VS Code extensions for documentation authoring (from extensions.json)",
+              "items": {
+                "type": "string"
+              },
+              "examples": [
+                [
+                  "yzhang.markdown-all-in-one",
+                  "DavidAnson.vscode-markdownlint",
+                  "bierner.markdown-preview-github-styles",
+                  "bierner.markdown-mermaid"
+                ]
+              ]
+            }
+          }
+        },
+        "integration": {
+          "type": "object",
+          "description": "Integration with VS Code workspace",
+          "properties": {
+            "vscode_configs": {
+              "type": "array",
+              "description": "VS Code config files that reference docs",
+              "items": {
+                "type": "string",
+                "enum": ["settings.json", "tasks.json", "launch.json", "keybindings.json", "extensions.json"]
+              },
+              "uniqueItems": true,
+              "minItems": 1,
+              "examples": [["tasks.json", "launch.json", "keybindings.json"]]
+            },
+            "schemas": {
+              "type": "array",
+              "description": "JSON schemas that validate documentation configs",
+              "items": {
+                "type": "string"
+              },
+              "examples": [
+                [
+                  "vscode-settings-schema.json",
+                  "monorepo-structure-schema.json",
+                  "vitepress-docs-schema.json"
+                ]
+              ]
+            },
+            "monorepo_alignment": {
+              "type": "object",
+              "description": "Alignment with Turbo monorepo structure",
+              "properties": {
+                "workspace": {
+                  "type": "string",
+                  "const": "server/apps/docs",
+                  "description": "Docs workspace path"
+                },
+                "package_name": {
+                  "type": "string",
+                  "const": "@react-scuba/docs",
+                  "description": "Package name in package.json"
+                },
+                "scripts": {
+                  "type": "array",
+                  "description": "NPM scripts for docs (must align with tasks.json)",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["docs:dev", "docs:build", "docs:preview"]]
+                }
+              }
+            }
+          }
+        },
+        "quality": {
+          "type": "object",
+          "description": "Documentation quality metrics and standards",
+          "properties": {
+            "coverage": {
+              "type": "object",
+              "description": "Documentation coverage tracking",
+              "properties": {
+                "target": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100,
+                  "description": "Target documentation coverage percentage",
+                  "default": 80
+                },
+                "current": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100,
+                  "description": "Current documentation coverage percentage"
+                }
+              }
+            },
+            "standards": {
+              "type": "object",
+              "description": "Documentation standards",
+              "properties": {
+                "markdown_lint": {
+                  "type": "boolean",
+                  "description": "Enforce markdown linting",
+                  "default": true
+                },
+                "spell_check": {
+                  "type": "boolean",
+                  "description": "Enable spell checking",
+                  "default": false
+                },
+                "link_validation": {
+                  "type": "boolean",
+                  "description": "Validate all links on build",
+                  "default": true
+                }
+              }
+            }
+          }
         }
       }
     }
   },
   "definitions": {
-    "palette": {
+    "nav_item": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Navigation item text"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link URL (internal or external)"
+        },
+        "items": {
+          "type": "array",
+          "description": "Dropdown menu items",
+          "items": {
+            "$ref": "#/definitions/nav_item"
+          }
+        },
+        "activeMatch": {
+          "type": "string",
+          "description": "Regex pattern for active state"
+        }
+      }
+    },
+    "sidebar_item": {
       "type": "object",
       "properties": {
-        "media": { "type": "string" },
-        "scheme": { "type": "string", "enum": ["default", "slate"] },
-        "primary": { "type": "string" },
-        "accent": { "type": "string" },
-        "toggle": {
-          "type": "object",
-          "properties": {
-            "icon": { "type": "string" },
-            "name": { "type": "string" }
+        "text": {
+          "type": "string",
+          "description": "Sidebar item text"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to documentation page"
+        },
+        "items": {
+          "type": "array",
+          "description": "Nested sidebar items",
+          "items": {
+            "$ref": "#/definitions/sidebar_item"
+          }
+        },
+        "collapsed": {
+          "type": "boolean",
+          "description": "Collapse nested items by default",
+          "default": false
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "site": {
+        "title": "React Scuba Documentation",
+        "description": "Comprehensive documentation for React Scuba multi-tenant diving center platform",
+        "base": "/",
+        "lang": "en-US",
+        "theme_config": {
+          "logo": "/logo.svg",
+          "nav": [
+            { "text": "Guide", "link": "/guide/" },
+            { "text": "Reference", "link": "/reference/" },
+            { "text": "Testing", "link": "/testing/" }
+          ],
+          "sidebar": {
+            "/guide/": [
+              {
+                "text": "Getting Started",
+                "items": [
+                  { "text": "Installation", "link": "/guide/installation" },
+                  { "text": "Structure", "link": "/guide/structure" }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "docs": {
+        "root": "server/apps/docs",
+        "sections": [
+          {
+            "path": "guide",
+            "title": "User Guide",
+            "description": "Getting started and development guides",
+            "files": [
+              { "path": "index.md", "title": "Introduction" },
+              { "path": "installation.md", "title": "Installation" }
+            ]
+          }
+        ],
+        "extensions": {
+          "markdown": {
+            "lineNumbers": true,
+            "theme": "material-theme-darker",
+            "languages": ["typescript", "python", "docker"]
+          },
+          "mermaid": true
+        }
+      },
+      "structure": {
+        "root_docs": [
+          {
+            "file": "README.md",
+            "purpose": "Project overview",
+            "audience": "developers"
+          }
+        ],
+        "section_mapping": {
+          "guide": {
+            "path": "server/apps/docs/guide",
+            "topics": ["installation", "structure", "configuration"]
+          }
+        }
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "last_updated": "2025-10-28T12:00:00Z",
+        "maintainers": [
+          {
+            "name": "Architecture Team",
+            "role": "lead"
+          }
+        ],
+        "tooling": {
+          "framework": {
+            "name": "vitepress",
+            "version": "1.0.0"
+          },
+          "builder": {
+            "name": "vite",
+            "version": "7.1.11"
+          },
+          "deployment": {
+            "target": "github-pages"
           }
         }
       }
     }
-  }
+  ]
 }

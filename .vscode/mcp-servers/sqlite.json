@@ -1,0 +1,48 @@
+{
+  "servers": {
+    "sqlite": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "sqlite-mcp-server",
+        "--security-opt=no-new-privileges:true",
+        "--cap-drop=ALL",
+        "--user",
+        "node:node",
+        "--read-only",
+        "--cpus=0.5",
+        "--memory=512m",
+        "--memory-reservation=256m",
+        "--pids-limit=30",
+        "--network",
+        "mcp-cluster",
+        "--network-alias",
+        "sqlite-mcp",
+        "--dns=172.28.0.1",
+        "--stop-timeout=15",
+        "--restart=unless-stopped",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=100m",
+        "-p",
+        "9094:9090",
+        "-v",
+        "react_scuba_sqlite-cache:/cache:rw,Z",
+        "-v",
+        "${workspaceFolder}:/data:rw",
+        "-e",
+        "OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317",
+        "-e",
+        "OTEL_SERVICE_NAME=sqlite-mcp-server",
+        "-e",
+        "LOG_LEVEL=info",
+        "-e",
+        "LOG_FORMAT=json",
+        "mcp-sqlite:latest",
+        "mcp-server-sqlite-npx",
+        "/data/db.sqlite"
+      ]
+    }
+  }
+}

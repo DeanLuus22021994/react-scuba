@@ -1,0 +1,60 @@
+{
+  "servers": {
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "github-mcp-server",
+        "--security-opt=no-new-privileges:true",
+        "--cap-drop=ALL",
+        "--user",
+        "65534:65534",
+        "--cpus=2.0",
+        "--memory=1g",
+        "--memory-reservation=512m",
+        "--pids-limit=100",
+        "--network",
+        "mcp-cluster",
+        "--network-alias",
+        "github-mcp",
+        "--dns=172.28.0.1",
+        "--add-host=host.docker.internal:host-gateway",
+        "--stop-timeout=30",
+        "--restart=unless-stopped",
+        "-p",
+        "9090:9090",
+        "-v",
+        "github-mcp-cache:/cache/github:rw,Z",
+        "-v",
+        "github-mcp-data:/app/data:rw,Z",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "-e",
+        "GITHUB_DYNAMIC_TOOLSETS",
+        "-e",
+        "GITHUB_HOST=https://github.com",
+        "-e",
+        "GITHUB_TOOLSETS=context,repos,issues,pull_requests,actions,users,code_security,discussions,projects",
+        "-e",
+        "OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317",
+        "-e",
+        "OTEL_SERVICE_NAME=github-mcp-server",
+        "-e",
+        "OTEL_RESOURCE_ATTRIBUTES=service.version=0.19.1,deployment.environment=development",
+        "-e",
+        "LOG_LEVEL=info",
+        "-e",
+        "LOG_FORMAT=json",
+        "ghcr.io/github/github-mcp-server:latest",
+        "stdio"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}",
+        "GITHUB_DYNAMIC_TOOLSETS": "1"
+      }
+    }
+  }
+}

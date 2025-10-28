@@ -1,0 +1,55 @@
+{
+  "servers": {
+    "mariadb": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "mariadb-mcp-server",
+        "--security-opt=no-new-privileges:true",
+        "--cap-drop=ALL",
+        "--user",
+        "node:node",
+        "--cpus=1.0",
+        "--memory=2g",
+        "--memory-reservation=1g",
+        "--pids-limit=50",
+        "--network",
+        "mcp-cluster",
+        "--network-alias",
+        "mariadb-mcp",
+        "--dns=172.28.0.1",
+        "--add-host=host.docker.internal:host-gateway",
+        "--stop-timeout=30",
+        "--restart=unless-stopped",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=200m",
+        "-p",
+        "9093:9090",
+        "-v",
+        "react_scuba_mariadb-node-cache:/cache/node:rw,Z",
+        "-v",
+        "react_scuba_mariadb-cache:/cache/mariadb:rw,Z",
+        "-e",
+        "MARIADB_CONNECTION",
+        "-e",
+        "NODE_ENV=production",
+        "-e",
+        "NODE_OPTIONS=--max-old-space-size=2048",
+        "-e",
+        "OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317",
+        "-e",
+        "OTEL_SERVICE_NAME=mariadb-mcp-server",
+        "-e",
+        "LOG_LEVEL=info",
+        "-e",
+        "LOG_FORMAT=json",
+        "mcp-mariadb:latest"
+      ],
+      "env": {
+        "MARIADB_CONNECTION": "mysql://root:${env:MARIADB_PASSWORD}@host.docker.internal:3306/mcp_db"
+      }
+    }
+  }
+}

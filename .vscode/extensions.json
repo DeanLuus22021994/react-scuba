@@ -1,38 +1,164 @@
 {
-    "recommendations": [
-        // Copilot and AI tools (from devcontainer.json)
-        "GitHub.copilot-chat",
-        "GitHub.copilot",
-        "ms-vscode.copilot-mermaid-diagram",
-        "ms-vscode.vscode-copilot-vision",
-        "ms-vscode.vscode-websearchforcopilot",
-        // JavaScript/TypeScript and React (Rust-based tooling)
-        "ms-vscode.vscode-typescript-next",  // TypeScript support
-        "biomejs.biome",                     // Biome (Rust linter + formatter)
-        "christian-kohler.npm-intellisense", // NPM IntelliSense (from devcontainer.json)
-        "Orta.vscode-jest",                  // Jest testing (from devcontainer.json)
-        "VisualStudioExptTeam.intellicode-api-usage-examples",  // IntelliCode (from devcontainer.json)
-        // Python (for MCP backend, matches your settings.json)
-        "ms-python.python",                  // Python support (from devcontainer.json)
-        "ms-python.black-formatter",         // Black formatter (from devcontainer.json)
-        "ms-python.isort",                   // isort (from devcontainer.json)
-        "ms-python.ruff",                    // Ruff (additional, for consistency with settings.json)
-        // GitHub and CI/CD (from devcontainer.json)
-        "github.vscode-github-actions",      // GitHub Actions
-        "GitHub.vscode-pull-request-github", // GitHub PRs (from devcontainer.json)
-        // Azure and cloud (from devcontainer.json, for deployment)
-        "ms-azuretools.vscode-containers",   // Containers (from devcontainer.json)
-        "vscjava.migrate-java-to-azure",     // Azure migration (from devcontainer.json)
-        "vscjava.vscode-java-upgrade",       // Java upgrade (from devcontainer.json)
-        // Other utilities (from devcontainer.json)
-        "redhat.vscode-yaml",                // YAML support (from devcontainer.json)
-        "bierner.markdown-preview-github-styles",  // Markdown preview (additional)
-        "ms-vscode.vscode-markdownlint"      // Markdown linting (additional)
-    ],
-    "unwantedRecommendations": [
-        "ms-vscode.vscode-typescript",  // Avoid older TypeScript if using next
-        "dbaeumer.vscode-eslint",       // Replaced by Biome
-        "esbenp.prettier-vscode",       // Replaced by Biome
-        "ms-python.pylint"             // Avoid if preferring Ruff (optional, based on settings.json)
-    ]
+  // ============================================================================
+  // VS Code Extension Recommendations - Optimized for React Scuba (October 2025)
+  // Aligned with settings.json, tasks.json, launch.json, and keybindings.json
+  // ============================================================================
+  "recommendations": [
+    // ========================================================================
+    // GitHub Copilot & AI Tools (Required - Primary Development Tools)
+    // ========================================================================
+    "GitHub.copilot",                        // Core Copilot - code suggestions
+    "GitHub.copilot-chat",                   // Chat interface with agents (@workspace, @terminal, @vscode, @git)
+    "ms-vscode.copilot-mermaid-diagram",     // Diagram generation from Copilot
+    "ms-vscode.vscode-copilot-vision",       // Visual context for Copilot
+    "ms-vscode.vscode-websearchforcopilot",  // Web search integration for Copilot
+
+    // ========================================================================
+    // JavaScript/TypeScript - Rust-Based Tooling (Biome-First Strategy)
+    // ========================================================================
+    "biomejs.biome",                         // Primary linter & formatter (Rust-based, replaces ESLint/Prettier)
+    "ms-vscode.vscode-typescript-next",      // Latest TypeScript language features
+    "christian-kohler.npm-intellisense",     // NPM module import IntelliSense
+    "christian-kohler.path-intellisense",    // File path autocomplete
+
+    // ========================================================================
+    // Testing & Quality (Vitest + Pytest + Coverage)
+    // ========================================================================
+    "vitest.explorer",                       // Vitest test explorer for React/TypeScript tests
+    "ZixuanChen.vitest-explorer",            // Alternative Vitest test runner
+    "ryanluker.vscode-coverage-gutters",     // Coverage visualization in editor
+    "ms-vscode.test-adapter-converter",      // Test adapter conversion
+
+    // ========================================================================
+    // Python Development (Python 3.14t + UV + Ruff + Pytest)
+    // ========================================================================
+    "ms-python.python",                      // Core Python extension (Pylance language server)
+    "ms-python.vscode-pylance",              // Pylance - fast Python language server
+    "charliermarsh.ruff",                    // Ruff linter (Rust-based, primary Python linter)
+    "ms-python.isort",                       // Import sorting (aligned with settings.json)
+    "ms-python.black-formatter",             // Black formatter (aligned with settings.json)
+    "ms-python.debugpy",                     // Python debugging (debugpy for Python 3.14t)
+    "littlefoxteam.vscode-python-test-adapter", // Python test adapter for Pytest
+
+    // ========================================================================
+    // Docker & Containerization (Multi-Stack Support)
+    // ========================================================================
+    "ms-azuretools.vscode-docker",           // Docker support (compose, containers, images)
+    "ms-vscode-remote.remote-containers",    // Dev containers support
+
+    // ========================================================================
+    // Git & Version Control (GitHub Integration)
+    // ========================================================================
+    "GitHub.vscode-pull-request-github",     // GitHub PR management
+    "eamodio.gitlens",                       // Advanced Git features (blame, history, diff)
+    "mhutchie.git-graph",                    // Git graph visualization
+
+    // ========================================================================
+    // GitHub Actions & CI/CD
+    // ========================================================================
+    "github.vscode-github-actions",          // GitHub Actions workflow editor & validation
+
+    // ========================================================================
+    // YAML & Configuration Files
+    // ========================================================================
+    "redhat.vscode-yaml",                    // YAML language support with schema validation
+    "tamasfe.even-better-toml",              // TOML support (for pyproject.toml)
+
+    // ========================================================================
+    // Markdown & Documentation (MkDocs Integration)
+    // ========================================================================
+    "yzhang.markdown-all-in-one",            // Comprehensive Markdown support
+    "bierner.markdown-preview-github-styles", // GitHub-flavored Markdown preview
+    "DavidAnson.vscode-markdownlint",        // Markdown linting
+    "bierner.markdown-mermaid",              // Mermaid diagram support in Markdown
+
+    // ========================================================================
+    // CSS & Styling (Tailwind v4 Support)
+    // ========================================================================
+    "bradlc.vscode-tailwindcss",             // Tailwind CSS IntelliSense
+    "stylelint.vscode-stylelint",            // CSS linting
+
+    // ========================================================================
+    // Azure & Cloud Deployment
+    // ========================================================================
+    "ms-azuretools.vscode-azureresourcegroups", // Azure resource management
+    "ms-azuretools.vscode-azurefunctions",      // Azure Functions development
+
+    // ========================================================================
+    // VS Code Enhancements & Productivity
+    // ========================================================================
+    "usernamehw.errorlens",                  // Inline error/warning display
+    "oderwat.indent-rainbow",                // Visual indentation guides
+    "aaron-bond.better-comments",            // Enhanced comment highlighting
+    "Gruntfuggly.todo-tree",                 // TODO/FIXME/NOTE highlighting
+    "wayou.vscode-todo-highlight",           // Additional TODO highlighting
+    "VisualStudioExptTeam.vscodeintellicode", // AI-assisted IntelliSense
+    "VisualStudioExptTeam.intellicode-api-usage-examples", // API usage examples
+
+    // ========================================================================
+    // Turbo Monorepo & Workspace Management
+    // ========================================================================
+    "rangav.vscode-thunder-client",          // API testing (for testing Express endpoints)
+    "humao.rest-client",                     // REST API client
+
+    // ========================================================================
+    // Debugging & Performance
+    // ========================================================================
+    "ms-vscode.vscode-js-profile-flame",     // JavaScript performance profiling
+    "connor4312.nodejs-testing",             // Node.js testing support
+
+    // ========================================================================
+    // Shell & Terminal Enhancement (PowerShell Focus)
+    // ========================================================================
+    "ms-vscode.powershell",                  // PowerShell language support
+
+    // ========================================================================
+    // Data & Database (PostgreSQL Support)
+    // ========================================================================
+    "ckolkman.vscode-postgres",              // PostgreSQL support
+    "mtxr.sqltools",                         // SQL tools
+    "mtxr.sqltools-driver-pg",               // PostgreSQL driver for SQL tools
+
+    // ========================================================================
+    // Environment & Configuration
+    // ========================================================================
+    "mikestead.dotenv",                      // .env file syntax highlighting
+    "EditorConfig.EditorConfig"              // EditorConfig support
+  ],
+
+  // ============================================================================
+  // Unwanted Extensions (Conflicts with Current Stack)
+  // ============================================================================
+  "unwantedRecommendations": [
+    // JavaScript/TypeScript - Replaced by Biome
+    "dbaeumer.vscode-eslint",                // Replaced by Biome
+    "esbenp.prettier-vscode",                // Replaced by Biome
+    "rvest.vs-code-prettier-eslint",         // Replaced by Biome
+    "xabikos.JavaScriptSnippets",            // Conflicts with Biome formatting
+
+    // Python - Replaced by Ruff
+    "ms-python.pylint",                      // Replaced by Ruff
+    "ms-python.flake8",                      // Replaced by Ruff
+    "ms-python.mypy-type-checker",           // Disabled in settings.json
+
+    // TypeScript - Using next version
+    "ms-vscode.vscode-typescript",           // Using vscode-typescript-next instead
+
+    // Testing - Using Vitest/Pytest
+    "Orta.vscode-jest",                      // Not using Jest (using Vitest)
+    "firsttris.vscode-jest-runner",          // Not using Jest
+
+    // Formatters - Using Biome/Black
+    "HookyQR.beautify",                      // Replaced by Biome
+    "michelemelluso.code-beautifier",        // Replaced by Biome
+
+    // Linters - Using Biome/Ruff
+    "standard.vscode-standard",              // Not using StandardJS
+    "wix.vscode-import-cost",                // Performance impact in monorepo
+
+    // Deprecated or Conflicting
+    "octref.vetur",                          // Not using Vue.js
+    "johnsoncodehk.volar",                   // Not using Vue.js
+    "svelte.svelte-vscode"                   // Not using Svelte
+  ]
 }

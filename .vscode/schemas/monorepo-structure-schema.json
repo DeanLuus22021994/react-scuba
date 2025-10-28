@@ -1,58 +1,739 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/monorepo-structure",
-  "title": "React Scuba Monorepo Structure Schema",
-  "description": "Schema for validating monorepo structure configuration in monorepo.yml",
+  "title": "React Scuba Monorepo Structure Schema - October 2025",
+  "description": "Comprehensive schema for validating Turbo monorepo structure with multi-tenant content management, aligned with tasks.json, settings.json, launch.json, keybindings.json, and extensions.json configurations",
   "type": "object",
-  "required": ["name", "root", "structure", "metadata"],
+  "required": ["name", "version", "root", "structure", "tooling", "ci", "metadata"],
   "properties": {
     "name": {
       "type": "string",
-      "description": "Monorepo project name",
-      "pattern": "^[a-z0-9-]+$"
+      "description": "Monorepo project name (used in package.json, Docker labels, documentation)",
+      "pattern": "^[a-z0-9-]+$",
+      "minLength": 3,
+      "maxLength": 50,
+      "examples": ["react-scuba", "react-scuba-monorepo"]
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the monorepo architecture",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "examples": ["1.0.0", "2.1.3"]
     },
     "root": {
       "type": "string",
-      "description": "Root directory path for the monorepo",
-      "pattern": "^\\.\\/[a-zA-Z0-9_-]+$"
+      "description": "Root directory path for the monorepo (relative to workspace root)",
+      "pattern": "^\\.\\/[a-zA-Z0-9_-]+$",
+      "examples": ["./server", "./workspace"]
     },
     "structure": {
       "type": "object",
+      "description": "Monorepo workspace structure with apps, packages, clients, and scripts",
       "required": ["apps", "packages", "required_files"],
       "properties": {
         "apps": {
           "type": "array",
-          "description": "Workspace application directories",
+          "description": "Workspace application directories (frontend, backend, docs)",
           "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9-]+$"
+            "type": "object",
+            "required": ["name", "type", "path", "framework"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Application name (matches directory name)",
+                "pattern": "^[a-z0-9-]+$",
+                "examples": ["web", "api", "content", "docs"]
+              },
+              "type": {
+                "type": "string",
+                "description": "Application type for launch configuration mapping",
+                "enum": ["frontend", "backend", "content-management", "documentation"],
+                "examples": ["frontend", "backend", "content-management"]
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from monorepo root",
+                "pattern": "^apps\\/[a-z0-9-]+$",
+                "examples": ["apps/web", "apps/api", "apps/content"]
+              },
+              "framework": {
+                "type": "object",
+                "description": "Framework/runtime information for debugging and tasks",
+                "required": ["name", "version"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "enum": ["vite", "express", "node", "vitepress"],
+                    "examples": ["vite", "express", "node", "vitepress"]
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Minimum supported version",
+                    "pattern": "^\\d+\\.\\d+\\.\\d+$",
+                    "examples": ["7.1.11", "5.0.0"]
+                  },
+                  "config": {
+                    "type": "string",
+                    "description": "Config file relative to app directory",
+                    "examples": ["vite.config.js", "tsconfig.json"]
+                  }
+                }
+              },
+              "ports": {
+                "type": "object",
+                "description": "Port configuration for launch.json server ready actions",
+                "properties": {
+                  "dev": {
+                    "type": "integer",
+                    "minimum": 1024,
+                    "maximum": 65535,
+                    "description": "Development server port",
+                    "examples": [3001, 5000, 8000]
+                  },
+                  "debug": {
+                    "type": "integer",
+                    "minimum": 1024,
+                    "maximum": 65535,
+                    "description": "Debug server port",
+                    "examples": [9229, 9230]
+                  }
+                }
+              },
+              "scripts": {
+                "type": "object",
+                "description": "NPM scripts defined in package.json (for tasks.json validation)",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "examples": [
+                  {
+                    "dev": "vite",
+                    "build": "vite build",
+                    "test": "vitest run"
+                  }
+                ]
+              },
+              "dependencies": {
+                "type": "object",
+                "description": "Critical dependencies for extension recommendations",
+                "properties": {
+                  "biome": {
+                    "type": "boolean",
+                    "description": "Uses Biome for linting/formatting",
+                    "default": true
+                  },
+                  "vitest": {
+                    "type": "boolean",
+                    "description": "Uses Vitest for testing",
+                    "default": true
+                  },
+                  "typescript": {
+                    "type": "boolean",
+                    "description": "Uses TypeScript",
+                    "default": true
+                  }
+                }
+              }
+            }
           },
-          "minItems": 1
+          "minItems": 1,
+          "uniqueItems": true
         },
         "packages": {
           "type": "array",
-          "description": "Shared package directories",
+          "description": "Shared package directories (config, types, ui, utils)",
           "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9-]+$"
+            "type": "object",
+            "required": ["name", "path", "exports"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Package name (scoped with @react-scuba)",
+                "pattern": "^@react-scuba\\/[a-z0-9-]+$",
+                "examples": ["@react-scuba/config", "@react-scuba/types", "@react-scuba/ui"]
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from monorepo root",
+                "pattern": "^packages\\/[a-z0-9-]+$",
+                "examples": ["packages/config", "packages/types"]
+              },
+              "exports": {
+                "type": "array",
+                "description": "Exported modules from this package",
+                "items": {
+                  "type": "string"
+                },
+                "examples": [["tsconfig.base.json", "tsconfig.node.json", "biome.json"]]
+              },
+              "consumers": {
+                "type": "array",
+                "description": "Apps/packages that depend on this package",
+                "items": {
+                  "type": "string"
+                },
+                "examples": [["web", "api", "content"]]
+              }
+            }
           },
-          "minItems": 1
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "clients": {
+          "type": "array",
+          "description": "Multi-tenant client configurations (@react-scuba/content integration)",
+          "items": {
+            "type": "object",
+            "required": ["slug", "name", "path", "status"],
+            "properties": {
+              "slug": {
+                "type": "string",
+                "description": "URL-safe tenant identifier",
+                "pattern": "^[a-z0-9-]+$",
+                "examples": ["ocean-spirit-mauritius", "di-authority-johannesburg", "_template"]
+              },
+              "name": {
+                "type": "string",
+                "description": "Display name of client",
+                "examples": ["Ocean Spirit Scuba Diving Mauritius", "Digital Identity Authority"]
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from monorepo root",
+                "pattern": "^clients\\/[a-z0-9-]+$",
+                "examples": ["clients/ocean-spirit-mauritius"]
+              },
+              "status": {
+                "type": "string",
+                "enum": ["active", "inactive", "template"],
+                "description": "Client status for tenant resolution"
+              },
+              "industry": {
+                "type": "string",
+                "enum": ["diving", "software", "consulting", "ecommerce", "healthcare"],
+                "description": "Industry type for content schema validation"
+              },
+              "config": {
+                "type": "string",
+                "description": "Configuration file path",
+                "pattern": "^config\\.json$",
+                "default": "config.json"
+              },
+              "assets": {
+                "type": "object",
+                "description": "Asset directories for this client",
+                "properties": {
+                  "team": {
+                    "type": "string",
+                    "pattern": "^images\\/team$",
+                    "default": "images/team"
+                  },
+                  "branding": {
+                    "type": "string",
+                    "pattern": "^images\\/branding$",
+                    "default": "images/branding"
+                  }
+                }
+              }
+            }
+          },
+          "uniqueItems": true
+        },
+        "scripts": {
+          "type": "array",
+          "description": "Monorepo utility scripts (setup, validation, deployment)",
+          "items": {
+            "type": "object",
+            "required": ["name", "path", "purpose"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Script filename",
+                "examples": ["setup-python.sh", "validate-all-configs.js", "check-node-modules.sh"]
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path from monorepo root",
+                "pattern": "^scripts\\/[a-zA-Z0-9_-]+\\.(sh|ps1|js|ts)$",
+                "examples": ["scripts/setup-python.sh", "scripts/validate-all-configs.js"]
+              },
+              "purpose": {
+                "type": "string",
+                "enum": ["setup", "validation", "deployment", "testing", "maintenance"],
+                "description": "Script category for task organization"
+              },
+              "shell": {
+                "type": "string",
+                "enum": ["bash", "pwsh", "node"],
+                "description": "Required shell/runtime"
+              }
+            }
+          },
+          "uniqueItems": true
         },
         "required_files": {
           "type": "array",
-          "description": "Files required at monorepo root",
+          "description": "Files required at monorepo root for proper operation",
           "items": {
-            "type": "string"
+            "type": "object",
+            "required": ["name", "purpose", "schema"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Required filename",
+                "examples": ["package.json", "turbo.json", "tsconfig.json", "biome.json"]
+              },
+              "purpose": {
+                "type": "string",
+                "description": "Why this file is required",
+                "examples": ["Workspace configuration", "Turbo orchestration", "TypeScript base config"]
+              },
+              "schema": {
+                "type": "string",
+                "format": "uri",
+                "description": "JSON schema URL for validation",
+                "examples": ["https://json.schemastore.org/package.json", "https://turbo.build/schema.json"]
+              },
+              "validated_by": {
+                "type": "string",
+                "enum": ["vscode", "turbo", "npm", "biome", "custom"],
+                "description": "Tool responsible for validation"
+              }
+            }
           },
-          "minItems": 1
+          "minItems": 1,
+          "uniqueItems": true
         },
         "workspace_configs": {
           "type": "object",
-          "description": "Required config files per workspace",
+          "description": "Required config files per workspace (apps/packages)",
           "additionalProperties": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "object",
+              "required": ["file", "extends"],
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "description": "Config filename",
+                  "examples": ["tsconfig.json", "package.json", "biome.json"]
+                },
+                "extends": {
+                  "type": "string",
+                  "description": "Parent config this extends",
+                  "examples": ["../../packages/config/tsconfig.base.json", "@react-scuba/config"]
+                },
+                "required": {
+                  "type": "boolean",
+                  "description": "Whether this file is mandatory",
+                  "default": true
+                }
+              }
+            }
+          },
+          "examples": [
+            {
+              "web": [
+                {
+                  "file": "tsconfig.json",
+                  "extends": "../../packages/config/tsconfig.react.json",
+                  "required": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "tooling": {
+      "type": "object",
+      "description": "Development tooling configuration aligned with VS Code settings",
+      "required": ["package_manager", "orchestration", "linting", "testing"],
+      "properties": {
+        "package_manager": {
+          "type": "object",
+          "description": "Package manager configuration (npm with workspaces)",
+          "required": ["name", "version", "workspaces"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": ["npm", "pnpm", "yarn"],
+              "default": "npm",
+              "description": "Package manager (must match settings.json npm.packageManager)"
+            },
+            "version": {
+              "type": "string",
+              "description": "Minimum required version",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$",
+              "examples": ["10.9.2"]
+            },
+            "workspaces": {
+              "type": "array",
+              "description": "Workspace glob patterns (must match package.json workspaces)",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z]+\\/\\*$"
+              },
+              "minItems": 1,
+              "examples": [["apps/*", "packages/*"]]
+            },
+            "protocol": {
+              "type": "string",
+              "enum": ["workspace:*", "file:", "link:", "^"],
+              "description": "Workspace dependency protocol",
+              "default": "workspace:*"
+            }
+          }
+        },
+        "orchestration": {
+          "type": "object",
+          "description": "Turbo orchestration configuration",
+          "required": ["name", "version", "config_file"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "const": "turbo",
+              "description": "Orchestration tool (Turborepo)"
+            },
+            "version": {
+              "type": "string",
+              "description": "Turbo version",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$",
+              "examples": ["2.5.8"]
+            },
+            "config_file": {
+              "type": "string",
+              "const": "turbo.json",
+              "description": "Turbo configuration filename"
+            },
+            "tasks": {
+              "type": "array",
+              "description": "Turbo tasks (must match tasks.json labels)",
+              "items": {
+                "type": "string",
+                "enum": ["build", "dev", "lint", "lint:fix", "format", "format:check", "test", "test:coverage", "type-check", "clean"]
+              },
+              "uniqueItems": true,
+              "examples": [["build", "dev", "test", "lint"]]
+            },
+            "cache_strategy": {
+              "type": "string",
+              "enum": ["local", "remote", "both"],
+              "default": "local",
+              "description": "Cache strategy for Turbo builds"
+            }
+          }
+        },
+        "linting": {
+          "type": "object",
+          "description": "Linting/formatting tooling (Biome-first strategy)",
+          "required": ["primary", "formatters"],
+          "properties": {
+            "primary": {
+              "type": "object",
+              "description": "Primary linter (must match settings.json defaultFormatter)",
+              "required": ["name", "config"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "const": "biome",
+                  "description": "Biome linter (Rust-based)"
+                },
+                "config": {
+                  "type": "string",
+                  "const": "biome.json",
+                  "description": "Biome configuration file"
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Whether Biome is enabled (settings.json biome.enabled)"
+                }
+              }
+            },
+            "formatters": {
+              "type": "object",
+              "description": "Language-specific formatters (must align with settings.json [language] sections)",
+              "properties": {
+                "javascript": {
+                  "type": "string",
+                  "const": "biomejs.biome",
+                  "description": "JavaScript formatter"
+                },
+                "typescript": {
+                  "type": "string",
+                  "const": "biomejs.biome",
+                  "description": "TypeScript formatter"
+                },
+                "json": {
+                  "type": "string",
+                  "const": "biomejs.biome",
+                  "description": "JSON formatter"
+                },
+                "yaml": {
+                  "type": "string",
+                  "const": "redhat.vscode-yaml",
+                  "description": "YAML formatter"
+                },
+                "python": {
+                  "type": "string",
+                  "const": "ms-python.black-formatter",
+                  "description": "Python formatter"
+                }
+              }
+            },
+            "secondary": {
+              "type": "array",
+              "description": "Secondary/language-specific linters",
+              "items": {
+                "type": "object",
+                "required": ["name", "language"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "enum": ["ruff", "markdownlint", "stylelint"],
+                    "description": "Linter name"
+                  },
+                  "language": {
+                    "type": "string",
+                    "enum": ["python", "markdown", "css"],
+                    "description": "Target language"
+                  },
+                  "config": {
+                    "type": "string",
+                    "description": "Config file path",
+                    "examples": ["pyproject.toml", ".markdownlint.json"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "testing": {
+          "type": "object",
+          "description": "Testing framework configuration",
+          "required": ["javascript", "python"],
+          "properties": {
+            "javascript": {
+              "type": "object",
+              "description": "JavaScript/TypeScript testing (Vitest)",
+              "required": ["framework", "runner"],
+              "properties": {
+                "framework": {
+                  "type": "string",
+                  "const": "vitest",
+                  "description": "Test framework (must match tasks.json and launch.json)"
+                },
+                "runner": {
+                  "type": "string",
+                  "const": "vitest",
+                  "description": "Test runner command"
+                },
+                "config": {
+                  "type": "string",
+                  "const": "vitest.config.js",
+                  "description": "Vitest configuration file"
+                },
+                "coverage": {
+                  "type": "object",
+                  "properties": {
+                    "provider": {
+                      "type": "string",
+                      "enum": ["v8", "istanbul"],
+                      "default": "v8"
+                    },
+                    "reporter": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": ["text", "html", "json", "lcov"]
+                      },
+                      "default": ["text", "html"]
+                    }
+                  }
+                }
+              }
+            },
+            "python": {
+              "type": "object",
+              "description": "Python testing (Pytest with UV runner)",
+              "required": ["framework", "runner"],
+              "properties": {
+                "framework": {
+                  "type": "string",
+                  "const": "pytest",
+                  "description": "Python test framework"
+                },
+                "runner": {
+                  "type": "string",
+                  "enum": ["pytest", "uv run pytest"],
+                  "description": "Test runner command (UV for Python 3.14t)"
+                },
+                "config": {
+                  "type": "string",
+                  "const": "pyproject.toml",
+                  "description": "Pytest configuration in pyproject.toml"
+                },
+                "discovery": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Auto-discover tests (settings.json python.testing.autoTestDiscoverOnSaveEnabled)"
+                }
+              }
+            }
+          }
+        },
+        "typescript": {
+          "type": "object",
+          "description": "TypeScript configuration hierarchy",
+          "required": ["version", "base_config", "workspace_configs"],
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "TypeScript version",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$",
+              "examples": ["5.9.3"]
+            },
+            "base_config": {
+              "type": "string",
+              "const": "packages/config/tsconfig.base.json",
+              "description": "Base TypeScript config all workspaces extend"
+            },
+            "workspace_configs": {
+              "type": "array",
+              "description": "Workspace-specific TypeScript configs",
+              "items": {
+                "type": "object",
+                "required": ["workspace", "config", "extends"],
+                "properties": {
+                  "workspace": {
+                    "type": "string",
+                    "description": "Workspace name",
+                    "examples": ["web", "api", "content"]
+                  },
+                  "config": {
+                    "type": "string",
+                    "description": "Config path relative to workspace",
+                    "default": "tsconfig.json"
+                  },
+                  "extends": {
+                    "type": "string",
+                    "description": "Parent config",
+                    "examples": ["../../packages/config/tsconfig.react.json", "../../packages/config/tsconfig.node.json"]
+                  },
+                  "strict": {
+                    "type": "boolean",
+                    "description": "Strict mode enabled",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "vscode": {
+          "type": "object",
+          "description": "VS Code configuration files alignment check",
+          "required": ["configs"],
+          "properties": {
+            "configs": {
+              "type": "array",
+              "description": "VS Code configuration files",
+              "items": {
+                "type": "object",
+                "required": ["file", "schema", "aligned_with"],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "enum": ["settings.json", "tasks.json", "launch.json", "keybindings.json", "extensions.json"],
+                    "description": "VS Code config filename"
+                  },
+                  "schema": {
+                    "type": "string",
+                    "description": "Schema file path",
+                    "examples": [".vscode/schemas/vscode-settings-schema.json", ".vscode/schemas/monorepo-structure-schema.json"]
+                  },
+                  "aligned_with": {
+                    "type": "array",
+                    "description": "Other config files this is aligned with",
+                    "items": {
+                      "type": "string"
+                    },
+                    "examples": [["tasks.json", "launch.json", "keybindings.json"]]
+                  },
+                  "validation_enabled": {
+                    "type": "boolean",
+                    "description": "Whether schema validation is enabled",
+                    "default": true
+                  }
+                }
+              },
+              "minItems": 5,
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "ci": {
+      "type": "object",
+      "description": "CI/CD pipeline configuration",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["github-actions", "gitlab-ci", "jenkins", "azure-pipelines"],
+          "default": "github-actions",
+          "description": "CI/CD provider"
+        },
+        "workflows": {
+          "type": "array",
+          "description": "CI/CD workflow definitions",
+          "items": {
+            "type": "object",
+            "required": ["name", "trigger", "jobs"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Workflow name",
+                "examples": ["test", "build", "deploy", "validate-configs"]
+              },
+              "trigger": {
+                "type": "array",
+                "description": "Workflow triggers",
+                "items": {
+                  "type": "string",
+                  "enum": ["push", "pull_request", "schedule", "workflow_dispatch"]
+                }
+              },
+              "jobs": {
+                "type": "array",
+                "description": "Jobs in this workflow",
+                "items": {
+                  "type": "string"
+                },
+                "examples": [["lint", "test", "build", "deploy"]]
+              }
+            }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "description": "Automated validation checks",
+          "properties": {
+            "configs": {
+              "type": "boolean",
+              "description": "Validate client configs on push",
+              "default": true
+            },
+            "typescript": {
+              "type": "boolean",
+              "description": "Type-check all workspaces",
+              "default": true
+            },
+            "tests": {
+              "type": "boolean",
+              "description": "Run all tests",
+              "default": true
             }
           }
         }
@@ -60,27 +741,250 @@
     },
     "metadata": {
       "type": "object",
-      "required": ["description", "version", "workspaces"],
+      "description": "Monorepo metadata for documentation and tooling",
+      "required": ["description", "architecture", "features", "documentation"],
       "properties": {
         "description": {
           "type": "string",
-          "description": "Monorepo description"
+          "description": "Human-readable monorepo description",
+          "minLength": 10,
+          "maxLength": 200,
+          "examples": ["React Scuba multi-tenant monorepo with Turbo orchestration, Biome linting, and Python 3.14t support"]
         },
-        "version": {
+        "architecture": {
           "type": "string",
-          "description": "Monorepo version",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          "enum": ["monorepo", "polyrepo", "hybrid"],
+          "default": "monorepo",
+          "description": "Repository architecture pattern"
         },
-        "workspaces": {
+        "features": {
           "type": "array",
-          "description": "Workspace glob patterns",
+          "description": "Key monorepo features",
           "items": {
             "type": "string",
-            "pattern": "^[a-z]+\\/\\*$"
+            "enum": [
+              "multi-tenant",
+              "turbo-orchestration",
+              "biome-linting",
+              "vitest-testing",
+              "typescript-strict",
+              "python-3.14t",
+              "docker-compose",
+              "vscode-optimized",
+              "ci-cd-automated"
+            ]
+          },
+          "uniqueItems": true,
+          "examples": [["multi-tenant", "turbo-orchestration", "biome-linting"]]
+        },
+        "documentation": {
+          "type": "array",
+          "description": "Documentation files with descriptions",
+          "items": {
+            "type": "object",
+            "required": ["file", "purpose"],
+            "properties": {
+              "file": {
+                "type": "string",
+                "description": "Documentation filename",
+                "examples": ["README.md", "MULTI_TENANT_ARCHITECTURE.md", "ISSUES.md"]
+              },
+              "purpose": {
+                "type": "string",
+                "description": "Purpose of this documentation",
+                "examples": ["Architecture overview", "Known issues", "Development guide"]
+              },
+              "audience": {
+                "type": "string",
+                "enum": ["developers", "architects", "operators", "contributors"],
+                "description": "Target audience"
+              }
+            }
           },
           "minItems": 1
+        },
+        "maintainers": {
+          "type": "array",
+          "description": "Monorepo maintainers",
+          "items": {
+            "type": "object",
+            "required": ["name", "role"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Maintainer name"
+              },
+              "role": {
+                "type": "string",
+                "enum": ["owner", "maintainer", "contributor"],
+                "description": "Maintainer role"
+              },
+              "contact": {
+                "type": "string",
+                "format": "email",
+                "description": "Contact email (optional)"
+              }
+            }
+          }
+        },
+        "license": {
+          "type": "string",
+          "description": "License identifier (SPDX)",
+          "examples": ["MIT", "Apache-2.0", "GPL-3.0", "UNLICENSED"]
+        },
+        "created": {
+          "type": "string",
+          "format": "date",
+          "description": "Monorepo creation date (ISO 8601)",
+          "examples": ["2025-01-01"]
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last significant update (ISO 8601)",
+          "examples": ["2025-10-28T12:00:00Z"]
         }
       }
     }
-  }
+  },
+  "examples": [
+    {
+      "name": "react-scuba-monorepo",
+      "version": "1.0.0",
+      "root": "./server",
+      "structure": {
+        "apps": [
+          {
+            "name": "web",
+            "type": "frontend",
+            "path": "apps/web",
+            "framework": {
+              "name": "vite",
+              "version": "7.1.11",
+              "config": "vite.config.js"
+            },
+            "ports": {
+              "dev": 3001,
+              "debug": 9229
+            }
+          },
+          {
+            "name": "api",
+            "type": "backend",
+            "path": "apps/api",
+            "framework": {
+              "name": "express",
+              "version": "5.0.0"
+            },
+            "ports": {
+              "dev": 5000,
+              "debug": 9230
+            }
+          },
+          {
+            "name": "content",
+            "type": "content-management",
+            "path": "apps/content",
+            "framework": {
+              "name": "node",
+              "version": "20.0.0"
+            }
+          }
+        ],
+        "packages": [
+          {
+            "name": "@react-scuba/config",
+            "path": "packages/config",
+            "exports": ["tsconfig.base.json", "tsconfig.react.json", "biome.json"]
+          },
+          {
+            "name": "@react-scuba/types",
+            "path": "packages/types",
+            "exports": ["index.d.ts"]
+          }
+        ],
+        "clients": [
+          {
+            "slug": "ocean-spirit-mauritius",
+            "name": "Ocean Spirit Scuba Diving Mauritius",
+            "path": "clients/ocean-spirit-mauritius",
+            "status": "active",
+            "industry": "diving"
+          },
+          {
+            "slug": "di-authority-johannesburg",
+            "name": "Digital Identity Authority",
+            "path": "clients/di-authority-johannesburg",
+            "status": "active",
+            "industry": "software"
+          }
+        ],
+        "required_files": [
+          {
+            "name": "package.json",
+            "purpose": "Workspace configuration",
+            "schema": "https://json.schemastore.org/package.json",
+            "validated_by": "npm"
+          },
+          {
+            "name": "turbo.json",
+            "purpose": "Turbo orchestration",
+            "schema": "https://turbo.build/schema.json",
+            "validated_by": "turbo"
+          }
+        ]
+      },
+      "tooling": {
+        "package_manager": {
+          "name": "npm",
+          "version": "10.9.2",
+          "workspaces": ["apps/*", "packages/*"]
+        },
+        "orchestration": {
+          "name": "turbo",
+          "version": "2.5.8",
+          "config_file": "turbo.json",
+          "tasks": ["build", "dev", "test", "lint"]
+        },
+        "linting": {
+          "primary": {
+            "name": "biome",
+            "config": "biome.json",
+            "enabled": true
+          },
+          "formatters": {
+            "javascript": "biomejs.biome",
+            "typescript": "biomejs.biome",
+            "json": "biomejs.biome",
+            "yaml": "redhat.vscode-yaml",
+            "python": "ms-python.black-formatter"
+          }
+        },
+        "testing": {
+          "javascript": {
+            "framework": "vitest",
+            "runner": "vitest",
+            "config": "vitest.config.js"
+          },
+          "python": {
+            "framework": "pytest",
+            "runner": "uv run pytest",
+            "config": "pyproject.toml"
+          }
+        }
+      },
+      "metadata": {
+        "description": "React Scuba multi-tenant monorepo with Turbo orchestration",
+        "architecture": "monorepo",
+        "features": ["multi-tenant", "turbo-orchestration", "biome-linting"],
+        "documentation": [
+          {
+            "file": "README.md",
+            "purpose": "Project overview",
+            "audience": "developers"
+          }
+        ]
+      }
+    }
+  ]
 }

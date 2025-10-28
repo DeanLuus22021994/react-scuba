@@ -1,0 +1,49 @@
+{
+  "servers": {
+    "git": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "git-mcp-server",
+        "--security-opt=no-new-privileges:true",
+        "--cap-drop=ALL",
+        "--cpus=1.0",
+        "--memory=1g",
+        "--memory-reservation=512m",
+        "--pids-limit=50",
+        "--network",
+        "mcp-cluster",
+        "--network-alias",
+        "git-mcp",
+        "--dns=172.28.0.1",
+        "--stop-timeout=20",
+        "--restart=unless-stopped",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=200m",
+        "-p",
+        "9096:9090",
+        "-v",
+        "react_scuba_git-cache:/cache/git:rw,Z",
+        "-v",
+        "react_scuba_git-pip-cache:/cache/pip:rw,Z",
+        "-v",
+        "react_scuba_git-python-cache:/cache/python:rw,Z",
+        "-v",
+        "${workspaceFolder}:/repos:rw",
+        "-e",
+        "PYTHONUNBUFFERED=1",
+        "-e",
+        "OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317",
+        "-e",
+        "OTEL_SERVICE_NAME=git-mcp-server",
+        "-e",
+        "LOG_LEVEL=info",
+        "-e",
+        "LOG_FORMAT=json",
+        "mcp-git:latest"
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "servers": {
+    "markitdown": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--name",
+        "markitdown-mcp-server",
+        "--security-opt=no-new-privileges:true",
+        "--cap-drop=ALL",
+        "--read-only",
+        "--cpus=0.5",
+        "--memory=512m",
+        "--memory-reservation=256m",
+        "--pids-limit=30",
+        "--network",
+        "mcp-cluster",
+        "--network-alias",
+        "markitdown-mcp",
+        "--dns=172.28.0.1",
+        "--stop-timeout=15",
+        "--restart=unless-stopped",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=200m",
+        "-p",
+        "9098:9090",
+        "-v",
+        "react_scuba_markitdown-cache:/cache:rw,Z",
+        "-v",
+        "${workspaceFolder}:/workspace:ro",
+        "-e",
+        "PYTHONUNBUFFERED=1",
+        "-e",
+        "OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317",
+        "-e",
+        "OTEL_SERVICE_NAME=markitdown-mcp-server",
+        "-e",
+        "LOG_LEVEL=info",
+        "-e",
+        "LOG_FORMAT=json",
+        "markitdown-mcp:latest"
+      ]
+    }
+  }
+}

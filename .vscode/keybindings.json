@@ -1,4 +1,11 @@
+// ============================================================================
+// VS Code Keybindings - Optimized for React Scuba (October 2025)
+// Aligned with tasks.json, settings.json, and launch.json configurations
+// ============================================================================
 [
+  // ============================================================================
+  // GitHub Copilot Chat - Primary Interface
+  // ============================================================================
   {
     "key": "ctrl+shift+i",
     "command": "workbench.action.chat.open",
@@ -6,55 +13,79 @@
   },
   {
     "key": "ctrl+alt+i",
-    "command": "workbench.action.chat.openInEditor"
+    "command": "workbench.action.chat.openInEditor",
+    "when": "!inChat"
   },
   {
     "key": "ctrl+i",
     "command": "inlineChat.start",
-    "when": "editorTextFocus && !editorReadonly"
+    "when": "editorTextFocus && !editorReadonly && !inChat"
   },
   {
     "key": "ctrl+shift+/",
-    "command": "workbench.action.chat.sendToNewChat"
+    "command": "workbench.action.chat.sendToNewChat",
+    "when": "!inChat"
   },
   {
     "key": "ctrl+shift+.",
     "command": "github.copilot.terminal.suggestCommand",
-    "when": "terminalFocus"
+    "when": "terminalFocus && !terminalTextSelected"
   },
+
+  // ============================================================================
+  // GitHub Copilot - Context Attachment
+  // ============================================================================
   {
     "key": "ctrl+alt+a",
-    "command": "workbench.action.chat.attachContext"
+    "command": "workbench.action.chat.attachContext",
+    "when": "inChat"
   },
   {
     "key": "ctrl+shift+a",
     "command": "workbench.action.chat.attachContext.selection",
-    "when": "editorHasSelection"
+    "when": "editorHasSelection && inChat"
   },
+  {
+    "key": "ctrl+alt+f",
+    "command": "workbench.action.chat.attachFile",
+    "when": "inChat"
+  },
+
+  // ============================================================================
+  // GitHub Copilot - Agent Shortcuts (@workspace, @terminal, etc.)
+  // ============================================================================
   {
     "key": "ctrl+alt+w",
     "command": "workbench.action.chat.sendToChat",
-    "args": "@workspace"
+    "args": "@workspace",
+    "when": "inChat"
   },
   {
     "key": "ctrl+alt+t",
     "command": "workbench.action.chat.sendToChat",
-    "args": "@terminal"
+    "args": "@terminal",
+    "when": "inChat"
   },
   {
     "key": "ctrl+alt+v",
     "command": "workbench.action.chat.sendToChat",
-    "args": "@vscode"
+    "args": "@vscode",
+    "when": "inChat"
   },
   {
     "key": "ctrl+alt+g",
     "command": "workbench.action.chat.sendToChat",
-    "args": "@git"
+    "args": "@git",
+    "when": "inChat"
   },
+
+  // ============================================================================
+  // GitHub Copilot - Inline Suggestions
+  // ============================================================================
   {
     "key": "tab",
     "command": "editor.action.inlineSuggest.commit",
-    "when": "inlineSuggestionVisible && !editorReadonly"
+    "when": "inlineSuggestionVisible && !editorReadonly && !suggestWidgetVisible"
   },
   {
     "key": "alt+]",
@@ -69,27 +100,36 @@
   {
     "key": "escape",
     "command": "editor.action.inlineSuggest.hide",
-    "when": "inlineSuggestionVisible"
+    "when": "inlineSuggestionVisible && !editorHasMultipleSelections"
   },
+  {
+    "key": "ctrl+alt+right",
+    "command": "editor.action.inlineSuggest.acceptNextWord",
+    "when": "inlineSuggestionVisible && !editorReadonly"
+  },
+
+  // ============================================================================
+  // GitHub Copilot - Code Generation & AI Actions
+  // ============================================================================
   {
     "key": "ctrl+shift+enter",
     "command": "github.copilot.generate",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+shift+alt+enter",
     "command": "github.copilot.generateTests",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+alt+d",
     "command": "github.copilot.generateDocs",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+alt+f",
+    "key": "ctrl+alt+x",
     "command": "github.copilot.fix",
-    "when": "editorHasSelection"
+    "when": "editorHasSelection && !editorReadonly"
   },
   {
     "key": "ctrl+alt+e",
@@ -102,6 +142,39 @@
     "when": "editorTextFocus"
   },
   {
+    "key": "ctrl+shift+alt+r",
+    "command": "github.copilot.reviewSelection",
+    "when": "editorHasSelection"
+  },
+
+  // ============================================================================
+  // GitHub Copilot - Session Management
+  // ============================================================================
+  {
+    "key": "ctrl+alt+c",
+    "command": "github.copilot.chat.clearSession",
+    "when": "inChat"
+  },
+  {
+    "key": "ctrl+alt+h",
+    "command": "github.copilot.chat.history",
+    "when": "inChat"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "github.copilot.chat.shareSession",
+    "when": "inChat"
+  },
+  {
+    "key": "ctrl+k ctrl+m",
+    "command": "github.copilot.chat.modelSelection",
+    "when": "inChat"
+  },
+
+  // ============================================================================
+  // Editor - Code Intelligence & Navigation
+  // ============================================================================
+  {
     "key": "ctrl+k ctrl+i",
     "command": "editor.action.showHover",
     "when": "editorTextFocus"
@@ -109,11 +182,16 @@
   {
     "key": "ctrl+shift+space",
     "command": "editor.action.triggerParameterHints",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && editorHasSignatureHelpProvider"
   },
   {
     "key": "ctrl+.",
     "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+.",
+    "command": "editor.action.sourceAction",
     "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
   },
   {
@@ -122,29 +200,396 @@
     "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+alt+c",
-    "command": "github.copilot.chat.clearSession"
+    "key": "ctrl+shift+o",
+    "command": "workbench.action.gotoSymbol",
+    "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+alt+h",
-    "command": "github.copilot.chat.history"
+    "key": "ctrl+t",
+    "command": "workbench.action.showAllSymbols"
+  },
+
+  // ============================================================================
+  // Editor - Formatting & Code Actions (Biome Integration)
+  // ============================================================================
+  {
+    "key": "ctrl+shift+f",
+    "command": "editor.action.formatDocument",
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+alt+s",
-    "command": "github.copilot.chat.shareSession"
+    "key": "ctrl+k ctrl+f",
+    "command": "editor.action.formatSelection",
+    "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+k ctrl+m",
-    "command": "github.copilot.chat.modelSelection"
+    "key": "ctrl+shift+alt+o",
+    "command": "editor.action.organizeImports",
+    "when": "editorTextFocus && !editorReadonly && supportedCodeEditor"
   },
+
+  // ============================================================================
+  // Testing - Aligned with Vitest & Pytest Configurations
+  // ============================================================================
   {
-    "key": "ctrl+shift+t",
+    "key": "ctrl+; t",
     "command": "testing.runAtCursor",
     "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+shift+alt+t",
+    "key": "ctrl+; d",
     "command": "testing.debugAtCursor",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+; f",
+    "command": "testing.runCurrentFile",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+; a",
+    "command": "testing.runAll"
+  },
+  {
+    "key": "ctrl+; r",
+    "command": "testing.reRunLastRun"
+  },
+  {
+    "key": "ctrl+; c",
+    "command": "testing.cancelRun"
+  },
+  {
+    "key": "ctrl+; ctrl+;",
+    "command": "testing.showMostRecentOutput"
+  },
+
+  // ============================================================================
+  // Debug - Aligned with launch.json Configurations
+  // ============================================================================
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.start",
+    "when": "debuggersAvailable && debugState == 'inactive'"
+  },
+  {
+    "key": "ctrl+f5",
+    "command": "workbench.action.debug.run",
+    "when": "debuggersAvailable"
+  },
+  {
+    "key": "shift+f5",
+    "command": "workbench.action.debug.stop",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+shift+f5",
+    "command": "workbench.action.debug.restart",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "f9",
+    "command": "editor.debug.action.toggleBreakpoint",
+    "when": "debuggersAvailable && editorTextFocus"
+  },
+  {
+    "key": "f10",
+    "command": "workbench.action.debug.stepOver",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "f11",
+    "command": "workbench.action.debug.stepInto",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "shift+f11",
+    "command": "workbench.action.debug.stepOut",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "workbench.view.debug",
+    "when": "viewContainer.workbench.view.debug.enabled"
+  },
+
+  // ============================================================================
+  // Tasks - Quick Access to tasks.json Configurations
+  // ============================================================================
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.tasks.build"
+  },
+  {
+    "key": "ctrl+shift+alt+b",
+    "command": "workbench.action.tasks.runTask"
+  },
+  {
+    "key": "ctrl+shift+alt+t",
+    "command": "workbench.action.tasks.test"
+  },
+  {
+    "key": "ctrl+alt+k",
+    "command": "workbench.action.tasks.terminate"
+  },
+  {
+    "key": "ctrl+alt+shift+k",
+    "command": "workbench.action.tasks.restartTask"
+  },
+
+  // ============================================================================
+  // Terminal - Enhanced PowerShell & Command Execution
+  // ============================================================================
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+shift+`",
+    "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+shift+5",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+pagedown",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+pageup",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "workbench.action.terminal.copySelection",
+    "when": "terminalFocus && terminalTextSelected"
+  },
+  {
+    "key": "ctrl+shift+v",
+    "command": "workbench.action.terminal.paste",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "workbench.action.terminal.scrollUp",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "workbench.action.terminal.scrollDown",
+    "when": "terminalFocus"
+  },
+
+  // ============================================================================
+  // Git - Version Control Operations
+  // ============================================================================
+  {
+    "key": "ctrl+shift+g",
+    "command": "workbench.view.scm"
+  },
+  {
+    "key": "ctrl+k ctrl+c",
+    "command": "git.commitAll"
+  },
+  {
+    "key": "ctrl+k ctrl+p",
+    "command": "git.push"
+  },
+  {
+    "key": "ctrl+k ctrl+l",
+    "command": "git.pull"
+  },
+  {
+    "key": "ctrl+k ctrl+s",
+    "command": "git.sync"
+  },
+  {
+    "key": "ctrl+k ctrl+b",
+    "command": "git.branch"
+  },
+  {
+    "key": "ctrl+k ctrl+h",
+    "command": "git.viewHistory"
+  },
+
+  // ============================================================================
+  // File & Workspace Navigation
+  // ============================================================================
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.view.search",
+    "when": "!editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+h",
+    "command": "workbench.action.replaceInFiles"
+  },
+  {
+    "key": "ctrl+k r",
+    "command": "workbench.action.files.revealActiveFileInWindows"
+  },
+  {
+    "key": "ctrl+k o",
+    "command": "workbench.action.files.showOpenedFileInNewWindow"
+  },
+
+  // ============================================================================
+  // Problems & Output - Diagnostics Navigation
+  // ============================================================================
+  {
+    "key": "ctrl+shift+m",
+    "command": "workbench.actions.view.problems"
+  },
+  {
+    "key": "f8",
+    "command": "editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+f8",
+    "command": "editor.action.marker.prevInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+u",
+    "command": "workbench.action.output.toggleOutput"
+  },
+
+  // ============================================================================
+  // Multi-Cursor & Selection - Enhanced Productivity
+  // ============================================================================
+  {
+    "key": "ctrl+d",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "editor.action.selectHighlights",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+alt+up",
+    "command": "editor.action.insertCursorAbove",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+down",
+    "command": "editor.action.insertCursorBelow",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+alt+i",
+    "command": "editor.action.insertCursorAtEndOfEachLineSelected",
+    "when": "editorTextFocus"
+  },
+
+  // ============================================================================
+  // Editor Layout & Window Management
+  // ============================================================================
+  {
+    "key": "ctrl+\\",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+k ctrl+\\",
+    "command": "workbench.action.splitEditorOrthogonal"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+k w",
+    "command": "workbench.action.closeAllEditors"
+  },
+  {
+    "key": "ctrl+k ctrl+w",
+    "command": "workbench.action.closeEditorsInGroup"
+  },
+  {
+    "key": "ctrl+1",
+    "command": "workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "ctrl+2",
+    "command": "workbench.action.focusSecondEditorGroup"
+  },
+  {
+    "key": "ctrl+3",
+    "command": "workbench.action.focusThirdEditorGroup"
+  },
+
+  // ============================================================================
+  // Python Specific - Pytest & Debugging
+  // ============================================================================
+  {
+    "key": "ctrl+shift+alt+p",
+    "command": "python.execInTerminal",
+    "when": "editorTextFocus && editorLangId == 'python'"
+  },
+  {
+    "key": "ctrl+alt+shift+d",
+    "command": "python.debugInTerminal",
+    "when": "editorTextFocus && editorLangId == 'python'"
+  },
+
+  // ============================================================================
+  // Markdown Preview - Documentation Workflow
+  // ============================================================================
+  {
+    "key": "ctrl+k v",
+    "command": "markdown.showPreviewToSide",
+    "when": "editorLangId == 'markdown'"
+  },
+  {
+    "key": "ctrl+shift+v",
+    "command": "markdown.showPreview",
+    "when": "editorLangId == 'markdown' && !terminalFocus"
+  },
+
+  // ============================================================================
+  // Accessibility & Focus Management
+  // ============================================================================
+  {
+    "key": "ctrl+k ctrl+x",
+    "command": "workbench.action.removeRootFolder"
+  },
+  {
+    "key": "ctrl+k f",
+    "command": "workbench.action.closeFolder"
+  },
+  {
+    "key": "ctrl+k ctrl+s",
+    "command": "workbench.action.openGlobalKeybindings"
+  },
+  {
+    "key": "ctrl+k ctrl+t",
+    "command": "workbench.action.selectTheme"
+  },
+  {
+    "key": "ctrl+k z",
+    "command": "workbench.action.toggleZenMode"
   }
 ]

@@ -1,108 +1,649 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/DeanLuus22021994/docker_dotfiles/schemas/markdown-doc.json",
-  "title": "Documentation Markdown File",
-  "description": "JSON Schema for validating frontmatter in documentation markdown files",
+  "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/markdown-doc",
+  "title": "React Scuba VitePress Markdown Documentation Frontmatter Schema",
+  "description": "Comprehensive JSON Schema for validating YAML frontmatter in VitePress markdown documentation files. Aligned with VitePress 1.0.0, vitepress-docs-schema.json, monorepo-structure-schema.json, vscode-settings-schema.json, and complete VS Code configuration stack (tasks.json, settings.json, launch.json, keybindings.json, extensions.json). Supports multi-tenant architecture, Turbo monorepo workflows, and React Scuba platform documentation standards.",
   "type": "object",
   "required": ["title", "description"],
   "properties": {
     "title": {
       "type": "string",
-      "description": "Document title (used in navigation and page header)",
+      "description": "Document title (displayed in browser tab, page header, and navigation)",
       "minLength": 3,
       "maxLength": 100,
-      "pattern": "^[A-Z].*$"
+      "pattern": "^[A-Z].*$",
+      "examples": [
+        "Getting Started Guide",
+        "Multi-Tenant Architecture",
+        "Component API Reference",
+        "Deployment to GitHub Pages"
+      ]
     },
     "description": {
       "type": "string",
-      "description": "Brief summary of the document content (used for SEO and page meta)",
+      "description": "Brief summary of document content (used for SEO meta description, page metadata, and search results)",
       "minLength": 10,
-      "maxLength": 300
+      "maxLength": 300,
+      "examples": [
+        "Complete guide to setting up the React Scuba development environment with Vite, React 19, and Tailwind CSS",
+        "Comprehensive documentation for the multi-tenant content management system with subdomain, domain, and environment-based tenant resolution"
+      ]
+    },
+    "layout": {
+      "type": "string",
+      "description": "VitePress layout type for page rendering",
+      "enum": ["doc", "page", "home"],
+      "default": "doc",
+      "examples": ["doc", "home"]
+    },
+    "outline": {
+      "oneOf": [
+        {
+          "type": "boolean",
+          "description": "Show/hide outline (table of contents)"
+        },
+        {
+          "type": "array",
+          "description": "Outline depth range [min, max]",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "examples": [[2, 3], [1, 4]]
+        },
+        {
+          "type": "string",
+          "enum": ["deep"],
+          "description": "Show all heading levels"
+        }
+      ],
+      "default": [2, 3],
+      "examples": [true, false, [2, 3], "deep"]
+    },
+    "sidebar": {
+      "type": "boolean",
+      "description": "Show/hide left sidebar navigation",
+      "default": true
+    },
+    "aside": {
+      "oneOf": [
+        {
+          "type": "boolean",
+          "description": "Show/hide right aside (outline sidebar)"
+        },
+        {
+          "type": "string",
+          "enum": ["left"],
+          "description": "Position aside on left side"
+        }
+      ],
+      "default": true
+    },
+    "editLink": {
+      "type": "boolean",
+      "description": "Show/hide 'Edit this page' link",
+      "default": true
+    },
+    "lastUpdated": {
+      "type": "boolean",
+      "description": "Show/hide last updated timestamp",
+      "default": true
+    },
+    "prev": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "description": "Custom previous page title"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "Previous page link text"
+            },
+            "link": {
+              "type": "string",
+              "description": "Previous page link URL"
+            }
+          },
+          "required": ["text", "link"]
+        }
+      ],
+      "default": true,
+      "description": "Previous page navigation link configuration"
+    },
+    "next": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "description": "Custom next page title"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "Next page link text"
+            },
+            "link": {
+              "type": "string",
+              "description": "Next page link URL"
+            }
+          },
+          "required": ["text", "link"]
+        }
+      ],
+      "default": true,
+      "description": "Next page navigation link configuration"
     },
     "tags": {
       "type": "array",
-      "description": "Topic tags for content categorization",
+      "description": "Topic tags for content categorization, search, and filtering",
       "items": {
         "type": "string",
-        "pattern": "^[a-z0-9-]+$"
+        "pattern": "^[a-z0-9-]+$",
+        "examples": [
+          "vitepress",
+          "react",
+          "typescript",
+          "multi-tenant",
+          "turbo",
+          "biome",
+          "testing",
+          "deployment",
+          "docker",
+          "github-actions"
+        ]
       },
       "minItems": 1,
-      "maxItems": 10,
+      "maxItems": 15,
       "uniqueItems": true
     },
     "date": {
       "type": "string",
-      "description": "Document creation or last major update date (YYYY-MM-DD)",
+      "description": "Document creation or last major update date (ISO 8601 format: YYYY-MM-DD)",
       "format": "date",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-10-28", "2025-11-15"]
     },
     "status": {
       "type": "string",
-      "description": "Document status for content management",
-      "enum": ["draft", "review", "published", "deprecated"],
+      "description": "Document lifecycle status for content management workflows",
+      "enum": ["draft", "review", "published", "deprecated", "archived"],
       "default": "published"
     },
     "author": {
       "type": "string",
-      "description": "Primary document author",
+      "description": "Primary document author or maintainer",
       "minLength": 2,
-      "maxLength": 50
+      "maxLength": 100,
+      "examples": ["Architecture Team", "Dean Luus", "GitHub Copilot"]
+    },
+    "contributors": {
+      "type": "array",
+      "description": "Additional contributors to this document",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 100
+      },
+      "uniqueItems": true
     },
     "category": {
       "type": "string",
-      "description": "High-level category for organizational purposes",
+      "description": "High-level category for organizational hierarchy (aligned with VitePress sidebar structure)",
       "enum": [
+        "guide",
+        "reference",
+        "testing",
+        "contributing",
+        "deployment",
+        "agent",
+        "archive",
+        "api",
         "installation",
         "configuration",
         "user-guide",
-        "api",
         "security",
-        "testing",
         "production",
         "development",
-        "reference"
-      ]
+        "architecture",
+        "multi-tenant",
+        "turbo-monorepo"
+      ],
+      "examples": ["guide", "reference", "deployment"]
     },
     "priority": {
       "type": "string",
-      "description": "Content priority for ordering and recommendations",
-      "enum": ["high", "medium", "low"],
+      "description": "Content priority for ordering, recommendations, and search ranking",
+      "enum": ["critical", "high", "medium", "low"],
       "default": "medium"
     },
     "related": {
       "type": "array",
-      "description": "Related document paths for cross-referencing",
+      "description": "Related document paths for cross-referencing and 'See Also' sections",
       "items": {
         "type": "string",
-        "pattern": "^[a-z0-9-/]+\\.md$"
+        "pattern": "^[a-z0-9-/]+\\.md$",
+        "examples": [
+          "guide/installation.md",
+          "reference/components/index.md",
+          "deployment/github-pages.md",
+          "contributing/testing.md"
+        ]
       },
       "uniqueItems": true
     },
     "version": {
       "type": "string",
-      "description": "Document version for tracking major changes",
-      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+      "description": "Document version for tracking major changes (semantic versioning)",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "examples": ["1.0.0", "2.1.3", "1.0"]
     },
     "template": {
       "type": "string",
-      "description": "Template type used to generate this document",
-      "enum": ["guide", "reference", "tutorial", "api-doc", "changelog"]
+      "description": "Template type used to generate or structure this document",
+      "enum": ["guide", "reference", "tutorial", "api-doc", "changelog", "troubleshooting", "howto", "overview"],
+      "examples": ["guide", "reference", "tutorial"]
+    },
+    "audience": {
+      "type": "array",
+      "description": "Target audience for this documentation (helps with content filtering and recommendations)",
+      "items": {
+        "type": "string",
+        "enum": ["developers", "architects", "devops", "contributors", "beginners", "advanced", "maintainers", "clients"]
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "examples": [["developers", "architects"], ["beginners"]]
+    },
+    "difficulty": {
+      "type": "string",
+      "description": "Technical difficulty level of the content",
+      "enum": ["beginner", "intermediate", "advanced", "expert"],
+      "examples": ["beginner", "advanced"]
+    },
+    "readingTime": {
+      "type": "integer",
+      "description": "Estimated reading time in minutes",
+      "minimum": 1,
+      "maximum": 240,
+      "examples": [5, 15, 30]
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "Required knowledge or completed tutorials before reading this document",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        ["Node.js 20.x installed", "Basic React knowledge", "Familiarity with npm workspaces"]
+      ]
+    },
+    "deprecated": {
+      "type": "boolean",
+      "description": "Flag document as deprecated (shows warning banner)",
+      "default": false
+    },
+    "deprecatedBy": {
+      "type": "string",
+      "description": "Path to replacement document if this is deprecated",
+      "pattern": "^[a-z0-9-/]+\\.md$",
+      "examples": ["guide/new-installation.md"]
+    },
+    "pageClass": {
+      "type": "string",
+      "description": "Custom CSS class for page styling",
+      "pattern": "^[a-z-]+$",
+      "examples": ["wide-content", "full-width", "api-reference"]
+    },
+    "head": {
+      "type": "array",
+      "description": "Additional HTML head tags for this specific page (SEO, Open Graph, Twitter Cards)",
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 3,
+        "items": [
+          {
+            "type": "string",
+            "description": "HTML tag name",
+            "enum": ["meta", "link", "script", "style"]
+          },
+          {
+            "type": "object",
+            "description": "Tag attributes"
+          }
+        ]
+      },
+      "examples": [
+        [
+          ["meta", { "property": "og:type", "content": "article" }],
+          ["meta", { "name": "twitter:card", "content": "summary_large_image" }]
+        ]
+      ]
+    },
+    "keywords": {
+      "type": "array",
+      "description": "SEO keywords for search engine optimization",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      },
+      "minItems": 3,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "examples": [
+        ["vitepress", "documentation", "react", "typescript", "multi-tenant", "turbo", "monorepo"]
+      ]
+    },
+    "ogImage": {
+      "type": "string",
+      "description": "Open Graph image URL for social media sharing",
+      "format": "uri",
+      "examples": ["/og-images/guide-installation.png", "https://example.com/og.png"]
+    },
+    "twitterCard": {
+      "type": "string",
+      "description": "Twitter card type for Twitter sharing",
+      "enum": ["summary", "summary_large_image", "app", "player"],
+      "default": "summary_large_image"
+    },
+    "canonical": {
+      "type": "string",
+      "description": "Canonical URL for this document (prevents duplicate content SEO issues)",
+      "format": "uri",
+      "examples": ["https://deanluus22021994.github.io/react-scuba/guide/installation"]
+    },
+    "robots": {
+      "type": "string",
+      "description": "Robots meta tag for search engine crawlers",
+      "enum": ["index,follow", "noindex,follow", "index,nofollow", "noindex,nofollow"],
+      "default": "index,follow"
+    },
+    "draft": {
+      "type": "boolean",
+      "description": "Mark document as draft (excluded from production builds)",
+      "default": false
+    },
+    "featured": {
+      "type": "boolean",
+      "description": "Feature this document in homepage or category highlights",
+      "default": false
+    },
+    "monorepo": {
+      "type": "object",
+      "description": "Monorepo-specific metadata for Turbo workspace documentation",
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "Turbo workspace this document relates to",
+          "enum": [
+            "server/apps/web",
+            "server/apps/api",
+            "server/apps/content",
+            "server/apps/docs",
+            "server/packages/config",
+            "server/packages/types",
+            "server/packages/ui",
+            "server/packages/utils"
+          ],
+          "examples": ["server/apps/web", "server/packages/config"]
+        },
+        "scripts": {
+          "type": "array",
+          "description": "Related npm scripts from package.json or tasks.json",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z:]+$"
+          },
+          "examples": [["dev", "build", "test", "lint", "format"]]
+        },
+        "tasks": {
+          "type": "array",
+          "description": "Related VS Code task labels from tasks.json",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["Build Project", "npm: test", "Docker: Up Basic Stack"]]
+        },
+        "debugConfigs": {
+          "type": "array",
+          "description": "Related VS Code debug configurations from launch.json",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["Web App (Chrome)", "API Server", "Full Stack Debug"]]
+        }
+      }
+    },
+    "vscode": {
+      "type": "object",
+      "description": "VS Code-specific metadata for editor integration",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "description": "Recommended VS Code extensions for working with this document",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$"
+          },
+          "examples": [
+            ["yzhang.markdown-all-in-one", "DavidAnson.vscode-markdownlint", "bierner.markdown-mermaid"]
+          ]
+        },
+        "settings": {
+          "type": "array",
+          "description": "Relevant VS Code settings from settings.json for this topic",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["typescript.tsserver.maxTsServerMemory", "biome.enabled", "python.defaultInterpreterPath"]]
+        },
+        "snippets": {
+          "type": "array",
+          "description": "Useful code snippet prefixes for this document's topic",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["react-component", "vitest-test", "docker-compose"]]
+        }
+      }
+    },
+    "multiTenant": {
+      "type": "object",
+      "description": "Multi-tenant architecture metadata (if document relates to @react-scuba/content)",
+      "properties": {
+        "relevance": {
+          "type": "string",
+          "enum": ["tenant-config", "tenant-resolution", "client-onboarding", "asset-management", "validation"],
+          "description": "Multi-tenant architecture area this document covers"
+        },
+        "clients": {
+          "type": "array",
+          "description": "Specific client tenants this document references",
+          "items": {
+            "type": "string",
+            "enum": ["ocean-spirit-mauritius", "di-authority-johannesburg", "_template"]
+          }
+        },
+        "configFields": {
+          "type": "array",
+          "description": "ClientConfig fields documented in this page",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["tenant", "company", "contact", "team", "services", "branding"]]
+        }
+      }
+    },
+    "testing": {
+      "type": "object",
+      "description": "Testing-related metadata (if document covers testing topics)",
+      "properties": {
+        "frameworks": {
+          "type": "array",
+          "description": "Testing frameworks covered in this document",
+          "items": {
+            "type": "string",
+            "enum": ["vitest", "pytest", "testing-library", "playwright", "cypress"]
+          }
+        },
+        "coverage": {
+          "type": "boolean",
+          "description": "Document covers test coverage topics",
+          "default": false
+        },
+        "e2e": {
+          "type": "boolean",
+          "description": "Document covers end-to-end testing",
+          "default": false
+        }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "description": "Deployment-related metadata (if document covers deployment)",
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": ["github-pages", "netlify", "vercel", "cloudflare-pages", "azure", "docker", "kubernetes"],
+          "description": "Deployment platform documented"
+        },
+        "ci": {
+          "type": "boolean",
+          "description": "Document covers CI/CD pipelines",
+          "default": false
+        },
+        "docker": {
+          "type": "boolean",
+          "description": "Document covers Docker containerization",
+          "default": false
+        }
+      }
+    },
+    "changelog": {
+      "type": "object",
+      "description": "Changelog-specific metadata (for changelog documents)",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Version this changelog entry documents"
+        },
+        "releaseDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Release date for this version"
+        },
+        "breaking": {
+          "type": "boolean",
+          "description": "Contains breaking changes",
+          "default": false
+        }
+      }
     }
   },
   "additionalProperties": false,
   "examples": [
     {
-      "title": "Getting Started Guide",
-      "description": "Complete guide to setting up the Docker development environment from scratch",
-      "tags": ["installation", "quickstart", "docker"],
-      "date": "2025-10-26",
+      "title": "Getting Started with React Scuba",
+      "description": "Complete guide to setting up the React Scuba development environment with Vite 7, React 19, TypeScript 5.9, and Tailwind CSS 4",
+      "layout": "doc",
+      "outline": [2, 3],
+      "sidebar": true,
+      "tags": ["installation", "quickstart", "vite", "react", "typescript"],
+      "date": "2025-10-28",
       "status": "published",
-      "author": "Dean Luus",
-      "category": "installation",
+      "author": "Architecture Team",
+      "category": "guide",
+      "priority": "critical",
+      "related": ["guide/structure.md", "guide/configuration.md"],
+      "version": "1.0.0",
+      "template": "guide",
+      "audience": ["developers", "beginners"],
+      "difficulty": "beginner",
+      "readingTime": 15,
+      "prerequisites": ["Node.js 20.x", "npm 10.9.2", "Git"],
+      "keywords": ["react", "vite", "typescript", "installation", "setup", "turbo", "monorepo"],
+      "monorepo": {
+        "workspace": "server/apps/web",
+        "scripts": ["dev", "build", "test"],
+        "tasks": ["Build Project", "npm: dev"]
+      }
+    },
+    {
+      "title": "Multi-Tenant Architecture Overview",
+      "description": "Comprehensive documentation for the multi-tenant content management system enabling streamlined onboarding of diving center clients with isolated configurations",
+      "layout": "doc",
+      "tags": ["multi-tenant", "architecture", "content-management"],
+      "date": "2025-10-28",
+      "status": "published",
+      "category": "architecture",
       "priority": "high",
-      "related": ["readme/prerequisites.md", "config/docker.md"],
       "version": "2.0.0",
-      "template": "guide"
+      "template": "reference",
+      "audience": ["architects", "developers"],
+      "difficulty": "advanced",
+      "readingTime": 30,
+      "multiTenant": {
+        "relevance": "tenant-config",
+        "clients": ["ocean-spirit-mauritius", "di-authority-johannesburg"],
+        "configFields": ["tenant", "company", "contact", "services"]
+      },
+      "monorepo": {
+        "workspace": "server/apps/content"
+      }
+    },
+    {
+      "title": "Component Testing with Vitest",
+      "description": "Guide to writing and running component tests using Vitest 3.2.4 and React Testing Library in the React Scuba monorepo",
+      "layout": "doc",
+      "tags": ["testing", "vitest", "react-testing-library"],
+      "status": "published",
+      "category": "testing",
+      "template": "guide",
+      "audience": ["developers"],
+      "difficulty": "intermediate",
+      "testing": {
+        "frameworks": ["vitest", "testing-library"],
+        "coverage": true
+      },
+      "monorepo": {
+        "workspace": "server/apps/web",
+        "scripts": ["test", "test:coverage"],
+        "tasks": ["npm: test", "npm: test:coverage"]
+      },
+      "vscode": {
+        "extensions": ["vitest.explorer", "ryanluker.vscode-coverage-gutters"],
+        "settings": ["typescript.tsserver.maxTsServerMemory"]
+      }
+    },
+    {
+      "title": "Deploying to GitHub Pages",
+      "description": "Step-by-step guide to deploying the React Scuba documentation and application to GitHub Pages with automated workflows",
+      "layout": "doc",
+      "tags": ["deployment", "github-pages", "github-actions", "ci-cd"],
+      "status": "published",
+      "category": "deployment",
+      "template": "tutorial",
+      "audience": ["devops", "developers"],
+      "difficulty": "intermediate",
+      "deployment": {
+        "platform": "github-pages",
+        "ci": true
+      },
+      "related": ["deployment/index.md", "deployment/analytics.md"]
     }
   ]
 }
