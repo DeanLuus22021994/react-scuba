@@ -1,19 +1,15 @@
 import dotenv from 'dotenv';
-import mysql from 'mysql2/promise';
+import mariadb from 'mariadb';
 
 dotenv.config();
 
-const pool = mysql.createPool({
+const pool = mariadb.createPool({
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 3306,
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'password',
   database: process.env.DB_NAME || 'scuba_booking_db',
-  waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0,
-  enableKeepAlive: true,
-  keepAliveInitialDelay: 0,
 });
 
 // Test connection on startup (non-blocking)

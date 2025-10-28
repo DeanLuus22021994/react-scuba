@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import mysql from 'mysql2/promise';
+import mariadb from 'mariadb';
 
 dotenv.config();
 
@@ -89,12 +89,11 @@ const createTables = async (dbPool) => {
 const initializeDatabase = async () => {
   try {
     // Create connection WITHOUT database to create database
-    const tempPool = mysql.createPool({
+    const tempPool = mariadb.createPool({
       host: process.env.DB_HOST || 'localhost',
       port: process.env.DB_PORT || 3306,
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || 'password',
-      waitForConnections: true,
       connectionLimit: 1,
     });
 
@@ -107,20 +106,19 @@ const initializeDatabase = async () => {
     await tempPool.end();
 
     // Now connect WITH database and create tables
-    const dbPool = mysql.createPool({
+    const dbPool = mariadb.createPool({
       host: process.env.DB_HOST || 'localhost',
       port: process.env.DB_PORT || 3306,
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || 'password',
       database: process.env.DB_NAME || 'scuba_booking_db',
-      waitForConnections: true,
       connectionLimit: 10,
     });
 
     await createTables(dbPool);
 
     // Initialize availability for next 90 days
-    const [existing] = await dbPool.query('SELECT COUNT(*) as count FROM availability');
+    const existing = await dbPool.query('SELECT COUNT(*) as count FROM availability');
     if (existing[0].count === 0) {
       const values = [];
       for (let i = 0; i < 90; i++) {

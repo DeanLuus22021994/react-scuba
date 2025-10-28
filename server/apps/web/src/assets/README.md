@@ -4,7 +4,7 @@ This directory contains shared static assets for the multi-tenant diving platfor
 
 ## Structure
 
-```
+```text
 assets/
 ├── logo.svg           # Main company logo
 ├── placeholder.svg    # Placeholder image for missing content

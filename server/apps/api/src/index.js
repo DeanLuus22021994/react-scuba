@@ -1,8 +1,8 @@
-import compression from 'compression';
+// import compression from 'compression'; // Temporarily disabled - package not installed
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
-import rateLimit from 'express-rate-limit';
+// import rateLimit from 'express-rate-limit'; // Temporarily disabled - package not installed
 // import helmet from 'helmet'; // Temporarily disabled for debugging
 import availabilityRoutes from './routes/availability.js';
 import bookingRoutes from './routes/bookings.js';

@@ -265,7 +265,7 @@ services:
       mcp-cluster:
         ipv4_address: 172.28.0.75
     ports:
-      - "8081:8080"
+      - "8082:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -543,9 +543,9 @@ services:
     hostname: ollama-llm
     networks:
       mcp-cluster:
-        ipv4_address: 172.28.0.81
+        ipv4_address: 172.28.0.59
     ports:
-      - "11434:11434"
+      - "11435:11434"
       - "9401:9401"
     env_file:
       - devcontainer.env
@@ -722,11 +722,11 @@ services:
     hostname: nginx-master
     networks:
       mcp-cluster:
-        ipv4_address: 172.28.0.70
+        ipv4_address: 172.28.0.73
     ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
+      - "8443:443"
+      - "8080:80"
+      - "8088:8080"
     volumes:
       - react_scuba_nginx-logs:/var/log/nginx
     restart: unless-stopped
@@ -749,10 +749,10 @@ services:
     hostname: nginx-slave-1
     networks:
       mcp-cluster:
-        ipv4_address: 172.28.0.71
+        ipv4_address: 172.28.0.81
     ports:
-      - "8081:80"
-      - "8091:8080"
+      - "8091:80"
+      - "8092:8080"
     volumes:
       - react_scuba_nginx-slave1-logs:/var/log/nginx
     restart: unless-stopped
@@ -772,10 +772,10 @@ services:
     hostname: nginx-slave-2
     networks:
       mcp-cluster:
-        ipv4_address: 172.28.0.72
+        ipv4_address: 172.28.0.82
     ports:
-      - "8082:80"
-      - "8092:8080"
+      - "8093:80"
+      - "8094:8080"
     volumes:
       - react_scuba_nginx-slave2-logs:/var/log/nginx
     restart: unless-stopped
@@ -857,8 +857,8 @@ services:
       mcp-cluster:
         ipv4_address: 172.28.0.65
     ports:
-      - "3000:3000"
-      - "3001:3001"
+      - "3001:3000"
+      - "3002:3001"
       - "5173:5173"
       - "5174:5174"
     volumes:

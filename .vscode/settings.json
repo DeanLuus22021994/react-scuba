@@ -189,5 +189,42 @@
   "diffEditor.experimental.useBetterFolding": true,
   "editor.experimentalGpuAcceleration": "on",
   "window.titleBarStyle": "custom",
-  "python-envs.pythonProjects": ["docker-compose-examples/mcp/python_utils"]
+  "python-envs.pythonProjects": ["docker-compose-examples/mcp/python_utils"],
+
+  // === PYTHON 3.14T FREE-THREADING CONFIGURATION ===
+  "python.defaultInterpreterPath": "C:\\Users\\deanl.MSI\\.local\\bin\\python3.14t.exe",
+  "python.interpreter.infoVisibility": "always",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.include": ["docker-compose-examples/mcp/python_utils"],
+  "python.analysis.extraPaths": ["docker-compose-examples/mcp/python_utils/src"],
+  "python.linting.enabled": false,
+  "python.formatting.provider": "none",
+  "ruff.enable": true,
+  "ruff.organizeImports": true,
+  "ruff.fixAll": true,
+  "ruff.interpreter": ["C:\\Users\\deanl.MSI\\.local\\bin\\python3.14t.exe"],
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": [
+    "docker-compose-examples/mcp/python_utils/tests",
+    "-v",
+    "--tb=short"
+  ],
+
+  // === PERFORMANCE OPTIMIZATION ===
+  "python.jediEnabled": false,
+  "python.languageServer": "Pylance",
+  "pylance.insidersChannel": "daily",
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.indexing": true,
+  "python.analysis.packageIndexDepths": [
+    {
+      "name": "react_scuba_utils",
+      "depth": 10
+    }
+  ]
 }

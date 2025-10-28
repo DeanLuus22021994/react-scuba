@@ -16,6 +16,9 @@
     "@react-scuba/utils": "*",
     "express": "^4.21.3",
     "mariadb": "^3.4.4",
+    "mysql2": "^3.11.5",
+    "compression": "^1.7.4",
+    "express-rate-limit": "^8.1.0",
     "cors": "^2.8.6",
     "helmet": "^8.0.1",
     "dotenv": "^16.6.2"
