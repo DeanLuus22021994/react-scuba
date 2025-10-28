@@ -1,28 +1,28 @@
 {
-  "name": "@react-scuba/utils",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
-  "exports": {
-    ".": "./src/index.ts",
-    "./logger": "./src/logger.js",
-    "./analytics": "./src/analytics.js",
-    "./currency": "./src/currency.js"
-  },
-  "scripts": {
-    "lint": "biome check .",
-    "format": "biome format --write .",
-    "test": "vitest run",
-    "type-check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@react-scuba/types": "*"
-  },
-  "devDependencies": {
-    "@react-scuba/config": "*",
-    "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
-  }
+	"name": "@react-scuba/utils",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
+	"exports": {
+		".": "./src/index.ts",
+		"./logger": "./src/logger.js",
+		"./analytics": "./src/analytics.js",
+		"./currency": "./src/currency.js"
+	},
+	"scripts": {
+		"lint": "biome check .",
+		"format": "biome format --write .",
+		"test": "vitest run",
+		"type-check": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@react-scuba/types": "*"
+	},
+	"devDependencies": {
+		"@react-scuba/config": "*",
+		"typescript": "^5.9.3",
+		"vitest": "^3.2.4"
+	}
 }
