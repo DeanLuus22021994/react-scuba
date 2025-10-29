@@ -9,20 +9,81 @@ React Scuba implements a modular, composable Docker infrastructure with clear se
 ```
 .devcontainer/infrastructure/
 ├── base/
-│   └── dockerfile.node-compiler          # Base layer: build tools, npm optimization
+│   ├── dockerfile.node-compiler           # Base layer: build tools, npm optimization
+│   ├── dockerfile.builder-runner          # GitHub Actions runner
+│   └── dockerfile.buildx                  # BuildKit daemon
 │
 ├── services/
 │   ├── api/
 │   │   └── dockerfile                     # API server (production-optimized slim)
 │   ├── web/
 │   │   └── dockerfile                     # React dev server (Vite + HMR)
-│   └── tools/
-│       └── dockerfile                     # Build tools (CI/CD, testing, linting)
+│   ├── tools/
+│   │   └── dockerfile                     # Build tools (CI/CD, testing, linting)
+│   ├── node-dev/
+│   │   └── dockerfile                     # Node bootstrap environment
+│   ├── buildx/
+│   │   └── dockerfile                     # Build service
+│   ├── python/
+│   │   └── dockerfile                     # Python environment
+│   ├── ollama/
+│   │   └── dockerfile                     # LLM inference service
+│   └── nvidia/
+│       └── dockerfile                     # NVIDIA runtime service
+│
+├── databases/
+│   ├── postgres/
+│   │   └── dockerfile                     # PostgreSQL 16
+│   └── mariadb/
+│       └── dockerfile                     # MariaDB 11
+│
+├── mcp-servers/
+│   ├── discovery/
+│   ├── fetch/
+│   ├── filesystem/
+│   ├── git/
+│   ├── github/
+│   ├── markitdown/
+│   ├── memory/
+│   └── python/
+│       └── dockerfile (×8)                # MCP server implementations
+│
+├── monitoring/
+│   ├── config/
+│   │   ├── nginx.conf                     # Nginx configuration
+│   │   └── prometheus.yml                 # Prometheus config
+│   ├── exporters/
+│   │   ├── cadvisor/
+│   │   ├── mysql/
+│   │   ├── node/
+│   │   └── postgres/
+│   │       └── dockerfile (×4)            # Monitoring exporters
+│   ├── prometheus/
+│   │   └── dockerfile                     # Prometheus service
+│   └── grafana/
+│       └── dockerfile                     # Grafana dashboard
+│
+├── networking/
+│   ├── nginx/
+│   │   └── dockerfile                     # nginx master
+│   └── nginx-slave/
+│       └── dockerfile                     # nginx load balancer slave
+│
+├── cache/
+│   ├── memcached/
+│   │   └── dockerfile                     # Memcached cache
+│   ├── redis/
+│   │   └── dockerfile                     # Redis cache & RedisInsight
+│   └── minio/
+│       └── dockerfile                     # S3-compatible object storage
+│
+├── gpu/
+│   └── dockerfile                         # NVIDIA GPU plugin
 │
 └── compose/
-    ├── docker-compose.base.yml            # Fragment: databases, cache
-    ├── docker-compose.app.yml             # Fragment: api, web, tools services
-    └── docker-compose.infra.yml           # Fragment: monitoring, load balancing
+    ├── base.yml                           # Fragment: databases, cache
+    ├── app.yml                            # Fragment: api, web, tools services
+    └── infra.yml                          # Fragment: monitoring, load balancing
 ```
 
 ## Architecture Layers
@@ -77,11 +138,13 @@ React Scuba implements a modular, composable Docker infrastructure with clear se
 
 ## Composition Fragments
 
-### docker-compose.base.yml
+Located in `.devcontainer/infrastructure/compose/` - organized by service tier:
+
+### base.yml
 **Standalone**: ✅ Can run independently
 
 ```bash
-docker-compose -f docker-compose.base.yml up
+docker-compose -f .devcontainer/infrastructure/compose/base.yml up
 ```
 
 **Services**:
@@ -91,15 +154,15 @@ docker-compose -f docker-compose.base.yml up
 - `redis` (172.28.0.61:6379) - Redis 7
 - `redisinsight` (172.28.0.62:5540) - Redis UI
 
-### docker-compose.app.yml
-**Standalone**: ✅ Requires docker-compose.base.yml running
+### app.yml
+**Standalone**: ✅ Requires base.yml running
 
 ```bash
 # Start base first
-docker-compose -f docker-compose.base.yml up -d
+docker-compose -f .devcontainer/infrastructure/compose/base.yml up -d
 
 # Then start app services
-docker-compose -f docker-compose.app.yml up
+docker-compose -f .devcontainer/infrastructure/compose/app.yml up
 ```
 
 **Services**:
@@ -107,7 +170,7 @@ docker-compose -f docker-compose.app.yml up
 - `node-web` (172.28.0.65:5173) - Web Dev Server
 - `node-tools` (172.28.0.66) - Build Tools
 
-### docker-compose.infra.yml
+### infra.yml
 **Status**: Template for future infrastructure consolidation
 
 **Future Services**:
@@ -127,12 +190,12 @@ docker-compose up -d
 
 ### Run Base Services Only
 ```bash
-docker-compose -f docker-compose.base.yml up -d
+docker-compose -f .devcontainer/infrastructure/compose/base.yml up -d
 ```
 
 ### Run App Services Only
 ```bash
-docker-compose -f docker-compose.app.yml up -d
+docker-compose -f .devcontainer/infrastructure/compose/app.yml up -d
 ```
 
 ### Build Individual Services
@@ -304,7 +367,7 @@ ports:
 
 ## References
 
-- Docker Compose: https://docs.docker.com/compose/
-- Node.js Slim Images: https://github.com/nodejs/docker-node
-- Multi-stage Builds: https://docs.docker.com/build/building/multi-stage/
-- Docker Networks: https://docs.docker.com/engine/network/
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Node.js Slim Images](https://github.com/nodejs/docker-node)
+- [Multi-stage Builds](https://docs.docker.com/build/building/multi-stage/)
+- [Docker Networks](https://docs.docker.com/engine/network/)

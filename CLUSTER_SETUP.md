@@ -61,7 +61,7 @@ Gateway: 172.28.0.1
 
 **File**: `.devcontainer/containers/dockerfile.service.node.slim`
 
-#### Three-Stage Build Process:
+#### Three-Stage Build Process
 
 1. **Builder Stage** (Full development)
    - Base: `node:22-slim` (150MB)
@@ -83,7 +83,7 @@ Gateway: 172.28.0.1
    - **Final size**: 200-250MB
    - **Size reduction**: 71% vs node:22, 83% vs node:22-full
 
-#### Key Features:
+#### Key Features
 
 ```dockerfile
 # Security: Non-root user execution
@@ -400,7 +400,7 @@ react-scuba/
 
 ## References
 
-- Node.js Slim Images: https://github.com/nodejs/docker-node
-- Docker Multi-stage Builds: https://docs.docker.com/build/building/multi-stage/
-- Express.js Production Best Practices: https://expressjs.com/en/advanced/best-practice-performance.html
-- Kubernetes Probes: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+- [Node.js Slim Images](https://github.com/nodejs/docker-node)
+- [Docker Multi-stage Builds](https://docs.docker.com/build/building/multi-stage/)
+- [Express.js Production Best Practices](https://expressjs.com/en/advanced/best-practice-performance.html)
+- [Kubernetes Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)

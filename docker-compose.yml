@@ -92,8 +92,8 @@ services:
   # ==== TIER 2: MCP Database Services (after databases) ====
   postgres-mcp:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.db.postgres
+      context: ./.devcontainer/infrastructure/databases/postgres
+      dockerfile: dockerfile
     image: mcp-postgres:latest
     container_name: postgres-mcp
     hostname: postgres-mcp
@@ -121,8 +121,8 @@ services:
 
   mariadb-mcp:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.db.mariadb
+      context: ./.devcontainer/infrastructure/databases/mariadb
+      dockerfile: dockerfile
     image: mcp-mariadb:latest
     container_name: mariadb-mcp
     hostname: mariadb-mcp
@@ -241,8 +241,8 @@ services:
 
   github-runner:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.builder.runner
+      context: ./.devcontainer/infrastructure/base
+      dockerfile: dockerfile.builder-runner
     image: react-scuba-runner:latest
     container_name: github-runner
     hostname: github-runner
@@ -266,8 +266,8 @@ services:
   # cAdvisor - Container metrics exporter
   cadvisor:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.exporter.cadvisor
+      context: ./.devcontainer/infrastructure/monitoring/exporters/cadvisor
+      dockerfile: dockerfile
     image: mcp-cadvisor:latest
     container_name: mcp-cadvisor
     hostname: cadvisor
@@ -308,8 +308,8 @@ services:
   # Node Exporter - Host metrics
   node-exporter:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.exporter.node
+      context: ./.devcontainer/infrastructure/monitoring/exporters/node
+      dockerfile: dockerfile
     image: mcp-node-exporter:latest
     container_name: mcp-node-exporter
     hostname: node-exporter
@@ -345,8 +345,8 @@ services:
   # PostgreSQL Exporter
   postgres-exporter:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.exporter.postgres
+      context: ./.devcontainer/infrastructure/monitoring/exporters/postgres
+      dockerfile: dockerfile
     image: mcp-postgres-exporter:latest
     container_name: mcp-postgres-exporter
     hostname: postgres-exporter
@@ -378,8 +378,8 @@ services:
   # MySQL/MariaDB Exporter
   mysql-exporter:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.exporter.mysql
+      context: ./.devcontainer/infrastructure/monitoring/exporters/mysql
+      dockerfile: dockerfile
     image: mcp-mysql-exporter:latest
     container_name: mcp-mysql-exporter
     hostname: mysql-exporter
@@ -439,7 +439,7 @@ services:
       mcp-cluster:
         ipv4_address: 172.28.0.70
     volumes:
-      - ./.devcontainer/containers/gateway/config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./.devcontainer/infrastructure/monitoring/config/nginx.conf:/etc/nginx/nginx.conf:ro
     env_file:
       - devcontainer.env
     restart: unless-stopped
@@ -455,7 +455,7 @@ services:
         ipv4_address: 172.28.0.71
     volumes:
       - type: bind
-        source: ./.devcontainer/containers/gateway/config/prometheus.yml
+        source: ./.devcontainer/infrastructure/monitoring/config/prometheus.yml
         target: /etc/prometheus/prometheus.yml
         read_only: true
       - react_scuba_prometheus-data:/prometheus
@@ -514,8 +514,8 @@ services:
   # ==== TIER 3: GPU & AI Services ====
   nvidia-device-plugin:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.nvidia.device.plugin
+      context: ./.devcontainer/infrastructure/gpu
+      dockerfile: dockerfile
     image: nvidia-device-plugin:latest
     container_name: nvidia-device-plugin
     hostname: nvidia-device-plugin
@@ -552,8 +552,8 @@ services:
   # Avoid: codegeex4:9b-all-q4_K_M (7.5GB loaded) causes 29% CPU offload and RAM spikes
   ollama-llm:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.service.ollama
+      context: ./.devcontainer/infrastructure/services/ollama
+      dockerfile: dockerfile
     image: ollama-llm:latest
     container_name: ollama-llm
     hostname: ollama-llm
@@ -651,7 +651,7 @@ services:
   node-builder:
     build:
       context: .
-      dockerfile: .devcontainer/containers/dockerfile.service.node
+      dockerfile: .devcontainer/infrastructure/services/buildx/dockerfile
     image: react-scuba-node:latest
     container_name: node-builder
     hostname: node-builder
@@ -729,8 +729,8 @@ services:
   # ==== TIER 5: Network Layer (load balancing) ====
   nginx-master:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.network.nginx
+      context: ./.devcontainer/infrastructure/networking/nginx
+      dockerfile: dockerfile
     image: nginx-master:latest
     container_name: nginx-master
     hostname: nginx-master
@@ -756,8 +756,8 @@ services:
 
   nginx-slave-1:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.network.nginx.slave
+      context: ./.devcontainer/infrastructure/networking/nginx-slave
+      dockerfile: dockerfile
     image: nginx-slave:latest
     container_name: nginx-slave-1
     hostname: nginx-slave-1
@@ -779,8 +779,8 @@ services:
 
   nginx-slave-2:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.network.nginx.slave
+      context: ./.devcontainer/infrastructure/networking/nginx-slave
+      dockerfile: dockerfile
     image: nginx-slave:latest
     container_name: nginx-slave-2
     hostname: nginx-slave-2
@@ -803,8 +803,8 @@ services:
   # ==== TIER 6: Object Layer (caching & storage) ====
   memcached:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.object.memcached
+      context: ./.devcontainer/infrastructure/cache/memcached
+      dockerfile: dockerfile
     image: memcached:latest
     container_name: memcached
     hostname: memcached
@@ -831,8 +831,8 @@ services:
 
   redisinsight:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.object.redisinsight
+      context: ./.devcontainer/infrastructure/cache/redis
+      dockerfile: dockerfile
     image: redisinsight:latest
     container_name: redisinsight
     hostname: redisinsight
@@ -855,7 +855,7 @@ services:
   node-bootstrap:
     build:
       context: .
-      dockerfile: .devcontainer/containers/dockerfile.bootstrap.node
+      dockerfile: .devcontainer/infrastructure/services/node-dev/dockerfile
     image: node-bootstrap:latest
     container_name: node-bootstrap
     hostname: node-bootstrap
@@ -950,8 +950,8 @@ services:
   # ==== TIER 8: MCP Servers (document conversion) ====
   markitdown-mcp:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.mcp.markitdown
+      context: ./.devcontainer/infrastructure/mcp-servers/markitdown
+      dockerfile: dockerfile
     image: markitdown-mcp:latest
     container_name: markitdown-mcp
     hostname: markitdown-mcp
