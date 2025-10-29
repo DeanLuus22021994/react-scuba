@@ -1,23 +1,340 @@
 # ==============================================================================
 # docker-compose.infra.yml - Infrastructure Services
 # ==============================================================================
-# Purpose: Monitoring, logging, service discovery
-# Composition: Prometheus, Grafana, cAdvisor, node-exporter, nginx
-# Network: mcp-cluster (shared with all other services)
-# Testing: docker-compose -f docker-compose.infra.yml up
-# Note: This file is for future infrastructure consolidation
+# Purpose: Monitoring, logging, service discovery, load balancing
+# Services: Prometheus, Grafana, cAdvisor, node-exporter, nginx master/slaves
+# Network: mcp-cluster (172.28.0.0/16)
+# Usage: docker-compose -f .devcontainer/infrastructure/compose/infra.yml up
 # ==============================================================================
 
 name: react-scuba-infra
 
-# Extract relevant infrastructure services from main compose
-# This is a template for future separation of monitoring/load balancing tiers
-# Currently embedded in main docker-compose.yml for operational simplicity
+services:
+  # ==== Monitoring Stack ====
+  prometheus:
+    build:
+      context: ./.devcontainer/infrastructure/monitoring/prometheus
+      dockerfile: dockerfile
+    image: mcp-prometheus:latest
+    container_name: tbc-prometheus
+    hostname: prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.71
+    volumes:
+      - type: bind
+        source: ./.devcontainer/infrastructure/monitoring/config/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+      - react_scuba_prometheus-data:/prometheus
+    env_file:
+      - devcontainer.env
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=15d"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9090/-/healthy",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: tbc-grafana
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.72
+    volumes:
+      - react_scuba_grafana-data:/var/lib/grafana
+      - ./.devcontainer/infrastructure/monitoring/dashboard-cluster.json:/etc/grafana/provisioning/dashboards/cluster.json
+      - ./.devcontainer/infrastructure/monitoring/dashboard-database.json:/etc/grafana/provisioning/dashboards/database.json
+      - ./.devcontainer/infrastructure/monitoring/dashboard-system.json:/etc/grafana/provisioning/dashboards/system.json
+    env_file:
+      - devcontainer.env
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-piechart-panel
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/api/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ==== Metrics Exporters ====
+  cadvisor:
+    build:
+      context: ./.devcontainer/infrastructure/monitoring/exporters/cadvisor
+      dockerfile: dockerfile
+    image: mcp-cadvisor:latest
+    container_name: mcp-cadvisor
+    hostname: cadvisor
+    privileged: true
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.75
+    ports:
+      - "8082:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    command:
+      - "--docker_only=true"
+      - "--housekeeping_interval=10s"
+      - "--max_housekeeping_interval=30s"
+      - "--storage_duration=2m"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/healthz",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  node-exporter:
+    build:
+      context: ./.devcontainer/infrastructure/monitoring/exporters/node
+      dockerfile: dockerfile
+    image: mcp-node-exporter:latest
+    container_name: mcp-node-exporter
+    hostname: node-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.76
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--path.rootfs=/rootfs"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9100/metrics",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  postgres-exporter:
+    build:
+      context: ./.devcontainer/infrastructure/monitoring/exporters/postgres
+      dockerfile: dockerfile
+    image: mcp-postgres-exporter:latest
+    container_name: mcp-postgres-exporter
+    hostname: postgres-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.77
+    ports:
+      - "9187:9187"
+    environment:
+      - DATA_SOURCE_NAME=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres?sslmode=disable
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9187/",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+  mysql-exporter:
+    build:
+      context: ./.devcontainer/infrastructure/monitoring/exporters/mysql
+      dockerfile: dockerfile
+    image: mcp-mysql-exporter:latest
+    container_name: mcp-mysql-exporter
+    hostname: mysql-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.78
+    ports:
+      - "9104:9104"
+    env_file:
+      - devcontainer.env
+    environment:
+      - DATA_SOURCE_NAME=root:${MARIADB_PASSWORD:-password}@tcp(mariadb:3306)/
+      - MYSQLD_EXPORTER_WEB_LISTEN_ADDRESS=:9104
+    command:
+      - --collect.global_status
+      - --collect.info_schema.innodb_metrics
+      - --collect.auto_increment.columns
+      - --collect.info_schema.processlist
+      - --collect.binlog_size
+      - --collect.info_schema.tablestats
+      - --collect.global_variables
+      - --collect.info_schema.query_response_time
+      - --collect.info_schema.userstats
+      - --collect.info_schema.tables
+      - --collect.perf_schema.tablelocks
+      - --collect.perf_schema.file_events
+      - --collect.perf_schema.eventswaits
+      - --collect.perf_schema.indexiowaits
+      - --collect.perf_schema.tableiowaits
+      - --collect.slave_status
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9104/metrics",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  # ==== Load Balancing ====
+  nginx-master:
+    build:
+      context: ./.devcontainer/infrastructure/networking/nginx
+      dockerfile: dockerfile
+    image: nginx-master:latest
+    container_name: nginx-master
+    hostname: nginx-master
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.73
+    ports:
+      - "8443:443"
+      - "8080:80"
+      - "8088:8080"
+    volumes:
+      - react_scuba_nginx-logs:/var/log/nginx
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      - nginx-slave-1
+      - nginx-slave-2
+
+  nginx-slave-1:
+    build:
+      context: ./.devcontainer/infrastructure/networking/nginx-slave
+      dockerfile: dockerfile
+    image: nginx-slave:latest
+    container_name: nginx-slave-1
+    hostname: nginx-slave-1
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.81
+    ports:
+      - "8091:80"
+      - "8092:8080"
+    volumes:
+      - react_scuba_nginx-slave1-logs:/var/log/nginx
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+
+  nginx-slave-2:
+    build:
+      context: ./.devcontainer/infrastructure/networking/nginx-slave
+      dockerfile: dockerfile
+    image: nginx-slave:latest
+    container_name: nginx-slave-2
+    hostname: nginx-slave-2
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.82
+    ports:
+      - "8093:80"
+      - "8094:8080"
+    volumes:
+      - react_scuba_nginx-slave2-logs:/var/log/nginx
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+
+# External reference to databases on mcp-cluster
 networks:
-  react-scuba_mcp-cluster:
+  mcp-cluster:
     name: mcp-cluster
     external: true
 
-# Placeholder for infrastructure services
-# These will be extracted from main docker-compose.yml in next phase
+# Volume declarations
+volumes:
+  react_scuba_prometheus-data:
+    name: react_scuba_prometheus-data
+  react_scuba_grafana-data:
+    name: react_scuba_grafana-data
+  react_scuba_nginx-logs:
+    name: react_scuba_nginx-logs
+  react_scuba_nginx-slave1-logs:
+    name: react_scuba_nginx-slave1-logs
+  react_scuba_nginx-slave2-logs:
+    name: react_scuba_nginx-slave2-logs

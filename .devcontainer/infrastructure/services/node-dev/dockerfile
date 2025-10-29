@@ -30,16 +30,32 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
   g++ \
   tini
 
-# Stage 2: Dependency pre-cache (optional - for faster subsequent builds)
-FROM base AS dependencies
+# Stage 2: Full development environment with dependencies
+FROM base AS development
 
-# Set working directory
 WORKDIR /workspace
 
-# Create placeholder for dependencies
-# In production, copy package files and run npm install here
-# For now, just prepare the directory structure
-RUN mkdir -p /workspace/server/node_modules
+# Copy root package files
+COPY package.json package-lock.json .npmrc* ./
+
+# Copy server workspace package files
+COPY server/package.json server/package-lock.json ./server/
+
+# Copy workspace packages
+COPY server/packages ./server/packages
+COPY server/apps/api/package.json ./server/apps/api/
+COPY server/apps/web/package.json ./server/apps/web/
+COPY server/apps/content/package.json ./server/apps/content/
+COPY server/apps/docs/package.json ./server/apps/docs/
+
+# Install all dependencies with npm workspaces
+RUN npm ci --legacy-peer-deps 2>&1 | tail -20
+
+# Copy entire source tree
+COPY server ./server
+
+# Build workspace dependencies
+RUN npm run build --workspaces 2>&1 | tail -20 || true
 
 # Stage 3: Runtime environment
 FROM base AS runtime
@@ -54,6 +70,10 @@ RUN chown -R node-dev:node-dev /workspace
 
 # Prepare node_modules cache directory
 RUN mkdir -p /cache && chown -R node-dev:node-dev /cache
+
+# Copy built dependencies from development stage
+COPY --from=development --chown=node-dev:node-dev /workspace/node_modules ./node_modules
+COPY --from=development --chown=node-dev:node-dev /workspace/server ./server
 
 # Create health check script
 RUN cat > /usr/local/bin/node-health <<'HEALTH_EOF'
@@ -82,9 +102,9 @@ else
 fi
 
 # Check if node_modules exist
-if [ -d "/workspace/server/node_modules" ]; then
+if [ -d "/workspace/node_modules" ]; then
   DEPENDENCIES_INSTALLED=true
-  MODULE_COUNT=$(find /workspace/server/node_modules -maxdepth 1 -type d | wc -l)
+  MODULE_COUNT=$(find /workspace/node_modules -maxdepth 1 -type d | wc -l)
 else
   DEPENDENCIES_INSTALLED=false
   MODULE_COUNT=0

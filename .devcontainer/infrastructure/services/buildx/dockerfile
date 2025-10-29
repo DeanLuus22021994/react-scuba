@@ -21,7 +21,7 @@ FROM node:22-slim AS builder
 
 LABEL stage="builder" description="Build stage with development tools"
 
-# Install build dependencies (temporary, removed in final image)
+# Install build dependencies - required for compilation, removed in final runtime image
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     make \
