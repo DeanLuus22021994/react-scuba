@@ -1,13 +1,25 @@
 {
   "extends": "../../packages/config/tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "./src",
     "allowJs": true,
     "checkJs": false,
     "lib": ["ES2020"],
     "types": ["node"],
-    "noEmit": true
+    "noEmit": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "coverage", "*.config.js", "vitest.config.js"]
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "vitest.config.js",
+    "**/*.config.js",
+    "**/*.config.ts",
+    "**/*.test.js",
+    "**/*.test.ts",
+    "**/*.spec.js",
+    "**/*.spec.ts"
+  ]
 }
