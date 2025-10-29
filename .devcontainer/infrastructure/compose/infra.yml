@@ -321,15 +321,4 @@ services:
 # External reference to databases on mcp-cluster
 
 
-# Volume declarations
-volumes:
-  react_scuba_prometheus-data:
-    name: react_scuba_prometheus-data
-  react_scuba_grafana-data:
-    name: react_scuba_grafana-data
-  react_scuba_nginx-logs:
-    name: react_scuba_nginx-logs
-  react_scuba_nginx-slave1-logs:
-    name: react_scuba_nginx-slave1-logs
-  react_scuba_nginx-slave2-logs:
-    name: react_scuba_nginx-slave2-logs
+# Volumes are defined in main docker-compose.yml to avoid conflicts

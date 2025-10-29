@@ -159,6 +159,4 @@ services:
 
 
 
-volumes:
-  react_scuba_api-logs:
-    name: react_scuba_api-logs
+# Volumes are defined in main docker-compose.yml to avoid conflicts

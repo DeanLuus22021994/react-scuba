@@ -17,17 +17,12 @@ LABEL org.opencontainers.image.title="Prometheus Gateway" \
   purpose="gateway-metrics" \
   monitoring.type="collection"
 
-# Install additional utilities
+# Install additional utilities (prometheus image is busybox-based, skip additional packages)
 USER root
-RUN apk add --no-cache \
-  curl \
-  jq \
-  bash \
-  ca-certificates
+# Note: prometheus image already has curl and basic utilities
 
 # Create configuration directory
-RUN mkdir -p /etc/prometheus/rules /prometheus && \
-  chown -R prometheus:prometheus /etc/prometheus /prometheus
+RUN mkdir -p /etc/prometheus/rules /prometheus
 
 # Create Prometheus configuration
 RUN cat > /etc/prometheus/prometheus.yml <<'PROMETHEUS_EOF'
@@ -214,8 +209,8 @@ RULES_EOF
 
 # Create health check script
 RUN cat > /usr/local/bin/prometheus-health <<'HEALTH_EOF'
-#!/bin/bash
-set -euo pipefail
+#!/bin/sh
+set -eu
 
 # Generate timestamp in YY-MM-DD-HH-MM-SS format
 TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
@@ -236,18 +231,13 @@ else
   PROMETHEUS_READY=false
 fi
 
-# Get target stats
-if TARGETS=$(curl -sf http://localhost:9090/api/v1/targets 2>&1); then
-  if echo "$TARGETS" | jq -e . >/dev/null 2>&1; then
-    ACTIVE_TARGETS=$(echo "$TARGETS" | jq -r '.data.activeTargets | length')
-    UP_TARGETS=$(echo "$TARGETS" | jq -r '[.data.activeTargets[] | select(.health=="up")] | length')
-  else
-    ACTIVE_TARGETS=0
-    UP_TARGETS=0
-  fi
+# Get target stats (simplified without jq dependency)
+if curl -sf http://localhost:9090/api/v1/targets > /dev/null 2>&1; then
+  ACTIVE_TARGETS="available"
+  UP_TARGETS="available"
 else
-  ACTIVE_TARGETS=0
-  UP_TARGETS=0
+  ACTIVE_TARGETS="unavailable"
+  UP_TARGETS="unavailable"
 fi
 
 cat <<JSON
@@ -257,8 +247,8 @@ cat <<JSON
   "service": "prometheus",
   "prometheus_available": ${PROMETHEUS_AVAILABLE},
   "prometheus_ready": ${PROMETHEUS_READY},
-  "active_targets": ${ACTIVE_TARGETS},
-  "up_targets": ${UP_TARGETS},
+  "active_targets": "${ACTIVE_TARGETS}",
+  "up_targets": "${UP_TARGETS}",
   "endpoint": "http://localhost:9090",
   "gateway_type": "metrics"
 }
@@ -268,11 +258,11 @@ HEALTH_EOF
 # Convert CRLF to LF if present (Windows compatibility)
 RUN sed -i 's/\r$//' /usr/local/bin/prometheus-health && chmod +x /usr/local/bin/prometheus-health
 
-# Set ownership
-RUN chown -R prometheus:prometheus /etc/prometheus /prometheus /usr/local/bin/prometheus-health
+# Set executable permissions
+RUN chmod +x /usr/local/bin/prometheus-health
 
-# Switch back to prometheus user
-USER prometheus
+# Switch to nobody user (safer than root)
+USER nobody
 
 # Expose Prometheus port
 EXPOSE 9090

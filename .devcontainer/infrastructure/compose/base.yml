@@ -9,15 +9,7 @@
 
 
 
-volumes:
-  postgres-db-volume:
-    name: react_scuba_postgres_volume
-  mariadb-volume:
-    name: react_scuba_mariadb_volume
-  memcached-cache:
-    name: react_scuba_memcached_cache
-  redis-cache:
-    name: react_scuba_redis_cache
+# Volumes are defined in main docker-compose.yml to avoid conflicts
 
 services:
   # ==== TIER 1: Databases ====
@@ -37,7 +29,7 @@ services:
       - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
       - POSTGRES_INITDB_ARGS=-c max_connections=200
     volumes:
-      - postgres-db-volume:/var/lib/postgresql/data
+      - react_scuba_postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -67,7 +59,7 @@ services:
       - MYSQL_PASSWORD=${DOCKER_MARIADB_PASSWORD:-password}
       - MARIADB_AUTO_UPGRADE=1
     volumes:
-      - mariadb-volume:/var/lib/mysql
+      - react_scuba_mariadb-data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
       interval: 10s
@@ -117,7 +109,7 @@ services:
       - "6379:6379"
     command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
     volumes:
-      - redis-cache:/data
+      - react_scuba_redis-data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s

@@ -103,7 +103,4 @@ services:
 
 
 
-volumes:
-  react_scuba_ollama-models:
-    name: react_scuba_ollama-models
-    driver: local
+# Volumes are defined in main docker-compose.yml to avoid conflicts
