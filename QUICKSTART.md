@@ -77,7 +77,7 @@ npm run mcp:health       # Health check
 ### Development Workflow
 
 ```bash
-npm run dev              # Start Turbo dev server
+npm run dev              # Start all workspace dev servers
 npm run build            # Build all workspaces
 npm test                 # Run tests
 npm run lint:fix         # Fix linting issues

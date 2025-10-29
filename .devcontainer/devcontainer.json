@@ -204,7 +204,7 @@
     }
   },
 
-  "postCreateCommand": "npm install && npm install -g turbo && npm run specs:validate && python3 -c 'import sys; print(f\"GIL Enabled: {sys._is_gil_enabled()}\")' && echo '✅ Spec-driven development environment ready!'",
+  "postCreateCommand": "npm install && npm run specs:validate && python3 -c 'import sys; print(f\"GIL Enabled: {sys._is_gil_enabled()}\")' && echo '✅ Spec-driven development environment ready!'",
   "postStartCommand": "docker ps",
 
   "remoteUser": "vscode",

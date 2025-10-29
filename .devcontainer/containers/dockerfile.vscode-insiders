@@ -46,7 +46,7 @@ RUN wget -qO /tmp/code-insiders.deb 'https://code.visualstudio.com/sha/download?
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js 22 LTS and package managers
-RUN npm install -g npm@latest pnpm@latest yarn@latest turbo@latest
+RUN npm install -g npm@latest pnpm@latest yarn@latest
 
 # Install Python 3.14t free-threading build for MCP integration
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

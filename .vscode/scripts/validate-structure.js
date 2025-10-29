@@ -20,7 +20,7 @@ const expectedStructure = {
         type: 'directory',
         required: true,
         children: {
-          'settings.turbo.json': { type: 'file', required: true },
+          required: true },
           'settings.client.json': { type: 'file', required: true },
           'README.md': { type: 'file', required: true }
         }
@@ -207,3 +207,4 @@ if (validationErrors.length > 0) {
 } else {
   process.exit(0);
 }
+

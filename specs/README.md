@@ -38,7 +38,7 @@ npm run specs:deploy-test
 
 ## Integration
 
-- **Turbo Pipeline**: Integrated with monorepo build system
+- **npm Workspaces**: Native monorepo orchestration
 - **CI/CD**: Automated validation on every commit
 - **DevContainer**: Multi-service validation in containerized environment
 - **Kubernetes**: Business validation through cluster deployment

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "architecture": {
     "type": "monorepo",
-    "build_system": "turbo",
+    "build_system": "npm-workspaces",
     "package_manager": "npm"
   },
   "applications": [

@@ -17,7 +17,6 @@ The React Scuba VS Code workspace has been restructured to provide better organi
 ├── mcp.json                         # MCP server configurations
 │
 ├── configs/                         # 🆕 Domain-specific configurations
-│   ├── settings.turbo.json         # Turbo monorepo optimizations
 │   ├── settings.client.json        # Multi-tenant client settings
 │   └── README.md                   # Configuration documentation
 │
@@ -41,8 +40,8 @@ The React Scuba VS Code workspace has been restructured to provide better organi
 
 The organized structure **enhances** your existing comprehensive VS Code settings without replacement:
 
-- **Preserves all existing settings**: GitHub Copilot, Python, Docker, Biome, TypeScript configurations remain intact
-- **Adds domain-specific optimizations**: Turbo monorepo performance enhancements
+- **Preserves all existing settings**: GitHub Copilot, Python, Docker, Biome, JavaScript configurations remain intact
+- **Adds domain-specific optimizations**: npm workspaces performance enhancements
 - **Enables multi-tenant development**: Client-specific theming and validation support
 - **Maintains backwards compatibility**: All existing tools and extensions continue to work
 
@@ -56,7 +55,7 @@ The organized structure **enhances** your existing comprehensive VS Code setting
 ### 📊 Performance Optimizations
 
 - **TypeScript server memory**: Increased to 12GB for large monorepo
-- **File watching exclusions**: Optimized for Turbo build artifacts
+- **File watching exclusions**: Optimized for build artifacts
 - **Search performance**: Improved indexing for multi-tenant structure
 - **Explorer organization**: File nesting patterns for better navigation
 
@@ -74,7 +73,7 @@ npm run workspace:setup
 **What this does:**
 
 - ✅ Preserves all existing comprehensive settings
-- ✅ Adds Turbo monorepo optimizations
+- ✅ Adds npm workspaces optimizations
 - ✅ Enables multi-tenant client support
 - ✅ Configures GitHub Copilot instruction files
 - ✅ Creates automatic backup with timestamp
@@ -166,8 +165,8 @@ cp .vscode/settings.json.backup-2025-10-28T16-52-30 .vscode/settings.json
 
 With the organized structure, GitHub Copilot now has comprehensive understanding of:
 
-- **Project architecture**: Turbo monorepo with multi-tenant support
-- **Technology stack**: React 19, Express.js 5, PostgreSQL, TypeScript 5.9.3
+- **Project architecture**: npm workspaces monorepo with multi-tenant support
+- **Technology stack**: React 19, Express.js 5, PostgreSQL, JavaScript ES2020+
 - **Development patterns**: Component structure, API routes, client configurations
 - **Testing strategies**: Vitest unit tests, Playwright E2E tests
 - **Deployment targets**: Azure services, Docker containers
@@ -232,7 +231,7 @@ npm run workspace:validate
 
 - **VS Code Multi-root Workspaces**: [Official Documentation](https://code.visualstudio.com/docs/editor/multi-root-workspaces)
 - **GitHub Copilot Instructions**: [Custom Instructions Guide](https://aka.ms/vscode-ghcp-custom-instructions)
-- **Turbo Documentation**: [Turbo Monorepo Guide](https://turbo.build/repo/docs)
+- **npm Workspaces Documentation**: [npm Workspaces Guide](https://docs.npmjs.com/cli/using-npm/workspaces)
 - **React Scuba Architecture**: See `.vscode/copilot/instructions.md` for detailed project context
 
 ## 🎉 Next Steps

@@ -120,7 +120,7 @@ react-scuba/
 - **Docker Compose** (local development)
 
 ### Build & Tooling
-- **Turbo 2.5.8** (monorepo orchestration)
+- **npm workspaces** (monorepo orchestration)
 - **npm 10.9.2** (package manager, workspaces)
 - **Biome 2.3.1** (Rust-based linter, replaces ESLint)
 - **Vitest 3.2.4** (unit testing)
@@ -236,8 +236,8 @@ npm run clean:all               # Clean + remove node_modules
 ## Key Files
 
 ### Configuration
-- \`server/turbo.json\`: Turbo pipeline configuration
 - \`server/package.json\`: Root package + workspace definitions
+- \`.vscode/settings.json\`: VS Code editor settings
 - \`.vscode/settings.json\`: VS Code editor settings
 - \`.vscode/tasks.json\`: Task runner definitions
 - \`.vscode/mcp.json\`: MCP server configurations
@@ -260,7 +260,7 @@ npm run clean:all               # Clean + remove node_modules
 - Check MCP configs: \`#file:.vscode/mcp-servers/*.json\`
 - Multi-tenant configs: \`#file:server/clients/*/config.json\`
 - Mention **"multi-tenant"** for client-specific context
-- Mention **"Turbo monorepo"** for workspace context
+- Mention **"npm workspaces monorepo"** for workspace context
 `,
       },
     ],
@@ -700,7 +700,6 @@ dist/
 build/
 out/
 .next/
-.turbo/
 *.tsbuildinfo
 .vite/
 .cache/

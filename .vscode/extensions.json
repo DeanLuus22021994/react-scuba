@@ -95,7 +95,7 @@
     "VisualStudioExptTeam.intellicode-api-usage-examples", // API usage examples
 
     // ========================================================================
-    // Turbo Monorepo & Workspace Management
+    // npm Workspaces & Monorepo Management
     // ========================================================================
     "rangav.vscode-thunder-client",          // API testing (for testing Express endpoints)
     "humao.rest-client",                     // REST API client

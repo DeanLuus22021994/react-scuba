@@ -36,8 +36,8 @@ if (existsSync('.vscode/settings.json')) {
 console.log('📖 Reading domain-specific configurations...');
 
 // Read domain-specific configurations (pure JSON)
-const turboSettings = JSON.parse(readFileSync(join(configDir, 'settings.turbo.json'), 'utf8'));
-console.log('✅ Turbo monorepo settings loaded');
+const turboSettings = JSON.parse(readFileSync(join(configDir, 'settings.client.json'), 'utf8'));
+console.log('✅ Client settings loaded');
 
 const clientSettings = JSON.parse(readFileSync(join(configDir, 'settings.client.json'), 'utf8'));
 console.log('✅ Multi-tenant client settings loaded');
@@ -68,7 +68,7 @@ console.log('✅ Additive configuration merge completed');
 console.log('');
 console.log('📊 Additive Merge Summary:');
 console.log(`   • Existing settings: ${Object.keys(existingSettings).length} properties`);
-console.log(`   • Turbo enhancements: ${Object.keys(turboSettings).length} properties`);
+console.log(`   • Optimizations: ${Object.keys(turboSettings).length} properties`);
 console.log(`   • Client enhancements: ${Object.keys(clientSettings).length} properties`);
 console.log(`   • Total final settings: ${Object.keys(mergedSettings).length} properties`);
 
@@ -90,7 +90,7 @@ console.log('🎉 Additive configuration merge successful!');
 console.log('==========================================');
 console.log('');
 console.log('✅ Enhanced with domain-specific configurations:');
-console.log('   📁 Turbo monorepo optimizations (enhanced TypeScript memory, file watching)');
+console.log('   📁 npm workspaces optimizations (enhanced TypeScript memory, file watching)');
 console.log('   🏢 Multi-tenant client settings (schema validation, theme support)');
 console.log('   🤖 GitHub Copilot instruction files integration');
 console.log('   💾 All original settings preserved and enhanced');
@@ -102,3 +102,4 @@ console.log('3. Verify all extensions and tools still work as expected');
 console.log('4. Use backup to restore if any issues occur');
 console.log('');
 console.log('🎯 Your comprehensive VS Code setup is now enhanced with organized structure!');
+

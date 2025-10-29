@@ -2,13 +2,13 @@
 
 ## Project Context
 
-**React Scuba** is a multi-tenant dive shop management platform built with a modern Turbo monorepo architecture. This workspace provides comprehensive context for GitHub Copilot to assist with development across the entire platform.
+**React Scuba** is a multi-tenant dive shop management platform built with a modern npm workspaces monorepo architecture. This workspace provides comprehensive context for GitHub Copilot to assist with development across the entire platform.
 
 ## Architecture Overview
 
 ### Monorepo Structure
 
-- **Turbo 2.5.8** monorepo orchestration
+- **npm workspaces** monorepo orchestration
 - **React 19.2 + Vite 7.1.11** frontend (apps/web)
 - **Express.js 5.0.0** backend API (apps/api)
 - **Multi-tenant content provider** (apps/content)
@@ -18,7 +18,7 @@
 
 - **Frontend**: React 19, TypeScript 5.9.3, Tailwind CSS 4, React Router v7
 - **Backend**: Express.js 5, PostgreSQL 17, MariaDB 11
-- **Build Tools**: Vite 7, Turbo, Biome 2.3.1 (linting)
+- **Build Tools**: Vite 7, Biome 2.3.1 (linting)
 - **Testing**: Vitest 3.2.4, Playwright 1.56
 
 ## Multi-Tenant Architecture
@@ -104,7 +104,7 @@ npm run format                  # Format all files
 Use `@workspace` for project-wide understanding:
 
 - `@workspace explain the multi-tenant architecture`
-- `@workspace show me the Turbo monorepo structure`
+- `@workspace show me the npm workspaces monorepo structure`
 - `@workspace what's the tech stack for React components?`
 
 ### Code Generation Patterns

@@ -29,7 +29,7 @@ echo "✅ Directory structure created"
 echo "🔍 Validating configuration files..."
 
 required_files=(
-    ".vscode/configs/settings.turbo.json"
+    ".vscode/configs/"
     ".vscode/configs/settings.client.json"
     ".vscode/configs/README.md"
     ".vscode/copilot/instructions.md"
@@ -146,13 +146,13 @@ cat > react-scuba.code-workspace << 'EOF'
   "settings": {
     "files.exclude": {
       "**/node_modules": false,
-      "**/.turbo": true,
+      "**/.npm": true,
       "**/dist": false,
       "**/build": false
     },
     "search.exclude": {
       "**/node_modules": true,
-      "**/.turbo": true
+      "**/.npm": true
     }
   },
   "extensions": {
@@ -205,3 +205,4 @@ echo "   - .vscode/mcp-servers/ (Model Context Protocol servers)"
 echo "   - .vscode/scripts/     (automation scripts)"
 echo ""
 echo "Happy coding with React Scuba! 🤿"
+

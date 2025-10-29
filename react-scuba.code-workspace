@@ -36,13 +36,11 @@
   "settings": {
     "files.exclude": {
       "**/node_modules": false,
-      "**/.turbo": true,
       "**/dist": false,
       "**/build": false
     },
     "search.exclude": {
-      "**/node_modules": true,
-      "**/.turbo": true
+      "**/node_modules": true
     },
     "github.copilot.chat.codeGeneration.useInstructionFiles": true
   },

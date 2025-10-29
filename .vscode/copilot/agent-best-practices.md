@@ -32,7 +32,7 @@ const reactComponentAgent = new Agent({
     "multi-tenant-aware",
   ],
   context: {
-    projectType: "turbo-monorepo",
+    projectType: "npm-workspaces-monorepo",
     frontend: "react-vite",
     styling: "tailwind-v4",
     stateManagement: "zustand",
@@ -65,7 +65,7 @@ const contentAgent = new Agent({
 
 #### Code Generation Tasks
 
-- **Primary**: GitHub Copilot with GPT-4 Turbo
+- **Primary**: GitHub Copilot with GPT-4
 - **Alternative**: Claude Sonnet for complex refactoring
 - **Specialized**: Codestral for TypeScript-heavy tasks
 
@@ -130,8 +130,8 @@ test_cases = [
 
 ### Evaluation Metrics
 
-1. **Code Quality**: Biome linting compliance, TypeScript strictness
-2. **Architecture Compliance**: Follows Turbo monorepo patterns
+1. **Code Quality**: Biome linting compliance, JavaScript best practices
+2. **Architecture Compliance**: Follows npm workspaces monorepo patterns
 3. **Multi-Tenant Awareness**: Properly handles client isolation
 4. **Performance**: Bundle size impact, runtime performance
 5. **Testing Coverage**: Generated tests achieve 80%+ coverage
@@ -201,7 +201,7 @@ React Scuba includes MCP servers for enhanced AI capabilities:
       "args": [".vscode/mcp-servers/filesystem/server.js"],
       "env": {
         "WORKSPACE_ROOT": "${workspaceFolder}",
-        "MONOREPO_TYPE": "turbo"
+        "MONOREPO_TYPE": "npm-workspaces"
       }
     },
     "react-scuba-github": {

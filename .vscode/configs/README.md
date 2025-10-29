@@ -13,14 +13,12 @@ This directory contains organized VS Code workspace configurations for the React
 ├── mcp.json                         # MCP server configurations
 │
 ├── configs/                         # Extended configuration files
-│   ├── settings.turbo.json         # Turbo monorepo optimizations
 │   ├── settings.client.json        # Multi-tenant client settings
 │   └── README.md                   # This documentation
 │
 ├── schemas/                         # JSON Schema definitions
 │   ├── mcp-server.schema.json      # MCP server validation
 │   ├── client-config.schema.json   # Client configuration validation
-│   └── turbo-pipeline.schema.json  # Turbo pipeline validation
 │
 ├── mcp-servers/                     # MCP server implementations
 │   ├── filesystem/                 # File system operations
@@ -41,9 +39,7 @@ This directory contains organized VS Code workspace configurations for the React
 
 ## Configuration Files
 
-### settings.turbo.json
-
-Turbo monorepo-specific optimizations including:
+### settings.client.json
 
 - TypeScript server memory allocation (12GB)
 - File watching exclusions for build artifacts
@@ -74,7 +70,7 @@ npm run workspace:setup
 
 #### Option 2: Manual Selective Application
 
-Copy specific settings from `settings.turbo.json` or `settings.client.json` into the main `settings.json` file as needed.
+Copy specific settings from `settings.client.json` into the main `settings.json` file as needed.
 
 #### Option 3: Workspace-Specific Overrides
 
@@ -94,7 +90,7 @@ The `merge-configs.js` script can be extended to automatically merge configurati
 ## Best Practices
 
 1. **Keep Root Files Minimal**: Main configuration files should only contain orchestration logic
-2. **Domain-Specific Configs**: Use subdirectory configs for specific concerns (Turbo, clients, etc.)
+2. **Domain-Specific Configs**: Use subdirectory configs for specific concerns (clients, etc.)
 3. **Schema Validation**: All JSON configurations should have corresponding schemas
 4. **Documentation**: Update this README when adding new configuration files
 5. **Version Control**: All configuration files are tracked in Git (no `.gitignore` exclusions)

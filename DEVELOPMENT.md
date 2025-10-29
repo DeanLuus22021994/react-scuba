@@ -589,7 +589,7 @@ npm install
 
 ### Architecture
 
-- **Monorepo:** Turborepo with npm workspaces
+- **Monorepo:** npm workspaces
 - **Apps:** Web (frontend), API (backend), Docs (VitePress)
 - **Packages:** Shared config, types, UI, utils
 - **State:** Zustand for global state, TanStack Query for server state

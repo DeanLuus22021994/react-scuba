@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     // ============================================================================
-    // Node.js / TypeScript Debugging (Turbo Monorepo)
+    // Node.js / JavaScript Debugging (npm workspaces)
     // ============================================================================
     {
       "name": "🚀 Dev: Web + API (Full Stack)",

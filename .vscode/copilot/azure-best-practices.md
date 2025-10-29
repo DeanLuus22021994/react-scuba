@@ -403,7 +403,7 @@ class DiveRecommendationService {
     `;
 
     const response = await this.openai.createCompletion({
-      model: "gpt-35-turbo",
+      model: "gpt-4",
       prompt,
       max_tokens: 500,
       temperature: 0.7,

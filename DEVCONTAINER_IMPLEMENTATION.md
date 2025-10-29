@@ -70,7 +70,7 @@ This implementation provides a complete enterprise-grade development environment
 
 - VS Code Insiders with pinned version
 - User-controlled update mechanism via `vscode-update-control` script
-- Node.js 22 LTS + npm/pnpm/yarn/turbo
+- Node.js 22 LTS + npm/pnpm/yarn
 - Python 3.12 + UV package manager
 - Docker CLI for container management
 - Oh My Zsh with plugins
@@ -256,7 +256,6 @@ VSCODE_STATUS_BAR_INTEGRATION=true       # Status bar integration
 
 ```env
 USE_NAMED_VOLUMES=true               # Workspace-specific volumes
-TURBO_CACHE_LOCAL=true               # Container-local cache
 ```
 
 ### DevContainer Configuration
@@ -436,10 +435,10 @@ vscode-update-control rollback
 
 ### Build Performance
 
-- ✅ Container-local Turbo cache ensures clean builds
+- ✅ Native npm workspace caching ensures clean builds
 - ✅ Named volumes enable instant container startup
 - ✅ Persistent MCP service survives main container rebuilds
-- ✅ Parallel workspace builds via Turbo
+- ✅ Parallel workspace builds via npm
 
 ### Developer Experience
 

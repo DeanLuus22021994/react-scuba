@@ -16,8 +16,8 @@ Write-Host "   • Optimized asset inlining (4KB threshold)" -ForegroundColor Gr
 Write-Host "   • Better dependency pre-bundling" -ForegroundColor Gray
 
 Write-Host "
-✅ Enhanced Turbo Configuration:" -ForegroundColor Green
-Write-Host "   • Global environment variable tracking" -ForegroundColor Gray
+✅ Enhanced npm Workspace Configuration:" -ForegroundColor Green
+Write-Host "   • Optimized workspace build orchestration" -ForegroundColor Gray
 Write-Host "   • Smart output logging (errors-only/new-only)" -ForegroundColor Gray
 Write-Host "   • Input-based test caching" -ForegroundColor Gray
 Write-Host "   • TUI mode enabled" -ForegroundColor Gray

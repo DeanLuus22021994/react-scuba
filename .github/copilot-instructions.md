@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-React Scuba is a **multi-tenant dive shop management platform** built with a modern Turbo monorepo architecture. The platform supports multiple dive shop clients with isolated configurations, theming, and content while sharing a unified codebase.
+React Scuba is a **multi-tenant dive shop management platform** built with a modern npm workspaces monorepo architecture. The platform supports multiple dive shop clients with isolated configurations, theming, and content while sharing a unified codebase.
 
 ## Directory Structure
 
 ```
 react-scuba/
-├── server/                    # Turbo monorepo root
+├── server/                    # npm workspaces monorepo root
 │   ├── apps/                  # Application workspaces
 │   │   ├── web/              # React 19 frontend (Vite 7)
 │   │   ├── api/              # Express.js 5 backend
@@ -52,7 +52,7 @@ react-scuba/
 
 ### Build & Tooling
 
-- **Turbo 2.5.8** (monorepo orchestration)
+- **npm workspaces** (monorepo orchestration)
 - **npm 10.9.2** (package manager, workspaces)
 - **Biome 2.3.1** (Rust-based linter, replaces ESLint)
 - **Vitest 3.2.4** (unit testing)
@@ -179,8 +179,8 @@ npm run clean:all               # Clean + remove node_modules
 
 ### Configuration
 
-- `server/turbo.json`: Turbo pipeline configuration
 - `server/package.json`: Root package + workspace definitions
+- `.vscode/settings.json`: VS Code editor settings
 - `.vscode/settings.json`: VS Code editor settings
 - `.vscode/tasks.json`: Task runner definitions
 - `.vscode/mcp.json`: MCP server configurations
@@ -206,4 +206,4 @@ npm run clean:all               # Clean + remove node_modules
 - Reference MCP server configs in **.vscode/mcp-servers/** directory (use file reference syntax)
 - Reference client configs in **server/clients/** directory (use file reference syntax)
 - Mention **"multi-tenant"** for client-specific context
-- Mention **"Turbo monorepo"** for workspace context
+- Mention **"npm workspaces monorepo"** for workspace context

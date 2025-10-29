@@ -42,7 +42,6 @@ FROM git-setup AS dependencies
 RUN mkdir -p \
   /cache/node_modules \
   /cache/npm \
-  /cache/turbo \
   /cache/git-hooks \
   /cache/husky \
   /workspace && \
@@ -50,12 +49,11 @@ RUN mkdir -p \
 
 # Set cache environment variables
 ENV NPM_CONFIG_CACHE=/cache/npm \
-  TURBO_CACHE_DIR=/cache/turbo \
   NODE_OPTIONS="--max-old-space-size=4096" \
   HUSKY=1
 
 # Volume mount points (will be mounted at runtime)
-VOLUME ["/cache/node_modules", "/cache/npm", "/cache/turbo", "/cache/git-hooks", "/cache/husky"]
+VOLUME ["/cache/node_modules", "/cache/npm", "/cache/git-hooks", "/cache/husky"]
 
 # ==============================================================================
 # Stage: Workspace Clone & Setup
@@ -66,8 +64,7 @@ FROM dependencies AS workspace-clone
 # We prepare the symlinks for cached directories (create parent dirs first)
 
 RUN mkdir -p /workspace/.git /workspace/.husky && \
-  ln -sf /cache/node_modules /workspace/node_modules && \
-  ln -sf /cache/turbo /workspace/.turbo
+  ln -sf /cache/node_modules /workspace/node_modules
 
 # ==============================================================================
 # Stage: Git Hooks Setup (Husky)
@@ -91,7 +88,7 @@ fi
 cd /workspace
 
 # Install dependencies if node_modules is empty
-if [ ! -d \"node_modules/@turbo\" ]; then
+if [ ! -d \"node_modules\" ] || [ -z \"$(ls -A node_modules)\" ]; then
   echo \"📦 Installing dependencies...\"
   npm ci --prefer-offline --no-audit --no-fund
 fi
@@ -134,7 +131,7 @@ RUN chmod +x /usr/local/bin/turbo-build.sh
 # ==============================================================================
 # Stage: Development Runtime
 # ==============================================================================
-FROM turbo-build AS runtime
+FROM workspace-build AS runtime
 
 # Expose common ports
 EXPOSE 3000 3001 5173 5174
