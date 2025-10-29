@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://react-scuba.dev/schemas/toc-schema.json",
+  "title": "AI-Optimized Documentation Table of Contents Schema",
+  "description": "Schema for validating documentation TOC structure for AI semantic indexing",
+  "type": "object",
+  "required": ["version", "updated", "purpose", "domains"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of TOC schema"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date in YYYY-MM-DD format"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Purpose of this documentation structure"
+    },
+    "domains": {
+      "type": "object",
+      "description": "Documentation organized by domain",
+      "patternProperties": {
+        "^[a-z-]+$": {
+          "type": "object",
+          "required": ["path", "description", "files"],
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Relative path to domain directory"
+            },
+            "description": {
+              "type": "string",
+              "description": "Domain purpose description"
+            },
+            "files": {
+              "type": "array",
+              "description": "Documentation files in this domain",
+              "items": {
+                "type": "object",
+                "required": ["slug", "title", "source", "tags", "ai_hints"],
+                "properties": {
+                  "slug": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$",
+                    "description": "URL-safe file identifier"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Human-readable title"
+                  },
+                  "source": {
+                    "type": "string",
+                    "description": "Original source file"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Classification tags"
+                  },
+                  "ai_hints": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "AI semantic indexing hints"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Cross-domain relationships",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "type", "description"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["implements", "extends", "supports", "enables", "requires"]
+          },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "ai_config": {
+      "type": "object",
+      "description": "AI processing configuration"
+    },
+    "validation": {
+      "type": "object",
+      "description": "Validation rules"
+    }
+  }
+}

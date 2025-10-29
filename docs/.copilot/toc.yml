@@ -1,0 +1,160 @@
+# React Scuba Documentation - Table of Contents
+# AI-Optimized Semantic Indexing Structure
+
+schema: './schemas/toc-schema.json'
+version: '1.0.0'
+last_updated: '2025-10-29'
+
+domains:
+  architecture:
+    description: Multi-tenant and multi-industry architecture concepts
+    path: ./architecture
+    files:
+      - name: multi-tenant-concepts.md
+        title: Multi-Tenant Architecture Concepts
+        ai_hints: [multi-tenancy, saas-architecture, tenant-isolation]
+        
+      - name: multi-tenant-configuration.md
+        title: Multi-Tenant Configuration Management
+        ai_hints: [configuration-schema, tenant-resolution, type-safety]
+        
+      - name: multi-industry-concepts.md
+        title: Multi-Industry Platform Concepts
+        ai_hints: [industry-agnostic, vertical-flexibility, service-types]
+        
+      - name: multi-industry-implementations.md
+        title: Multi-Industry Implementation Patterns
+        ai_hints: [content-management, client-onboarding, industry-patterns]
+
+  infrastructure:
+    description: Development environment and infrastructure configuration
+    path: ./infrastructure
+    files:
+      - name: devcontainer-architecture.md
+        title: DevContainer Architecture Overview
+        ai_hints: [devcontainer, vscode-insiders, hybrid-volumes]
+        
+      - name: devcontainer-mcp-services.md
+        title: MCP Service Configuration
+        ai_hints: [mcp-sidecar, service-discovery, health-monitoring]
+        
+      - name: devcontainer-volumes.md
+        title: Volume Strategy and Management
+        ai_hints: [named-volumes, bind-mounts, dependency-isolation]
+        
+      - name: development-workflow.md
+        title: Development Workflow
+        ai_hints: [task-execution, dependency-management, build-validation]
+        
+      - name: development-infrastructure.md
+        title: Infrastructure Configuration
+        ai_hints: [docker-compose, mcp-cluster, service-orchestration]
+
+  modernization:
+    description: Technology stack and modernization achievements
+    path: ./modernization
+    files:
+      - name: tech-stack-overview.md
+        title: Technology Stack Overview
+        ai_hints: [bleeding-edge-stack, react-19, vite-7, npm-workspaces]
+        
+      - name: build-optimizations.md
+        title: Build Performance Optimizations
+        ai_hints: [build-performance, bundle-optimization, caching-strategies]
+        
+      - name: modernization-achievements.md
+        title: Modernization Achievements
+        ai_hints: [dependency-updates, typescript-migration, turbo-removal]
+
+  getting-started:
+    description: Quick start and setup verification
+    path: ./getting-started
+    files:
+      - name: quickstart-setup.md
+        title: Quick Start Setup
+        ai_hints: [initial-setup, prerequisites, service-activation]
+        
+      - name: quickstart-verification.md
+        title: Quick Start Verification
+        ai_hints: [health-checks, service-validation, troubleshooting]
+
+  planning:
+    description: Task tracking and platform roadmap
+    path: ./planning
+    files:
+      - name: infrastructure-tasks.md
+        title: Infrastructure Tasks
+        ai_hints: [task-backlog, port-conflicts, architecture-decisions]
+        
+      - name: todo-platform.md
+        title: Platform Roadmap
+        ai_hints: [feature-roadmap, phases, success-metrics]
+
+cross_references:
+  architecture:
+    - infrastructure/devcontainer-architecture.md
+    - modernization/tech-stack-overview.md
+    
+  infrastructure:
+    - architecture/multi-tenant-concepts.md
+    - getting-started/quickstart-setup.md
+    - planning/infrastructure-tasks.md
+    
+  modernization:
+    - infrastructure/development-workflow.md
+    - planning/todo-platform.md
+    
+  getting-started:
+    - infrastructure/devcontainer-architecture.md
+    - infrastructure/development-workflow.md
+    
+  planning:
+    - infrastructure/development-infrastructure.md
+    - modernization/modernization-achievements.md
+
+ai_indexing:
+  priority_documents:
+    - architecture/multi-tenant-concepts.md
+    - infrastructure/devcontainer-architecture.md
+    - modernization/tech-stack-overview.md
+    - getting-started/quickstart-setup.md
+    
+  semantic_relationships:
+    tenant_resolution:
+      - architecture/multi-tenant-configuration.md
+      - infrastructure/development-workflow.md
+      
+    devcontainer_setup:
+      - infrastructure/devcontainer-architecture.md
+      - infrastructure/devcontainer-mcp-services.md
+      - infrastructure/devcontainer-volumes.md
+      
+    build_performance:
+      - modernization/build-optimizations.md
+      - infrastructure/development-workflow.md
+      
+    service_health:
+      - infrastructure/devcontainer-mcp-services.md
+      - getting-started/quickstart-verification.md
+      - planning/infrastructure-tasks.md
+
+metadata:
+  format: markdown
+  code_examples: excluded
+  audience: ai-copilot
+  update_frequency: on-change
+  validation: json-schema
+  
+archive:
+  original_files:
+    location: ../archive/original/
+    files:
+      - DEVCONTAINER.md
+      - DEVELOPMENT.md
+      - MODERNIZATION.md
+      - MULTI_TENANT.md
+      - MULTI_INDUSTRY.md
+      - QUICKSTART.md
+      - TASKS.md
+      - TODO.md
+    preservation_date: '2025-10-29'
