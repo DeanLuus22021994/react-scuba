@@ -11,7 +11,7 @@ services:
   # ==== Monitoring Stack ====
   prometheus:
     build:
-      context: ../../../.devcontainer/infrastructure/monitoring/prometheus
+      context: ../monitoring/prometheus
       dockerfile: dockerfile
     image: mcp-prometheus:latest
     container_name: tbc-prometheus
@@ -23,7 +23,7 @@ services:
         ipv4_address: 172.28.0.71
     volumes:
       - type: bind
-        source: ./.devcontainer/infrastructure/monitoring/config/prometheus.yml
+        source: ../monitoring/config/prometheus.yml
         target: /etc/prometheus/prometheus.yml
         read_only: true
       - react_scuba_prometheus-data:/prometheus
@@ -59,9 +59,9 @@ services:
         ipv4_address: 172.28.0.72
     volumes:
       - react_scuba_grafana-data:/var/lib/grafana
-      - ./.devcontainer/infrastructure/monitoring/dashboard-cluster.json:/etc/grafana/provisioning/dashboards/cluster.json
-      - ./.devcontainer/infrastructure/monitoring/dashboard-database.json:/etc/grafana/provisioning/dashboards/database.json
-      - ./.devcontainer/infrastructure/monitoring/dashboard-system.json:/etc/grafana/provisioning/dashboards/system.json
+      - ../monitoring/dashboard-cluster.json:/etc/grafana/provisioning/dashboards/cluster.json
+      - ../monitoring/dashboard-database.json:/etc/grafana/provisioning/dashboards/database.json
+      - ../monitoring/dashboard-system.json:/etc/grafana/provisioning/dashboards/system.json
     env_file:
       - ../../../devcontainer.env
     environment:
@@ -85,7 +85,7 @@ services:
   # ==== Metrics Exporters ====
   cadvisor:
     build:
-      context: ../../../.devcontainer/infrastructure/monitoring/exporters/cadvisor
+      context: ../monitoring/exporters/cadvisor
       dockerfile: dockerfile
     image: mcp-cadvisor:latest
     container_name: mcp-cadvisor
@@ -126,7 +126,7 @@ services:
 
   node-exporter:
     build:
-      context: ../../../.devcontainer/infrastructure/monitoring/exporters/node
+      context: ../monitoring/exporters/node
       dockerfile: dockerfile
     image: mcp-node-exporter:latest
     container_name: mcp-node-exporter
@@ -162,7 +162,7 @@ services:
 
   postgres-exporter:
     build:
-      context: ../../../.devcontainer/infrastructure/monitoring/exporters/postgres
+      context: ../monitoring/exporters/postgres
       dockerfile: dockerfile
     image: mcp-postgres-exporter:latest
     container_name: mcp-postgres-exporter
@@ -194,7 +194,7 @@ services:
 
   mysql-exporter:
     build:
-      context: ../../../.devcontainer/infrastructure/monitoring/exporters/mysql
+      context: ../monitoring/exporters/mysql
       dockerfile: dockerfile
     image: mcp-mysql-exporter:latest
     container_name: mcp-mysql-exporter
@@ -247,7 +247,7 @@ services:
   # ==== Load Balancing ====
   nginx-master:
     build:
-      context: ../../../.devcontainer/infrastructure/networking/nginx
+      context: ../networking/nginx
       dockerfile: dockerfile
     image: nginx-master:latest
     container_name: nginx-master
@@ -274,7 +274,7 @@ services:
 
   nginx-slave-1:
     build:
-      context: ../../../.devcontainer/infrastructure/networking/nginx-slave
+      context: ../networking/nginx-slave
       dockerfile: dockerfile
     image: nginx-slave:latest
     container_name: nginx-slave-1
@@ -297,7 +297,7 @@ services:
 
   nginx-slave-2:
     build:
-      context: ../../../.devcontainer/infrastructure/networking/nginx-slave
+      context: ../networking/nginx-slave
       dockerfile: dockerfile
     image: nginx-slave:latest
     container_name: nginx-slave-2

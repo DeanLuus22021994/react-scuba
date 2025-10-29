@@ -12,7 +12,7 @@ services:
   # ==== TIER 7.5: API Server ====
   node-api:
     build:
-      context: .
+      context: ../../..
       dockerfile: .devcontainer/infrastructure/services/api/dockerfile
     image: react-scuba-api:latest
     container_name: node-api
@@ -73,7 +73,7 @@ services:
   # ==== TIER 7: Web Dev Server ====
   node-web:
     build:
-      context: .
+      context: ../../..
       dockerfile: .devcontainer/infrastructure/services/web/dockerfile
     image: react-scuba-web:latest
     container_name: node-web
@@ -82,18 +82,19 @@ services:
       mcp-cluster:
         ipv4_address: 172.28.0.65
     ports:
+      - "3001:3001"
       - "5173:5173"
       - "5174:5174"
     env_file:
       - ../../../devcontainer.env
     environment:
       - NODE_ENV=development
-      - PORT=5173
+      - PORT=3001
       - VITE_HMR_HOST=localhost
       - VITE_HMR_PORT=5173
     volumes:
-      - ./server/apps/web/src:/app/apps/web/src
-      - ./server/packages:/app/packages
+      - ../../../server/apps/web/src:/app/server/apps/web/src
+      - ../../../server/packages:/app/server/packages
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5173"]
@@ -118,7 +119,7 @@ services:
   # ==== TIER 7: Build Tools ====
   node-tools:
     build:
-      context: .
+      context: ../../..
       dockerfile: .devcontainer/infrastructure/services/tools/dockerfile
     image: react-scuba-tools:latest
     container_name: node-tools
@@ -131,8 +132,8 @@ services:
     environment:
       - NODE_ENV=development
     volumes:
-      - ./server:/app/server
-      - ./docker-compose-examples:/app/docker-compose-examples
+      - ../../../server:/app/server
+      - ../../../docker-compose-examples:/app/docker-compose-examples
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "node", "--version"]
