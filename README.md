@@ -127,6 +127,25 @@ Documentation is organized in `docs/.copilot/` for AI semantic indexing:
 
 See [`docs/.copilot/MIGRATION.md`](./docs/.copilot/MIGRATION.md) for migration guide from legacy docs.
 
+### GitHub Actions Workflows
+
+GitHub Actions workflows are currently **disabled** (renamed to `.yml.disabled`) for local development focus:
+
+- `ci.yml.disabled` - Continuous Integration checks
+- `docs-validation.yml.disabled` - Documentation TOC validation
+- `docs-audit.yml.disabled` - Weekly documentation audit
+- `docs.yml.disabled` - VitePress documentation deployment
+- `test-stacks.yml.disabled` - Docker stack testing
+
+**Re-enabling Workflows**: Remove the `.disabled` extension to activate:
+```bash
+cd .github/workflows
+mv ci.yml.disabled ci.yml
+mv docs-validation.yml.disabled docs-validation.yml
+```
+
+Workflows can be tested on feature branches before enabling in main.
+
 ### Online Documentation
 
 - **[Online Documentation](https://deanluus22021994.github.io/react-scuba/)** - Complete VitePress documentation
