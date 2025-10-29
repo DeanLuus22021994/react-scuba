@@ -220,7 +220,7 @@ interface CaseStudy {
 cp -r server/clients/_template server/clients/di-authority-johannesburg
 ```
 
-**Step 2: Configure Tenant Metadata**
+Step 2: Configure Tenant Metadata**
 
 ```json
 {
@@ -232,7 +232,7 @@ cp -r server/clients/_template server/clients/di-authority-johannesburg
 }
 ```
 
-#### Step 3: Define Services (NOT courses)
+Step 3: Define Services (NOT courses)
 
 ```json
 {
@@ -246,7 +246,7 @@ cp -r server/clients/_template server/clients/di-authority-johannesburg
 }
 ```
 
-**Step 4: Set Feature Flags**
+Step 4: Set Feature Flags**
 
 ```json
 {
