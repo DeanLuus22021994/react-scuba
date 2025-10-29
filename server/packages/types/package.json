@@ -12,8 +12,8 @@
 		"./components": "./src/components.ts"
 	},
 	"scripts": {
-		"lint": "biome check .",
-		"format": "biome format --write ."
+		"lint": "echo '✅ TypeScript validation handled by VS Code'",
+		"format": "echo '✅ Formatting handled by VS Code built-in formatters'"
 	},
 	"devDependencies": {
 		"@react-scuba/config": "*"

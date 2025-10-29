@@ -65,10 +65,10 @@ last_updated: 2025-10-29
 
 ### Linting and Formatting
 
-**Biome**: Version 2.3.1 Rust-based linting (replaces ESLint)
+**Native Language Servers**: VS Code built-in TypeScript/JavaScript validation (replaces ESLint)
 **Line Length**: 100 characters
 **Quote Style**: Single quotes (JS/TS), double quotes (Python)
-**Import Sorting**: Auto-sort with Biome
+**Import Sorting**: Auto-sort with VS Code TypeScript language server
 
 ### TypeScript Configuration
 

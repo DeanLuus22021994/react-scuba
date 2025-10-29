@@ -70,7 +70,6 @@ RUN mkdir -p /home/vscode/.vscode-insiders/extensions \
 USER vscode
 RUN code-insiders --install-extension GitHub.copilot \
     && code-insiders --install-extension GitHub.copilot-chat \
-    && code-insiders --install-extension biomejs.biome \
     && code-insiders --install-extension ms-vscode.vscode-typescript-next \
     && code-insiders --install-extension bradlc.vscode-tailwindcss \
     && code-insiders --install-extension ms-python.python \

@@ -109,7 +109,7 @@ react-scuba/
 ### Build & Tooling
 - **npm workspaces** (monorepo orchestration)
 - **npm 10.9.2** (package manager, workspaces)
-- **Biome 2.3.1** (Rust-based linter, replaces ESLint)
+- **Native Language Servers** (VS Code built-in TypeScript/JavaScript validation)
 - **Vitest 3.2.4** (unit testing)
 - **Playwright 1.56** (E2E testing)
 
@@ -122,11 +122,11 @@ react-scuba/
 ## Code Standards
 
 ### Formatting & Linting
-- **Biome-first approach**: Use Biome for all JavaScript/TypeScript files
+- **Native language server approach**: Use VS Code built-in validation for all JavaScript/TypeScript files
 - **Line length**: 100 characters
 - **Indentation**: 2 spaces (JS/TS), 4 spaces (Python)
 - **Quotes**: Single quotes (JS/TS), double quotes (Python)
-- **Imports**: Auto-sort with Biome/isort
+- **Imports**: Auto-sort with VS Code TypeScript language server/isort
 - **Run \`npm run lint:fix\` before committing**
 
 ### TypeScript
@@ -204,8 +204,8 @@ npm run test:coverage           # Generate coverage reports
 npx playwright test             # Run E2E tests
 
 # Linting & Formatting
-npm run lint                    # Check with Biome
-npm run lint:fix                # Fix with Biome
+npm run lint                    # Native language server validation
+npm run lint:fix                # Native language server validation
 npm run format                  # Format all files
 npm run format:check            # Check formatting
 
@@ -236,7 +236,7 @@ npm run clean:all               # Clean + remove node_modules
 - \`server/apps/docs/\`: VitePress documentation site
 
 ### Build Tooling
-- \`server/packages/config/biome.json\`: Biome config
+- \`server/packages/config/tsconfig.base.json\`: TypeScript config
 - \`server/packages/config/tsconfig.*.json\`: TypeScript configs
 - \`server/apps/web/vite.config.js\`: Vite build config
 - \`server/apps/web/tailwind.config.js\`: Tailwind config
@@ -569,7 +569,7 @@ See \`server/clients/_template/config.json\` for the full schema.
 This package contains **shared tooling configurations** for the monorepo.
 
 ## Configurations
-- **biome.json**: Biome linter/formatter config (Rust-based, replaces ESLint)
+- **tsconfig.json**: TypeScript configuration for native language server validation
 - **tsconfig.base.json**: Base TypeScript config (extended by all workspaces)
 - **tsconfig.node.json**: Node.js TypeScript config
 - **tsconfig.react.json**: React TypeScript config

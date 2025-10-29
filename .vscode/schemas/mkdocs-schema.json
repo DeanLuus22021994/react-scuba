@@ -23,7 +23,7 @@
           "description": "Site meta description for SEO",
           "minLength": 50,
           "maxLength": 160,
-          "examples": ["Comprehensive documentation for React Scuba multi-tenant diving center platform with npm workspaces monorepo and Biome tooling"]
+          "examples": ["Comprehensive documentation for React Scuba multi-tenant diving center platform with npm workspaces monorepo and native language server tooling"]
         },
         "base": {
           "type": "string",
@@ -619,7 +619,7 @@
                   "setting_key": {
                     "type": "string",
                     "description": "Settings.json key path",
-                    "examples": ["biome.enabled", "python.testing.pytestArgs", "npm.packageManager"]
+                    "examples": ["typescript.preferences.organizeImports", "python.testing.pytestArgs", "npm.packageManager"]
                   },
                   "doc_file": {
                     "type": "string",

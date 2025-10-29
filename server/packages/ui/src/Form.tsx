@@ -44,7 +44,7 @@ export interface FormLabelProps extends HTMLAttributes<HTMLLabelElement> {
 export const FormLabel = forwardRef<HTMLLabelElement, FormLabelProps>(
 	({ children, required, className, ...props }, ref) => {
 		return (
-			// biome-ignore lint/a11y/noLabelWithoutControl: FormLabel is designed to be used with separate inputs via htmlFor prop
+			// FormLabel is designed to be used with separate inputs via htmlFor prop
 			<label
 				ref={ref}
 				className={cn(

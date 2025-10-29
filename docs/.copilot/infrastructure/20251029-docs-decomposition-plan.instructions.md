@@ -32,7 +32,7 @@ Decompose 8 documentation files into AI-optimized, code-free semantic files grou
 
 - .github/copilot-instructions.md - Output policy guidelines
 - .vscode/schemas/markdown-doc.json - Documentation metadata schema
-- biome.json - Linting rules
+- tsconfig.json - TypeScript configuration
 
 ## Implementation Checklist
 
@@ -98,7 +98,7 @@ Decompose 8 documentation files into AI-optimized, code-free semantic files grou
 - [x] Task 7.3: Update markdown schema
   - Files: .vscode/schemas/markdown-doc.json
 
-- [x] Task 7.4: Update Biome configuration
+- [x] Task 7.4: Update TypeScript configuration
   - Files: Created docs/.copilot/.markdownlint.json
 
 ### [x] Phase 8: Archive and Cleanup
@@ -115,7 +115,7 @@ Decompose 8 documentation files into AI-optimized, code-free semantic files grou
 ## Dependencies
 
 - YAML schema support in VS Code
-- Biome linter configuration
+- Native language server configuration
 - Markdown validation tools
 
 ## Success Criteria

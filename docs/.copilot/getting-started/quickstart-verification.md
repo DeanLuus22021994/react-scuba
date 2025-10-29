@@ -103,10 +103,10 @@ Code suggestions appear while typing
 Chat functionality accessible
 No authentication errors
 
-### Biome Linter
+### Native Language Servers
 
-Biome extension loaded successfully
-Linting errors display inline
+TypeScript/JavaScript language servers loaded successfully
+Validation errors display inline
 Format on save working
 Configuration detected correctly
 

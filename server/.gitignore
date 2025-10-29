@@ -52,7 +52,7 @@ typings/
 
 # Rust toolchain caches
 .swc/
-.biome/
+# Using native VS Code language servers (no external linting directories)
 
 # Python cache
 __pycache__/

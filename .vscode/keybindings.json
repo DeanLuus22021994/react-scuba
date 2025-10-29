@@ -210,7 +210,7 @@
   },
 
   // ============================================================================
-  // Editor - Formatting & Code Actions (Biome Integration)
+  // Editor - Formatting & Code Actions (Native Language Server Integration)
   // ============================================================================
   {
     "key": "ctrl+shift+f",

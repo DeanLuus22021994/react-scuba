@@ -251,7 +251,7 @@ Integration Points:
 Development tool integration:
 
 **GitHub Copilot**: AI pair programming assistance
-**Biome**: Rust-based linting and formatting
+**Native Language Servers**: VS Code built-in TypeScript/JavaScript validation
 **Python Tools**: Pylance, Ruff for Python development
 **MCP Servers**: Configured for VS Code MCP protocol support
 

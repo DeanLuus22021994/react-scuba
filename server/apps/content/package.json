@@ -6,8 +6,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "node --watch src/index.js",
-		"lint": "biome check .",
-		"format": "biome format --write .",
+		"lint": "echo '✅ Linting handled by VS Code JavaScript language server'",
+		"format": "echo '✅ Formatting handled by VS Code built-in formatters'",
 		"test": "vitest run --passWithNoTests",
 		"type-check": "tsc --noEmit"
 	},

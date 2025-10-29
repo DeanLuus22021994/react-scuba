@@ -74,7 +74,7 @@
             },
             "linting": {
               "type": "string",
-              "enum": ["biome", "eslint", "rome"]
+              "enum": ["native-language-servers", "eslint", "rome"]
             },
             "testing": {
               "type": "object",

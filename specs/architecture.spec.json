@@ -28,7 +28,7 @@
   "packages": [
     {
       "name": "config",
-      "purpose": "Shared tooling configurations (Biome, TypeScript, etc.)",
+      "purpose": "Shared tooling configurations (Native Language Servers, TypeScript, etc.)",
       "shared": true
     },
     {

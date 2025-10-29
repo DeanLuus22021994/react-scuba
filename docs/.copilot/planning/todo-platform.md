@@ -21,7 +21,7 @@ last_updated: 2025-10-29
 **React Frontend**: 100% complete (see modernization achievements documentation)
 **Build System**: npm workspaces migration complete
 **TypeScript**: Migrated to pure JavaScript ES2020+
-**Linting**: Biome 2.3.1 operational
+**Linting**: Native language server validation operational
 **Testing**: 78/78 tests passing
 **Documentation**: Archived in docs/archive/modernization/
 

@@ -114,10 +114,9 @@
   "javascript.preferences.allowIncompleteCompletions": true,
   "javascript.preferences.allowRenameOfImportPath": true,
 
-  // === BIOME BLEEDING EDGE CONFIGURATION (FIXED) ===
-  "biome.enabled": true,
-  "biome.lspBin": "${workspaceFolder}/server/node_modules/@biomejs/biome/bin/biome",
-  "biome.rename": true,
+  // === NATIVE LANGUAGE SERVER CONFIGURATION ===
+  // Using built-in TypeScript and JavaScript language servers
+  // No external linting tools required
 
   // === GITHUB COPILOT BLEEDING EDGE FEATURES ===
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,

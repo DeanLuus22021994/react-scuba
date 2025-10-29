@@ -130,7 +130,7 @@ test_cases = [
 
 ### Evaluation Metrics
 
-1. **Code Quality**: Biome linting compliance, JavaScript best practices
+1. **Code Quality**: Native language server validation, JavaScript best practices
 2. **Architecture Compliance**: Follows npm workspaces monorepo patterns
 3. **Multi-Tenant Awareness**: Properly handles client isolation
 4. **Performance**: Bundle size impact, runtime performance
@@ -274,6 +274,7 @@ CMD ["python", "-m", "react_scuba_agents.server"]
 - **Permission Checking**: Verify agent has permission for requested operations
 - **Audit Logging**: Log all agent activities for security auditing
 - **Client Context**: Maintain proper client context throughout agent execution
+
 ## Output Policy for AI Agents
 
 **CRITICAL REQUIREMENT**: All AI agents and subagents MUST adhere to the following output policy:
@@ -286,6 +287,7 @@ CMD ["python", "-m", "react_scuba_agents.server"]
 - **Exception**: User explicitly requests summary/report/documentation generation
 
 This policy applies to:
+
 - Code generation agents
 - Testing agents
 - Documentation agents (generate docs, not summaries of generation)
@@ -308,4 +310,3 @@ This policy applies to:
 2. **MCP Server Failures**: Check server logs and restart services
 3. **Authentication Problems**: Verify API keys and permissions
 4. **Workspace Context**: Ensure proper workspace structure and configuration
-

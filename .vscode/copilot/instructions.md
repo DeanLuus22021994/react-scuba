@@ -18,7 +18,7 @@
 
 - **Frontend**: React 19, TypeScript 5.9.3, Tailwind CSS 4, React Router v7
 - **Backend**: Express.js 5, PostgreSQL 17, MariaDB 11
-- **Build Tools**: Vite 7, Biome 2.3.1 (linting)
+- **Build Tools**: Vite 7, Native VS Code Language Servers (validation)
 - **Testing**: Vitest 3.2.4, Playwright 1.56
 
 ## Multi-Tenant Architecture
@@ -62,10 +62,10 @@ server/clients/
 
 ### Formatting & Linting
 
-- **Biome-first approach** (replaces ESLint)
+- **Native VS Code approach** (using built-in language servers)
 - **Line length**: 100 characters
 - **Indentation**: 2 spaces (JS/TS), 4 spaces (Python)
-- **Auto-sort imports** with Biome
+- **Auto-sort imports** with VS Code TypeScript language server
 
 ## Development Workflows
 
@@ -86,7 +86,7 @@ npm run test:coverage           # Coverage reports
 npx playwright test             # E2E tests
 
 # Linting
-npm run lint:fix                # Fix with Biome
+npm run lint:fix                # Native language server validation
 npm run format                  # Format all files
 ```
 

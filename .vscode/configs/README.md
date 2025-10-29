@@ -39,12 +39,12 @@ This directory contains organized VS Code workspace configurations for the React
 
 ## Configuration Files
 
-### settings.client.json
+### settings.main.json
 
 - TypeScript server memory allocation (12GB)
 - File watching exclusions for build artifacts
 - NPM workspace integration
-- Biome linter path resolution
+- Native TypeScript language server configuration
 - Explorer file nesting patterns
 
 ### settings.client.json

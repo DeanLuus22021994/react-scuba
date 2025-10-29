@@ -14,9 +14,9 @@
     "ms-vscode.vscode-websearchforcopilot",  // Web search integration for Copilot
 
     // ========================================================================
-    // JavaScript/TypeScript - Rust-Based Tooling (Biome-First Strategy)
+    // JavaScript/TypeScript - Native VS Code Language Servers
     // ========================================================================
-    "biomejs.biome",                         // Primary linter & formatter (Rust-based, replaces ESLint/Prettier)
+    // Using built-in TypeScript/JavaScript language servers (no external linting)
     "ms-vscode.vscode-typescript-next",      // Latest TypeScript language features
     "christian-kohler.npm-intellisense",     // NPM module import IntelliSense
     "christian-kohler.path-intellisense",    // File path autocomplete
@@ -129,11 +129,11 @@
   // Unwanted Extensions (Conflicts with Current Stack)
   // ============================================================================
   "unwantedRecommendations": [
-    // JavaScript/TypeScript - Replaced by Biome
-    "dbaeumer.vscode-eslint",                // Replaced by Biome
-    "esbenp.prettier-vscode",                // Replaced by Biome
-    "rvest.vs-code-prettier-eslint",         // Replaced by Biome
-    "xabikos.JavaScriptSnippets",            // Conflicts with Biome formatting
+    // JavaScript/TypeScript - Using native VS Code language servers
+    "dbaeumer.vscode-eslint",                // Not needed - using native language servers
+    "esbenp.prettier-vscode",                // Not needed - using built-in formatting
+    "rvest.vs-code-prettier-eslint",         // Not needed - using native validation
+    "xabikos.JavaScriptSnippets",            // Using built-in TypeScript snippets
 
     // Testing - Duplicate Vitest extensions
     "ZixuanChen.vitest-explorer",            // Duplicate of vitest.explorer - REMOVED
@@ -150,11 +150,11 @@
     "Orta.vscode-jest",                      // Not using Jest (using Vitest)
     "firsttris.vscode-jest-runner",          // Not using Jest
 
-    // Formatters - Using Biome/Black
-    "HookyQR.beautify",                      // Replaced by Biome
-    "michelemelluso.code-beautifier",        // Replaced by Biome
+    // Formatters - Using Native VS Code/Black
+    "HookyQR.beautify",                      // Using built-in formatters
+    "michelemelluso.code-beautifier",        // Using built-in formatters
 
-    // Linters - Using Biome/Ruff
+    // Linters - Using Native Language Servers/Ruff
     "standard.vscode-standard",              // Not using StandardJS
     "wix.vscode-import-cost",                // Performance impact in monorepo
 

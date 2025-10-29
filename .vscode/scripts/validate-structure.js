@@ -20,7 +20,6 @@ const expectedStructure = {
         type: 'directory',
         required: true,
         children: {
-          required: true },
           'settings.client.json': { type: 'file', required: true },
           'README.md': { type: 'file', required: true }
         }
@@ -121,7 +120,7 @@ try {
     // Check for important configurations
     const importantConfigs = [
       'github.copilot.chat.codeGeneration.useInstructionFiles',
-      'biome.enabled',
+      'typescript.preferences.organizeImports',
       'typescript.tsserver.maxTsServerMemory'
     ];
 
@@ -137,7 +136,7 @@ try {
     // If JSONC parsing fails, check if it's valid JSONC by checking key properties
     try {
       const rawContent = readFileSync('.vscode/settings.json', 'utf8');
-      if (rawContent.includes('"github.copilot') && rawContent.includes('"typescript.') && rawContent.includes('"biome.')) {
+      if (rawContent.includes('"github.copilot') && rawContent.includes('"typescript.')) {
         console.log('✅ settings.json contains expected configurations (JSONC format)');
       } else {
         validationErrors.push(`❌ settings.json missing expected configurations`);

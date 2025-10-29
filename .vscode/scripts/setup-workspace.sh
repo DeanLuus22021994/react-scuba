@@ -157,7 +157,6 @@ cat > react-scuba.code-workspace << 'EOF'
   },
   "extensions": {
     "recommendations": [
-      "biomejs.biome",
       "ms-vscode.vscode-typescript-next",
       "bradlc.vscode-tailwindcss",
       "github.copilot",

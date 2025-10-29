@@ -117,9 +117,9 @@
                 "type": "object",
                 "description": "Critical dependencies for extension recommendations",
                 "properties": {
-                  "biome": {
+                  "nativeLanguageServers": {
                     "type": "boolean",
-                    "description": "Uses Biome for linting/formatting",
+                    "description": "Uses native VS Code language servers for validation",
                     "default": true
                   },
                   "vitest": {
@@ -164,7 +164,7 @@
                 "items": {
                   "type": "string"
                 },
-                "examples": [["tsconfig.base.json", "tsconfig.node.json", "biome.json"]]
+                "examples": [["tsconfig.base.json", "tsconfig.node.json", "vitest.config.js"]]
               },
               "consumers": {
                 "type": "array",
@@ -281,7 +281,7 @@
               "name": {
                 "type": "string",
                 "description": "Required filename",
-                "examples": ["package.json", "package.json", "tsconfig.json", "biome.json"]
+                "examples": ["package.json", "package.json", "tsconfig.json", "vitest.config.js"]
               },
               "purpose": {
                 "type": "string",
@@ -296,7 +296,7 @@
               },
               "validated_by": {
                 "type": "string",
-                "enum": ["vscode", "npm-workspaces", "npm", "biome", "custom"],
+                "enum": ["vscode", "npm-workspaces", "npm", "native-language-servers", "custom"],
                 "description": "Tool responsible for validation"
               }
             }
@@ -316,7 +316,7 @@
                 "file": {
                   "type": "string",
                   "description": "Config filename",
-                  "examples": ["tsconfig.json", "package.json", "biome.json"]
+                  "examples": ["tsconfig.json", "package.json", "vitest.config.js"]
                 },
                 "extends": {
                   "type": "string",
@@ -426,7 +426,7 @@
         },
         "linting": {
           "type": "object",
-          "description": "Linting/formatting tooling (Biome-first strategy)",
+          "description": "Linting/formatting tooling (Native language server strategy)",
           "required": ["primary", "formatters"],
           "properties": {
             "primary": {
@@ -436,18 +436,18 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "const": "biome",
-                  "description": "Biome linter (Rust-based)"
+                  "const": "native-language-servers",
+                  "description": "VS Code built-in TypeScript/JavaScript validation"
                 },
                 "config": {
                   "type": "string",
-                  "const": "biome.json",
-                  "description": "Biome configuration file"
+                  "const": "tsconfig.json",
+                  "description": "TypeScript configuration for language server"
                 },
                 "enabled": {
                   "type": "boolean",
                   "default": true,
-                  "description": "Whether Biome is enabled (settings.json biome.enabled)"
+                  "description": "Whether native language servers are enabled (VS Code built-in)"
                 }
               }
             },
@@ -457,17 +457,17 @@
               "properties": {
                 "javascript": {
                   "type": "string",
-                  "const": "biomejs.biome",
+                  "const": "vscode.typescript-language-features",
                   "description": "JavaScript formatter"
                 },
                 "typescript": {
                   "type": "string",
-                  "const": "biomejs.biome",
+                  "const": "vscode.typescript-language-features",
                   "description": "TypeScript formatter"
                 },
                 "json": {
                   "type": "string",
-                  "const": "biomejs.biome",
+                  "const": "vscode.json-language-features",
                   "description": "JSON formatter"
                 },
                 "yaml": {
@@ -749,7 +749,7 @@
           "description": "Human-readable monorepo description",
           "minLength": 10,
           "maxLength": 200,
-          "examples": ["React Scuba multi-tenant monorepo with npm workspaces orchestration, Biome linting, and Python 3.14t support"]
+          "examples": ["React Scuba multi-tenant monorepo with npm workspaces orchestration, native language server validation, and Python 3.14t support"]
         },
         "architecture": {
           "type": "string",
@@ -765,7 +765,7 @@
             "enum": [
               "multi-tenant",
               "npm-workspaces",
-              "biome-linting",
+              "native-validation",
               "vitest-testing",
               "typescript-strict",
               "python-3.14t",
@@ -775,7 +775,7 @@
             ]
           },
           "uniqueItems": true,
-          "examples": [["multi-tenant", "npm-workspaces", "biome-linting"]]
+          "examples": [["multi-tenant", "npm-workspaces", "native-validation"]]
         },
         "documentation": {
           "type": "array",
@@ -895,7 +895,7 @@
           {
             "name": "@react-scuba/config",
             "path": "packages/config",
-            "exports": ["tsconfig.base.json", "tsconfig.react.json", "biome.json"]
+            "exports": ["tsconfig.base.json", "tsconfig.react.json", "vitest.config.js"]
           },
           {
             "name": "@react-scuba/types",
@@ -948,14 +948,14 @@
         },
         "linting": {
           "primary": {
-            "name": "biome",
-            "config": "biome.json",
+            "name": "native-language-servers",
+            "config": "tsconfig.json",
             "enabled": true
           },
           "formatters": {
-            "javascript": "biomejs.biome",
-            "typescript": "biomejs.biome",
-            "json": "biomejs.biome",
+            "javascript": "vscode.typescript-language-features",
+            "typescript": "vscode.typescript-language-features",
+            "json": "vscode.json-language-features",
             "yaml": "redhat.vscode-yaml",
             "python": "ms-python.black-formatter"
           }
@@ -976,7 +976,7 @@
       "metadata": {
         "description": "React Scuba multi-tenant monorepo with npm workspaces orchestration",
         "architecture": "monorepo",
-        "features": ["multi-tenant", "npm-workspaces", "biome-linting"],
+        "features": ["multi-tenant", "npm-workspaces", "native-validation"],
         "documentation": [
           {
             "file": "README.md",

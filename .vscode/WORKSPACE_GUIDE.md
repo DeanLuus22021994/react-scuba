@@ -40,7 +40,7 @@ The React Scuba VS Code workspace has been restructured to provide better organi
 
 The organized structure **enhances** your existing comprehensive VS Code settings without replacement:
 
-- **Preserves all existing settings**: GitHub Copilot, Python, Docker, Biome, JavaScript configurations remain intact
+- **Preserves all existing settings**: GitHub Copilot, Python, Docker, JavaScript configurations remain intact
 - **Adds domain-specific optimizations**: npm workspaces performance enhancements
 - **Enables multi-tenant development**: Client-specific theming and validation support
 - **Maintains backwards compatibility**: All existing tools and extensions continue to work
@@ -189,7 +189,7 @@ Try these enhanced queries after applying the organized structure:
 
 All existing tools continue to work exactly as before:
 
-- ✅ **Biome linting**: Enhanced with monorepo path resolution
+- ✅ **Native language servers**: Enhanced with monorepo path resolution
 - ✅ **Python development**: All Python 3.14 settings preserved
 - ✅ **Docker integration**: MCP server configurations maintained
 - ✅ **TypeScript**: Enhanced memory allocation and project diagnostics

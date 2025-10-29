@@ -5,6 +5,18 @@ schema: './schemas/toc-schema.json'
 version: '1.0.0'
 last_updated: '2025-10-29'
 
+# Meta-Documentation - AI Agent Usage Guide
+ai_agent_guide:
+  name: AI-AGENT-GUIDE.md
+  title: AI Agent Guide - React Scuba Documentation System
+  description: Comprehensive guide for AI agents working with React Scuba documentation
+  ai_hints: [ai-agents, github-copilot, documentation-patterns, semantic-indexing, automation]
+  cross_references:
+    - architecture/multi-tenant-concepts.md
+    - infrastructure/development-workflow.md  
+    - modernization/react19-vite7.md
+    - getting-started/quick-start-setup.md
+
 domains:
   architecture:
     description: Multi-tenant and multi-industry architecture concepts

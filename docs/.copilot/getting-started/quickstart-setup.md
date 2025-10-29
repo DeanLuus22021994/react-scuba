@@ -111,7 +111,7 @@ Check monitoring stack accessibility
 ### VS Code Extensions
 
 Verify GitHub Copilot active and authenticated
-Biome linter loaded and functional
+Native language servers loaded and functional
 Python extensions recognize virtual environment
 Docker extension shows running containers
 

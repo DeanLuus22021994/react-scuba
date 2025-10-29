@@ -17,7 +17,7 @@
     },
     "tooling": {
       "monorepo": "npm-workspaces",
-      "linting": "biome",
+      "linting": "native-language-servers",
       "testing": {
         "unit": "vitest",
         "e2e": "playwright"

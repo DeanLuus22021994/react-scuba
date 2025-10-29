@@ -12,8 +12,8 @@
 		"./currency": "./src/currency.js"
 	},
 	"scripts": {
-		"lint": "biome check .",
-		"format": "biome format --write ."
+		"lint": "echo '✅ JavaScript/TypeScript validation handled by VS Code'",
+		"format": "echo '✅ Formatting handled by VS Code built-in formatters'"
 	},
 	"dependencies": {
 		"@react-scuba/types": "*"

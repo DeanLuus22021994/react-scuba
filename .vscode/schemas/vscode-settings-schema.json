@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/vscode-settings",
   "title": "VS Code Settings Schema - React Scuba Workspace (October 2025)",
-  "description": "Comprehensive schema for team VS Code settings aligned with tasks.json, launch.json, keybindings.json, and extensions.json configurations. Supports npm workspaces monorepo, Biome linting, Python 3.14t, UV package manager, Docker Compose, MCP servers, GitHub Copilot, and full-stack debugging workflows.",
+  "description": "Comprehensive schema for team VS Code settings aligned with tasks.json, launch.json, keybindings.json, and extensions.json configurations. Supports npm workspaces monorepo, native language server validation, Python 3.14t, UV package manager, Docker Compose, MCP servers, GitHub Copilot, and full-stack debugging workflows.",
   "type": "object",
   "properties": {
     "files.autoSave": {
@@ -33,7 +33,7 @@
     "editor.formatOnSave": {
       "type": "boolean",
       "default": true,
-      "description": "Format files on save using configured formatter (Biome for JS/TS, Black for Python)"
+      "description": "Format files on save using configured formatter (Native language servers for JS/TS, Black for Python)"
     },
     "editor.formatOnPaste": {
       "type": "boolean",
@@ -70,11 +70,11 @@
           "type": "string",
           "enum": ["explicit", "always", "never"]
         },
-        "source.organizeImports.biome": {
+        "source.organizeImports": {
           "type": "string",
           "enum": ["explicit", "always", "never"]
         },
-        "quickfix.biome": {
+        "quickfix": {
           "type": "string",
           "enum": ["explicit", "always", "never"]
         }
@@ -150,108 +150,96 @@
       "default": "allOpenProjects",
       "description": "Scope for TypeScript workspace symbol search (npm workspaces monorepo aware)"
     },
-    "biome.enabled": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable Biome linter and formatter (replaces ESLint and Prettier)"
-    },
-    "biome.lspBin": {
-      "type": "string",
-      "default": "node_modules/@biomejs/biome/bin/biome",
-      "description": "Path to Biome LSP binary (relative to workspace)"
-    },
-    "biome.searchInPath": {
-      "type": "boolean",
-      "default": true,
-      "description": "Search for Biome in PATH if not found in node_modules"
-    },
+
+
+
     "[javascript]": {
       "type": "object",
       "properties": {
         "editor.defaultFormatter": {
           "type": "string",
-          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
-          "default": "biomejs.biome"
+          "enum": ["vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "vscode.typescript-language-features"
         },
         "editor.tabSize": {"type": "integer", "default": 2},
         "editor.codeActionsOnSave": {"type": "object"}
       },
-      "description": "JavaScript-specific editor settings (Biome-first)"
+      "description": "JavaScript-specific editor settings (Native language server)"
     },
     "[javascriptreact]": {
       "type": "object",
       "properties": {
         "editor.defaultFormatter": {
           "type": "string",
-          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
-          "default": "biomejs.biome"
+          "enum": ["vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "vscode.typescript-language-features"
         },
         "editor.tabSize": {"type": "integer", "default": 2},
         "editor.codeActionsOnSave": {"type": "object"}
       },
-      "description": "React JSX-specific editor settings (Biome-first)"
+      "description": "React JSX-specific editor settings (Native language server)"
     },
     "[typescript]": {
       "type": "object",
       "properties": {
         "editor.defaultFormatter": {
           "type": "string",
-          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
-          "default": "biomejs.biome"
+          "enum": ["vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "vscode.typescript-language-features"
         },
         "editor.tabSize": {"type": "integer", "default": 2},
         "editor.codeActionsOnSave": {"type": "object"}
       },
-      "description": "TypeScript-specific editor settings (Biome-first)"
+      "description": "TypeScript-specific editor settings (Native language server)"
     },
     "[typescriptreact]": {
       "type": "object",
       "properties": {
         "editor.defaultFormatter": {
           "type": "string",
-          "enum": ["biomejs.biome", "vscode.typescript-language-features", "esbenp.prettier-vscode"],
-          "default": "biomejs.biome"
+          "enum": ["vscode.typescript-language-features", "esbenp.prettier-vscode"],
+          "default": "vscode.typescript-language-features"
         },
         "editor.tabSize": {"type": "integer", "default": 2},
         "editor.codeActionsOnSave": {"type": "object"}
       },
-      "description": "React TSX-specific editor settings (Biome-first)"
+      "description": "React TSX-specific editor settings (Native language server)"
     },
     "[json]": {
       "type": "object",
       "properties": {
         "editor.defaultFormatter": {
           "type": "string",
-          "enum": ["biomejs.biome", "vscode.json-language-features", "esbenp.prettier-vscode"],
-          "default": "biomejs.biome"
+          "enum": ["vscode.json-language-features", "esbenp.prettier-vscode"],
+          "default": "vscode.json-language-features"
         },
         "editor.tabSize": {"type": "integer", "default": 2}
       },
-      "description": "JSON-specific editor settings (Biome-first)"
+      "description": "JSON-specific editor settings (Native language server)"
     },
     "[jsonc]": {
       "type": "object",
       "properties": {
         "editor.defaultFormatter": {
           "type": "string",
-          "enum": ["biomejs.biome", "vscode.json-language-features", "esbenp.prettier-vscode"],
-          "default": "biomejs.biome"
+          "enum": ["vscode.json-language-features", "esbenp.prettier-vscode"],
+          "default": "vscode.json-language-features"
         },
         "editor.tabSize": {"type": "integer", "default": 2}
       },
-      "description": "JSON with Comments-specific editor settings (Biome-first)"
+      "description": "JSON with Comments-specific editor settings (Native language server)"
     },
     "[css]": {
       "type": "object",
       "properties": {
         "editor.defaultFormatter": {
           "type": "string",
-          "enum": ["biomejs.biome", "vscode.css-language-features", "stylelint.vscode-stylelint"],
-          "default": "biomejs.biome"
+          "enum": ["vscode.css-language-features", "stylelint.vscode-stylelint"],
+          "default": "vscode.css-language-features"
         },
         "editor.tabSize": {"type": "integer", "default": 2}
       },
-      "description": "CSS-specific editor settings (Biome-first with Tailwind support)"
+      "description": "CSS-specific editor settings (Native language server with Tailwind support)"
     },
     "[markdown]": {
       "type": "object",
@@ -350,15 +338,14 @@
     "files.associations": {
       "type": "object",
       "additionalProperties": {"type": "string"},
-      "description": "File associations for language modes (Biome, Docker, MkDocs)",
+      "description": "File associations for language modes (Native language servers, Docker, MkDocs)",
       "default": {
         ".husky/*": "shellscript",
         "docker-compose*.yml": "yaml",
         "*.Dockerfile": "dockerfile",
         "package.json": "jsonc",
         "**/package.json": "jsonc",
-        "biome.json": "jsonc",
-        "**/biome.json": "jsonc",
+        "**/vitest.config.js": "javascript",
         "**/tsconfig*.json": "jsonc"
       }
     },
