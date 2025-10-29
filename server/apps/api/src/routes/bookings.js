@@ -1,265 +1,133 @@
 import express from 'express';
-import { body, query, validationResult } from 'express-validator';
-import pool from '../db/connection.js';
+import { BookingService } from '../services/booking.js';
+import {
+  bookingValidationRules,
+  bookingStatusValidationRules,
+  bookingQueryValidationRules,
+  handleValidationErrors,
+} from '../services/validation.js';
+import logger from '../utils/logger.js';
 
 const router = express.Router();
-
-// Validation middleware
-const validateBooking = [
-  body('name').trim().isLength({ min: 2, max: 255 }).escape(),
-  body('email').isEmail().normalizeEmail(),
-  body('phone').trim().isLength({ min: 8, max: 50 }),
-  body('preferredDate').isISO8601().toDate(),
-  body('participants').isInt({ min: 1, max: 20 }),
-  body('bookingType').isIn(['dive', 'course', 'discover', 'advanced']),
-  body('courseId').optional().trim(),
-  body('diveSiteId').optional().trim(),
-  body('specialRequests').optional().trim().isLength({ max: 2000 }),
-];
-
-const handleValidationErrors = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  next();
-};
 
 // GET all bookings (admin endpoint - add auth later)
 router.get(
   '/',
-  query('status').optional().isIn(['pending', 'confirmed', 'cancelled']),
-  async (req, res) => {
+  bookingQueryValidationRules,
+  handleValidationErrors,
+  async (req, res, next) => {
     try {
-      const { status, limit = 50, offset = 0 } = req.query;
-      let queryStr = 'SELECT * FROM bookings';
-      const params = [];
+      const filters = {
+        status: req.query.status,
+        limit: req.query.limit,
+        offset: req.query.offset,
+      };
 
-      if (status) {
-        queryStr += ' WHERE status = ?';
-        params.push(status);
+      logger.info('Fetching bookings', { filters, ip: req.ip });
+      const result = await BookingService.getAllBookings(filters);
+
+      if (result.success) {
+        res.json(result.data);
+      } else {
+        res.status(result.error.status || 500).json({ error: result.error });
       }
-
-      queryStr += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-      params.push(Number.parseInt(limit, 10), Number.parseInt(offset, 10));
-
-      const [bookings] = await pool.query(queryStr, params);
-      res.json({ bookings, count: bookings.length });
     } catch (error) {
-      console.error('Error fetching bookings:', error);
-      res.status(500).json({ error: 'Failed to fetch bookings' });
+      logger.error('Error in GET /bookings route', error);
+      next(error);
     }
   }
 );
 
 // GET single booking by ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    const [bookings] = await pool.query('SELECT * FROM bookings WHERE id = ?', [req.params.id]);
+    const bookingId = req.params.id;
+    logger.info('Fetching single booking', { bookingId, ip: req.ip });
 
-    if (bookings.length === 0) {
-      return res.status(404).json({ error: 'Booking not found' });
+    const result = await BookingService.getBookingById(bookingId);
+
+    if (result.success) {
+      res.json(result.data);
+    } else {
+      res.status(result.error.status || 500).json({ error: result.error });
     }
-
-    res.json({ booking: bookings[0] });
   } catch (error) {
-    console.error('Error fetching booking:', error);
-    res.status(500).json({ error: 'Failed to fetch booking' });
+    logger.error('Error in GET /bookings/:id route', { bookingId: req.params.id, error });
+    next(error);
   }
 });
 
 // POST create new booking
-router.post('/', validateBooking, handleValidationErrors, async (req, res) => {
-  const connection = await pool.getConnection();
-
-  try {
-    await connection.beginTransaction();
-
-    const {
-      name,
-      email,
-      phone,
-      preferredDate,
-      participants,
-      bookingType,
-      courseId,
-      diveSiteId,
-      specialRequests,
-    } = req.body;
-
-    // Check availability
-    const [dateStr] = new Date(preferredDate).toISOString().split('T');
-    const [availability] = await connection.query(
-      'SELECT * FROM availability WHERE date = ? FOR UPDATE',
-      [dateStr]
-    );
-
-    if (availability.length === 0) {
-      await connection.rollback();
-      return res.status(400).json({ error: 'Date not available for booking' });
-    }
-
-    const [avail] = availability;
-    if (avail.available_slots < participants) {
-      await connection.rollback();
-      return res.status(400).json({
-        error: 'Not enough slots available',
-        available: avail.available_slots,
-        requested: participants,
+router.post(
+  '/',
+  bookingValidationRules,
+  handleValidationErrors,
+  async (req, res, next) => {
+    try {
+      logger.info('Creating new booking', {
+        email: req.body.email,
+        bookingType: req.body.bookingType,
+        participants: req.body.participants,
+        ip: req.ip
       });
+
+      const result = await BookingService.createBooking(req.body);
+
+      if (result.success) {
+        res.status(201).json(result.data);
+      } else {
+        res.status(result.error.status || 400).json({ error: result.error });
+      }
+    } catch (error) {
+      logger.error('Error in POST /bookings route', { bookingData: req.body, error });
+      next(error);
     }
-
-    // Create booking
-    const [result] = await connection.query(
-      `INSERT INTO bookings (name, email, phone, preferred_date, participants, booking_type, 
-       course_id, dive_site_id, special_requests, status) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')`,
-      [
-        name,
-        email,
-        phone,
-        dateStr,
-        participants,
-        bookingType,
-        courseId || null,
-        diveSiteId || null,
-        specialRequests,
-      ]
-    );
-
-    const bookingId = result.insertId;
-
-    // Update availability
-    await connection.query(
-      'UPDATE availability SET booked_slots = booked_slots + ? WHERE date = ?',
-      [participants, dateStr]
-    );
-
-    // Log history
-    await connection.query(
-      'INSERT INTO booking_history (booking_id, action, new_status, notes) VALUES (?, ?, ?, ?)',
-      [bookingId, 'created', 'pending', 'Booking created via API']
-    );
-
-    await connection.commit();
-
-    res.status(201).json({
-      message: 'Booking created successfully',
-      bookingId,
-      availableSlots: avail.available_slots - participants,
-    });
-  } catch (error) {
-    await connection.rollback();
-    console.error('Error creating booking:', error);
-    res.status(500).json({ error: 'Failed to create booking' });
-  } finally {
-    connection.release();
   }
-});
-
-// PATCH update booking status
+);// PATCH update booking status
 router.patch(
   '/:id/status',
-  body('status').isIn(['pending', 'confirmed', 'cancelled']),
+  bookingStatusValidationRules,
   handleValidationErrors,
-  async (req, res) => {
-    const connection = await pool.getConnection();
-
+  async (req, res, next) => {
     try {
-      await connection.beginTransaction();
-
-      const { status } = req.body;
       const bookingId = req.params.id;
+      const { status } = req.body;
 
-      // Get current booking
-      const [bookings] = await connection.query('SELECT * FROM bookings WHERE id = ? FOR UPDATE', [
-        bookingId,
-      ]);
+      logger.info('Updating booking status', { bookingId, status, ip: req.ip });
+      const result = await BookingService.updateBookingStatus(bookingId, status);
 
-      if (bookings.length === 0) {
-        await connection.rollback();
-        return res.status(404).json({ error: 'Booking not found' });
+      if (result.success) {
+        res.json(result.data);
+      } else {
+        res.status(result.error.status || 500).json({ error: result.error });
       }
-
-      const [booking] = bookings;
-      const oldStatus = booking.status;
-
-      // Update booking status
-      await connection.query('UPDATE bookings SET status = ? WHERE id = ?', [status, bookingId]);
-
-      // If cancelling, free up slots
-      if (status === 'cancelled' && oldStatus !== 'cancelled') {
-        await connection.query(
-          'UPDATE availability SET booked_slots = booked_slots - ? WHERE date = ?',
-          [booking.participants, booking.preferred_date]
-        );
-      }
-
-      // Log history
-      await connection.query(
-        'INSERT INTO booking_history (booking_id, action, old_status, new_status) VALUES (?, ?, ?, ?)',
-        [bookingId, 'status_changed', oldStatus, status]
-      );
-
-      await connection.commit();
-
-      res.json({
-        message: 'Booking status updated successfully',
-        bookingId,
-        oldStatus,
-        newStatus: status,
-      });
     } catch (error) {
-      await connection.rollback();
-      console.error('Error updating booking status:', error);
-      res.status(500).json({ error: 'Failed to update booking status' });
-    } finally {
-      connection.release();
+      logger.error('Error in PATCH /bookings/:id/status route', {
+        bookingId: req.params.id,
+        status: req.body.status,
+        error
+      });
+      next(error);
     }
   }
 );
 
 // DELETE booking
-router.delete('/:id', async (req, res) => {
-  const connection = await pool.getConnection();
-
+router.delete('/:id', async (req, res, next) => {
   try {
-    await connection.beginTransaction();
-
     const bookingId = req.params.id;
 
-    // Get booking info
-    const [bookings] = await connection.query('SELECT * FROM bookings WHERE id = ? FOR UPDATE', [
-      bookingId,
-    ]);
+    logger.info('Deleting booking', { bookingId, ip: req.ip });
+    const result = await BookingService.deleteBooking(bookingId);
 
-    if (bookings.length === 0) {
-      await connection.rollback();
-      return res.status(404).json({ error: 'Booking not found' });
+    if (result.success) {
+      res.json(result.data);
+    } else {
+      res.status(result.error.status || 500).json({ error: result.error });
     }
-
-    const [booking] = bookings;
-
-    // Free up slots if booking wasn't already cancelled
-    if (booking.status !== 'cancelled') {
-      await connection.query(
-        'UPDATE availability SET booked_slots = booked_slots - ? WHERE date = ?',
-        [booking.participants, booking.preferred_date]
-      );
-    }
-
-    // Delete booking (cascades to history)
-    await connection.query('DELETE FROM bookings WHERE id = ?', [bookingId]);
-
-    await connection.commit();
-
-    res.json({ message: 'Booking deleted successfully', bookingId });
   } catch (error) {
-    await connection.rollback();
-    console.error('Error deleting booking:', error);
-    res.status(500).json({ error: 'Failed to delete booking' });
-  } finally {
-    connection.release();
+    logger.error('Error in DELETE /bookings/:id route', { bookingId: req.params.id, error });
+    next(error);
   }
 });
 

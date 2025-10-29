@@ -1,12 +1,13 @@
-// import compression from 'compression'; // Temporarily disabled - package not installed
+import compression from 'compression';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
-// import rateLimit from 'express-rate-limit'; // Temporarily disabled - package not installed
-// import helmet from 'helmet'; // Temporarily disabled for debugging
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
 import availabilityRoutes from './routes/availability.js';
 import bookingRoutes from './routes/bookings.js';
 import contactRoutes from './routes/contacts.js';
+import logger from './utils/logger.js';
 
 dotenv.config();
 
@@ -14,14 +15,45 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Security middleware
-// app.use(helmet()); // Temporarily disabled for debugging
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://www.googletagmanager.com"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        imgSrc: ["'self'", "data:", "https:"],
+        connectSrc: ["'self'", "https://www.google-analytics.com"]
+      }
+    },
+    crossOriginEmbedderPolicy: false
+  })
+);
 app.use(compression());
 
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
-  message: 'Too many requests from this IP, please try again later.',
+  message: {
+    error: {
+      message: 'Too many requests from this IP, please try again later.',
+      status: 429,
+      retryAfter: 900 // 15 minutes in seconds
+    }
+  },
+  standardHeaders: true, // Return rate limit info in headers
+  legacyHeaders: false, // Disable X-RateLimit-* headers
+  handler: (req, res) => {
+    res.status(429).json({
+      error: {
+        message: 'Too many requests from this IP, please try again later.',
+        status: 429,
+        retryAfter: Math.ceil(req.rateLimit.resetTime / 1000)
+      }
+    });
+  }
 });
 app.use('/api/', limiter);
 
@@ -42,7 +74,7 @@ app.get('/health', (req, res, next) => {
   try {
     res.json({ status: 'healthy', timestamp: new Date().toISOString() });
   } catch (error) {
-    console.error('Health check error:', error);
+    logger.error('Health check failed', error);
     next(error);
   }
 });
@@ -54,11 +86,21 @@ app.use('/api/availability', availabilityRoutes);
 
 // Error handling middleware
 app.use((err, req, res, _next) => {
-  console.error('Error:', err);
+  logger.error('API Error', {
+    error: err,
+    method: req.method,
+    url: req.url,
+    ip: req.ip,
+    userAgent: req.get('User-Agent')
+  });
+
+  // Don't leak error details in production
+  const isDevelopment = process.env.NODE_ENV !== 'production';
   res.status(err.status || 500).json({
     error: {
       message: err.message || 'Internal server error',
       status: err.status || 500,
+      ...(isDevelopment && { stack: err.stack })
     },
   });
 });
@@ -74,17 +116,21 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.error(`Server running on port ${PORT}`);
+  logger.info('Server started', { port: PORT, environment: process.env.NODE_ENV });
 });
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  logger.error('Unhandled Promise Rejection', {
+    reason,
+    promise: promise.toString(),
+    location: 'process.unhandledRejection'
+  });
 });
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
+  logger.error('Uncaught Exception - Server will exit', error);
   process.exit(1);
 });
 
