@@ -10,7 +10,7 @@ services:
   python-mcp-sidecar:
     build:
       context: ./docker-compose-examples/mcp/python_utils
-      dockerfile: ../../../.devcontainer/containers/dockerfile.mcp.python
+      dockerfile: ../../../.devcontainer/infrastructure/mcp-servers/python/dockerfile
       args:
         PYTHON_VERSION: "3.14t"
         UV_VERSION: "latest"
