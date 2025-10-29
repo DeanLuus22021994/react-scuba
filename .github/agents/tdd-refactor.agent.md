@@ -64,6 +64,8 @@ Clean up code, apply security best practices, and enhance design whilst keeping 
 
 ## Execution Guidelines
 
+**OUTPUT POLICY**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested by the user. Provide only enterprise-focused explicit output for completed refactoring tasks.
+
 1. **Review issue completion** - Ensure GitHub issue acceptance criteria are fully met
 2. **Ensure green tests** - All tests must pass before refactoring
 3. **Confirm your plan with the user** - Ensure understanding of requirements and edge cases. NEVER start making changes without user confirmation

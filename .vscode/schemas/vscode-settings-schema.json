@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/vscode-settings",
   "title": "VS Code Settings Schema - React Scuba Workspace (October 2025)",
-  "description": "Comprehensive schema for team VS Code settings aligned with tasks.json, launch.json, keybindings.json, and extensions.json configurations. Supports Turbo monorepo, Biome linting, Python 3.14t, UV package manager, Docker Compose, MCP servers, GitHub Copilot, and full-stack debugging workflows.",
+  "description": "Comprehensive schema for team VS Code settings aligned with tasks.json, launch.json, keybindings.json, and extensions.json configurations. Supports npm workspaces monorepo, Biome linting, Python 3.14t, UV package manager, Docker Compose, MCP servers, GitHub Copilot, and full-stack debugging workflows.",
   "type": "object",
   "properties": {
     "files.autoSave": {
@@ -86,7 +86,7 @@
       "minimum": 2048,
       "maximum": 16384,
       "default": 8192,
-      "description": "Maximum memory allocation for TypeScript language server (MB) - increased for Turbo monorepo"
+      "description": "Maximum memory allocation for TypeScript language server (MB) - increased for npm workspaces monorepo"
     },
     "typescript.tsserver.experimental.enableProjectDiagnostics": {
       "type": "boolean",
@@ -109,7 +109,7 @@
       "type": "string",
       "enum": ["shortest", "relative", "non-relative", "project-relative"],
       "default": "relative",
-      "description": "Preferred style for auto-import paths in Turbo monorepo"
+      "description": "Preferred style for auto-import paths in npm workspaces monorepo"
     },
     "typescript.preferences.jsxAttributeCompletionStyle": {
       "type": "string",
@@ -148,7 +148,7 @@
       "type": "string",
       "enum": ["allOpenProjects", "currentProject"],
       "default": "allOpenProjects",
-      "description": "Scope for TypeScript workspace symbol search (Turbo monorepo aware)"
+      "description": "Scope for TypeScript workspace symbol search (npm workspaces monorepo aware)"
     },
     "biome.enabled": {
       "type": "boolean",
@@ -299,14 +299,14 @@
     "files.watcherExclude": {
       "type": "object",
       "additionalProperties": {"type": "boolean"},
-      "description": "Files excluded from file system watcher (performance optimization for Turbo monorepo)",
+      "description": "Files excluded from file system watcher (performance optimization for npm workspaces monorepo)",
       "default": {
         "**/node_modules/**": true,
         "**/dist/**": true,
         "**/.git/**": true,
         "**/build/**": true,
         "**/coverage/**": true,
-        "**/.turbo/**": true,
+        "**/.npm-cache/**": true,
         "**/out/**": true,
         "**/.next/**": true,
         "**/.vite/**": true
@@ -321,7 +321,7 @@
         "**/.ruff_cache": true,
         "**/htmlcov": true,
         "**/.coverage": true,
-        "**/.turbo": true,
+        "**/.npm-cache": true,
         "**/.vite": true,
         "**/.next": true
       }
@@ -329,7 +329,7 @@
     "search.exclude": {
       "type": "object",
       "additionalProperties": {"type": "boolean"},
-      "description": "Files excluded from search operations (Turbo monorepo performance)",
+      "description": "Files excluded from search operations (npm workspaces monorepo performance)",
       "default": {
         "**/.pytest_cache": true,
         "**/.mypy_cache": true,
@@ -341,7 +341,7 @@
         "**/build": true,
         "**/coverage": true,
         "**/package-lock.json": true,
-        "**/.turbo": true,
+        "**/.npm-cache": true,
         "**/.next": true,
         "**/.vite": true,
         "**/out": true
@@ -350,13 +350,13 @@
     "files.associations": {
       "type": "object",
       "additionalProperties": {"type": "string"},
-      "description": "File associations for language modes (Turbo, Biome, Docker, MkDocs)",
+      "description": "File associations for language modes (Biome, Docker, MkDocs)",
       "default": {
         ".husky/*": "shellscript",
         "docker-compose*.yml": "yaml",
         "*.Dockerfile": "dockerfile",
-        "turbo.json": "jsonc",
-        "**/turbo.json": "jsonc",
+        "package.json": "jsonc",
+        "**/package.json": "jsonc",
         "biome.json": "jsonc",
         "**/biome.json": "jsonc",
         "**/tsconfig*.json": "jsonc"
@@ -382,7 +382,7 @@
       "type": "string",
       "enum": ["auto", "npm", "yarn", "pnpm", "bun"],
       "default": "npm",
-      "description": "Package manager for the workspace (npm with Turbo orchestration)"
+      "description": "Package manager for the workspace (npm workspaces)"
     },
     "npm.autoDetect": {
       "type": "string",
@@ -1032,3 +1032,5 @@
     }
   }
 }
+
+

@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/vitepress-docs",
   "title": "React Scuba Documentation Schema - VitePress (October 2025)",
-  "description": "Comprehensive schema for VitePress documentation configuration aligned with Turbo monorepo, multi-tenant architecture, tasks.json, settings.json, launch.json, keybindings.json, and extensions.json. Validates documentation structure, navigation, plugins, and content organization for the React Scuba platform.",
+  "description": "Comprehensive schema for VitePress documentation configuration aligned with npm workspaces monorepo, multi-tenant architecture, tasks.json, settings.json, launch.json, keybindings.json, and extensions.json. Validates documentation structure, navigation, plugins, and content organization for the React Scuba platform.",
   "type": "object",
   "required": ["site", "docs", "structure", "metadata"],
   "properties": {
@@ -23,7 +23,7 @@
           "description": "Site meta description for SEO",
           "minLength": 50,
           "maxLength": 160,
-          "examples": ["Comprehensive documentation for React Scuba multi-tenant diving center platform with Turbo monorepo and Biome tooling"]
+          "examples": ["Comprehensive documentation for React Scuba multi-tenant diving center platform with npm workspaces monorepo and Biome tooling"]
         },
         "base": {
           "type": "string",
@@ -783,7 +783,7 @@
             },
             "monorepo_alignment": {
               "type": "object",
-              "description": "Alignment with Turbo monorepo structure",
+              "description": "Alignment with npm workspaces monorepo structure",
               "properties": {
                 "workspace": {
                   "type": "string",

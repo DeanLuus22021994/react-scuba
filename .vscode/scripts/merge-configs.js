@@ -36,7 +36,7 @@ if (existsSync('.vscode/settings.json')) {
 console.log('📖 Reading domain-specific configurations...');
 
 // Read domain-specific configurations (pure JSON)
-const turboSettings = JSON.parse(readFileSync(join(configDir, 'settings.client.json'), 'utf8'));
+const clientSettings2 = JSON.parse(readFileSync(join(configDir, 'settings.client.json'), 'utf8'));
 console.log('✅ Client settings loaded');
 
 const clientSettings = JSON.parse(readFileSync(join(configDir, 'settings.client.json'), 'utf8'));
@@ -49,8 +49,8 @@ console.log('🔄 Merging configurations additively...');
 const mergedSettings = {
   // Start with existing comprehensive settings (preserves all original functionality)
   ...existingSettings,
-  // Add Turbo optimizations (may override some TypeScript settings for better performance)
-  ...turboSettings,
+  // Add npm workspace optimizations (may override some TypeScript settings for better performance)
+  ...clientSettings2,
   // Add client-specific settings (adds multi-tenant support)
   ...clientSettings
 };
@@ -68,7 +68,7 @@ console.log('✅ Additive configuration merge completed');
 console.log('');
 console.log('📊 Additive Merge Summary:');
 console.log(`   • Existing settings: ${Object.keys(existingSettings).length} properties`);
-console.log(`   • Optimizations: ${Object.keys(turboSettings).length} properties`);
+console.log(`   • Optimizations: ${Object.keys(clientSettings2).length} properties`);
 console.log(`   • Client enhancements: ${Object.keys(clientSettings).length} properties`);
 console.log(`   • Total final settings: ${Object.keys(mergedSettings).length} properties`);
 
@@ -102,4 +102,7 @@ console.log('3. Verify all extensions and tools still work as expected');
 console.log('4. Use backup to restore if any issues occur');
 console.log('');
 console.log('🎯 Your comprehensive VS Code setup is now enhanced with organized structure!');
+
+
+
 

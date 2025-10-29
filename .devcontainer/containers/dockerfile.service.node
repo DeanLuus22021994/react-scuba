@@ -1,10 +1,10 @@
-# Node.js Development Container - Pre-commit & Turborepo Build Environment
-# Purpose: Unified container for git hooks, linting, formatting, and Turborepo builds
+# Node.js Development Container - Pre-commit & Build Environment
+# Purpose: Unified container for git hooks, linting, formatting, and npm workspace builds
 # Strategy: Clone workspace at runtime, leverage named volumes for instant rebuilds
 #
 # FEATURES:
 # - Pre-commit hooks (husky) with persistent cache
-# - Turborepo builds with shared .turbo cache
+# - npm workspace builds with efficient caching
 # - Named volumes for zero repository pollution
 # - Fast rebuilds with layered caching
 
@@ -105,28 +105,26 @@ EOF
 RUN chmod +x /usr/local/bin/setup-hooks.sh
 
 # ==============================================================================
-# Stage: Turborepo Build Runner
+# Stage: npm Workspace Build Runner
 # ==============================================================================
-FROM git-hooks AS turbo-build
+FROM git-hooks AS workspace-build
 
-# Build script that leverages Turbo cache
-COPY <<EOF /usr/local/bin/turbo-build.sh
+# Build script that leverages npm workspace caching
+COPY <<EOF /usr/local/bin/workspace-build.sh
 #!/bin/sh
 set -e
 
 cd /workspace
 
-echo \"🏗️  Building with Turborepo...\"
+echo "🏗️  Building with npm workspaces..."
 
-# Run Turborepo build with cache
+# Run npm workspace build
 npm run build
 
-echo \"✅ Turborepo build complete\"
-echo \"📊 Cache stats:\"
-ls -lh .turbo/cache 2>/dev/null || echo \"No cache yet\"
+echo "✅ Workspace build complete"
 EOF
 
-RUN chmod +x /usr/local/bin/turbo-build.sh
+RUN chmod +x /usr/local/bin/workspace-build.sh
 
 # ==============================================================================
 # Stage: Development Runtime
@@ -148,11 +146,11 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 
 # Labels for container metadata
 LABEL purpose="node-development" \
-  features="pre-commit,turborepo,git-hooks" \
+  features="pre-commit,npm-workspaces,git-hooks" \
   caching="named-volumes" \
   node.version="22" \
   package.manager="npm" \
   workspace="/workspace" \
-  volumes="node_modules,npm,turbo,git-hooks,husky" \
+  volumes="node_modules,npm,git-hooks,husky" \
   maintainer="Dean Luus" \
-  description="Node.js development container with pre-commit hooks and Turborepo support"
+  description="Node.js development container with pre-commit hooks and npm workspaces support"

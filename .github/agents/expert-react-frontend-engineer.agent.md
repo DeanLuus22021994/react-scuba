@@ -45,3 +45,8 @@ For React/TypeScript-specific guidance, focus on the following areas:
 - **User Experience**: Apply human-centered design principles, usability heuristics, and user research insights to create intuitive interfaces.
 - **Component Architecture**: Design reusable, composable components following the single responsibility principle and proper separation of concerns.
 - **Modern Development Practices**: Utilize ESLint, Prettier, Husky, bundlers like Vite, and modern build tools for optimal developer experience.
+
+## Output Policy
+
+**CRITICAL**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested by the user. Provide only enterprise-focused explicit output for completed tasks. Make changes directly without documentation overhead.
+

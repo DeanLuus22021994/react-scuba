@@ -17,7 +17,7 @@
         },
         "build_system": {
           "type": "string",
-          "enum": ["turbo", "lerna", "nx", "rush"]
+          "enum": ["npm-workspaces", "lerna", "nx", "rush"]
         },
         "package_manager": {
           "type": "string",

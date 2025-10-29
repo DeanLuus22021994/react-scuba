@@ -109,7 +109,7 @@ react_scuba_utils_node_modules      # Utilities
 
 **Container-Local** (no persistence):
 
-- `.turbo` cache (clean builds per container lifecycle)
+- Build artifacts cleaned per container lifecycle
 
 ---
 

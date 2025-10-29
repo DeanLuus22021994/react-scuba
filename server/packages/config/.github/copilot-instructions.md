@@ -23,3 +23,8 @@ Other workspaces extend these configs:
 - **Indentation**: 2 spaces
 - **Quotes**: Single quotes (JS/TS)
 - **TypeScript strict mode**: Enabled
+
+
+## Copilot Output Guidelines
+
+**IMPORTANT**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested. Provide only enterprise-focused explicit output for tasks. Make changes directly without documentation overhead.

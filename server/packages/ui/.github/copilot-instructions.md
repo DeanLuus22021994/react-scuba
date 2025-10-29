@@ -22,3 +22,8 @@ import { Button, Card } from '@react-scuba/ui';
 ## Styling
 - Uses **Tailwind CSS 4** utility classes
 - Theme variables from `@react-scuba/content`
+
+
+## Copilot Output Guidelines
+
+**IMPORTANT**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested. Provide only enterprise-focused explicit output for tasks. Make changes directly without documentation overhead.

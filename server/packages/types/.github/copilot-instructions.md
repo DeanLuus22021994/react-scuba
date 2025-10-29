@@ -14,3 +14,8 @@ This package contains **shared TypeScript type definitions** used across the mon
 ```typescript
 import type { ClientConfig, BookingData } from '@react-scuba/types';
 ```
+
+
+## Copilot Output Guidelines
+
+**IMPORTANT**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested. Provide only enterprise-focused explicit output for tasks. Make changes directly without documentation overhead.

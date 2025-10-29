@@ -74,12 +74,12 @@ Use this agent when:
 - Error messages if issues arise
 - Success criteria validation results
 
+**CRITICAL OUTPUT POLICY**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested by the user. Provide only enterprise-focused explicit output for completed tasks. Make changes directly without documentation overhead.
+
 **At Completion:**
 
-- Markdown-formatted summary from changes file
-- List of all files created/modified with links
-- Markdown links to planning documents (plan, details, research)
-- Recommendation to clean up planning files
+- Brief completion status (e.g., "Implementation complete: 5 files modified")
+- List of critical files changed (paths only, no summaries)
 - Automatic deletion of the prompt file
 
 ## Tools Called
@@ -127,6 +127,14 @@ Use this agent when:
 4. External dependencies are unavailable
 5. Success criteria cannot be met with current approach
 6. User requested phase/task review (`phaseStop` or `taskStop` variables)
+
+**Subagent Usage:**
+
+When implementing complex tasks that require specialized expertise or multi-step research:
+- Use `runSubagent` for focused research tasks (e.g., API exploration, architecture investigation)
+- Delegate to subagents when task requires deep investigation beyond current scope
+- Ensure subagent output adheres to output policy (no summary documents unless explicitly requested)
+- Integrate subagent findings directly into implementation without creating intermediate documentation
 
 ## Integration with Project Standards
 

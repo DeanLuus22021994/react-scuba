@@ -163,3 +163,7 @@ npx playwright test       # E2E tests
 - **Build fails**: Check TypeScript errors with `npm run type-check`
 - **Slow dev server**: Clear cache with `rm -rf node_modules/.vite`
 - **Module not found**: Verify path aliases in `tsconfig.json` and `vite.config.js`
+
+## Copilot Output Guidelines
+
+**IMPORTANT**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested. Provide only enterprise-focused explicit output for tasks. Make changes directly without documentation overhead.

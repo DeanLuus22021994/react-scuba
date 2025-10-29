@@ -78,3 +78,8 @@ npm run test:coverage     # Coverage report
 npm start                 # Start API server
 npm run dev               # Development mode (nodemon)
 ```
+
+
+## Copilot Output Guidelines
+
+**IMPORTANT**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested. Provide only enterprise-focused explicit output for tasks. Make changes directly without documentation overhead.

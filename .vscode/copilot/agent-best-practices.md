@@ -274,6 +274,24 @@ CMD ["python", "-m", "react_scuba_agents.server"]
 - **Permission Checking**: Verify agent has permission for requested operations
 - **Audit Logging**: Log all agent activities for security auditing
 - **Client Context**: Maintain proper client context throughout agent execution
+## Output Policy for AI Agents
+
+**CRITICAL REQUIREMENT**: All AI agents and subagents MUST adhere to the following output policy:
+
+- **No Summary Documents**: Do NOT generate summary.md, changelog.md, or report files unless explicitly requested
+- **Enterprise Focus**: Provide only enterprise-focused explicit output for completed tasks
+- **Direct Implementation**: Make code changes directly without intermediate documentation
+- **Factual Output Only**: Return concrete findings (code examples, API signatures, configurations) not narrative summaries
+- **Subagent Compliance**: When delegating to subagents via runSubagent, instruct them to follow this output policy
+- **Exception**: User explicitly requests summary/report/documentation generation
+
+This policy applies to:
+- Code generation agents
+- Testing agents
+- Documentation agents (generate docs, not summaries of generation)
+- Refactoring agents
+- Research subagents
+- All automated workflows
 
 ## Troubleshooting Common Issues
 
@@ -290,3 +308,4 @@ CMD ["python", "-m", "react_scuba_agents.server"]
 2. **MCP Server Failures**: Check server logs and restart services
 3. **Authentication Problems**: Verify API keys and permissions
 4. **Workspace Context**: Ensure proper workspace structure and configuration
+

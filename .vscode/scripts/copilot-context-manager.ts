@@ -74,12 +74,12 @@ const phases: CopilotPhase[] = [
         content: `# React Scuba - Copilot Workspace Instructions
 
 ## Project Overview
-React Scuba is a **multi-tenant dive shop management platform** built with a modern Turbo monorepo architecture. The platform supports multiple dive shop clients with isolated configurations, theming, and content while sharing a unified codebase.
+React Scuba is a **multi-tenant dive shop management platform** built with a modern npm workspaces monorepo architecture. The platform supports multiple dive shop clients with isolated configurations, theming, and content while sharing a unified codebase.
 
 ## Directory Structure
 \`\`\`
 react-scuba/
-├── server/                    # Turbo monorepo root
+├── server/                    # npm workspaces monorepo root
 │   ├── apps/                  # Application workspaces
 │   │   ├── web/              # React 19 frontend (Vite 7)
 │   │   ├── api/              # Express.js 5 backend
@@ -912,3 +912,5 @@ switch (command) {
     log('  npm run copilot:validate  - Validate context files\n');
     process.exit(1);
 }
+
+

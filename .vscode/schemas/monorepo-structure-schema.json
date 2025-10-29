@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/monorepo-structure",
   "title": "React Scuba Monorepo Structure Schema - October 2025",
-  "description": "Comprehensive schema for validating Turbo monorepo structure with multi-tenant content management, aligned with tasks.json, settings.json, launch.json, keybindings.json, and extensions.json configurations",
+  "description": "Comprehensive schema for validating npm workspaces monorepo structure with multi-tenant content management, aligned with tasks.json, settings.json, launch.json, keybindings.json, and extensions.json configurations",
   "type": "object",
   "required": ["name", "version", "root", "structure", "tooling", "ci", "metadata"],
   "properties": {
@@ -281,22 +281,22 @@
               "name": {
                 "type": "string",
                 "description": "Required filename",
-                "examples": ["package.json", "turbo.json", "tsconfig.json", "biome.json"]
+                "examples": ["package.json", "package.json", "tsconfig.json", "biome.json"]
               },
               "purpose": {
                 "type": "string",
                 "description": "Why this file is required",
-                "examples": ["Workspace configuration", "Turbo orchestration", "TypeScript base config"]
+                "examples": ["Workspace configuration", "npm workspaces orchestration", "TypeScript base config"]
               },
               "schema": {
                 "type": "string",
                 "format": "uri",
                 "description": "JSON schema URL for validation",
-                "examples": ["https://json.schemastore.org/package.json", "https://turbo.build/schema.json"]
+                "examples": ["https://json.schemastore.org/package.json"]
               },
               "validated_by": {
                 "type": "string",
-                "enum": ["vscode", "turbo", "npm", "biome", "custom"],
+                "enum": ["vscode", "npm-workspaces", "npm", "biome", "custom"],
                 "description": "Tool responsible for validation"
               }
             }
@@ -387,28 +387,28 @@
         },
         "orchestration": {
           "type": "object",
-          "description": "Turbo orchestration configuration",
+          "description": "npm workspaces orchestration configuration",
           "required": ["name", "version", "config_file"],
           "properties": {
             "name": {
               "type": "string",
-              "const": "turbo",
-              "description": "Orchestration tool (Turborepo)"
+              "const": "npm-workspaces",
+              "description": "Orchestration tool (npm workspaces)"
             },
             "version": {
               "type": "string",
-              "description": "Turbo version",
+              "description": "npm version",
               "pattern": "^\\d+\\.\\d+\\.\\d+$",
               "examples": ["2.5.8"]
             },
             "config_file": {
               "type": "string",
-              "const": "turbo.json",
-              "description": "Turbo configuration filename"
+              "const": "package.json",
+              "description": "npm workspaces configuration filename"
             },
             "tasks": {
               "type": "array",
-              "description": "Turbo tasks (must match tasks.json labels)",
+              "description": "npm scripts (must match tasks.json labels)",
               "items": {
                 "type": "string",
                 "enum": ["build", "dev", "lint", "lint:fix", "format", "format:check", "test", "test:coverage", "type-check", "clean"]
@@ -420,7 +420,7 @@
               "type": "string",
               "enum": ["local", "remote", "both"],
               "default": "local",
-              "description": "Cache strategy for Turbo builds"
+              "description": "Cache strategy for npm builds"
             }
           }
         },
@@ -749,7 +749,7 @@
           "description": "Human-readable monorepo description",
           "minLength": 10,
           "maxLength": 200,
-          "examples": ["React Scuba multi-tenant monorepo with Turbo orchestration, Biome linting, and Python 3.14t support"]
+          "examples": ["React Scuba multi-tenant monorepo with npm workspaces orchestration, Biome linting, and Python 3.14t support"]
         },
         "architecture": {
           "type": "string",
@@ -764,7 +764,7 @@
             "type": "string",
             "enum": [
               "multi-tenant",
-              "turbo-orchestration",
+              "npm-workspaces",
               "biome-linting",
               "vitest-testing",
               "typescript-strict",
@@ -775,7 +775,7 @@
             ]
           },
           "uniqueItems": true,
-          "examples": [["multi-tenant", "turbo-orchestration", "biome-linting"]]
+          "examples": [["multi-tenant", "npm-workspaces", "biome-linting"]]
         },
         "documentation": {
           "type": "array",
@@ -927,10 +927,10 @@
             "validated_by": "npm"
           },
           {
-            "name": "turbo.json",
-            "purpose": "Turbo orchestration",
-            "schema": "https://turbo.build/schema.json",
-            "validated_by": "turbo"
+            "name": "package.json",
+            "purpose": "npm workspaces orchestration",
+            "schema": "https://json.schemastore.org/package.json",
+            "validated_by": "npm-workspaces"
           }
         ]
       },
@@ -941,9 +941,9 @@
           "workspaces": ["apps/*", "packages/*"]
         },
         "orchestration": {
-          "name": "turbo",
+          "name": "npm-workspaces",
           "version": "2.5.8",
-          "config_file": "turbo.json",
+          "config_file": "package.json",
           "tasks": ["build", "dev", "test", "lint"]
         },
         "linting": {
@@ -974,9 +974,9 @@
         }
       },
       "metadata": {
-        "description": "React Scuba multi-tenant monorepo with Turbo orchestration",
+        "description": "React Scuba multi-tenant monorepo with npm workspaces orchestration",
         "architecture": "monorepo",
-        "features": ["multi-tenant", "turbo-orchestration", "biome-linting"],
+        "features": ["multi-tenant", "npm-workspaces", "biome-linting"],
         "documentation": [
           {
             "file": "README.md",

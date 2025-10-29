@@ -40,3 +40,8 @@ const MyComponent = () => {
 
 ## Client Config Schema
 See `server/clients/_template/config.json` for the full schema.
+
+
+## Copilot Output Guidelines
+
+**IMPORTANT**: Do NOT generate summary documents, changelog files, or markdown reports unless explicitly requested. Provide only enterprise-focused explicit output for tasks. Make changes directly without documentation overhead.

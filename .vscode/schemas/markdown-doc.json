@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/DeanLuus22021994/react-scuba/schemas/markdown-doc",
   "title": "React Scuba VitePress Markdown Documentation Frontmatter Schema",
-  "description": "Comprehensive JSON Schema for validating YAML frontmatter in VitePress markdown documentation files. Aligned with VitePress 1.0.0, vitepress-docs-schema.json, monorepo-structure-schema.json, vscode-settings-schema.json, and complete VS Code configuration stack (tasks.json, settings.json, launch.json, keybindings.json, extensions.json). Supports multi-tenant architecture, Turbo monorepo workflows, and React Scuba platform documentation standards.",
+  "description": "Comprehensive JSON Schema for validating YAML frontmatter in VitePress markdown documentation files. Aligned with VitePress 1.0.0, vitepress-docs-schema.json, monorepo-structure-schema.json, vscode-settings-schema.json, and complete VS Code configuration stack (tasks.json, settings.json, launch.json, keybindings.json, extensions.json). Supports multi-tenant architecture, npm workspaces monorepo workflows, and React Scuba platform documentation standards.",
   "type": "object",
   "required": ["title", "description"],
   "properties": {
@@ -157,7 +157,7 @@
           "react",
           "typescript",
           "multi-tenant",
-          "turbo",
+          "npm-workspaces",
           "biome",
           "testing",
           "deployment",
@@ -219,7 +219,7 @@
         "development",
         "architecture",
         "multi-tenant",
-        "turbo-monorepo"
+        "npm-workspaces-monorepo"
       ],
       "examples": ["guide", "reference", "deployment"]
     },
@@ -344,7 +344,7 @@
       "maxItems": 20,
       "uniqueItems": true,
       "examples": [
-        ["vitepress", "documentation", "react", "typescript", "multi-tenant", "turbo", "monorepo"]
+        ["vitepress", "documentation", "react", "typescript", "multi-tenant", "npm-workspaces", "monorepo"]
       ]
     },
     "ogImage": {
@@ -383,11 +383,11 @@
     },
     "monorepo": {
       "type": "object",
-      "description": "Monorepo-specific metadata for Turbo workspace documentation",
+      "description": "Monorepo-specific metadata for npm workspace documentation",
       "properties": {
         "workspace": {
           "type": "string",
-          "description": "Turbo workspace this document relates to",
+          "description": "npm workspace this document relates to",
           "enum": [
             "server/apps/web",
             "server/apps/api",
@@ -575,7 +575,7 @@
       "difficulty": "beginner",
       "readingTime": 15,
       "prerequisites": ["Node.js 20.x", "npm 10.9.2", "Git"],
-      "keywords": ["react", "vite", "typescript", "installation", "setup", "turbo", "monorepo"],
+      "keywords": ["react", "vite", "typescript", "installation", "setup", "npm-workspaces", "monorepo"],
       "monorepo": {
         "workspace": "server/apps/web",
         "scripts": ["dev", "build", "test"],

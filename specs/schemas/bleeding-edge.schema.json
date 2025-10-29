@@ -70,7 +70,7 @@
           "properties": {
             "monorepo": {
               "type": "string",
-              "pattern": "^turbo-2\\."
+              "pattern": "^npm-workspaces\\."
             },
             "linting": {
               "type": "string",

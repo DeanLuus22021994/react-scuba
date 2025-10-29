@@ -199,6 +199,15 @@ npm run clean:all               # Clean + remove node_modules
 - `server/apps/web/vite.config.js`: Vite build config
 - `server/apps/web/tailwind.config.js`: Tailwind config
 
+## GitHub Copilot Output Guidelines
+
+**CRITICAL**: Do NOT create summary documents, markdown reports, or changelog files unless explicitly requested by the user.
+
+- **Task Output**: Provide only enterprise-focused explicit output for tasks
+- **No Summaries**: Never generate summary.md, changes.md, or similar files automatically
+- **Concise Responses**: Keep responses brief and actionable
+- **Direct Implementation**: Make changes directly without documentation overhead
+
 ## GitHub Copilot Tips
 
 - Use **@workspace** to search across entire monorepo
