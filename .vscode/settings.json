@@ -46,7 +46,7 @@
     "watchDirectory": "useFsEvents",
     "fallbackPolling": "dynamicPriority",
     "synchronousWatchDirectory": true,
-    "excludeDirectories": ["**/node_modules", "**/.git", "**/dist", "**/build", "**/.turbo"]
+    "excludeDirectories": ["**/node_modules", "**/.git", "**/dist", "**/build", "**/.turbo", "**/coverage"]
   },
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.workspaceSymbols.scope": "allOpenProjects",
@@ -57,6 +57,7 @@
     "**/server/packages/*/node_modules/**": true,
     "**/server/apps/*/.turbo/**": true,
     "**/server/packages/*/.turbo/**": true,
+    "**/server/apps/*/coverage/**": true,
     "**/.turbo/**": true,
     "**/dist/**": true,
     "**/build/**": true,

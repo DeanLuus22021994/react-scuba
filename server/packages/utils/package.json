@@ -13,17 +13,12 @@
 	},
 	"scripts": {
 		"lint": "biome check .",
-		"format": "biome format --write .",
-		"test": "vitest run",
-		"type-check": "tsc --noEmit"
+		"format": "biome format --write ."
 	},
 	"dependencies": {
 		"@react-scuba/types": "*"
 	},
 	"devDependencies": {
-		"@react-scuba/config": "*",
-		"@types/node": "^20.19.24",
-		"typescript": "^5.9.3",
-		"vitest": "^3.2.4"
+		"@react-scuba/config": "*"
 	}
 }

@@ -6,6 +6,7 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
     "jsx": "react-jsx",
     "useDefineForClassFields": true,
+    "ignoreDeprecations": "5.0",
 
     // Modules
     "module": "ESNext",

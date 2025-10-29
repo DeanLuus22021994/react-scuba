@@ -13,11 +13,9 @@
 	},
 	"scripts": {
 		"lint": "biome check .",
-		"format": "biome format --write .",
-		"type-check": "tsc --noEmit"
+		"format": "biome format --write ."
 	},
 	"devDependencies": {
-		"@react-scuba/config": "*",
-		"typescript": "^5.9.3"
+		"@react-scuba/config": "*"
 	}
 }
