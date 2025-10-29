@@ -685,6 +685,190 @@
       "runOptions": {
         "instanceLimit": 1
       }
+    },
+    // ===========================
+    // MCP Service Management Tasks
+    // ===========================
+    {
+      "label": "MCP: Start Sidecar Service",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "--profile", "mcp", "up", "-d"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "MCP: Stop Sidecar Service",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "--profile", "mcp", "down"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "MCP: Restart Sidecar Service",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "--profile", "mcp", "restart", "python-mcp-sidecar"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "MCP: View Logs",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "logs", "-f", "python-mcp-sidecar"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": false,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "MCP: Health Check",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "compose",
+        "exec",
+        "python-mcp-sidecar",
+        "python",
+        "-m",
+        "react_scuba_utils.health",
+        "--protocol-validation"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "MCP: View Service Discovery",
+      "type": "shell",
+      "command": "curl",
+      "args": ["-s", "http://localhost:9097/services", "|", "jq"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "MCP: Open Health Dashboard",
+      "type": "shell",
+      "command": "start",
+      "args": ["http://localhost:9097/services"],
+      "windows": {
+        "command": "cmd",
+        "args": ["/c", "start", "http://localhost:9097/services"]
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "focus": false,
+        "clear": false,
+        "echo": false,
+        "showReuseMessage": false
+      }
+    },
+    // ===========================
+    // VS Code Insiders Management
+    // ===========================
+    {
+      "label": "VS Code Insiders: Check Updates",
+      "type": "shell",
+      "command": "vscode-update-control",
+      "args": ["check"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "VS Code Insiders: Update",
+      "type": "shell",
+      "command": "vscode-update-control",
+      "args": ["update"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "VS Code Insiders: Rollback",
+      "type": "shell",
+      "command": "vscode-update-control",
+      "args": ["rollback"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "VS Code Insiders: Pin Version",
+      "type": "shell",
+      "command": "vscode-update-control",
+      "args": ["pin"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false,
+        "clear": true,
+        "echo": true,
+        "showReuseMessage": false
+      }
     }
   ]
 }

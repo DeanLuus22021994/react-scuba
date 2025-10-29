@@ -972,6 +972,25 @@ volumes:
     name: react_scuba_node-bootstrap-cache
   react_scuba_markitdown-cache:
     name: react_scuba_markitdown-cache
+  # Workspace-specific named volumes for dependency isolation
+  react_scuba_root_node_modules:
+    name: react_scuba_root_node_modules
+  react_scuba_web_node_modules:
+    name: react_scuba_web_node_modules
+  react_scuba_api_node_modules:
+    name: react_scuba_api_node_modules
+  react_scuba_content_node_modules:
+    name: react_scuba_content_node_modules
+  react_scuba_docs_node_modules:
+    name: react_scuba_docs_node_modules
+  react_scuba_config_node_modules:
+    name: react_scuba_config_node_modules
+  react_scuba_types_node_modules:
+    name: react_scuba_types_node_modules
+  react_scuba_ui_node_modules:
+    name: react_scuba_ui_node_modules
+  react_scuba_utils_node_modules:
+    name: react_scuba_utils_node_modules
 
 # Custom network with static IPs
 networks:

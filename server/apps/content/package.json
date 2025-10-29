@@ -12,12 +12,12 @@
 		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"zod": "^4.1.14"
+		"zod": "^4.1.12"
 	},
 	"devDependencies": {
 		"@react-scuba/config": "*",
 		"@types/node": "^24.9.2",
-		"typescript": "^5.9.4",
-		"vitest": "^3.2.5"
+		"typescript": "^5.9.3",
+		"vitest": "^3.2.4"
 	}
 }

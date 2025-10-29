@@ -1,0 +1,140 @@
+# Docker Compose MCP Persistent Service - Sidecar Architecture
+# Persistent Python MCP service with real-time health monitoring
+# Survives main container rebuilds via dedicated sidecar container
+# Network: Hybrid bridge + mcp-cluster integration with service discovery
+# Health: Full MCP protocol validation with real-time WebSocket streaming
+# Port: Internal HTTP on 9099 (unpublished to host)
+
+services:
+  # ==== Python MCP Persistent Sidecar Service ====
+  python-mcp-sidecar:
+    build:
+      context: ./docker-compose-examples/mcp/python_utils
+      dockerfile: ../../../.devcontainer/containers/dockerfile.mcp.python
+      args:
+        PYTHON_VERSION: "3.14t"
+        UV_VERSION: "latest"
+    image: python-mcp-sidecar:latest
+    container_name: python-mcp-sidecar
+    hostname: python-mcp-sidecar
+    profiles:
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.99
+    ports:
+      - "9099" # Internal only - no host publishing
+    env_file:
+      - devcontainer.env
+    environment:
+      - ENABLE_MCP=${ENABLE_MCP:-false}
+      - MCP_HTTP_PORT=9099
+      - MCP_PROTOCOL_VERSION=1.0.0
+      - PYTHONUNBUFFERED=1
+      - UV_SYSTEM_PYTHON=1
+      - PYTHON_GIL_MODE=1
+    volumes:
+      # Source code bind mount for hot reload
+      - ./docker-compose-examples/mcp/python_utils:/app:ro
+      # Persistent Python packages (survives rebuilds)
+      - react_scuba_python_mcp_packages:/usr/local/lib/python3.14/site-packages
+      # Persistent MCP service state
+      - react_scuba_python_mcp_state:/data
+      # Python cache for performance
+      - react_scuba_python_mcp_cache:/cache/python
+      # UV cache for package management
+      - react_scuba_python_mcp_uv_cache:/cache/uv
+    working_dir: /app
+    command: ["python", "-m", "react_scuba_utils.mcp_server"]
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          memory: 256M
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-m",
+          "react_scuba_utils.health",
+          "--protocol-validation",
+          "--endpoint",
+          "http://localhost:9099/health",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    labels:
+      - "com.react-scuba.service=python-mcp"
+      - "com.react-scuba.tier=mcp-sidecar"
+      - "com.react-scuba.health.realtime=true"
+      - "com.react-scuba.discovery.enabled=true"
+
+  # ==== Service Discovery & Health Monitor ====
+  mcp-discovery-agent:
+    build:
+      context: ./.devcontainer/containers
+      dockerfile: dockerfile.mcp.discovery
+    image: mcp-discovery-agent:latest
+    container_name: mcp-discovery-agent
+    hostname: mcp-discovery-agent
+    profiles:
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.98
+    ports:
+      - "9097:9097" # WebSocket health streaming endpoint
+    env_file:
+      - devcontainer.env
+    environment:
+      - MCP_DISCOVERY_ENABLED=true
+      - MCP_HEALTH_WEBSOCKET_PORT=9097
+      - MCP_SERVICES=python-mcp-sidecar:9099
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - react_scuba_mcp_discovery_state:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9097/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      python-mcp-sidecar:
+        condition: service_healthy
+    labels:
+      - "com.react-scuba.service=mcp-discovery"
+      - "com.react-scuba.tier=monitoring"
+
+# Named volumes for persistent MCP service state
+volumes:
+  react_scuba_python_mcp_packages:
+    name: react_scuba_python_mcp_packages
+    driver: local
+  react_scuba_python_mcp_state:
+    name: react_scuba_python_mcp_state
+    driver: local
+  react_scuba_python_mcp_cache:
+    name: react_scuba_python_mcp_cache
+    driver: local
+  react_scuba_python_mcp_uv_cache:
+    name: react_scuba_python_mcp_uv_cache
+    driver: local
+  react_scuba_mcp_discovery_state:
+    name: react_scuba_mcp_discovery_state
+    driver: local
+
+# Hybrid networking: integrates with existing mcp-cluster network
+networks:
+  mcp-cluster:
+    external: true
+    name: react-scuba_mcp-cluster

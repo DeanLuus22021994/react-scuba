@@ -196,7 +196,7 @@
   "python.interpreter.infoVisibility": "onFailure",
   "python.terminal.activateEnvironment": false,
   "python.terminal.activateEnvInCurrentTerminal": false,
-  
+
   // DISABLE CONTINUOUS ANALYSIS - MAJOR PERFORMANCE KILLER
   "python.analysis.typeCheckingMode": "off",
   "python.analysis.autoImportCompletions": false,
@@ -218,21 +218,27 @@
   "python.analysis.stubPath": "",
   "python.analysis.typeshedPaths": [],
   "python.analysis.useLibraryCodeForTypes": false,
-  
+
   // DISABLE PYLANCE INTENSIVE FEATURES
   "pylance.insidersChannel": "off",
   "python.languageServer": "None",
   "python.jediEnabled": false,
-  
+
   // DISABLE LINTING AND FORMATTING (USE RUFF ONLY WHEN NEEDED)
   "python.linting.enabled": false,
   "python.formatting.provider": "none",
   "ruff.enable": false,
   "ruff.organizeImports": false,
   "ruff.fixAll": false,
-  
+
   // DISABLE TESTING AUTO-DISCOVERY
   "python.testing.pytestEnabled": false,
   "python.testing.unittestEnabled": false,
-  "python.testing.autoTestDiscoverOnSaveEnabled": false
+  "python.testing.autoTestDiscoverOnSaveEnabled": false,
+
+  // Vitest Extension Configuration
+  "vitest.enable": true,
+  "vitest.commandLine": "npm test",
+  "vitest.rootConfig": "./server/apps/web/vite.config.js",
+  "vitest.disableWorkspaceWarning": true
 }
