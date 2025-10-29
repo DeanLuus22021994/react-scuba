@@ -21,7 +21,7 @@ services:
       - mcp
     networks:
       mcp-cluster:
-        ipv4_address: 172.28.0.99
+        ipv4_address: 172.29.0.99
     ports:
       - "9099" # Internal only - no host publishing
     env_file:
@@ -89,7 +89,7 @@ services:
       - mcp
     networks:
       mcp-cluster:
-        ipv4_address: 172.28.0.98
+        ipv4_address: 172.29.0.98
     ports:
       - "9097:9097" # WebSocket health streaming endpoint
     env_file:
@@ -133,8 +133,12 @@ volumes:
     name: react_scuba_mcp_discovery_state
     driver: local
 
-# Hybrid networking: integrates with existing mcp-cluster network
+# MCP-specific network (separate from main cluster for isolation)
 networks:
   mcp-cluster:
-    external: true
     name: react-scuba_mcp-cluster
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.29.0.0/16
+          gateway: 172.29.0.1

@@ -136,9 +136,9 @@ networks:
 5. **memory** - Persistent conversation context
 
 ### Additional in Compose (`compose/mcp.yml`)
-6. **discovery** - Service discovery and health aggregation (port 9097)
-7. **markitdown** - PDF/document conversion to markdown
-8. **python** - Python 3.14t execution environment
+1. **discovery** - Service discovery and health aggregation (port 9097)
+2. **markitdown** - PDF/document conversion to markdown
+3. **python** - Python 3.14t execution environment
 
 **Configuration Drift:** VS Code only aware of 5/8 MCP servers
 

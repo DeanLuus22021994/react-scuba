@@ -1,79 +1,25 @@
 # ==============================================================================
-# docker-compose.yml - React Scuba Cluster Orchestration (Modular Architecture)
+# docker-compose.yml - React Scuba Full Stack Orchestration
 # ==============================================================================
 #
-# PURPOSE:
-#   Main orchestration file that composes all microservices via modular fragments.
-#   Use this file with fragment includes for complete cluster deployment.
-#
-# MODULAR COMPOSITION TIERS:
-#   ├── Tier 1: Base Services (databases, cache)
-#   │   └── .devcontainer/infrastructure/compose/base.yml
-#   ├── Tier 2: Application Services (API, web, tools, builders)
-#   │   └── .devcontainer/infrastructure/compose/app.yml
-#   ├── Tier 3: Infrastructure (monitoring, metrics, logging)
-#   │   └── .devcontainer/infrastructure/compose/infra.yml
-#   ├── Tier 4: GPU & AI (NVIDIA acceleration, LLM inference)
-#   │   └── .devcontainer/infrastructure/compose/gpu.yml
-#   └── Tier 5: MCP Servers (Model Context Protocol services)
-#       └── .devcontainer/infrastructure/compose/mcp.yml
+# Single command deployment: docker compose up
+# Includes core service tiers via modular compose fragments
+# MCP services managed separately in docker-compose.mcp-persistent.yml
 #
 # USAGE:
-#   # Full stack (all services)
-#   docker-compose -f docker-compose.yml \
-#     -f .devcontainer/infrastructure/compose/base.yml \
-#     -f .devcontainer/infrastructure/compose/app.yml \
-#     -f .devcontainer/infrastructure/compose/infra.yml \
-#     -f .devcontainer/infrastructure/compose/gpu.yml \
-#     -f .devcontainer/infrastructure/compose/mcp.yml \
-#     up
+#   docker compose up              # Start core stack (base + app + infra + gpu)
+#   docker compose up --build     # Start with build
+#   docker compose --profile no-gpu up  # Start without GPU services
 #
-#   # Development (no GPU/MCP)
-#   docker-compose -f docker-compose.yml \
-#     -f .devcontainer/infrastructure/compose/base.yml \
-#     -f .devcontainer/infrastructure/compose/app.yml \
-#     up
-#
-#   # Minimal (just databases)
-#   docker-compose -f docker-compose.yml \
-#     -f .devcontainer/infrastructure/compose/base.yml \
-#     up
-#
-# NETWORKING:
-#   - Network: mcp-cluster (172.28.0.0/16)
-#   - Tier allocation:
-#     * 172.28.0.1 - Gateway
-#     * 172.28.0.20-29 - Database tier (postgres-db, mariadb)
-#     * 172.28.0.30-49 - MCP tier (discovery, fetch, filesystem, git, github, markitdown, memory, python)
-#     * 172.28.0.50-59 - Cache tier (memcached, redis, minio)
-#     * 172.28.0.60-69 - Bootstrap tier (node-builder, node-bootstrap)
-#     * 172.28.0.70-79 - Infrastructure tier (nginx, prometheus, grafana)
-#     * 172.28.0.80-99 - GPU tier (nvidia-device-plugin, ollama-llm)
-#
-# VOLUMES:
-#   - All volumes defined below are shared across fragments
-#   - Naming convention: react_scuba_{service}-{type}
-#   - Storage: /var/lib/docker/volumes/ on host
-#
-# REQUIREMENTS:
-#   - Docker Compose v2.0+
-#   - Docker Engine 20.10+
-#   - NVIDIA Docker runtime (for GPU services)
-#   - Node.js 20.x (for .devcontainer support)
-#
-# FEATURES:
-#   ✅ Modular architecture with independent fragments
-#   ✅ Service discovery via mcp-discovery (port 9097)
-#   ✅ Health checks for all services
-#   ✅ Multi-stage builds for size optimization
-#   ✅ GPU acceleration with NVIDIA device plugin
-#   ✅ Monitoring stack (Prometheus, Grafana, Exporters)
-#   ✅ MCP Protocol support (8 servers)
-#   ✅ Production-ready API server (Node slim)
-#   ✅ Development ready (node-bootstrap, node-builder)
+# MCP SERVICES (separate):
+#   docker compose -f docker-compose.mcp-persistent.yml up -d --profile mcp
 #
 
-# Placeholder for services (provided by compose fragments)
+include:
+  - .devcontainer/infrastructure/compose/base.yml
+  - .devcontainer/infrastructure/compose/app.yml
+  - .devcontainer/infrastructure/compose/infra.yml
+  - .devcontainer/infrastructure/compose/gpu.yml
 
 # Named volumes for persistence (shared across all fragments)
 volumes:
@@ -186,9 +132,10 @@ volumes:
   react_scuba_k8s-cache:
     name: react_scuba_k8s-cache
 
-# Custom network with static IPs (created by base fragment)
+# Network configuration (shared by all included services)
 networks:
   mcp-cluster:
+    name: mcp-cluster
     driver: bridge
     ipam:
       config:

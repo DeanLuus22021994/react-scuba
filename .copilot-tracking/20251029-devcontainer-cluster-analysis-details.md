@@ -8,7 +8,7 @@
 
 ### Cluster Service Distribution (Lines 15-45 in research)
 
-**Total Services Identified: 42 services across 5 tiers**
+#### Total Services Identified: 42 services across 5 tiers
 
 #### Tier 1: Base Infrastructure (9 services)
 - **Databases** (2): PostgreSQL 16 (172.28.0.20), MariaDB 11 (172.28.0.21)
@@ -39,7 +39,7 @@
 
 ### Network Architecture Validation
 
-**Network: mcp-cluster (172.28.0.0/16)**
+#### Network: mcp-cluster (172.28.0.0/16)
 - **Gateway**: 172.28.0.1
 - **Database Tier**: 172.28.0.20-29 (2 allocated)
 - **MCP Tier**: 172.28.0.30-49 (8 allocated: .33-.40)

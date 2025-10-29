@@ -8,8 +8,6 @@
 # Discovery: Auto-discovery via localhost:9097/services
 # ==============================================================================
 
-name: react-scuba-mcp
-
 services:
   # ==== MCP Discovery Service ====
   # Role: Service discovery, health aggregation, protocol validation
@@ -17,7 +15,7 @@ services:
   # Health Dashboard: http://localhost:9097/services
   mcp-discovery:
     build:
-      context: ./.devcontainer/infrastructure/mcp-servers/discovery
+      context: ../../../.devcontainer/infrastructure/mcp-servers/discovery
       dockerfile: dockerfile
     image: mcp-discovery:latest
     container_name: mcp-discovery
@@ -29,7 +27,7 @@ services:
       - "9097:9097"
       - "5005:5005"
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - MCP_DISCOVERY_MODE=standalone
@@ -46,7 +44,7 @@ services:
   # Capabilities: SSL verification, proxy support, rate limiting
   mcp-fetch:
     build:
-      context: ./.devcontainer/infrastructure/mcp-servers/fetch
+      context: ../../../.devcontainer/infrastructure/mcp-servers/fetch
       dockerfile: dockerfile
     image: mcp-fetch:latest
     container_name: mcp-fetch
@@ -57,7 +55,7 @@ services:
     ports:
       - "5006:5006"
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - MCP_TIMEOUT=30
@@ -80,7 +78,7 @@ services:
   # Permissions: Read/write with access control lists
   mcp-filesystem:
     build:
-      context: ./.devcontainer/infrastructure/mcp-servers/filesystem
+      context: ../../../.devcontainer/infrastructure/mcp-servers/filesystem
       dockerfile: dockerfile
     image: mcp-filesystem:latest
     container_name: mcp-filesystem
@@ -93,7 +91,7 @@ services:
     volumes:
       - ${PWD}/data:/data:rw
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - MCP_SANDBOX_ROOT=/data
@@ -114,7 +112,7 @@ services:
   # Capabilities: SSH key support, branch management, history analysis
   mcp-git:
     build:
-      context: ./.devcontainer/infrastructure/mcp-servers/git
+      context: ../../../.devcontainer/infrastructure/mcp-servers/git
       dockerfile: dockerfile
     image: mcp-git:latest
     container_name: mcp-git
@@ -128,7 +126,7 @@ services:
       - ${PWD}/server:/workspace:rw
       - ~/.ssh:/root/.ssh:ro
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no
@@ -150,7 +148,7 @@ services:
   # Rate Limiting: Respects GitHub API rate limits (60 public, 5000 authenticated)
   mcp-github:
     build:
-      context: ./.devcontainer/infrastructure/mcp-servers/github
+      context: ../../../.devcontainer/infrastructure/mcp-servers/github
       dockerfile: dockerfile
     image: mcp-github:latest
     container_name: mcp-github
@@ -161,7 +159,7 @@ services:
     ports:
       - "5009:5009"
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - GITHUB_TOKEN=${GITHUB_TOKEN:-}
@@ -196,7 +194,7 @@ services:
     volumes:
       - ${PWD}/data:/data:rw
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - MCP_UPLOAD_DIR=/data/uploads
@@ -230,7 +228,7 @@ services:
     ports:
       - "5011:5011"
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - REDIS_URL=redis://redis:6379
@@ -268,7 +266,7 @@ services:
     volumes:
       - ${PWD}/data:/data:rw
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHON_RUNTIME=3.14t
@@ -287,10 +285,7 @@ services:
         condition: service_started
         required: false
 
-networks:
-  mcp-cluster:
-    name: mcp-cluster
-    external: true
+
 
 # Note: Service discovery automatically registers all MCP services with mcp-discovery
 # Health dashboard available at http://localhost:9097/services

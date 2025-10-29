@@ -8,13 +8,11 @@
 # Requirements: NVIDIA Docker runtime, CUDA 12.x
 # ==============================================================================
 
-name: react-scuba-gpu
-
 services:
   # ==== GPU Support ====
   nvidia-device-plugin:
     build:
-      context: ./.devcontainer/infrastructure/gpu
+      context: ../../../.devcontainer/infrastructure/gpu
       dockerfile: dockerfile
     image: nvidia-device-plugin:latest
     container_name: nvidia-device-plugin
@@ -26,7 +24,7 @@ services:
     ports:
       - "9400:9400"
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     deploy:
       resources:
         reservations:
@@ -55,7 +53,7 @@ services:
   # Configuration: Optimized for single concurrent inference, no CPU offload
   ollama-llm:
     build:
-      context: ./.devcontainer/infrastructure/services/ollama
+      context: ../../../.devcontainer/infrastructure/services/ollama
       dockerfile: dockerfile
     image: ollama-llm:latest
     container_name: ollama-llm
@@ -67,7 +65,7 @@ services:
       - "11435:11434"
       - "9401:9401"
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     deploy:
       resources:
         reservations:
@@ -103,10 +101,7 @@ services:
         condition: service_started
         required: false
 
-networks:
-  mcp-cluster:
-    name: mcp-cluster
-    external: true
+
 
 volumes:
   react_scuba_ollama-models:

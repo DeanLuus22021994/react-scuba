@@ -173,6 +173,58 @@
               "memory-cache:/cache/memory",
               "mcp-memory:latest"
             ]
+          },
+          "discovery": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "discovery-mcp",
+              "--network",
+              "mcp-cluster",
+              "-v",
+              "mcp-discovery-cache:/cache/discovery",
+              "mcp-discovery:latest"
+            ]
+          },
+          "markitdown": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "markitdown-mcp",
+              "--network",
+              "mcp-cluster",
+              "-v",
+              "${workspaceFolder}/data:/data:rw",
+              "-v",
+              "markitdown-cache:/cache/markitdown",
+              "mcp-markitdown:latest"
+            ]
+          },
+          "python": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "--name",
+              "python-mcp",
+              "--network",
+              "mcp-cluster",
+              "-v",
+              "${workspaceFolder}/data:/data:rw",
+              "-v",
+              "python-exp-cache:/cache/python",
+              "mcp-python:latest"
+            ]
           }
         }
       }

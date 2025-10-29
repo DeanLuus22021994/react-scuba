@@ -7,16 +7,7 @@
 # Testing: docker-compose -f docker-compose.base.yml up
 # ==============================================================================
 
-name: react-scuba-base
 
-networks:
-  mcp-cluster:
-    name: mcp-cluster
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.28.0.0/16
-          gateway: 172.28.0.1
 
 volumes:
   postgres-db-volume:
@@ -61,7 +52,7 @@ services:
         max-file: "3"
 
   mariadb:
-    image: mariadb:11-alpine
+    image: mariadb:11
     container_name: mariadb
     hostname: mariadb
     networks:

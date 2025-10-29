@@ -7,13 +7,11 @@
 # Usage: docker-compose -f .devcontainer/infrastructure/compose/infra.yml up
 # ==============================================================================
 
-name: react-scuba-infra
-
 services:
   # ==== Monitoring Stack ====
   prometheus:
     build:
-      context: ./.devcontainer/infrastructure/monitoring/prometheus
+      context: ../../../.devcontainer/infrastructure/monitoring/prometheus
       dockerfile: dockerfile
     image: mcp-prometheus:latest
     container_name: tbc-prometheus
@@ -30,7 +28,7 @@ services:
         read_only: true
       - react_scuba_prometheus-data:/prometheus
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
@@ -65,7 +63,7 @@ services:
       - ./.devcontainer/infrastructure/monitoring/dashboard-database.json:/etc/grafana/provisioning/dashboards/database.json
       - ./.devcontainer/infrastructure/monitoring/dashboard-system.json:/etc/grafana/provisioning/dashboards/system.json
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-piechart-panel
@@ -87,7 +85,7 @@ services:
   # ==== Metrics Exporters ====
   cadvisor:
     build:
-      context: ./.devcontainer/infrastructure/monitoring/exporters/cadvisor
+      context: ../../../.devcontainer/infrastructure/monitoring/exporters/cadvisor
       dockerfile: dockerfile
     image: mcp-cadvisor:latest
     container_name: mcp-cadvisor
@@ -128,7 +126,7 @@ services:
 
   node-exporter:
     build:
-      context: ./.devcontainer/infrastructure/monitoring/exporters/node
+      context: ../../../.devcontainer/infrastructure/monitoring/exporters/node
       dockerfile: dockerfile
     image: mcp-node-exporter:latest
     container_name: mcp-node-exporter
@@ -164,7 +162,7 @@ services:
 
   postgres-exporter:
     build:
-      context: ./.devcontainer/infrastructure/monitoring/exporters/postgres
+      context: ../../../.devcontainer/infrastructure/monitoring/exporters/postgres
       dockerfile: dockerfile
     image: mcp-postgres-exporter:latest
     container_name: mcp-postgres-exporter
@@ -196,7 +194,7 @@ services:
 
   mysql-exporter:
     build:
-      context: ./.devcontainer/infrastructure/monitoring/exporters/mysql
+      context: ../../../.devcontainer/infrastructure/monitoring/exporters/mysql
       dockerfile: dockerfile
     image: mcp-mysql-exporter:latest
     container_name: mcp-mysql-exporter
@@ -207,7 +205,7 @@ services:
     ports:
       - "9104:9104"
     env_file:
-      - devcontainer.env
+      - ../../../devcontainer.env
     environment:
       - DATA_SOURCE_NAME=root:${MARIADB_PASSWORD:-password}@tcp(mariadb:3306)/
       - MYSQLD_EXPORTER_WEB_LISTEN_ADDRESS=:9104
@@ -249,7 +247,7 @@ services:
   # ==== Load Balancing ====
   nginx-master:
     build:
-      context: ./.devcontainer/infrastructure/networking/nginx
+      context: ../../../.devcontainer/infrastructure/networking/nginx
       dockerfile: dockerfile
     image: nginx-master:latest
     container_name: nginx-master
@@ -276,7 +274,7 @@ services:
 
   nginx-slave-1:
     build:
-      context: ./.devcontainer/infrastructure/networking/nginx-slave
+      context: ../../../.devcontainer/infrastructure/networking/nginx-slave
       dockerfile: dockerfile
     image: nginx-slave:latest
     container_name: nginx-slave-1
@@ -299,7 +297,7 @@ services:
 
   nginx-slave-2:
     build:
-      context: ./.devcontainer/infrastructure/networking/nginx-slave
+      context: ../../../.devcontainer/infrastructure/networking/nginx-slave
       dockerfile: dockerfile
     image: nginx-slave:latest
     container_name: nginx-slave-2
@@ -321,10 +319,7 @@ services:
       start_period: 15s
 
 # External reference to databases on mcp-cluster
-networks:
-  mcp-cluster:
-    name: mcp-cluster
-    external: true
+
 
 # Volume declarations
 volumes:

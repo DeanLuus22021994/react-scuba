@@ -35,7 +35,7 @@ class WorkspaceSetup {
         'documentation'
       ]
     };
-    
+
     this.state = {
       currentStep: 0,
       completedSteps: [],
@@ -94,7 +94,7 @@ class WorkspaceSetup {
           },
           {
             "label": "npm: build",
-            "type": "npm", 
+            "type": "npm",
             "script": "build",
             "group": {
               "kind": "build",
@@ -266,14 +266,14 @@ class WorkspaceSetup {
       // Write file with proper formatting
       const jsonContent = JSON.stringify(content, null, 2);
       writeFileSync(filePath, jsonContent);
-      
+
       if (existsSync(filePath)) {
         this.logSuccess(`Configuration written: ${filePath}`);
         this.state.created.push(filePath);
       } else {
         this.state.modified.push(filePath);
       }
-      
+
       return true;
     } catch (error) {
       this.logError(`Failed to write ${filePath}: ${error.message}`);
@@ -286,7 +286,7 @@ class WorkspaceSetup {
    */
   setupEnvironment() {
     this.logStep('Environment Configuration');
-    
+
     try {
       // Create .env template if it doesn't exist
       const envPath = '.env.example';
@@ -320,7 +320,7 @@ class WorkspaceSetup {
           'DEBUG=react-scuba:*',
           'VERBOSE=false'
         ].join('\\n');
-        
+
         writeFileSync(envPath, envContent);
         this.logSuccess('Environment template created');
       }
@@ -384,7 +384,7 @@ class WorkspaceSetup {
       // Setup settings.json
       const settingsPath = '.vscode/settings.json';
       let existingSettings = {};
-      
+
       if (existsSync(settingsPath)) {
         try {
           const content = readFileSync(settingsPath, 'utf8');
@@ -453,7 +453,7 @@ class WorkspaceSetup {
     try {
       // Setup Git hooks directory
       this.ensureDirectory('.githooks');
-      
+
       // Create pre-commit hook
       const preCommitPath = '.githooks/pre-commit';
       const preCommitContent = [
@@ -479,9 +479,9 @@ class WorkspaceSetup {
         'echo "✅ Pre-commit checks passed!"',
         'exit 0'
       ].join('\\n');
-      
+
       writeFileSync(preCommitPath, preCommitContent);
-      
+
       // Make hook executable (Unix systems)
       try {
         execSync(`chmod +x ${preCommitPath}`, { stdio: 'ignore' });
@@ -513,17 +513,17 @@ class WorkspaceSetup {
 
     try {
       const serverPackagePath = 'server/package.json';
-      
+
       if (!existsSync(serverPackagePath)) {
         this.logError('Server package.json not found. Cannot configure workspaces.');
         return false;
       }
 
       const pkg = JSON.parse(readFileSync(serverPackagePath, 'utf8'));
-      
+
       // Merge npm scripts
       pkg.scripts = { ...pkg.scripts, ...this.templates.npmScripts };
-      
+
       // Ensure workspaces are configured
       if (!pkg.workspaces) {
         pkg.workspaces = [
@@ -600,43 +600,13 @@ class WorkspaceSetup {
           'volumes:',
           '  postgres_data:'
         ].join('\\n');
-        
+
         writeFileSync(dockerComposePath, yamlContent);
         this.logSuccess('Docker Compose configuration created');
       }
 
-      // Create Dockerfile if it doesn't exist
-      const dockerfilePath = 'server/Dockerfile';
-      if (!existsSync(dockerfilePath)) {
-        const dockerContent = [
-          'FROM node:20-alpine',
-          '',
-          'WORKDIR /app',
-          '',
-          '# Copy package files',
-          'COPY package*.json ./',
-          'COPY apps/*/package*.json ./apps/',
-          'COPY packages/*/package*.json ./packages/',
-          '',
-          '# Install dependencies',
-          'RUN npm ci --only=production',
-          '',
-          '# Copy source code',
-          'COPY . .',
-          '',
-          '# Build the application',
-          'RUN npm run build',
-          '',
-          '# Expose port',
-          'EXPOSE 3000',
-          '',
-          '# Start the application',
-          'CMD ["npm", "start"]'
-        ].join('\\n');
-        
-        writeFileSync(dockerfilePath, dockerContent);
-        this.logSuccess('Dockerfile created');
-      }
+      // Note: Dockerfiles are managed in .devcontainer/infrastructure/ cluster structure
+      // No standalone dockerfiles should exist outside the cluster architecture
 
       this.state.completedSteps.push('docker-config');
       return true;
@@ -698,7 +668,7 @@ class WorkspaceSetup {
           '3. Update documentation as needed',
           '4. Submit pull requests for review'
         ].join('\\n');
-        
+
         writeFileSync(readmePath, readmeContent);
         this.logSuccess('README.md created');
       }
@@ -737,7 +707,7 @@ class WorkspaceSetup {
           '│   ├── ui/         # UI components',
           '│   └── utils/      # Utilities',
           '└── clients/        # Multi-tenant configs',
-          '    ├── _template/', 
+          '    ├── _template/',
           '    └── [client-id]/',
           '```',
           '',
@@ -755,7 +725,7 @@ class WorkspaceSetup {
           '- E2E tests: Playwright',
           '- Coverage: `npm run test:coverage`'
         ].join('\\n');
-        
+
         writeFileSync(devDocsPath, devDocsContent);
         this.logSuccess('Development documentation created');
       }
@@ -775,13 +745,13 @@ class WorkspaceSetup {
     console.log('\\n' + '='.repeat(60));
     console.log('🎉 WORKSPACE SETUP COMPLETION REPORT');
     console.log('='.repeat(60));
-    
+
     console.log(`✅ Completed Steps: ${this.state.completedSteps.length}/${this.config.setupSteps.length}`);
     console.log(`📄 Files Created: ${this.state.created.length}`);
     console.log(`📝 Files Modified: ${this.state.modified.length}`);
     console.log(`⚠️  Warnings: ${this.state.warnings.length}`);
     console.log(`❌ Errors: ${this.state.errors.length}`);
-    
+
     if (this.state.completedSteps.length > 0) {
       console.log('\\n✅ COMPLETED STEPS:');
       this.state.completedSteps.forEach((step, index) => {
@@ -841,7 +811,7 @@ class WorkspaceSetup {
       for (let i = 0; i < setupMethods.length; i++) {
         this.state.currentStep = i;
         const success = setupMethods[i].call(this);
-        
+
         if (!success && this.config.setupSteps[i] === 'required') {
           this.logError(`Required setup step failed: ${this.config.setupSteps[i]}`);
           break;

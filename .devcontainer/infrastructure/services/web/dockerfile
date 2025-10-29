@@ -40,7 +40,6 @@ RUN mkdir -p /build/.npm-cache && chmod -R 777 /build/.npm-cache
 COPY server/package.json server/package-lock.json ./
 COPY server/packages ./packages
 COPY server/apps/web ./apps/web
-COPY server/apps/docs ./apps/docs
 
 # Install all dependencies including dev tools
 RUN npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps
