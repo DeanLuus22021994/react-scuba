@@ -225,10 +225,11 @@ services:
       - --oci-worker-gc-keepstorage=5000
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "sh", "-c", "test -S /run/buildkit/buildkitd.sock"]
+      test: ["CMD-SHELL", "nc -z localhost 1234 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 15s
 
   github-runner:
     build:
@@ -276,6 +277,11 @@ services:
       - /dev/disk/:/dev/disk:ro
     devices:
       - /dev/kmsg
+    command:
+      - "--docker_only=true"
+      - "--housekeeping_interval=10s"
+      - "--max_housekeeping_interval=30s"
+      - "--storage_duration=2m"
     restart: unless-stopped
     healthcheck:
       test:
@@ -831,7 +837,7 @@ services:
       - react_scuba_redisinsight-data:/data
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://localhost:5540 || exit 1"]
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:5540 || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5

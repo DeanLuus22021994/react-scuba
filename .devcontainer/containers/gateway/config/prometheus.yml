@@ -1,0 +1,63 @@
+# React Scuba MCP Cluster - Prometheus Configuration
+# Monitors all exporters in the MCP monitoring stack
+
+global:
+  scrape_interval: 15s      # Default scrape interval
+  scrape_timeout: 10s       # Default scrape timeout (must be less than interval)
+  evaluation_interval: 15s  # Evaluate rules every 15s
+
+# Scrape configurations for all MCP cluster exporters
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          cluster: 'mcp-cluster'
+          tier: 'monitoring'
+
+  # Node Exporter - Host system metrics
+  - job_name: 'node-exporter'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['172.28.0.76:9100']
+        labels:
+          cluster: 'mcp-cluster'
+          tier: 'monitoring'
+          service: 'node-exporter'
+
+  # cAdvisor - Container metrics
+  - job_name: 'cadvisor'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['172.28.0.75:8080']
+        labels:
+          cluster: 'mcp-cluster'
+          tier: 'monitoring'
+          service: 'cadvisor'
+
+  # PostgreSQL Exporter - Database metrics
+  - job_name: 'postgres-exporter'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['172.28.0.77:9187']
+        labels:
+          cluster: 'mcp-cluster'
+          tier: 'monitoring'
+          service: 'postgres-exporter'
+          database: 'postgresql'
+
+  # MySQL Exporter - MariaDB metrics
+  - job_name: 'mysql-exporter'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['172.28.0.78:9104']
+        labels:
+          cluster: 'mcp-cluster'
+          tier: 'monitoring'
+          service: 'mysql-exporter'
+          database: 'mariadb'
