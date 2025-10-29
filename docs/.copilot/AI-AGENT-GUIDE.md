@@ -271,6 +271,108 @@ For new industry implementations:
 
 ## Advanced Agent Patterns
 
+### Planning Workflow for Development Tasks
+
+**CRITICAL**: All development tasks require comprehensive planning documentation before implementation.
+
+#### Pattern: Research-First Development
+
+```markdown
+When addressing a development issue:
+
+1. **Research Phase** (Conduct FIRST, ALWAYS)
+   - Search `.copilot-tracking/research/` for existing analysis
+   - If missing/incomplete, create new research file:
+     * Analyze codebase for root causes
+     * Review external documentation  
+     * Test current behavior
+     * Document findings with evidence
+   - File: `YYYYMMDD-task-description-research.md`
+
+2. **Planning Phase** (After research validation)
+   - Create plan file with phases and checkboxes
+     * File: `YYYYMMDD-task-description-plan.instructions.md`
+     * Frontmatter: `applyTo: '.copilot-tracking/changes/...-changes.md'`
+   - Create details file with specifications
+     * File: `YYYYMMDD-task-description-details.md`
+     * Include line number references to research
+   - Create changes file template
+     * File: `YYYYMMDD-task-description-changes.md`
+     * Real-time tracking structure
+   - Create prompt file for agent execution
+     * File: `implement-task-description.prompt.md`
+     * Frontmatter: `---\nmode: agent\nmodel: Claude Sonnet 4\n---`
+
+3. **Implementation Phase** (Execute via agent mode)
+   - Agent follows prompt file step-by-step
+   - Updates changes file in real-time
+   - Verifies each phase completion
+   - Provides summary with markdown links
+
+4. **Archival Phase** (After completion)
+   - Move 4 files to `docs/archive/planning/`
+   - Update `docs/archive/ARCHIVE_INDEX.md`
+   - Delete prompt file
+   - Commit with descriptive message
+```
+
+#### Pattern: Planning File Structure
+
+```markdown
+Required 5 Planning Documents:
+
+1. **Research File** (Foundation)
+   - Issue analysis and root cause
+   - Solution options with trade-offs
+   - External references
+   - Verification results
+
+2. **Plan File** (Execution Roadmap)
+   - Task overview and objectives
+   - Phase breakdown with checkboxes
+   - Line references: "Details: file.md (Lines X-Y)"
+   - Success criteria
+
+3. **Details File** (Specifications)
+   - Research references with line numbers
+   - File-by-file implementation specs
+   - Command execution details
+   - Verification steps per task
+
+4. **Changes File** (Real-time Tracking)
+   - Command outputs and results
+   - Files modified (before/after)
+   - Timestamps for each change
+   - Final verification checklist
+
+5. **Prompt File** (Agent Instructions)
+   - Step-by-step execution process
+   - Verification commands
+   - Cleanup and archival steps
+   - Mode: agent, Model: Claude Sonnet 4
+```
+
+#### Pattern: Planning Best Practices
+
+```markdown
+Cross-Reference Guidelines:
+
+- **Line Numbers**: Always include "(Lines X-Y)" when referencing files
+- **Template Markers**: Use {{placeholder}} for content needing replacement  
+- **Research First**: Never plan without validated research
+- **Atomic Tasks**: Break large tasks into phases with checkboxes
+- **Verification**: Include exact commands for validation
+- **Linking**: Cross-reference related sections across all 5 files
+
+Example Iteration:
+20251029-vscode-language-server-*
+├── research.md   (10.2 KB) - Root cause analysis
+├── plan.md       (2.8 KB)  - 3 phases, 6 tasks
+├── details.md    (12.1 KB) - Specifications
+├── changes.md    (3.5 KB)  - Tracking
+└── prompt.md     (8.1 KB)  - Execution
+```
+
 ### Context-Aware Code Generation
 
 #### Pattern: Full-Stack Feature Implementation
@@ -278,25 +380,36 @@ For new industry implementations:
 ```markdown
 When implementing a new multi-tenant feature:
 
-1. Architecture Phase:
+1. **Planning Phase** (REQUIRED FIRST)
+   - Create research file analyzing feature requirements
+   - Document multi-tenant isolation requirements
+   - Plan data model with tenant context
+   - Create complete 5-file planning set
+
+2. Architecture Phase:
    - Review multi-tenant concepts and constraints
    - Design tenant-aware data models
    - Plan configuration schema extensions
 
-2. Backend Implementation:
+3. Backend Implementation:
    - Generate Express routes with tenant context
    - Implement database queries with tenant isolation
    - Create API endpoints with proper validation
 
-3. Frontend Implementation:  
+4. Frontend Implementation:  
    - Generate React components with tenant theming
    - Implement client configuration consumption
    - Create responsive, accessible UI patterns
 
-4. Testing & Validation:
+5. Testing & Validation:
    - Generate unit tests for business logic
    - Create integration tests for multi-tenant scenarios
    - Validate feature flags and configuration variants
+
+6. **Archival Phase** (REQUIRED LAST)
+   - Archive planning files to docs/archive/planning/
+   - Update ARCHIVE_INDEX.md
+   - Delete prompt file
 ```
 
 #### Pattern: Documentation-Driven Development
@@ -309,6 +422,8 @@ Using documentation to guide implementation:
 3. Apply modern technology patterns (modernization/)
 4. Follow quick-start examples (getting-started/)
 5. Reference future planning (planning/)
+6. **Create planning documentation in .copilot-tracking/**
+7. Archive planning docs in docs/archive/planning/ when complete
 ```
 
 ## Maintenance & Evolution

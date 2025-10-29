@@ -211,6 +211,107 @@ npm run clean:all               # Clean + remove node_modules
 - `server/apps/web/vite.config.js`: Vite build config
 - `server/apps/web/tailwind.config.js`: Tailwind config
 
+## Planning Workflow
+
+**CRITICAL**: All development tasks require comprehensive planning documentation in `.copilot-tracking/`.
+
+### Planning Directory Structure
+
+```
+.copilot-tracking/
+├── research/        # Research findings and analysis
+├── plans/          # Task checklists with phase breakdown
+├── details/        # Comprehensive implementation specifications
+├── changes/        # Implementation tracking and verification
+└── prompts/        # Agent execution instructions
+```
+
+### Required Planning Files (5 documents)
+
+**1. Research File** (`YYYYMMDD-task-description-research.md`)
+- Issue analysis and root cause identification
+- Solution options with trade-offs
+- External references and documentation
+- Verification results and testing outcomes
+
+**2. Plan File** (`YYYYMMDD-task-description-plan.instructions.md`)
+- Task overview and objectives
+- Phase breakdown with checkboxes
+- Line number references to details file
+- Success criteria and dependencies
+- Frontmatter: `applyTo: '.copilot-tracking/changes/YYYYMMDD-task-description-changes.md'`
+
+**3. Details File** (`YYYYMMDD-task-description-details.md`)
+- Research references with line numbers
+- File-by-file implementation specifications
+- Command execution details
+- Verification steps per task
+- Success criteria per phase
+
+**4. Changes File** (`YYYYMMDD-task-description-changes.md`)
+- Real-time implementation tracking
+- Command outputs and results
+- Files modified with before/after states
+- Timestamp for each change
+- Final verification checklist
+
+**5. Prompt File** (`implement-task-description.prompt.md`)
+- Agent mode instructions
+- Step-by-step execution process
+- Verification commands
+- Cleanup and archival steps
+- Frontmatter: `---\nmode: agent\nmodel: Claude Sonnet 4\n---`
+
+### Planning Workflow Process
+
+**Step 1: Research** (Always first)
+1. Search `.copilot-tracking/research/` for existing research
+2. If missing/incomplete, conduct comprehensive research:
+   - Analyze codebase for root causes
+   - Review external documentation
+   - Test current behavior
+   - Document all findings with evidence
+3. Create research file with complete analysis
+
+**Step 2: Planning** (After research validation)
+1. Create plan file with phases and tasks
+2. Create details file with specifications
+3. Create changes file template for tracking
+4. Create prompt file for agent execution
+5. Ensure all cross-references use correct line numbers
+
+**Step 3: Implementation** (Execute via agent mode)
+1. Agent follows prompt file instructions
+2. Updates changes file in real-time
+3. Verifies each phase completion
+4. Provides summary with markdown links
+
+**Step 4: Archival** (After completion)
+1. Move 4 planning files to `docs/archive/planning/`
+2. Update `docs/archive/ARCHIVE_INDEX.md`
+3. Delete prompt file
+4. Commit changes with descriptive message
+
+### Planning Best Practices
+
+- **Line Number References**: Always include `(Lines X-Y)` when referencing other files
+- **Template Markers**: Use `{{placeholder}}` for content requiring replacement
+- **Research First**: Never plan without validated research
+- **Atomic Tasks**: Break large tasks into phases with clear checkboxes
+- **Verification Steps**: Include exact commands for validation
+- **Cross-References**: Link related sections across all 5 files
+
+### Example Planning Iteration
+
+```
+20251029-vscode-language-server-*
+├── research.md      (10.2 KB) - Root cause: VS Code TS cache
+├── plan.md          (2.8 KB)  - 3 phases, 6 tasks, 8 min
+├── details.md       (12.1 KB) - Command-by-command specs
+├── changes.md       (3.5 KB)  - Real-time tracking
+└── prompt.md        (8.1 KB)  - Agent execution
+```
+
 ## GitHub Copilot Output Guidelines
 
 **CRITICAL**: Do NOT create summary documents, markdown reports, or changelog files unless explicitly requested by the user.
@@ -219,6 +320,7 @@ npm run clean:all               # Clean + remove node_modules
 - **No Summaries**: Never generate summary.md, changes.md, or similar files automatically
 - **Concise Responses**: Keep responses brief and actionable
 - **Direct Implementation**: Make changes directly without documentation overhead
+- **Planning Exception**: The 5 planning files in `.copilot-tracking/` are REQUIRED for all development tasks
 
 ## GitHub Copilot Tips
 
@@ -226,5 +328,7 @@ npm run clean:all               # Clean + remove node_modules
 - Reference VS Code schemas in **.vscode/schemas/** directory (use file reference syntax)
 - Reference MCP server configs in **.vscode/mcp-servers/** directory (use file reference syntax)
 - Reference client configs in **server/clients/** directory (use file reference syntax)
+- Reference planning files in **.copilot-tracking/** directory for task context
 - Mention **"multi-tenant"** for client-specific context
 - Mention **"npm workspaces monorepo"** for workspace context
+- Mention **"planning mode"** to trigger planning workflow
