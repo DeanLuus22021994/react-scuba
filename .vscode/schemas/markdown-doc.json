@@ -219,9 +219,12 @@
         "development",
         "architecture",
         "multi-tenant",
-        "npm-workspaces-monorepo"
+        "npm-workspaces-monorepo",
+        "infrastructure",
+        "modernization",
+        "planning"
       ],
-      "examples": ["guide", "reference", "deployment"]
+      "examples": ["guide", "reference", "deployment", "architecture", "infrastructure"]
     },
     "priority": {
       "type": "string",
@@ -261,11 +264,11 @@
       "description": "Target audience for this documentation (helps with content filtering and recommendations)",
       "items": {
         "type": "string",
-        "enum": ["developers", "architects", "devops", "contributors", "beginners", "advanced", "maintainers", "clients"]
+        "enum": ["developers", "architects", "devops", "contributors", "beginners", "advanced", "maintainers", "clients", "ai-copilot"]
       },
       "minItems": 1,
       "uniqueItems": true,
-      "examples": [["developers", "architects"], ["beginners"]]
+      "examples": [["developers", "architects"], ["beginners"], ["ai-copilot"]]
     },
     "difficulty": {
       "type": "string",
@@ -552,6 +555,40 @@
           "default": false
         }
       }
+    },
+    "ai_hints": {
+      "type": "array",
+      "description": "AI semantic indexing hints for Copilot and MCP servers (used in .copilot/ documentation)",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "examples": [
+        ["multi-tenancy", "saas-architecture", "tenant-isolation"],
+        ["devcontainer", "vscode-insiders", "hybrid-volumes"],
+        ["bleeding-edge-stack", "react-19", "vite-7"]
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "description": "Documentation domain for AI-optimized structure (used in .copilot/ documentation)",
+      "enum": ["architecture", "infrastructure", "modernization", "getting-started", "planning"],
+      "examples": ["architecture", "infrastructure", "modernization"]
+    },
+    "related_documents": {
+      "type": "array",
+      "description": "Related documents within .copilot/ structure for semantic navigation",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z-/]+\\.md$"
+      },
+      "uniqueItems": true,
+      "examples": [
+        ["infrastructure/devcontainer-architecture.md", "modernization/tech-stack-overview.md"]
+      ]
     }
   },
   "additionalProperties": false,

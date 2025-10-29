@@ -8,9 +8,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '../..');
 
 interface CopilotFile {
@@ -49,7 +50,7 @@ function ensureDir(filePath: string): void {
 
 function createFile(file: CopilotFile): boolean {
   const fullPath = path.resolve(ROOT_DIR, file.path);
-  
+
   if (fs.existsSync(fullPath)) {
     log(`⚠️  Skipping ${file.path} (already exists)`, colors.yellow);
     return false;
@@ -791,7 +792,7 @@ data/
 
 function executePhase(phaseId: string): void {
   const phase = phases.find((p) => p.id === phaseId);
-  
+
   if (!phase) {
     log(`❌ Phase "${phaseId}" not found`, colors.red);
     process.exit(1);
@@ -835,10 +836,10 @@ function validateContext(): void {
   function findFiles(dir: string): void {
     try {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
-      
+
       for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
-        
+
         if (entry.isDirectory() && entry.name !== 'node_modules' && entry.name !== '.git') {
           findFiles(fullPath);
         } else if (entry.isFile()) {

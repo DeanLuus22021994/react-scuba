@@ -58,4 +58,4 @@ Template for onboarding new diving centers to the React Scuba multi-tenant platf
 
 The platform includes built-in Zod validation for all configuration fields. Invalid configurations will be rejected with detailed error messages.
 
-**Reference:** `MULTI_TENANT_ARCHITECTURE.md` for complete implementation details.
+**Reference:** `docs/.copilot/architecture/multi-tenant-concepts.md` for complete implementation details.

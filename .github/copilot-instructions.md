@@ -187,9 +187,14 @@ npm run clean:all               # Clean + remove node_modules
 
 ### Documentation
 
-- `DEVELOPMENT.md`: Development setup guide
-- `IMPLEMENTATION_SUMMARY.md`: Architecture overview
-- `MULTI_TENANT_ARCHITECTURE.md`: Multi-tenancy details
+- `docs/.copilot/`: AI-optimized semantic documentation structure
+  - `architecture/`: Multi-tenant and multi-industry concepts
+  - `infrastructure/`: DevContainer and development workflow
+  - `modernization/`: Technology stack and achievements
+  - `getting-started/`: Quick start setup and verification
+  - `planning/`: Infrastructure tasks and platform roadmap
+- `docs/.copilot/toc.yml`: Semantic table of contents with AI indexing
+- `docs/archive/original/`: Archived original documentation (DEVCONTAINER.md, DEVELOPMENT.md, etc.)
 - `server/apps/docs/`: VitePress documentation site
 
 ### Build Tooling

@@ -808,6 +808,29 @@
       }
     },
     // ===========================
+    // VS Code Language Server Management
+    // ===========================
+    {
+      "label": "TypeScript: Restart Language Server",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$tsconfig = '.vscode/scripts/tsconfig.json'; if (Test-Path $tsconfig) { (Get-Item $tsconfig).LastWriteTime = Get-Date; Write-Host 'TypeScript config touched - language server will reload automatically' } else { Write-Host 'TypeScript config not found' }"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "focus": false,
+        "clear": false,
+        "echo": false,
+        "showReuseMessage": false
+      },
+      "detail": "Touches tsconfig.json to trigger automatic TypeScript language server reload"
+    },
+    // ===========================
     // VS Code Insiders Management
     // ===========================
     {

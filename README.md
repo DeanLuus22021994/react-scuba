@@ -28,7 +28,7 @@ A modern, production-ready website platform for dive centers and marine tourism 
 - 📧 **Forms** - Contact & booking with validation & reCAPTCHA
 - 📞 **CTAs** - Click-to-call, WhatsApp integration
 
-### Code Quality
+### Linting
 
 - ✅ **ESLint** - Code quality enforcement
 - ✨ **Prettier** - Consistent code formatting
@@ -56,11 +56,11 @@ A modern, production-ready website platform for dive centers and marine tourism 
 2. **Optional: Set up Python environment with UV:**
    \`\`\`bash
 
-   # Install UV (fast Python package manager)
+   ## Install UV (fast Python package manager)
 
    curl -LsSf <https://astral.sh/uv/install.sh> | sh
 
-   # Set up Python environment
+   ## Set up Python environment
 
    npm run python:setup
    \`\`\`
@@ -69,7 +69,7 @@ A modern, production-ready website platform for dive centers and marine tourism 
    \`\`\`bash
    cp .env.example .env
 
-   # Edit .env with your API keys
+   ## Edit .env with your API keys
 
    \`\`\`
 
@@ -92,7 +92,7 @@ A modern, production-ready website platform for dive centers and marine tourism 
 - `npm run test:ui` - Run tests with UI
 - `npm run test:coverage` - Generate coverage report
 
-### Code Quality
+### Code Quality & Linting
 
 - `npm run lint` - Check for lint errors
 - `npm run lint:fix` - Auto-fix lint errors
@@ -115,12 +115,25 @@ A modern, production-ready website platform for dive centers and marine tourism 
 
 ## 📚 Documentation
 
+### AI-Optimized Structure
+
+Documentation is organized in `docs/.copilot/` for AI semantic indexing:
+
+- **Architecture** - Multi-tenant and multi-industry concepts
+- **Infrastructure** - DevContainer, MCP services, development workflow
+- **Modernization** - Technology stack and build optimizations
+- **Getting Started** - Quick start setup and verification
+- **Planning** - Infrastructure tasks and platform roadmap
+
+See [`docs/.copilot/MIGRATION.md`](./docs/.copilot/MIGRATION.md) for migration guide from legacy docs.
+
+### Online Documentation
+
 - **[Online Documentation](https://deanluus22021994.github.io/react-scuba/)** - Complete VitePress documentation
 - **[Contributing Guide](https://deanluus22021994.github.io/react-scuba/contributing.html)** - Development guidelines and contribution process
 - **[Quick Start](https://deanluus22021994.github.io/react-scuba/guide/quick-start.html)** - Get up and running in 5 minutes
 - **[API Reference](https://deanluus22021994.github.io/react-scuba/api/)** - Component documentation
 - **[Deployment Guide](https://deanluus22021994.github.io/react-scuba/deployment/)** - Production deployment
-- **[Docker Deployment Guide](./docs/deployment/docker.md)** - Docker and Docker Compose setup
 - **[.env.example](./.env.example)** - Environment variables reference
 
 ## 🐳 Docker Compose Examples (Optional)

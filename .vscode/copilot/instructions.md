@@ -123,6 +123,37 @@ Use `@workspace` for project-wide understanding:
 
 ## File Structure Reference
 
+### Documentation (docs/.copilot/)
+
+AI-optimized semantic structure organized by domain:
+
+```text
+docs/.copilot/
+├── toc.yml                        # Semantic table of contents
+├── architecture/                  # Multi-tenant concepts
+│   ├── multi-tenant-concepts.md
+│   ├── multi-tenant-configuration.md
+│   └── multi-industry-concepts.md
+├── infrastructure/                # DevContainer and workflow
+│   ├── devcontainer-architecture.md
+│   ├── devcontainer-mcp-services.md
+│   ├── devcontainer-volumes.md
+│   ├── development-workflow.md
+│   └── development-infrastructure.md
+├── modernization/                 # Tech stack evolution
+│   ├── tech-stack-overview.md
+│   ├── build-optimizations.md
+│   └── modernization-achievements.md
+├── getting-started/               # Quick start guides
+│   ├── quickstart-setup.md
+│   └── quickstart-verification.md
+└── planning/                      # Roadmap and tasks
+    ├── infrastructure-tasks.md
+    └── todo-platform.md
+```
+
+**Note**: Original documentation archived in `docs/archive/original/`
+
 ### Frontend (apps/web)
 
 ```text
