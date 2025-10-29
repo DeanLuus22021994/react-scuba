@@ -1,6 +1,8 @@
-// docs/.copilot/__tests__/link-checker.test.ts
+// .copilot/__tests__/link-checker.test.ts
 import { describe, it, expect, beforeAll } from 'vitest';
+// @ts-ignore - fs is a Node.js built-in that will resolve at runtime
 import * as fs from 'fs';
+// @ts-ignore - path is a Node.js built-in that will resolve at runtime
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 
@@ -35,7 +37,7 @@ describe('Documentation Link Checker', () => {
   it('should have all files referenced in TOC', () => {
     const missingFiles: string[] = [];
 
-    for (const [domainName, domain] of Object.entries(toc.domains)) {
+    for (const [, domain] of Object.entries(toc.domains)) {
       const domainPath = path.join(DOCS_ROOT, domain.path.replace('./', ''));
 
       for (const file of domain.files) {
@@ -52,11 +54,11 @@ describe('Documentation Link Checker', () => {
   it('should have all cross-references valid', () => {
     const brokenRefs: string[] = [];
 
-    for (const [domain, refs] of Object.entries(toc.cross_references)) {
+    for (const [domainRef, refs] of Object.entries(toc.cross_references)) {
       for (const ref of refs) {
         const refPath = path.join(DOCS_ROOT, ref);
         if (!fs.existsSync(refPath)) {
-          brokenRefs.push(`${domain} -> ${ref}`);
+          brokenRefs.push(`${domainRef} -> ${ref}`);
         }
       }
     }
@@ -67,7 +69,7 @@ describe('Documentation Link Checker', () => {
   it('should have all related_documents in frontmatter valid', () => {
     const brokenRelated: string[] = [];
 
-    for (const [domainName, domain] of Object.entries(toc.domains)) {
+    for (const [, domain] of Object.entries(toc.domains)) {
       const domainPath = path.join(DOCS_ROOT, domain.path.replace('./', ''));
 
       for (const file of domain.files) {
@@ -99,7 +101,7 @@ describe('Documentation Link Checker', () => {
     const fileNames: string[] = [];
     const duplicates: string[] = [];
 
-    for (const [domainName, domain] of Object.entries(toc.domains)) {
+    for (const [, domain] of Object.entries(toc.domains)) {
       for (const file of domain.files) {
         if (fileNames.includes(file.name)) {
           duplicates.push(file.name);

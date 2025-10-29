@@ -1,6 +1,8 @@
-// docs/.copilot/__tests__/orphan-detector.test.ts
+// .copilot/__tests__/orphan-detector.test.ts
 import { describe, it, expect, beforeAll } from 'vitest';
+// @ts-ignore - fs is a Node.js built-in that will resolve at runtime
 import * as fs from 'fs';
+// @ts-ignore - path is a Node.js built-in that will resolve at runtime
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 
@@ -57,7 +59,7 @@ describe('Orphan File Detector', () => {
     }
     
     // Add domain files
-    for (const [domainName, domain] of Object.entries(toc.domains)) {
+    for (const [, domain] of Object.entries(toc.domains)) {
       const domainPath = domain.path.replace('./', '');
       for (const file of domain.files) {
         const filePath = path.join(domainPath, file.name).replace(/\\/g, '/');

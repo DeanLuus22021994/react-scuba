@@ -209,10 +209,10 @@ docs/archive/planning/
 
 **Deliverables**:
 - TOC validation script (`.vscode/scripts/src/documentation/validate-toc.js`)
-- Documentation test suite (3 test files in `docs/.copilot/__tests__/`)
+- Documentation test suite (3 test files in `.copilot/__tests__/`)
 - CI/CD workflows (docs-validation.yml, docs-audit.yml)
 - Pre-commit hooks (install-hooks.js, pre-commit-docs.sh)
-- AI Agent Guide (`docs/.copilot/AI-AGENT-GUIDE.md`)
+- AI Agent Guide (`.copilot/AI-AGENT-GUIDE.md`)
 
 **Outcome**: Enterprise-grade documentation validation infrastructure with automated integrity checks.
 ```

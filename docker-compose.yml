@@ -4,6 +4,14 @@
 # Storage: 250GB NVMe SSD with named volumes for instant rebuilds
 # Network: Host network binding for maximum performance
 # Tier 1: Databases → Tier 2: MCP Services → Tier 3: GPU/AI → Tier 4: Tools
+#
+# MODULAR ARCHITECTURE:
+# - .devcontainer/infrastructure/services/api/dockerfile - Slim API server
+# - .devcontainer/infrastructure/services/web/dockerfile - React dev server
+# - .devcontainer/infrastructure/services/tools/dockerfile - Build tools
+# - docker-compose.base.yml - Fragment for base services (dbs, cache)
+# - docker-compose.app.yml - Fragment for app services (api, web, tools)
+# - docker-compose.infra.yml - Fragment for infrastructure (monitoring)
 
 services:
   # ==== TIER 1: Databases (starts first) ====
@@ -878,6 +886,67 @@ services:
       retries: 3
       start_period: 15s
 
+  # ==== TIER 7.5: API Server Layer (Node slim production) ====
+  node-api:
+    build:
+      context: .
+      dockerfile: .devcontainer/infrastructure/services/api/dockerfile
+    image: react-scuba-api:latest
+    container_name: node-api
+    hostname: node-api
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.64
+    ports:
+      - "8003:3000"
+    env_file:
+      - devcontainer.env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - API_LOG_LEVEL=info
+      - DB_HOST=postgres-db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
+      - DB_NAME=postgres
+      - CACHE_HOST=memcached
+      - CACHE_PORT=11211
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - react_scuba_api-logs:/var/log/api
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      mariadb:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.5"
+          memory: 256M
+    stdin_open: true
+    tty: false
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   # ==== TIER 8: MCP Servers (document conversion) ====
   markitdown-mcp:
     build:
@@ -965,6 +1034,8 @@ volumes:
     name: react_scuba_redisinsight-data
   react_scuba_node-bootstrap-cache:
     name: react_scuba_node-bootstrap-cache
+  react_scuba_api-logs:
+    name: react_scuba_api-logs
   react_scuba_markitdown-cache:
     name: react_scuba_markitdown-cache
   # Workspace-specific named volumes for dependency isolation

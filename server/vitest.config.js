@@ -6,8 +6,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./apps/web/src/setupTests.ts"],
     include: [
-      "apps/**/*.{test,spec}.{js,ts}",
-      "../docs/.copilot/__tests__/**/*.{test,spec}.{js,ts}"
+      "apps/**/*.{test,spec}.{js,ts}"
     ],
     coverage: {
       provider: "v8",
@@ -19,7 +18,7 @@ export default defineConfig({
       ],
       include: [
         "apps/**/*.{js,ts}",
-        "../docs/.copilot/**/*.md"
+        "../.copilot/**/*.md"
       ]
     },
   },

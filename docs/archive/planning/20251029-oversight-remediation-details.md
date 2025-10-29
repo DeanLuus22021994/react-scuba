@@ -50,7 +50,7 @@ Add npm scripts for easy validation execution.
 
 - **Scripts to Add**:
   - `"validate:toc": "node ../.vscode/scripts/validate-toc.js"`
-  - `"validate:docs": "npm run validate:toc && npm test -- docs/.copilot/__tests__/"`
+  - `"validate:docs": "npm run validate:toc && npm test -- .copilot/__tests__/"`
   - `"validate:all": "npm run validate:docs && npm run lint"`
 
 - **Success**:
@@ -97,7 +97,7 @@ Install and configure validation dependencies.
 Comprehensive test suite for documentation link validation.
 
 - **Files**:
-  - `docs/.copilot/__tests__/link-checker.test.ts` - Test suite (NEW)
+  - `.copilot/__tests__/link-checker.test.ts` - Test suite (NEW)
 
 - **Tests to Implement**:
   1. All TOC files exist
@@ -125,13 +125,13 @@ Comprehensive test suite for documentation link validation.
 
 ### Task 2.2: Create orphan file detector test
 
-Detect files in docs/.copilot/ not referenced in TOC.
+Detect files in .copilot/ not referenced in TOC.
 
 - **Files**:
-  - `docs/.copilot/__tests__/orphan-detector.test.ts` - Test suite (NEW)
+  - `.copilot/__tests__/orphan-detector.test.ts` - Test suite (NEW)
 
 - **Implementation**:
-  - Scan all .md files in docs/.copilot/ recursively
+  - Scan all .md files in .copilot/ recursively
   - Load TOC and build list of referenced files
   - Compare scanned vs referenced
   - Report orphaned files
@@ -158,7 +158,7 @@ Detect files in docs/.copilot/ not referenced in TOC.
 Validate toc.yml against JSON schema.
 
 - **Files**:
-  - `docs/.copilot/__tests__/schema-validation.test.ts` - Test suite (NEW)
+  - `.copilot/__tests__/schema-validation.test.ts` - Test suite (NEW)
 
 - **Implementation**:
   - Load toc-schema.json
@@ -187,7 +187,7 @@ Configure Vitest to include documentation tests.
   - `server/vitest.config.js` - Update test patterns
 
 - **Changes**:
-  - Add `'../docs/.copilot/__tests__/**/*.test.ts'` to test.include
+  - Add `'../.copilot/__tests__/**/*.test.ts'` to test.include
   - Ensure coverage includes docs tests
 
 - **Success**:
@@ -211,7 +211,7 @@ GitHub Actions workflow for automated validation.
   - `.github/workflows/docs-validation.yml` - Workflow (NEW)
 
 - **Triggers**:
-  - Pull requests modifying docs/.copilot/
+  - Pull requests modifying .copilot/
   - Pushes to main branch
 
 - **Jobs**:
@@ -314,7 +314,7 @@ Bash script for pre-commit validation.
   - `.vscode/scripts/pre-commit-docs.sh` - Hook script (NEW)
 
 - **Implementation**:
-  - Check if docs/.copilot/ files are staged
+  - Check if .copilot/ files are staged
   - Run TOC validation script
   - Run link checker tests
   - Block commit if validation fails
@@ -371,7 +371,7 @@ Document hook installation process.
 
 - **Files**:
   - `README.md` - Add hook setup section
-  - `docs/.copilot/MIGRATION.md` - Add to contributor guidelines
+  - `.copilot/MIGRATION.md` - Add to contributor guidelines
 
 - **Content**:
   - Explanation of pre-commit validation
@@ -397,7 +397,7 @@ Document hook installation process.
 Comprehensive guide for AI agents and contributors.
 
 - **Files**:
-  - `docs/.copilot/AI-AGENT-GUIDE.md` - Usage guide (NEW)
+  - `.copilot/AI-AGENT-GUIDE.md` - Usage guide (NEW)
 
 - **Content Sections**:
   1. **Overview**: Purpose of AI-optimized structure
@@ -431,7 +431,7 @@ Comprehensive guide for AI agents and contributors.
 Add AI-AGENT-GUIDE.md to TOC structure.
 
 - **Files**:
-  - `docs/.copilot/toc.yml` - Add file entry
+  - `.copilot/toc.yml` - Add file entry
 
 - **Changes**:
   - Add to infrastructure domain (best fit)
@@ -455,7 +455,7 @@ Add AI-AGENT-GUIDE.md to TOC structure.
 Reference agent guide in migration documentation.
 
 - **Files**:
-  - `docs/.copilot/MIGRATION.md` - Add reference in "For Contributors" section
+  - `.copilot/MIGRATION.md` - Add reference in "For Contributors" section
 
 - **Changes**:
   - Add bullet point linking to AI-AGENT-GUIDE.md

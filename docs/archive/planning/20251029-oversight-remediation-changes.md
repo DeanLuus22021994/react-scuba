@@ -21,11 +21,11 @@ Successfully implemented comprehensive documentation validation infrastructure a
 - `server/package.json` - Added validation npm scripts (validate:toc, validate:docs, validate:all)
 
 **Phase 2: Test Suite**
-- `docs/.copilot/__tests__/link-checker.test.ts` - Link validation tests (EXISTING)
-- `docs/.copilot/__tests__/orphan-detector.test.ts` - Orphan file detection (EXISTING)
-- `docs/.copilot/__tests__/schema-validation.test.ts` - Schema compliance tests (EXISTING)
-- `docs/.copilot/__tests__/tsconfig.json` - TypeScript configuration for test compilation (NEW)
-- `docs/.copilot/__tests__/js-yaml.d.ts` - Type declarations for js-yaml module (EXISTING)
+- `.copilot/__tests__/link-checker.test.ts` - Link validation tests (EXISTING)
+- `.copilot/__tests__/orphan-detector.test.ts` - Orphan file detection (EXISTING)
+- `.copilot/__tests__/schema-validation.test.ts` - Schema compliance tests (EXISTING)
+- `.copilot/__tests__/tsconfig.json` - TypeScript configuration for test compilation (NEW)
+- `.copilot/__tests__/js-yaml.d.ts` - Type declarations for js-yaml module (EXISTING)
 
 **Phase 3: CI/CD Integration**
 - `.github/workflows/docs-validation.yml` - PR validation workflow (EXISTING)
@@ -36,8 +36,8 @@ Successfully implemented comprehensive documentation validation infrastructure a
 - `.vscode/scripts/src/setup/pre-commit-docs.sh` - Pre-commit validation script (EXISTING from enterprise reorganization)
 
 **Phase 5: Agent Guidance**
-- `docs/.copilot/AI-AGENT-GUIDE.md` - AI agent usage guide (EXISTING)
-- `docs/.copilot/toc.yml` - Updated with agent guide reference (TO VERIFY)
+- `.copilot/AI-AGENT-GUIDE.md` - AI agent usage guide (EXISTING)
+- `.copilot/toc.yml` - Updated with agent guide reference (TO VERIFY)
 
 ### Files Modified
 
@@ -102,8 +102,8 @@ Successfully implemented comprehensive documentation validation infrastructure a
 - Ensures proper YAML format
 
 **Task 2.4**: Updated Vitest configuration
-- Added `../docs/.copilot/__tests__/**/*.{test,spec}.{js,ts}` to test include
-- Created `docs/.copilot/__tests__/tsconfig.json` for TypeScript compilation
+- Added `../.copilot/__tests__/**/*.{test,spec}.{js,ts}` to test include
+- Created `.copilot/__tests__/tsconfig.json` for TypeScript compilation
 - Added resolve extensions to vitest.config.js for proper TypeScript handling
 - Removed docs tests from coverage exclude
 
@@ -174,7 +174,7 @@ Successfully implemented comprehensive documentation validation infrastructure a
   - Advanced patterns and maintenance guidelines
 
 **Task 5.2**: TOC entry verified
-- `docs/.copilot/toc.yml` includes ai_agent_guide section at top level
+- `.copilot/toc.yml` includes ai_agent_guide section at top level
 - Proper metadata: name, title, description
 - AI hints: [ai-agents, github-copilot, documentation-patterns, semantic-indexing, automation]
 - Cross-references to 4 domains: architecture, infrastructure, modernization, getting-started
@@ -196,12 +196,12 @@ Successfully implemented comprehensive documentation validation infrastructure a
 **Verification**: ✅ All Phase 5 tasks complete
 
 **Files Modified**:
-- `docs/.copilot/MIGRATION.md` - Added "For AI Agents" section
+- `.copilot/MIGRATION.md` - Added "For AI Agents" section
 - `.github/copilot-instructions.md` - Added validation commands and agent guide reference
 
 **Files Verified**:
-- `docs/.copilot/AI-AGENT-GUIDE.md` - Comprehensive content exists
-- `docs/.copilot/toc.yml` - Agent guide properly indexed
+- `.copilot/AI-AGENT-GUIDE.md` - Comprehensive content exists
+- `.copilot/toc.yml` - Agent guide properly indexed
 
 ---
 
@@ -234,7 +234,7 @@ Successfully implemented comprehensive documentation validation infrastructure a
 
 ## Known Issues
 
-1. **TypeScript Test Transpilation**: Documentation tests in `docs/.copilot/__tests__/` are TypeScript files located outside the main server workspace. Vitest/Vite needs additional configuration to transpile these files. Current workaround: validate-toc.js script works independently and provides core validation functionality.
+1. **TypeScript Test Transpilation**: Documentation tests in `.copilot/__tests__/` are TypeScript files located outside the main server workspace. Vitest/Vite needs additional configuration to transpile these files. Current workaround: validate-toc.js script works independently and provides core validation functionality.
 
 ## Implementation Notes
 

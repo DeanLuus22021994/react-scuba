@@ -1,0 +1,162 @@
+# ==============================================================================
+# docker-compose.base.yml - Base Infrastructure Services
+# ==============================================================================
+# Purpose: Database, cache, and core infrastructure for cluster
+# Composition: PostgreSQL, MariaDB, Memcached, Redis
+# Network: mcp-cluster (shared with all other services)
+# Testing: docker-compose -f docker-compose.base.yml up
+# ==============================================================================
+
+name: react-scuba-base
+
+networks:
+  mcp-cluster:
+    name: mcp-cluster
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          gateway: 172.28.0.1
+
+volumes:
+  postgres-db-volume:
+    name: react_scuba_postgres_volume
+  mariadb-volume:
+    name: react_scuba_mariadb_volume
+  memcached-cache:
+    name: react_scuba_memcached_cache
+  redis-cache:
+    name: react_scuba_redis_cache
+
+services:
+  # ==== TIER 1: Databases ====
+
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres-db
+    hostname: postgres-db
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.20
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
+      - POSTGRES_INITDB_ARGS=-c max_connections=200
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  mariadb:
+    image: mariadb:11-alpine
+    container_name: mariadb
+    hostname: mariadb
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.21
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DOCKER_MARIADB_ROOT_PASSWORD:-password}
+      - MYSQL_DATABASE=mariadb
+      - MYSQL_USER=mariadb
+      - MYSQL_PASSWORD=${DOCKER_MARIADB_PASSWORD:-password}
+      - MARIADB_AUTO_UPGRADE=1
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ==== TIER 4: Cache Layer ====
+
+  memcached:
+    image: memcached:1.6-alpine
+    container_name: memcached
+    hostname: memcached
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.60
+    ports:
+      - "11211:11211"
+    command: memcached -m 256 -p 11211
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.61
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-cache:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: redisinsight
+    hostname: redisinsight
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.62
+    ports:
+      - "5540:5540"
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

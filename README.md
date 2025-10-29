@@ -117,7 +117,7 @@ A modern, production-ready website platform for dive centers and marine tourism 
 
 ### AI-Optimized Structure
 
-Documentation is organized in `docs/.copilot/` for AI semantic indexing:
+Documentation is organized in `.copilot/` for AI semantic indexing (at root level):
 
 - **Architecture** - Multi-tenant and multi-industry concepts
 - **Infrastructure** - DevContainer, MCP services, development workflow
@@ -125,7 +125,7 @@ Documentation is organized in `docs/.copilot/` for AI semantic indexing:
 - **Getting Started** - Quick start setup and verification
 - **Planning** - Infrastructure tasks and platform roadmap
 
-See [`docs/.copilot/MIGRATION.md`](./docs/.copilot/MIGRATION.md) for migration guide from legacy docs.
+See [`.copilot/MIGRATION.md`](./.copilot/MIGRATION.md) for migration guide from legacy docs.
 
 ### GitHub Actions Workflows
 

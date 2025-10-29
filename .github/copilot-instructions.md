@@ -192,14 +192,14 @@ npm run clean:all               # Clean + remove node_modules
 
 ### Documentation
 
-- `docs/.copilot/`: AI-optimized semantic documentation structure
+- `.copilot/`: AI-optimized semantic documentation structure (at root level)
   - `architecture/`: Multi-tenant and multi-industry concepts
   - `infrastructure/`: DevContainer and development workflow
   - `modernization/`: Technology stack and achievements
   - `getting-started/`: Quick start setup and verification
   - `planning/`: Infrastructure tasks and platform roadmap
   - `AI-AGENT-GUIDE.md`: Comprehensive guide for AI agents (validation, patterns, debugging)
-- `docs/.copilot/toc.yml`: Semantic table of contents with AI indexing
+- `.copilot/toc.yml`: Semantic table of contents with AI indexing
 - `docs/archive/original/`: Archived original documentation (DEVCONTAINER.md, DEVELOPMENT.md, etc.)
 - `server/apps/docs/`: VitePress documentation site
 - `docs/scripts/validate-toc.js`: TOC validation script (link checking, orphan detection)

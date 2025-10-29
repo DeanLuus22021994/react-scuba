@@ -1,0 +1,49 @@
+# ==============================================================================
+# Node Compiler Base - Foundation for all node services
+# ==============================================================================
+# Purpose: Reusable base image for pre-compiled node services
+# Architecture: Optimized for multi-stage builds inheriting this as base
+# Base: Node.js 22 slim Alpine
+# Performance: Pre-cached build tools, npm cache layers for fast rebuilds
+# Separation of Concerns: Build stage base, inherited by service-specific Dockerfiles
+# ==============================================================================
+
+FROM node:22-slim
+
+LABEL \
+    org.opencontainers.image.title="Node Compiler Base" \
+    org.opencontainers.image.description="Pre-configured build environment for React Scuba services" \
+    org.opencontainers.image.vendor="React Scuba" \
+    maintainer="Dean Luus" \
+    purpose="base-compiler" \
+    node.version="22-slim" \
+    architecture="x86_64"
+
+# Install build-time dependencies (cached layer, optimized for rebuilds)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    make \
+    g++ \
+    ca-certificates \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configure npm for optimal performance
+ENV NPM_CONFIG_CACHE=/build/.npm-cache \
+    NPM_CONFIG_LOGLEVEL=warn \
+    NODE_OPTIONS="--max-old-space-size=2048" \
+    NODE_ENV=development
+
+# Create build directory with proper permissions
+WORKDIR /build
+
+# Create npm cache directory for layer caching
+RUN mkdir -p /build/.npm-cache && chmod -R 777 /build/.npm-cache
+
+# Health check for build environment
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD node --version && npm --version > /dev/null || exit 1
+
+# Default command (can be overridden in child Dockerfiles)
+CMD ["/bin/bash"]

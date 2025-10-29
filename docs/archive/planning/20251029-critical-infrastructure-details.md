@@ -451,10 +451,10 @@ Document archived oversight remediation in index file.
 
   **Deliverables**:
   - TOC validation script (`.vscode/scripts/src/documentation/validate-toc.js`)
-  - Documentation test suite (3 test files in `docs/.copilot/__tests__/`)
+  - Documentation test suite (3 test files in `.copilot/__tests__/`)
   - CI/CD workflows (`docs-validation.yml.disabled`, `docs-audit.yml.disabled`)
   - Pre-commit hooks (`install-hooks.js`, `pre-commit-docs.sh`)
-  - AI Agent Guide (`docs/.copilot/AI-AGENT-GUIDE.md`)
+  - AI Agent Guide (`.copilot/AI-AGENT-GUIDE.md`)
 
   **Outcome**: Enterprise-grade documentation validation infrastructure with automated integrity checks preventing documentation drift.
 

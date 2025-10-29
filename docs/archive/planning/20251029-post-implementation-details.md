@@ -286,7 +286,7 @@ Add documentation explaining why DevContainer volume mounts were deferred.
 
 - **Files**:
   - `.devcontainer/devcontainer.json` - Add comment block
-  - `docs/.copilot/infrastructure/devcontainer-volumes.md` - Update with deferral note
+  - `.copilot/infrastructure/devcontainer-volumes.md` - Update with deferral note
 
 - **Documentation Content** (for devcontainer.json):
   ```jsonc
@@ -388,7 +388,7 @@ Add documentation explaining why DevContainer volume mounts were deferred.
 **Internal Dependencies**:
 - `.vscode/scripts/tsconfig.json` (correct config) ✅
 - `docker-compose.yml` (services running) ✅
-- `docs/.copilot/infrastructure/devcontainer-volumes.md` (documentation file) ✅
+- `.copilot/infrastructure/devcontainer-volumes.md` (documentation file) ✅
 
 **Blocking Issues**: NONE - All dependencies satisfied
 

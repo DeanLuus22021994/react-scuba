@@ -22,8 +22,8 @@ Address 5 critical oversight gaps in documentation decomposition: validation aut
 
 ### Project Files
 
-- docs/.copilot/toc.yml - Semantic TOC with 15 files across 5 domains
-- docs/.copilot/schemas/toc-schema.json - JSON schema for TOC validation
+- .copilot/toc.yml - Semantic TOC with 15 files across 5 domains
+- .copilot/schemas/toc-schema.json - JSON schema for TOC validation
 - .vscode/schemas/markdown-doc.json - Markdown frontmatter schema
 - .github/workflows/*.yml - Existing CI/CD workflows
 - server/package.json - Test scripts and dependencies
@@ -63,17 +63,17 @@ Address 5 critical oversight gaps in documentation decomposition: validation aut
 
 - [x] Task 2.1: Create link checker test suite
   - Details: .copilot-tracking/details/20251029-oversight-remediation-details.md (Lines 167-245)
-  - Files: docs/.copilot/__tests__/link-checker.test.ts
+  - Files: .copilot/__tests__/link-checker.test.ts
   - Tests: file existence, cross-references, frontmatter validation
 
 - [x] Task 2.2: Create orphan file detector test
   - Details: .copilot-tracking/details/20251029-oversight-remediation-details.md (Lines 247-295)
-  - Files: docs/.copilot/__tests__/orphan-detector.test.ts
+  - Files: .copilot/__tests__/orphan-detector.test.ts
   - Detects files not referenced in TOC
 
 - [x] Task 2.3: Create schema validation test
   - Details: .copilot-tracking/details/20251029-oversight-remediation-details.md (Lines 297-335)
-  - Files: docs/.copilot/__tests__/schema-validation.test.ts
+  - Files: .copilot/__tests__/schema-validation.test.ts
   - Validates TOC against JSON schema
 
 - [x] Task 2.4: Update Vitest configuration
@@ -112,24 +112,24 @@ Address 5 critical oversight gaps in documentation decomposition: validation aut
 
 - [x] Task 4.3: Add hook setup to README
   - Details: .copilot-tracking/details/20251029-oversight-remediation-details.md (Lines 647-675)
-  - Files: README.md, docs/.copilot/MIGRATION.md
+  - Files: README.md, .copilot/MIGRATION.md
   - Document hook installation process
 
 ### [x] Phase 5: Agent Guidance Documentation
 
 - [x] Task 5.1: Create AI Agent Usage Guide
   - Details: .copilot-tracking/details/20251029-oversight-remediation-details.md (Lines 677-755)
-  - Files: docs/.copilot/AI-AGENT-GUIDE.md
+  - Files: .copilot/AI-AGENT-GUIDE.md
   - How to query, add files, maintain TOC
 
 - [x] Task 5.2: Update TOC with guide reference
   - Details: .copilot-tracking/details/20251029-oversight-remediation-details.md (Lines 757-795)
-  - Files: docs/.copilot/toc.yml
+  - Files: .copilot/toc.yml
   - Add AI-AGENT-GUIDE.md to infrastructure domain
 
 - [x] Task 5.3: Update migration guide
   - Details: .copilot-tracking/details/20251029-oversight-remediation-details.md (Lines 797-825)
-  - Files: docs/.copilot/MIGRATION.md
+  - Files: .copilot/MIGRATION.md
   - Reference agent guide in "For Contributors" section
 
 - [x] Task 5.4: Update Copilot instructions

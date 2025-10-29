@@ -1,0 +1,23 @@
+# ==============================================================================
+# docker-compose.infra.yml - Infrastructure Services
+# ==============================================================================
+# Purpose: Monitoring, logging, service discovery
+# Composition: Prometheus, Grafana, cAdvisor, node-exporter, nginx
+# Network: mcp-cluster (shared with all other services)
+# Testing: docker-compose -f docker-compose.infra.yml up
+# Note: This file is for future infrastructure consolidation
+# ==============================================================================
+
+name: react-scuba-infra
+
+# Extract relevant infrastructure services from main compose
+# This is a template for future separation of monitoring/load balancing tiers
+# Currently embedded in main docker-compose.yml for operational simplicity
+
+networks:
+  react-scuba_mcp-cluster:
+    name: mcp-cluster
+    external: true
+
+# Placeholder for infrastructure services
+# These will be extracted from main docker-compose.yml in next phase

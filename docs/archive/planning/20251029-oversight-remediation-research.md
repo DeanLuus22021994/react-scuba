@@ -32,10 +32,10 @@ Documentation decomposition completed successfully with 15 files across 5 domain
 8. `README.md` - Fixed markdown lint errors, added AI-optimized docs section
 9. `server/clients/_template/README.md` - Updated architecture reference path
 10. `server/packages/config/tsconfig.node.json` - Changed ES2023 to ES2022
-11. `docs/.copilot/.markdownlint.json` - NEW FILE - MD013, MD025, MD032 suppression
-12. `docs/.copilot/MIGRATION.md` - NEW FILE - Complete migration guide
-13. `docs/.copilot/infrastructure/20251029-docs-decomposition-plan.instructions.md` - Updated completion status
-14. `docs/.copilot/toc.yml` - Removed non-existent file, cleaned whitespace
+11. `.copilot/.markdownlint.json` - NEW FILE - MD013, MD025, MD032 suppression
+12. `.copilot/MIGRATION.md` - NEW FILE - Complete migration guide
+13. `.copilot/infrastructure/20251029-docs-decomposition-plan.instructions.md` - Updated completion status
+14. `.copilot/toc.yml` - Removed non-existent file, cleaned whitespace
 
 **Files Deleted** (1 file):
 
@@ -43,10 +43,10 @@ Documentation decomposition completed successfully with 15 files across 5 domain
 
 ### Project Structure Analysis
 
-**Documentation Structure** (docs/.copilot/):
+**Documentation Structure** (.copilot/):
 
 ```text
-docs/.copilot/
+.copilot/
 ├── toc.yml                          # Semantic TOC with 15 files
 ├── MIGRATION.md                     # Migration guide (NEW)
 ├── .markdownlint.json              # Lint config (NEW)
@@ -86,7 +86,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import yaml from 'js-yaml';
 
-const DOCS_ROOT = path.resolve(process.cwd(), 'docs/.copilot');
+const DOCS_ROOT = path.resolve(process.cwd(), '.copilot');
 const TOC_PATH = path.join(DOCS_ROOT, 'toc.yml');
 
 function validateTOC() {
@@ -129,7 +129,7 @@ process.exit(result.valid ? 0 : 1);
 ### Link Checker Test (Vitest)
 
 ```typescript
-// docs/.copilot/__tests__/link-checker.test.ts
+// .copilot/__tests__/link-checker.test.ts
 import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -235,13 +235,13 @@ name: Documentation Validation
 on:
   pull_request:
     paths:
-      - 'docs/.copilot/**'
+      - '.copilot/**'
       - '.github/workflows/docs-validation.yml'
   push:
     branches:
       - main
     paths:
-      - 'docs/.copilot/**'
+      - '.copilot/**'
 
 jobs:
   validate:
@@ -265,16 +265,16 @@ jobs:
         run: node .vscode/scripts/validate-toc.js
 
       - name: Run link checker tests
-        run: npm test -- docs/.copilot/__tests__/link-checker.test.ts
+        run: npm test -- .copilot/__tests__/link-checker.test.ts
         working-directory: ./server
 
       - name: Check markdown lint
-        run: npx markdownlint-cli2 "docs/.copilot/**/*.md"
+        run: npx markdownlint-cli2 ".copilot/**/*.md"
 
       - name: Validate YAML schema
         run: |
           npm install -g ajv-cli
-          ajv validate -s docs/.copilot/schemas/toc-schema.json -d docs/.copilot/toc.yml
+          ajv validate -s .copilot/schemas/toc-schema.json -d .copilot/toc.yml
 ```
 
 ### Pre-commit Hook
@@ -283,8 +283,8 @@ jobs:
 #!/bin/bash
 # .git/hooks/pre-commit
 
-# Check if docs/.copilot files are staged
-if git diff --cached --name-only | grep -q "^docs/.copilot/"; then
+# Check if .copilot files are staged
+if git diff --cached --name-only | grep -q "^.copilot/"; then
   echo "Validating documentation structure..."
 
   # Run TOC validation
@@ -295,7 +295,7 @@ if git diff --cached --name-only | grep -q "^docs/.copilot/"; then
   fi
 
   # Run link checker
-  cd server && npm test -- docs/.copilot/__tests__/link-checker.test.ts
+  cd server && npm test -- .copilot/__tests__/link-checker.test.ts
   if [ $? -ne 0 ]; then
     echo "❌ Link checker failed. Please fix broken links before committing."
     exit 1
@@ -363,7 +363,7 @@ exit 0
 
 ### Priority 2: Link Checker Test Suite
 
-**Location**: `docs/.copilot/__tests__/link-checker.test.ts`
+**Location**: `.copilot/__tests__/link-checker.test.ts`
 
 **Test Coverage**:
 - All TOC files exist
@@ -379,7 +379,7 @@ exit 0
 **Location**: `.github/workflows/docs-validation.yml`
 
 **Triggers**:
-- Pull requests touching docs/.copilot/
+- Pull requests touching .copilot/
 - Pushes to main branch
 
 **Checks**:
@@ -403,7 +403,7 @@ exit 0
 
 ### Priority 5: Agent Usage Documentation
 
-**Location**: `docs/.copilot/AI-AGENT-GUIDE.md`
+**Location**: `.copilot/AI-AGENT-GUIDE.md`
 
 **Content**:
 - How to query AI-optimized documentation
@@ -437,7 +437,7 @@ exit 0
 
 **Impact**: No automated detection of broken structure
 
-**Solution**: Add Vitest test suite in docs/.copilot/__tests__/
+**Solution**: Add Vitest test suite in .copilot/__tests__/
 
 ### 3. CI/CD Integration
 
