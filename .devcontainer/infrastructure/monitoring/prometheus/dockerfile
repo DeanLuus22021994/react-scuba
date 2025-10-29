@@ -207,8 +207,8 @@ groups:
         expr: (sum(up{job!=""} == 1) / count(up{job!=""})) * 100
 RULES_EOF
 
-# Create health check script
-RUN cat > /usr/local/bin/prometheus-health <<'HEALTH_EOF'
+# Create health check script directory and file
+RUN mkdir -p /usr/local/bin && cat > /usr/local/bin/prometheus-health <<'HEALTH_EOF'
 #!/bin/sh
 set -eu
 
