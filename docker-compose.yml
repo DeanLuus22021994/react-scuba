@@ -646,12 +646,10 @@ services:
       - devcontainer.env
     environment:
       - NODE_ENV=development
-      - TURBO_TELEMETRY_DISABLED=1
     volumes:
       - ./server:/workspace
       - react_scuba_node-builder-node-modules:/cache/node_modules
       - react_scuba_node-builder-npm:/cache/npm
-      - react_scuba_node-builder-turbo:/cache/turbo
       - react_scuba_node-builder-git-hooks:/cache/git-hooks
       - react_scuba_node-builder-husky:/cache/husky
     working_dir: /workspace
@@ -869,7 +867,6 @@ services:
       - devcontainer.env
     environment:
       - NODE_ENV=development
-      - TURBO_TELEMETRY_DISABLED=1
     command: ["tail", "-f", "/dev/null"]
     stdin_open: true
     tty: true
@@ -943,8 +940,6 @@ volumes:
     name: react_scuba_node-builder-node-modules
   react_scuba_node-builder-npm:
     name: react_scuba_node-builder-npm
-  react_scuba_node-builder-turbo:
-    name: react_scuba_node-builder-turbo
   react_scuba_node-builder-git-hooks:
     name: react_scuba_node-builder-git-hooks
   react_scuba_node-builder-husky:

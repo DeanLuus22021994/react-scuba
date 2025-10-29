@@ -54,9 +54,6 @@ typings/
 .swc/
 .biome/
 
-# Turborepo cache
-.turbo/
-
 # Python cache
 __pycache__/
 *.pyc

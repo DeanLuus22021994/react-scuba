@@ -1,6 +1,6 @@
 # ============================================================================
 # React Scuba Monorepo .gitignore
-# Bleeding-Edge Stack: React 19.2, Vite 7.1, TypeScript 5.9, Turbo 2.5
+# Stack: React 19.2, Vite 7.1, JavaScript ES2020+
 # Multi-Tenant SaaS Platform with Docker Infrastructure
 # ============================================================================
 
@@ -58,8 +58,7 @@ out/
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# Turbo build cache
-.turbo/
+# Build cache
 .next/
 .nuxt/
 

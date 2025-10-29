@@ -1,7 +1,7 @@
-# Node.js Monorepo Builder - Optimized for Turborepo with persistent caching
+# Node.js Monorepo Builder - Optimized with persistent caching
 # Builds all workspace packages (apps/*, packages/*) with zero repository pollution
 # 
-# OPTIMIZATION: Named volumes for node_modules, .turbo cache, package-lock.json
+# OPTIMIZATION: Named volumes for node_modules, npm cache, package-lock.json
 # PERFORMANCE: Multi-stage builds, build cache mounts, slim base image
 
 FROM node:20-slim AS base
@@ -54,10 +54,8 @@ COPY --from=deps /app/packages ./packages
 # Copy source code and build configs
 COPY . .
 
-# Build all workspaces with Turborepo
-# Cache mount for Turborepo build cache
-RUN --mount=type=cache,target=/app/.turbo,sharing=locked \
-  npm run build
+# Build all workspaces with npm
+RUN npm run build
 
 # ==============================================================================
 # Stage: Production Runtime
@@ -70,18 +68,16 @@ RUN groupadd -r nodejs && useradd -r -g nodejs nodejs
 # Create volume mount points for persistent caching
 RUN mkdir -p \
   /cache/node_modules \
-  /cache/turbo \
   /cache/npm \
   /cache/lockfile && \
   chown -R nodejs:nodejs /cache
 
-VOLUME ["/cache/node_modules", "/cache/turbo", "/cache/npm", "/cache/lockfile"]
+VOLUME ["/cache/node_modules", "/cache/npm", "/cache/lockfile"]
 
 # Copy built artifacts
 COPY --from=builder --chown=nodejs:nodejs /app/apps ./apps
 COPY --from=builder --chown=nodejs:nodejs /app/packages ./packages
 COPY --from=builder --chown=nodejs:nodejs /app/package.json ./
-COPY --from=builder --chown=nodejs:nodejs /app/turbo.json ./
 
 # Symlink node_modules and package-lock.json to persistent volumes
 # This keeps repository clean while maintaining cache across builds
@@ -91,8 +87,7 @@ RUN ln -sf /cache/node_modules ./node_modules && \
 # Performance tuning for Node.js
 ENV NODE_ENV=production \
   NODE_OPTIONS="--max-old-space-size=4096" \
-  NPM_CONFIG_CACHE=/cache/npm \
-  TURBO_CACHE_DIR=/cache/turbo
+  NPM_CONFIG_CACHE=/cache/npm
 
 USER nodejs
 
@@ -104,11 +99,11 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 # Default: Run development server (override in docker-compose)
 CMD ["npm", "run", "dev"]
 
-LABEL monorepo="turborepo" \
+LABEL monorepo="npm-workspaces" \
   workspaces="apps/web,apps/api,apps/docs,packages/*" \
   node.version="20" \
   package.manager="npm@10.9.2" \
   cache.strategy="named-volumes" \
-  cache.volumes="node_modules,turbo,npm,lockfile" \
+  cache.volumes="node_modules,npm,lockfile" \
   optimization="multi-stage,cache-mounts,zero-pollution" \
   description="React Scuba Monorepo - Node.js build environment with persistent caching"

@@ -29,11 +29,6 @@
   "workbench.tips.enabled": false,
   "workbench.welcome.enabled": false,
 
-  // Turbo monorepo configuration
-  "turbo.enabled": true,
-  "turbo.ui.enabled": true,
-  "turbo.telemetry.enabled": false,
-
   // === TYPESCRIPT BLEEDING EDGE CONFIGURATION ===
   "typescript.tsserver.maxTsServerMemory": 16384,
   "typescript.tsserver.experimental.enableProjectDiagnostics": true,
@@ -46,7 +41,7 @@
     "watchDirectory": "useFsEvents",
     "fallbackPolling": "dynamicPriority",
     "synchronousWatchDirectory": true,
-    "excludeDirectories": ["**/node_modules", "**/.git", "**/dist", "**/build", "**/.turbo", "**/coverage"]
+    "excludeDirectories": ["**/node_modules", "**/.git", "**/dist", "**/build", "**/coverage"]
   },
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.workspaceSymbols.scope": "allOpenProjects",
@@ -55,10 +50,7 @@
     "**/server/node_modules/**": true,
     "**/server/apps/*/node_modules/**": true,
     "**/server/packages/*/node_modules/**": true,
-    "**/server/apps/*/.turbo/**": true,
-    "**/server/packages/*/.turbo/**": true,
     "**/server/apps/*/coverage/**": true,
-    "**/.turbo/**": true,
     "**/dist/**": true,
     "**/build/**": true,
     "**/.next/**": true,
