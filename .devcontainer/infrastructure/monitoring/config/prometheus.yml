@@ -21,7 +21,7 @@ scrape_configs:
     scrape_interval: 300s    # Much longer interval (5 minutes) to prevent connection pressure
     scrape_timeout: 60s      # Longer timeout to prevent broken pipes
     static_configs:
-      - targets: ['host.docker.internal:9100']  # Use Docker's host networking alias
+      - targets: ['172.28.0.76:9100']  # Direct IP on mcp-cluster network
         labels:
           cluster: 'mcp-cluster'
           tier: 'monitoring'

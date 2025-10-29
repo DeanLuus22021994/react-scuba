@@ -59,14 +59,35 @@ services:
         ipv4_address: 172.28.0.72
     volumes:
       - react_scuba_grafana-data:/var/lib/grafana
-      - ../monitoring/dashboard-cluster.json:/etc/grafana/provisioning/dashboards/cluster.json
-      - ../monitoring/dashboard-database.json:/etc/grafana/provisioning/dashboards/database.json
-      - ../monitoring/dashboard-system.json:/etc/grafana/provisioning/dashboards/system.json
+      # Provisioning configurations
+      - type: bind
+        source: ../monitoring/grafana/provisioning/datasources/prometheus.datasource
+        target: /etc/grafana/provisioning/datasources/prometheus.yaml
+        read_only: true
+      - type: bind
+        source: ../monitoring/grafana/provisioning/dashboards/dashboards.yml
+        target: /etc/grafana/provisioning/dashboards/dashboards.yml
+        read_only: true
+      # Dashboard structure - complete dashboards
+      - type: bind
+        source: ../monitoring/grafana/dashboards/complete
+        target: /etc/grafana/dashboards/complete
+        read_only: true
+      # Dashboard structure - reusable components (for reference/future use)
+      - type: bind
+        source: ../monitoring/grafana/dashboards/common
+        target: /etc/grafana/dashboards/common
+        read_only: true
+      - type: bind
+        source: ../monitoring/grafana/dashboards/panels
+        target: /etc/grafana/dashboards/panels
+        read_only: true
     env_file:
       - ../../../devcontainer.env
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-piechart-panel
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/dashboards/complete/cluster.json
     restart: unless-stopped
     healthcheck:
       test:
@@ -81,6 +102,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    depends_on:
+      prometheus:
+        condition: service_healthy
 
   # ==== Metrics Exporters ====
   cadvisor:
@@ -146,19 +170,20 @@ services:
       - "--path.rootfs=/rootfs"
       - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
     restart: unless-stopped
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://localhost:9100/metrics",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    # Health check disabled - causes excessive connection resets with Prometheus scraping
+    # healthcheck:
+    #   test:
+    #     [
+    #       "CMD",
+    #       "wget",
+    #       "--quiet",
+    #       "--tries=1",
+    #       "--spider",
+    #       "http://localhost:9100/metrics",
+    #     ]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
 
   postgres-exporter:
     build:

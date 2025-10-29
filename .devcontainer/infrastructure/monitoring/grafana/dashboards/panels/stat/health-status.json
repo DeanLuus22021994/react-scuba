@@ -1,0 +1,55 @@
+{
+  "type": "stat",
+  "options": {
+    "colorMode": "background",
+    "graphMode": "none",
+    "justifyMode": "center",
+    "orientation": "auto",
+    "reduceOptions": {
+      "values": false,
+      "calcs": ["lastNotNull"],
+      "fields": ""
+    },
+    "textMode": "auto"
+  },
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "thresholds"
+      },
+      "mappings": [
+        {
+          "options": {
+            "0": {
+              "color": "red",
+              "index": 0,
+              "text": "DOWN"
+            },
+            "1": {
+              "color": "green",
+              "index": 1,
+              "text": "UP"
+            }
+          },
+          "type": "value"
+        }
+      ],
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "red",
+            "value": null
+          },
+          {
+            "color": "green",
+            "value": 1
+          }
+        ]
+      },
+      "unit": "none"
+    },
+    "overrides": []
+  },
+  "pluginVersion": "10.0.0"
+}

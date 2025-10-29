@@ -1,0 +1,73 @@
+{
+  "type": "timeseries",
+  "options": {
+    "legend": {
+      "calcs": ["last", "max", "mean"],
+      "displayMode": "table",
+      "placement": "right",
+      "showLegend": true
+    },
+    "tooltip": {
+      "mode": "multi",
+      "sort": "desc"
+    }
+  },
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "palette-classic"
+      },
+      "custom": {
+        "axisCenteredZero": false,
+        "axisColorMode": "text",
+        "axisLabel": "",
+        "axisPlacement": "auto",
+        "barAlignment": 0,
+        "drawStyle": "line",
+        "fillOpacity": 20,
+        "gradientMode": "opacity",
+        "hideFrom": {
+          "tooltip": false,
+          "viz": false,
+          "legend": false
+        },
+        "lineInterpolation": "smooth",
+        "lineWidth": 2,
+        "pointSize": 5,
+        "scaleDistribution": {
+          "type": "linear"
+        },
+        "showPoints": "never",
+        "spanNulls": true,
+        "stacking": {
+          "group": "A",
+          "mode": "none"
+        },
+        "thresholdsStyle": {
+          "mode": "line"
+        }
+      },
+      "mappings": [],
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "green",
+            "value": null
+          },
+          {
+            "color": "yellow",
+            "value": 80
+          },
+          {
+            "color": "red",
+            "value": 95
+          }
+        ]
+      },
+      "unit": "bytes"
+    },
+    "overrides": []
+  },
+  "pluginVersion": "10.0.0"
+}

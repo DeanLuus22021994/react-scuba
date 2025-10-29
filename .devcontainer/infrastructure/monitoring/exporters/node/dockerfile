@@ -11,3 +11,7 @@ LABEL maintainer="Dean Luus" \
 # The service will be monitored through prometheus scraping instead
 # HEALTHCHECK --interval=300s --timeout=30s --start-period=60s --retries=2 \
 #   CMD wget --quiet --tries=1 --timeout=10 --spider http://localhost:9100/ || exit 1
+
+# Set log level to warn to suppress connection reset errors
+# These errors occur when HTTP clients close connections early but don't affect functionality
+CMD ["--log.level=warn"]
