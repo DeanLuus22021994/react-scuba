@@ -133,7 +133,7 @@ export const checkCalendarAvailability = async (date: string, courseId: string):
     return { success: true, data: response as unknown as AvailabilityData };
   } catch (error) {
     const axiosError = error as AxiosError;
-    return { success: false, error: axiosError.response?.data || axiosError.message };
+    return { success: false, error: (axiosError.response?.data as string) || axiosError.message };
   }
 };
 

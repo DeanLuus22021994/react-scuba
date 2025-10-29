@@ -1,15 +1,24 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
     "target": "ES2022",
+    "module": "node16",
     "lib": ["ES2022"],
-    "types": ["node"],
+    "moduleResolution": "node16",
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"]
   },
-  "include": ["*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "contexts/**/*.md"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

@@ -1,11 +1,9 @@
 # React Scuba - Copilot Workspace Instructions
 
 ## Project Overview
-
 React Scuba is a **multi-tenant dive shop management platform** built with a modern npm workspaces monorepo architecture. The platform supports multiple dive shop clients with isolated configurations, theming, and content while sharing a unified codebase.
 
 ## Directory Structure
-
 ```
 react-scuba/
 ├── server/                    # npm workspaces monorepo root
@@ -33,7 +31,6 @@ react-scuba/
 ## Technology Stack
 
 ### Frontend (apps/web)
-
 - **React 19.2** with **Vite 7.1.11** (SWC plugin)
 - **TypeScript 5.9.3** (strict mode)
 - **Tailwind CSS 4** (PostCSS)
@@ -44,22 +41,19 @@ react-scuba/
 - **React Hook Form + Zod** (forms & validation)
 
 ### Backend (apps/api)
-
 - **Express.js 5.0.0** (Node.js 20.x)
 - **PostgreSQL 17** (primary database)
 - **MariaDB 11** (legacy support)
 - **Docker Compose** (local development)
 
 ### Build & Tooling
-
 - **npm workspaces** (monorepo orchestration)
 - **npm 10.9.2** (package manager, workspaces)
-- **VS Code Language Servers** (Built-in TypeScript/JavaScript validation)
+- **Native Language Servers** (VS Code built-in TypeScript/JavaScript validation)
 - **Vitest 3.2.4** (unit testing)
 - **Playwright 1.56** (E2E testing)
 
 ### Python (docker-compose-examples/mcp/python_utils)
-
 - **Python 3.14t** (free-threading build)
 - **UV** (fast package manager)
 - **Ruff** (Rust-based linter)
@@ -68,16 +62,14 @@ react-scuba/
 ## Code Standards
 
 ### Formatting & Linting
-
-- **Native VS Code approach**: Use built-in language servers for validation
+- **Native language server approach**: Use VS Code built-in validation for all JavaScript/TypeScript files
 - **Line length**: 100 characters
 - **Indentation**: 2 spaces (JS/TS), 4 spaces (Python)
 - **Quotes**: Single quotes (JS/TS), double quotes (Python)
-- **Imports**: Auto-organize with VS Code TypeScript language server
-- **Run `npm test` to validate code before committing**
+- **Imports**: Auto-sort with VS Code TypeScript language server/isort
+- **Run `npm run lint:fix` before committing**
 
 ### TypeScript
-
 - **Strict mode enabled** (`strict: true`)
 - **Module resolution**: Bundler
 - **Target**: ES2022
@@ -86,7 +78,6 @@ react-scuba/
 - **Prefer interfaces** over type aliases for objects
 
 ### React Patterns
-
 - **Functional components** with hooks (no class components)
 - **TypeScript prop types** (no PropTypes)
 - **Custom hooks** for shared logic (prefix with `use`)
@@ -94,7 +85,6 @@ react-scuba/
 - **Lazy loading**: Use `React.lazy()` for route components
 
 ### File Naming
-
 - **Components**: PascalCase (`UserProfile.tsx`)
 - **Hooks**: camelCase with `use` prefix (`useAuth.ts`)
 - **Utilities**: camelCase (`formatDate.ts`)
@@ -104,9 +94,7 @@ react-scuba/
 ## Multi-Tenant Architecture
 
 ### Client Configuration
-
 Each client has a config in `server/clients/{client-id}/config.json`:
-
 ```json
 {
   "id": "client-id",
@@ -121,7 +109,6 @@ Each client has a config in `server/clients/{client-id}/config.json`:
 ```
 
 ### Content Resolution
-
 - **Runtime**: `@react-scuba/content` package resolves client from subdomain/domain/env
 - **Build**: Vite injects client config at build time (multi-build for production)
 - **Assets**: Client-specific images in `server/clients/{client-id}/images/`
@@ -129,14 +116,12 @@ Each client has a config in `server/clients/{client-id}/config.json`:
 ## Testing Conventions
 
 ### Unit Tests (Vitest)
-
 - **Location**: Colocated with source (`Component.test.tsx`)
 - **Coverage target**: 80%+ (critical paths 100%)
 - **Mocking**: Use `vi.mock()` for external dependencies
 - **Run**: `npm test` (watch mode) or `npm run test:coverage`
 
 ### E2E Tests (Playwright)
-
 - **Location**: `server/apps/web/tests/e2e/`
 - **Scenarios**: User journeys, multi-tenant flows, critical paths
 - **Run**: `npx playwright test`
@@ -160,7 +145,7 @@ npx playwright test             # Run E2E tests
 
 # Linting & Formatting
 npm run lint                    # Native language server validation
-npm run test                    # Run all tests for validation
+npm run lint:fix                # Native language server validation
 npm run format                  # Format all files
 npm run format:check            # Check formatting
 
@@ -170,11 +155,6 @@ npm run mcp:build               # Build Docker images
 npm run mcp:test                # Test server startup
 npm run mcp:all                 # Full validation + build + test
 
-# Documentation Validation
-npm run validate:docs           # Validate documentation TOC and structure
-npm run validate:all            # Run all validation checks (docs + tests)
-npm test -- docs/               # Run documentation test suite
-
 # Cleanup
 npm run clean                   # Clean build artifacts
 npm run clean:all               # Clean + remove node_modules
@@ -183,30 +163,23 @@ npm run clean:all               # Clean + remove node_modules
 ## Key Files
 
 ### Configuration
-
 - `server/package.json`: Root package + workspace definitions
-- `.vscode/settings.json`: VS Code editor settings
 - `.vscode/settings.json`: VS Code editor settings
 - `.vscode/tasks.json`: Task runner definitions
 - `.vscode/mcp.json`: MCP server configurations
 
 ### Documentation
-
 - `docs/.copilot/`: AI-optimized semantic documentation structure
   - `architecture/`: Multi-tenant and multi-industry concepts
   - `infrastructure/`: DevContainer and development workflow
   - `modernization/`: Technology stack and achievements
   - `getting-started/`: Quick start setup and verification
   - `planning/`: Infrastructure tasks and platform roadmap
-  - `AI-AGENT-GUIDE.md`: Comprehensive guide for AI agents (validation, patterns, debugging)
 - `docs/.copilot/toc.yml`: Semantic table of contents with AI indexing
-- `docs/archive/original/`: Archived original documentation (DEVCONTAINER.md, DEVELOPMENT.md, etc.)
+- `docs/archive/original/`: Archived original documentation
 - `server/apps/docs/`: VitePress documentation site
-- `docs/scripts/validate-toc.js`: TOC validation script (link checking, orphan detection)
 
 ### Build Tooling
-
-- `server/packages/config/tsconfig.*.json`: TypeScript configs (no external linter needed)
 - `server/packages/config/tsconfig.*.json`: TypeScript configs
 - `server/apps/web/vite.config.js`: Vite build config
 - `server/apps/web/tailwind.config.js`: Tailwind config
@@ -221,7 +194,6 @@ npm run clean:all               # Clean + remove node_modules
 - **Direct Implementation**: Make changes directly without documentation overhead
 
 ## GitHub Copilot Tips
-
 - Use **@workspace** to search across entire monorepo
 - Reference VS Code schemas in **.vscode/schemas/** directory (use file reference syntax)
 - Reference MCP server configs in **.vscode/mcp-servers/** directory (use file reference syntax)

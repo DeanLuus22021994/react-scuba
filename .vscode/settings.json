@@ -231,5 +231,15 @@
   "vitest.enable": true,
   "vitest.commandLine": "npm test",
   "vitest.rootConfig": "./server/apps/web/vite.config.js",
-  "vitest.disableWorkspaceWarning": true
+  "vitest.disableWorkspaceWarning": true,
+
+  // === MARKDOWN LINTING CONFIGURATION ===
+  // Disable specific markdown rules for AI-optimized context documentation
+  // These rules interfere with well-structured Copilot instruction files
+  "markdownlint.config": {
+    "MD022": false,
+    "MD032": false,
+    "MD031": false,
+    "MD040": false
+  }
 }

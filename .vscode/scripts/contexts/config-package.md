@@ -1,0 +1,25 @@
+# React Scuba Config Package - Copilot Instructions
+
+## Workspace: @react-scuba/config
+
+This package contains **shared tooling configurations** for the monorepo.
+
+## Configurations
+- **tsconfig.json**: TypeScript configuration for native language server validation
+- **tsconfig.base.json**: Base TypeScript config (extended by all workspaces)
+- **tsconfig.node.json**: Node.js TypeScript config
+- **tsconfig.react.json**: React TypeScript config
+
+## Usage
+Other workspaces extend these configs:
+```json
+{
+  "extends": "@react-scuba/config/tsconfig.react.json"
+}
+```
+
+## Standards
+- **Line length**: 100 characters
+- **Indentation**: 2 spaces
+- **Quotes**: Single quotes (JS/TS)
+- **TypeScript strict mode**: Enabled

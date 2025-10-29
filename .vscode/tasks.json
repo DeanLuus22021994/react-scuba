@@ -815,17 +815,21 @@
       "type": "shell",
       "command": "pwsh.exe",
       "args": [
-        "-NoProfile",
-        "-Command",
-        "$tsconfig = '.vscode/scripts/tsconfig.json'; if (Test-Path $tsconfig) { (Get-Item $tsconfig).LastWriteTime = Get-Date; Write-Host 'TypeScript config touched - language server will reload automatically' } else { Write-Host 'TypeScript config not found' }"
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".vscode/scripts/src/development/restart-ts-server.ps1"
       ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": [],
       "presentation": {
-        "reveal": "silent",
+        "reveal": "always",
         "panel": "shared",
         "focus": false,
-        "clear": false,
-        "echo": false,
+        "clear": true,
+        "echo": true,
         "showReuseMessage": false
       },
       "detail": "Touches tsconfig.json to trigger automatic TypeScript language server reload"

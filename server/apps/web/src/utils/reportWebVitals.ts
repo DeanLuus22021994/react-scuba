@@ -51,3 +51,34 @@ export const reportWebVitalsToGA4 = (): void => {
       });
     });
 };
+
+/**
+ * Default export for React's reportWebVitals pattern
+ * Accepts optional callback function for custom Web Vitals reporting
+ */
+const reportWebVitals = (onPerfEntry?: (metric: any) => void) => {
+  if (onPerfEntry && typeof onPerfEntry === 'function') {
+    // Use GA4 reporting with custom callback
+    import('web-vitals')
+      .then(({ onCLS, onFCP, onINP, onLCP, onTTFB }) => {
+        const sendToCallback = (metric: any) => {
+          onPerfEntry(metric);
+        };
+        onCLS(sendToCallback);
+        onFCP(sendToCallback);
+        onINP(sendToCallback);
+        onLCP(sendToCallback);
+        onTTFB(sendToCallback);
+      })
+      .catch((error) => {
+        logger.error('Failed to load web-vitals for callback reporting', {
+          error: error instanceof Error ? error.message : String(error),
+        });
+      });
+  } else {
+    // Use default GA4 reporting
+    reportWebVitalsToGA4();
+  }
+};
+
+export default reportWebVitals;

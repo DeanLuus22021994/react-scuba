@@ -132,21 +132,32 @@ Reference the new structure in prompts:
 
 ## For Contributors
 
+### For AI Agents
+
+See `docs/.copilot/AI-AGENT-GUIDE.md` for comprehensive guidance on:
+- Documentation architecture and semantic structure
+- Agent usage patterns (discovery, code generation, maintenance, troubleshooting)
+- Validation workflows (`npm run validate:docs`, `npm run validate:all`)
+- Multi-tenant debugging strategies
+- Integration with GitHub Copilot and VS Code
+
 ### Adding New Documentation
 
 1. Choose appropriate domain directory
 2. Create file with YAML frontmatter (see existing files for template)
 3. Update `docs/.copilot/toc.yml` with new entry
-4. Add semantic relationships in frontmatter `related_documents`
-5. Use `ai_hints` for AI indexing keywords
-6. **No code examples** - focus on concepts only
+4. Run `npm run validate:docs` to verify TOC integrity
+5. Add semantic relationships in frontmatter `related_documents`
+6. Use `ai_hints` for AI indexing keywords
+7. **No code examples** - focus on concepts only
 
 ### Updating Existing Documentation
 
 1. Edit files in `docs/.copilot/{domain}/`
 2. Update `last_updated` date in frontmatter
 3. Update `toc.yml` if file relationships change
-4. Maintain consistency with AI-optimized style
+4. Run `npm run validate:docs` to check for orphaned files and broken links
+5. Maintain consistency with AI-optimized style
 
 ### Markdown Linting
 

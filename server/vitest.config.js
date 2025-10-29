@@ -3,7 +3,8 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     globals: true,
-    environment: "node",
+    environment: "jsdom",
+    setupFiles: ["./apps/web/src/setupTests.ts"],
     include: [
       "apps/**/*.{test,spec}.{js,ts}",
       "../docs/.copilot/__tests__/**/*.{test,spec}.{js,ts}"
@@ -14,8 +15,7 @@ export default defineConfig({
       exclude: [
         "node_modules/",
         "**/tests/",
-        "**/*.config.js",
-        "../docs/.copilot/__tests__/"
+        "**/*.config.js"
       ],
       include: [
         "apps/**/*.{js,ts}",
@@ -23,4 +23,7 @@ export default defineConfig({
       ]
     },
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+  }
 });

@@ -24,8 +24,8 @@ describe('team', () => {
   });
 
   it('should find team member by name', () => {
-    const member = getTeamMemberByName('Raj Patel');
+    const member = getTeamMemberByName('Jill Holloway');
     expect(member).toBeDefined();
-    expect(member.name).toBe('Raj Patel');
+    expect(member.name).toBe('Jill Holloway');
   });
 });
