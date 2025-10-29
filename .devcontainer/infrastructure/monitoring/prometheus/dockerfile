@@ -91,6 +91,9 @@ scrape_configs:
 
   # === SERVICE LAYER ===
   - job_name: 'service-node'
+    scrape_interval: 60s
+    scrape_timeout: 20s
+    metrics_path: '/metrics'
     static_configs:
       - targets: ['node-exporter:9100']
         labels:

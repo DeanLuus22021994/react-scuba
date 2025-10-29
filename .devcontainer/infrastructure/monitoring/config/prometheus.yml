@@ -2,9 +2,9 @@
 # Monitors all exporters in the MCP monitoring stack
 
 global:
-  scrape_interval: 15s      # Default scrape interval
-  scrape_timeout: 10s       # Default scrape timeout (must be less than interval)
-  evaluation_interval: 15s  # Evaluate rules every 15s
+  scrape_interval: 60s      # Default scrape interval - reduced to prevent connection issues
+  scrape_timeout: 20s       # Default scrape timeout (must be less than interval)
+  evaluation_interval: 30s  # Evaluate rules every 30s
 
 # Scrape configurations for all MCP cluster exporters
 scrape_configs:
@@ -18,10 +18,10 @@ scrape_configs:
 
   # Node Exporter - Host system metrics
   - job_name: 'node-exporter'
-    scrape_interval: 15s
-    scrape_timeout: 10s
+    scrape_interval: 300s    # Much longer interval (5 minutes) to prevent connection pressure
+    scrape_timeout: 60s      # Longer timeout to prevent broken pipes
     static_configs:
-      - targets: ['172.28.0.76:9100']
+      - targets: ['host.docker.internal:9100']  # Use Docker's host networking alias
         labels:
           cluster: 'mcp-cluster'
           tier: 'monitoring'
