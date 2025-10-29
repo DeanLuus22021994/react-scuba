@@ -1,6 +1,6 @@
 ---
-mode: agent
-model: Claude Sonnet 4
+agent: coder
+model: Claude Sonnet 4.5 (copilot)
 ---
 
 <!-- markdownlint-disable-file -->
