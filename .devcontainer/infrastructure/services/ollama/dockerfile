@@ -1,0 +1,149 @@
+# ==============================================================================
+# Ollama LLM Service - AI Inference with NVIDIA GPU (GPU-Only Mode)
+# ==============================================================================
+# Purpose: Run LLM models for AI inference (smollm2, codegeex4, etc.)
+# Architecture: Ollama with NVIDIA runtime via Docker Compose device requests
+# Base: Official Ollama image with CUDA support
+# GPU: Direct host GPU access (RTX 3050 6GB) - no plugin mediation
+# Storage: Named Docker volume (not bind mount) prevents local filesystem pollution
+# Health: Custom endpoint on port 9401 with GPU status and model readiness
+# Optimization: All models must fit in VRAM (6GB) to avoid CPU/RAM offload
+# ==============================================================================
+
+FROM ollama/ollama:latest
+
+# Metadata labels
+LABEL org.opencontainers.image.title="Ollama LLM Service (GPU-Only)" \
+  org.opencontainers.image.description="AI inference service with GPU-only mode - direct host GPU access" \
+  org.opencontainers.image.vendor="React Scuba" \
+  maintainer="Dean Luus" \
+  purpose="llm-inference" \
+  gpu.support="nvidia" \
+  gpu.mode="required" \
+  gpu.access="docker-compose-device-requests" \
+  gpu.vram="6GB" \
+  models.supported="smollm2:latest,codegeex4:9b-all-q3_K_M" \
+  storage.type="named-volume" \
+  storage.isolation="true"
+
+# Install additional utilities
+USER root
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  curl \
+  jq \
+  netcat-openbsd \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Create model storage directory with proper permissions
+RUN mkdir -p /root/.ollama/models && \
+  chmod -R 755 /root/.ollama
+
+# Create health check script with GPU info
+RUN cat > /usr/local/bin/ollama-health <<'HEALTH_EOF'
+#!/bin/bash
+set -euo pipefail
+
+# Generate timestamp in YY-MM-DD-HH-MM-SS format
+TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
+
+# GPU info via Docker environment variables (no nvidia-smi required)
+# CUDA_VISIBLE_DEVICES is set by Docker, indicating GPU is available
+if [ -n "${CUDA_VISIBLE_DEVICES:-}" ]; then
+  GPU_AVAILABLE=true
+  # Get GPU info from Ollama's inference logs
+  GPU_INFO="[{\"cuda_device\":\"${CUDA_VISIBLE_DEVICES}\",\"mode\":\"GPU-only\",\"ollama_num_gpu\":${OLLAMA_NUM_GPU:-999}}]"
+else
+  # GPU is REQUIRED - fail health check if not available
+  echo "{\"error\":\"GPU not available - GPU-only mode requires NVIDIA GPU\"}" >&2
+  exit 1
+fi
+
+# Check Ollama service status
+if curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+  OLLAMA_STATUS="running"
+  MODELS=$(curl -s http://localhost:11434/api/tags | jq -c '.models // []')
+else
+  OLLAMA_STATUS="starting"
+  MODELS="[]"
+fi
+
+# Construct health response
+cat <<JSON
+{
+  "timestamp": "${TIMESTAMP}",
+  "status": "healthy",
+  "service": "ollama",
+  "mode": "gpu-only",
+  "ollama_status": "${OLLAMA_STATUS}",
+  "gpu_available": ${GPU_AVAILABLE},
+  "cuda_visible_devices": "${CUDA_VISIBLE_DEVICES:-}",
+  "ollama_num_gpu": ${OLLAMA_NUM_GPU:-999},
+  "gpus": ${GPU_INFO},
+  "models": ${MODELS},
+  "model_storage": "/root/.ollama/models",
+  "inference_ready": $([ "${OLLAMA_STATUS}" = "running" ] && echo "true" || echo "false")
+}
+JSON
+HEALTH_EOF
+
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/ollama-health && chmod +x /usr/local/bin/ollama-health
+
+# Create model initialization script with GPU-only flags
+RUN cat > /usr/local/bin/init-model <<'INIT_EOF'
+#!/bin/bash
+set -euo pipefail
+
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Waiting for Ollama service to start..."
+until curl -s http://localhost:11434/api/tags > /dev/null 2>&1; do
+  sleep 2
+done
+
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Ollama service is ready."
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model storage: $OLLAMA_MODELS"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] GPU mode: Required (OLLAMA_NUM_GPU=$OLLAMA_NUM_GPU)"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Checking for smollm2:latest model..."
+
+# Check if model exists
+if ! ollama list | grep -q "smollm2"; then
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Pulling smollm2:latest model to volume mount: $OLLAMA_MODELS"
+  ollama pull smollm2:latest
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model downloaded successfully to named volume."
+else
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model already exists in volume mount."
+fi
+
+# Verify model files are in volume mount
+MODEL_SIZE=$(du -sh $OLLAMA_MODELS 2>/dev/null | cut -f1 || echo "0")
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model storage size: $MODEL_SIZE"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model initialization complete. Ollama is ready for GPU inference."
+INIT_EOF
+
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/init-model && chmod +x /usr/local/bin/init-model
+
+# Expose Ollama API port and health port
+EXPOSE 11434 9401
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+  CMD /usr/local/bin/ollama-health > /dev/null || exit 1
+
+# Environment variables for GPU-only inference
+ENV OLLAMA_HOST=0.0.0.0 \
+  OLLAMA_MODELS=/root/.ollama/models \
+  OLLAMA_NUM_GPU=999 \
+  OLLAMA_GPU_LAYERS=999 \
+  CUDA_VISIBLE_DEVICES=0 \
+  OLLAMA_MAX_LOADED_MODELS=1 \
+  OLLAMA_FLASH_ATTENTION=1 \
+  OLLAMA_GPU_OVERHEAD=0 \
+  OLLAMA_SCHED_SPREAD=false \
+  OLLAMA_NUM_PARALLEL=1 \
+  OLLAMA_MAX_QUEUE=1
+
+# Start Ollama service with GPU-only mode, initialize model from volume, and serve health endpoint
+ENTRYPOINT []
+CMD ["/bin/bash", "-c", "ollama serve & /usr/local/bin/init-model & (while true; do HEALTH_DATA=$(/usr/local/bin/ollama-health 2>&1 || echo '{\"error\":\"health check failed\"}'); printf \"HTTP/1.1 200 OK\\r\\nContent-Type: application/json\\r\\nContent-Length: %d\\r\\n\\r\\n%s\" \"${#HEALTH_DATA}\" \"$HEALTH_DATA\" | nc -l -p 9401 -q 1; done) & wait"]

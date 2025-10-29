@@ -1,0 +1,97 @@
+# Python MCP Service Dockerfile
+# Python 3.14t free-threading build with UV package manager
+# HTTP server on internal port 9099 for MCP protocol
+# Full protocol validation and health monitoring
+
+FROM python:3.14-rc-slim-bookworm
+
+LABEL maintainer="React Scuba Development Team"
+LABEL description="Python MCP Service with HTTP endpoint and protocol validation"
+LABEL com.react-scuba.service="python-mcp-sidecar"
+LABEL com.react-scuba.tier="mcp-persistent"
+
+# Build arguments
+ARG PYTHON_VERSION=3.14t
+ARG UV_VERSION=latest
+
+# Install system dependencies
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends \
+    curl \
+    ca-certificates \
+    git \
+    build-essential \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install UV package manager
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
+    && mv /root/.local/bin/uv /usr/local/bin/ \
+    && mv /root/.local/bin/uvx /usr/local/bin/
+
+# Create application directory
+WORKDIR /app
+
+# Copy Python utilities package
+COPY pyproject.toml README.md ./
+COPY src/ ./src/
+COPY tests/ ./tests/
+
+# Install Python dependencies with UV
+RUN uv pip install --system --no-cache -e .
+
+# Create directories for persistence
+RUN mkdir -p /data /cache/python /cache/uv \
+    && chmod -R 777 /data /cache
+
+# Create health check script
+RUN echo '#!/usr/bin/env python3\n\
+import sys\n\
+import httpx\n\
+import argparse\n\
+\n\
+def check_health(endpoint: str, protocol_validation: bool = False) -> int:\n\
+    try:\n\
+        response = httpx.get(endpoint, timeout=5.0)\n\
+        if response.status_code != 200:\n\
+            print(f"Health check failed: HTTP {response.status_code}")\n\
+            return 1\n\
+        \n\
+        if protocol_validation:\n\
+            # Validate MCP protocol compliance\n\
+            data = response.json()\n\
+            required_fields = ["status", "version", "protocol"]\n\
+            if not all(field in data for field in required_fields):\n\
+                print("Health check failed: Missing required MCP protocol fields")\n\
+                return 1\n\
+        \n\
+        print("Health check passed")\n\
+        return 0\n\
+    except Exception as e:\n\
+        print(f"Health check failed: {e}")\n\
+        return 1\n\
+\n\
+if __name__ == "__main__":\n\
+    parser = argparse.ArgumentParser()\n\
+    parser.add_argument("--endpoint", default="http://localhost:9099/health")\n\
+    parser.add_argument("--protocol-validation", action="store_true")\n\
+    args = parser.parse_args()\n\
+    sys.exit(check_health(args.endpoint, args.protocol_validation))\n\
+' > /usr/local/bin/health-check && chmod +x /usr/local/bin/health-check
+
+# Expose internal HTTP port (no external publishing)
+EXPOSE 9099
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    UV_SYSTEM_PYTHON=1 \
+    PYTHON_GIL_MODE=1 \
+    MCP_HTTP_PORT=9099 \
+    MCP_PROTOCOL_VERSION=1.0.0
+
+# Health check with protocol validation
+HEALTHCHECK --interval=15s --timeout=5s --start-period=30s --retries=3 \
+    CMD python3 -m react_scuba_utils.health --protocol-validation --endpoint http://localhost:9099/health
+
+# Run MCP server
+CMD ["python", "-m", "react_scuba_utils.mcp_server"]

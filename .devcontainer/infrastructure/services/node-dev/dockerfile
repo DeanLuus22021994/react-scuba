@@ -1,0 +1,124 @@
+# ==============================================================================
+# Node Bootstrap Container - Instant Development Environment
+# ==============================================================================
+# Purpose: Fast-start Node.js environment with pre-cached dependencies
+# Architecture: Multi-stage build with dependency caching
+# Base: Node.js 20 LTS Alpine
+# Performance: Leverages volume mounts for instant subsequent builds
+# ==============================================================================
+
+# Stage 1: Base with system dependencies
+FROM node:20-alpine AS base
+
+# Metadata labels
+LABEL org.opencontainers.image.title="Node Bootstrap Container" \
+  org.opencontainers.image.description="Fast-start Node.js development environment" \
+  org.opencontainers.image.vendor="React Scuba" \
+  maintainer="Dean Luus" \
+  purpose="bootstrap" \
+  runtime="node-20-alpine"
+
+# Install essential build tools and utilities
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+  apk add --no-cache \
+  git \
+  curl \
+  bash \
+  ca-certificates \
+  python3 \
+  make \
+  g++ \
+  tini
+
+# Stage 2: Dependency pre-cache (optional - for faster subsequent builds)
+FROM base AS dependencies
+
+# Set working directory
+WORKDIR /workspace
+
+# Create placeholder for dependencies
+# In production, copy package files and run npm install here
+# For now, just prepare the directory structure
+RUN mkdir -p /workspace/server/node_modules
+
+# Stage 3: Runtime environment
+FROM base AS runtime
+
+# Create non-root user (use uid/gid that doesn't conflict with alpine defaults)
+RUN addgroup -g 1100 node-dev && \
+  adduser -u 1100 -G node-dev -s /bin/bash -D node-dev
+
+# Set up workspace
+WORKDIR /workspace
+RUN chown -R node-dev:node-dev /workspace
+
+# Prepare node_modules cache directory
+RUN mkdir -p /cache && chown -R node-dev:node-dev /cache
+
+# Create health check script
+RUN cat > /usr/local/bin/node-health <<'HEALTH_EOF'
+#!/bin/bash
+set -euo pipefail
+
+# Generate timestamp in YY-MM-DD-HH-MM-SS format
+TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
+
+# Check Node.js availability
+if NODE_VERSION=$(node --version 2>&1); then
+  NODE_AVAILABLE=true
+  STATUS="healthy"
+else
+  NODE_AVAILABLE=false
+  STATUS="unhealthy"
+  NODE_VERSION="unavailable"
+fi
+
+# Check npm availability
+if NPM_VERSION=$(npm --version 2>&1); then
+  NPM_AVAILABLE=true
+else
+  NPM_AVAILABLE=false
+  NPM_VERSION="unavailable"
+fi
+
+# Check if node_modules exist
+if [ -d "/workspace/server/node_modules" ]; then
+  DEPENDENCIES_INSTALLED=true
+  MODULE_COUNT=$(find /workspace/server/node_modules -maxdepth 1 -type d | wc -l)
+else
+  DEPENDENCIES_INSTALLED=false
+  MODULE_COUNT=0
+fi
+
+cat <<JSON
+{
+  "timestamp": "${TIMESTAMP}",
+  "status": "${STATUS}",
+  "service": "node-bootstrap",
+  "node_version": "${NODE_VERSION}",
+  "npm_version": "${NPM_VERSION}",
+  "node_available": ${NODE_AVAILABLE},
+  "npm_available": ${NPM_AVAILABLE},
+  "dependencies_installed": ${DEPENDENCIES_INSTALLED},
+  "module_count": ${MODULE_COUNT},
+  "workspace": "/workspace"
+}
+JSON
+HEALTH_EOF
+
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/node-health && chmod +x /usr/local/bin/node-health
+
+# Switch to non-root user
+USER node-dev
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+  CMD /usr/local/bin/node-health > /dev/null || exit 1
+
+# Expose common development ports
+EXPOSE 3000 3001 5173 5174 8080
+
+# Keep container running
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["tail", "-f", "/dev/null"]

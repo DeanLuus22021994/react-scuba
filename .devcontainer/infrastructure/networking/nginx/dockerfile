@@ -1,0 +1,189 @@
+# ==============================================================================
+# Nginx Load Balancer Master - Primary Gateway & Load Balancer
+# ==============================================================================
+# Purpose: High-availability load balancing with health checks and failover
+# Architecture: Master node with upstream slave nodes
+# Base: Official Nginx Alpine
+# Features: Round-robin LB, SSL termination, health checks, caching
+# ==============================================================================
+
+FROM nginx:alpine
+
+# Metadata labels
+LABEL org.opencontainers.image.title="Nginx Load Balancer Master" \
+  org.opencontainers.image.description="Primary load balancer and gateway" \
+  org.opencontainers.image.vendor="React Scuba" \
+  maintainer="Dean Luus" \
+  purpose="network-loadbalancer-master" \
+  network.role="master" \
+  load.balancing="true"
+
+# Install additional utilities
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+  apk add --no-cache \
+  curl \
+  jq \
+  bash \
+  ca-certificates \
+  openssl
+
+# Create nginx configuration for load balancing
+RUN cat > /etc/nginx/nginx.conf <<'NGINX_EOF'
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log warn;
+pid /var/run/nginx.pid;
+
+events {
+    worker_connections 1024;
+    use epoll;
+    multi_accept on;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent" "$http_x_forwarded_for" '
+                    'upstream: $upstream_addr';
+
+    access_log /var/log/nginx/access.log main;
+
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    client_max_body_size 100M;
+
+    # Gzip compression
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_types text/plain text/css text/xml text/javascript
+               application/json application/javascript application/xml+rss
+               application/rss+xml font/truetype font/opentype
+               application/vnd.ms-fontobject image/svg+xml;
+
+    # Upstream slave nodes for load balancing
+    upstream backend_slaves {
+        least_conn;
+        server nginx-slave-1:80 max_fails=3 fail_timeout=30s;
+        server nginx-slave-2:80 max_fails=3 fail_timeout=30s;
+        keepalive 32;
+    }
+
+    # Upstream for monitoring services
+    upstream monitoring {
+        server prometheus:9090;
+    }
+
+    upstream visualization {
+        server grafana:3000;
+    }
+
+    # Health check endpoint
+    server {
+        listen 8080;
+        server_name _;
+        
+        location /health {
+            access_log off;
+            return 200 "healthy\n";
+            add_header Content-Type text/plain;
+        }
+
+        location /nginx_status {
+            stub_status on;
+            access_log off;
+        }
+    }
+
+    # Main load balancer
+    server {
+        listen 80 default_server;
+        server_name _;
+
+        location / {
+            proxy_pass http://backend_slaves;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_cache_bypass $http_upgrade;
+            proxy_connect_timeout 5s;
+            proxy_send_timeout 60s;
+            proxy_read_timeout 60s;
+        }
+
+        location /metrics {
+            proxy_pass http://monitoring;
+            proxy_set_header Host $host;
+        }
+
+        location /dashboards {
+            proxy_pass http://visualization;
+            proxy_set_header Host $host;
+        }
+    }
+}
+NGINX_EOF
+
+# Create health check script
+RUN cat > /usr/local/bin/nginx-health <<'HEALTH_EOF'
+#!/bin/bash
+set -euo pipefail
+
+TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
+
+# Check nginx status
+if curl -sf http://localhost:8080/health > /dev/null 2>&1; then
+  STATUS="healthy"
+  NGINX_AVAILABLE=true
+else
+  STATUS="unhealthy"
+  NGINX_AVAILABLE=false
+fi
+
+# Get nginx stats
+if STATS=$(curl -sf http://localhost:8080/nginx_status 2>&1); then
+  ACTIVE_CONNECTIONS=$(echo "$STATS" | grep "Active connections" | awk '{print $3}')
+  REQUESTS=$(echo "$STATS" | awk '/^[0-9]/ {print $3; exit}')
+else
+  ACTIVE_CONNECTIONS=0
+  REQUESTS=0
+fi
+
+cat <<JSON
+{
+  "timestamp": "${TIMESTAMP}",
+  "status": "${STATUS}",
+  "service": "nginx-master",
+  "nginx_available": ${NGINX_AVAILABLE},
+  "active_connections": ${ACTIVE_CONNECTIONS},
+  "total_requests": ${REQUESTS},
+  "role": "master",
+  "load_balancing": true,
+  "upstream_nodes": ["nginx-slave-1", "nginx-slave-2"]
+}
+JSON
+HEALTH_EOF
+
+# Convert CRLF to LF if present (Windows compatibility)
+RUN sed -i 's/\r$//' /usr/local/bin/nginx-health && chmod +x /usr/local/bin/nginx-health
+
+# Expose ports
+EXPOSE 80 443 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+  CMD /usr/local/bin/nginx-health > /dev/null || exit 1
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
