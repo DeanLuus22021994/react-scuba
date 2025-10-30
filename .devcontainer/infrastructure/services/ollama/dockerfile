@@ -37,7 +37,7 @@ ENV OLLAMA_MODELS_TO_PROVISION="smollm2:latest gemma3 qwen2.5-coder:3b"
 # This model will be kept hot in VRAM for immediate inference
 ENV OLLAMA_MODEL_TO_LOAD="qwen2.5-coder:3b"
 
-# Install additional utilities
+# Install additional utilities including CLI
 USER root
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -143,6 +143,12 @@ for MODEL_NAME in $OLLAMA_MODELS_TO_PROVISION; do
       echo "[$(date +%Y-%m-%d\ %H:%M:%S)] No host cache found. Downloading ${MODEL_NAME}..."
       ollama pull $MODEL_NAME > /dev/null 2>&1 || true
       echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} download complete."
+
+      # Sync downloaded model back to host cache (if writable)
+      if [ -w "$HOST_CACHE" ]; then
+        echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Syncing ${MODEL_NAME} to host cache..."
+        cp -r $OLLAMA_MODELS/* $HOST_CACHE/ 2>/dev/null || true
+      fi
     fi
   else
     echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} already exists in volume."
@@ -151,6 +157,14 @@ done
 
 MODEL_SIZE=$(du -sh $OLLAMA_MODELS 2>/dev/null | cut -f1 || echo "0")
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Volume size: $MODEL_SIZE"
+
+# Sync all models to host cache (one-way: volume -> host cache)
+if [ -w "$HOST_CACHE" ] && [ -n "$(ls -A $OLLAMA_MODELS 2>/dev/null)" ]; then
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Syncing all models from volume to host cache..."
+  rsync -a --delete $OLLAMA_MODELS/ $HOST_CACHE/ 2>/dev/null || cp -r $OLLAMA_MODELS/* $HOST_CACHE/ 2>/dev/null || true
+  CACHE_SIZE=$(du -sh $HOST_CACHE 2>/dev/null | cut -f1 || echo "0")
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Host cache size: $CACHE_SIZE"
+fi
 
 # Load selected model into GPU RAM
 if [ -n "$OLLAMA_MODEL_TO_LOAD" ]; then

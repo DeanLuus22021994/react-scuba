@@ -92,7 +92,7 @@ services:
       - OLLAMA_DEBUG=0
     volumes:
       - react_scuba_ollama-models:/root/.ollama/models
-      - C:/shared_memory/ollama-cache:/host-cache:ro
+      - C:/shared_memory/ollama-cache:/host-cache:rw
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "/usr/local/bin/ollama-health"]
