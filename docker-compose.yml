@@ -1,10 +1,9 @@
 # ==============================================================================
-# docker-compose.yml - React Scuba Full Stack Orchestration
+# docker-compose.yml - Full Stack Orchestration
 # ==============================================================================
 #
 # Single command deployment: docker compose up
-# Includes core service tiers via modular compose fragments
-# MCP services managed separately in docker-compose.mcp-persistent.yml
+# Includes core service tiers via modular compose fragments + MCP services
 #
 # DEPLOYMENT PROFILES:
 #   minimal       - DevContainer essentials (3 services: node-tools + 2 MCP)
@@ -13,17 +12,155 @@
 #   monitoring    - + metrics & visualization (prometheus, grafana, exporters)
 #   loadbalancing - + nginx reverse proxy
 #   gpu           - + NVIDIA GPU & Ollama LLM inference
-#   full          - All services (28 total)
+#   mcp           - + MCP persistent services (python-mcp-sidecar, discovery)
+#   full          - All services (30 total)
 #
 # USAGE:
-#   docker compose --profile full up              # Full cluster (28 services)
+#   docker compose --profile full up              # Full cluster (30 services)
 #   docker compose --profile minimal up           # Minimal (3 services)
-#   docker compose --profile base --profile app up  # Databases + app (10 services)
+#   docker compose --profile mcp up               # MCP services only (2 services)
 #   docker compose up --build                      # Build + start with full profile
 #
-# MCP SERVICES:
-#   docker compose -f docker-compose.mcp-persistent.yml --profile mcp up -d
-#
+
+# ==== YAML Anchors for Reusable Patterns ====
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-restart-policy: &restart-unless-stopped
+  restart: unless-stopped
+
+x-healthcheck-defaults: &healthcheck-defaults
+  interval: 30s
+  timeout: 5s
+  retries: 3
+  start_period: 20s
+
+x-deploy-small: &deploy-small
+  resources:
+    limits:
+      cpus: "0.5"
+      memory: 256M
+    reservations:
+      cpus: "0.25"
+      memory: 128M
+
+x-deploy-medium: &deploy-medium
+  resources:
+    limits:
+      cpus: "1.0"
+      memory: 512M
+    reservations:
+      cpus: "0.5"
+      memory: 256M
+
+x-deploy-large: &deploy-large
+  resources:
+    limits:
+      cpus: "2.0"
+      memory: 2048M
+    reservations:
+      cpus: "1.0"
+      memory: 1024M
+
+x-env-file: &default-env-file
+  - devcontainer.env
+
+services:
+  # ==== Python MCP Persistent Sidecar Service ====
+  python-mcp-sidecar:
+    build:
+      context: ./docker-compose-examples/mcp/python_utils
+      dockerfile: ../../../.devcontainer/infrastructure/mcp-servers/python/dockerfile
+      args:
+        PYTHON_VERSION: "3.14t"
+        UV_VERSION: "latest"
+    image: python-mcp-sidecar:latest
+    container_name: python-mcp-sidecar
+    hostname: python-mcp-sidecar
+    profiles:
+      - full
+      - minimal
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.99
+    ports:
+      - "9099"
+    env_file: *default-env-file
+    environment:
+      - ENABLE_MCP=${ENABLE_MCP:-false}
+      - MCP_HTTP_PORT=9099
+      - MCP_PROTOCOL_VERSION=1.0.0
+      - PYTHONUNBUFFERED=1
+      - UV_SYSTEM_PYTHON=1
+      - PYTHON_GIL_MODE=1
+    volumes:
+      - ./docker-compose-examples/mcp/python_utils:/app:ro
+      - python-mcp-packages:/usr/local/lib/python3.14/site-packages
+      - python-mcp-state:/data
+      - python-mcp-cache:/cache/python
+      - python-mcp-uv-cache:/cache/uv
+    working_dir: /app
+    command: ["python", "-m", "utils.mcp_server"]
+    stdin_open: true
+    tty: true
+    <<: *restart-unless-stopped
+    deploy:
+      <<: *deploy-medium
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-m",
+          "utils.health",
+          "--protocol-validation",
+          "--endpoint",
+          "http://localhost:9099/health",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # ==== Service Discovery & Health Monitor ====
+  mcp-discovery-agent:
+    build:
+      context: ./.devcontainer/infrastructure/mcp-servers/discovery
+      dockerfile: dockerfile
+    image: mcp-discovery-agent:latest
+    container_name: mcp-discovery-agent
+    hostname: mcp-discovery-agent
+    profiles:
+      - full
+      - minimal
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.98
+    ports:
+      - "9097:9097"
+    env_file: *default-env-file
+    environment:
+      - MCP_DISCOVERY_ENABLED=true
+      - MCP_HEALTH_WEBSOCKET_PORT=9097
+      - MCP_SERVICES=python-mcp-sidecar:9099
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - mcp-discovery-state:/data
+    <<: *restart-unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9097/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      python-mcp-sidecar:
+        condition: service_healthy
 
 include:
   # ==== Database Services ====
@@ -55,116 +192,18 @@ include:
   - .devcontainer/infrastructure/services/nvidia/docker-compose.nvidia.yml
   - .devcontainer/infrastructure/services/ollama/docker-compose.ollama.yml
 
-# Named volumes for persistence (shared across all fragments)
+# MCP-specific volumes (others declared in individual compose files)
 volumes:
-  # ==== Database Volumes ====
-  postgres-data:
-    name: postgres-data
-  postgres-node-cache:
-    name: postgres-node-cache
-  postgres-cache:
-    name: postgres-cache
-  mariadb-data:
-    name: mariadb-data
-  mariadb-node-cache:
-    name: mariadb-node-cache
-  mariadb-cache:
-    name: mariadb-cache
-
-  # ==== Cache Volumes ====
-  redis-data:
-    name: redis-data
-  redisinsight-data:
-    name: redisinsight-data
-  minio-data:
-    name: minio-data
-
-  # ==== Build & Development Volumes ====
-  buildkit-cache:
-    name: buildkit-cache
-  buildkit-tmp:
-    name: buildkit-tmp
-  node-builder-node-modules:
-    name: node-builder-node-modules
-  node-builder-npm:
-    name: node-builder-npm
-  node-builder-git-hooks:
-    name: node-builder-git-hooks
-  node-builder-husky:
-    name: node-builder-husky
-  node-bootstrap-cache:
-    name: node-bootstrap-cache
-
-  # ==== CI/CD Volumes ====
-  runner-work:
-    name: runner-work
-  runner-cache:
-    name: runner-cache
-
-  # ==== Infrastructure Volumes ====
-  prometheus-data:
-    name: prometheus-data
-  grafana-data:
-    name: grafana-data
-  nginx-logs:
-    name: nginx-logs
-  nginx-slave1-logs:
-    name: nginx-slave1-logs
-  nginx-slave2-logs:
-    name: nginx-slave2-logs
-
-  # ==== API & Application Volumes ====
-  api-logs:
-    name: api-logs
-  api-data:
-    name: api-data
-
-  # ==== GPU & AI Volumes ====
-  ollama-models:
-    name: ollama-models
-    driver: local
-
-  # ==== MCP Volumes ====
-  mcp-discovery-cache:
-    name: mcp-discovery-cache
-  markitdown-cache:
-    name: markitdown-cache
-  mcp-memory-cache:
-    name: mcp-memory-cache
-
-  # ==== Workspace Node Modules ====
-  root_node_modules:
-    name: root_node_modules
-  web_node_modules:
-    name: web_node_modules
-  api_node_modules:
-    name: api_node_modules
-  content_node_modules:
-    name: content_node_modules
-  docs_node_modules:
-    name: docs_node_modules
-  config_node_modules:
-    name: config_node_modules
-  types_node_modules:
-    name: types_node_modules
-  ui_node_modules:
-    name: ui_node_modules
-  utils_node_modules:
-    name: utils_node_modules
-  react-vite-cache:
-    name: react-vite-cache
-  react-npm-cache:
-    name: react-npm-cache
-
-  # ==== Development Volumes ====
-  devcontainer-cache:
-    name: devcontainer-cache
-  python-exp-cache:
-    name: python-exp-cache
-  k8s-config:
-    name: k8s-config
-  k8s-cache:
-    name: k8s-cache
+  python-mcp-packages:
+    name: python-mcp-packages
+  python-mcp-state:
+    name: python-mcp-state
+  python-mcp-cache:
+    name: python-mcp-cache
+  python-mcp-uv-cache:
+    name: python-mcp-uv-cache
+  mcp-discovery-state:
+    name: mcp-discovery-state
 
 # Network configuration (shared by all included services)
 networks:

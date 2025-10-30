@@ -67,3 +67,9 @@ services:
         max-file: "3"
     labels:
       - "com.react-scuba.service=node-api"
+
+volumes:
+  api-logs:
+    name: api-logs
+  api-data:
+    name: api-data

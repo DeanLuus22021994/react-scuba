@@ -1,9 +1,6 @@
 {
   "name": "React Scuba MCP Development Environment",
-  "dockerComposeFile": [
-    "../docker-compose.yml",
-    "../docker-compose.mcp-persistent.yml"
-  ],
+  "dockerComposeFile": "../docker-compose.yml",
   "service": "node-tools",
   "workspaceFolder": "/workspace",
   "shutdownAction": "stopCompose",

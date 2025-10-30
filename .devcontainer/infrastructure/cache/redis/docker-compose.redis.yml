@@ -70,3 +70,9 @@ services:
         max-file: "3"
     labels:
       - "com.react-scuba.service=redisinsight"
+
+volumes:
+  redis-data:
+    name: redis-data
+  redisinsight-data:
+    name: redisinsight-data

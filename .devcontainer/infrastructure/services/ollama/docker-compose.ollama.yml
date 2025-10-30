@@ -54,3 +54,7 @@ services:
       start_period: 40s
     labels:
       - "com.react-scuba.service=ollama-llm"
+
+volumes:
+  ollama-models:
+    name: ollama-models

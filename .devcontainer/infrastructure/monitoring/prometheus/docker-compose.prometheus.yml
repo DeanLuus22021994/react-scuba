@@ -53,3 +53,7 @@ services:
     labels:
       - "com.react-scuba.service=prometheus"
       - "com.react-scuba.tier=monitoring"
+
+volumes:
+  prometheus-data:
+    name: prometheus-data

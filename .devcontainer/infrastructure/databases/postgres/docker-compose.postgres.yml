@@ -38,3 +38,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  postgres-data:
+    name: postgres-data

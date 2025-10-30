@@ -75,3 +75,7 @@ services:
     labels:
       - "com.react-scuba.service=grafana"
       - "com.react-scuba.tier=monitoring"
+
+volumes:
+  grafana-data:
+    name: grafana-data

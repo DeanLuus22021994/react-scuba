@@ -37,3 +37,7 @@ services:
       start_period: 15s
     labels:
       - "com.react-scuba.service=nginx"
+
+volumes:
+  nginx-logs:
+    name: nginx-logs
