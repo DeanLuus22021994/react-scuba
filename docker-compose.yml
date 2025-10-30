@@ -18,7 +18,8 @@
 include:
   - .devcontainer/infrastructure/compose/base.yml
   - .devcontainer/infrastructure/compose/app.yml
-  - .devcontainer/infrastructure/compose/infra.yml
+  - .devcontainer/infrastructure/compose/monitoring.yml
+  - .devcontainer/infrastructure/compose/loadbalancing.yml
   - .devcontainer/infrastructure/compose/gpu.yml
 
 # Named volumes for persistence (shared across all fragments)

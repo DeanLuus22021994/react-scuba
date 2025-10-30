@@ -1,0 +1,94 @@
+# ==============================================================================
+# docker-compose.loadbalancing.yml - Load Balancing Services
+# ==============================================================================
+# Purpose: Request distribution and load balancing
+# Services: nginx master (load balancer), nginx slaves (upstream servers)
+# Network: mcp-cluster (172.28.0.0/16)
+# Usage: Included via main docker-compose.yml
+# ==============================================================================
+
+services:
+  # ==== Load Balancing ====
+  nginx-master:
+    build:
+      context: ../networking/nginx
+      dockerfile: dockerfile
+    image: nginx-master:latest
+    pull_policy: build
+    container_name: nginx-master
+    hostname: nginx-master
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.73
+    ports:
+      - "8443:443"
+      - "8080:80"
+      - "8088:8080"
+    volumes:
+      - react_scuba_nginx-logs:/var/log/nginx
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      - nginx-slave-1
+      - nginx-slave-2
+
+  nginx-slave-1:
+    build:
+      context: ../networking/nginx-slave
+      dockerfile: dockerfile
+    image: nginx-slave:latest
+    pull_policy: build
+    container_name: nginx-slave-1
+    hostname: nginx-slave-1
+    depends_on:
+      node-api:
+        condition: service_healthy
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.81
+    ports:
+      - "8091:80"
+      - "8092:8080"
+    volumes:
+      - react_scuba_nginx-slave1-logs:/var/log/nginx
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  nginx-slave-2:
+    build:
+      context: ../networking/nginx-slave
+      dockerfile: dockerfile
+    image: nginx-slave:latest
+    pull_policy: build
+    container_name: nginx-slave-2
+    hostname: nginx-slave-2
+    depends_on:
+      node-api:
+        condition: service_healthy
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.82
+    ports:
+      - "8093:80"
+      - "8094:8080"
+    volumes:
+      - react_scuba_nginx-slave2-logs:/var/log/nginx
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+# External reference to node-api on mcp-cluster network
