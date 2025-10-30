@@ -5,17 +5,5 @@
 # Reference: https://github.com/prometheus-community/postgres_exporter
 # ==============================================================================
 
-# Auth settings (can be overridden by DATA_SOURCE_NAME env var)
-auth:
-  # Connection is managed via DATA_SOURCE_NAME environment variable
-  # This config file is provided to suppress the warning message
-
-# Metric collection settings
-queries:
-  # Use default queries provided by the exporter
-  # Custom queries can be added here if needed
-
-# Logging
-log:
-  level: info
-  format: logfmt
+# Connection is managed via DATA_SOURCE_NAME environment variable
+# This minimal config file is provided to suppress the warning message

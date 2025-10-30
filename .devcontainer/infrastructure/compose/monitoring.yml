@@ -139,16 +139,29 @@ services:
       - /dev/disk/:/dev/disk:ro
     devices:
       - /dev/kmsg
+    environment:
+      - CADVISOR_LOG_LEVEL=error
     command:
       - "--docker_only=true"
       - "--housekeeping_interval=10s"
       - "--max_housekeeping_interval=30s"
       - "--storage_duration=2m"
-      - "--disable_metrics=disk,diskIO,network,tcp,udp,percpu,sched,process,hugetlb,referenced_memory,cpu_topology,resctrl"
+      - "--disable_metrics=disk,diskIO,tcp,udp,percpu,sched,process,hugetlb,referenced_memory,resctrl,advtcp,memory_numa"
       - "--store_container_labels=false"
+      - "--whitelisted_container_labels=com.docker.compose.project,com.docker.compose.service"
       - "--event_storage_event_limit=default=0"
       - "--event_storage_age_limit=default=0"
+      - "--raw_cgroup_prefix_whitelist=/docker"
+      - "--disable_root_cgroup_stats=true"
+      - "--enable_load_reader=false"
+      - "--log_cadvisor_usage=false"
+      - "--v=0"
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     healthcheck:
       test:
         [
@@ -187,20 +200,17 @@ services:
       - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
       - "--no-collector.diskstats"
     restart: unless-stopped
-    # Health check disabled - causes excessive connection resets with Prometheus scraping
-    # healthcheck:
-    #   test:
-    #     [
-    #       "CMD",
-    #       "wget",
-    #       "--quiet",
-    #       "--tries=1",
-    #       "--spider",
-    #       "http://localhost:9100/metrics",
-    #     ]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9100/metrics"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   # postgres-exporter and mysql-exporter configurations are included from:
   # - ../monitoring/exporters/postgres/docker-compose.postgres-exporter.yml
