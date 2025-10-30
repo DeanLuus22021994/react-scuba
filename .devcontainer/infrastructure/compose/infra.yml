@@ -19,6 +19,7 @@ services:
       context: ../monitoring/prometheus
       dockerfile: dockerfile
     image: mcp-prometheus:latest
+    pull_policy: build
     container_name: tbc-prometheus
     hostname: prometheus
     ports:
@@ -114,9 +115,10 @@ services:
   # ==== Metrics Exporters ====
   cadvisor:
     build:
-      context: ../monitoring/exporters/cadvisor
+      context: ../monitoring/cadvisor
       dockerfile: dockerfile
     image: mcp-cadvisor:latest
+    pull_policy: build
     container_name: mcp-cadvisor
     hostname: cadvisor
     privileged: true
@@ -228,9 +230,10 @@ services:
 
   nginx-slave-1:
     build:
-      context: ../networking/nginx-slave
+      context: ../services/nginx/slave
       dockerfile: dockerfile
     image: nginx-slave:latest
+    pull_policy: build
     container_name: nginx-slave-1
     hostname: nginx-slave-1
     depends_on:

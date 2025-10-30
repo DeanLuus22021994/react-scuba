@@ -15,6 +15,7 @@ services:
       context: ../gpu
       dockerfile: dockerfile
     image: nvidia-device-plugin:latest
+    pull_policy: build
     container_name: nvidia-device-plugin
     hostname: nvidia-device-plugin
     privileged: true
@@ -56,6 +57,7 @@ services:
       context: ../services/ollama
       dockerfile: dockerfile
     image: ollama-llm:latest
+    pull_policy: build
     container_name: ollama-llm
     hostname: ollama-llm
     networks:

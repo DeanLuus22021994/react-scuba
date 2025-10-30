@@ -136,12 +136,12 @@ for MODEL_NAME in $OLLAMA_MODELS_TO_PROVISION; do
         echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} copied from host cache successfully."
       else
         echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Copy failed. Downloading ${MODEL_NAME}..."
-        ollama pull $MODEL_NAME 2>&1 | grep -E '(pulling|error|Error|failed|Failed|success)' || true
+        ollama pull $MODEL_NAME > /dev/null 2>&1 || true
         echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} download complete."
       fi
     else
       echo "[$(date +%Y-%m-%d\ %H:%M:%S)] No host cache found. Downloading ${MODEL_NAME}..."
-      ollama pull $MODEL_NAME 2>&1 | grep -E '(pulling|error|Error|failed|Failed|success)' || true
+      ollama pull $MODEL_NAME > /dev/null 2>&1 || true
       echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} download complete."
     fi
   else
