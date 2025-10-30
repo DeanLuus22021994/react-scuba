@@ -10,7 +10,7 @@
 #   - Security: non-root user, minimal attack surface
 #   - Performance: Node-only (no Python, git, make), instant startup
 #   - Graceful shutdown: SIGTERM handler for orchestrators
-# 
+#
 # Build: docker build -f .devcontainer/containers/dockerfile.service.node.slim -t api-server:latest .
 # Run: docker compose up node-api
 
@@ -45,7 +45,7 @@ COPY server/apps/api ./apps/api
 
 # Install dependencies with production flag
 # This installs all dependencies listed in package.json
-RUN npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps --production=false
+RUN npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps --omit=dev
 
 # Build the workspace and API
 RUN npm run build 2>/dev/null || true
@@ -138,9 +138,9 @@ CMD ["node", "apps/api/src/index.js"]
 # Base Image: node:22-slim = 150MB
 # Build artifacts removed: .npm-cache, src files, git, docs = -200MB
 # Final size: ~200-250MB for complete API server with all db drivers
-# 
+#
 # Comparison:
-#   - node:22 (alpine): 900MB  
+#   - node:22 (alpine): 900MB
 #   - node:22 (slim): 150MB (83% smaller)
 #   - this image: 200-250MB (71% smaller than full node:22)
 #

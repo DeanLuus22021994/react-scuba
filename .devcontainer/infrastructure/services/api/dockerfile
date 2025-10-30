@@ -42,7 +42,7 @@ COPY server/packages ./packages
 COPY server/apps/api ./apps/api
 
 # Install dependencies with peer dependency resolution
-RUN npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps --production=false
+RUN npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps --omit=dev
 
 # Build workspace (compiles TypeScript, bundles, optimizations)
 RUN npm run build 2>/dev/null || true
