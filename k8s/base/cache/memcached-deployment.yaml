@@ -1,0 +1,107 @@
+# ==============================================================================
+# Memcached Deployment for Session Caching
+# ==============================================================================
+# 3 replicas with consistent hashing for distributed cache
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memcached
+  namespace: cache
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: memcached
+      tier: cache
+  template:
+    metadata:
+      labels:
+        app: memcached
+        tier: cache
+      annotations:
+        linkerd.io/inject: enabled
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9150"
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: memcached
+                topologyKey: kubernetes.io/hostname
+
+      securityContext:
+        fsGroup: 11211
+        runAsNonRoot: true
+        runAsUser: 11211
+
+      containers:
+        - name: memcached
+          image: memcached:1.6-alpine
+          ports:
+            - containerPort: 11211
+              name: memcached
+
+          args:
+            - -m 256
+            - -c 1024
+            - -t 4
+
+          livenessProbe:
+            tcpSocket:
+              port: 11211
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          readinessProbe:
+            tcpSocket:
+              port: 11211
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
+
+        # Memcached Exporter for Prometheus
+        - name: memcached-exporter
+          image: prom/memcached-exporter:latest
+          ports:
+            - containerPort: 9150
+              name: metrics
+
+          args:
+            - --memcached.address=localhost:11211
+
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memcached
+  namespace: cache
+spec:
+  selector:
+    app: memcached
+  ports:
+    - port: 11211
+      targetPort: 11211
+      name: memcached
+    - port: 9150
+      targetPort: 9150
+      name: metrics

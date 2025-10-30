@@ -1,0 +1,28 @@
+# ==============================================================================
+# Development API Patches
+# ==============================================================================
+# Reduced resources, increased logging for dev
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-api
+  namespace: apps
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: api
+          env:
+            - name: NODE_ENV
+              value: "development"
+            - name: LOG_LEVEL
+              value: "debug"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"

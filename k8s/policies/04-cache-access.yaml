@@ -1,0 +1,39 @@
+# ==============================================================================
+# Cache Access Network Policy
+# ==============================================================================
+# Allows application pods to access cache services (Redis, Memcached)
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-cache-access
+  namespace: cache
+spec:
+  podSelector:
+    matchLabels:
+      tier: cache
+  policyTypes:
+    - Ingress
+  ingress:
+    # Allow from application pods
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: apps
+          podSelector:
+            matchLabels:
+              tier: app
+      ports:
+        - protocol: TCP
+          port: 6379  # Redis
+        - protocol: TCP
+          port: 11211 # Memcached
+
+    # Allow from monitoring for metrics collection
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: monitoring
+      ports:
+        - protocol: TCP
+          port: 9121  # redis-exporter

@@ -1,0 +1,23 @@
+# ==============================================================================
+# ServiceMonitor for Memcached Metrics
+# ==============================================================================
+# Scrapes memcached-exporter sidecar
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: memcached-exporter
+  namespace: monitoring
+  labels:
+    prometheus: react-scuba
+spec:
+  selector:
+    matchLabels:
+      app: memcached
+  namespaceSelector:
+    matchNames:
+      - cache
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics

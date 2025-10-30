@@ -1,0 +1,38 @@
+# ==============================================================================
+# Linkerd ServiceProfile for Web Service
+# ==============================================================================
+# Configures retries, timeouts, and routes for web endpoints
+
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: node-web.apps.svc.cluster.local
+  namespace: apps
+spec:
+  routes:
+    - name: health_check
+      condition:
+        method: GET
+        pathRegex: /health
+      timeout: 3s
+      isRetryable: false
+
+    - name: static_assets
+      condition:
+        method: GET
+        pathRegex: /(assets|static)/.*
+      timeout: 5s
+      isRetryable: true
+
+    - name: web_pages
+      condition:
+        method: GET
+        pathRegex: /.*
+      timeout: 10s
+      isRetryable: true
+      retryOn: 5xx,gateway-error,connect-failure
+
+  retryBudget:
+    retryRatio: 0.3
+    minRetriesPerSecond: 10
+    ttl: 10s

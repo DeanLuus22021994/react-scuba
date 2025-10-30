@@ -1,0 +1,72 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${TENANT_ID}-ingress
+  namespace: apps
+  annotations:
+    # Nginx ingress annotations
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+    # Rate limiting per tenant
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "5"
+
+    # Tenant header injection
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Tenant-ID "${TENANT_ID}";
+      proxy_set_header X-Tenant-Name "${TENANT_NAME}";
+
+    # TLS certificate (cert-manager)
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - ${TENANT_DOMAIN}
+        - ${TENANT_ID}.localhost  # For local development
+      secretName: ${TENANT_ID}-tls
+
+  rules:
+    # Production domain
+    - host: ${TENANT_DOMAIN}
+      http:
+        paths:
+          # API routes
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: node-api
+                port:
+                  number: 3000
+
+          # Web app routes
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: node-web
+                port:
+                  number: 80
+
+    # Local development domain
+    - host: ${TENANT_ID}.localhost
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: node-api
+                port:
+                  number: 3000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: node-web
+                port:
+                  number: 80

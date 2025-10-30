@@ -1,0 +1,38 @@
+# ==============================================================================
+# Linkerd ServiceProfile for API Service
+# ==============================================================================
+# Configures retries, timeouts, and routes for API endpoints
+
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: node-api.apps.svc.cluster.local
+  namespace: apps
+spec:
+  routes:
+    - name: health_check
+      condition:
+        method: GET
+        pathRegex: /health
+      timeout: 3s
+      isRetryable: false
+
+    - name: ready_check
+      condition:
+        method: GET
+        pathRegex: /ready
+      timeout: 3s
+      isRetryable: false
+
+    - name: api_endpoints
+      condition:
+        method: GET|POST|PUT|DELETE
+        pathRegex: /api/.*
+      timeout: 30s
+      isRetryable: true
+      retryOn: 5xx,gateway-error,connect-failure
+
+  retryBudget:
+    retryRatio: 0.2
+    minRetriesPerSecond: 10
+    ttl: 10s

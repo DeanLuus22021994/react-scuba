@@ -1,0 +1,116 @@
+# ==============================================================================
+# Skaffold Configuration for Local Kubernetes Development
+# ==============================================================================
+# Enables hot-reload development with automatic rebuilds
+
+apiVersion: skaffold/v4beta7
+kind: Config
+
+metadata:
+  name: react-scuba
+
+build:
+  local:
+    push: true
+    useBuildkit: true
+
+  artifacts:
+    - image: localhost:5001/react-scuba-api
+      context: server/apps/api
+      docker:
+        dockerfile: Dockerfile
+        buildArgs:
+          NODE_ENV: development
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: /app/src
+
+    - image: localhost:5001/react-scuba-web
+      context: server/apps/web
+      docker:
+        dockerfile: Dockerfile
+        buildArgs:
+          NODE_ENV: development
+      sync:
+        manual:
+          - src: 'src/**/*.{js,jsx,ts,tsx}'
+            dest: /app/src
+
+deploy:
+  helm:
+    releases:
+      - name: di-authority-johannesburg
+        chartPath: k8s/charts/react-scuba
+        namespace: apps
+        createNamespace: true
+        valuesFiles:
+          - k8s/tenants/di-authority-johannesburg/values.yaml
+        setValues:
+          api.image.tag: latest
+          web.image.tag: latest
+          api.image.pullPolicy: Always
+          web.image.pullPolicy: Always
+
+      - name: ocean-spirit-mauritius
+        chartPath: k8s/charts/react-scuba
+        namespace: apps
+        createNamespace: true
+        valuesFiles:
+          - k8s/tenants/ocean-spirit-mauritius/values.yaml
+        setValues:
+          api.image.tag: latest
+          web.image.tag: latest
+          api.image.pullPolicy: Always
+          web.image.pullPolicy: Always
+
+portForward:
+  - resourceType: service
+    resourceName: prometheus
+    namespace: monitoring
+    port: 9090
+    localPort: 9090
+
+  - resourceType: service
+    resourceName: grafana
+    namespace: monitoring
+    port: 3000
+    localPort: 3001
+
+  - resourceType: service
+    resourceName: jaeger-query
+    namespace: monitoring
+    port: 16686
+    localPort: 16686
+
+profiles:
+  # Development profile - single tenant
+  - name: dev
+    activation:
+      - env: SKAFFOLD_PROFILE=dev
+    deploy:
+      helm:
+        releases:
+          - name: di-authority-johannesburg
+            chartPath: k8s/charts/react-scuba
+            namespace: apps
+            createNamespace: true
+            valuesFiles:
+              - k8s/tenants/di-authority-johannesburg/values.yaml
+
+  # Multi-tenant profile - all clients
+  - name: multi-tenant
+    activation:
+      - env: SKAFFOLD_PROFILE=multi-tenant
+    # Uses default deploy configuration (all tenants)
+
+  # CI profile - no hot-reload
+  - name: ci
+    activation:
+      - env: SKAFFOLD_PROFILE=ci
+    build:
+      artifacts:
+        - image: localhost:5001/react-scuba-api
+          context: server/apps/api
+        - image: localhost:5001/react-scuba-web
+          context: server/apps/web

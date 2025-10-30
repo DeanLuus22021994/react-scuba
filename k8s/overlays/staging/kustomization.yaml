@@ -1,0 +1,29 @@
+# ==============================================================================
+# Staging Environment Overlay
+# ==============================================================================
+# Production-like configuration for pre-production testing
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: apps
+
+bases:
+  - ../../base/apps
+  - ../../base/databases
+  - ../../base/cache
+  - ../../base/monitoring
+  - ../../base/networking
+
+patchesStrategicMerge:
+  - ingress-patches.yaml
+
+commonLabels:
+  environment: staging
+
+# Images use semantic versioning for staging
+images:
+  - name: localhost:5001/react-scuba-api
+    newTag: staging-v1.0.0
+  - name: localhost:5001/react-scuba-web
+    newTag: staging-v1.0.0

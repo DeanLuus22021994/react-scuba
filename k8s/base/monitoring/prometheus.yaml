@@ -1,0 +1,170 @@
+# ==============================================================================
+# Prometheus Instance with Tenant-Aware Metrics Collection
+# ==============================================================================
+# Deployed via Prometheus Operator with relabeling for multi-tenancy
+
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: react-scuba
+  namespace: monitoring
+spec:
+  replicas: 2
+  version: v2.48.0
+
+  serviceAccountName: prometheus
+
+  # Service discovery across all namespaces
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector:
+    matchLabels:
+      prometheus: react-scuba
+
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector:
+    matchLabels:
+      prometheus: react-scuba
+
+  # Tenant label relabeling
+  additionalScrapeConfigs:
+    name: additional-scrape-configs
+    key: prometheus-additional.yaml
+
+  # Storage
+  retention: 30d
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 50Gi
+
+  # Resources
+  resources:
+    requests:
+      cpu: 500m
+      memory: 2Gi
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+
+  # Security
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+
+  # High availability
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: prometheus
+          topologyKey: kubernetes.io/hostname
+
+  # Alerting
+  alerting:
+    alertmanagers:
+      - namespace: monitoring
+        name: alertmanager
+        port: web
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  namespace: monitoring
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/metrics
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources:
+      - configmaps
+    verbs: ["get"]
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics"]
+    verbs: ["get"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+  - kind: ServiceAccount
+    name: prometheus
+    namespace: monitoring
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: prometheus
+spec:
+  selector:
+    app.kubernetes.io/name: prometheus
+  ports:
+    - port: 9090
+      targetPort: 9090
+      name: web
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: additional-scrape-configs
+  namespace: monitoring
+data:
+  prometheus-additional.yaml: |
+    # Tenant label relabeling for all metrics
+    - job_name: 'kubernetes-pods'
+      kubernetes_sd_configs:
+        - role: pod
+      relabel_configs:
+        # Extract tenant label from pod labels
+        - source_labels: [__meta_kubernetes_pod_label_tenant]
+          target_label: tenant
+          action: replace
+        # Keep only pods with prometheus.io/scrape annotation
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        # Use port from annotation if specified
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          regex: (.+)
+          target_label: __address__
+          replacement: $1
+        # Use path from annotation if specified
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)

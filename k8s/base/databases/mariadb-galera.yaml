@@ -1,0 +1,226 @@
+# ==============================================================================
+# Shared MariaDB Galera Cluster for Multi-Tenant Platform
+# ==============================================================================
+# 3-node synchronous multi-master replication
+# Separate databases per tenant with isolated credentials
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-galera
+  namespace: databases
+  labels:
+    app: mariadb
+    tier: database
+spec:
+  clusterIP: None  # Headless service for StatefulSet
+  ports:
+    - port: 3306
+      name: mysql
+    - port: 4567
+      name: galera
+    - port: 4568
+      name: ist
+    - port: 4444
+      name: sst
+  selector:
+    app: mariadb
+    tier: database
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-external
+  namespace: databases
+spec:
+  type: NodePort
+  selector:
+    app: mariadb
+    tier: database
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+      nodePort: 30306
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-galera
+  namespace: databases
+  labels:
+    app: mariadb
+    tier: database
+spec:
+  serviceName: mariadb-galera
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mariadb
+      tier: database
+  template:
+    metadata:
+      labels:
+        app: mariadb
+        tier: database
+      annotations:
+        linkerd.io/inject: "disabled"  # Database shouldn't have service mesh
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - mariadb
+              topologyKey: kubernetes.io/hostname
+
+      initContainers:
+        - name: init-mariadb
+          image: mariadb:11
+          command:
+            - bash
+            - "-c"
+            - |
+              set -ex
+              # Generate mysql server-id from pod ordinal
+              [[ `hostname` =~ -([0-9]+)$ ]] || exit 1
+              ordinal=${BASH_REMATCH[1]}
+              echo $((100 + $ordinal)) > /mnt/config-map/server-id
+              # Copy appropriate conf.d files from config-map to emptyDir
+              if [[ $ordinal -eq 0 ]]; then
+                cp /mnt/config-map/bootstrap.cnf /mnt/conf.d/
+              fi
+              cp /mnt/config-map/galera.cnf /mnt/conf.d/
+          volumeMounts:
+            - name: mariadb-config
+              mountPath: /mnt/config-map
+            - name: conf
+              mountPath: /mnt/conf.d
+
+      containers:
+        - name: mariadb
+          image: mariadb:11
+          ports:
+            - containerPort: 3306
+              name: mysql
+            - containerPort: 4567
+              name: galera
+            - containerPort: 4568
+              name: ist
+            - containerPort: 4444
+              name: sst
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-credentials
+                  key: root-password
+            - name: WSREP_CLUSTER_ADDRESS
+              value: "gcomm://mariadb-galera-0.mariadb-galera.databases.svc.cluster.local,mariadb-galera-1.mariadb-galera.databases.svc.cluster.local,mariadb-galera-2.mariadb-galera.databases.svc.cluster.local"
+          volumeMounts:
+            - name: mariadb-data
+              mountPath: /var/lib/mysql
+            - name: conf
+              mountPath: /etc/mysql/conf.d
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "1000m"
+              memory: "2Gi"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "SHOW STATUS LIKE 'wsrep_ready';" | grep ON
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+
+        # MySQL exporter for Prometheus
+        - name: mysql-exporter
+          image: prom/mysqld-exporter:v0.15.1
+          ports:
+            - containerPort: 9104
+              name: metrics
+          env:
+            - name: DATA_SOURCE_NAME
+              value: "root:$(MYSQL_ROOT_PASSWORD)@(localhost:3306)/"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-credentials
+                  key: root-password
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+            limits:
+              cpu: "200m"
+              memory: "200Mi"
+
+      volumes:
+        - name: mariadb-config
+          configMap:
+            name: mariadb-config
+        - name: conf
+          emptyDir: {}
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mariadb-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "fast-ssd"
+        resources:
+          requests:
+            storage: 15Gi
+
+---
+# MariaDB Galera Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-config
+  namespace: databases
+data:
+  galera.cnf: |
+    [mysqld]
+    binlog_format=ROW
+    default-storage-engine=innodb
+    innodb_autoinc_lock_mode=2
+    bind-address=0.0.0.0
+
+    # Galera Provider Configuration
+    wsrep_on=ON
+    wsrep_provider=/usr/lib/libgalera_smm.so
+
+    # Galera Cluster Configuration
+    wsrep_cluster_name="react-scuba-galera"
+    wsrep_sst_method=rsync
+
+    # Galera Synchronization Configuration
+    wsrep_sst_auth=root:${MYSQL_ROOT_PASSWORD}
+
+    # Node-specific will be set by pod
+
+  bootstrap.cnf: |
+    [mysqld]
+    wsrep_new_cluster

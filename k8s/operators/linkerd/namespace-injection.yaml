@@ -1,0 +1,31 @@
+# ==============================================================================
+# Linkerd Namespace Configuration
+# ==============================================================================
+# Enable auto-injection for apps namespace
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps
+  annotations:
+    linkerd.io/inject: enabled
+  labels:
+    name: apps
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mcp
+  annotations:
+    linkerd.io/inject: enabled
+  labels:
+    name: mcp
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  annotations:
+    linkerd.io/inject: enabled
+  labels:
+    name: monitoring

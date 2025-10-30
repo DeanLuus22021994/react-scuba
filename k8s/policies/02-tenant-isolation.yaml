@@ -1,0 +1,32 @@
+# ==============================================================================
+# Tenant Isolation Network Policy
+# ==============================================================================
+# Enforces tenant boundary: pods can only communicate with same-tenant pods
+# Uses 'tenant' label for isolation
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: tenant-isolation
+  namespace: apps
+spec:
+  podSelector:
+    matchExpressions:
+      - key: tenant
+        operator: Exists
+  policyTypes:
+    - Ingress
+  ingress:
+    # Allow traffic only from pods with matching tenant label
+    - from:
+        - podSelector:
+            matchLabels:
+              tenant: "${TENANT_ID}"
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 3000  # API port
+        - protocol: TCP
+          port: 80    # Web port

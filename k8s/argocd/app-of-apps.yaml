@@ -1,0 +1,130 @@
+# ==============================================================================
+# ArgoCD App-of-Apps Pattern - Infrastructure Applications
+# ==============================================================================
+# Parent application that manages all infrastructure components
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: react-scuba-infrastructure
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/DeanLuus22021994/react-scuba.git
+    targetRevision: main
+    path: k8s/argocd/apps
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: react-scuba-databases
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/DeanLuus22021994/react-scuba.git
+    targetRevision: main
+    path: k8s/base/databases
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: databases
+
+  syncPolicy:
+    automated:
+      prune: false  # Don't auto-delete databases
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: react-scuba-cache
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/DeanLuus22021994/react-scuba.git
+    targetRevision: main
+    path: k8s/base/cache
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cache
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: react-scuba-monitoring
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/DeanLuus22021994/react-scuba.git
+    targetRevision: main
+    path: k8s/base/monitoring
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: react-scuba-policies
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/DeanLuus22021994/react-scuba.git
+    targetRevision: main
+    path: k8s/policies
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apps
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

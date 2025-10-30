@@ -1,0 +1,66 @@
+# ==============================================================================
+# ArgoCD ApplicationSet for Automated Tenant Onboarding
+# ==============================================================================
+# Automatically creates ArgoCD Applications for each tenant directory in k8s/tenants/
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: react-scuba-tenants
+  namespace: argocd
+spec:
+  generators:
+    # Git directory generator - discovers tenant directories
+    - git:
+        repoURL: https://github.com/DeanLuus22021994/react-scuba.git
+        revision: main
+        directories:
+          - path: k8s/tenants/*
+          - path: k8s/tenants/_template
+            exclude: true
+
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      labels:
+        tenant: '{{path.basename}}'
+        app.kubernetes.io/part-of: react-scuba
+
+    spec:
+      project: default
+
+      source:
+        repoURL: https://github.com/DeanLuus22021994/react-scuba.git
+        targetRevision: main
+        path: k8s/charts/react-scuba
+        helm:
+          valueFiles:
+            - ../../tenants/{{path.basename}}/values.yaml
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: apps
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+
+        syncOptions:
+          - CreateNamespace=true
+          - PruneLast=true
+
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
+
+      # Health assessment for tenant applications
+      ignoreDifferences:
+        - group: apps
+          kind: Deployment
+          jsonPointers:
+            - /spec/replicas

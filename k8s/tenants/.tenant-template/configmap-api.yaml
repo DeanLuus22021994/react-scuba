@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: apps
+data:
+  # Tenant identification
+  tenant-id: "${TENANT_ID}"
+  tenant-name: "${TENANT_NAME}"
+
+  # Database configuration
+  db-name: "${DB_NAME}"
+
+  # Application settings
+  log-level: "info"
+  node-env: "production"
+  api-version: "v1"
+
+  # Feature flags (customize per tenant)
+  enable-analytics: "true"
+  enable-caching: "true"
+  enable-rate-limiting: "true"
+
+  # Performance tuning
+  max-connections: "100"
+  request-timeout: "30000"
+  keepalive-timeout: "65000"
+
+  # Tenant-specific features (from server/clients/${TENANT_ID}/config.json)
+  # features-booking: "true"
+  # features-courses: "true"
+  # features-equipment: "true"

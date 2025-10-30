@@ -1,0 +1,23 @@
+# ==============================================================================
+# ServiceMonitor for Redis Metrics
+# ==============================================================================
+# Scrapes redis-exporter sidecar
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: redis-exporter
+  namespace: monitoring
+  labels:
+    prometheus: react-scuba
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  namespaceSelector:
+    matchNames:
+      - cache
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - service-accounts.yaml
+  - roles.yaml
+  - rolebindings.yaml
+  - cluster-roles.yaml
+  - cluster-rolebindings.yaml
+
+commonLabels:
+  managed-by: kustomize
+  component: rbac

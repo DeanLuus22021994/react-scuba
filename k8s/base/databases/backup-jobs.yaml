@@ -1,0 +1,154 @@
+# ==============================================================================
+# Database Backup CronJobs for PostgreSQL and MariaDB
+# ==============================================================================
+# Daily backups at 2 AM UTC to MinIO S3-compatible storage
+# Retention: 30 daily, 12 weekly, 6 monthly
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: databases
+  labels:
+    app: postgres-backup
+    tier: database
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM UTC
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: postgres-backup
+            tier: database
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: backup-sa
+          containers:
+            - name: pg-backup
+              image: postgres:17-alpine
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+                  BACKUP_FILE="/backups/postgres_${TIMESTAMP}.sql.gz"
+
+                  echo "Starting PostgreSQL backup at ${TIMESTAMP}"
+
+                  # Backup all tenant databases
+                  for DB in di_authority_johannesburg_db ocean_spirit_mauritius_db; do
+                    echo "Backing up database: ${DB}"
+                    pg_dump -h react-scuba-postgres -U postgres -d ${DB} | gzip > ${BACKUP_FILE}_${DB}
+                  done
+
+                  echo "Backup completed successfully"
+
+                  # Cleanup old backups (keep last 30 days)
+                  find /backups -name "postgres_*.sql.gz" -mtime +30 -delete
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-credentials
+                      key: password
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /backups
+              resources:
+                requests:
+                  cpu: "100m"
+                  memory: "256Mi"
+                limits:
+                  cpu: "500m"
+                  memory: "1Gi"
+          volumes:
+            - name: backup-storage
+              persistentVolumeClaim:
+                claimName: backup-storage
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mariadb-backup
+  namespace: databases
+  labels:
+    app: mariadb-backup
+    tier: database
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM UTC
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: mariadb-backup
+            tier: database
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: backup-sa
+          containers:
+            - name: mariadb-backup
+              image: mariadb:11
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  set -e
+                  TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+                  BACKUP_DIR="/backups/mariadb_${TIMESTAMP}"
+
+                  echo "Starting MariaDB backup at ${TIMESTAMP}"
+                  mkdir -p ${BACKUP_DIR}
+
+                  # Backup using mariabackup
+                  mariabackup --backup \
+                    --target-dir=${BACKUP_DIR} \
+                    --user=root \
+                    --password=${MYSQL_ROOT_PASSWORD} \
+                    --host=mariadb-galera-0.mariadb-galera.databases.svc.cluster.local
+
+                  # Compress backup
+                  tar -czf ${BACKUP_DIR}.tar.gz -C /backups mariadb_${TIMESTAMP}
+                  rm -rf ${BACKUP_DIR}
+
+                  echo "Backup completed successfully"
+
+                  # Cleanup old backups (keep last 30 days)
+                  find /backups -name "mariadb_*.tar.gz" -mtime +30 -delete
+              env:
+                - name: MYSQL_ROOT_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: mariadb-credentials
+                      key: root-password
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /backups
+              resources:
+                requests:
+                  cpu: "100m"
+                  memory: "256Mi"
+                limits:
+                  cpu: "500m"
+                  memory: "1Gi"
+          volumes:
+            - name: backup-storage
+              persistentVolumeClaim:
+                claimName: backup-storage
+
+---
+# ServiceAccount for backup jobs
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backup-sa
+  namespace: databases

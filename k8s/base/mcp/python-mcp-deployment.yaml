@@ -1,0 +1,113 @@
+# ==============================================================================
+# Python MCP Sidecar Deployment
+# ==============================================================================
+# Multi-tenant MCP service with per-tenant isolation
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-mcp-sidecar
+  namespace: mcp
+  labels:
+    app: python-mcp-sidecar
+    tier: mcp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python-mcp-sidecar
+      tier: mcp
+  template:
+    metadata:
+      labels:
+        app: python-mcp-sidecar
+        tier: mcp
+      annotations:
+        linkerd.io/inject: "enabled"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9099"
+    spec:
+      serviceAccountName: mcp-sa
+
+      containers:
+        - name: python-mcp
+          image: localhost:5001/python-mcp-sidecar:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9099
+              name: http
+              protocol: TCP
+
+          env:
+            - name: MCP_PORT
+              value: "9099"
+            - name: MCP_HOST
+              value: "0.0.0.0"
+            - name: LOG_LEVEL
+              value: "info"
+            - name: TENANT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tenant']
+
+          envFrom:
+            - configMapRef:
+                name: mcp-config
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9099
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 9099
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-mcp-sidecar
+  namespace: mcp
+  labels:
+    app: python-mcp-sidecar
+    tier: mcp
+spec:
+  type: ClusterIP
+  selector:
+    app: python-mcp-sidecar
+    tier: mcp
+  ports:
+    - protocol: TCP
+      port: 9099
+      targetPort: 9099
+      name: http

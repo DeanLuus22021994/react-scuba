@@ -1,0 +1,29 @@
+apiVersion: v2
+name: react-scuba
+description: Multi-tenant dive shop management platform
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+keywords:
+  - dive-shop
+  - multi-tenant
+  - scuba
+  - booking
+
+maintainers:
+  - name: React Scuba Team
+    email: support@react-scuba.com
+
+dependencies:
+  - name: postgresql
+    version: "12.x.x"
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+  - name: redis
+    version: "18.x.x"
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
+
+sources:
+  - https://github.com/DeanLuus22021994/react-scuba

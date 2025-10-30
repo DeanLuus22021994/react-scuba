@@ -1,0 +1,30 @@
+# ==============================================================================
+# Development Environment Overlay
+# ==============================================================================
+# Lower resource requirements for local development
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: apps
+
+bases:
+  - ../../base/apps
+  - ../../base/databases
+  - ../../base/cache
+  - ../../base/monitoring
+  - ../../base/networking
+
+patchesStrategicMerge:
+  - api-patches.yaml
+  - web-patches.yaml
+
+commonLabels:
+  environment: dev
+
+# Images use latest tag for dev
+images:
+  - name: localhost:5001/react-scuba-api
+    newTag: latest
+  - name: localhost:5001/react-scuba-web
+    newTag: latest

@@ -1,0 +1,27 @@
+# ==============================================================================
+# ServiceMonitor for Node.js API Metrics
+# ==============================================================================
+# Scrapes custom application metrics with tenant labels
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: node-api
+  namespace: monitoring
+  labels:
+    prometheus: react-scuba
+spec:
+  selector:
+    matchLabels:
+      app: node-api
+  namespaceSelector:
+    matchNames:
+      - apps
+  endpoints:
+    - port: http
+      interval: 30s
+      path: /metrics
+      relabelings:
+        - sourceLabels: [__meta_kubernetes_pod_label_tenant]
+          targetLabel: tenant
+          action: replace

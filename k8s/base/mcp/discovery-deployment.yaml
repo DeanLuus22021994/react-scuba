@@ -1,0 +1,111 @@
+# ==============================================================================
+# MCP Discovery Agent Deployment
+# ==============================================================================
+# Service discovery agent with cluster-wide observability
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-discovery-agent
+  namespace: mcp
+  labels:
+    app: mcp-discovery
+    tier: mcp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mcp-discovery
+      tier: mcp
+  template:
+    metadata:
+      labels:
+        app: mcp-discovery
+        tier: mcp
+      annotations:
+        linkerd.io/inject: "enabled"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9097"
+    spec:
+      serviceAccountName: mcp-sa
+
+      containers:
+        - name: discovery-agent
+          image: localhost:5001/mcp-discovery-agent:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9097
+              name: http
+              protocol: TCP
+
+          env:
+            - name: DISCOVERY_PORT
+              value: "9097"
+            - name: DISCOVERY_HOST
+              value: "0.0.0.0"
+            - name: LOG_LEVEL
+              value: "info"
+            - name: KUBERNETES_NAMESPACE_FILTER
+              value: "apps,databases,cache,monitoring"
+
+          envFrom:
+            - configMapRef:
+                name: mcp-config
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9097
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /services
+              port: 9097
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-discovery
+  namespace: mcp
+  labels:
+    app: mcp-discovery
+    tier: mcp
+spec:
+  type: ClusterIP
+  selector:
+    app: mcp-discovery
+    tier: mcp
+  ports:
+    - protocol: TCP
+      port: 9097
+      targetPort: 9097
+      name: http

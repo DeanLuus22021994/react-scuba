@@ -1,0 +1,108 @@
+name: Automated Tenant Onboarding
+
+on:
+  workflow_dispatch:
+    inputs:
+      tenant-id:
+        description: 'Tenant ID (lowercase, hyphenated)'
+        required: true
+        type: string
+      tenant-name:
+        description: 'Tenant Display Name'
+        required: true
+        type: string
+      tenant-domain:
+        description: 'Tenant Domain'
+        required: true
+        type: string
+
+jobs:
+  onboard-tenant:
+    name: Create Tenant Configuration
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Validate tenant ID
+        run: |
+          if [[ ! "${{ inputs.tenant-id }}" =~ ^[a-z0-9-]+$ ]]; then
+            echo "Error: Tenant ID must be lowercase alphanumeric with hyphens"
+            exit 1
+          fi
+
+      - name: Check if tenant exists
+        run: |
+          if [ -d "k8s/tenants/${{ inputs.tenant-id }}" ]; then
+            echo "Error: Tenant ${{ inputs.tenant-id }} already exists"
+            exit 1
+          fi
+
+      - name: Copy template
+        run: |
+          cp -r k8s/tenants/.tenant-template k8s/tenants/${{ inputs.tenant-id }}
+
+      - name: Replace placeholders
+        run: |
+          cd k8s/tenants/${{ inputs.tenant-id }}
+
+          # Replace in all YAML files
+          find . -name '*.yaml' -type f -exec sed -i \
+            -e 's/\${TENANT_ID}/${{ inputs.tenant-id }}/g' \
+            -e 's/\${TENANT_NAME}/${{ inputs.tenant-name }}/g' \
+            -e 's/\${TENANT_DOMAIN}/${{ inputs.tenant-domain }}/g' \
+            -e 's/\${DB_NAME}/${{ inputs.tenant-id }}_db/g' \
+            -e 's/\${DB_USER}/${{ inputs.tenant-id }}_user/g' \
+            {} +
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Generate Helm values
+        run: |
+          bash k8s/scripts/generate-tenant-values.sh ${{ inputs.tenant-id }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'feat: Add tenant ${{ inputs.tenant-id }}'
+          branch: tenant/${{ inputs.tenant-id }}
+          title: 'Add tenant: ${{ inputs.tenant-name }}'
+          body: |
+            ## New Tenant Onboarding
+
+            **Tenant ID**: `${{ inputs.tenant-id }}`
+            **Tenant Name**: ${{ inputs.tenant-name }}
+            **Domain**: ${{ inputs.tenant-domain }}
+
+            ### Changes
+            - Created tenant configuration in `k8s/tenants/${{ inputs.tenant-id }}/`
+            - Generated Helm values from client config
+            - Configured ingress for domain routing
+
+            ### Next Steps
+            1. Review generated configuration
+            2. Generate sealed secrets for database credentials
+            3. Merge PR to trigger ArgoCD deployment
+
+            ### Verification
+            ```bash
+            # After merge, check deployment
+            argocd app get ${{ inputs.tenant-id }}
+            kubectl get pods -n apps -l tenant=${{ inputs.tenant-id }}
+            ```
+          labels: |
+            tenant-onboarding
+            automated

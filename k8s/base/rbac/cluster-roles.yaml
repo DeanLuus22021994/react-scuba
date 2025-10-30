@@ -1,0 +1,64 @@
+# ==============================================================================
+# ClusterRoles for Cross-Namespace Access
+# ==============================================================================
+# Cluster-wide permissions for monitoring and operators
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: monitoring-cluster-role
+rules:
+  # Prometheus service discovery
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/metrics
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+
+  - apiGroups: [""]
+    resources:
+      - configmaps
+    verbs: ["get"]
+
+  - apiGroups: ["networking.k8s.io"]
+    resources:
+      - ingresses
+    verbs: ["get", "list", "watch"]
+
+  - nonResourceURLs: ["/metrics", "/metrics/cadvisor"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mcp-discovery-role
+rules:
+  # MCP service discovery across all namespaces
+  - apiGroups: [""]
+    resources:
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+
+  - apiGroups: ["apps"]
+    resources:
+      - deployments
+      - statefulsets
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-application-controller
+rules:
+  # ArgoCD requires cluster-admin for multi-namespace management
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]

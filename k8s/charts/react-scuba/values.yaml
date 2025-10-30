@@ -1,0 +1,188 @@
+# ==============================================================================
+# React Scuba Helm Chart - Default Values
+# ==============================================================================
+# Override these values for tenant-specific deployments
+
+# Global settings
+global:
+  tenantId: "shared"
+  tenantName: "Shared"
+  domain: "localhost"
+
+  # Image registry
+  imageRegistry: localhost:5001
+  imagePullSecrets: []
+
+  # Storage classes
+  storageClass:
+    fast: fast-ssd
+    standard: standard
+    backup: backup
+
+# API service configuration
+api:
+  enabled: true
+  replicaCount: 2
+
+  image:
+    repository: react-scuba-api
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  service:
+    type: ClusterIP
+    port: 3000
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+
+  env:
+    nodeEnv: production
+    logLevel: info
+    enableAnalytics: true
+    enableCaching: true
+
+# Web service configuration
+web:
+  enabled: true
+  replicaCount: 3
+
+  image:
+    repository: react-scuba-web
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 15
+    targetCPUUtilizationPercentage: 70
+
+  env:
+    theme: light
+    language: en
+    enablePWA: true
+
+# Database configuration
+database:
+  # Use shared PostgreSQL cluster
+  type: postgresql
+  host: react-scuba-postgres.databases.svc.cluster.local
+  port: 5432
+  name: react_scuba_shared
+  user: react_scuba_shared_user
+
+  # Secret name for credentials
+  secretName: db-credentials
+
+# Cache configuration
+cache:
+  redis:
+    enabled: true
+    host: redis.cache.svc.cluster.local
+    port: 6379
+
+  memcached:
+    enabled: true
+    host: memcached.cache.svc.cluster.local
+    port: 11211
+
+# Storage configuration
+storage:
+  minio:
+    enabled: true
+    endpoint: minio-api.cache.svc.cluster.local:9000
+    bucket: tenant-assets
+
+# Ingress configuration
+ingress:
+  enabled: true
+  className: nginx
+
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+
+  hosts:
+    - host: localhost
+      paths:
+        - path: /api
+          pathType: Prefix
+          service: api
+        - path: /
+          pathType: Prefix
+          service: web
+
+  tls:
+    - secretName: tls-cert
+      hosts:
+        - localhost
+
+# Service mesh configuration
+serviceMesh:
+  linkerd:
+    enabled: true
+    inject: true
+
+# Monitoring configuration
+monitoring:
+  enabled: true
+  prometheus:
+    scrape: true
+  jaeger:
+    enabled: true
+    endpoint: jaeger-collector.monitoring.svc.cluster.local:14268
+
+# Security configuration
+security:
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    capabilities:
+      drop:
+        - ALL
+
+# Network policies
+networkPolicies:
+  enabled: true
+  tenantIsolation: true
+
+# Resource quotas per tenant
+resourceQuota:
+  enabled: false
+  requests:
+    cpu: "4"
+    memory: 8Gi
+  limits:
+    cpu: "8"
+    memory: 16Gi

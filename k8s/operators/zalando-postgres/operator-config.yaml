@@ -1,0 +1,53 @@
+# ==============================================================================
+# Zalando Postgres Operator Configuration
+# ==============================================================================
+# Custom OperatorConfiguration for React Scuba
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-operator
+  namespace: postgres-operator
+data:
+  # General configuration
+  docker_image: registry.opensource.zalan.do/acid/spilo-16:3.1-p1
+  enable_crd_validation: "true"
+  enable_lazy_spilo_upgrade: "true"
+
+  # Database configuration
+  db_hosted_zone: cluster.local
+  master_dns_name_format: "{cluster}.{namespace}.svc.{hostedzone}"
+  replica_dns_name_format: "{cluster}-repl.{namespace}.svc.{hostedzone}"
+
+  # Connection pooling
+  enable_connection_pooler: "true"
+  connection_pooler_image: "registry.opensource.zalan.do/acid/pgbouncer:master-32"
+  connection_pooler_mode: "transaction"
+  connection_pooler_number_of_instances: "2"
+  connection_pooler_default_cpu_request: "100m"
+  connection_pooler_default_memory_request: "100Mi"
+
+  # Backup configuration
+  enable_logical_backup: "true"
+  logical_backup_schedule: "0 2 * * *"
+  logical_backup_docker_image: "registry.opensource.zalan.do/acid/logical-backup:v1.10.1"
+
+  # Load balancer configuration
+  enable_master_load_balancer: "true"
+  enable_replica_load_balancer: "true"
+
+  # Pod resources
+  pod_management_policy: "ordered_ready"
+  enable_pod_antiaffinity: "true"
+
+  # Storage
+  volume_claim_template: |
+    {
+      "accessModes": ["ReadWriteOnce"],
+      "storageClassName": "fast-ssd",
+      "resources": {
+        "requests": {
+          "storage": "30Gi"
+        }
+      }
+    }

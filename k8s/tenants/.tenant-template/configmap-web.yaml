@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+  namespace: apps
+data:
+  # Tenant identification
+  tenant-id: "${TENANT_ID}"
+  tenant-name: "${TENANT_NAME}"
+
+  # API configuration
+  api-url: "http://node-api.apps.svc.cluster.local:3000"
+
+  # Feature flags
+  enable-pwa: "true"
+  enable-offline-mode: "false"
+  enable-analytics: "true"
+
+  # UI settings (from server/clients/${TENANT_ID}/config.json theme)
+  theme: "light"
+  language: "en"
+  primary-color: "#0066cc"
+
+  # Branding (from server/clients/${TENANT_ID}/config.json)
+  # company-name: "${TENANT_NAME}"
+  # logo-url: "/assets/${TENANT_ID}/logo.png"
+  # favicon-url: "/assets/${TENANT_ID}/favicon.ico"

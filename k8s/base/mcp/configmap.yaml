@@ -1,0 +1,26 @@
+# ==============================================================================
+# MCP Configuration
+# ==============================================================================
+# Shared configuration for MCP services
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mcp-config
+  namespace: mcp
+  labels:
+    app.kubernetes.io/part-of: react-scuba
+data:
+  # Discovery settings
+  discovery-interval: "30s"
+  service-timeout: "10s"
+
+  # Tenant filtering
+  enable-tenant-filtering: "true"
+
+  # Observability
+  enable-metrics: "true"
+  enable-tracing: "true"
+
+  # Health check intervals
+  health-check-interval: "10s"

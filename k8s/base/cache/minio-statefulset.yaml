@@ -1,0 +1,151 @@
+# ==============================================================================
+# MinIO Object Storage StatefulSet
+# ==============================================================================
+# 4-node distributed setup for file storage and backups
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: minio
+  namespace: cache
+spec:
+  serviceName: minio
+  replicas: 4
+  selector:
+    matchLabels:
+      app: minio
+      tier: storage
+  template:
+    metadata:
+      labels:
+        app: minio
+        tier: storage
+      annotations:
+        linkerd.io/inject: enabled
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: minio
+              topologyKey: kubernetes.io/hostname
+
+      securityContext:
+        fsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+
+      containers:
+        - name: minio
+          image: minio/minio:latest
+          ports:
+            - containerPort: 9000
+              name: api
+            - containerPort: 9001
+              name: console
+
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - minio server http://minio-{0...3}.minio.cache.svc.cluster.local/data --console-address :9001
+
+          env:
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: root-user
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: root-password
+            - name: MINIO_PROMETHEUS_AUTH_TYPE
+              value: public
+
+          livenessProbe:
+            httpGet:
+              path: /minio/health/live
+              port: 9000
+            initialDelaySeconds: 120
+            periodSeconds: 30
+
+          readinessProbe:
+            httpGet:
+              path: /minio/health/ready
+              port: 9000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 40Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  namespace: cache
+spec:
+  selector:
+    app: minio
+  ports:
+    - port: 9000
+      targetPort: 9000
+      name: api
+    - port: 9001
+      targetPort: 9001
+      name: console
+  clusterIP: None
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-api
+  namespace: cache
+spec:
+  type: ClusterIP
+  selector:
+    app: minio
+  ports:
+    - port: 9000
+      targetPort: 9000
+      name: api
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-console
+  namespace: cache
+spec:
+  type: ClusterIP
+  selector:
+    app: minio
+  ports:
+    - port: 9001
+      targetPort: 9001
+      name: console

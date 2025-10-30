@@ -1,0 +1,132 @@
+# ==============================================================================
+# Shared PostgreSQL Cluster for Multi-Tenant React Scuba Platform
+# ==============================================================================
+# Managed by Zalando Postgres Operator
+# 3-node cluster with automatic failover via Patroni
+# Separate databases per tenant with isolated credentials
+
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: react-scuba-postgres
+  namespace: databases
+  labels:
+    app: postgres
+    tier: database
+spec:
+  # Team and database configuration
+  teamId: "react-scuba"
+  postgresql:
+    version: "17"
+    parameters:
+      max_connections: "500"
+      shared_buffers: "2GB"
+      effective_cache_size: "6GB"
+      maintenance_work_mem: "512MB"
+      checkpoint_completion_target: "0.9"
+      wal_buffers: "16MB"
+      default_statistics_target: "100"
+      random_page_cost: "1.1"
+      effective_io_concurrency: "200"
+      work_mem: "10MB"
+      min_wal_size: "1GB"
+      max_wal_size: "4GB"
+
+  # High availability configuration
+  numberOfInstances: 3
+  enableMasterLoadBalancer: true
+  enableReplicaLoadBalancer: true
+  enableConnectionPooler: true
+
+  connectionPooler:
+    numberOfInstances: 2
+    mode: "transaction"
+    schema: "pooler"
+    user: "pooler"
+    dockerImage: "registry.opensource.zalan.do/acid/pgbouncer:master-32"
+    maxDBConnections: 100
+    defaultCPURequest: "100m"
+    defaultMemoryRequest: "100Mi"
+    defaultCPULimit: "500m"
+    defaultMemoryLimit: "500Mi"
+
+  # Resources
+  resources:
+    requests:
+      cpu: "1000m"
+      memory: "2Gi"
+    limits:
+      cpu: "2000m"
+      memory: "4Gi"
+
+  # Storage
+  volume:
+    size: "30Gi"
+    storageClass: "fast-ssd"
+    iops: 3000
+
+  # Pod anti-affinity for HA
+  podAntiAffinity: "required"
+
+  # Databases to be created (tenants)
+  databases:
+    react_scuba_shared: react_scuba_admin
+    di_authority_johannesburg_db: di_authority_johannesburg_user
+    ocean_spirit_mauritius_db: ocean_spirit_mauritius_user
+
+  # Users with permissions
+  users:
+    react_scuba_admin:
+      - superuser
+      - createdb
+    di_authority_johannesburg_user:
+      - login
+    ocean_spirit_mauritius_user:
+      - login
+
+  # Backup configuration
+  enableLogicalBackup: true
+  logicalBackupSchedule: "0 2 * * *"  # Daily at 2 AM
+
+  # Monitoring
+  enableShmVolume: true
+  sidecars:
+    - name: "postgres-exporter"
+      image: "prometheuscommunity/postgres-exporter:v0.15.0"
+      ports:
+        - name: metrics
+          containerPort: 9187
+          protocol: TCP
+      env:
+        - name: DATA_SOURCE_NAME
+          value: "postgresql://postgres@localhost:5432/postgres?sslmode=disable"
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "100Mi"
+        limits:
+          cpu: "200m"
+          memory: "200Mi"
+
+  # Maintenance windows
+  maintenanceWindows:
+    - 02:00-04:00  # Allow updates between 2-4 AM
+
+---
+# Service for external access to PostgreSQL
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-external
+  namespace: databases
+spec:
+  type: NodePort
+  selector:
+    application: react-scuba-postgres
+    cluster-name: react-scuba-postgres
+    spilo-role: master
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 30432

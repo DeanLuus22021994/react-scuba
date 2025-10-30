@@ -1,0 +1,26 @@
+# ==============================================================================
+# Shared ConfigMap for Web Service
+# ==============================================================================
+# Base configuration - override in tenant-specific overlays
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+  namespace: apps
+data:
+  # Tenant configuration (override per tenant)
+  tenant-id: "shared"
+  tenant-name: "Shared"
+
+  # API configuration
+  api-url: "http://node-api.apps.svc.cluster.local:3000"
+
+  # Feature flags
+  enable-pwa: "true"
+  enable-offline-mode: "false"
+  enable-analytics: "true"
+
+  # UI settings
+  theme: "light"
+  language: "en"

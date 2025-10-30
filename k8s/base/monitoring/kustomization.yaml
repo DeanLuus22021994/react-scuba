@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: monitoring
+
+resources:
+  - prometheus.yaml
+  - grafana.yaml
+  - jaeger.yaml
+  - fluentbit-daemonset.yaml
+  - servicemonitors/postgres-servicemonitor.yaml
+  - servicemonitors/redis-servicemonitor.yaml
+  - servicemonitors/memcached-servicemonitor.yaml
+  - servicemonitors/api-servicemonitor.yaml
+
+commonLabels:
+  managed-by: kustomize
+  component: observability

@@ -1,0 +1,46 @@
+# ==============================================================================
+# RoleBindings for Namespace-scoped Permissions
+# ==============================================================================
+# Binds ServiceAccounts to Roles within namespaces
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-rolebinding
+  namespace: apps
+subjects:
+  - kind: ServiceAccount
+    name: app-sa
+    namespace: apps
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tenant-app-role
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: monitoring-rolebinding
+  namespace: monitoring
+subjects:
+  - kind: ServiceAccount
+    name: monitoring-sa
+    namespace: monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: monitoring-role
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: backup-rolebinding
+  namespace: databases
+subjects:
+  - kind: ServiceAccount
+    name: backup-sa
+    namespace: databases
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: backup-role

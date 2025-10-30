@@ -1,0 +1,59 @@
+# ==============================================================================
+# Database Access Network Policy
+# ==============================================================================
+# Allows application pods to access shared database cluster
+# Permits connections to PostgreSQL (5432) and MariaDB (3306)
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-db-access
+  namespace: databases
+spec:
+  podSelector:
+    matchLabels:
+      tier: database
+  policyTypes:
+    - Ingress
+  ingress:
+    # Allow from application pods
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: apps
+          podSelector:
+            matchLabels:
+              tier: app
+      ports:
+        - protocol: TCP
+          port: 5432  # PostgreSQL
+        - protocol: TCP
+          port: 3306  # MariaDB
+
+    # Allow from monitoring for metrics collection
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: monitoring
+      ports:
+        - protocol: TCP
+          port: 9187  # postgres-exporter
+        - protocol: TCP
+          port: 9104  # mysql-exporter
+
+    # Allow inter-database communication for replication
+    - from:
+        - podSelector:
+            matchLabels:
+              tier: database
+      ports:
+        - protocol: TCP
+          port: 5432  # PostgreSQL replication
+        - protocol: TCP
+          port: 3306  # MariaDB
+        - protocol: TCP
+          port: 4567  # Galera replication
+        - protocol: TCP
+          port: 4568  # Galera IST
+        - protocol: TCP
+          port: 4444  # Galera SST

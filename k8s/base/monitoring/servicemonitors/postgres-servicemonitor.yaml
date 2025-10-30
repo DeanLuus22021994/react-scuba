@@ -1,0 +1,27 @@
+# ==============================================================================
+# ServiceMonitor for PostgreSQL Metrics
+# ==============================================================================
+# Scrapes postgres-exporter sidecar from Zalando operator
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: postgres-exporter
+  namespace: monitoring
+  labels:
+    prometheus: react-scuba
+spec:
+  selector:
+    matchLabels:
+      application: react-scuba-postgres
+  namespaceSelector:
+    matchNames:
+      - databases
+  endpoints:
+    - port: exporter
+      interval: 30s
+      path: /metrics
+      relabelings:
+        - sourceLabels: [__meta_kubernetes_pod_label_tenant]
+          targetLabel: tenant
+          action: replace

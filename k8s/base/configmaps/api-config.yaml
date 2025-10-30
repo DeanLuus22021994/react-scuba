@@ -1,0 +1,32 @@
+# ==============================================================================
+# Shared ConfigMap for API Service
+# ==============================================================================
+# Base configuration - override in tenant-specific overlays
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: apps
+data:
+  # Tenant configuration (override per tenant)
+  tenant-id: "shared"
+  tenant-name: "Shared"
+
+  # Database configuration (tenant-specific DB)
+  db-name: "react_scuba_shared"
+
+  # Application settings
+  log-level: "info"
+  node-env: "production"
+  api-version: "v1"
+
+  # Feature flags
+  enable-analytics: "true"
+  enable-caching: "true"
+  enable-rate-limiting: "true"
+
+  # Performance tuning
+  max-connections: "100"
+  request-timeout: "30000"
+  keepalive-timeout: "65000"

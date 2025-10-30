@@ -1,0 +1,103 @@
+name: Validate and Deploy Kubernetes Manifests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'k8s/**'
+      - '.github/workflows/deploy-manifests.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'k8s/**'
+
+jobs:
+  validate:
+    name: Validate K8s Manifests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'v1.28.0'
+
+      - name: Setup kind
+        uses: helm/kind-action@v1.9.0
+        with:
+          version: v0.20.0
+          cluster_name: validation-cluster
+
+      - name: Validate YAML syntax
+        run: |
+          find k8s -name '*.yaml' -type f | while read file; do
+            echo "Validating $file"
+            kubectl apply --dry-run=client -f "$file" || exit 1
+          done
+
+      - name: Validate Helm chart
+        run: |
+          helm lint k8s/charts/react-scuba
+          helm template test k8s/charts/react-scuba --dry-run
+
+      - name: Run kubesec security scan
+        uses: controlplaneio/kubesec-action@v0.0.2
+        with:
+          input: k8s/base/apps/api-deployment.yaml
+
+      - name: Validate NetworkPolicies
+        run: |
+          kubectl apply -f k8s/policies/ --dry-run=server
+
+  deploy-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Deploy infrastructure
+        run: |
+          kubectl apply -k k8s/base/databases
+          kubectl apply -k k8s/base/cache
+          kubectl apply -k k8s/base/monitoring
+
+      - name: Deploy policies
+        run: |
+          kubectl apply -f k8s/policies/
+
+      - name: Wait for infrastructure
+        run: |
+          kubectl wait --for=condition=ready pod -l app=postgres -n databases --timeout=300s
+          kubectl wait --for=condition=ready pod -l app=redis -n cache --timeout=300s
+
+      - name: Deploy tenants
+        run: |
+          for tenant in k8s/tenants/*/; do
+            tenant_name=$(basename "$tenant")
+            if [ "$tenant_name" != ".tenant-template" ]; then
+              echo "Deploying tenant: $tenant_name"
+              helm upgrade --install "$tenant_name" k8s/charts/react-scuba \
+                --namespace apps \
+                --create-namespace \
+                --values "$tenant/values.yaml" \
+                --wait \
+                --timeout 5m
+            fi
+          done
+
+      - name: Verify deployment
+        run: |
+          kubectl get pods -A
+          kubectl get ingress -n apps

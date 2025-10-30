@@ -1,0 +1,29 @@
+# ==============================================================================
+# Ingress Controller Access Network Policy
+# ==============================================================================
+# Allows nginx ingress controller to route traffic to application pods
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-traffic
+  namespace: apps
+spec:
+  podSelector:
+    matchLabels:
+      tier: app
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 3000  # API
+        - protocol: TCP
+          port: 80    # Web
