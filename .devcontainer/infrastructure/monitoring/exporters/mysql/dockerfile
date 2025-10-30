@@ -12,8 +12,8 @@ USER root
 # Create startup script that generates .my.cnf with password from env
 RUN echo '#!/bin/sh' > /docker-entrypoint.sh && \
   echo 'echo "[client]" > /tmp/.my.cnf' >> /docker-entrypoint.sh && \
-  echo 'echo "user=root" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
-  echo 'echo "password=${MARIADB_PASSWORD:-password}" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'echo "user=exporter" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
+  echo 'echo "password=${DOCKER_MARIADB_ROOT_PASSWORD:-password}" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
   echo 'echo "host=mariadb" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
   echo 'echo "port=3306" >> /tmp/.my.cnf' >> /docker-entrypoint.sh && \
   echo 'chmod 600 /tmp/.my.cnf' >> /docker-entrypoint.sh && \
