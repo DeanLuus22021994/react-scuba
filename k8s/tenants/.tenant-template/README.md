@@ -1,7 +1,6 @@
-# ==============================================================================
 # Tenant Template README
-# ==============================================================================
-# Instructions for onboarding new tenants to the React Scuba platform
+
+## Instructions for onboarding new tenants to the React Scuba platform
 
 ## Quick Start
 
@@ -121,5 +120,5 @@ kubectl describe ingress -n apps ${TENANT_ID}-ingress
 
 For issues or questions, see:
 - Platform documentation: `k8s/charts/react-scuba/README.md`
-- ArgoCD dashboard: http://localhost:8080
-- Grafana monitoring: http://localhost:3000
+- ArgoCD dashboard: <http://localhost:8080>
+- Grafana monitoring: <http://localhost:3000>

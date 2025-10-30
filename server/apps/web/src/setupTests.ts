@@ -34,17 +34,27 @@ class LocalStorageMock {
   }
 }
 
-(global as any).localStorage = new LocalStorageMock();
-(global as any).sessionStorage = new LocalStorageMock();
+globalThis.localStorage = new LocalStorageMock();
+globalThis.sessionStorage = new LocalStorageMock();
 
 // Mock IntersectionObserver for tests
-(global as any).IntersectionObserver = class IntersectionObserver {
+globalThis.IntersectionObserver = class IntersectionObserver {
+  root: Element | Document | null = null;
+  rootMargin: string = '0px';
+  scrollMargin: string = '0px';
+  thresholds: ReadonlyArray<number> = [0];
   callback: IntersectionObserverCallback;
   options: IntersectionObserverInit | undefined;
 
   constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
     this.callback = callback;
     this.options = options;
+    if (options) {
+      this.root = options.root ?? null;
+      this.rootMargin = options.rootMargin ?? '0px';
+      this.scrollMargin = (options as any).scrollMargin ?? '0px';
+      this.thresholds = Array.isArray(options.threshold) ? options.threshold : [options.threshold ?? 0];
+    }
   }
 
   disconnect(): void {}
@@ -53,10 +63,10 @@ class LocalStorageMock {
     return [];
   }
   unobserve(): void {}
-};
+} as any;
 
 // Mock ResizeObserver for tests
-(global as any).ResizeObserver = class ResizeObserver {
+globalThis.ResizeObserver = class ResizeObserver {
   callback: ResizeObserverCallback;
 
   constructor(callback: ResizeObserverCallback) {

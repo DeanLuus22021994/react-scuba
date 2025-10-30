@@ -1,0 +1,303 @@
+# =============================================================================
+# AI Agent Metadata - React Scuba Platform Kubernetes Infrastructure
+# =============================================================================
+# Purpose: Machine-readable context for AI-driven development
+# Format: YAML for structured parsing
+# Token Optimization: High priority - use this file first for context
+
+platform:
+  name: React Scuba Platform
+  type: multi-tenant-saas
+  architecture: kubernetes-native
+  implementation_status: production_ready
+  active_tenants: 2
+  tenant_template_ready: true
+
+technology_stack:
+  orchestration: kubernetes-1.31
+  service_mesh: linkerd-2.14
+  databases:
+    primary: postgresql-17-zalando-operator
+    secondary: mariadb-11-galera-cluster
+  cache:
+    - redis-sentinel-ha
+    - memcached-3-nodes
+    - minio-s3-compatible
+  frontend: react-19.2-vite-7.1
+  backend: nodejs-20-express-5
+  observability:
+    metrics: prometheus-grafana
+    tracing: jaeger
+    logging: fluent-bit
+
+deployment_model:
+  gitops: argocd-applicationsets
+  packaging: helm-charts-3.x
+  overlays: kustomize-dev-staging-prod
+  hot_reload: skaffold-profiles
+  local_development: kind-cluster
+
+tenant_isolation:
+  method: shared_infrastructure_isolated_data
+  database_strategy: separate_db_per_tenant_shared_cluster
+  network_isolation: kubernetes_network_policies
+  rbac_scope: namespace_bounded_service_accounts
+  routing: nginx_ingress_domain_based
+  metrics_separation: prometheus_relabeling_tenant_label
+
+current_tenants:
+  - id: di-authority-johannesburg
+    name: DI Authority Johannesburg
+    industry: dive_training_center
+    region: south_africa
+    database: di_authority_johannesburg_db
+    domain: di-authority.co.za
+    status: active
+    deployment_date: 2024-Q4
+
+  - id: ocean-spirit-mauritius
+    name: Ocean Spirit Mauritius
+    industry: marine_tourism
+    region: mauritius
+    database: ocean_spirit_mauritius_db
+    domain: oceanspirit.mu
+    status: active
+    deployment_date: 2024-Q4
+
+infrastructure_components:
+  storage:
+    classes:
+      - name: fast-ssd
+        use_case: databases
+        provisioner: local-path
+        reclaim: retain
+      - name: standard
+        use_case: applications
+        provisioner: local-path
+        reclaim: delete
+      - name: backup
+        use_case: long_term_storage
+        provisioner: local-path
+        reclaim: retain
+
+  databases:
+    postgresql:
+      operator: zalando-postgres-operator
+      version: 17
+      nodes: 3
+      ha_method: patroni
+      connection_pooler: pgbouncer-transaction-mode
+      backup_schedule: daily_2am_utc
+      logical_backup: enabled
+
+    mariadb:
+      deployment: galera-cluster
+      version: 11
+      nodes: 3
+      replication: synchronous_multi_master
+      sst_method: rsync
+
+  cache:
+    redis:
+      deployment: sentinel
+      nodes: 3
+      ha_mode: automatic_failover
+      persistence: aof_everysec
+
+    memcached:
+      nodes: 3
+      memory_per_node: 512mb
+
+    minio:
+      nodes: 4
+      mode: distributed
+      bucket_strategy: per_tenant
+
+  networking:
+    ingress_controller: nginx
+    tls_automation: cert-manager
+    certificate_issuer: letsencrypt
+    service_mesh: linkerd
+    mtls: automatic
+
+  observability:
+    prometheus:
+      replicas: 2
+      retention: 30_days
+      storage: 50gi
+      scrape_interval: 30s
+
+    grafana:
+      dashboards: per_tenant
+      data_sources: prometheus_jaeger
+
+    jaeger:
+      deployment: all_in_one
+      storage: memory
+
+    fluent_bit:
+      deployment: daemonset
+      output: stdout
+      tenant_filtering: enabled
+
+security_model:
+  network_policies:
+    total_policies: 7
+    default_behavior: deny_all_ingress
+    egress_policy: allow_all
+    tenant_isolation: label_based
+
+  rbac:
+    service_accounts:
+      - app-sa
+      - monitoring-sa
+      - backup-sa
+      - mcp-sa
+    roles: namespace_scoped_least_privilege
+    cluster_roles: monitoring_mcp_discovery_argocd
+
+  secrets:
+    management: sealed_secrets
+    encryption: bitnami_sealed_secrets_controller
+    git_safe: true
+
+deployment_strategy:
+  new_tenant_onboarding:
+    time_required: 5_minutes
+    steps:
+      - clone_tenant_template
+      - configure_5_values
+      - generate_sealed_secrets
+      - git_commit_push
+      - argocd_auto_deploys
+
+  scaling:
+    method: horizontal_pod_autoscaler
+    triggers:
+      - cpu_utilization_70_percent
+      - memory_utilization_75_percent
+    api_scaling: 3_to_20_replicas
+    web_scaling: 5_to_30_replicas
+
+  environments:
+    dev:
+      replicas: 1
+      resources: minimal
+      images: latest_tag
+
+    staging:
+      replicas: production_like
+      resources: production_like
+      images: staging_v1.0.0
+      tls: letsencrypt_staging
+
+    prod:
+      replicas: 3_to_30
+      resources: high_availability
+      images: v1.0.0_semantic_versioning
+      tls: letsencrypt_production
+
+file_structure:
+  total_manifests: 61
+  organization: kustomize_bases_and_overlays
+
+  base:
+    storage: 2_files
+    databases: 3_files
+    apps: 2_files
+    cache: 4_files
+    configmaps: 3_files
+    rbac: 5_files
+    networking: 2_files
+    mcp: 3_files
+    linkerd: 2_files
+    monitoring: 9_files
+
+  overlays:
+    dev: 3_files
+    staging: 2_files
+    prod: 4_files
+
+  operators:
+    linkerd: 2_files
+    zalando_postgres: 2_files
+
+  policies: 7_network_policies
+
+  helm_charts:
+    react_scuba: 6_templates
+
+  tenants:
+    template: 5_files
+    di_authority: values_yaml
+    ocean_spirit: values_yaml
+
+  scripts:
+    validation: validate_k8s_ps1
+    tenant_generator: generate_tenant_values_sh
+
+ai_agent_instructions:
+  token_optimization:
+    - read_ai_metadata_yml_first
+    - use_frontmatter_for_context
+    - scan_tables_before_prose
+    - reference_expected_outputs_for_validation
+
+  recommended_reading_order:
+    - docs/k8s/ai-metadata.yml
+    - docs/k8s/architecture/01-multi-tenant-design.md
+    - docs/k8s/infrastructure/01-cluster-setup.md
+    - docs/k8s/deployments/01-helm-deployments.md
+    - docs/k8s/operations/02-tenant-onboarding.md
+
+  common_tasks:
+    deploy_new_tenant:
+      docs: operations/02-tenant-onboarding.md
+      steps: 5
+      time: 5_minutes
+
+    troubleshoot_pod:
+      docs: operations/03-troubleshooting.md
+      primary_commands:
+        - kubectl_describe_pod
+        - kubectl_logs
+        - kubectl_get_events
+
+    scale_application:
+      docs: deployments/02-kustomize-overlays.md
+      method: edit_hpa_manifest_or_kubectl_scale
+
+    monitor_tenant:
+      docs: observability/01-prometheus-grafana.md
+      access: port_forward_grafana_filter_by_tenant_label
+
+validation_commands:
+  cluster_health: kubectl get nodes && linkerd check
+  tenant_status: kubectl get pods -n apps -l tenant=<id>
+  database_connectivity: kubectl exec -n databases react-scuba-postgres-0 -- psql -U postgres -c "\l"
+  monitoring_access: kubectl port-forward -n monitoring svc/grafana 3001:3000
+  ingress_routing: kubectl get ingress -n apps
+  network_policies: kubectl get networkpolicies --all-namespaces
+
+key_file_references:
+  cluster_setup: .devcontainer/kind/setup-cluster.sh
+  helm_chart: k8s/charts/react-scuba/
+  tenant_template: k8s/tenants/.tenant-template/
+  validation_script: validate-k8s.ps1
+  skaffold_config: skaffold.yaml
+  argocd_apps: k8s/argocd/applicationset-tenants.yaml
+
+documentation_metrics:
+  total_md_files: 21
+  yaml_metadata_files: 1
+  token_budget_full_read: 50000_tokens
+  estimated_comprehension_time: 22_minutes
+  cross_references: 150_plus
+  code_examples: 200_plus
+  validation_checkpoints: 80_plus
+
+maintenance:
+  last_updated: 2025-10-30
+  update_frequency: on_infrastructure_change
+  validation_script: npm run validate:docs
+  toc_validation: docs/scripts/validate-toc.js
