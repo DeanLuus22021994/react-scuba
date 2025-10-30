@@ -31,11 +31,11 @@ LABEL org.opencontainers.image.title="Ollama LLM Service (GPU-Only)" \
 # ==============================================================================
 # Models to provision in volume (space-separated list) - these will be downloaded/cached
 # Format: "model1:tag model2:tag model3:tag"
-ENV OLLAMA_MODELS_TO_PROVISION="smollm2:latest gemma3 qwen3-vl:4b-instruct-q8_0"
+ENV OLLAMA_MODELS_TO_PROVISION="smollm2:latest gemma3 qwen2.5-coder:3b"
 
 # Model to load into GPU RAM on startup (must be in OLLAMA_MODELS_TO_PROVISION)
 # This model will be kept hot in VRAM for immediate inference
-ENV OLLAMA_MODEL_TO_LOAD="qwen3-vl:4b-instruct-q8_0"
+ENV OLLAMA_MODEL_TO_LOAD="qwen2.5-coder:3b"
 
 # Install additional utilities
 USER root
