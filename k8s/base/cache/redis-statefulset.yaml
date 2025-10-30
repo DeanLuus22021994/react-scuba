@@ -107,7 +107,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: standard
+        storageClassName: balanced-ssd
         resources:
           requests:
             storage: 10Gi

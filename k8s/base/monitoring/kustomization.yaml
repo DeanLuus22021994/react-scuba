@@ -10,6 +10,7 @@ resources:
   - 04-prometheus-service.yaml
   - 05-prometheus-configmap.yaml
   - 06-prometheus.yaml
+  - prometheusrules-tenants.yaml  # Tenant SLO alerts
   - grafana.yaml
   - jaeger.yaml
   - fluentbit-daemonset.yaml

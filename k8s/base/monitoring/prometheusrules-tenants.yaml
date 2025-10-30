@@ -1,0 +1,112 @@
+# ==============================================================================
+# Prometheus Alerting Rules for Multi-Tenant SLOs
+# ==============================================================================
+# Tenant-specific alerting for error rates, latency, and availability
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: tenant-slo-alerts
+  namespace: monitoring
+  labels:
+    prometheus: react-scuba
+    role: alert-rules
+spec:
+  groups:
+    - name: tenant.slo.rules
+      interval: 30s
+      rules:
+        # High error rate per tenant
+        - alert: TenantHighErrorRate
+          expr: |
+            (
+              sum(rate(http_requests_total{status=~"5.."}[5m])) by (tenant)
+              /
+              sum(rate(http_requests_total[5m])) by (tenant)
+            ) > 0.05
+          for: 5m
+          labels:
+            severity: warning
+            component: api
+          annotations:
+            summary: "High error rate for tenant {{ $labels.tenant }}"
+            description: "Tenant {{ $labels.tenant }} experiencing {{ $value | humanizePercentage }} error rate (threshold: 5%)"
+
+        # High P95 latency per tenant
+        - alert: TenantHighLatency
+          expr: |
+            histogram_quantile(0.95,
+              sum(rate(http_request_duration_seconds_bucket[5m])) by (le, tenant)
+            ) > 2
+          for: 10m
+          labels:
+            severity: warning
+            component: api
+          annotations:
+            summary: "High P95 latency for tenant {{ $labels.tenant }}"
+            description: "Tenant {{ $labels.tenant }} P95 latency is {{ $value }}s (threshold: 2s)"
+
+        # Database connection pool exhaustion per tenant
+        - alert: TenantDatabasePoolExhaustion
+          expr: |
+            (
+              pg_stat_database_numbackends{datname=~".*_db"}
+              /
+              pg_settings_max_connections
+            ) > 0.8
+          for: 5m
+          labels:
+            severity: critical
+            component: database
+          annotations:
+            summary: "Database pool exhaustion for {{ $labels.datname }}"
+            description: "Database {{ $labels.datname }} using {{ $value | humanizePercentage }} of connection pool"
+
+        # API pod not ready
+        - alert: TenantAPIPodsNotReady
+          expr: |
+            kube_deployment_status_replicas_available{deployment="node-api",namespace="apps"}
+            <
+            kube_deployment_spec_replicas{deployment="node-api",namespace="apps"}
+          for: 5m
+          labels:
+            severity: critical
+            component: api
+          annotations:
+            summary: "API pods not ready"
+            description: "Only {{ $value }} API pods available (expected: {{ $labels.spec_replicas }})"
+
+        # Redis cache hit rate low
+        - alert: TenantLowCacheHitRate
+          expr: |
+            (
+              rate(redis_keyspace_hits_total[5m])
+              /
+              (rate(redis_keyspace_hits_total[5m]) + rate(redis_keyspace_misses_total[5m]))
+            ) < 0.7
+          for: 10m
+          labels:
+            severity: warning
+            component: cache
+          annotations:
+            summary: "Low Redis cache hit rate"
+            description: "Cache hit rate is {{ $value | humanizePercentage }} (threshold: 70%)"
+
+    - name: tenant.availability.rules
+      interval: 30s
+      rules:
+        # Tenant API availability (SLO: 99.5% uptime)
+        - alert: TenantSLOViolation
+          expr: |
+            (
+              sum(rate(http_requests_total{status!~"5.."}[30m])) by (tenant)
+              /
+              sum(rate(http_requests_total[30m])) by (tenant)
+            ) < 0.995
+          for: 15m
+          labels:
+            severity: critical
+            component: slo
+          annotations:
+            summary: "SLO violation for tenant {{ $labels.tenant }}"
+            description: "Tenant {{ $labels.tenant }} availability is {{ $value | humanizePercentage }} (SLO: 99.5%)"

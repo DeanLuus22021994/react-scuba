@@ -1,7 +1,19 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["react", "react-dom"]
+    // React/Vite-specific module resolution
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+
+    // Browser environment
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
+    "jsx": "react-jsx",
+    "useDefineForClassFields": true,
+    "types": ["react", "react-dom"],
+
+    // Vite handles emit
+    "noEmit": true
   }
 }

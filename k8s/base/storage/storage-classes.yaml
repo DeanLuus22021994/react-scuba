@@ -1,12 +1,12 @@
 # ==============================================================================
 # Storage Classes for React Scuba Platform
 # ==============================================================================
-# Three tiers: fast-ssd (databases), standard (apps), backup (long-term)
+# Three tiers: premium-ssd (databases), balanced-ssd (apps/cache/monitoring), backup (long-term)
 
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: fast-ssd
+  name: premium-ssd
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: rancher.io/local-path
@@ -18,7 +18,7 @@ allowVolumeExpansion: true
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: standard
+  name: balanced-ssd
 provisioner: rancher.io/local-path
 volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete

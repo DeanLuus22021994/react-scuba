@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../packages/config/tsconfig.react.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@react-scuba/types": ["../../packages/types/src"],
+      "@react-scuba/ui": ["../../packages/ui/src"],
+      "@react-scuba/utils": ["../../packages/utils/src"]
+    },
+    "types": ["vite/client"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "build", "coverage", "**/*.test.tsx", "**/*.spec.tsx"]
+}

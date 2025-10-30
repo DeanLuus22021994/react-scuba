@@ -8,12 +8,9 @@
     "useDefineForClassFields": true,
     "ignoreDeprecations": "5.0",
 
-    // Modules
+    // Modules (specialized in tsconfig.react.json and tsconfig.node.json)
     "module": "ESNext",
-    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
 
     // Emit
     "noEmit": true,

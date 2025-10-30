@@ -188,7 +188,7 @@ spec:
         name: mariadb-data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: "fast-ssd"
+        storageClassName: "premium-ssd"
         resources:
           requests:
             storage: 15Gi

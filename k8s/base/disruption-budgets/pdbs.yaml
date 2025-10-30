@@ -1,0 +1,43 @@
+# ==============================================================================
+# Pod Disruption Budgets for High Availability
+# ==============================================================================
+# Ensures minimum replicas remain available during voluntary disruptions
+# (cluster upgrades, node drains, scaling operations)
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: postgres-pdb
+  namespace: databases
+spec:
+  minAvailable: 2  # Keep at least 2/3 postgres pods running
+  selector:
+    matchLabels:
+      application: react-scuba-postgres
+      cluster-name: react-scuba-postgres
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: mariadb-pdb
+  namespace: databases
+spec:
+  minAvailable: 2  # Keep at least 2/3 mariadb pods running for quorum
+  selector:
+    matchLabels:
+      app: mariadb
+      component: galera
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: redis-pdb
+  namespace: cache
+spec:
+  maxUnavailable: 1  # Allow only 1 redis pod down at a time
+  selector:
+    matchLabels:
+      app: redis
+      tier: cache

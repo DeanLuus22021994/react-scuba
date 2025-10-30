@@ -62,7 +62,7 @@ spec:
   # Storage
   volume:
     size: "30Gi"
-    storageClass: "fast-ssd"
+    storageClass: "premium-ssd"
     iops: 3000
 
   # Pod anti-affinity for HA

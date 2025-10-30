@@ -14,6 +14,8 @@ bases:
   - ../../base/cache
   - ../../base/monitoring
   - ../../base/networking
+  - ../../base/disruption-budgets  # Pod disruption budgets for HA
+  - ../../base/autoscaling  # Horizontal pod autoscalers
 
 patchesStrategicMerge:
   - api-patches.yaml

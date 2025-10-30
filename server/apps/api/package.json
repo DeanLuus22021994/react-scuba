@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
+    "migrate": "node-pg-migrate up --database-url-var DATABASE_URL --migrations-dir ./migrations",
+    "migrate:down": "node-pg-migrate down --database-url-var DATABASE_URL --migrations-dir ./migrations",
+    "migrate:create": "node-pg-migrate create --migrations-dir ./migrations",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
@@ -19,7 +22,9 @@
     "express-validator": "^7.3.0",
     "helmet": "^8.1.0",
     "mariadb": "^3.3.2",
-    "mysql2": "^3.11.5"
+    "mysql2": "^3.11.5",
+    "node-pg-migrate": "^8.0.3",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^3.2.4",
