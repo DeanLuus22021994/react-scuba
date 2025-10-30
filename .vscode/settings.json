@@ -213,9 +213,6 @@
   "python.formatting.provider": "none",
   "python.languageServer": "Pylance",
   "pylance.enable": true,
-  
-  // Python environment
-  "python-envs.defaultEnvManager": "ms-python.python:conda",
   "python-envs.defaultPackageManager": "ms-python.python:conda",
   "python-envs.pythonProjects": [],
   
