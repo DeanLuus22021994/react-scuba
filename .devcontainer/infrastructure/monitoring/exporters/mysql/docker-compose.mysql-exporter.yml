@@ -1,0 +1,60 @@
+# ==============================================================================
+# MySQL/MariaDB Exporter Service Configuration
+# ==============================================================================
+# Purpose: Prometheus metrics exporter for MariaDB
+# Location: .devcontainer/infrastructure/monitoring/exporters/mysql/
+# Usage: Referenced by main compose files
+# Security: Uses dedicated 'exporter' user with minimal privileges
+# ==============================================================================
+
+services:
+  mysql-exporter:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-mysql-exporter:latest
+    container_name: mcp-mysql-exporter
+    hostname: mysql-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.78
+    ports:
+      - "9104:9104"
+    env_file:
+      - ../../../../../devcontainer.env
+    environment:
+      - MYSQLD_EXPORTER_WEB_LISTEN_ADDRESS=:9104
+    command:
+      - --collect.global_status
+      - --collect.info_schema.innodb_metrics
+      - --collect.auto_increment.columns
+      - --collect.info_schema.processlist
+      - --collect.binlog_size
+      - --collect.info_schema.tablestats
+      - --collect.global_variables
+      - --collect.info_schema.query_response_time
+      - --collect.info_schema.userstats
+      - --collect.info_schema.tables
+      - --collect.perf_schema.tablelocks
+      - --collect.perf_schema.file_events
+      - --collect.perf_schema.eventswaits
+      - --collect.perf_schema.indexiowaits
+      - --collect.perf_schema.tableiowaits
+      - --collect.slave_status
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9104/metrics",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      mariadb:
+        condition: service_healthy

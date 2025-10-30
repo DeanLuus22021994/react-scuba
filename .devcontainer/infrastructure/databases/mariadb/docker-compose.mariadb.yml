@@ -1,0 +1,47 @@
+# ==============================================================================
+# MariaDB Service Configuration
+# ==============================================================================
+# Purpose: MariaDB 11 database service with automatic exporter user setup
+# Location: .devcontainer/infrastructure/databases/mariadb/
+# Usage: Referenced by main compose files
+# ==============================================================================
+
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    hostname: mariadb
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.21
+    ports:
+      - "3306:3306"
+    environment:
+      - MARIADB_ROOT_PASSWORD=${DOCKER_MARIADB_ROOT_PASSWORD:-password}
+      - MARIADB_DATABASE=mariadb
+      - MARIADB_USER=mariadb
+      - MARIADB_PASSWORD=${DOCKER_MARIADB_PASSWORD:-password}
+      - MARIADB_AUTO_UPGRADE=1
+    volumes:
+      - react_scuba_mariadb-data:/var/lib/mysql
+      # Initialize exporter user automatically on first startup
+      - type: bind
+        source: ./init-exporter-user.sql
+        target: /docker-entrypoint-initdb.d/01-init-exporter-user.sql
+        read_only: true
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'mariadb-admin ping -h 127.0.0.1 -u root -p$$MARIADB_ROOT_PASSWORD',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

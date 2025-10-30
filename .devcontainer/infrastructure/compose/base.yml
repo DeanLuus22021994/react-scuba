@@ -7,75 +7,14 @@
 # Testing: docker-compose -f docker-compose.base.yml up
 # ==============================================================================
 
-
+# Include database service configurations from their respective directories
+include:
+  - path: ../databases/postgres/docker-compose.postgres.yml
+  - path: ../databases/mariadb/docker-compose.mariadb.yml
 
 # Volumes are defined in main docker-compose.yml to avoid conflicts
 
 services:
-  # ==== TIER 1: Databases ====
-
-  postgres-db:
-    image: postgres:16-alpine
-    container_name: postgres-db
-    hostname: postgres-db
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.28.0.20
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=${DOCKER_POSTGRES_PASSWORD:-password}
-      - POSTGRES_INITDB_ARGS=-c max_connections=200
-    volumes:
-      - react_scuba_postgres-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  mariadb:
-    image: mariadb:11
-    container_name: mariadb
-    hostname: mariadb
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.28.0.21
-    ports:
-      - "3306:3306"
-    environment:
-      - MARIADB_ROOT_PASSWORD=${DOCKER_MARIADB_ROOT_PASSWORD:-password}
-      - MARIADB_DATABASE=mariadb
-      - MARIADB_USER=mariadb
-      - MARIADB_PASSWORD=${DOCKER_MARIADB_PASSWORD:-password}
-      - MARIADB_AUTO_UPGRADE=1
-    volumes:
-      - react_scuba_mariadb-data:/var/lib/mysql
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          'mariadb-admin ping -h 127.0.0.1 -u root -p$$MARIADB_ROOT_PASSWORD',
-        ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
 
   # ==== TIER 4: Cache Layer ====
 

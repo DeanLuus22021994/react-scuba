@@ -1,0 +1,40 @@
+# ==============================================================================
+# PostgreSQL Exporter Service Configuration
+# ==============================================================================
+# Purpose: Prometheus metrics exporter for PostgreSQL
+# Location: .devcontainer/infrastructure/monitoring/exporters/postgres/
+# Usage: Referenced by main compose files
+# ==============================================================================
+
+services:
+  postgres-exporter:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-postgres-exporter:latest
+    container_name: mcp-postgres-exporter
+    hostname: postgres-exporter
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.77
+    ports:
+      - "9187:9187"
+    environment:
+      - DATA_SOURCE_NAME=postgresql://postgres:${DOCKER_POSTGRES_PASSWORD:-password}@postgres-db:5432/postgres?sslmode=disable
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9187/",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      postgres-db:
+        condition: service_healthy
