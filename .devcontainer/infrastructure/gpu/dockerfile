@@ -40,7 +40,7 @@ TIMESTAMP=$(date +"%y-%m-%d-%H-%M-%S")
 GPU_INFO=$(nvidia-smi --query-gpu=index,name,driver_version,memory.total,memory.used,memory.free,temperature.gpu,utilization.gpu,utilization.memory \
   --format=csv,noheader,nounits | \
   awk -F', ' '{
-    printf "{\"index\":%d,\"name\":\"%s\",\"driver\":\"%s\",\"memory_total_mb\":%d,\"memory_used_mb\":%d,\"memory_free_mb\":%d,\"temperature_c\":%d,\"gpu_utilization_percent\":%d,\"memory_utilization_percent\":%d},", 
+    printf "{\"index\":%d,\"name\":\"%s\",\"driver\":\"%s\",\"memory_total_mb\":%d,\"memory_used_mb\":%d,\"memory_free_mb\":%d,\"temperature_c\":%d,\"gpu_utilization_percent\":%d,\"memory_utilization_percent\":%d},",
     $1, $2, $3, $4, $5, $6, $7, $8, $9
   }' | \
   sed 's/,$//' | \
@@ -60,7 +60,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
   CMD /usr/local/bin/gpu-health > /dev/null || exit 1
 
 # Keep container running and serve health endpoint
-CMD while true; do \
-  HEALTH_DATA=$(/usr/local/bin/gpu-health); \
-  printf "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: %d\r\n\r\n%s" "${#HEALTH_DATA}" "$HEALTH_DATA" | nc -l -p 9400 -q 1; \
-  done
+CMD ["/bin/bash", "-c", "while true; do HEALTH_DATA=$(/usr/local/bin/gpu-health); printf \"HTTP/1.1 200 OK\\r\\nContent-Type: application/json\\r\\nContent-Length: %d\\r\\n\\r\\n%s\" \"${#HEALTH_DATA}\" \"$HEALTH_DATA\" | nc -l -p 9400 -q 1; done"]
