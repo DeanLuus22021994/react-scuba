@@ -5,7 +5,7 @@
 # Architecture: Ollama with NVIDIA runtime via Docker Compose device requests
 # Base: Official Ollama image with CUDA support
 # GPU: Direct host GPU access (RTX 3050 6GB) - no plugin mediation
-# Storage: Named Docker volume (not bind mount) prevents local filesystem pollution
+# Storage: Centralized host cache (C:/shared_memory/ollama-cache) for cross-project model sharing
 # Health: Custom endpoint on port 9401 with GPU status and model readiness
 # Optimization: All models must fit in VRAM (6GB) to avoid CPU/RAM offload
 # ==============================================================================
@@ -23,8 +23,8 @@ LABEL org.opencontainers.image.title="Ollama LLM Service (GPU-Only)" \
   gpu.access="docker-compose-device-requests" \
   gpu.vram="6GB" \
   models.supported="smollm2:latest,codegeex4:9b-all-q3_K_M" \
-  storage.type="named-volume" \
-  storage.isolation="true"
+  storage.type="host-bind-mount" \
+  storage.path="C:/shared_memory/ollama-cache"
 
 # Install additional utilities
 USER root
@@ -108,17 +108,18 @@ echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Checking for smollm2:latest model..."
 
 # Check if model exists
 if ! ollama list | grep -q "smollm2"; then
-  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Pulling smollm2:latest model to volume mount: $OLLAMA_MODELS"
-  ollama pull smollm2:latest
-  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model downloaded successfully to named volume."
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Pulling smollm2:latest model to cache: $OLLAMA_MODELS"
+  # Suppress verbose download progress, only show errors and completion
+  ollama pull smollm2:latest 2>&1 | grep -E '(error|Error|failed|Failed|success|complete)' || true
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model download complete. Storage: C:/shared_memory/ollama-cache"
 else
-  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model already exists in volume mount."
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model already cached. Storage: C:/shared_memory/ollama-cache"
 fi
 
-# Verify model files are in volume mount
+# Verify model files are in host cache
 MODEL_SIZE=$(du -sh $OLLAMA_MODELS 2>/dev/null | cut -f1 || echo "0")
-echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model storage size: $MODEL_SIZE"
-echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model initialization complete. Ollama is ready for GPU inference."
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Cache size: $MODEL_SIZE (C:/shared_memory/ollama-cache)"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model initialization complete. Ollama ready for GPU inference."
 INIT_EOF
 
 # Convert CRLF to LF if present (Windows compatibility)

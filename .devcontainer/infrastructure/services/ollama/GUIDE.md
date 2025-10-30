@@ -9,7 +9,7 @@
 
 ## GPU Access Method
 
-**Direct Host GPU via Docker Compose Device Requests**
+### Direct Host GPU via Docker Compose Device Requests
 
 - ✅ No plugin mediation required
 - ✅ Native Docker GPU support in WSL2

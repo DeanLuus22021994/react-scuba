@@ -87,8 +87,9 @@ services:
       - OLLAMA_GPU_LAYERS=999
       - OLLAMA_FLASH_ATTENTION=1
       - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_DEBUG=0
     volumes:
-      - react_scuba_ollama-models:/root/.ollama/models
+      - C:/shared_memory/ollama-cache:/root/.ollama/models
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "/usr/local/bin/ollama-health"]
