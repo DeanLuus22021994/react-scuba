@@ -14,7 +14,7 @@ services:
       dockerfile: dockerfile
     image: mcp-mysql-exporter:latest
     pull_policy: build
-    container_name: mcp-mysql-exporter
+    container_name: mysql-exporter
     hostname: mysql-exporter
     networks:
       mcp-cluster:

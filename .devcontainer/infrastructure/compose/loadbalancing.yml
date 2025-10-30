@@ -15,7 +15,7 @@ services:
       dockerfile: dockerfile
     image: nginx-proxy:latest
     pull_policy: build
-    container_name: nginx-proxy
+    container_name: nginx
     hostname: nginx
     networks:
       mcp-cluster:

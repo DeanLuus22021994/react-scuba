@@ -13,7 +13,7 @@ services:
       dockerfile: dockerfile
     image: mcp-postgres-exporter:latest
     pull_policy: build
-    container_name: mcp-postgres-exporter
+    container_name: postgres-exporter
     hostname: postgres-exporter
     networks:
       mcp-cluster:

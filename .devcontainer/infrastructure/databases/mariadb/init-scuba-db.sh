@@ -12,8 +12,8 @@ echo "=================================================="
 echo "Initializing Scuba Booking Database"
 echo "=================================================="
 
-# Create the database if it doesn't exist
-mysql -u root -p"${MARIADB_ROOT_PASSWORD}" <<-EOSQL
+# Create the database if it doesn't exist (use mariadb command, not mysql)
+mariadb -u root -p"${MARIADB_ROOT_PASSWORD}" <<-EOSQL
     CREATE DATABASE IF NOT EXISTS scuba_booking_db;
     GRANT ALL PRIVILEGES ON scuba_booking_db.* TO 'root'@'%';
     GRANT ALL PRIVILEGES ON scuba_booking_db.* TO '${MARIADB_USER}'@'%';

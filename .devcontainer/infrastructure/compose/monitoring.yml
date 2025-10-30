@@ -20,7 +20,7 @@ services:
       dockerfile: dockerfile
     image: mcp-prometheus:latest
     pull_policy: build
-    container_name: tbc-prometheus
+    container_name: prometheus
     hostname: prometheus
     ports:
       - "9090:9090"
@@ -56,7 +56,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: tbc-grafana
+    container_name: grafana
     hostname: grafana
     ports:
       - "3000:3000"
@@ -123,7 +123,7 @@ services:
       dockerfile: dockerfile
     image: mcp-cadvisor:latest
     pull_policy: build
-    container_name: mcp-cadvisor
+    container_name: cadvisor
     hostname: cadvisor
     privileged: true
     networks:
@@ -132,10 +132,8 @@ services:
     ports:
       - "8082:8080"
     volumes:
-      - /:/rootfs:ro
       - /var/run:/var/run:ro
       - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
     devices:
       - /dev/kmsg
@@ -155,6 +153,8 @@ services:
       - "--disable_root_cgroup_stats=true"
       - "--enable_load_reader=false"
       - "--log_cadvisor_usage=false"
+      - "--docker_env_metadata_whitelist="
+      - "--docker=unix:///var/run/docker.sock"
       - "--v=0"
     restart: unless-stopped
     logging:
@@ -182,7 +182,7 @@ services:
       dockerfile: dockerfile
     image: mcp-node-exporter:latest
     pull_policy: build
-    container_name: mcp-node-exporter
+    container_name: node-exporter
     hostname: node-exporter
     networks:
       mcp-cluster:
@@ -198,7 +198,16 @@ services:
       - "--path.sysfs=/host/sys"
       - "--path.rootfs=/rootfs"
       - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
-      - "--no-collector.diskstats"
+      # Disable all collectors, then enable only essentials (prevents connection overload)
+      - "--collector.disable-defaults"
+      - "--collector.cpu"
+      - "--collector.meminfo"
+      - "--collector.loadavg"
+      - "--collector.filesystem"
+      - "--collector.netdev"
+      # Disable node-exporter's own metrics (reduces metric count by ~50)
+      - "--web.disable-exporter-metrics"
+      # Keep error logging visible (DO NOT hide issues)
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9100/metrics"]
