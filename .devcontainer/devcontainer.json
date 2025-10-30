@@ -8,8 +8,8 @@
     "python-mcp-sidecar",
     "mcp-discovery-agent"
   ],
-  "service": "devcontainer",
-  "workspaceFolder": "/workspaces",
+  "service": "node-tools",
+  "workspaceFolder": "/workspace",
   "shutdownAction": "stopCompose",
 
   "features": {
