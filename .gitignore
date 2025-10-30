@@ -372,8 +372,6 @@ deployment/
 .deployment/
 
 # Production builds
-production/
-prod/
 
 # CDN assets
 cdn/

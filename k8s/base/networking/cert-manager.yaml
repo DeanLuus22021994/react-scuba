@@ -1,3 +1,4 @@
+# yaml-language-server: disable=true
 # ==============================================================================
 # cert-manager Installation for TLS Certificate Management
 # ==============================================================================

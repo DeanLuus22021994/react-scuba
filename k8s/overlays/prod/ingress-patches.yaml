@@ -1,0 +1,16 @@
+# ==============================================================================
+# Production Ingress Patches
+# ==============================================================================
+# Use Let's Encrypt production for TLS certificates
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: react-scuba-ingress
+  namespace: apps
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.3"
+    nginx.ingress.kubernetes.io/limit-rps: "1000"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "10"

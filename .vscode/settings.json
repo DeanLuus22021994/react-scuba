@@ -81,7 +81,9 @@
   ],
   "files.associations": {
     "**/clients/*/config.json": "json",
-    "**/clients/_template/**": "json"
+    "**/clients/_template/**": "json",
+    "**/k8s/charts/**/templates/*.yaml": "helm",
+    "**/k8s/charts/**/templates/*.tpl": "helm"
   },
   "files.exclude": {
     "**/clients/*/images/*.{jpg,jpeg,png,gif,webp,svg}": false,
@@ -241,5 +243,11 @@
     "MD032": false,
     "MD031": false,
     "MD040": false
+  },
+  "yaml.schemas": {
+    "file:///c%3A/Users/deanl.MSI/.vscode-insiders/extensions/continue.continue-1.3.22-win32-x64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ],
+    "https://www.schemastore.org/helmfile.json": "file:///c%3A/react_scuba_runner/react-scuba/k8s/charts/react-scuba/templates/web-deployment.yaml"
   }
 }

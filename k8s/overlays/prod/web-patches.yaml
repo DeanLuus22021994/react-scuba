@@ -1,0 +1,40 @@
+# yaml-language-server: disable=true
+# ==============================================================================
+# Production Web Patches
+# ==============================================================================
+# Full HA with higher resource limits
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-web
+  namespace: apps
+spec:
+  replicas: 5
+  template:
+    spec:
+      containers:
+        - name: web
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "512Mi"
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: node-web-hpa
+  namespace: apps
+spec:
+  minReplicas: 5
+  maxReplicas: 30
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
