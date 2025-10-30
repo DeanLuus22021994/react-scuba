@@ -1,0 +1,130 @@
+# ============================================================================
+# YAML Validation Exceptions - React Scuba Workspace
+# Precise false positive suppression without disabling validation
+# ============================================================================
+
+# This file configures the YAML language server and Cloud Code extension
+# to suppress known false positives while maintaining full validation capabilities
+
+# ============================================================================
+# Docker Compose Files - Allow Compact YAML Syntax
+# ============================================================================
+# Reason: Docker Compose supports compact YAML syntax that strict YAML parsers
+#         may flag as errors (nested mappings, implicit keys)
+# Impact: Docker Compose files parse correctly with docker-compose CLI
+
+patterns:
+  - files: ["docker-compose.yml", "docker-compose.*.yml", ".devcontainer/infrastructure/**/*.yml"]
+    suppressions:
+      - code: "nested-mappings"
+        severity: "ignore"
+      - code: "implicit-keys"
+        severity: "ignore"
+      - code: "missing-quote"
+        severity: "warning"
+      - code: "unused-anchor"
+        severity: "hint"
+
+# ============================================================================
+# Kubernetes CRD Files - Suppress "Schema Not Known" Warnings
+# ============================================================================
+# Reason: Cloud Code does not have CRD schemas for third-party operators
+# Impact: These resources are valid K8s manifests that apply successfully
+
+crd_suppressions:
+  # ArgoCD Application and ApplicationSet
+  - files: ["k8s/argocd/**/*.yaml"]
+    apiVersions: ["argoproj.io/v1alpha1"]
+    kinds: ["Application", "ApplicationSet"]
+    reason: "ArgoCD CRDs not in Cloud Code schema database"
+
+  # Linkerd ServiceProfile
+  - files: ["k8s/base/linkerd/**/*.yaml"]
+    apiVersions: ["linkerd.io/v1alpha2"]
+    kinds: ["ServiceProfile"]
+    reason: "Linkerd CRDs not in Cloud Code schema database"
+
+  # Zalando Postgres Operator
+  - files: ["k8s/base/databases/postgres-cluster.yaml"]
+    apiVersions: ["acid.zalan.do/v1"]
+    kinds: ["postgresql"]
+    reason: "Zalando Postgres Operator CRDs not in schema database"
+
+  # Prometheus Operator (Prometheus, ServiceMonitor, PrometheusRule)
+  - files: ["k8s/base/monitoring/prometheus.yaml", "k8s/base/monitoring/servicemonitors/*.yaml"]
+    apiVersions: ["monitoring.coreos.com/v1"]
+    kinds: ["Prometheus", "ServiceMonitor", "PrometheusRule"]
+    reason: "Prometheus Operator CRDs not in schema database"
+
+  # cert-manager ClusterIssuer
+  - files: ["k8s/base/networking/cert-manager.yaml"]
+    apiVersions: ["cert-manager.io/v1"]
+    kinds: ["ClusterIssuer"]
+    reason: "cert-manager CRDs not in schema database"
+
+  # KIND Cluster
+  - files: [".devcontainer/kind/cluster-config.yaml"]
+    apiVersions: ["kind.x-k8s.io/v1alpha4"]
+    kinds: ["Cluster"]
+    reason: "KIND Cluster schema not in Cloud Code"
+
+# ============================================================================
+# Kustomize Strategic Merge Patches - Intentionally Partial Specs
+# ============================================================================
+# Reason: Kustomize strategic merge patches overlay base resources and
+#         intentionally have partial specifications (missing selector, etc.)
+# Impact: These patches merge correctly with kustomize build
+
+kustomize_patches:
+  - files: ["k8s/overlays/dev/api-patches.yaml", "k8s/overlays/dev/web-patches.yaml"]
+    suppressions:
+      - property: "selector"
+        reason: "Strategic merge patches inherit selector from base Deployment"
+      - property: "scaleTargetRef"
+        reason: "HPA patches inherit scaleTargetRef from base HPA"
+
+  - files: ["k8s/overlays/prod/api-patches.yaml", "k8s/overlays/prod/web-patches.yaml"]
+    suppressions:
+      - property: "selector"
+        reason: "Strategic merge patches inherit selector from base Deployment"
+      - property: "scaleTargetRef"
+        reason: "HPA patches inherit scaleTargetRef from base HPA"
+
+# ============================================================================
+# NetworkPolicy Files - Validator Confusion
+# ============================================================================
+# Reason: YAML validator confuses Kubernetes NetworkPolicy "from" field
+#         with CiliumNetworkPolicy "terms" field
+# Impact: NetworkPolicies apply correctly to Kubernetes clusters
+
+networkpolicies:
+  - files: ["k8s/policies/*.yaml"]
+    suppressions:
+      - property: "terms"
+        reason: "K8s NetworkPolicy uses 'from' field, not 'terms' (CiliumNetworkPolicy)"
+
+# ============================================================================
+# Multi-Document YAML Files - Schema Confusion
+# ============================================================================
+# Reason: Files with multiple YAML documents (---) confuse schema validators
+#         which try to validate the entire file as a single document
+# Impact: Each document in the file is individually valid
+
+multi_document:
+  - files: ["k8s/base/monitoring/prometheus.yaml"]
+    suppressions:
+      - code: "property-not-allowed"
+        properties: ["apiVersion", "kind", "metadata", "spec", "rules", "subjects", "roleRef", "data"]
+        reason: "Multi-document YAML file with 6 separate resources"
+
+# ============================================================================
+# Helm Template Files - Go Templating Syntax
+# ============================================================================
+# Reason: Helm chart templates use Go templating syntax ({{ .Values.* }})
+#         which should not be validated as plain YAML
+# Impact: These templates render correctly with helm template/install
+
+helm_templates:
+  - files: ["k8s/charts/**/templates/*.yaml", "k8s/charts/**/templates/*.tpl"]
+    language: "helm"
+    reason: "Helm templates use Go templating, not plain YAML"

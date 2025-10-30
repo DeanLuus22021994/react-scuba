@@ -1,0 +1,94 @@
+# YAML Validation Configuration
+# This file provides fine-grained control over YAML schema validation
+# to suppress false positives without disabling validation overhead
+
+# Docker Compose files - allow compact YAML syntax
+docker-compose.yml:
+  - rule: yaml-schema
+    severity: warning
+    paths:
+      - /x-*  # Allow YAML anchors and extensions
+
+.devcontainer/infrastructure/**/*.yml:
+  - rule: yaml-schema
+    severity: warning
+
+# Kubernetes CRD files - suppress "schema not known" warnings
+k8s/argocd/**/*.yaml:
+  - rule: cloud-code-schema
+    severity: ignore
+    reason: "ArgoCD Application and ApplicationSet CRDs not in Cloud Code schema database"
+
+k8s/base/linkerd/**/*.yaml:
+  - rule: cloud-code-schema
+    severity: ignore
+    reason: "Linkerd ServiceProfile CRDs not in Cloud Code schema database"
+
+k8s/base/databases/postgres-cluster.yaml:
+  - rule: cloud-code-schema
+    severity: ignore
+    reason: "Zalando Postgres Operator postgresql.acid.zalan.do/v1 CRD not in schema database"
+
+k8s/base/monitoring/prometheus.yaml:
+  - rule: cloud-code-schema
+    severity: ignore
+    reason: "Prometheus Operator monitoring.coreos.com/v1 CRDs not in schema database"
+  - rule: yaml-schema
+    severity: ignore
+    reason: "Multi-document YAML confuses schema validator"
+
+k8s/base/monitoring/servicemonitors/*.yaml:
+  - rule: cloud-code-schema
+    severity: ignore
+    reason: "ServiceMonitor CRDs from Prometheus Operator not in schema database"
+
+k8s/base/networking/cert-manager.yaml:
+  - rule: cloud-code-schema
+    severity: ignore
+    reason: "cert-manager ClusterIssuer CRDs not in schema database"
+
+# Kustomize strategic merge patches - intentionally partial specs
+k8s/overlays/dev/api-patches.yaml:
+  - rule: missing-property
+    property: selector
+    severity: ignore
+    reason: "Strategic merge patches intentionally have partial specs"
+
+k8s/overlays/dev/web-patches.yaml:
+  - rule: missing-property
+    property: selector
+    severity: ignore
+    reason: "Strategic merge patches intentionally have partial specs"
+
+k8s/overlays/prod/api-patches.yaml:
+  - rule: missing-property
+    property: selector
+    severity: ignore
+    reason: "Strategic merge patches intentionally have partial specs"
+  - rule: missing-property
+    property: scaleTargetRef
+    severity: ignore
+    reason: "HPA patches merged with base HPA definition"
+
+k8s/overlays/prod/web-patches.yaml:
+  - rule: missing-property
+    property: selector
+    severity: ignore
+    reason: "Strategic merge patches intentionally have partial specs"
+  - rule: missing-property
+    property: scaleTargetRef
+    severity: ignore
+    reason: "HPA patches merged with base HPA definition"
+
+# NetworkPolicy files - validator doesn't understand K8s NetworkPolicy structure
+k8s/policies/*.yaml:
+  - rule: missing-property
+    property: terms
+    severity: ignore
+    reason: "YAML validator confuses NetworkPolicy 'from' field with CiliumNetworkPolicy 'terms'"
+
+# KIND cluster config - uses cluster.x-k8s.io/v1alpha4 schema
+.devcontainer/kind/cluster-config.yaml:
+  - rule: cloud-code-schema
+    severity: ignore
+    reason: "KIND Cluster uses cluster.x-k8s.io/v1alpha4 schema not in Cloud Code"

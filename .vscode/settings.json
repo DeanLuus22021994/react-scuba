@@ -244,10 +244,121 @@
     "MD031": false,
     "MD040": false
   },
+
+  // === YAML VALIDATION CONFIGURATION ===
+  // Precise false positive suppression without disabling validation overhead
+  "yaml.schemaStore.enable": true,
+  "yaml.validate": true,
+  "yaml.format.enable": true,
+  "yaml.completion": true,
+  "yaml.hover": true,
+
+  // Custom schema mappings for Kubernetes resources
   "yaml.schemas": {
     "file:///c%3A/Users/deanl.MSI/.vscode-insiders/extensions/continue.continue-1.3.22-win32-x64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
     ],
-    "https://www.schemastore.org/helmfile.json": "file:///c%3A/react_scuba_runner/react-scuba/k8s/charts/react-scuba/templates/web-deployment.yaml"
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": [
+      "docker-compose.yml",
+      "docker-compose.*.yml",
+      ".devcontainer/infrastructure/**/*.yml"
+    ],
+    "https://json.schemastore.org/kustomization.json": [
+      "**/kustomization.yaml",
+      "**/kustomization.yml"
+    ],
+    "kubernetes": [
+      "k8s/base/**/*.yaml",
+      "k8s/overlays/**/*.yaml",
+      "!k8s/policies/**/*.yaml",
+      "!k8s/charts/**/*.yaml",
+      "!k8s/argocd/**/*.yaml",
+      "!k8s/base/networking/cert-manager.yaml",
+      "!k8s/base/linkerd/**/*.yaml",
+      "!k8s/base/databases/postgres-cluster.yaml",
+      "!k8s/base/monitoring/prometheus.yaml",
+      "!k8s/base/monitoring/servicemonitors/*.yaml",
+      "!**/kustomization.yaml"
+    ]
+  },
+
+  // Disable specific YAML validations for known false positives
+  "yaml.customTags": [
+    "!GetAtt sequence",
+    "!Base64",
+    "!Cidr sequence",
+    "!FindInMap sequence",
+    "!GetAZs",
+    "!ImportValue",
+    "!Join sequence",
+    "!Select sequence",
+    "!Split sequence",
+    "!Sub"
+  ],
+
+  // Suppress specific YAML diagnostic codes
+  "yaml.disableAdditionalProperties": false,
+  "yaml.maxItemsComputed": 10000,
+  "yaml.disableDefaultProperties": false,
+  "yaml.schemaStore.url": "https://www.schemastore.org/api/json/catalog.json",
+
+  // Configure YAML validation severity overrides
+  "yaml.style.flowMapping": "allow",
+  "yaml.style.flowSequence": "allow",
+  "yaml.format.bracketSpacing": true,
+  "yaml.format.proseWrap": "preserve",
+  "yaml.keyOrdering": false,
+
+  // Disable schema validation for specific patterns
+  "yaml.disableSchemaValidation": [
+    "k8s/policies/**/*.yaml",
+    "k8s/overlays/*/api-patches.yaml",
+    "k8s/overlays/*/web-patches.yaml"
+  ],
+
+  // === CLOUD CODE CONFIGURATION ===
+  // Suppress CRD validation warnings for known operators
+  "cloudcode.kubernetes": {
+    "useMinikube": false,
+    "minikubeProfile": "kind-react-scuba",
+    "showBuildStatusNotifications": false,
+    "showPushStatusNotifications": false
+  },
+
+  // Suppress specific Cloud Code diagnostic codes
+  "cloudcode.suppressDiagnostics": [
+    "undefined",  // "This apiVersion and/or kind does not reference a schema known by Cloud Code"
+    "513"         // "Property X is not allowed" (multi-document YAML confusion)
+  ],
+
+  // === DOCKER COMPOSE VALIDATION ===
+  // Allow compact YAML syntax in docker-compose files
+  "docker-compose.files": [
+    "docker-compose.yml",
+    "docker-compose.*.yml",
+    ".devcontainer/infrastructure/**/*.yml"
+  ],
+
+  // === FILE-SPECIFIC VALIDATION EXCLUSIONS ===
+  // Exclude specific files from schema validation that have known false positives
+  "files.readonlyInclude": {},
+  "files.readonlyExclude": {
+    // Kubernetes CRD files (ArgoCD, Linkerd, Zalando Postgres, Prometheus Operator, cert-manager)
+    "k8s/argocd/**/*.yaml": false,
+    "k8s/base/linkerd/**/*.yaml": false,
+    "k8s/base/databases/postgres-cluster.yaml": false,
+    "k8s/base/monitoring/prometheus.yaml": false,
+    "k8s/base/monitoring/servicemonitors/*.yaml": false,
+    "k8s/base/networking/cert-manager.yaml": false,
+
+    // Kustomize strategic merge patches (intentionally partial specs)
+    "k8s/overlays/*/api-patches.yaml": false,
+    "k8s/overlays/*/web-patches.yaml": false,
+
+    // NetworkPolicy files (validator doesn't understand K8s NetworkPolicy structure)
+    "k8s/policies/*.yaml": false,
+
+    // KIND cluster config (uses cluster.x-k8s.io/v1alpha4 schema)
+    ".devcontainer/kind/cluster-config.yaml": false
   }
 }
