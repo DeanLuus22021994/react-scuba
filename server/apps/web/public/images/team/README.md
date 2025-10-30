@@ -25,7 +25,7 @@ Team members are defined in each client's `config.json` file:
   "team": [
     {
       "id": "team-member-id",
-      "name": "Team Member Name", 
+      "name": "Team Member Name",
       "role": "Instructor/Role",
       "image": "/clients/[client-slug]/images/team/member.jpg"
     }
@@ -49,7 +49,7 @@ Images are dynamically loaded based on tenant configuration:
 import { useTenantConfig } from '@react-scuba/content/react';
 
 const { config } = useTenantConfig();
-const teamImages = config.team.map(member => member.image);
+const teamImages = config.team.map((member) => member.image);
 ```
 
 Displayed in the About page Team section with automatic tenant resolution.

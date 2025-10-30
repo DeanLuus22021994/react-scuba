@@ -1,23 +1,21 @@
 {
-	"name": "@react-scuba/content",
-	"version": "1.0.0",
-	"description": "Multi-tenant content management system",
-	"main": "src/index.js",
-	"type": "module",
-	"scripts": {
-		"dev": "node --watch src/index.js",
-		"lint": "echo '✅ Linting handled by VS Code JavaScript language server'",
-		"format": "echo '✅ Formatting handled by VS Code built-in formatters'",
-		"test": "vitest run --passWithNoTests",
-		"type-check": "tsc --noEmit"
-	},
-	"dependencies": {
-		"zod": "^4.1.12"
-	},
-	"devDependencies": {
-		"@react-scuba/config": "*",
-		"@types/node": "^24.9.2",
-		"typescript": "^5.9.3",
-		"vitest": "^3.2.4"
-	}
+  "name": "@react-scuba/content",
+  "version": "1.0.0",
+  "description": "Multi-tenant content management system",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "test": "vitest run --passWithNoTests",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@react-scuba/config": "*",
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
 }

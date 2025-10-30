@@ -17,13 +17,14 @@ export default defineConfig(({ mode }) => {
         fastRefresh: true,
       }),
       // Bundle analyzer - only in build mode
-      isProduction && visualizer({
-        filename: './dist/stats.html',
-        open: false,
-        gzipSize: true,
-        brotliSize: true,
-        template: 'treemap', // Use modern treemap visualization
-      }),
+      isProduction &&
+        visualizer({
+          filename: './dist/stats.html',
+          open: false,
+          gzipSize: true,
+          brotliSize: true,
+          template: 'treemap', // Use modern treemap visualization
+        }),
     ].filter(Boolean),
     esbuild: false, // Disable esbuild in favor of SWC
     build: {
@@ -94,7 +95,9 @@ export default defineConfig(({ mode }) => {
           drop_console: isProduction,
           drop_debugger: isProduction,
           // Additional optimizations
-          pure_funcs: isProduction ? ['console.log', 'console.info', 'console.debug', 'console.trace'] : [],
+          pure_funcs: isProduction
+            ? ['console.log', 'console.info', 'console.debug', 'console.trace']
+            : [],
           passes: 2,
           unsafe_arrows: true,
           unsafe_methods: true,

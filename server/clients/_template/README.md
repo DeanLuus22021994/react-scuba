@@ -5,6 +5,7 @@ Template for onboarding new diving centers to the React Scuba multi-tenant platf
 ## Quick Setup
 
 1. **Copy template:**
+
    ```bash
    cp -r server/clients/_template server/clients/your-client-slug
    ```
@@ -15,6 +16,7 @@ Template for onboarding new diving centers to the React Scuba multi-tenant platf
    - Update `tenant.slug` to match directory name
 
 3. **Add client assets:**
+
    ```
    images/
    ├── branding/
@@ -33,6 +35,7 @@ Template for onboarding new diving centers to the React Scuba multi-tenant platf
 ## Configuration Guide
 
 ### Required Updates
+
 - `tenant.id` - Generate new UUID
 - `tenant.slug` - URL-safe identifier (lowercase, hyphens)
 - `company.*` - Business information
@@ -40,6 +43,7 @@ Template for onboarding new diving centers to the React Scuba multi-tenant platf
 - `seo.*` - SEO metadata
 
 ### Multi-Tenant Features
+
 - Dynamic content loading by subdomain/domain
 - Type-safe configuration validation
 - Automatic asset path resolution
@@ -47,12 +51,12 @@ Template for onboarding new diving centers to the React Scuba multi-tenant platf
 
 ## Asset Guidelines
 
-| Asset Type | Format | Dimensions | Notes |
-|------------|--------|------------|-------|
-| Logo | PNG | 200x200+ | Transparent background |
-| Hero Image | JPG | 1920x1080+ | High quality, web-optimized |
-| Favicon | ICO | 32x32, 16x16 | Standard web icon |
-| Team Photos | JPG | 800x800 | Square aspect ratio |
+| Asset Type  | Format | Dimensions   | Notes                       |
+| ----------- | ------ | ------------ | --------------------------- |
+| Logo        | PNG    | 200x200+     | Transparent background      |
+| Hero Image  | JPG    | 1920x1080+   | High quality, web-optimized |
+| Favicon     | ICO    | 32x32, 16x16 | Standard web icon           |
+| Team Photos | JPG    | 800x800      | Square aspect ratio         |
 
 ## Validation
 

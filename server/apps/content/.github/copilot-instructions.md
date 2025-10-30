@@ -5,12 +5,14 @@
 This workspace provides **multi-tenant content resolution** for the React Scuba platform.
 
 ## Responsibilities
+
 - **Client config resolution**: Load client config based on subdomain/domain/environment
 - **Theme provider**: Inject client-specific theme variables
 - **Asset management**: Resolve client-specific images/logos
 - **Feature flags**: Control per-client feature availability
 
 ## Key Files
+
 ```
 apps/content/
 ├── src/
@@ -23,13 +25,14 @@ apps/content/
 ```
 
 ## Usage Example
+
 ```tsx
 import { ClientProvider, useClient } from '@react-scuba/content';
 
 // In your app root
 <ClientProvider>
   <App />
-</ClientProvider>
+</ClientProvider>;
 
 // In any component
 const MyComponent = () => {
@@ -39,8 +42,8 @@ const MyComponent = () => {
 ```
 
 ## Client Config Schema
-See `server/clients/_template/config.json` for the full schema.
 
+See `server/clients/_template/config.json` for the full schema.
 
 ## Copilot Output Guidelines
 

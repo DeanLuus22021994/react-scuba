@@ -5,12 +5,14 @@
 This is the **Express.js 5 backend API** serving the React Scuba platform.
 
 ## Tech Stack
+
 - **Express.js 5.0.0** (Node.js 20.x)
 - **PostgreSQL 17** (primary database)
 - **MariaDB 11** (legacy client support)
 - **Docker Compose** (local development)
 
 ## Key Directories
+
 ```
 apps/api/
 ├── src/
@@ -35,6 +37,7 @@ apps/api/
 ## API Patterns
 
 ### Route Handler
+
 ```javascript
 import express from 'express';
 import { validateBooking } from '../middleware/validation.js';
@@ -55,6 +58,7 @@ export default router;
 ```
 
 ### Database Access
+
 ```javascript
 import { pool } from '../db/postgres.js';
 
@@ -68,17 +72,18 @@ export const bookingService = {
 ```
 
 ## Testing
+
 ```bash
 npm test                  # Run API tests
 npm run test:coverage     # Coverage report
 ```
 
 ## Common Commands
+
 ```bash
 npm start                 # Start API server
 npm run dev               # Development mode (nodemon)
 ```
-
 
 ## Copilot Output Guidelines
 

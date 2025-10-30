@@ -17,15 +17,8 @@
     "tagline": "Explore the Ocean with Us",
     "description": "Professional dive center offering world-class underwater experiences.",
     "about": "We are a certified dive center dedicated to providing safe, exciting, and educational diving experiences. Our experienced instructors and modern equipment ensure the highest standards of safety and enjoyment.",
-    "coreValues": [
-      "Safety First",
-      "Environmental Conservation",
-      "Professional Excellence"
-    ],
-    "certifications": [
-      "PADI 5 Star IDC Center",
-      "SSI Authorized Training Center"
-    ],
+    "coreValues": ["Safety First", "Environmental Conservation", "Professional Excellence"],
+    "certifications": ["PADI 5 Star IDC Center", "SSI Authorized Training Center"],
     "established": 2025
   },
 

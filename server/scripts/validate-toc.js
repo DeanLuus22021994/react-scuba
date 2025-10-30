@@ -39,5 +39,5 @@ function validateTOC() {
 
 const result = validateTOC();
 console.log(result.valid ? '✅ TOC valid' : `❌ ${result.errors.length} errors`);
-result.errors.forEach(err => console.error(err));
+result.errors.forEach((err) => console.error(err));
 process.exit(result.valid ? 0 : 1);

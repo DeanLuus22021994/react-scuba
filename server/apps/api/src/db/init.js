@@ -1,13 +1,13 @@
-import dotenv from "dotenv";
-import mariadb from "mariadb";
-import logger from "../utils/logger.js";
+import dotenv from 'dotenv';
+import mariadb from 'mariadb';
+import logger from '../utils/logger.js';
 
 dotenv.config();
 
 const createTables = async (dbPool) => {
-	try {
-		// Create bookings table
-		await dbPool.query(`
+  try {
+    // Create bookings table
+    await dbPool.query(`
       CREATE TABLE IF NOT EXISTS bookings (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -29,8 +29,8 @@ const createTables = async (dbPool) => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
 
-		// Create availability calendar table
-		await dbPool.query(`
+    // Create availability calendar table
+    await dbPool.query(`
       CREATE TABLE IF NOT EXISTS availability (
         id INT AUTO_INCREMENT PRIMARY KEY,
         date DATE NOT NULL UNIQUE,
@@ -45,8 +45,8 @@ const createTables = async (dbPool) => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
 
-		// Create contacts table for contact form submissions
-		await dbPool.query(`
+    // Create contacts table for contact form submissions
+    await dbPool.query(`
       CREATE TABLE IF NOT EXISTS contacts (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -63,8 +63,8 @@ const createTables = async (dbPool) => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
 
-		// Create booking history/audit log
-		await dbPool.query(`
+    // Create booking history/audit log
+    await dbPool.query(`
       CREATE TABLE IF NOT EXISTS booking_history (
         id INT AUTO_INCREMENT PRIMARY KEY,
         booking_id INT NOT NULL,
@@ -80,71 +80,69 @@ const createTables = async (dbPool) => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
 
-		logger.info("All database tables created successfully");
-	} catch (error) {
-		logger.error("Error creating tables", { error: error.message });
-		throw error;
-	}
+    logger.info('All database tables created successfully');
+  } catch (error) {
+    logger.error('Error creating tables', { error: error.message });
+    throw error;
+  }
 };
 
 const initializeDatabase = async () => {
-	try {
-		// Create connection WITHOUT database to create database
-		const tempPool = mariadb.createPool({
-			host: process.env.DB_HOST || "localhost",
-			port: process.env.DB_PORT || 3306,
-			user: process.env.DB_USER || "root",
-			password: process.env.DB_PASSWORD || "password",
-			connectionLimit: 1,
-		});
+  try {
+    // Create connection WITHOUT database to create database
+    const tempPool = mariadb.createPool({
+      host: process.env.DB_HOST || 'localhost',
+      port: process.env.DB_PORT || 3306,
+      user: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || 'password',
+      connectionLimit: 1,
+    });
 
-		const connection = await tempPool.getConnection();
-		await connection.query(
-			`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || "scuba_booking_db"} 
-       CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`,
-		);
-		connection.release();
-		await tempPool.end();
+    const connection = await tempPool.getConnection();
+    await connection.query(
+      `CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || 'scuba_booking_db'} 
+       CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`
+    );
+    connection.release();
+    await tempPool.end();
 
-		// Now connect WITH database and create tables
-		const dbPool = mariadb.createPool({
-			host: process.env.DB_HOST || "localhost",
-			port: process.env.DB_PORT || 3306,
-			user: process.env.DB_USER || "root",
-			password: process.env.DB_PASSWORD || "password",
-			database: process.env.DB_NAME || "scuba_booking_db",
-			connectionLimit: 10,
-		});
+    // Now connect WITH database and create tables
+    const dbPool = mariadb.createPool({
+      host: process.env.DB_HOST || 'localhost',
+      port: process.env.DB_PORT || 3306,
+      user: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || 'password',
+      database: process.env.DB_NAME || 'scuba_booking_db',
+      connectionLimit: 10,
+    });
 
-		await createTables(dbPool);
+    await createTables(dbPool);
 
-		// Initialize availability for next 90 days
-		const existing = await dbPool.query(
-			"SELECT COUNT(*) as count FROM availability",
-		);
-		if (existing[0].count === 0) {
-			const values = [];
-			for (let i = 0; i < 90; i++) {
-				const date = new Date();
-				date.setDate(date.getDate() + i);
-				const [dateStr] = date.toISOString().split("T");
-				values.push(`('${dateStr}', 20, 0)`);
-			}
-			await dbPool.query(
-				`INSERT INTO availability (date, total_slots, booked_slots) VALUES ${values.join(",")}`,
-			);
-			logger.info("Initialized availability calendar for 90 days", {
-				days: 90,
-			});
-		}
+    // Initialize availability for next 90 days
+    const existing = await dbPool.query('SELECT COUNT(*) as count FROM availability');
+    if (existing[0].count === 0) {
+      const values = [];
+      for (let i = 0; i < 90; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() + i);
+        const [dateStr] = date.toISOString().split('T');
+        values.push(`('${dateStr}', 20, 0)`);
+      }
+      await dbPool.query(
+        `INSERT INTO availability (date, total_slots, booked_slots) VALUES ${values.join(',')}`
+      );
+      logger.info('Initialized availability calendar for 90 days', {
+        days: 90,
+      });
+    }
 
-		await dbPool.end();
-		logger.info("Database initialization complete");
-		process.exit(0);
-	} catch (error) {
-		logger.error("Database initialization failed", { error: error.message });
-		process.exit(1);
-	}
+    await dbPool.end();
+    logger.info('Database initialization complete');
+    process.exit(0);
+  } catch (error) {
+    logger.error('Database initialization failed', { error: error.message });
+    process.exit(1);
+  }
 };
 
 initializeDatabase();

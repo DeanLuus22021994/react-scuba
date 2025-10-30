@@ -28,17 +28,23 @@ const AboutPage = () => {
       <Helmet>
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Ocean Spirit Diving Team - PADI 5 Star ECO Centre" />
-        <meta property="og:description" content="Meet our team of certified PADI instructors with 50+ years combined experience in Mauritius." />
+        <meta
+          property="og:description"
+          content="Meet our team of certified PADI instructors with 50+ years combined experience in Mauritius."
+        />
         <meta property="og:image" content="https://www.osdiving.com/images/team/team-photo.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.osdiving.com/about" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Ocean Spirit Diving Team" />
-        <meta name="twitter:description" content="Meet our team of certified PADI instructors with 50+ years combined experience." />
+        <meta
+          name="twitter:description"
+          content="Meet our team of certified PADI instructors with 50+ years combined experience."
+        />
         <meta name="twitter:image" content="https://www.osdiving.com/images/team/team-photo.jpg" />
 
         {/* JSON-LD Structured Data */}
@@ -49,7 +55,8 @@ const AboutPage = () => {
             name: 'Ocean Spirit Scuba Diving',
             url: 'https://www.osdiving.com',
             logo: 'https://www.osdiving.com/logo.png',
-            description: 'PADI 5 Star ECO Centre in Mauritius offering professional scuba diving courses and guided dives',
+            description:
+              'PADI 5 Star ECO Centre in Mauritius offering professional scuba diving courses and guided dives',
             address: {
               '@type': 'PostalAddress',
               addressCountry: 'MU',
@@ -59,7 +66,7 @@ const AboutPage = () => {
               'https://www.facebook.com/oceanspirit',
               'https://www.instagram.com/oceanspirit',
             ],
-            employee: TEAM_MEMBERS.map(member => ({
+            employee: TEAM_MEMBERS.map((member) => ({
               '@type': 'Person',
               name: member.name,
               jobTitle: member.role,
@@ -249,11 +256,20 @@ const AboutPage = () => {
           {/* Underwater bubbles decoration */}
           <div className="absolute inset-0 pointer-events-none opacity-10">
             <div className="absolute top-20 left-10 w-16 h-16 bg-ocean-300 rounded-full blur-xl animate-pulse" />
-            <div className="absolute top-40 right-20 w-24 h-24 bg-cyan-300 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-            <div className="absolute bottom-32 left-1/4 w-20 h-20 bg-ocean-400 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }} />
-            <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-blue-300 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '0.5s' }} />
+            <div
+              className="absolute top-40 right-20 w-24 h-24 bg-cyan-300 rounded-full blur-2xl animate-pulse"
+              style={{ animationDelay: '1s' }}
+            />
+            <div
+              className="absolute bottom-32 left-1/4 w-20 h-20 bg-ocean-400 rounded-full blur-xl animate-pulse"
+              style={{ animationDelay: '2s' }}
+            />
+            <div
+              className="absolute bottom-20 right-1/3 w-28 h-28 bg-blue-300 rounded-full blur-2xl animate-pulse"
+              style={{ animationDelay: '0.5s' }}
+            />
           </div>
-          
+
           <div className="max-w-7xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -265,7 +281,11 @@ const AboutPage = () => {
               <div className="inline-flex items-center justify-center gap-3 mb-6">
                 <div className="h-1 w-12 bg-gradient-to-r from-transparent to-ocean-500 rounded-full" />
                 <svg className="w-10 h-10 text-ocean-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <div className="h-1 w-12 bg-gradient-to-l from-transparent to-ocean-500 rounded-full" />
               </div>
@@ -273,7 +293,9 @@ const AboutPage = () => {
                 Meet the Ocean Spirit Team
               </h2>
               <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                Your expert dive professionals with <span className="font-semibold text-ocean-700">decades of combined experience</span> guiding unforgettable underwater adventures in Mauritius
+                Your expert dive professionals with{' '}
+                <span className="font-semibold text-ocean-700">decades of combined experience</span>{' '}
+                guiding unforgettable underwater adventures in Mauritius
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 mt-6 text-ocean-600">
                 <div className="flex items-center gap-2">
@@ -298,7 +320,7 @@ const AboutPage = () => {
                 <TeamMember key={index} member={member} index={index} />
               ))}
             </div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -311,14 +333,20 @@ const AboutPage = () => {
                   Ready to Dive with the Best?
                 </h3>
                 <p className="text-ocean-50 text-lg mb-6 max-w-2xl mx-auto">
-                  Our team is ready to guide you through Mauritius's most spectacular underwater adventures. From your first breath underwater to advanced wreck explorations.
+                  Our team is ready to guide you through Mauritius's most spectacular underwater
+                  adventures. From your first breath underwater to advanced wreck explorations.
                 </p>
                 <button
                   onClick={handleBookingClick}
                   className="inline-flex items-center gap-2 bg-white text-ocean-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-ocean-50 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
                   </svg>
                   Book Your Dive Experience
                 </button>

@@ -12,13 +12,7 @@
     "tagline": "PADI 5 Star ECO Green Fins Scuba Diving Centre",
     "description": "Premier PADI 5 Star ECO dive center in Northern Mauritius",
     "about": "Scuba diving in Mauritius means that from the day you arrive, you are among friends.",
-    "coreValues": [
-      "Conservation",
-      "Humility",
-      "Respect",
-      "Family Values",
-      "Career Development"
-    ],
+    "coreValues": ["Conservation", "Humility", "Respect", "Family Values", "Career Development"],
     "certifications": [
       "PADI 5 Star ECO Centre",
       "Green Fins Member",
@@ -77,11 +71,7 @@
       "name": "Jill Holloway",
       "role": "Director & PADI Diver",
       "bio": "Leading Ocean Spirit with passion for marine conservation and diving education.",
-      "certifications": [
-        "Director",
-        "DEPTH Magazine Editor",
-        "Videographer"
-      ],
+      "certifications": ["Director", "DEPTH Magazine Editor", "Videographer"],
       "image": "/clients/ocean-spirit-mauritius/images/team/jill-holloway.jpg"
     },
     {
@@ -89,10 +79,7 @@
       "name": "Bobby",
       "role": "PADI IDC Staff Instructor",
       "bio": "Patient and kind instructor with comprehensive expertise.",
-      "certifications": [
-        "PADI IDC Staff Instructor",
-        "Enriched Air Instructor"
-      ],
+      "certifications": ["PADI IDC Staff Instructor", "Enriched Air Instructor"],
       "image": "/clients/ocean-spirit-mauritius/images/team/bobby-instructor.jpg"
     }
   ],
@@ -116,11 +103,7 @@
   "seo": {
     "title": "Ocean Spirit Scuba Diving Mauritius",
     "description": "Premier PADI 5 Star ECO dive center in Northern Mauritius",
-    "keywords": [
-      "scuba diving",
-      "Mauritius",
-      "PADI"
-    ],
+    "keywords": ["scuba diving", "Mauritius", "PADI"],
     "baseUrl": "https://www.osdiving.com"
   },
   "features": {
@@ -133,11 +116,6 @@
   },
   "pricing": {
     "defaultCurrency": "MUR",
-    "currencies": [
-      "MUR",
-      "USD",
-      "EUR",
-      "GBP"
-    ]
+    "currencies": ["MUR", "USD", "EUR", "GBP"]
   }
 }

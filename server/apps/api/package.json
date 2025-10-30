@@ -1,32 +1,30 @@
 {
-	"name": "@react-scuba/api",
-	"version": "0.1.0",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "node --watch src/index.js",
-		"start": "node src/index.js",
-		"lint": "echo '✅ Linting handled by VS Code JavaScript language server'",
-		"format": "echo '✅ Formatting handled by VS Code built-in formatters'",
-		"test": "vitest run",
-		"test:watch": "vitest",
-		"test:coverage": "vitest run --coverage"
-	},
-	"dependencies": {
-		"compression": "^1.8.1",
-		"cors": "^2.8.5",
-		"dotenv": "^16.6.1",
-		"express": "^4.21.2",
-		"express-rate-limit": "^8.1.0",
-		"express-validator": "^7.3.0",
-		"helmet": "^8.1.0",
-		"mariadb": "^3.3.2",
-		"mysql2": "^3.11.5"
-	},
-	"devDependencies": {
-		"@vitest/coverage-v8": "^3.2.4",
-		"@vitest/ui": "^3.2.4",
-		"supertest": "^7.1.4",
-		"vitest": "^3.2.4"
-	}
+  "name": "@react-scuba/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.3.0",
+    "helmet": "^8.1.0",
+    "mariadb": "^3.3.2",
+    "mysql2": "^3.11.5"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
+  }
 }

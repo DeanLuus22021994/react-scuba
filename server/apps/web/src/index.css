@@ -47,10 +47,9 @@ h6 {
 a:focus-visible,
 button:focus-visible {
   outline: none;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: #0ea5e9;
   --tw-ring-offset-width: 2px;
 }
@@ -74,7 +73,9 @@ button:focus-visible {
   border-radius: 0.5rem;
   transition: all 0.3s ease;
   transform: scale(1);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .btn-primary:hover {
@@ -144,13 +145,16 @@ button:focus-visible {
 .card {
   background-color: white;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
   transition: box-shadow 0.3s ease;
   padding: 1.5rem;
 }
 
 .card:hover {
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
@@ -205,16 +209,13 @@ button:focus-visible {
 
 /* Background Patterns */
 .bg-pattern-dots {
-  background-image: radial-gradient(
-    circle,
-    rgba(2, 132, 199, 0.1) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle, rgba(2, 132, 199, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
 .bg-pattern-grid {
-  background-image: linear-gradient(rgba(2, 132, 199, 0.1) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(2, 132, 199, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(2, 132, 199, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
 }
@@ -232,12 +233,11 @@ button:focus-visible {
 .focus-ring:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
-    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width)
+    var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: #0ea5e9;
   --tw-ring-offset-width: 2px;
 }
@@ -246,32 +246,29 @@ button:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
   --tw-ring-inset: inset;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: #0ea5e9;
 }
 
 .focus-visible-ring:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
-    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width)
+    var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: #0ea5e9;
   --tw-ring-offset-width: 2px;
 }
 
 .keyboard-focus:focus-visible {
   outline: none;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: #0ea5e9;
   --tw-ring-offset-width: 2px;
 }
@@ -386,7 +383,7 @@ button:focus-visible {
 }
 
 .anchor-link::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -470,10 +467,9 @@ button:focus-visible {
 .input-field:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: #0ea5e9;
   border-color: transparent;
 }
@@ -546,10 +542,9 @@ button:focus-visible {
 .react-datepicker__input-container input:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: #0ea5e9;
   border-color: transparent;
 }
@@ -558,7 +553,9 @@ button:focus-visible {
   font-family: ui-sans-serif, system-ui, sans-serif;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .react-datepicker__header {
@@ -603,7 +600,9 @@ button:focus-visible {
 
 .leaflet-popup-content-wrapper {
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .leaflet-popup-content {
@@ -642,7 +641,8 @@ button:focus-visible {
 .dialog-panel {
   background-color: white;
   border-radius: 0.5rem;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
   max-width: 28rem;
   width: 100%;
@@ -692,7 +692,7 @@ button:focus-visible {
 }
 
 .section-anchor::before {
-  content: "";
+  content: '';
   display: block;
   height: 5rem;
   margin-top: -5rem;
@@ -736,7 +736,7 @@ button:focus-visible {
 }
 
 .nav-link.active::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1063,8 +1063,7 @@ button:focus-visible {
 }
 
 .animate-fade-out {
-  animation: fadeOut var(--animation-duration-normal)
-    var(--animation-easing-out);
+  animation: fadeOut var(--animation-duration-normal) var(--animation-easing-out);
 }
 
 .animate-fade-in-up {
@@ -1076,13 +1075,11 @@ button:focus-visible {
 }
 
 .animate-slide-in-left {
-  animation: slideInLeft var(--animation-duration-normal)
-    var(--animation-easing-out);
+  animation: slideInLeft var(--animation-duration-normal) var(--animation-easing-out);
 }
 
 .animate-slide-in-right {
-  animation: slideInRight var(--animation-duration-normal)
-    var(--animation-easing-out);
+  animation: slideInRight var(--animation-duration-normal) var(--animation-easing-out);
 }
 
 .animate-scale-in {
@@ -1133,18 +1130,15 @@ button:focus-visible {
 }
 
 .animate-scroll-reveal {
-  animation: scrollReveal var(--animation-duration-slow)
-    var(--animation-easing-out);
+  animation: scrollReveal var(--animation-duration-slow) var(--animation-easing-out);
 }
 
 .animate-scroll-reveal-left {
-  animation: scrollRevealLeft var(--animation-duration-slow)
-    var(--animation-easing-out);
+  animation: scrollRevealLeft var(--animation-duration-slow) var(--animation-easing-out);
 }
 
 .animate-scroll-reveal-right {
-  animation: scrollRevealRight var(--animation-duration-slow)
-    var(--animation-easing-out);
+  animation: scrollRevealRight var(--animation-duration-slow) var(--animation-easing-out);
 }
 
 .animate-highlight-anchor {
@@ -1155,7 +1149,8 @@ button:focus-visible {
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.6s var(--animation-easing-out),
+  transition:
+    opacity 0.6s var(--animation-easing-out),
     transform 0.6s var(--animation-easing-out);
 }
 

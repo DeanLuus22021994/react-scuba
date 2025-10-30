@@ -1,21 +1,17 @@
 {
-	"name": "@react-scuba/types",
-	"version": "0.1.0",
-	"private": true,
-	"type": "module",
-	"main": "./src/index.ts",
-	"types": "./src/index.ts",
-	"exports": {
-		".": "./src/index.ts",
-		"./api": "./src/api.ts",
-		"./common": "./src/common.ts",
-		"./components": "./src/components.ts"
-	},
-	"scripts": {
-		"lint": "echo '✅ TypeScript validation handled by VS Code'",
-		"format": "echo '✅ Formatting handled by VS Code built-in formatters'"
-	},
-	"devDependencies": {
-		"@react-scuba/config": "*"
-	}
+  "name": "@react-scuba/types",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./api": "./src/api.ts",
+    "./common": "./src/common.ts",
+    "./components": "./src/components.ts"
+  },
+  "devDependencies": {
+    "@react-scuba/config": "*"
+  }
 }

@@ -9,16 +9,19 @@ This directory contains utility scripts for repository maintenance and developme
 **Purpose**: Automates the extraction of the `docker-compose-examples` directory into a separate repository and sets it up as a git submodule.
 
 **Usage**:
+
 ```bash
 ./scripts/extract-docker-compose-examples.sh
 ```
 
 **Prerequisites**:
+
 - Git installed
 - GitHub repository created (https://github.com/DeanLuus22021994/docker-compose-examples)
 - Write access to both repositories
 
 **What it does**:
+
 1. Verifies the docker-compose-examples directory exists
 2. Checks if the target GitHub repository exists
 3. Extracts content to a temporary location
@@ -28,6 +31,7 @@ This directory contains utility scripts for repository maintenance and developme
 7. Adds it back as a git submodule
 
 **Interactive prompts**:
+
 - Confirm push to new repository
 - Confirm removal and submodule addition
 - Confirm push to react-scuba
@@ -39,15 +43,18 @@ This directory contains utility scripts for repository maintenance and developme
 **Purpose**: Verifies that the docker-compose-examples submodule is correctly configured and working.
 
 **Usage**:
+
 ```bash
 ./scripts/verify-submodule-setup.sh
 ```
 
 **Prerequisites**:
+
 - Git installed
 - Repository is a git repository
 
 **What it checks**:
+
 1. .gitmodules file exists and is configured
 2. Submodule directory exists
 3. Git submodule status is correct
@@ -57,6 +64,7 @@ This directory contains utility scripts for repository maintenance and developme
 7. Docker availability (optional)
 
 **Output**:
+
 - ✅ Pass: Test succeeded
 - ❌ Fail: Critical issue found
 - ⚠️ Warn: Non-critical issue or optional feature

@@ -141,18 +141,23 @@ Client configurations are stored as JSON files in `server/clients/{tenant-slug}/
 ### Functions
 
 #### `loadClientConfig(tenantSlug, configPath?, useCache?)`
+
 Load and validate client configuration from JSON file.
 
 #### `createTenantResolver(options)`
+
 Create tenant resolver with specified strategy.
 
 #### `validateClientConfig(config)`
+
 Validate configuration against schema (throws on error).
 
 #### `safeValidateClientConfig(config)`
+
 Safely validate configuration (returns result object).
 
 #### `clearConfigCache(tenantSlug?)`
+
 Clear configuration cache.
 
 ### Tenant Resolution Strategies

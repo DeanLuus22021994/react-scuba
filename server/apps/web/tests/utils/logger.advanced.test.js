@@ -1,7 +1,7 @@
 /**
  * Advanced Logger Utility Tests
  * Demonstrates Rust-based testing with SWC compilation
- * 
+ *
  * Benefits of Rust toolchain for testing:
  * - Faster test compilation via SWC (20-70x faster than Babel)
  * - Parallel test execution (multi-threaded)
@@ -205,7 +205,7 @@ describe('Logger Utility - Advanced Tests (Rust SWC)', () => {
       expect(consoleWarnSpy).toHaveBeenCalledOnce();
       expect(endTime - startTime).toBeLessThan(50);
     });
-  })
+  });
 
   describe('Edge Cases', () => {
     it('should handle empty messages', () => {
@@ -235,7 +235,7 @@ describe('Logger Utility - Advanced Tests (Rust SWC)', () => {
       logger.info('First');
       logger.warn('Second');
       logger.error('Third');
-      logger.info('Fourth')
+      logger.info('Fourth');
 
       const ids = [
         JSON.parse(consoleWarnSpy.mock.calls[0][0]).correlation_id,
@@ -294,7 +294,7 @@ describe('Logger Utility - Advanced Tests (Rust SWC)', () => {
         error: 'DATABASE_ERROR',
         code: 'ERR_DB_001',
         stack: 'Error stack trace...',
-      })
+      });
 
       const errorLog = JSON.parse(consoleErrorSpy.mock.calls[0][0]);
 
@@ -304,17 +304,17 @@ describe('Logger Utility - Advanced Tests (Rust SWC)', () => {
       expect(errorLog.correlation_id).toBe('error-trace-789');
     });
   });
-})
+});
 
 /**
  * RUST TOOLCHAIN TESTING BENEFITS DEMONSTRATED:
- * 
+ *
  * 1. ✅ Fast Compilation: SWC compiles this test file 20-70x faster than Babel
  * 2. ✅ Parallel Execution: Vitest runs this alongside other tests using worker threads
  * 3. ✅ Low Memory: SWC uses less memory during transformation
  * 4. ✅ Quick Iterations: File watching with SWC provides instant feedback
  * 5. ✅ Native Performance: All the benefits of Rust's performance without code changes
- * 
+ *
  * Run with: npm test -- tests/utils/logger.advanced.test.js --run
  * Watch mode: npm test -- tests/utils/logger.advanced.test.js
  */

@@ -62,11 +62,7 @@ const OptimizedImage = ({
       )}
       {isInView && (
         <picture>
-          <source
-            type="image/webp"
-            srcSet={generateSrcSet(getWebPSrc(src))}
-            sizes={sizes}
-          />
+          <source type="image/webp" srcSet={generateSrcSet(getWebPSrc(src))} sizes={sizes} />
           <img
             src={src}
             srcSet={generateSrcSet(src)}

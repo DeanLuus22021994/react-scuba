@@ -5,6 +5,7 @@
 This is the **React 19 frontend application** built with **Vite 7** and **TypeScript**.
 
 ## Tech Stack
+
 - **React 19.2** (latest features: automatic batching, transitions, Suspense)
 - **Vite 7.1.11** (with @vitejs/plugin-react-swc for faster builds)
 - **TypeScript 5.9.3** (strict mode enabled)
@@ -16,6 +17,7 @@ This is the **React 19 frontend application** built with **Vite 7** and **TypeSc
 - **React Hook Form + Zod** (forms with type-safe validation)
 
 ## Key Directories
+
 ```
 apps/web/
 ├── src/
@@ -38,6 +40,7 @@ apps/web/
 ## Code Patterns
 
 ### Component Structure
+
 ```tsx
 import { useState } from 'react';
 import type { FC } from 'react';
@@ -60,6 +63,7 @@ export const MyComponent: FC<MyComponentProps> = ({ title, onSubmit }) => {
 ```
 
 ### Custom Hooks
+
 ```tsx
 import { useQuery } from '@tanstack/react-query';
 
@@ -73,6 +77,7 @@ export const useDiveTrips = (clientId: string) => {
 ```
 
 ### API Integration (TanStack Query)
+
 ```tsx
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -89,6 +94,7 @@ export const useCreateBooking = () => {
 ```
 
 ### Multi-Tenant Resolution
+
 ```tsx
 import { useClient } from '@react-scuba/content';
 
@@ -106,6 +112,7 @@ export const HomePage = () => {
 ## Testing
 
 ### Unit Tests (Vitest + Testing Library)
+
 ```tsx
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
@@ -120,6 +127,7 @@ describe('MyComponent', () => {
 ```
 
 ### E2E Tests (Playwright)
+
 ```typescript
 import { test, expect } from '@playwright/test';
 
@@ -153,6 +161,7 @@ npx playwright test       # E2E tests
 ```
 
 ## Performance Best Practices
+
 - **Lazy load routes**: Use `React.lazy()` for code splitting
 - **Memoize expensive computations**: Use `useMemo`, `useCallback`
 - **Optimize images**: Use WebP format, lazy loading
@@ -160,6 +169,7 @@ npx playwright test       # E2E tests
 - **TanStack Query caching**: Set appropriate `staleTime` and `cacheTime`
 
 ## Common Issues
+
 - **Build fails**: Check TypeScript errors with `npm run type-check`
 - **Slow dev server**: Clear cache with `rm -rf node_modules/.vite`
 - **Module not found**: Verify path aliases in `tsconfig.json` and `vite.config.js`

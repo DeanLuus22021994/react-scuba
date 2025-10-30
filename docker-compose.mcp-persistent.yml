@@ -80,8 +80,8 @@ services:
   # ==== Service Discovery & Health Monitor ====
   mcp-discovery-agent:
     build:
-      context: ./.devcontainer/containers
-      dockerfile: dockerfile.mcp.discovery
+      context: ./.devcontainer/infrastructure/mcp-servers/discovery
+      dockerfile: dockerfile
     image: mcp-discovery-agent:latest
     container_name: mcp-discovery-agent
     hostname: mcp-discovery-agent
