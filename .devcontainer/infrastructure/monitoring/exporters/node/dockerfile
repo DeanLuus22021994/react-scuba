@@ -1,17 +1,13 @@
 # Node Exporter - Hardware and OS metrics
 # Reference: https://github.com/prometheus/node_exporter
+# v1.6.1 is the last stable version before go-kit logger verbosity bug in v1.7.0+
 
-FROM prom/node-exporter:v1.7.0
+FROM prom/node-exporter:v1.6.1
 
 LABEL maintainer="Dean Luus" \
   description="Prometheus Node Exporter for host metrics" \
-  version="1.7.0"
+  version="1.6.1"
 
-# Disable health check to prevent connection reset issues
-# The service will be monitored through prometheus scraping instead
-# HEALTHCHECK --interval=300s --timeout=30s --start-period=60s --retries=2 \
-#   CMD wget --quiet --tries=1 --timeout=10 --spider http://localhost:9100/ || exit 1
-
-# Set log level to warn to suppress connection reset errors
-# These errors occur when HTTP clients close connections early but don't affect functionality
-CMD ["--log.level=warn"]
+# v1.6.1 does NOT have the broken pipe logging bug from v1.7.0+
+# No need to suppress logs - this version doesn't log normal HTTP closures as errors
+# Default CMD is sufficient (no --log.level override needed)
