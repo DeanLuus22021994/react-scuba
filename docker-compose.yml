@@ -86,7 +86,9 @@ volumes:
     name: react_scuba_api-data
 
   # ==== GPU & AI Volumes ====
-  # Ollama models stored in C:/shared_memory/ollama-cache (centralized host cache)
+  react_scuba_ollama-models:
+    name: react_scuba_ollama-models
+    driver: local
 
   # ==== MCP Volumes ====
   react_scuba_mcp-discovery-cache:
