@@ -51,7 +51,10 @@ Thumbs.db
 # === Environment & Secrets ===
 .env
 .env.*
+devcontainer.env
 !.env.example
+!.env.template
+!devcontainer.env.template
 *.key
 *.pem
 *.cert

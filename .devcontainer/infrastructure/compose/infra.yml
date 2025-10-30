@@ -232,7 +232,7 @@ services:
     env_file:
       - ../../../devcontainer.env
     environment:
-      - DATA_SOURCE_NAME=root:${MARIADB_PASSWORD:-password}@tcp(mariadb:3306)/
+      - DATA_SOURCE_NAME=root:${DOCKER_MARIADB_ROOT_PASSWORD:-password}@tcp(mariadb:3306)/
       - MYSQLD_EXPORTER_WEB_LISTEN_ADDRESS=:9104
     command:
       - --collect.global_status

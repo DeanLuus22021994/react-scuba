@@ -78,10 +78,12 @@ storybook-static/
 .env.test.local
 .env.production.local
 .env.*.local
+devcontainer.env
 
 # Keep example environment files
 !.env.example
 !.env.template
+!devcontainer.env.template
 
 # Local configuration overrides
 config.local.json
@@ -191,6 +193,7 @@ dmypy.json
 # Docker Compose overrides
 docker-compose.override.yml
 docker-compose.local.yml
+docker-compose.*.local.yml
 
 # Docker build artifacts
 .docker/
@@ -428,6 +431,9 @@ debug/
 # ============================================================================
 # Security & Secrets
 # ============================================================================
+# Environment files with actual credentials
+devcontainer.env
+
 # API keys and secrets
 .secrets/
 secrets/
