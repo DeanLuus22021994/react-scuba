@@ -17,7 +17,7 @@
 ## Model Cache
 
 - **Host cache**: `C:/shared_memory/ollama-cache` (read-only mount at `/host-cache`)
-- **Runtime storage**: Named volume `react_scuba_ollama-models`
+- **Runtime storage**: Named volume `ollama-models`
 - **First startup**: Copies from host cache if available, otherwise downloads
 - **Subsequent startups**: Uses volume (no copy/download)
 

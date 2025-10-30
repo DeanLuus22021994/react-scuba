@@ -1,0 +1,37 @@
+# ==============================================================================
+# MCP MarkItDown Server Configuration
+# ==============================================================================
+# Purpose: Document conversion MCP server for Copilot
+# Location: .devcontainer/infrastructure/mcp-servers/markitdown/
+# Usage: docker compose -f docker-compose.markitdown.yml up
+# Note: Runs on-demand via stdio, not persistent service
+# ==============================================================================
+
+services:
+  markitdown-mcp:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-markitdown:latest
+    container_name: markitdown-mcp
+    hostname: markitdown-mcp
+    profiles:
+      - full
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.95
+    volumes:
+      - ../../../../../data:/data:rw
+      - markitdown-cache:/cache/markitdown
+    working_dir: /data
+    stdin_open: true
+    tty: false
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    labels:
+      - "com.react-scuba.service=markitdown-mcp"

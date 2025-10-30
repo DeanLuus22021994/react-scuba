@@ -1,0 +1,37 @@
+# ==============================================================================
+# MCP Memory Server Configuration
+# ==============================================================================
+# Purpose: Persistent memory/context MCP server for Copilot
+# Location: .devcontainer/infrastructure/mcp-servers/memory/
+# Usage: docker compose -f docker-compose.memory.yml up
+# Note: Runs on-demand via stdio, not persistent service
+# ==============================================================================
+
+services:
+  memory-mcp:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-memory:latest
+    container_name: memory-mcp
+    hostname: memory-mcp
+    profiles:
+      - full
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.94
+    volumes:
+      - memory-data:/memory
+      - memory-node-cache:/cache/node
+      - memory-cache:/cache/memory
+    stdin_open: true
+    tty: false
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    labels:
+      - "com.react-scuba.service=memory-mcp"

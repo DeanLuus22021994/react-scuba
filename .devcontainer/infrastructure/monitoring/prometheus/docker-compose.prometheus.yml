@@ -1,0 +1,55 @@
+# ==============================================================================
+# Prometheus Service Configuration
+# ==============================================================================
+# Purpose: Metrics collection and time-series database
+# Location: .devcontainer/infrastructure/monitoring/prometheus/
+# Usage: docker compose -f docker-compose.prometheus.yml up
+# Web UI: http://localhost:9090
+# ==============================================================================
+
+services:
+  prometheus:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-prometheus:latest
+    pull_policy: build
+    container_name: prometheus
+    hostname: prometheus
+    profiles:
+      - full
+      - monitoring
+    ports:
+      - "9090:9090"
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.71
+    volumes:
+      - type: bind
+        source: ../config/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+      - prometheus-data:/prometheus
+    env_file:
+      - ../../../../devcontainer.env
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=15d"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9090/-/healthy",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "com.react-scuba.service=prometheus"
+      - "com.react-scuba.tier=monitoring"

@@ -1,50 +1,20 @@
 # ==============================================================================
-# docker-compose.base.yml - Base Infrastructure Services
+# Redis Service Configuration
 # ==============================================================================
-# Purpose: Database, cache, and core infrastructure for cluster
-# Composition: PostgreSQL, MariaDB, Memcached, Redis
-# Network: mcp-cluster (shared with all other services)
-# Testing: docker-compose -f docker-compose.base.yml up
+# Purpose: In-memory data structure store with persistence
+# Location: .devcontainer/infrastructure/cache/redis/
+# Usage: docker compose -f docker-compose.redis.yml up
+# Testing: docker compose exec redis redis-cli ping
 # ==============================================================================
-
-# Include database service configurations from their respective directories
-include:
-  - path: ../databases/postgres/docker-compose.postgres.yml
-  - path: ../databases/mariadb/docker-compose.mariadb.yml
-
-# Volumes are defined in main docker-compose.yml to avoid conflicts
 
 services:
-
-  # ==== TIER 4: Cache Layer ====
-
-  memcached:
-    image: memcached:1.6-alpine
-    container_name: memcached
-    hostname: memcached
-    networks:
-      mcp-cluster:
-        ipv4_address: 172.28.0.60
-    ports:
-      - "11211:11211"
-    command: memcached -m 256 -p 11211
-    healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "11211"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
   redis:
     image: redis:7-alpine
     container_name: redis
     hostname: redis
+    profiles:
+      - full
+      - base
     networks:
       mcp-cluster:
         ipv4_address: 172.28.0.61
@@ -52,7 +22,7 @@ services:
       - "6379:6379"
     command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
     volumes:
-      - react_scuba_redis-data:/data
+      - redis-data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -65,11 +35,17 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    labels:
+      - "com.react-scuba.service=redis"
+      - "com.react-scuba.tier=cache"
 
   redisinsight:
     image: redislabs/redisinsight:latest
     container_name: redisinsight
     hostname: redisinsight
+    profiles:
+      - full
+      - base
     networks:
       mcp-cluster:
         ipv4_address: 172.28.0.62
@@ -92,3 +68,5 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    labels:
+      - "com.react-scuba.service=redisinsight"

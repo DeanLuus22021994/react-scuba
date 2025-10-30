@@ -6,132 +6,165 @@
 # Includes core service tiers via modular compose fragments
 # MCP services managed separately in docker-compose.mcp-persistent.yml
 #
-# USAGE:
-#   docker compose up              # Start core stack (base + app + infra + gpu)
-#   docker compose up --build     # Start with build
-#   docker compose --profile no-gpu up  # Start without GPU services
+# DEPLOYMENT PROFILES:
+#   minimal       - DevContainer essentials (3 services: node-tools + 2 MCP)
+#   base          - + databases & cache (postgres, mariadb, redis, memcached)
+#   app           - + application services (node-api, node-web)
+#   monitoring    - + metrics & visualization (prometheus, grafana, exporters)
+#   loadbalancing - + nginx reverse proxy
+#   gpu           - + NVIDIA GPU & Ollama LLM inference
+#   full          - All services (28 total)
 #
-# MCP SERVICES (separate):
-#   docker compose -f docker-compose.mcp-persistent.yml up -d --profile mcp
+# USAGE:
+#   docker compose --profile full up              # Full cluster (28 services)
+#   docker compose --profile minimal up           # Minimal (3 services)
+#   docker compose --profile base --profile app up  # Databases + app (10 services)
+#   docker compose up --build                      # Build + start with full profile
+#
+# MCP SERVICES:
+#   docker compose -f docker-compose.mcp-persistent.yml --profile mcp up -d
 #
 
 include:
-  - .devcontainer/infrastructure/compose/base.yml
-  - .devcontainer/infrastructure/compose/app.yml
-  - .devcontainer/infrastructure/compose/monitoring.yml
-  - .devcontainer/infrastructure/compose/loadbalancing.yml
-  - .devcontainer/infrastructure/compose/gpu.yml
+  # ==== Database Services ====
+  - .devcontainer/infrastructure/databases/postgres/docker-compose.postgres.yml
+  - .devcontainer/infrastructure/databases/mariadb/docker-compose.mariadb.yml
+
+  # ==== Cache Services ====
+  - .devcontainer/infrastructure/cache/memcached/docker-compose.memcached.yml
+  - .devcontainer/infrastructure/cache/redis/docker-compose.redis.yml
+  - .devcontainer/infrastructure/cache/minio/docker-compose.minio.yml
+
+  # ==== Application Services ====
+  - .devcontainer/infrastructure/services/api/docker-compose.api.yml
+  - .devcontainer/infrastructure/services/web/docker-compose.web.yml
+  - .devcontainer/infrastructure/services/buildx/docker-compose.buildx.yml
+
+  # ==== Monitoring Services ====
+  - .devcontainer/infrastructure/monitoring/prometheus/docker-compose.prometheus.yml
+  - .devcontainer/infrastructure/monitoring/grafana/docker-compose.grafana.yml
+  - .devcontainer/infrastructure/monitoring/exporters/postgres/docker-compose.postgres-exporter.yml
+  - .devcontainer/infrastructure/monitoring/exporters/mysql/docker-compose.mysql-exporter.yml
+  - .devcontainer/infrastructure/monitoring/exporters/cadvisor/docker-compose.cadvisor.yml
+  - .devcontainer/infrastructure/monitoring/exporters/node/docker-compose.node-exporter.yml
+
+  # ==== Networking Services ====
+  - .devcontainer/infrastructure/networking/nginx/docker-compose.nginx.yml
+
+  # ==== GPU Services ====
+  - .devcontainer/infrastructure/services/nvidia/docker-compose.nvidia.yml
+  - .devcontainer/infrastructure/services/ollama/docker-compose.ollama.yml
 
 # Named volumes for persistence (shared across all fragments)
 volumes:
   # ==== Database Volumes ====
-  react_scuba_postgres-data:
-    name: react_scuba_postgres-data
-  react_scuba_postgres-node-cache:
-    name: react_scuba_postgres-node-cache
-  react_scuba_postgres-cache:
-    name: react_scuba_postgres-cache
-  react_scuba_mariadb-data:
-    name: react_scuba_mariadb-data
-  react_scuba_mariadb-node-cache:
-    name: react_scuba_mariadb-node-cache
-  react_scuba_mariadb-cache:
-    name: react_scuba_mariadb-cache
+  postgres-data:
+    name: postgres-data
+  postgres-node-cache:
+    name: postgres-node-cache
+  postgres-cache:
+    name: postgres-cache
+  mariadb-data:
+    name: mariadb-data
+  mariadb-node-cache:
+    name: mariadb-node-cache
+  mariadb-cache:
+    name: mariadb-cache
 
   # ==== Cache Volumes ====
-  react_scuba_redis-data:
-    name: react_scuba_redis-data
-  react_scuba_redisinsight-data:
-    name: react_scuba_redisinsight-data
-  react_scuba_minio-data:
-    name: react_scuba_minio-data
+  redis-data:
+    name: redis-data
+  redisinsight-data:
+    name: redisinsight-data
+  minio-data:
+    name: minio-data
 
   # ==== Build & Development Volumes ====
-  react_scuba_buildkit-cache:
-    name: react_scuba_buildkit-cache
-  react_scuba_buildkit-tmp:
-    name: react_scuba_buildkit-tmp
-  react_scuba_node-builder-node-modules:
-    name: react_scuba_node-builder-node-modules
-  react_scuba_node-builder-npm:
-    name: react_scuba_node-builder-npm
-  react_scuba_node-builder-git-hooks:
-    name: react_scuba_node-builder-git-hooks
-  react_scuba_node-builder-husky:
-    name: react_scuba_node-builder-husky
-  react_scuba_node-bootstrap-cache:
-    name: react_scuba_node-bootstrap-cache
+  buildkit-cache:
+    name: buildkit-cache
+  buildkit-tmp:
+    name: buildkit-tmp
+  node-builder-node-modules:
+    name: node-builder-node-modules
+  node-builder-npm:
+    name: node-builder-npm
+  node-builder-git-hooks:
+    name: node-builder-git-hooks
+  node-builder-husky:
+    name: node-builder-husky
+  node-bootstrap-cache:
+    name: node-bootstrap-cache
 
   # ==== CI/CD Volumes ====
-  react_scuba_runner-work:
-    name: react_scuba_runner-work
-  react_scuba_runner-cache:
-    name: react_scuba_runner-cache
+  runner-work:
+    name: runner-work
+  runner-cache:
+    name: runner-cache
 
   # ==== Infrastructure Volumes ====
-  react_scuba_prometheus-data:
-    name: react_scuba_prometheus-data
-  react_scuba_grafana-data:
-    name: react_scuba_grafana-data
-  react_scuba_nginx-logs:
-    name: react_scuba_nginx-logs
-  react_scuba_nginx-slave1-logs:
-    name: react_scuba_nginx-slave1-logs
-  react_scuba_nginx-slave2-logs:
-    name: react_scuba_nginx-slave2-logs
+  prometheus-data:
+    name: prometheus-data
+  grafana-data:
+    name: grafana-data
+  nginx-logs:
+    name: nginx-logs
+  nginx-slave1-logs:
+    name: nginx-slave1-logs
+  nginx-slave2-logs:
+    name: nginx-slave2-logs
 
   # ==== API & Application Volumes ====
-  react_scuba_api-logs:
-    name: react_scuba_api-logs
-  react_scuba_api-data:
-    name: react_scuba_api-data
+  api-logs:
+    name: api-logs
+  api-data:
+    name: api-data
 
   # ==== GPU & AI Volumes ====
-  react_scuba_ollama-models:
-    name: react_scuba_ollama-models
+  ollama-models:
+    name: ollama-models
     driver: local
 
   # ==== MCP Volumes ====
-  react_scuba_mcp-discovery-cache:
-    name: react_scuba_mcp-discovery-cache
-  react_scuba_markitdown-cache:
-    name: react_scuba_markitdown-cache
-  react_scuba_mcp-memory-cache:
-    name: react_scuba_mcp-memory-cache
+  mcp-discovery-cache:
+    name: mcp-discovery-cache
+  markitdown-cache:
+    name: markitdown-cache
+  mcp-memory-cache:
+    name: mcp-memory-cache
 
   # ==== Workspace Node Modules ====
-  react_scuba_root_node_modules:
-    name: react_scuba_root_node_modules
-  react_scuba_web_node_modules:
-    name: react_scuba_web_node_modules
-  react_scuba_api_node_modules:
-    name: react_scuba_api_node_modules
-  react_scuba_content_node_modules:
-    name: react_scuba_content_node_modules
-  react_scuba_docs_node_modules:
-    name: react_scuba_docs_node_modules
-  react_scuba_config_node_modules:
-    name: react_scuba_config_node_modules
-  react_scuba_types_node_modules:
-    name: react_scuba_types_node_modules
-  react_scuba_ui_node_modules:
-    name: react_scuba_ui_node_modules
-  react_scuba_utils_node_modules:
-    name: react_scuba_utils_node_modules
-  react_scuba_react-vite-cache:
-    name: react_scuba_react-vite-cache
-  react_scuba_react-npm-cache:
-    name: react_scuba_react-npm-cache
+  root_node_modules:
+    name: root_node_modules
+  web_node_modules:
+    name: web_node_modules
+  api_node_modules:
+    name: api_node_modules
+  content_node_modules:
+    name: content_node_modules
+  docs_node_modules:
+    name: docs_node_modules
+  config_node_modules:
+    name: config_node_modules
+  types_node_modules:
+    name: types_node_modules
+  ui_node_modules:
+    name: ui_node_modules
+  utils_node_modules:
+    name: utils_node_modules
+  react-vite-cache:
+    name: react-vite-cache
+  react-npm-cache:
+    name: react-npm-cache
 
   # ==== Development Volumes ====
-  react_scuba_devcontainer-cache:
-    name: react_scuba_devcontainer-cache
-  react_scuba_python-exp-cache:
-    name: react_scuba_python-exp-cache
-  react_scuba_k8s-config:
-    name: react_scuba_k8s-config
-  react_scuba_k8s-cache:
-    name: react_scuba_k8s-cache
+  devcontainer-cache:
+    name: devcontainer-cache
+  python-exp-cache:
+    name: python-exp-cache
+  k8s-config:
+    name: k8s-config
+  k8s-cache:
+    name: k8s-cache
 
 # Network configuration (shared by all included services)
 networks:

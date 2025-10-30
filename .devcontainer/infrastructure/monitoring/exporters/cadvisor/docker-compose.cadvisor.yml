@@ -1,0 +1,66 @@
+# ==============================================================================
+# cAdvisor Metrics Exporter Configuration
+# ==============================================================================
+# Purpose: Container metrics collection for Prometheus
+# Location: .devcontainer/infrastructure/monitoring/exporters/cadvisor/
+# Usage: docker compose -f docker-compose.cadvisor.yml up
+# Port: 8082 (metrics endpoint)
+# Metrics: http://localhost:8082/metrics
+# ==============================================================================
+
+services:
+  cadvisor:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-cadvisor:latest
+    pull_policy: build
+    container_name: cadvisor
+    hostname: cadvisor
+    privileged: true
+    profiles:
+      - full
+      - monitoring
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.75
+    ports:
+      - "8082:8080"
+    volumes:
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    environment:
+      - CADVISOR_LOG_LEVEL=error
+    command:
+      - "--docker_only=true"
+      - "--housekeeping_interval=10s"
+      - "--max_housekeeping_interval=30s"
+      - "--storage_duration=2m"
+      - "--disable_metrics=disk,diskIO,tcp,udp,percpu,sched,process,hugetlb,referenced_memory,resctrl,advtcp,memory_numa"
+      - "--store_container_labels=false"
+      - "--whitelisted_container_labels=com.docker.compose.project,com.docker.compose.service"
+      - "--event_storage_event_limit=default=0"
+      - "--event_storage_age_limit=default=0"
+      - "--raw_cgroup_prefix_whitelist=/docker"
+      - "--disable_root_cgroup_stats=true"
+      - "--enable_load_reader=false"
+      - "--log_cadvisor_usage=false"
+      - "--docker_env_metadata_whitelist="
+      - "--docker=unix:///var/run/docker.sock"
+      - "--v=0"
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "com.react-scuba.service=cadvisor"

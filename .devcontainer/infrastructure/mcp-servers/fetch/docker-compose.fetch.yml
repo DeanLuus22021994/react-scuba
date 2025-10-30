@@ -1,0 +1,38 @@
+# ==============================================================================
+# MCP Fetch Server Configuration
+# ==============================================================================
+# Purpose: HTTP/HTTPS fetching MCP server for Copilot
+# Location: .devcontainer/infrastructure/mcp-servers/fetch/
+# Usage: docker compose -f docker-compose.fetch.yml up
+# Note: Runs on-demand via stdio, not persistent service
+# ==============================================================================
+
+services:
+  fetch-mcp:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-fetch:latest
+    container_name: fetch-mcp
+    hostname: fetch-mcp
+    profiles:
+      - full
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.92
+    volumes:
+      - fetch-cache:/cache/fetch
+      - fetch-pip-cache:/cache/pip
+      - fetch-python-cache:/cache/python
+      - fetch-http-cache:/cache/http
+    stdin_open: true
+    tty: false
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    labels:
+      - "com.react-scuba.service=fetch-mcp"

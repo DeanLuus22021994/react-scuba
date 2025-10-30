@@ -1,0 +1,45 @@
+# ==============================================================================
+# MCP Discovery Agent Configuration
+# ==============================================================================
+# Purpose: Service discovery and health monitoring for MCP cluster
+# Location: .devcontainer/infrastructure/mcp-servers/discovery/
+# Usage: docker compose -f docker-compose.discovery.yml up
+# WebSocket: ws://localhost:9097
+# Dashboard: http://localhost:9097/services
+# ==============================================================================
+
+services:
+  mcp-discovery-agent:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-discovery-agent:latest
+    container_name: mcp-discovery-agent
+    hostname: mcp-discovery-agent
+    profiles:
+      - full
+      - minimal
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.98
+    ports:
+      - "9097:9097"
+    env_file:
+      - ../../../../../devcontainer.env
+    environment:
+      - MCP_DISCOVERY_ENABLED=true
+      - MCP_HEALTH_WEBSOCKET_PORT=9097
+      - MCP_SERVICES=python-mcp-sidecar:9099
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - mcp_discovery_state:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9097/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+    labels:
+      - "com.react-scuba.service=mcp-discovery"

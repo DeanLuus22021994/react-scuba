@@ -1,333 +1,444 @@
-# DevContainer TOC Validation Script
-# Validates devcontainer-toc.yml structure and checks data consistency
-# Uses native PowerShell YAML parsing (requires PowerShell-Yaml module)
+#Requires -Version 7.5
 
+<#
+.SYNOPSIS
+    DevContainer Infrastructure Validation Script - Docker Native Tools
+
+.DESCRIPTION
+    Leverages Docker Compose native validation and inspection tools:
+    - docker compose config --quiet --dry-run (YAML syntax validation)
+    - docker compose config --services|--networks|--volumes (infrastructure queries)
+    - docker image inspect (MCP server image validation)
+    - No external PowerShell dependencies required
+
+.PARAMETER Verbose
+    Enable detailed diagnostic output
+
+.PARAMETER Json
+    Output results in JSON format for CI/CD integration
+
+.PARAMETER SkipImages
+    Skip Docker image existence validation
+
+.EXAMPLE
+    .\validate-toc.ps1
+
+.EXAMPLE
+    .\validate-toc.ps1 -Verbose -Json
+
+.EXAMPLE
+    .\validate-toc.ps1 -SkipImages
+
+.NOTES
+    Requires: PowerShell 7.5+, Docker Compose v2+
+    Author: React Scuba Team
+    Version: 3.0.0
+    Last Updated: 2025-10-30
+#>
+
+[CmdletBinding()]
 param(
-    [switch]$Verbose,
     [switch]$Json,
-    [switch]$InstallDependencies
+    [switch]$SkipImages
 )
 
-$ErrorActionPreference = "Stop"
-$tocFile = Join-Path $PSScriptRoot "devcontainer-toc.yml"
-$schemaFile = Join-Path $PSScriptRoot "devcontainer-toc.schema.json"
+# Strict mode for better error detection
+Set-StrictMode -Version 3.0
+$ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'
 
-# ANSI colors
-$colors = @{
-    Reset = "`e[0m"
-    Red = "`e[31m"
-    Green = "`e[32m"
-    Yellow = "`e[33m"
-    Blue = "`e[34m"
-    Cyan = "`e[36m"
+# File paths
+$script:rootDir = Split-Path $PSScriptRoot -Parent
+$script:devcontainerDir = $PSScriptRoot
+$script:dockerComposeMain = Join-Path $script:rootDir 'docker-compose.yml'
+$script:dockerComposeMcp = Join-Path $script:rootDir 'docker-compose.mcp-persistent.yml'
+$script:mcpServersConfig = Join-Path $script:devcontainerDir 'mcp-servers.json'
+
+# ANSI color codes
+$script:Colors = @{
+    Reset   = "`e[0m"
+    Red     = "`e[31m"
+    Green   = "`e[32m"
+    Yellow  = "`e[33m"
+    Blue    = "`e[34m"
+    Cyan    = "`e[36m"
+    Magenta = "`e[35m"
+    Bold    = "`e[1m"
 }
+
+#region Helper Functions
 
 function Write-ColorOutput {
-    param([string]$Message, [string]$Color = "Reset")
-    Write-Host "$($colors[$Color])$Message$($colors.Reset)"
-}
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [string]$Message,
 
-function Install-YamlModule {
-    Write-ColorOutput "Installing PowerShell-Yaml module..." "Cyan"
-    try {
-        Install-Module -Name powershell-yaml -Force -Scope CurrentUser
-        Write-ColorOutput "✓ PowerShell-Yaml module installed" "Green"
-        return $true
-    }
-    catch {
-        Write-ColorOutput "✗ Failed to install PowerShell-Yaml: $_" "Red"
-        return $false
-    }
-}
+        [Parameter(Position = 1)]
+        [ValidateSet('Reset', 'Red', 'Green', 'Yellow', 'Blue', 'Cyan', 'Magenta', 'Bold')]
+        [string]$Color = 'Reset',
 
-function Test-YamlModule {
-    try {
-        Import-Module powershell-yaml -ErrorAction Stop
-        return $true
-    }
-    catch {
-        Write-ColorOutput "⚠ PowerShell-Yaml module not found" "Yellow"
-        Write-ColorOutput "  Install: Install-Module -Name powershell-yaml -Force" "Cyan"
-        Write-ColorOutput "  Or run: .\validate-toc.ps1 -InstallDependencies" "Cyan"
-        return $false
-    }
-}
-
-function Test-YamlSyntax {
-    param([string]$FilePath)
-
-    try {
-        $content = Get-Content -Path $FilePath -Raw
-        $data = ConvertFrom-Yaml -Yaml $content -ErrorAction Stop
-        Write-ColorOutput "✓ YAML syntax valid" "Green"
-        return $true, $data
-    }
-    catch {
-        Write-ColorOutput "✗ YAML syntax error: $_" "Red"
-        return $false, $null
-    }
-}
-
-function Test-RequiredFields {
-    param([hashtable]$Data)
-
-    Write-ColorOutput "`nChecking required fields..." "Cyan"
-
-    $checks = @()
-    $requiredPaths = @(
-        @{ Path = "metadata.version"; Name = "Metadata version" }
-        @{ Path = "metadata.total_services"; Name = "Total services count" }
-        @{ Path = "directory_structure.root"; Name = "Directory root" }
-        @{ Path = "core_configuration.devcontainer"; Name = "DevContainer config" }
-        @{ Path = "infrastructure_components.compose"; Name = "Compose configuration" }
-        @{ Path = "network_architecture.ip_allocation"; Name = "IP allocation" }
-        @{ Path = "volume_strategy.named_volumes"; Name = "Named volumes" }
-        @{ Path = "service_health.health_checks"; Name = "Health checks" }
-        @{ Path = "status.devcontainer_status"; Name = "DevContainer status" }
+        [switch]$NoNewline
     )
 
-    foreach ($item in $requiredPaths) {
-        $path = $item.Path -split '\.'
-        $value = $Data
-        $found = $true
+    if ($Json -and $Color -notin @('Red', 'Magenta')) { return }
 
-        foreach ($key in $path) {
-            if ($value.ContainsKey($key)) {
-                $value = $value[$key]
-            }
-            else {
-                $found = $false
-                break
-            }
-        }
-
-        if ($found -and $null -ne $value) {
-            $checks += @{ Name = $item.Name; Status = "PASS" }
-        }
-        else {
-            $checks += @{ Name = $item.Name; Status = "FAIL"; Details = "Missing or null" }
-        }
-    }
-
-    # Output results
-    $passCount = ($checks | Where-Object { $_.Status -eq "PASS" }).Count
-    $failCount = ($checks | Where-Object { $_.Status -eq "FAIL" }).Count
-
-    foreach ($check in $checks) {
-        $color = if ($check.Status -eq "PASS") { "Green" } else { "Red" }
-        $symbol = if ($check.Status -eq "PASS") { "✓" } else { "✗" }
-        $details = if ($check.Details) { " - $($check.Details)" } else { "" }
-        Write-ColorOutput "$symbol $($check.Name)$details" $color
-    }
-
-    Write-ColorOutput "`n$passCount passed, $failCount failed" $(if ($failCount -eq 0) { "Green" } else { "Yellow" })
-    return $failCount -eq 0
+    $output = "$($script:Colors[$Color])$Message$($script:Colors.Reset)"
+    Write-Host $output -NoNewline:$NoNewline
 }
 
-function Test-DataConsistency {
-    param([hashtable]$Data)
+function New-Check {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$Name,
 
-    Write-ColorOutput "`nRunning consistency checks..." "Cyan"
+        [Parameter(Mandatory)]
+        [ValidateSet('PASS', 'FAIL', 'WARN')]
+        [string]$Status,
+
+        [string]$Details = $null
+    )
+
+    return @{ Name = $Name; Status = $Status; Details = $Details }
+}
+
+function Write-CheckResults {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [array]$Checks
+    )
+
+    foreach ($check in $Checks) {
+        $color = switch ($check.Status) {
+            'PASS' { 'Green' }
+            'FAIL' { 'Red' }
+            'WARN' { 'Yellow' }
+        }
+        $symbol = switch ($check.Status) {
+            'PASS' { '✓' }
+            'FAIL' { '✗' }
+            'WARN' { '⚠' }
+        }
+        $details = if ($check.Details) { " - $($check.Details)" } else { '' }
+        Write-ColorOutput "  $symbol $($check.Name)$details" $color
+    }
+}
+
+function Test-FileExists {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$Path,
+
+        [Parameter(Mandatory)]
+        [string]$Name
+    )
+
+    if (Test-Path $Path) {
+        return New-Check -Name $Name -Status 'PASS'
+    }
+    return New-Check -Name $Name -Status 'FAIL' -Details 'File not found'
+}
+
+function Invoke-DockerCompose {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string[]]$Arguments,
+
+        [switch]$IgnoreErrors
+    )
+
+    try {
+        # Change to root directory for Docker Compose context
+        Push-Location $script:rootDir
+
+        $allArgs = @('-f', $script:dockerComposeMain, '-f', $script:dockerComposeMcp) + $Arguments
+        $result = docker compose $allArgs 2>&1
+        $exitCode = $LASTEXITCODE
+
+        Pop-Location
+
+        if ($exitCode -ne 0 -and -not $IgnoreErrors) {
+            throw "Docker Compose command failed: $result"
+        }
+
+        return @{
+            Success = ($exitCode -eq 0)
+            Output = $result
+            ExitCode = $exitCode
+        }
+    }
+    catch {
+        Pop-Location
+        if ($IgnoreErrors) {
+            return @{
+                Success = $false
+                Output = $_.Exception.Message
+                ExitCode = 1
+            }
+        }
+        throw
+    }
+}function Test-DockerAvailable {
+    [CmdletBinding()]
+    param()
+
+    try {
+        $null = docker --version 2>&1
+        $null = docker compose version 2>&1
+        return $true
+    }
+    catch {
+        Write-ColorOutput '✗ Docker or Docker Compose not available' 'Red'
+        Write-ColorOutput '  Please ensure Docker Desktop is installed and running' 'Yellow'
+        return $false
+    }
+}
+
+#endregion
+
+#region Validation Functions
+
+function Test-DockerComposeFiles {
+    [CmdletBinding()]
+    param()
+
+    Write-ColorOutput "`nValidating Docker Compose configuration..." 'Cyan'
+
+    $checks = @(
+        (Test-FileExists -Path $script:dockerComposeMain -Name 'docker-compose.yml exists')
+        (Test-FileExists -Path $script:dockerComposeMcp -Name 'docker-compose.mcp-persistent.yml exists')
+    )
+
+    # Validate YAML syntax using Docker Compose native validation
+    Write-ColorOutput '  Running: docker compose config --quiet --dry-run' 'Blue'
+    $configResult = Invoke-DockerCompose -Arguments @('config', '--quiet', '--dry-run') -IgnoreErrors
+
+    $checks += if ($configResult.Success) {
+        New-Check -Name 'YAML syntax validation' -Status 'PASS'
+    } else {
+        New-Check -Name 'YAML syntax validation' -Status 'FAIL' -Details $configResult.Output
+    }
+
+    Write-CheckResults -Checks $checks
+    return -not ($checks.Status -contains 'FAIL')
+}
+
+function Get-DockerComposeInventory {
+    [CmdletBinding()]
+    param()
+
+    Write-ColorOutput "`nQuerying Docker Compose infrastructure..." 'Cyan'
+
+    try {
+        $baseArgs = @('--profile', 'full', 'config')
+
+        # Query all resource types in parallel
+        $inventory = @{
+            Services = @((Invoke-DockerCompose -Arguments ($baseArgs + '--services')).Output | Where-Object { $_ -match '\S' })
+            Networks = @((Invoke-DockerCompose -Arguments ($baseArgs + '--networks')).Output | Where-Object { $_ -match '\S' })
+            Volumes  = @((Invoke-DockerCompose -Arguments ($baseArgs + '--volumes')).Output | Where-Object { $_ -match '\S' })
+        }
+
+        $inventory.ServiceCount = $inventory.Services.Count
+        $inventory.NetworkCount = $inventory.Networks.Count
+        $inventory.VolumeCount = $inventory.Volumes.Count
+
+        Write-ColorOutput "  ✓ Services: $($inventory.ServiceCount)" 'Green'
+        Write-ColorOutput "  ✓ Networks: $($inventory.NetworkCount)" 'Green'
+        Write-ColorOutput "  ✓ Volumes: $($inventory.VolumeCount)" 'Green'
+
+        return $inventory
+    }
+    catch {
+        Write-ColorOutput "  ✗ Failed to query inventory: $($_.Exception.Message)" 'Red'
+        return $null
+    }
+}function Test-McpServersConfig {
+    [CmdletBinding()]
+    param()
+
+    Write-ColorOutput "`nValidating MCP servers configuration..." 'Cyan'
 
     $checks = @()
 
-    # Check 1: Service count matches
-    $metadataCount = $Data.metadata.total_services
-    $composeServices = 0
-
-    if ($Data.infrastructure_components.compose.tiers) {
-        foreach ($tier in $Data.infrastructure_components.compose.tiers.GetEnumerator()) {
-            $composeServices += $tier.Value.service_count
-        }
+    # Check file exists
+    $fileCheck = Test-FileExists -Path $script:mcpServersConfig -Name 'mcp-servers.json exists'
+    $checks += $fileCheck
+    if ($fileCheck.Status -eq 'FAIL') {
+        Write-CheckResults -Checks $checks
+        return $false
     }
 
-    if ($metadataCount -eq $composeServices) {
-        $checks += @{ Name = "Service count consistency"; Status = "PASS"; Details = "$metadataCount services" }
-    }
-    else {
-        $checks += @{ Name = "Service count consistency"; Status = "FAIL"; Details = "Metadata: $metadataCount, Compose: $composeServices" }
-    }
-
-    # Check 2: All IPs are valid
-    $invalidIps = @()
-    if ($Data.network_architecture.ip_allocation) {
-        foreach ($tier in $Data.network_architecture.ip_allocation.GetEnumerator()) {
-            foreach ($service in $tier.Value.services) {
-                if ($service.ip -and $service.ip -ne $null -and $service.ip -notmatch '^(\d{1,3}\.){3}\d{1,3}$') {
-                    $invalidIps += "$($service.name): $($service.ip)"
-                }
-            }
-        }
-    }
-
-    if ($invalidIps.Count -eq 0) {
-        $checks += @{ Name = "IP address format"; Status = "PASS"; Details = "All IPs valid" }
-    }
-    else {
-        $checks += @{ Name = "IP address format"; Status = "FAIL"; Details = ($invalidIps -join ", ") }
-    }
-
-    # Check 3: Volume names follow convention
-    $invalidVolumes = @()
-    if ($Data.volume_strategy.named_volumes) {
-        foreach ($category in $Data.volume_strategy.named_volumes.GetEnumerator()) {
-            foreach ($volume in $category.Value) {
-                if ($volume.name -notmatch '^react_scuba_[a-z_-]+$') {
-                    $invalidVolumes += $volume.name
-                }
-            }
-        }
-    }
-
-    if ($invalidVolumes.Count -eq 0) {
-        $checks += @{ Name = "Volume naming convention"; Status = "PASS"; Details = "All volumes follow convention" }
-    }
-    else {
-        $checks += @{ Name = "Volume naming convention"; Status = "FAIL"; Details = ($invalidVolumes -join ", ") }
-    }
-
-    # Check 4: Status values are valid
-    $validStatuses = @("operational", "degraded", "offline", "fully_operational")
-    $statusValid = $validStatuses -contains $Data.metadata.status -and
-                  $validStatuses -contains $Data.status.devcontainer_status
-
-    if ($statusValid) {
-        $checks += @{ Name = "Status values"; Status = "PASS"; Details = "All status values valid" }
-    }
-    else {
-        $checks += @{ Name = "Status values"; Status = "FAIL"; Details = "Invalid status detected" }
-    }
-
-    # Output results
-    $passCount = ($checks | Where-Object { $_.Status -eq "PASS" }).Count
-    $failCount = ($checks | Where-Object { $_.Status -eq "FAIL" }).Count
-
-    foreach ($check in $checks) {
-        $color = if ($check.Status -eq "PASS") { "Green" } else { "Red" }
-        $symbol = if ($check.Status -eq "PASS") { "✓" } else { "✗" }
-        Write-ColorOutput "$symbol $($check.Name): $($check.Details)" $color
-    }
-
-    Write-ColorOutput "`n$passCount passed, $failCount failed" $(if ($failCount -eq 0) { "Green" } else { "Yellow" })
-
-    return $failCount -eq 0
-}
-
-function Get-Statistics {
-    param([hashtable]$Data)
-
-    Write-ColorOutput "`nStatistics:" "Cyan"
-
+    # Parse JSON
     try {
-        $stats = @{
-            "Total Services" = $Data.metadata.total_services
-            "MCP Servers" = $Data.core_configuration.mcp_servers.servers.Count
-            "Named Volumes" = 0
-            "Health Checks" = $Data.service_health.health_checks.Count
-            "Workflow Steps" = $Data.workflows.startup.steps.Count
-            "IP Allocations" = 0
-        }
-
-        # Count volumes
-        if ($Data.volume_strategy.named_volumes) {
-            foreach ($category in $Data.volume_strategy.named_volumes.GetEnumerator()) {
-                $stats["Named Volumes"] += $category.Value.Count
-            }
-        }
-
-        # Count IPs
-        if ($Data.network_architecture.ip_allocation) {
-            foreach ($tier in $Data.network_architecture.ip_allocation.GetEnumerator()) {
-                $stats["IP Allocations"] += $tier.Value.services.Count
-            }
-        }
-
-        foreach ($key in ($stats.Keys | Sort-Object)) {
-            Write-ColorOutput "  $key : $($stats[$key])" "Blue"
-        }
-
-        return $stats
+        $mcpConfig = Get-Content $script:mcpServersConfig -Raw | ConvertFrom-Json
+        $checks += New-Check -Name 'JSON syntax valid' -Status 'PASS'
     }
     catch {
-        Write-ColorOutput "✗ Statistics error: $_" "Red"
-        return $null
+        $checks += New-Check -Name 'JSON syntax valid' -Status 'FAIL' -Details $_.Exception.Message
+        Write-CheckResults -Checks $checks
+        return $false
     }
-}
 
-# Main execution
-Write-ColorOutput "DevContainer TOC Validation" "Cyan"
-Write-ColorOutput "==========================`n" "Cyan"
-
-# Handle dependency installation
-if ($InstallDependencies) {
-    if (Install-YamlModule) {
-        Write-ColorOutput "`nDependencies installed. Please run the script again without -InstallDependencies" "Green"
-        exit 0
+    # Validate structure
+    if (-not $mcpConfig.mcpServers) {
+        $checks += New-Check -Name 'mcpServers key exists' -Status 'FAIL' -Details 'Missing mcpServers object'
+        Write-CheckResults -Checks $checks
+        return $false
     }
-    else {
-        exit 1
+
+    $serverCount = @($mcpConfig.mcpServers.PSObject.Properties).Count
+    $checks += New-Check -Name 'MCP servers defined' -Status 'PASS' -Details "$serverCount servers"
+
+    # Validate each server
+    foreach ($serverName in $mcpConfig.mcpServers.PSObject.Properties.Name) {
+        $checks += Test-McpServer -ServerName $serverName -Server $mcpConfig.mcpServers.$serverName
     }
+
+    Write-CheckResults -Checks $checks
+    return -not ($checks.Status -contains 'FAIL')
 }
 
-$results = @{
-    yaml_syntax = $false
-    required_fields = $false
-    consistency_checks = $false
-}
+function Test-McpServer {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$ServerName,
 
-# Check file exists
-if (-not (Test-Path $tocFile)) {
-    Write-ColorOutput "✗ TOC file not found: $tocFile" "Red"
-    exit 1
-}
+        [Parameter(Mandatory)]
+        $Server
+    )
 
-# Check YAML module
-if (-not (Test-YamlModule)) {
-    exit 1
-}
+    $checks = @()
 
-# Run validations
-$syntaxResult = Test-YamlSyntax -FilePath $tocFile
-$results.yaml_syntax = $syntaxResult[0]
-$yamlData = $syntaxResult[1]
+    # Check required fields
+    if (-not ($Server.command -and $Server.args)) {
+        return New-Check -Name "Server '$ServerName' config" -Status 'FAIL' -Details 'Missing command or args'
+    }
 
-if ($results.yaml_syntax -and $yamlData) {
-    $results.required_fields = Test-RequiredFields -Data $yamlData
-    $results.consistency_checks = Test-DataConsistency -Data $yamlData
+    $checks += New-Check -Name "Server '$ServerName' config" -Status 'PASS'
 
-    # Get statistics
-    $stats = Get-Statistics -Data $yamlData
-}
+    # Validate Docker command format
+    if ($Server.command -eq 'docker' -and $Server.args -contains 'run') {
+        $checks += New-Check -Name "Server '$ServerName' uses Docker" -Status 'PASS'
 
-# Final result
-Write-ColorOutput "`n==========================`n" "Cyan"
+        # Check Docker image exists
+        if (-not $SkipImages) {
+            $imageArg = $Server.args | Where-Object { $_ -notmatch '^-' -and $_ -ne 'run' -and $_ -ne 'docker' } | Select-Object -Last 1
 
-$allPassed = $results.Values | Where-Object { $_ -eq $false } | Measure-Object | Select-Object -ExpandProperty Count
-if ($allPassed -eq 0) {
-    Write-ColorOutput "✓ All validations passed" "Green"
-
-    if ($Json -and $stats) {
-        $output = @{
-            success = $true
-            results = $results
-            statistics = $stats
+            if ($imageArg) {
+                $null = docker image inspect $imageArg 2>&1
+                $checks += if ($LASTEXITCODE -eq 0) {
+                    New-Check -Name "Image '$imageArg' exists" -Status 'PASS'
+                } else {
+                    New-Check -Name "Image '$imageArg' exists" -Status 'WARN' -Details 'Not found locally (will pull on first use)'
+                }
+            }
         }
-        $output | ConvertTo-Json -Depth 10
     }
 
-    exit 0
+    return $checks
 }
-else {
-    Write-ColorOutput "✗ Some validations failed" "Red"
+
+#endregion
+
+#region Main Execution
+
+function Invoke-Validation {
+    [CmdletBinding()]
+    param()
+
+    # Header
+    if (-not $Json) {
+        Write-ColorOutput "$($script:Colors.Bold)DevContainer Infrastructure Validation (Docker Native)$($script:Colors.Reset)" 'Cyan'
+        Write-ColorOutput "Version: 3.0.0 | Date: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" 'Blue'
+        Write-ColorOutput "==========================================================`n" 'Cyan'
+    }
+
+    # Run validations
+    $dockerAvailable = Test-DockerAvailable
+    $results = @{
+        docker_available = $dockerAvailable
+        compose_syntax   = if ($dockerAvailable) { Test-DockerComposeFiles } else { $false }
+        mcp_config       = Test-McpServersConfig
+    }
+
+    $inventory = if ($dockerAvailable) { Get-DockerComposeInventory } else { $null }
+    $allPassed = -not ($results.Values -contains $false)
+
+    # Output results
+    if (-not $Json) {
+        Write-ColorOutput "`n==========================================================" 'Cyan'
+        Write-ColorOutput $(if ($allPassed) { "✓ All validations passed" } else { "✗ Some validations failed" }) $(if ($allPassed) { 'Green' } else { 'Red' })
+
+        if ($allPassed -and $inventory) {
+            Write-ColorOutput "`nInfrastructure Summary:" 'Cyan'
+            Write-ColorOutput "  Services: $($inventory.ServiceCount)" 'Blue'
+            Write-ColorOutput "  Networks: $($inventory.NetworkCount)" 'Blue'
+            Write-ColorOutput "  Volumes: $($inventory.VolumeCount)" 'Blue'
+        }
+    }
+
+    # Return structured result
+    $output = @{ Success = $allPassed; ExitCode = if ($allPassed) { 0 } else { 1 }; Results = $results; Inventory = $inventory }
 
     if ($Json) {
-        $output = @{
-            success = $false
-            results = $results
-            statistics = if ($stats) { $stats } else { @{} }
+        $jsonOutput = [ordered]@{
+            success   = $allPassed
+            timestamp = Get-Date -Format 'o'
+            results   = $results
+            inventory = if ($inventory) {
+                @{
+                    services = $inventory.Services
+                    networks = $inventory.Networks
+                    volumes  = $inventory.Volumes
+                    counts   = @{
+                        services = $inventory.ServiceCount
+                        networks = $inventory.NetworkCount
+                        volumes  = $inventory.VolumeCount
+                    }
+                }
+            } else { @{} }
         }
-        $output | ConvertTo-Json -Depth 10
+        $jsonOutput | ConvertTo-Json -Depth 10 | Write-Host
     }
 
+    return $output
+}
+
+# Execute main function
+try {
+    $result = Invoke-Validation
+
+    if ($result -is [hashtable] -and $result.ContainsKey('ExitCode')) {
+        exit $result.ExitCode
+    }
+
+    $errorMsg = "Validation function returned invalid result type: $($result.GetType().Name)"
+    if ($Json) {
+        @{ success = $false; timestamp = Get-Date -Format 'o'; error = $errorMsg } | ConvertTo-Json -Depth 10 | Write-Host
+    } else {
+        Write-Error $errorMsg
+    }
     exit 1
 }
+catch {
+    if ($Json) {
+        @{
+            success = $false
+            timestamp = Get-Date -Format 'o'
+            error = $_.Exception.Message
+            stackTrace = $_.ScriptStackTrace
+        } | ConvertTo-Json -Depth 10 | Write-Host
+    } else {
+        Write-ColorOutput "`nUnhandled error: $($_.Exception.Message)" 'Red'
+        Write-ColorOutput "Stack trace: $($_.ScriptStackTrace)" 'Yellow'
+    }
+    exit 1
+}
+
+#endregion

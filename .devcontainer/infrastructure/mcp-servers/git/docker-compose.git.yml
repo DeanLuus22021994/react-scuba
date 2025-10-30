@@ -1,0 +1,39 @@
+# ==============================================================================
+# MCP Git Server Configuration
+# ==============================================================================
+# Purpose: Git repository access MCP server for Copilot
+# Location: .devcontainer/infrastructure/mcp-servers/git/
+# Usage: docker compose -f docker-compose.git.yml up
+# Note: Runs on-demand via stdio, not persistent service
+# ==============================================================================
+
+services:
+  git-mcp:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-git:latest
+    container_name: git-mcp
+    hostname: git-mcp
+    profiles:
+      - full
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.91
+    volumes:
+      - ../../../../../:/repos
+      - git-cache:/cache/git
+      - git-pip-cache:/cache/pip
+      - git-python-cache:/cache/python
+    working_dir: /repos
+    stdin_open: true
+    tty: false
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    labels:
+      - "com.react-scuba.service=git-mcp"

@@ -1,0 +1,53 @@
+# ==============================================================================
+# Nginx Slave Node Configuration (Placeholder)
+# ==============================================================================
+# Purpose: Additional nginx instances for horizontal scaling
+# Location: .devcontainer/infrastructure/networking/nginx-slave/
+# Usage: docker compose -f docker-compose.nginx-slave.yml up
+# Status: Not currently deployed in base cluster
+# ==============================================================================
+#
+# To enable slave nodes:
+# 1. Uncomment services below
+# 2. Configure IP addresses (172.28.0.74, 172.28.0.75, etc.)
+# 3. Add to loadbalancing profile
+# 4. Update nginx master for upstream load balancing
+#
+# services:
+#   nginx-slave1:
+#     build:
+#       context: .
+#       dockerfile: dockerfile
+#     image: nginx-slave:latest
+#     pull_policy: build
+#     container_name: nginx-slave1
+#     hostname: nginx-slave1
+#     profiles:
+#       - full
+#       - loadbalancing
+#     networks:
+#       mcp-cluster:
+#         ipv4_address: 172.28.0.74
+#     ports:
+#       - "8081:80"
+#     volumes:
+#       - nginx-slave1-logs:/var/log/nginx
+#     restart: unless-stopped
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+#       interval: 10s
+#       timeout: 3s
+#       retries: 3
+#       start_period: 15s
+#     labels:
+#       - "com.react-scuba.service=nginx-slave1"
+#       - "com.react-scuba.tier=loadbalancing"
+#
+# volumes:
+#   nginx-slave1-logs:
+#     name: nginx-slave1-logs
+#
+# networks:
+#   mcp-cluster:
+#     external: true
+#     name: react-scuba_mcp-cluster

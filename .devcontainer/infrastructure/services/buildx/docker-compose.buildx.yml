@@ -1,0 +1,56 @@
+# ==============================================================================
+# Node.js Build Tools Configuration
+# ==============================================================================
+# Purpose: Development workspace container with build tools
+# Location: .devcontainer/infrastructure/services/buildx/
+# Usage: docker compose -f docker-compose.buildx.yml up
+# Note: This is the primary DevContainer workspace service
+# ==============================================================================
+
+services:
+  node-tools:
+    build:
+      context: ../../../../..
+      dockerfile: .devcontainer/infrastructure/services/buildx/dockerfile
+    image: react-scuba-tools:latest
+    pull_policy: build
+    container_name: node-tools
+    hostname: node-tools
+    profiles:
+      - full
+      - minimal
+      - app
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.60
+    env_file:
+      - ../../../../../devcontainer.env
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ../../../../../server:/app/server
+      - ../../../../../docker-compose-examples:/app/docker-compose-examples
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "--version"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+        reservations:
+          cpus: "1.0"
+          memory: 1024M
+    stdin_open: true
+    tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    labels:
+      - "com.react-scuba.service=node-tools"

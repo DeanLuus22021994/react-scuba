@@ -16,6 +16,9 @@ services:
     pull_policy: build
     container_name: mysql-exporter
     hostname: mysql-exporter
+    profiles:
+      - full
+      - monitoring
     networks:
       mcp-cluster:
         ipv4_address: 172.28.0.78

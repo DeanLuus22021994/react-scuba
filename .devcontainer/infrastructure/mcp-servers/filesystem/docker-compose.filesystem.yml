@@ -1,0 +1,37 @@
+# ==============================================================================
+# MCP Filesystem Server Configuration
+# ==============================================================================
+# Purpose: File system access MCP server for Copilot
+# Location: .devcontainer/infrastructure/mcp-servers/filesystem/
+# Usage: docker compose -f docker-compose.filesystem.yml up
+# Note: Runs on-demand via stdio, not persistent service
+# ==============================================================================
+
+services:
+  filesystem-mcp:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-filesystem:latest
+    container_name: filesystem-mcp
+    hostname: filesystem-mcp
+    profiles:
+      - full
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.90
+    volumes:
+      - ../../../../../:/workspace:ro
+      - filesystem-node-cache:/cache/node
+    working_dir: /workspace
+    stdin_open: true
+    tty: false
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    labels:
+      - "com.react-scuba.service=filesystem-mcp"

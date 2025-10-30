@@ -143,13 +143,13 @@ docker compose -f docker-compose.yml \
 **PostgreSQL**:
 - Version: 16-alpine
 - Port: 5432
-- Data persistence: Named volume `react_scuba_postgres-data`
+- Data persistence: Named volume `postgres-data`
 - Configuration: `.devcontainer/infrastructure/databases/postgres/`
 
 **MariaDB**:
 - Version: 11-alpine
 - Port: 3306
-- Data persistence: Named volume `react_scuba_mariadb-data`
+- Data persistence: Named volume `mariadb-data`
 - Configuration: `.devcontainer/infrastructure/databases/mariadb/`
 
 ### gpu/
@@ -299,27 +299,27 @@ monitoring/
 ### Named Volumes
 
 **Database Persistence**:
-- `react_scuba_postgres-data`: PostgreSQL data
-- `react_scuba_mariadb-data`: MariaDB data
-- `react_scuba_redis-data`: Redis persistence
+- `postgres-data`: PostgreSQL data
+- `mariadb-data`: MariaDB data
+- `redis-data`: Redis persistence
 
 **Application Volumes**:
-- `react_scuba_api-logs`: API server logs
-- `react_scuba_nginx-logs`: Nginx access/error logs
+- `api-logs`: API server logs
+- `nginx-logs`: Nginx access/error logs
 
 **MCP Volumes**:
-- `react_scuba_python_mcp_packages`: Python packages
-- `react_scuba_python_mcp_state`: MCP state persistence
-- `react_scuba_python_mcp_cache`: Python cache
-- `react_scuba_python_mcp_uv_cache`: UV package manager cache
-- `react_scuba_mcp_discovery_state`: Discovery agent state
+- `python_mcp_packages`: Python packages
+- `python_mcp_state`: MCP state persistence
+- `python_mcp_cache`: Python cache
+- `python_mcp_uv_cache`: UV package manager cache
+- `mcp_discovery_state`: Discovery agent state
 
 **Monitoring Volumes**:
-- `react_scuba_prometheus-data`: Prometheus time-series data
-- `react_scuba_grafana-data`: Grafana dashboards
+- `prometheus-data`: Prometheus time-series data
+- `grafana-data`: Grafana dashboards
 
 **GPU Volumes**:
-- `react_scuba_ollama-models`: Ollama model storage
+- `ollama-models`: Ollama model storage
 
 ### Bind Mounts
 

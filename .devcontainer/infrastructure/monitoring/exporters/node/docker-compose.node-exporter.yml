@@ -1,0 +1,57 @@
+# ==============================================================================
+# Node Exporter Metrics Configuration
+# ==============================================================================
+# Purpose: Host system metrics collection for Prometheus
+# Location: .devcontainer/infrastructure/monitoring/exporters/node/
+# Usage: docker compose -f docker-compose.node-exporter.yml up
+# Port: 9100 (metrics endpoint)
+# Metrics: http://localhost:9100/metrics
+# ==============================================================================
+
+services:
+  node-exporter:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: mcp-node-exporter:latest
+    pull_policy: build
+    container_name: node-exporter
+    hostname: node-exporter
+    profiles:
+      - full
+      - monitoring
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.76
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--path.rootfs=/rootfs"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+      - "--collector.disable-defaults"
+      - "--collector.cpu"
+      - "--collector.meminfo"
+      - "--collector.loadavg"
+      - "--collector.filesystem"
+      - "--collector.netdev"
+      - "--web.disable-exporter-metrics"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9100/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    labels:
+      - "com.react-scuba.service=node-exporter"

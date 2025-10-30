@@ -4,13 +4,15 @@
     "../docker-compose.yml",
     "../docker-compose.mcp-persistent.yml"
   ],
-  "runServices": [
-    "python-mcp-sidecar",
-    "mcp-discovery-agent"
-  ],
   "service": "node-tools",
   "workspaceFolder": "/workspace",
   "shutdownAction": "stopCompose",
+  "overrideCommand": false,
+  "runServices": [
+    "node-tools",
+    "python-mcp-sidecar",
+    "mcp-discovery-agent"
+  ],
 
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {

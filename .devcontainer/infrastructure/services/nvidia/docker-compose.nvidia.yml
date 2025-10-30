@@ -1,0 +1,49 @@
+# ==============================================================================
+# NVIDIA Device Plugin Configuration
+# ==============================================================================
+# Purpose: GPU device management and allocation for containers
+# Location: .devcontainer/infrastructure/services/nvidia/
+# Usage: docker compose -f docker-compose.nvidia.yml up
+# Requirements: NVIDIA GPU, Docker runtime, CUDA 12.x drivers
+# Port: 9400 (metrics)
+# ==============================================================================
+
+services:
+  nvidia-device-plugin:
+    build:
+      context: ../../gpu
+      dockerfile: dockerfile
+    image: nvidia-device-plugin:latest
+    pull_policy: build
+    container_name: nvidia-device-plugin
+    hostname: nvidia-device-plugin
+    privileged: true
+    profiles:
+      - full
+      - gpu
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.80
+    ports:
+      - "9400:9400"
+    env_file:
+      - ../../../../../devcontainer.env
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/gpu-health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    labels:
+      - "com.react-scuba.service=nvidia-device-plugin"

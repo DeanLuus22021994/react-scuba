@@ -1,0 +1,38 @@
+# ==============================================================================
+# MCP GitHub Server Configuration
+# ==============================================================================
+# Purpose: GitHub API access MCP server for Copilot
+# Location: .devcontainer/infrastructure/mcp-servers/github/
+# Usage: docker compose -f docker-compose.github.yml up
+# Note: Requires GITHUB_TOKEN environment variable
+# ==============================================================================
+
+services:
+  github-mcp:
+    image: ghcr.io/github/github-mcp-server:latest
+    container_name: github-mcp
+    hostname: github-mcp
+    profiles:
+      - full
+      - mcp
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.29.0.93
+    ports:
+      - "3000"
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_DYNAMIC_TOOLSETS=1
+    volumes:
+      - github-mcp-cache:/cache/github
+      - github-mcp-data:/app/data
+    stdin_open: true
+    tty: false
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    labels:
+      - "com.react-scuba.service=github-mcp"

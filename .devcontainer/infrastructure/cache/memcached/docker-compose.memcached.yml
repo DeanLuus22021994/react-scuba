@@ -1,0 +1,38 @@
+# ==============================================================================
+# Memcached Service Configuration
+# ==============================================================================
+# Purpose: Distributed memory caching system
+# Location: .devcontainer/infrastructure/cache/memcached/
+# Usage: docker compose -f docker-compose.memcached.yml up
+# Testing: echo "stats" | nc localhost 11211
+# ==============================================================================
+
+services:
+  memcached:
+    image: memcached:1.6-alpine
+    container_name: memcached
+    hostname: memcached
+    profiles:
+      - full
+      - base
+    networks:
+      mcp-cluster:
+        ipv4_address: 172.28.0.60
+    ports:
+      - "11211:11211"
+    command: memcached -m 256 -p 11211
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    labels:
+      - "com.react-scuba.service=memcached"
+      - "com.react-scuba.tier=cache"

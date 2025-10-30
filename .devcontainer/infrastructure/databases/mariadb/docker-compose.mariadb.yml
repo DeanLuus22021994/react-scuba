@@ -11,6 +11,9 @@ services:
     image: mariadb:11
     container_name: mariadb
     hostname: mariadb
+    profiles:
+      - full
+      - base
     networks:
       mcp-cluster:
         ipv4_address: 172.28.0.21
@@ -25,7 +28,7 @@ services:
       # Pass exporter password to init script
       - DOCKER_MARIADB_ROOT_PASSWORD=${DOCKER_MARIADB_ROOT_PASSWORD:-password}
     volumes:
-      - react_scuba_mariadb-data:/var/lib/mysql
+      - mariadb-data:/var/lib/mysql
       # Initialize exporter user automatically on first startup
       - type: bind
         source: ./init-exporter-user.sh

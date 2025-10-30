@@ -1,22 +1,24 @@
 # ==============================================================================
-# docker-compose.loadbalancing.yml - Load Balancing Services
+# Nginx Master Reverse Proxy Configuration
 # ==============================================================================
-# Purpose: Reverse proxy and load balancing
-# Services: nginx (single reverse proxy)
-# Network: mcp-cluster (172.28.0.0/16)
-# Usage: Included via main docker-compose.yml
+# Purpose: Primary reverse proxy and load balancer
+# Location: .devcontainer/infrastructure/networking/nginx/
+# Usage: docker compose -f docker-compose.nginx.yml up
+# Ports: HTTP:8080, HTTPS:8443, Health:8088
 # ==============================================================================
 
 services:
-  # ==== Reverse Proxy ====
   nginx:
     build:
-      context: ../networking/nginx
+      context: .
       dockerfile: dockerfile
     image: nginx-proxy:latest
     pull_policy: build
     container_name: nginx
     hostname: nginx
+    profiles:
+      - full
+      - loadbalancing
     networks:
       mcp-cluster:
         ipv4_address: 172.28.0.73
@@ -25,7 +27,7 @@ services:
       - "8080:80"
       - "8088:8080"
     volumes:
-      - react_scuba_nginx-logs:/var/log/nginx
+      - nginx-logs:/var/log/nginx
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
@@ -33,8 +35,5 @@ services:
       timeout: 3s
       retries: 3
       start_period: 15s
-    depends_on:
-      node-api:
-        condition: service_healthy
-
-# External reference to node-api on mcp-cluster network
+    labels:
+      - "com.react-scuba.service=nginx"
