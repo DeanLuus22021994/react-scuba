@@ -17,7 +17,7 @@ This directory contains utility scripts for repository maintenance and developme
 **Prerequisites**:
 
 - Git installed
-- GitHub repository created (https://github.com/DeanLuus22021994/docker-compose-examples)
+- GitHub repository created: [docker-compose-examples](https://github.com/DeanLuus22021994/docker-compose-examples)
 - Write access to both repositories
 
 **What it does**:

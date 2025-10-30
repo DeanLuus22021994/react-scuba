@@ -21,7 +21,8 @@ interface Logger {
   getCorrelationId: () => string;
 }
 
-const isDevelopment = import.meta.env['MODE'] === 'development';
+const isDevelopment = typeof import.meta !== 'undefined' &&
+  import.meta.env?.MODE === 'development';
 
 // Polyfill for UUID generation (works in all environments)
 const generateUUID = () => {

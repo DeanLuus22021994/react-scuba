@@ -1,0 +1,47 @@
+{
+  "name": "react-scuba",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multi-tenant dive shop management platform",
+  "author": "Dean Luus <dean@reactscuba.dev>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "cd server && npm run dev",
+    "build": "cd server && npm run build",
+    "build:prod": "cd server && npm run build:prod",
+    "test": "cd server && npm test",
+    "test:coverage": "cd server && npm run test:coverage",
+    "lint": "cd server && npm run lint",
+    "lint:fix": "cd server && npm run lint:fix",
+    "format": "cd server && npm run format",
+    "format:check": "cd server && npm run format:check",
+    "check": "cd server && npm run check",
+    "fix": "cd server && npm run fix",
+    "precommit": "cd server && npm run precommit",
+    "clean": "cd server && npm run clean",
+    "clean:all": "cd server && npm run clean:all",
+    "prepare": "husky install",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  },
+  "keywords": [
+    "dive-shop",
+    "booking",
+    "management",
+    "multi-tenant",
+    "react",
+    "typescript",
+    "express"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeanLuus22021994/react-scuba"
+  },
+  "bugs": {
+    "url": "https://github.com/DeanLuus22021994/react-scuba/issues"
+  },
+  "homepage": "https://github.com/DeanLuus22021994/react-scuba"
+}

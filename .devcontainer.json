@@ -1,11 +1,10 @@
 {
   "name": "React Scuba Cluster Development",
-  "version": "1.0.0",
-  
+
   // Use Docker Compose for cluster environment
-  "dockerComposeFile": ["docker-compose.yml"],
-  "service": "node-bootstrap",
-  "workspaceFolder": "/workspace",
+  "dockerComposeFile": ["docker-compose.yml", "docker-compose.mcp-persistent.yml"],
+  "service": "node-tools",
+  "workspaceFolder": "/app",
 
   // Features for development
   "features": {
@@ -53,7 +52,7 @@
       "label": "Prometheus",
       "onAutoForward": "notify"
     },
-    "3000": {
+    "3001": {
       "label": "Grafana",
       "onAutoForward": "notify"
     }
@@ -63,9 +62,6 @@
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
   ],
-
-  // Poststart commands
-  "postStartCommand": "npm run dev --filter=@react-scuba/web",
 
   // VS Code extensions
   "customizations": {
@@ -103,13 +99,6 @@
       }
     }
   },
-
-  // Container creation options
-  "runArgs": [
-    "--network=mcp-cluster",
-    "--cap-add=SYS_PTRACE",
-    "--security-opt=seccomp=unconfined"
-  ],
 
   // Lifecycle hooks
   "remoteUser": "node",

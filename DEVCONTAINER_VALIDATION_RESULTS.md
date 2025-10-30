@@ -28,13 +28,14 @@ All 17 containers healthy:
 - **Improvement**: 41% reduction from baseline
 
 ### Metrics Improvement
+
 | Metric Type | Previous | Current | Expected | Status |
 |-------------|----------|---------|----------|--------|
 | CPU | 2 | **14** | 100+ | 🟡 Partial |
 | Memory | 48 | **48** | 200+ | 🟡 Partial |
 | Network | 0 | **0** | 100+ | ❌ Missing |
 
-**CPU metrics improved 7x (from 2 to 14 metrics)**
+CPU metrics improved 7x (from 2 to 14 metrics)
 
 ### Root Cause (Confirmed)
 All 20 errors reference **stale container IDs** from previous Docker sessions:

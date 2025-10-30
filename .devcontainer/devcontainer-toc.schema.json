@@ -1,0 +1,422 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://react-scuba.dev/schemas/devcontainer-toc.schema.json",
+  "title": "DevContainer Table of Contents Schema",
+  "description": "Schema for validating devcontainer-toc.yml structure",
+  "type": "object",
+  "required": ["metadata", "directory_structure", "core_configuration", "infrastructure_components", "network_architecture", "volume_strategy", "service_health", "workflows", "status"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["version", "environment", "status", "total_services", "network_strategy"],
+      "properties": {
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "environment": { "type": "string", "enum": ["development", "staging", "production"] },
+        "status": { "type": "string", "enum": ["operational", "degraded", "offline"] },
+        "total_services": { "type": "integer", "minimum": 1 },
+        "network_strategy": { "type": "string" }
+      }
+    },
+    "directory_structure": {
+      "type": "object",
+      "required": ["root", "files", "directories"],
+      "properties": {
+        "root": { "type": "string" },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "purpose", "type"],
+            "properties": {
+              "name": { "type": "string" },
+              "purpose": { "type": "string" },
+              "type": { "type": "string" },
+              "servers_count": { "type": "integer" }
+            }
+          }
+        },
+        "directories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "subdirs"],
+            "properties": {
+              "name": { "type": "string" },
+              "subdirs": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "core_configuration": {
+      "type": "object",
+      "required": ["devcontainer", "mcp_servers"],
+      "properties": {
+        "devcontainer": {
+          "type": "object",
+          "required": ["file", "service", "workspace", "remote_user", "network"],
+          "properties": {
+            "file": { "type": "string" },
+            "service": { "type": "string" },
+            "workspace": { "type": "string" },
+            "remote_user": { "type": "string" },
+            "network": { "type": "string" },
+            "compose_files": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "mcp_servers": {
+          "type": "object",
+          "required": ["file", "servers"],
+          "properties": {
+            "file": { "type": "string" },
+            "servers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "purpose"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "purpose": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "infrastructure_components": {
+      "type": "object",
+      "properties": {
+        "base": { "$ref": "#/definitions/component" },
+        "cache": { "$ref": "#/definitions/cache_component" },
+        "compose": { "$ref": "#/definitions/compose_component" },
+        "databases": { "$ref": "#/definitions/databases_component" },
+        "gpu": { "$ref": "#/definitions/gpu_component" },
+        "mcp_servers": { "$ref": "#/definitions/mcp_servers_component" },
+        "monitoring": { "$ref": "#/definitions/monitoring_component" },
+        "networking": { "$ref": "#/definitions/networking_component" },
+        "services": { "$ref": "#/definitions/services_component" }
+      }
+    },
+    "network_architecture": {
+      "type": "object",
+      "required": ["ip_allocation"],
+      "properties": {
+        "ip_allocation": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z_]+$": {
+              "type": "object",
+              "required": ["range", "services"],
+              "properties": {
+                "range": { "type": "string" },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["name", "ip"],
+                    "properties": {
+                      "name": { "type": "string" },
+                      "ip": { "type": ["string", "null"], "pattern": "^(\\d{1,3}\\.){3}\\d{1,3}$|^$" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "volume_strategy": {
+      "type": "object",
+      "required": ["named_volumes", "bind_mounts"],
+      "properties": {
+        "named_volumes": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z_]+$": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/named_volume" }
+            }
+          }
+        },
+        "bind_mounts": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z_]+$": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/bind_mount" }
+            }
+          }
+        }
+      }
+    },
+    "service_health": {
+      "type": "object",
+      "required": ["health_checks", "monitoring_strategy"],
+      "properties": {
+        "health_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["service", "endpoint", "port", "protocol"],
+            "properties": {
+              "service": { "type": "string" },
+              "endpoint": { "type": "string" },
+              "port": { "type": "integer" },
+              "protocol": { "type": "string", "enum": ["http", "https", "tcp", "cli"] }
+            }
+          }
+        },
+        "monitoring_strategy": { "type": "object" }
+      }
+    },
+    "workflows": {
+      "type": "object",
+      "required": ["startup", "verification", "common_operations"],
+      "properties": {
+        "startup": {
+          "type": "object",
+          "required": ["steps"],
+          "properties": {
+            "steps": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/workflow_step" }
+            }
+          }
+        },
+        "verification": {
+          "type": "object",
+          "required": ["commands"],
+          "properties": {
+            "commands": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/command" }
+            }
+          }
+        },
+        "common_operations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/command" }
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "required": ["last_updated", "devcontainer_status", "total_services", "network_architecture"],
+      "properties": {
+        "last_updated": { "type": "string", "format": "date" },
+        "devcontainer_status": { "type": "string", "enum": ["fully_operational", "degraded", "offline"] },
+        "total_services": { "type": "integer", "minimum": 1 },
+        "network_architecture": { "type": "string" },
+        "verification_status": { "type": "string" }
+      }
+    }
+  },
+  "definitions": {
+    "component": {
+      "type": "object",
+      "required": ["path", "purpose"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" }
+      }
+    },
+    "cache_component": {
+      "type": "object",
+      "required": ["path", "purpose", "strategies"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "strategies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "path"],
+            "properties": {
+              "type": { "type": "string" },
+              "path": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "compose_component": {
+      "type": "object",
+      "required": ["path", "purpose", "tiers"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "tiers": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z_]+$": {
+              "type": "object",
+              "required": ["file", "service_count", "services"],
+              "properties": {
+                "file": { "type": "string" },
+                "service_count": { "type": "integer", "minimum": 1 },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["name"],
+                    "properties": {
+                      "name": { "type": "string" },
+                      "ip": { "type": ["string", "null"] },
+                      "port": { "type": ["integer", "null"] }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "databases_component": {
+      "type": "object",
+      "required": ["path", "purpose"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "postgres": { "$ref": "#/definitions/database_config" },
+        "mariadb": { "$ref": "#/definitions/database_config" }
+      }
+    },
+    "database_config": {
+      "type": "object",
+      "required": ["version", "port", "volume"],
+      "properties": {
+        "version": { "type": "string" },
+        "port": { "type": "integer" },
+        "volume": { "type": "string" },
+        "config_path": { "type": "string" }
+      }
+    },
+    "gpu_component": {
+      "type": "object",
+      "required": ["path", "purpose", "components", "requirements"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "components": { "type": "array", "items": { "type": "string" } },
+        "requirements": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "mcp_servers_component": {
+      "type": "object",
+      "required": ["path", "purpose", "server_types"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "server_types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "purpose"],
+            "properties": {
+              "name": { "type": "string" },
+              "purpose": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "monitoring_component": {
+      "type": "object",
+      "required": ["path", "purpose", "structure", "endpoints"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "structure": { "type": "object" },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["service", "url"],
+            "properties": {
+              "service": { "type": "string" },
+              "url": { "type": "string", "format": "uri" },
+              "credentials": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "networking_component": {
+      "type": "object",
+      "required": ["path", "purpose", "network"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "network": {
+          "type": "object",
+          "required": ["name", "type", "subnets", "dns"],
+          "properties": {
+            "name": { "type": "string" },
+            "type": { "type": "string" },
+            "subnets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["cidr", "purpose", "gateway"],
+                "properties": {
+                  "cidr": { "type": "string" },
+                  "purpose": { "type": "string" },
+                  "gateway": { "type": "string", "pattern": "^(\\d{1,3}\\.){3}\\d{1,3}$" }
+                }
+              }
+            },
+            "dns": { "type": "string" }
+          }
+        }
+      }
+    },
+    "services_component": {
+      "type": "object",
+      "required": ["path", "purpose", "services"],
+      "properties": {
+        "path": { "type": "string" },
+        "purpose": { "type": "string" },
+        "services": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "named_volume": {
+      "type": "object",
+      "required": ["name", "purpose"],
+      "properties": {
+        "name": { "type": "string" },
+        "purpose": { "type": "string" }
+      }
+    },
+    "bind_mount": {
+      "type": "object",
+      "required": ["source", "target", "purpose"],
+      "properties": {
+        "source": { "type": "string" },
+        "target": { "type": "string" },
+        "purpose": { "type": "string" }
+      }
+    },
+    "workflow_step": {
+      "type": "object",
+      "required": ["step", "action", "command"],
+      "properties": {
+        "step": { "type": "integer", "minimum": 1 },
+        "action": { "type": "string" },
+        "command": { "type": "string" }
+      }
+    },
+    "command": {
+      "type": "object",
+      "required": ["command"],
+      "properties": {
+        "purpose": { "type": "string" },
+        "action": { "type": "string" },
+        "command": { "type": "string" },
+        "warning": { "type": "string" }
+      }
+    }
+  }
+}

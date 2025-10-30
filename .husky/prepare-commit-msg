@@ -1,0 +1,26 @@
+#!/bin/sh
+# Prepare commit message hook - adds helpful context
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+# Don't modify if it's a merge, squash, or fixup commit
+if [ "$COMMIT_SOURCE" = "merge" ] || [ "$COMMIT_SOURCE" = "squash" ] || [ "$COMMIT_SOURCE" = "fixup" ]; then
+  exit 0
+fi
+
+# Add commit message guidelines as comment if message is empty
+if [ ! -s "$COMMIT_MSG_FILE" ]; then
+  echo "" >> "$COMMIT_MSG_FILE"
+  echo "# Commit message guidelines:" >> "$COMMIT_MSG_FILE"
+  echo "# - Use imperative mood (e.g., 'Add feature' not 'Added feature')" >> "$COMMIT_MSG_FILE"
+  echo "# - First line max 50 characters" >> "$COMMIT_MSG_FILE"
+  echo "# - Reference issues: Fix #123, Closes #456" >> "$COMMIT_MSG_FILE"
+  echo "# - Type: feat|fix|refactor|style|test|docs|chore" >> "$COMMIT_MSG_FILE"
+  echo "# Examples:" >> "$COMMIT_MSG_FILE"
+  echo "#   feat: add user authentication" >> "$COMMIT_MSG_FILE"
+  echo "#   fix: resolve memory leak in API server" >> "$COMMIT_MSG_FILE"
+  echo "#   refactor: simplify component logic" >> "$COMMIT_MSG_FILE"
+fi
+
+exit 0

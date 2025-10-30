@@ -1,0 +1,450 @@
+---
+# DevContainer Configuration - Machine-Readable Table of Contents
+# Format: YAML 1.2 | Linter: yamllint | Schema: devcontainer-toc.schema.json
+# Last Updated: 2025-10-30
+
+metadata:
+  version: "1.0.0"
+  environment: "development"
+  status: "operational"
+  total_services: 28
+  network_strategy: "multi-tier-hybrid-bridge"
+
+directory_structure:
+  root: ".devcontainer"
+  files:
+    - name: "devcontainer.json"
+      purpose: "VS Code DevContainer configuration"
+      type: "config"
+    - name: "mcp-servers.json"
+      purpose: "MCP server definitions"
+      type: "config"
+      servers_count: 9
+  directories:
+    - name: "infrastructure"
+      subdirs: ["base", "cache", "compose", "databases", "gpu", "mcp-servers", "monitoring", "networking", "services"]
+    - name: "k8s"
+      subdirs: []
+
+core_configuration:
+  devcontainer:
+    file: ".devcontainer/devcontainer.json"
+    service: "node-tools"
+    workspace: "/app"
+    remote_user: "vscode"
+    network: "mcp-cluster"
+    compose_files:
+      - "docker-compose.yml"
+      - "docker-compose.mcp-persistent.yml"
+
+  mcp_servers:
+    file: ".devcontainer/mcp-servers.json"
+    servers:
+      - { name: "github", purpose: "repository_management" }
+      - { name: "filesystem", purpose: "file_operations" }
+      - { name: "postgres", purpose: "database_queries" }
+      - { name: "mariadb", purpose: "database_queries" }
+      - { name: "sqlite", purpose: "lightweight_database" }
+      - { name: "memory", purpose: "in_memory_storage" }
+      - { name: "git", purpose: "version_control" }
+      - { name: "fetch", purpose: "http_requests" }
+      - { name: "markitdown", purpose: "markdown_processing" }
+
+infrastructure_components:
+  base:
+    path: "infrastructure/base"
+    purpose: "Foundation Docker images"
+
+  cache:
+    path: "infrastructure/cache"
+    purpose: "Build optimization caching"
+    strategies:
+      - { type: "node", path: "/cache/node" }
+      - { type: "python", path: "/cache/python" }
+      - { type: "git", path: "/cache/git" }
+      - { type: "k8s", path: "/cache/k8s" }
+      - { type: "http", path: "/cache/http" }
+
+  compose:
+    path: "infrastructure/compose"
+    purpose: "Modular Docker Compose definitions"
+    tiers:
+      base:
+        file: "base.yml"
+        service_count: 5
+        services:
+          - { name: "postgres-db", ip: "172.28.0.20", port: 5432 }
+          - { name: "mariadb", ip: "172.28.0.21", port: 3306 }
+          - { name: "redis", ip: "172.28.0.61", port: 6379 }
+          - { name: "memcached", ip: "172.28.0.60", port: 11211 }
+          - { name: "redisinsight", ip: null, port: 5540 }
+
+      app:
+        file: "app.yml"
+        service_count: 3
+        services:
+          - { name: "node-tools", ip: "172.29.0.60", port: null }
+          - { name: "node-api", ip: "172.28.0.64", port: 3000 }
+          - { name: "node-web", ip: "172.28.0.65", port: 5173 }
+
+      mcp:
+        file: "mcp.yml"
+        service_count: 8
+        services:
+          - { name: "mcp-discovery", ip: "172.28.0.33", port: 9097 }
+          - { name: "mcp-python", ip: "172.28.0.34", port: 9099 }
+          - { name: "mcp-fetch", ip: "172.28.0.35", port: 9100 }
+          - { name: "mcp-filesystem", ip: "172.28.0.36", port: 9101 }
+          - { name: "mcp-git", ip: "172.28.0.37", port: 9102 }
+          - { name: "mcp-github", ip: "172.28.0.38", port: 9103 }
+          - { name: "mcp-markitdown", ip: "172.28.0.39", port: 9104 }
+          - { name: "mcp-memory", ip: "172.28.0.40", port: 9105 }
+
+      monitoring:
+        file: "monitoring.yml"
+        service_count: 7
+        services:
+          - { name: "prometheus", ip: "172.28.0.71", port: 9090 }
+          - { name: "grafana", ip: "172.28.0.72", port: 3001 }
+          - { name: "postgres-exporter", ip: "172.28.0.77", port: 9187 }
+          - { name: "mysql-exporter", ip: "172.28.0.78", port: 9188 }
+          - { name: "cadvisor", ip: null, port: 8080 }
+          - { name: "node-exporter", ip: null, port: 9100 }
+          - { name: "alertmanager", ip: null, port: 9093 }
+
+      loadbalancing:
+        file: "loadbalancing.yml"
+        service_count: 3
+        services:
+          - { name: "nginx-master", ip: "172.28.0.70", port: 80 }
+          - { name: "nginx-slave-1", ip: null, port: null }
+          - { name: "nginx-slave-2", ip: null, port: null }
+
+      gpu:
+        file: "gpu.yml"
+        service_count: 2
+        services:
+          - { name: "nvidia-device-plugin", ip: "172.28.0.80", port: 9400 }
+          - { name: "ollama", ip: "172.28.0.59", port: 11435 }
+
+  databases:
+    path: "infrastructure/databases"
+    purpose: "Database service configurations"
+    postgres:
+      version: "16-alpine"
+      port: 5432
+      volume: "react_scuba_postgres-data"
+      config_path: "infrastructure/databases/postgres"
+    mariadb:
+      version: "11-alpine"
+      port: 3306
+      volume: "react_scuba_mariadb-data"
+      config_path: "infrastructure/databases/mariadb"
+
+  gpu:
+    path: "infrastructure/gpu"
+    purpose: "NVIDIA GPU acceleration"
+    components:
+      - "nvidia-device-plugin"
+      - "cuda-runtime-12.x"
+    requirements:
+      - "nvidia-docker-runtime"
+      - "cuda-compatible-gpu"
+      - "driver-version-525+"
+
+  mcp_servers:
+    path: "infrastructure/mcp-servers"
+    purpose: "MCP server implementations"
+    server_types:
+      - { name: "discovery", purpose: "service_registry_health_aggregation" }
+      - { name: "python", purpose: "python_3.14t_free_threading" }
+      - { name: "fetch", purpose: "http_rest_client" }
+      - { name: "filesystem", purpose: "file_operations" }
+      - { name: "git", purpose: "git_repository_operations" }
+      - { name: "github", purpose: "github_api_integration" }
+      - { name: "markitdown", purpose: "markdown_processing" }
+      - { name: "memory", purpose: "in_memory_kv_store" }
+
+  monitoring:
+    path: "infrastructure/monitoring"
+    purpose: "Observability infrastructure"
+    structure:
+      prometheus:
+        path: "monitoring/prometheus"
+        config: "config/prometheus.yml"
+      exporters:
+        postgres:
+          path: "monitoring/exporters/postgres"
+          port: 9187
+        mysql:
+          path: "monitoring/exporters/mysql"
+          port: 9188
+      grafana:
+        path: "monitoring/config/grafana"
+    endpoints:
+      - { service: "prometheus", url: "http://localhost:9090" }
+      - { service: "grafana", url: "http://localhost:3001", credentials: "admin:admin" }
+      - { service: "postgres-exporter", url: "http://localhost:9187/metrics" }
+      - { service: "mysql-exporter", url: "http://localhost:9188/metrics" }
+
+  networking:
+    path: "infrastructure/networking"
+    purpose: "Network configuration DNS management"
+    network:
+      name: "mcp-cluster"
+      type: "bridge"
+      subnets:
+        - { cidr: "172.28.0.0/16", purpose: "main_services", gateway: "172.28.0.1" }
+        - { cidr: "172.29.0.0/16", purpose: "mcp_persistent", gateway: "172.29.0.1" }
+      dns: "automatic"
+
+  services:
+    path: "infrastructure/services"
+    purpose: "Application service dockerfiles"
+    services:
+      - "ollama"
+      - "buildx"
+
+kubernetes:
+  path: "k8s"
+  purpose: "Production deployment configs"
+  files:
+    - "deployment.yaml"
+  note: "Development uses Docker Compose; K8s for production"
+
+network_architecture:
+  ip_allocation:
+    database_tier:
+      range: "172.28.0.20-29"
+      services:
+        - { name: "postgres", ip: "172.28.0.20" }
+        - { name: "mariadb", ip: "172.28.0.21" }
+
+    mcp_services:
+      range: "172.28.0.30-49"
+      services:
+        - { name: "discovery", ip: "172.28.0.33" }
+        - { name: "python", ip: "172.28.0.34" }
+        - { name: "fetch", ip: "172.28.0.35" }
+        - { name: "filesystem", ip: "172.28.0.36" }
+        - { name: "git", ip: "172.28.0.37" }
+        - { name: "github", ip: "172.28.0.38" }
+        - { name: "markitdown", ip: "172.28.0.39" }
+        - { name: "memory", ip: "172.28.0.40" }
+
+    application_tier:
+      range: "172.28.0.60-69"
+      services:
+        - { name: "memcached", ip: "172.28.0.60" }
+        - { name: "redis", ip: "172.28.0.61" }
+        - { name: "redisinsight", ip: "172.28.0.62" }
+        - { name: "api-server", ip: "172.28.0.64" }
+        - { name: "web-server", ip: "172.28.0.65" }
+
+    infrastructure_tier:
+      range: "172.28.0.70-79"
+      services:
+        - { name: "nginx", ip: "172.28.0.70" }
+        - { name: "prometheus", ip: "172.28.0.71" }
+        - { name: "grafana", ip: "172.28.0.72" }
+        - { name: "postgres-exporter", ip: "172.28.0.77" }
+        - { name: "mysql-exporter", ip: "172.28.0.78" }
+
+    gpu_tier:
+      range: "172.28.0.80-89"
+      services:
+        - { name: "nvidia-plugin", ip: "172.28.0.80" }
+        - { name: "ollama", ip: "172.28.0.59" }
+
+    mcp_persistent:
+      range: "172.29.0.0/16"
+      services:
+        - { name: "python-mcp-sidecar", ip: "172.29.0.99" }
+        - { name: "mcp-discovery-agent", ip: "172.29.0.98" }
+        - { name: "devcontainer-tools", ip: "172.29.0.60" }
+
+volume_strategy:
+  named_volumes:
+    database:
+      - { name: "react_scuba_postgres-data", purpose: "postgresql_data" }
+      - { name: "react_scuba_mariadb-data", purpose: "mariadb_data" }
+      - { name: "react_scuba_redis-data", purpose: "redis_persistence" }
+
+    application:
+      - { name: "react_scuba_api-logs", purpose: "api_server_logs" }
+      - { name: "react_scuba_nginx-logs", purpose: "nginx_access_error_logs" }
+
+    mcp:
+      - { name: "react_scuba_python_mcp_packages", purpose: "python_packages" }
+      - { name: "react_scuba_python_mcp_state", purpose: "mcp_state_persistence" }
+      - { name: "react_scuba_python_mcp_cache", purpose: "python_cache" }
+      - { name: "react_scuba_python_mcp_uv_cache", purpose: "uv_package_manager_cache" }
+      - { name: "react_scuba_mcp_discovery_state", purpose: "discovery_agent_state" }
+
+    monitoring:
+      - { name: "react_scuba_prometheus-data", purpose: "prometheus_timeseries" }
+      - { name: "react_scuba_grafana-data", purpose: "grafana_dashboards" }
+
+    gpu:
+      - { name: "react_scuba_ollama-models", purpose: "ollama_model_storage" }
+
+  bind_mounts:
+    development:
+      - { source: "./server", target: "/app/server", purpose: "hot_reload" }
+      - { source: "./docker-compose-examples", target: "/app/docker-compose-examples", purpose: "examples" }
+
+    configuration:
+      - { source: "./devcontainer.env", target: "container_env_vars", purpose: "environment" }
+
+environment_configuration:
+  primary_file: "devcontainer.env"
+  key_variables:
+    database:
+      - "POSTGRES_HOST"
+      - "POSTGRES_PORT"
+      - "POSTGRES_USER"
+      - "POSTGRES_PASSWORD"
+      - "MARIADB_HOST"
+      - "MARIADB_PORT"
+
+    network:
+      - "MCP_NETWORK"
+      - "MCP_SUBNET"
+      - "DEVCONTAINER_IP"
+
+    nodejs:
+      - "NODE_ENV"
+      - "NODE_OPTIONS"
+      - "NPM_CONFIG_CACHE"
+
+    python:
+      - "PYTHON_VERSION"
+      - "PYTHONPYCACHEPREFIX"
+      - "PIP_CACHE_DIR"
+
+service_health:
+  health_checks:
+    - { service: "postgres", endpoint: "pg_isready", port: 5432, protocol: "cli" }
+    - { service: "mariadb", endpoint: "mysql ping", port: 3306, protocol: "cli" }
+    - { service: "redis", endpoint: "redis-cli ping", port: 6379, protocol: "cli" }
+    - { service: "memcached", endpoint: "nc -z localhost 11211", port: 11211, protocol: "tcp" }
+    - { service: "prometheus", endpoint: "/api/v1/status", port: 9090, protocol: "http" }
+    - { service: "grafana", endpoint: "/api/health", port: 3001, protocol: "http" }
+    - { service: "mcp-discovery", endpoint: "/services", port: 9097, protocol: "http" }
+    - { service: "python-mcp", endpoint: "/health", port: 9099, protocol: "http" }
+    - { service: "ollama", endpoint: "/api/tags", port: 11435, protocol: "http" }
+
+  monitoring_strategy:
+    metrics_collection:
+      - "prometheus_scrapes_metrics_endpoints"
+      - "service_specific_exporters"
+      - "container_metrics_via_cadvisor"
+      - "system_metrics_via_node_exporter"
+
+    visualization:
+      - "grafana_dashboards_all_tiers"
+      - "preconfigured_database_dashboards"
+      - "realtime_alerting_alertmanager"
+
+workflows:
+  startup:
+    steps:
+      - { step: 1, action: "clone_repository", command: "git clone <repository>" }
+      - { step: 2, action: "setup_environment", command: "cp devcontainer.env.template devcontainer.env" }
+      - { step: 3, action: "start_infrastructure", command: "docker compose up -d" }
+      - { step: 4, action: "start_mcp_optional", command: "docker compose -f docker-compose.yml -f docker-compose.mcp-persistent.yml --profile mcp up -d" }
+      - { step: 5, action: "open_vscode", command: "code . # Then: Dev Containers: Reopen in Container" }
+
+  verification:
+    commands:
+      - { purpose: "check_services", command: "docker compose ps" }
+      - { purpose: "test_postgres", command: "docker exec postgres-db psql -U postgres -c \"\\l\"" }
+      - { purpose: "test_mariadb", command: "docker exec mariadb mysql -u root -ppassword -e \"SHOW DATABASES;\"" }
+      - { purpose: "test_redis", command: "docker exec redis redis-cli ping" }
+      - { purpose: "test_memcached", command: "docker exec memcached nc -z localhost 11211" }
+      - { purpose: "verify_prometheus", command: "curl http://localhost:9090" }
+      - { purpose: "verify_grafana", command: "curl http://localhost:3001" }
+      - { purpose: "verify_mcp", command: "curl http://localhost:9097/services" }
+
+  common_operations:
+    - { action: "view_logs", command: "docker compose logs -f <service-name>" }
+    - { action: "rebuild_service", command: "docker compose build <service-name>" }
+    - { action: "restart_service", command: "docker compose restart <service-name>" }
+    - { action: "stop_all", command: "docker compose down" }
+    - { action: "clean_volumes", command: "docker compose down -v", warning: "deletes_data" }
+
+troubleshooting:
+  common_issues:
+    port_conflicts:
+      description: "Host ports already in use"
+      solutions:
+        - "Check port usage: netstat -ano | findstr :<port>"
+        - "Modify port mappings in docker-compose files"
+
+    network_issues:
+      description: "Network connectivity problems"
+      solutions:
+        - "Enable Docker Desktop networking"
+        - "Verify network exists: docker network ls"
+        - "Recreate: docker network rm mcp-cluster && docker compose up -d"
+
+    volume_permissions:
+      description: "Permission denied on volumes"
+      solutions:
+        - "Windows: Ensure Docker Desktop C:\\ drive access"
+        - "Inspect volume: docker volume inspect <volume-name>"
+
+    build_failures:
+      description: "Docker build errors"
+      solutions:
+        - "Clear cache: docker builder prune"
+        - "Verify Dockerfile paths"
+        - "Check base image accessibility"
+
+    health_failures:
+      description: "Container health check failures"
+      solutions:
+        - "Check logs: docker compose logs <service-name>"
+        - "Verify health check commands"
+        - "Increase timeout/retries"
+
+  debug_commands:
+    - { purpose: "inspect_container", command: "docker inspect <container-name>" }
+    - { purpose: "inspect_network", command: "docker network inspect mcp-cluster" }
+    - { purpose: "inspect_volume", command: "docker volume inspect <volume-name>" }
+    - { purpose: "resource_usage", command: "docker stats" }
+    - { purpose: "exec_shell", command: "docker exec -it <container-name> bash" }
+
+documentation:
+  comprehensive_guides:
+    - { title: "DevContainer Architecture Overview", path: "../.copilot/infrastructure/devcontainer-architecture.md" }
+    - { title: "MCP Service Configuration", path: "../.copilot/infrastructure/devcontainer-mcp-services.md" }
+    - { title: "Volume Strategy and Management", path: "../.copilot/infrastructure/devcontainer-volumes.md" }
+    - { title: "Development Workflow", path: "../.copilot/infrastructure/development-workflow.md" }
+
+  quick_references:
+    - { title: "Foundation Standards", path: "../FOUNDATION_STANDARDS.md" }
+    - { title: "Getting Started Guide", path: "../.copilot/getting-started/quickstart-setup.md" }
+    - { title: "Planning Documentation", path: "../docs/archive/planning/" }
+
+  technical_specifications:
+    - { title: "Cluster Analysis Research", path: "../.copilot-tracking/20251029-devcontainer-cluster-analysis-research.md" }
+    - { title: "Validation Results", path: "../.copilot-tracking/20251029-devcontainer-cluster-analysis-final-report.md" }
+
+updates_maintenance:
+  version_tracking:
+    vscode: "vscode-update-control script"
+    container_images: "manual rebuild triggers"
+    dependencies: "tracked in package managers"
+
+  update_commands:
+    - { action: "update_vscode_insiders", command: "npm run vscode:update" }
+    - { action: "rebuild_containers", command: "docker compose build --pull" }
+    - { action: "update_base_images", command: "docker compose pull" }
+
+status:
+  last_updated: "2025-10-30"
+  devcontainer_status: "fully_operational"
+  total_services: 28
+  network_architecture: "multi_tier_hybrid_bridge"
+  verification_status: "all_tests_passed"

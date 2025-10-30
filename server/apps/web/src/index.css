@@ -278,6 +278,7 @@ button:focus-visible {
   position: fixed;
   inset: 0;
   background-color: rgb(0 0 0 / 0.5);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   z-index: 40;
 }
@@ -635,6 +636,7 @@ button:focus-visible {
   position: fixed;
   inset: 0;
   background-color: rgb(0 0 0 / 0.3);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 

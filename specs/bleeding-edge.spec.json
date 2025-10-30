@@ -16,7 +16,7 @@
       "database": ["postgresql-17", "mariadb-11"]
     },
     "tooling": {
-      "monorepo": "npm-workspaces",
+      "monorepo": "npm-workspaces.monorepo",
       "linting": "native-language-servers",
       "testing": {
         "unit": "vitest",

@@ -129,7 +129,7 @@ services:
     hostname: node-tools
     networks:
       mcp-cluster:
-        ipv4_address: 172.28.0.66
+        ipv4_address: 172.29.0.60
     env_file:
       - ../../../devcontainer.env
     environment:
