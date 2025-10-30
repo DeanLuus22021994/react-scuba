@@ -22,9 +22,20 @@ LABEL org.opencontainers.image.title="Ollama LLM Service (GPU-Only)" \
   gpu.mode="required" \
   gpu.access="docker-compose-device-requests" \
   gpu.vram="6GB" \
-  models.supported="smollm2:latest,codegeex4:9b-all-q3_K_M" \
+  models.supported="smollm2:latest,gemma3, qwen3-vl:4b-instruct-q8_0" \
   storage.type="named-volume" \
   storage.cache="C:/shared_memory/ollama-cache"
+
+# ==============================================================================
+# MODEL CONFIGURATION - Edit this to change which models are provisioned/loaded
+# ==============================================================================
+# Models to provision in volume (space-separated list) - these will be downloaded/cached
+# Format: "model1:tag model2:tag model3:tag"
+ENV OLLAMA_MODELS_TO_PROVISION="smollm2:latest gemma3 qwen3-vl:4b-instruct-q8_0"
+
+# Model to load into GPU RAM on startup (must be in OLLAMA_MODELS_TO_PROVISION)
+# This model will be kept hot in VRAM for immediate inference
+ENV OLLAMA_MODEL_TO_LOAD="qwen3-vl:4b-instruct-q8_0"
 
 # Install additional utilities
 USER root
@@ -96,7 +107,6 @@ RUN cat > /usr/local/bin/init-model <<'INIT_EOF'
 set -euo pipefail
 
 HOST_CACHE="/host-cache"
-MODEL_NAME="smollm2:latest"
 
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Waiting for Ollama service to start..."
 until curl -s http://localhost:11434/api/tags > /dev/null 2>&1; do
@@ -107,35 +117,49 @@ echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Ollama service is ready."
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model storage: $OLLAMA_MODELS"
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] GPU mode: Required (OLLAMA_NUM_GPU=$OLLAMA_NUM_GPU)"
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Models to provision: $OLLAMA_MODELS_TO_PROVISION"
+echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model to load in GPU: $OLLAMA_MODEL_TO_LOAD"
 
-# Check if model exists in volume
-if ! ollama list | grep -q "${MODEL_NAME%%:*}"; then
-  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Checking for ${MODEL_NAME} in host cache..."
+# Process each model in OLLAMA_MODELS_TO_PROVISION
+for MODEL_NAME in $OLLAMA_MODELS_TO_PROVISION; do
+  # Check if model exists in volume
+  if ! ollama list | grep -q "${MODEL_NAME%%:*}"; then
+    echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Checking for ${MODEL_NAME} in host cache..."
 
-  # Check if host cache is mounted and has models
-  if [ -d "$HOST_CACHE" ] && [ -n "$(ls -A $HOST_CACHE 2>/dev/null)" ]; then
-    echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Found host cache. Copying models to volume..."
-    cp -r $HOST_CACHE/* $OLLAMA_MODELS/ 2>/dev/null || true
+    # Check if host cache is mounted and has models
+    if [ -d "$HOST_CACHE" ] && [ -n "$(ls -A $HOST_CACHE 2>/dev/null)" ]; then
+      echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Found host cache. Copying models to volume..."
+      cp -r $HOST_CACHE/* $OLLAMA_MODELS/ 2>/dev/null || true
 
-    # Verify copy succeeded
-    if ollama list | grep -q "${MODEL_NAME%%:*}"; then
-      echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model copied from host cache successfully."
+      # Verify copy succeeded
+      if ollama list | grep -q "${MODEL_NAME%%:*}"; then
+        echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} copied from host cache successfully."
+      else
+        echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Copy failed. Downloading ${MODEL_NAME}..."
+        ollama pull $MODEL_NAME 2>&1 | grep -E '(pulling|error|Error|failed|Failed|success)' || true
+        echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} download complete."
+      fi
     else
-      echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Copy failed. Downloading ${MODEL_NAME}..."
+      echo "[$(date +%Y-%m-%d\ %H:%M:%S)] No host cache found. Downloading ${MODEL_NAME}..."
       ollama pull $MODEL_NAME 2>&1 | grep -E '(pulling|error|Error|failed|Failed|success)' || true
-      echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model download complete."
+      echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} download complete."
     fi
   else
-    echo "[$(date +%Y-%m-%d\ %H:%M:%S)] No host cache found. Downloading ${MODEL_NAME}..."
-    ollama pull $MODEL_NAME 2>&1 | grep -E '(pulling|error|Error|failed|Failed|success)' || true
-    echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model download complete."
+    echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${MODEL_NAME} already exists in volume."
   fi
-else
-  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model already exists in volume."
-fi
+done
 
 MODEL_SIZE=$(du -sh $OLLAMA_MODELS 2>/dev/null | cut -f1 || echo "0")
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Volume size: $MODEL_SIZE"
+
+# Load selected model into GPU RAM
+if [ -n "$OLLAMA_MODEL_TO_LOAD" ]; then
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Loading ${OLLAMA_MODEL_TO_LOAD} into GPU RAM..."
+  # Run the model with a simple prompt to load it into VRAM
+  ollama run $OLLAMA_MODEL_TO_LOAD "test" > /dev/null 2>&1 || true
+  echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model ${OLLAMA_MODEL_TO_LOAD} loaded and ready in GPU RAM."
+fi
+
 echo "[$(date +%Y-%m-%d\ %H:%M:%S)] Model initialization complete. Ollama ready for GPU inference."
 INIT_EOF
 
