@@ -1,22 +1,22 @@
 # ==============================================================================
-# Nginx Load Balancer Master - Primary Gateway & Load Balancer
+# Nginx Reverse Proxy - Primary Gateway
 # ==============================================================================
-# Purpose: High-availability load balancing with health checks and failover
-# Architecture: Master node with upstream slave nodes
+# Purpose: Single reverse proxy for node-api backend
+# Architecture: Direct proxy to node-api service
 # Base: Official Nginx Alpine
-# Features: Round-robin LB, SSL termination, health checks, caching
+# Features: Health checks, monitoring endpoints, SSL-ready
 # ==============================================================================
 
 FROM nginx:alpine
 
 # Metadata labels
-LABEL org.opencontainers.image.title="Nginx Load Balancer Master" \
-  org.opencontainers.image.description="Primary load balancer and gateway" \
+LABEL org.opencontainers.image.title="Nginx Reverse Proxy" \
+  org.opencontainers.image.description="Primary reverse proxy and gateway" \
   org.opencontainers.image.vendor="React Scuba" \
   maintainer="Dean Luus" \
-  purpose="network-loadbalancer-master" \
-  network.role="master" \
-  load.balancing="true"
+  purpose="network-reverse-proxy" \
+  network.role="gateway" \
+  load.balancing="false"
 
 # Install additional utilities
 RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
@@ -68,11 +68,9 @@ http {
                application/rss+xml font/truetype font/opentype
                application/vnd.ms-fontobject image/svg+xml;
 
-    # Upstream slave nodes for load balancing
-    upstream backend_slaves {
-        least_conn;
-        server nginx-slave-1:80 max_fails=3 fail_timeout=30s;
-        server nginx-slave-2:80 max_fails=3 fail_timeout=30s;
+    # Upstream API backend
+    upstream backend_api {
+        server node-api:3000 max_fails=3 fail_timeout=30s;
         keepalive 32;
     }
 
@@ -89,7 +87,7 @@ http {
     server {
         listen 8080;
         server_name _;
-        
+
         location /health {
             access_log off;
             return 200 "healthy\n";
@@ -108,7 +106,7 @@ http {
         server_name _;
 
         location / {
-            proxy_pass http://backend_slaves;
+            proxy_pass http://backend_api;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
@@ -164,13 +162,13 @@ cat <<JSON
 {
   "timestamp": "${TIMESTAMP}",
   "status": "${STATUS}",
-  "service": "nginx-master",
+  "service": "nginx-proxy",
   "nginx_available": ${NGINX_AVAILABLE},
   "active_connections": ${ACTIVE_CONNECTIONS},
   "total_requests": ${REQUESTS},
-  "role": "master",
-  "load_balancing": true,
-  "upstream_nodes": ["nginx-slave-1", "nginx-slave-2"]
+  "role": "reverse-proxy",
+  "load_balancing": false,
+  "upstream_nodes": ["node-api:3000"]
 }
 JSON
 HEALTH_EOF

@@ -90,6 +90,8 @@ services:
       - OLLAMA_FLASH_ATTENTION=1
       - OLLAMA_MAX_LOADED_MODELS=1
       - OLLAMA_DEBUG=0
+      - OLLAMA_RUNNER_TIMEOUT=180s
+      - OLLAMA_GPU_DISCOVERY_TIMEOUT=60s
     volumes:
       - react_scuba_ollama-models:/root/.ollama/models
       - C:/shared_memory/ollama-cache:/host-cache:rw

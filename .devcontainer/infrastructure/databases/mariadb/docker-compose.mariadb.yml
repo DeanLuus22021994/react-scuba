@@ -35,6 +35,11 @@ services:
         source: ./init-exporter-user.sql.template
         target: /docker-entrypoint-initdb.d/init-exporter-user.sql.template
         read_only: true
+      # Initialize scuba_booking_db database
+      - type: bind
+        source: ./init-scuba-db.sh
+        target: /docker-entrypoint-initdb.d/02-init-scuba-db.sh
+        read_only: true
     healthcheck:
       test:
         [
