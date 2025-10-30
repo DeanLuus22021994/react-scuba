@@ -3,7 +3,8 @@ kind: Kustomization
 
 resources:
   - nginx-ingress.yaml
-  - cert-manager.yaml
+  - 01-cert-manager-letsencrypt-staging.yaml
+  - 02-cert-manager-letsencrypt-prod.yaml
 
 commonLabels:
   managed-by: kustomize

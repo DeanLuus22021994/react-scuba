@@ -1,0 +1,35 @@
+# ==============================================================================
+# Prometheus Additional Scrape Configs
+# ==============================================================================
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: additional-scrape-configs
+  namespace: monitoring
+data:
+  prometheus-additional.yaml: |
+    # Tenant label relabeling for all metrics
+    - job_name: 'kubernetes-pods'
+      kubernetes_sd_configs:
+        - role: pod
+      relabel_configs:
+        # Extract tenant label from pod labels
+        - source_labels: [__meta_kubernetes_pod_label_tenant]
+          target_label: tenant
+          action: replace
+        # Keep only pods with prometheus.io/scrape annotation
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        # Use port from annotation if specified
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          regex: (.+)
+          target_label: __address__
+          replacement: $1
+        # Use path from annotation if specified
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)

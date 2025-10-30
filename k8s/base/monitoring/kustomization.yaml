@@ -4,7 +4,12 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
-  - prometheus.yaml
+  - 01-prometheus-serviceaccount.yaml
+  - 02-prometheus-clusterrole.yaml
+  - 03-prometheus-clusterrolebinding.yaml
+  - 04-prometheus-service.yaml
+  - 05-prometheus-configmap.yaml
+  - 06-prometheus.yaml
   - grafana.yaml
   - jaeger.yaml
   - fluentbit-daemonset.yaml

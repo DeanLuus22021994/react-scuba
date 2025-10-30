@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: databases
 
 resources:
-  - postgres-cluster.yaml
+  - 01-postgres-cluster.yaml
+  - 02-postgres-external-service.yaml
   - mariadb-galera.yaml
   - backup-jobs.yaml
 

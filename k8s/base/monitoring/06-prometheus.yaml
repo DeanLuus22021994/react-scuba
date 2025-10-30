@@ -1,0 +1,74 @@
+# ==============================================================================
+# Prometheus Instance with Tenant-Aware Metrics Collection
+# ==============================================================================
+# Deployed via Prometheus Operator with relabeling for multi-tenancy
+
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: react-scuba
+  namespace: monitoring
+spec:
+  replicas: 2
+  version: v2.48.0
+
+  serviceAccountName: prometheus
+
+  # Service discovery across all namespaces
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector:
+    matchLabels:
+      prometheus: react-scuba
+
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector:
+    matchLabels:
+      prometheus: react-scuba
+
+  # Tenant label relabeling
+  additionalScrapeConfigs:
+    name: additional-scrape-configs
+    key: prometheus-additional.yaml
+
+  # Storage
+  retention: 30d
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 50Gi
+
+  # Resources
+  resources:
+    requests:
+      cpu: 500m
+      memory: 2Gi
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+
+  # Security
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+
+  # High availability
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: prometheus
+          topologyKey: kubernetes.io/hostname
+
+  # Alerting
+  alerting:
+    alertmanagers:
+      - namespace: monitoring
+        name: alertmanager
+        port: web

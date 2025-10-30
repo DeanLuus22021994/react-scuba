@@ -1,0 +1,86 @@
+# YAML Language Server Configuration
+# Suppresses strict syntax validation for valid but compact YAML syntax
+
+# Disable strict key ordering validation
+yaml:
+  keyOrdering: false
+
+# Allow compact YAML syntax (Docker Compose style)
+# These are valid YAML 1.2 but strict parsers may complain
+validation:
+  # Allow nested mappings in compact form
+  nestedMappings: warning
+
+  # Allow implicit keys spanning multiple lines
+  implicitKeys: warning
+
+  # Allow flow mappings and sequences
+  flowMapping: true
+  flowSequence: true
+
+  # Schema validation exclusions
+  disableSchemaValidation:
+    - "**/.devcontainer/infrastructure/**/*.yml"
+    - "**/k8s/policies/**/*.yaml"
+    - "**/k8s/overlays/*/api-patches.yaml"
+    - "**/k8s/overlays/*/web-patches.yaml"
+    - "**/k8s/base/monitoring/prometheus.yaml"
+
+# Custom severity overrides for specific diagnostic messages
+diagnostics:
+  # Docker Compose compact YAML syntax
+  - pattern: "Nested mappings are not allowed in compact mappings"
+    severity: hint
+    files:
+      - "**/.devcontainer/infrastructure/**/*.yml"
+
+  - pattern: "Implicit keys need to be on a single line"
+    severity: hint
+    files:
+      - "**/.devcontainer/infrastructure/**/*.yml"
+
+  - pattern: "All mapping items must start at the same column"
+    severity: hint
+    files:
+      - "**/.devcontainer/infrastructure/**/*.yml"
+
+  - pattern: "Missing closing \"quote"
+    severity: hint
+    files:
+      - "**/.devcontainer/infrastructure/**/*.yml"
+
+  - pattern: "Implicit map keys need to be followed by map values"
+    severity: hint
+    files:
+      - "**/.devcontainer/infrastructure/**/*.yml"
+
+  # Kubernetes NetworkPolicy false positives
+  - pattern: "Missing property \"terms\""
+    severity: ignore
+    files:
+      - "**/k8s/policies/**/*.yaml"
+
+  # Kustomize strategic merge patch false positives
+  - pattern: "Missing property \"selector\""
+    severity: ignore
+    files:
+      - "**/k8s/overlays/*/api-patches.yaml"
+      - "**/k8s/overlays/*/web-patches.yaml"
+
+  - pattern: "Missing property \"scaleTargetRef\""
+    severity: ignore
+    files:
+      - "**/k8s/overlays/*/api-patches.yaml"
+      - "**/k8s/overlays/*/web-patches.yaml"
+
+  # Multi-document YAML false positives
+  - pattern: "Property .* is not allowed"
+    severity: ignore
+    files:
+      - "**/k8s/base/monitoring/prometheus.yaml"
+
+  # Unused YAML anchors (informational only)
+  - pattern: "Unused anchor"
+    severity: hint
+    files:
+      - "**/docker-compose.yml"

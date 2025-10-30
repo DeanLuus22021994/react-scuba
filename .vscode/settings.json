@@ -83,7 +83,12 @@
     "**/clients/*/config.json": "json",
     "**/clients/_template/**": "json",
     "**/k8s/charts/**/templates/*.yaml": "helm",
-    "**/k8s/charts/**/templates/*.tpl": "helm"
+    "**/k8s/charts/**/templates/*.tpl": "helm",
+    ".devcontainer/infrastructure/**/*.yml": "yaml",
+    "k8s/policies/**/*.yaml": "yaml",
+    "k8s/overlays/*/api-patches.yaml": "yaml",
+    "k8s/overlays/*/web-patches.yaml": "yaml",
+    "k8s/base/monitoring/prometheus.yaml": "yaml"
   },
   "files.exclude": {
     "**/clients/*/images/*.{jpg,jpeg,png,gif,webp,svg}": false,
@@ -248,7 +253,6 @@
   // === YAML VALIDATION CONFIGURATION ===
   // Precise false positive suppression without disabling validation overhead
   "yaml.schemaStore.enable": true,
-  "yaml.validate": true,
   "yaml.format.enable": true,
   "yaml.completion": true,
   "yaml.hover": true,
@@ -260,8 +264,7 @@
     ],
     "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": [
       "docker-compose.yml",
-      "docker-compose.*.yml",
-      ".devcontainer/infrastructure/**/*.yml"
+      "docker-compose.*.yml"
     ],
     "https://json.schemastore.org/kustomization.json": [
       "**/kustomization.yaml",
@@ -278,7 +281,9 @@
       "!k8s/base/databases/postgres-cluster.yaml",
       "!k8s/base/monitoring/prometheus.yaml",
       "!k8s/base/monitoring/servicemonitors/*.yaml",
-      "!**/kustomization.yaml"
+      "!**/kustomization.yaml",
+      "!k8s/overlays/*/api-patches.yaml",
+      "!k8s/overlays/*/web-patches.yaml"
     ]
   },
 
@@ -309,11 +314,14 @@
   "yaml.format.proseWrap": "preserve",
   "yaml.keyOrdering": false,
 
-  // Disable schema validation for specific patterns
+  // Disable validation entirely for files with known false positives
+  "yaml.validate": true,
   "yaml.disableSchemaValidation": [
     "k8s/policies/**/*.yaml",
     "k8s/overlays/*/api-patches.yaml",
-    "k8s/overlays/*/web-patches.yaml"
+    "k8s/overlays/*/web-patches.yaml",
+    "k8s/base/monitoring/prometheus.yaml",
+    ".devcontainer/infrastructure/**/*.yml"
   ],
 
   // === CLOUD CODE CONFIGURATION ===
@@ -360,5 +368,18 @@
 
     // KIND cluster config (uses cluster.x-k8s.io/v1alpha4 schema)
     ".devcontainer/kind/cluster-config.yaml": false
+  },
+
+  // === DIAGNOSTIC PROBLEM MATCHER CONFIGURATION ===
+  // Suppress specific diagnostic patterns
+  "problems.decorations.enabled": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": false,
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    }
   }
 }

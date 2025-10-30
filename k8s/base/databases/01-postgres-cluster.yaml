@@ -111,22 +111,3 @@ spec:
   # Maintenance windows
   maintenanceWindows:
     - 02:00-04:00  # Allow updates between 2-4 AM
-
----
-# Service for external access to PostgreSQL
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-external
-  namespace: databases
-spec:
-  type: NodePort
-  selector:
-    application: react-scuba-postgres
-    cluster-name: react-scuba-postgres
-    spilo-role: master
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
-      nodePort: 30432
