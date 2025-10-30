@@ -22,12 +22,18 @@ services:
       - MARIADB_USER=mariadb
       - MARIADB_PASSWORD=${DOCKER_MARIADB_PASSWORD:-password}
       - MARIADB_AUTO_UPGRADE=1
+      # Pass exporter password to init script
+      - DOCKER_MARIADB_ROOT_PASSWORD=${DOCKER_MARIADB_ROOT_PASSWORD:-password}
     volumes:
       - react_scuba_mariadb-data:/var/lib/mysql
       # Initialize exporter user automatically on first startup
       - type: bind
-        source: ./init-exporter-user.sql
-        target: /docker-entrypoint-initdb.d/01-init-exporter-user.sql
+        source: ./init-exporter-user.sh
+        target: /docker-entrypoint-initdb.d/01-init-exporter-user.sh
+        read_only: true
+      - type: bind
+        source: ./init-exporter-user.sql.template
+        target: /docker-entrypoint-initdb.d/init-exporter-user.sql.template
         read_only: true
     healthcheck:
       test:

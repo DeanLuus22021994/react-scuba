@@ -1,0 +1,30 @@
+-- ==============================================================================
+-- MariaDB Exporter User Initialization
+-- ==============================================================================
+-- Purpose: Create dedicated monitoring user for mysql-exporter with minimal privileges
+-- Location: .devcontainer/infrastructure/databases/mariadb/
+-- Usage: Automatically executed on first MariaDB container startup
+-- Security: Least-privilege access (no write permissions, monitoring only)
+-- Note: Password set to match DOCKER_MARIADB_ROOT_PASSWORD (use same credentials)
+-- ==============================================================================
+
+-- Drop user if exists to ensure clean state
+DROP USER IF EXISTS 'exporter'@'%';
+
+-- Create exporter user with password from environment
+-- Password will be set by init script preprocessing
+CREATE USER 'exporter'@'%' IDENTIFIED BY 'EXPORTER_PASSWORD_PLACEHOLDER';
+
+-- Grant monitoring-specific privileges
+-- PROCESS: View thread information
+-- REPLICATION CLIENT: Read replication status
+-- SELECT: Read database statistics
+-- SLAVE MONITOR: Access replication slave status (MariaDB-specific)
+GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'%';
+GRANT SLAVE MONITOR ON *.* TO 'exporter'@'%';
+
+-- Apply privilege changes immediately
+FLUSH PRIVILEGES;
+
+-- Log successful initialization
+SELECT 'MariaDB exporter user initialized successfully' AS status;
