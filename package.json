@@ -102,8 +102,8 @@
     "@types/node": "^24.9.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.0.4",
-    "@vitejs/plugin-react-swc": "^4.2.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitejs/plugin-react-swc": "^4.2.2",
     "@vitest/coverage-v8": "^4.0.13",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.39.1",
@@ -122,8 +122,8 @@
     "tailwindcss": "^4.1.15",
     "terser": "^5.44.0",
     "typescript": "^5.9.3",
-    "vite": "^7.1.11",
+    "vite": "^7.2.7",
     "vitepress": "^1.6.4",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   }
 }
