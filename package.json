@@ -120,7 +120,7 @@
     "rollup-plugin-visualizer": "^6.0.5",
     "size-limit": "^11.2.0",
     "tailwindcss": "^4.1.15",
-    "terser": "^5.44.0",
+    "terser": "^5.44.1",
     "typescript": "^5.9.3",
     "vite": "^7.1.11",
     "vitepress": "^1.6.4",
